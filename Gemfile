@@ -4,8 +4,8 @@ ruby '2.0.0'
 gem 'rails', '4.0.0'
 
 # Servers
-gem 'puma'
-gem 'unicorn'
+# gem 'puma'
+# gem 'unicorn'
 
 # Multi-environment configuration
 # gem 'simpleconfig'
