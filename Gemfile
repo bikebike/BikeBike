@@ -6,6 +6,7 @@ gem 'rails', '4.0.0'
 # Servers
 # gem 'puma'
 # gem 'unicorn'
+gem 'thin'
 
 # Multi-environment configuration
 # gem 'simpleconfig'
