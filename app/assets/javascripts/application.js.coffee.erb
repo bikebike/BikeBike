@@ -2,6 +2,7 @@
 #= require jquery_ujs
 #= require jquery.turbolinks
 #= require turbolinks
+#= require foundation
 
 # FRONT END
 
@@ -29,3 +30,7 @@ stopSpinner = ->
 # Turbolinks Spinner
 document.addEventListener 'page:fetch', startSpinner
 document.addEventListener 'page:receive', stopSpinner
+
+# $(function(){ $(document).foundation(); });
+$ ->
+  $(document).foundation();
