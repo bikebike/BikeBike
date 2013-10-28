@@ -1,0 +1,41 @@
+/**
+
+	Layouts only
+
+*/
+
+#main-container, #footer, #nav-inner {
+	max-width: $large-screen;
+	margin: 0 auto;
+}
+
+$body-background-color: #EEE;
+$main-container-background-color: #F4F4F4;
+$content-background-color: #FFF;
+$layout-border-color: #DDD;
+
+body {
+	background-color: $body-background-color;
+}
+
+#main-container {
+	background-color: $main-container-background-color;
+	border: 1px solid $layout-border-color;
+	border-top: 0;
+}
+
+#main {
+	border-right: 1px solid $layout-border-color;
+	padding: 0;
+}
+
+article.content {
+	background-color: $content-background-color;
+	border-left: 1px solid $layout-border-color;
+}
+
+
+#article-header {
+	border-bottom: 1px solid $layout-border-color;
+	padding: 0;
+}

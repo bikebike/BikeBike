@@ -65,7 +65,7 @@ $default-float: left;
 
 // $body-bg: #fff;
 // $body-font-color: #222;
-// $body-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+ $body-font-family: 'Cantarell', sans-serif;
 // $body-font-weight: normal;
 // $body-font-style: normal;
 
@@ -172,7 +172,7 @@ $default-float: left;
 
 // Control header font styles
 
-// $header-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+ $header-font-family: 'Fjalla One', sans-serif;
 // $header-font-weight: bold;
 // $header-font-style: normal;
 // $header-font-color: #222;
@@ -1260,7 +1260,7 @@ $default-float: left;
 
 // Height and margin
 
-// $topbar-height: 45px;
+ $topbar-height: 64px;
 // $topbar-margin-bottom: 0;
 
 // Control Input height for top bar
@@ -1269,8 +1269,8 @@ $default-float: left;
 
 // Controlling the styles for the title in the top bar
 
-// $topbar-title-weight: bold;
-// $topbar-title-font-size: em-calc(17);
+ $topbar-title-weight: normal;
+ $topbar-title-font-size: 2em;
 
 // Style the top bar dropdown elements
 
@@ -1286,8 +1286,8 @@ $default-float: left;
 // $topbar-link-color: #fff;
 // $topbar-link-color-hover: #fff;
 // $topbar-link-color-active: #fff;
-// $topbar-link-weight: bold;
-// $topbar-link-font-size: em-calc(13);
+ $topbar-link-weight: normal;
+ $topbar-link-font-size: 1.2em;
 // $topbar-link-hover-lightness: -30%; // Darken by 30%
 // $topbar-link-bg-hover: darken($topbar-bg-color, 3%);
 // $topbar-link-bg-active: darken($topbar-bg-color, 3%);

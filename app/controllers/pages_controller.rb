@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
 
-  def home
-  end
+	def home
+		@title_img = '/assets/nola.jpg'
+	end
 end
