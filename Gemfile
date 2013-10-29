@@ -34,7 +34,7 @@ gem 'jquery-rails'
 # Assets
 gem 'coffee-rails', '~> 4.0.0'
 gem 'haml_assets'
-# gem 'handlebars_assets'
+gem 'handlebars_assets'
 gem 'i18n-js'
 gem 'jquery-turbolinks'
 gem 'sass-rails', '~> 4.0.0'
