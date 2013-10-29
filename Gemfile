@@ -37,14 +37,13 @@ gem 'haml_assets'
 # gem 'handlebars_assets'
 gem 'i18n-js'
 gem 'jquery-turbolinks'
-# gem 'less-rails'
 gem 'sass-rails', '~> 4.0.0'
 gem 'therubyracer'
 gem 'compass-rails', '~> 2.0.alpha.0'
 gem 'zurb-foundation'
 gem 'turbolinks'
-# gem 'twitter-bootstrap-rails', github: 'diowa/twitter-bootstrap-rails', branch: 'fontawesome-3.2.1'
 gem 'uglifier', '>= 1.3.0'
+gem 'rails_12factor', group: :production
 
 group :development, :test do
   gem 'debugger'
