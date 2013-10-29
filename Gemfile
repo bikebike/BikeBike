@@ -43,7 +43,7 @@ gem 'compass-rails', '~> 2.0.alpha.0'
 gem 'zurb-foundation'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
-gem 'rails_12factor', group: :production
+//gem 'rails_12factor', group: :production
 
 group :development, :test do
   gem 'debugger'
