@@ -1,0 +1,42 @@
+= form_for @organization do |f|
+	.columns
+		- if @organization.errors.any?
+			#error_explanation
+				%h2= "#{pluralize(@organization.errors.count, "error")} prohibited this organization from being saved:"
+				%ul
+				- @organization.errors.full_messages.each do |msg|
+					%li= msg
+		= field f, :name, :text_field
+		= field f, :slug, :text_field
+
+	.columns.medium-4
+		-#%h2=_'organization.create.intro-title', :t
+		-#%p=_'organization.create.intro', :p
+		=# field f, :avatar, :image_field
+		= field f, :avatar, :image_field, @organization.avatar_url
+		-#= field f, :year_founded, :number_field
+		=# f.label :avatar do
+		=#	%div
+		=#		= image_tag(@organization.avatar_url || ''
+		=#		= f.hidden_field :avatar_cache
+	.columns.medium-8
+		= field f, :email_address, :email_field
+		-#= field f, :url, :text_field
+		= f.fields_for :locations do |b|
+			= field_set_tag 'Location' do
+				= field b, :country, :country_select, {help: 'Select a Country'}
+				- cc = @organization.locations && @organization.locations[b.index].country ? @organization.locations[b.index].country : 'US'
+				= field b, :territory, :subregion_select, cc, html: {class: @organization.locations[b.index].country ? 'can' : 'cant', data: {:country => cc}}
+				= field b, :city, :text_field
+				= field b, :street, :text_field
+				= field b, :postal_code, :text_field
+		-#= field f, :logo, :text_field
+		-#= field f, :avatar, :text_field
+		-#= field f, :requires_approval, :check_box
+		-#= field f, :secret_question, :text_field
+		-#= field f, :secret_answer, :text_field
+		-#= field f, :location_id, :number_field
+		-#= field f, :user_organization_replationship_id, :number_field
+	.columns
+		= field f, :info, :text_area
+		= actions :save

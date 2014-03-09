@@ -1,0 +1,2 @@
+module WorkshopStreamsHelper
+end

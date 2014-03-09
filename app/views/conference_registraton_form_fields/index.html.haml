@@ -1,0 +1,23 @@
+%h1 Listing conference_registraton_form_fields
+
+%table
+  %tr
+    %th Conference
+    %th Registration form field
+    %th Order
+    %th
+    %th
+    %th
+
+  - @conference_registraton_form_fields.each do |conference_registraton_form_field|
+    %tr
+      %td= conference_registraton_form_field.conference_id
+      %td= conference_registraton_form_field.registration_form_field_id
+      %td= conference_registraton_form_field.order
+      %td= link_to 'Show', conference_registraton_form_field
+      %td= link_to 'Edit', edit_conference_registraton_form_field_path(conference_registraton_form_field)
+      %td= link_to 'Destroy', conference_registraton_form_field, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Conference registraton form field', new_conference_registraton_form_field_path

@@ -1,5 +1,5 @@
 
-%nav.top-bar
+%nav.top-bar.row
 	#nav-inner
 		%ul.title-area
 			/ Title Area
@@ -13,18 +13,19 @@
 		.top-bar-section
 			/ Left Nav Section
 			%ul.left
-				%li.divider
 				%li.active
-					%a{href: "#"} Conferences
-				%li.divider
+					%a{href: "/conferences/"} Conferences
 				%li
-					%a{href: "#"} Organizations
-				%li.divider
+					%a{href: "/organizations/"} Organizations
 				%li
-					%a{href: "#"} Resources
-				%li.divider
-			/ Right Nav Section
+					%a{href: "/resources/"} Resources
+				/ Right Nav Section
 			%ul.right
-				%li.divider.hide-for-small
-				%li.has-form
-					%a.button{href: "#"} Sign In!
+				- if current_user
+					%li.has-form.sign-out
+						= link_to "Sign Out", :logout, method: :post, :class => 'button'
+					%li.user-profile
+						= link_to image_tag(current_user.avatar_url(:icon)), current_user
+				- else
+					%li.has-form.sign-in
+						= link_to "Sign In", :login, :class => 'button'

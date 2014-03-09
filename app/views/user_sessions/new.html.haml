@@ -1,0 +1,11 @@
+- banner_title 'Login'
+
+.row
+	.columns.medium-6
+		= render 'form'
+	.columns.medium-6
+		%h2
+			Create an Account
+		%p
+			#{_ 'user.why_register', 'paragraph'}
+			= render '/users/form'

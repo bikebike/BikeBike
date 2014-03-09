@@ -1,0 +1,43 @@
+%h1 Listing conferences
+
+%table
+  %tr
+    %th Title
+    %th Slug
+    %th Start date
+    %th End date
+    %th Info
+    %th Poster
+    %th Cover
+    %th Workshop schedule published
+    %th Registration open
+    %th Meals provided
+    %th Meal info
+    %th Travel info
+    %th Conference type
+    %th
+    %th
+    %th
+
+  - @conferences.each do |conference|
+    %tr
+      %td= conference.title
+      %td= conference.slug
+      %td= conference.start_date
+      %td= conference.end_date
+      %td= conference.info
+      %td= conference.poster
+      %td= conference.cover
+      %td= conference.workshop_schedule_published
+      %td= conference.registration_open
+      %td= conference.meals_provided
+      %td= conference.meal_info
+      %td= conference.travel_info
+      %td= conference.conference_type
+      %td= link_to 'Show', conference
+      %td= link_to 'Edit', edit_conference_path(conference)
+      %td= link_to 'Destroy', conference, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Conference', new_conference_path

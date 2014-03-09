@@ -1,0 +1,14 @@
+= form_for @registration_form_field do |f|
+	- if @registration_form_field.errors.any?
+		#error_explanation
+			%h2= "#{pluralize(@registration_form_field.errors.count, "error")} prohibited this registration_form_field from being saved:"
+			%ul
+				- @registration_form_field.errors.full_messages.each do |msg|
+					%li= msg
+
+	= field f, :field_type, :select, RegistrationFormField::Types.keys
+	- RegistrationFormField::Fields.each do |key, value|
+		- classes = RegistrationFormField::TypesForField(key.to_sym).collect{|v| 'field-type-' + v.to_s}
+		- classes << 'registration-form-field-field'
+		= eval('field f, :' + key.to_s + ', :' + value[:control] + (value[:options] ? ', ' + (value[:options].map.with_index{|v, i| 'value[:options][' + i.to_s + ']'}.join(', ') || 'nil') : '') + ", classes: classes")
+	= actions :save

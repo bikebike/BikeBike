@@ -1,0 +1,23 @@
+%h1 Listing conference_host_organizations
+
+%table
+  %tr
+    %th Conference
+    %th Organization
+    %th Order
+    %th
+    %th
+    %th
+
+  - @conference_host_organizations.each do |conference_host_organization|
+    %tr
+      %td= conference_host_organization.conference_id
+      %td= conference_host_organization.organization_id
+      %td= conference_host_organization.order
+      %td= link_to 'Show', conference_host_organization
+      %td= link_to 'Edit', edit_conference_host_organization_path(conference_host_organization)
+      %td= link_to 'Destroy', conference_host_organization, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Conference host organization', new_conference_host_organization_path

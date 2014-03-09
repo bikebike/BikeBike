@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @organization_status.name
+%p
+  %b Slug:
+  = @organization_status.slug
+%p
+  %b Info:
+  = @organization_status.info
+
+= link_to 'Edit', edit_organization_status_path(@organization_status)
+\|
+= link_to 'Back', organization_statuses_path

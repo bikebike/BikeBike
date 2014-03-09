@@ -1,0 +1,19 @@
+= form_for @conference_registraton_form_field do |f|
+  - if @conference_registraton_form_field.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@conference_registraton_form_field.errors.count, "error")} prohibited this conference_registraton_form_field from being saved:"
+      %ul
+        - @conference_registraton_form_field.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :conference_id
+    = f.number_field :conference_id
+  .field
+    = f.label :registration_form_field_id
+    = f.number_field :registration_form_field_id
+  .field
+    = f.label :order
+    = f.number_field :order
+  .actions
+    = f.submit 'Save'

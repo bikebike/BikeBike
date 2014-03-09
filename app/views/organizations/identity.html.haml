@@ -1,0 +1,13 @@
+
+- page_style :form
+
+= tabs!
+.row
+	= form_for @organization do |f|
+		.columns.medium-4
+			%h2=_'organization.members.help.title', :t
+			%p=_'organization.members.help', :p
+		.columns.medium-8
+			= field f, :cover, :image_field, @organization.cover_url
+			= field f, :year_founded, :number_field
+			= actions :save

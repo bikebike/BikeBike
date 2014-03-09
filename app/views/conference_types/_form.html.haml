@@ -1,0 +1,16 @@
+= form_for @conference_type do |f|
+  - if @conference_type.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@conference_type.errors.count, "error")} prohibited this conference_type from being saved:"
+      %ul
+        - @conference_type.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :title
+    = f.text_field :title
+  .field
+    = f.label :info
+    = f.text_field :info
+  .actions
+    = f.submit 'Save'

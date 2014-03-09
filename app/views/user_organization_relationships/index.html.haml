@@ -1,0 +1,23 @@
+%h1 Listing user_organization_relationships
+
+%table
+  %tr
+    %th User
+    %th Organization
+    %th Relationship
+    %th
+    %th
+    %th
+
+  - @user_organization_relationships.each do |user_organization_relationship|
+    %tr
+      %td= user_organization_relationship.user_id
+      %td= user_organization_relationship.organization_id
+      %td= user_organization_relationship.relationship
+      %td= link_to 'Show', user_organization_relationship
+      %td= link_to 'Edit', edit_user_organization_relationship_path(user_organization_relationship)
+      %td= link_to 'Destroy', user_organization_relationship, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New User organization relationship', new_user_organization_relationship_path

@@ -1,0 +1,130 @@
+conference
+	- title 						: string
+	- slug							: string
+	- start_date 					: datetime
+	- end_date 						: datetime
+	- info							: text
+	- poster						: *image
+	- banner						: *image
+	- workshop_schedule_published 	: boolean
+	- registration_open				: boolean
+	- meals_provided				: boolean
+	- meal_info						: *text
+
+	- conference_type 				: [conference_type]
+	- host_organizations			: NtoN[organization]
+	- locations						: *NtoN[location]
+	- registration_form_fields		: *NtoN[registration_form_field]
+	- workshop_resources			: *NtoN[workshop_resource]
+
+*conference_type
+	- title	: string
+	- slug	: string
+	- info 	: text
+
+event
+	- title			: string
+	- slug			: string
+	- conference 	: [conference]
+	- info 			: text
+	- location 		: *[location]
+	- start_time 	: *datetime
+	- end_time 		: *datetime
+
+*location
+	- title			: *string
+	- latitude		: *float
+	- longitude		: *float
+	- country		: *string
+	- territory		: *string
+	- city			: *string
+	- street		: *string
+	- postal_code	: *string
+
+*organization
+	- name				: string
+	- slug				: string
+	- email_address		: string
+	- shop_status		: list(string)
+	- year_founded		: integer
+	- info				: text
+	- url				: string
+	- logo				: image
+	- icon				: image
+	- requires_approval	: boolean
+	- secret_question	: *string
+	- secret_answer		: *string(hashed)
+	- location			: [location]
+	- members			: NtoN[user_organization_replationship]
+
+registration_form_field
+	- title			: string
+	- slug			: string
+	- required		: boolean
+	- field_type	: list(string)
+	- options		: *string
+	- other_option	: *boolean
+	- retired		: boolean
+
+request
+	- comment	: text
+	- object	: Nto1[object]
+	- is_invite	: boolean
+	- state		: list(string)
+
+*user_organization_relationship
+	- user			: [user]
+	- organization	: [organization]
+	- relationship	: string
+
+workshop
+	- title					: string
+	- slug					: string
+	- info					: text
+	- conference			: [conference]
+	- stream				: [workshop_stream]
+	- presentation_style	: [presentation_style]
+	- requested_resources	: NtoN[workshop_resource]
+	- facilitators			: NtoN[user]
+	- min_facilitators		: integer
+	- location				: *[location]
+	- start_time			: *datetime
+	- end_time				: *datetime
+
+*workshop_presentation_style
+	- name	: string
+	- slug	: string
+	- info	: text
+
+*workshop_resource
+	- name	: string
+	- slug	: string
+	- info	: text
+
+*workshop_stream
+	- name	: string
+	- slug	: string
+	- info	: text
+
+rails g scaffold organization name:string slug:string email_address:string url:string year_founded:integer info:text logo:string avatar:string requires_approval:boolean secret_question:string secret_answer:string location_id:integer user_organization_replationship_id:integer
+
+organization_status:string
+user_organization_replationship_id:integer
+
+
+conference title:string slug:string start_date:datetime end_date:datetime info:text poster:string banner:string workshop_schedule_published:boolean registration_open:boolean meals_provided:boolean meal_info:text travel_info:text conference_type:conference_type_id
+
+conference_hosts_organizations conference_id:integer organization_id:integer
+
+	- host_organizations			: NtoN[organization]
+	- locations						: *NtoN[location]
+	- registration_form_fields		: *NtoN[registration_form_field]
+	- workshop_resources			: *NtoN[workshop_resource]
+
+registration_form_field
+	- title			: string
+	- help			: text
+	- required		: boolean
+	- field_type	: list(string)
+	- options		: string
+	- retired		: boolean

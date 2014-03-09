@@ -1,0 +1,7 @@
+.columns.medium-8
+	= field :is_attending, :select_tag, ConferenceRegistration::AttendingOptions, label: 'Are you attending?'
+	%ol
+		- @conference.registration_form_fields.each do |ff|
+			%li
+				= form_field ff
+= actions :register

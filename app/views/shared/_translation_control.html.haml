@@ -1,0 +1,27 @@
+- if ThereAreTranslationsOnThisPage?
+	- counts = {'one' => _('translation.count.one'), 'zero' => _('translation.count.zero'), 'two' => _('translation.count.two'), 'few' => _('translation.count.few'), 'many' => _('translation.count.many')}
+	- save_str = _ 'active_record.save'
+	= javascript_include_tag 'translate'
+	%div#translation-control
+		= form_tag '/translate/' do
+			= hidden_field_tag :translationlang, I18n.locale
+			.row
+				.columns.medium-3
+					= select_tag :translationkey, options_for_select(get_all_translations().invert())
+				.columns.medium-8
+					= text_area_tag :translationvalue, '', :rows => '1'
+					#translatepluralizations
+						= hidden_field_tag :translationhascount, I18n.locale
+						- counts.each do |count_key,count_name|
+							.row
+								.columns.medium-2
+									= check_box_tag ('translationpluralization_' + count_key.to_s)
+									= label_tag ('translationpluralization_' + count_key.to_s), count_name.to_s
+								.columns.medium-10
+									= text_area_tag ('translationvalue_' + count_key.to_s), '', :rows => '1'
+					#translatevars
+						%strong Parameters:
+						%ul
+				.columns.medium-1
+					= button_tag save_str
+				

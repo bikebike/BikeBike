@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Conference:
+  = @conference_registraton_form_field.conference_id
+%p
+  %b Registration form field:
+  = @conference_registraton_form_field.registration_form_field_id
+%p
+  %b Order:
+  = @conference_registraton_form_field.order
+
+= link_to 'Edit', edit_conference_registraton_form_field_path(@conference_registraton_form_field)
+\|
+= link_to 'Back', conference_registraton_form_fields_path

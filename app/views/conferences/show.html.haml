@@ -1,0 +1,76 @@
+- title 'Bike!Bike!'
+- banner_image @conference.cover_url
+- page_style 'emphasize-banner'
+
+- content_for :banner do
+	.row
+		.columns.medium-6
+			%figure
+				%img{src: @conference.poster_url}
+		.columns.medium-6.info
+			%h1='Bike!Bike!'
+			%h2
+				Columbus, Ohio
+			%em
+				= (l @conference.start_date, format: :date) + ' - ' + (l @conference.end_date, format: :date)
+			%p
+				= _ 'nola_2013.about', 'paragraph'
+			.centered
+				%a.button{href: '#'}
+					Register Now
+
+= tabs!
+
+%section
+	.row
+		.columns.medium-6
+			%h1=@conference.title
+			%p=@conference.info.gsub(/\s*\n+\s*/, '</p><p>').html_safe
+		.columns.medium-6
+
+.row
+	%p#notice= notice
+
+	%p
+		%b Conference type:
+		= @conference.conference_type.title
+	%p
+		%b Title:
+		= @conference.title
+	%p
+		%b Slug:
+		= @conference.slug
+	%p
+		%b Start date:
+		= @conference.start_date
+	%p
+		%b End date:
+		= @conference.end_date
+	%p
+		%b Info:
+		= @conference.info
+	%p
+		%b Poster:
+		= @conference.poster
+	%p
+		%b Banner:
+		= @conference.cover
+	%p
+		%b Workshop schedule published:
+		= @conference.workshop_schedule_published
+	%p
+		%b Registration open:
+		= @conference.registration_open
+	%p
+		%b Meals provided:
+		= @conference.meals_provided
+	%p
+		%b Meal info:
+		= @conference.meal_info
+	%p
+		%b Travel info:
+		= @conference.travel_info
+
+	= link_to 'Edit', edit_conference_path(@conference)
+	\|
+	= link_to 'Back', conferences_path

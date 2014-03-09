@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @conference_type.title
+%p
+  %b Info:
+  = @conference_type.info
+
+= link_to 'Edit', edit_conference_type_path(@conference_type)
+\|
+= link_to 'Back', conference_types_path

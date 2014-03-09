@@ -1,7 +1,9 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 ruby '2.0.0'
 gem 'rails', '4.0.0'
+
+#gem 'nokogiri', :git => '/nokogiri/'
 
 # Servers
 # gem 'puma'
@@ -29,6 +31,7 @@ gem 'pg'
 gem 'haml'
 # gem 'http_accept_language'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 # gem 'resque', require: 'resque/server' # Resque web interface
 
 # Assets
@@ -36,14 +39,32 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'haml_assets'
 gem 'handlebars_assets'
 gem 'i18n-js'
+gem 'i18n-active_record',
+      :git => 'git://github.com/svenfuchs/i18n-active_record.git',
+      :require => 'i18n/active_record'
 gem 'jquery-turbolinks'
 gem 'sass-rails', '~> 4.0.0'
-gem 'therubyracer'
-gem 'compass-rails', '~> 2.0.alpha.0'
-gem 'zurb-foundation'
+gem "compass-rails", "~> 1.1.3"
+gem 'foundation-rails'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
-#gem 'rails_12factor', group: :production
+gem 'bcrypt-ruby', git: 'https://github.com/codahale/bcrypt-ruby.git'
+gem 'sorcery', '>= 0.8.1'
+gem 'oauth2', '~> 0.8.0'
+gem 'ruby-drupal-hash'
+gem 'redis'
+gem 'carrierwave'
+gem 'carrierwave-imageoptimizer'
+gem 'mini_magick'
+gem 'carmen-rails', '~> 1.0.0', github: 'jim/carmen-rails'
+gem 'nested_form'
+gem 'acts_as_list'
+#gem 'jcrop-rails'
+#gem 'rmagick'
+
+gem 'geocoder'
+gem 'forgery'
+gem 'paper_trail'
 
 group :development, :test do
   gem 'debugger'
@@ -55,10 +76,13 @@ group :development, :test do
 end
 
 group :development do
+  #gem 'perftools.rb'
   gem 'bullet'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'meta_request'
+  gem 'haml-rails'
+  gem 'awesome_print'
 end
 
 group :test do

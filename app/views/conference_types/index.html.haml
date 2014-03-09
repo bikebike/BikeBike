@@ -1,0 +1,21 @@
+%h1 Listing conference_types
+
+%table
+  %tr
+    %th Title
+    %th Info
+    %th
+    %th
+    %th
+
+  - @conference_types.each do |conference_type|
+    %tr
+      %td= conference_type.title
+      %td= conference_type.info
+      %td= link_to 'Show', conference_type
+      %td= link_to 'Edit', edit_conference_type_path(conference_type)
+      %td= link_to 'Destroy', conference_type, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Conference type', new_conference_type_path

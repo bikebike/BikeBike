@@ -1,0 +1,13 @@
+.columns.medium-8
+	#conference-form
+		=render 'registration_form_fields/conference_form'
+
+- content_for(:after_form) do
+	.row
+		.columns.medium-6
+			%h3='New Form Field'
+			=render 'registration_form_fields/form'
+		.columns.medium-6
+			%h3='Existing Form Fields'
+			#registration-form-field-list
+				= render 'registration_form_fields/list'

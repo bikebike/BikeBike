@@ -1,0 +1,23 @@
+%h1 Listing workshop_streams
+
+%table
+  %tr
+    %th Name
+    %th Slug
+    %th Info
+    %th
+    %th
+    %th
+
+  - @workshop_streams.each do |workshop_stream|
+    %tr
+      %td= workshop_stream.name
+      %td= workshop_stream.slug
+      %td= workshop_stream.info
+      %td= link_to 'Show', workshop_stream
+      %td= link_to 'Edit', edit_workshop_stream_path(workshop_stream)
+      %td= link_to 'Destroy', workshop_stream, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Workshop stream', new_workshop_stream_path

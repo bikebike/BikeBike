@@ -1,0 +1,18 @@
+- page_style 'organization'
+- banner_image @organization.cover_url
+- content_for :banner do
+	.row
+		.columns.medium-6.info
+			%h1=@organization.name
+			%h2=@organization.locations[0].city + (@organization.locations[0].territory ? ' ' + @organization.locations[0].territory : '') + ', ' + Carmen::Country.coded(@organization.locations[0].country).name
+		.columns.medium-6
+			%figure
+				= image_tag(@organization.avatar_url)
+
+%p#notice= notice
+
+= tabs!
+
+.row
+	.columns
+		=p @organization, :info

@@ -1,0 +1,41 @@
+%h1 Listing organizations
+
+%table
+  %tr
+    %th Name
+    %th Slug
+    %th Email address
+    %th Url
+    %th Year founded
+    %th Info
+    %th Logo
+    %th Avatar
+    %th Requires approval
+    %th Secret question
+    %th Secret answer
+    %th User organization replationship
+    %th
+    %th
+    %th
+
+  - @organizations.each do |organization|
+    %tr
+      %td= organization.name
+      %td= organization.slug
+      %td= organization.email_address
+      %td= organization.url
+      %td= organization.year_founded
+      %td= organization.info
+      %td= organization.logo
+      %td= organization.avatar
+      %td= organization.requires_approval
+      %td= organization.secret_question
+      %td= organization.secret_answer
+      %td= organization.user_organization_replationship_id
+      %td= link_to 'Show', organization
+      %td= link_to 'Edit', edit_organization_path(organization)
+      %td= link_to 'Destroy', organization, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Organization', new_organization_path

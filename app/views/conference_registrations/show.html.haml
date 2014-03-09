@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Conference:
+  = @conference_registration.conference_id
+%p
+  %b User:
+  = @conference_registration.user_id
+%p
+  %b Is attending:
+  = @conference_registration.is_attending
+
+= link_to 'Edit', edit_conference_registration_path(@conference_registration)
+\|
+= link_to 'Back', conference_registrations_path

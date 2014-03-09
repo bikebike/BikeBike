@@ -1,0 +1,19 @@
+= form_for @organization_status do |f|
+  - if @organization_status.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@organization_status.errors.count, "error")} prohibited this organization_status from being saved:"
+      %ul
+        - @organization_status.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :slug
+    = f.text_field :slug
+  .field
+    = f.label :info
+    = f.text_field :info
+  .actions
+    = f.submit 'Save'

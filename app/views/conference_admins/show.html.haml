@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Conference:
+  = @conference_admin.conference_id
+%p
+  %b User:
+  = @conference_admin.user_id
+
+= link_to 'Edit', edit_conference_admin_path(@conference_admin)
+\|
+= link_to 'Back', conference_admins_path

@@ -1,0 +1,14 @@
+- banner_title @user.username
+
+%p#notice= notice
+
+.row
+
+	%p
+		%b Email:
+		= @user.email
+	= image_tag(@user.avatar_url(:thumb)) if @user.avatar?
+
+	= link_to 'Edit', edit_user_path(@user)
+	\|
+	= link_to 'Back', users_path

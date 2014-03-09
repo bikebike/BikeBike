@@ -1,0 +1,23 @@
+%h1 Listing conference_registrations
+
+%table
+  %tr
+    %th Conference
+    %th User
+    %th Is attending
+    %th
+    %th
+    %th
+
+  - @conference_registrations.each do |conference_registration|
+    %tr
+      %td= conference_registration.conference_id
+      %td= conference_registration.user_id
+      %td= conference_registration.is_attending
+      %td= link_to 'Show', conference_registration
+      %td= link_to 'Edit', edit_conference_registration_path(conference_registration)
+      %td= link_to 'Destroy', conference_registration, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Conference registration', new_conference_registration_path

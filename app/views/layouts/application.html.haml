@@ -25,20 +25,19 @@
 			Le javascript
 			\==================================================
 		/ Placed at the top of the document 'cause of turbolinks
+		= javascript_include_tag '//use.typekit.net/iqv7hcg.js'
 		= javascript_include_tag 'application'
+		= javascript_include_tag 'nested_form'
 		= javascript_include_tag '//use.edgefonts.net/abel;amatic-sc.js'
 
-	%body
+	%body{ class: (yield_or_default :page_style) }
+		= render 'shared/translation_control'
 		= render 'shared/navbar'
 
-		#main-container.container.row
-			%aside.columns.large-4.push-8
-				Stuff that is not directly related to this page will go here, things like recommend or popular articles.
-			%section#main.columns.large-8.pull-4
-				%header#article-header.columns.large-12
-					%img{src: @title_img}
-				%nav.columns.large-2
-					Nav 2
-				%article.content.columns.large-10= yield
+		%main
+			- if has_banner?
+				%header#banner{banner_attrs(yield_or_default :banner_image)}
+					= yield :banner
+			= yield
 		#footer
 			.container= render 'shared/footer'
