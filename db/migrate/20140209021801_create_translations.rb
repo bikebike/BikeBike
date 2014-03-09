@@ -1,5 +1,5 @@
 class CreateTranslations < ActiveRecord::Migration
-	def self.up
+	def change
       create_table :translations do |t|
         t.string :locale
         t.string :key
@@ -9,9 +9,5 @@ class CreateTranslations < ActiveRecord::Migration
 
         t.timestamps
       end
-    end
-
-    def self.down
-      drop_table :translations
     end
 end
