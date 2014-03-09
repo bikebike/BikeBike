@@ -15,9 +15,6 @@
 #= require i18n
 #= require i18n/translations
 
-# ALL THE REST
-#= require_tree .
-
 'use strict'
 
 I18n.defaultLocale = '<%= I18n.default_locale %>'
