@@ -12,8 +12,6 @@
 		= field f, :poster, :image_field, @conference.poster_url
 		= field f, :cover, :image_field, @conference.cover_url
 	.columns.medium-8
-		=# f.fields_for :conference_type do |c|
-		=# field c, :id, :text_field
 		= field f, :conference_type_id, :collection_select, ConferenceType.all, attrs: [:id, :title]
 		.row
 			.columns.small-6
@@ -21,7 +19,6 @@
 			.columns.small-6
 				= field f, :end_date, :date_field
 		= field f, :workshop_schedule_published, :check_box
-		=# field f, :registration_open, :check_box
 		= field f, :meals_provided, :check_box
 		= field f, :meal_info, :text_area
 		= field f, :travel_info, :text_area

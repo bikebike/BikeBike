@@ -1,12 +1,11 @@
 Bike!Bike!
 ===========
 
-This is the development repository for Bike!Bike!
+This is the development repository for Bike!Bike! Progress can currently be seen at [bikebike.herokuapp.com](http://bikebike.herokuapp.com/)
 
-If you're about to get started contributing please contact Godwin: `goodgodwin``@``hotmail.com`. Also try to familiarize yourself with the [technologies](#technologies) we're using, our [collaboration tools](#collaboration-tools), [requirements](#requirements-overview), [coding conventions](#coding-conventions), [style guide](#style-guide).
+If you're about to get started contributing please contact Godwin: `goodgodwin``@``hotmail.com`. Also try to familiarize yourself with the [technologies](#technologies) we're using, our [collaboration tools](#collaboration-tools), [requirements](#requirements-overview), [coding conventions](#coding-conventions), [style guide](#style-guide), and [testing practices](#testing-practices).
 
 ### Technologies ###
------
 
 * [Ruby 2.0.0][1]
 * [Rails 4.0.0][2]
@@ -30,7 +29,6 @@ If you're about to get started contributing please contact Godwin: `goodgodwin``
 
 
 ## Collaboration Tools ##
------
 
 * [Trello][10]
 * [GitHub][11]
@@ -42,7 +40,6 @@ If you're about to get started contributing please contact Godwin: `goodgodwin``
 
 
 ## Requirements Overview ##
------
 
 Bike!Bike! is a conference which is held in and hosted by a different city each year. The conference is specifically for not for profit bicycle collectives (5013c or equivalent status is not required). There are also 'Reginal Bike!Bike!s' which can be hosted by any organization at any time of the year.
 
@@ -116,6 +113,12 @@ If the key does not exist, the previos lines will produce the following respecti
 
 If the user has sufficient rights, these blocks will also be surrounded by the necessary markup to allow them to be selected and edited by the user.
 
+
 ### Style Guide ###
 
 On hold until our design team determines a director for our identity.
+
+
+## Testing Practices ##
+
+Once tests are set up, we will ensure 100% code coverage. This higher than normal amount is due to the fact that the application will capture all translations, on which pages they occur, and which keys are missing languages in each available language.

@@ -34,12 +34,28 @@ class ConferencesController < ApplicationController
 	# PATCH/PUT /conferences/1
 	def update
 		if params[:register]
+			registration = ConferenceRegistration.find_by(:user_id => current_user.id, :conference_id => @conference.id)
+			if registration
+				registration.conference_registration_responses.destroy_all
+			else
+				registration = ConferenceRegistration.new(user_id: current_user.id, conference_id: @conference.id, is_attending: params[:is_attending])
+			end
+			data = Hash.new
 			params.each do |key, value|
 				matches = /^field_(\d+)(_(\d+|other))?/.match(key)
 				if matches
-					x
+					if matches[3] == nil
+						data[matches[1]] = value
+					else
+						data[matches[1]] ||= Hash.new
+						data[matches[1]][matches[3]] = value
+					end
 				end
 			end
+			data.each do |key, value|
+				registration.conference_registration_responses << ConferenceRegistrationResponse.new(registration_form_field_id: key.to_i, data: value.to_json.to_s)
+			end
+			registration.save!
 			render action: 'show'
 		elsif @conference.update(conference_params)
 			redirect_to @conference, notice: 'Conference was successfully updated.'

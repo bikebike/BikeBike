@@ -1,4 +1,4 @@
-conference
+*conference
 	- title 						: string
 	- slug							: string
 	- start_date 					: datetime
@@ -57,7 +57,7 @@ event
 	- location			: [location]
 	- members			: NtoN[user_organization_replationship]
 
-registration_form_field
+*registration_form_field
 	- title			: string
 	- slug			: string
 	- required		: boolean
@@ -106,25 +106,4 @@ workshop
 	- slug	: string
 	- info	: text
 
-rails g scaffold organization name:string slug:string email_address:string url:string year_founded:integer info:text logo:string avatar:string requires_approval:boolean secret_question:string secret_answer:string location_id:integer user_organization_replationship_id:integer
-
-organization_status:string
-user_organization_replationship_id:integer
-
-
-conference title:string slug:string start_date:datetime end_date:datetime info:text poster:string banner:string workshop_schedule_published:boolean registration_open:boolean meals_provided:boolean meal_info:text travel_info:text conference_type:conference_type_id
-
-conference_hosts_organizations conference_id:integer organization_id:integer
-
-	- host_organizations			: NtoN[organization]
-	- locations						: *NtoN[location]
-	- registration_form_fields		: *NtoN[registration_form_field]
-	- workshop_resources			: *NtoN[workshop_resource]
-
-registration_form_field
-	- title			: string
-	- help			: text
-	- required		: boolean
-	- field_type	: list(string)
-	- options		: string
-	- retired		: boolean
+rails g scaffold 
