@@ -3,7 +3,7 @@ Bike!Bike!
 
 This is the development repository for Bike!Bike!
 
-If you're about to get started contributing please contact Godwin: `goodgodwin``@``hotmail.com`. Also try to familiarize yourself with the [technologies](#technologies) we're using, our collaboration tools, requirements, coding conventions, style guide.
+If you're about to get started contributing please contact Godwin: `goodgodwin``@``hotmail.com`. Also try to familiarize yourself with the [technologies](#technologies) we're using, our [collaboration tools](#collaboration-tools), [requirements](#requirements-overview), [coding conventions](#coding-conventions), [style guide](#style-guide).
 
 ### Technologies ###
 -----
