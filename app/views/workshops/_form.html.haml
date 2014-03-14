@@ -1,0 +1,40 @@
+= form_for @workshop do |f|
+  - if @workshop.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@workshop.errors.count, "error")} prohibited this workshop from being saved:"
+      %ul
+        - @workshop.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :title
+    = f.text_field :title
+  .field
+    = f.label :slug
+    = f.text_field :slug
+  .field
+    = f.label :info
+    = f.text_area :info
+  .field
+    = f.label :conference_id
+    = f.number_field :conference_id
+  .field
+    = f.label :workshop_stream_id
+    = f.number_field :workshop_stream_id
+  .field
+    = f.label :workshop_presentation_style
+    = f.number_field :workshop_presentation_style
+  .field
+    = f.label :min_facilitators
+    = f.number_field :min_facilitators
+  .field
+    = f.label :location_id
+    = f.number_field :location_id
+  .field
+    = f.label :start_time
+    = f.datetime_select :start_time
+  .field
+    = f.label :end_time
+    = f.datetime_select :end_time
+  .actions
+    = f.submit 'Save'

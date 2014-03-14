@@ -1,5 +1,7 @@
 BikeBike::Application.routes.draw do
 
+  resources :workshops
+
 	#resources :conference_registration_responses
 
 	#resources :conference_registrations

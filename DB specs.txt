@@ -106,4 +106,7 @@ workshop
 	- slug	: string
 	- info	: text
 
-rails g scaffold 
+rails g scaffold workshop title:string slug:string info:text conference_id:integer workshop_stream_id:integer workshop_presentation_style:integer min_facilitators:integer location_id:integer start_time:datetime end_time:datetime
+
+	- requested_resources	: NtoN[workshop_resource]
+	- facilitators			: NtoN[user]

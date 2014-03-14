@@ -1,0 +1,37 @@
+%h1 Listing workshops
+
+%table
+  %tr
+    %th Title
+    %th Slug
+    %th Info
+    %th Conference
+    %th Workshop stream
+    %th Workshop presentation style
+    %th Min facilitators
+    %th Location
+    %th Start time
+    %th End time
+    %th
+    %th
+    %th
+
+  - @workshops.each do |workshop|
+    %tr
+      %td= workshop.title
+      %td= workshop.slug
+      %td= workshop.info
+      %td= workshop.conference_id
+      %td= workshop.workshop_stream_id
+      %td= workshop.workshop_presentation_style
+      %td= workshop.min_facilitators
+      %td= workshop.location_id
+      %td= workshop.start_time
+      %td= workshop.end_time
+      %td= link_to 'Show', workshop
+      %td= link_to 'Edit', edit_workshop_path(workshop)
+      %td= link_to 'Destroy', workshop, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Workshop', new_workshop_path

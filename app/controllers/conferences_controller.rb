@@ -37,6 +37,7 @@ class ConferencesController < ApplicationController
 			registration = ConferenceRegistration.find_by(:user_id => current_user.id, :conference_id => @conference.id)
 			if registration
 				registration.conference_registration_responses.destroy_all
+				registration.is_attending = params[:is_attending]
 			else
 				registration = ConferenceRegistration.new(user_id: current_user.id, conference_id: @conference.id, is_attending: params[:is_attending])
 			end
@@ -53,7 +54,7 @@ class ConferencesController < ApplicationController
 				end
 			end
 			data.each do |key, value|
-				registration.conference_registration_responses << ConferenceRegistrationResponse.new(registration_form_field_id: key.to_i, data: value.to_json.to_s)
+				registration.conference_registration_responses << ConferenceRegistrationResponse.new(registration_form_field_id: key.to_i, data: value.to_json)
 			end
 			registration.save!
 			render action: 'show'
@@ -134,6 +135,16 @@ class ConferencesController < ApplicationController
 		# Use callbacks to share common setup or constraints between actions.
 		def set_conference
 			@conference = Conference.find_by(slug: params[:slug] || params[:conference_slug])
+			set_conference_registration
+		end
+
+		def set_conference_registration
+			if !@conference || !current_user
+				@conference_registration = nil
+				return
+			end
+
+			@conference_registration = ConferenceRegistration.find_by(conference_id: @conference.id, user_id: current_user.id)
 		end
 
 		# Only allow a trusted parameter "white list" through.

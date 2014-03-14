@@ -56,6 +56,14 @@ class RegistrationFormField < ActiveRecord::Base
 		o
 	end
 
+	def repeats?()
+		field_type.to_s == 'multiple' && selection_type.to_s != 'select'
+	end
+
+	def is_array?()
+		field_type.to_s == 'multiple' && selection_type.to_s != 'radio_button'
+	end
+
 	private
 		def get_from_options(key)
 			if options
