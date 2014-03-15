@@ -1,0 +1,23 @@
+%h1 Listing workshop_requested_resources
+
+%table
+  %tr
+    %th Workshop
+    %th Workshop resource
+    %th Status
+    %th
+    %th
+    %th
+
+  - @workshop_requested_resources.each do |workshop_requested_resource|
+    %tr
+      %td= workshop_requested_resource.workshop_id
+      %td= workshop_requested_resource.workshop_resource_id
+      %td= workshop_requested_resource.status
+      %td= link_to 'Show', workshop_requested_resource
+      %td= link_to 'Edit', edit_workshop_requested_resource_path(workshop_requested_resource)
+      %td= link_to 'Destroy', workshop_requested_resource, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Workshop requested resource', new_workshop_requested_resource_path

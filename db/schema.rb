@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140314025647) do
+ActiveRecord::Schema.define(version: 20140315181222) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -204,10 +204,26 @@ ActiveRecord::Schema.define(version: 20140314025647) do
     t.text     "value"
   end
 
+  create_table "workshop_facilitators", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "workshop_id"
+    t.string   "role"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "workshop_presentation_styles", force: true do |t|
     t.string   "name"
     t.string   "slug"
     t.string   "info"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "workshop_requested_resources", force: true do |t|
+    t.integer  "workshop_id"
+    t.integer  "workshop_resource_id"
+    t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
