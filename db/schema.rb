@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140315181222) do
+ActiveRecord::Schema.define(version: 20140315183241) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,26 @@ ActiveRecord::Schema.define(version: 20140315181222) do
     t.text     "preregistration_info"
     t.text     "registration_info"
     t.text     "postregistration_info"
+  end
+
+  create_table "event_types", force: true do |t|
+    t.string   "slug"
+    t.text     "info"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "events", force: true do |t|
+    t.string   "title"
+    t.string   "slug"
+    t.integer  "event_type_id"
+    t.integer  "conference_id"
+    t.text     "info"
+    t.integer  "location_id"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "locations", force: true do |t|

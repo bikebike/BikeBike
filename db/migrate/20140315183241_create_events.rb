@@ -4,9 +4,9 @@ class CreateEvents < ActiveRecord::Migration
       t.string :title
       t.string :slug
       t.integer :event_type_id
-      t.conference_id :conference
+      t.integer :conference_id
       t.text :info
-      t.location_id :location
+      t.integer :location_id
       t.datetime :start_time
       t.datetime :end_time
 
