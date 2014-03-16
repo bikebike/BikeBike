@@ -113,7 +113,6 @@ updateFormFieldList = () ->
 			(json) ->
 				$('#conference-form').html(json.form)
 				$('#registration-form-field-list').html(json.list)
-				#console.log json
 				updateFormFieldList()
 				return
 	$('#conference-form .remove-form-field').click () ->

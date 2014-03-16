@@ -201,7 +201,7 @@ module ApplicationHelper
 		end
 	end
 
-	def field(form, name, type = nil, param = nil, html: nil, help: false, attrs: [], classes: nil, label: nil, placeholder: nil, value: nil, checked: nil)
+	def field(form, name, type = nil, param = nil, html: nil, help: false, attrs: [], classes: nil, label: nil, placeholder: nil, value: nil, checked: nil, required: false)
 
 		if form.is_a?(Symbol) || form.is_a?(String)
 			param = type
@@ -226,7 +226,7 @@ module ApplicationHelper
 		end
 
 		select_prompt = nil
-		show_label = true
+		show_label = !(/^hidden_field/.match(type.to_s))
 		label_after = true
 		value_attribute = !form
 
@@ -262,7 +262,7 @@ module ApplicationHelper
 			label_html = eval("(" + (form ? 'form.label' : 'label_tag') + " name, '<span>#{label ? CGI.escapeHTML(label) : name}</span>'.html_safe)")
 		end
 
-		if label === false
+		if label === false || !show_label
 			label_html = ''
 		end
 
@@ -354,7 +354,9 @@ module ApplicationHelper
 				end
 			end
 			form_html += (html_options || '')
-			puts "\n\t" + form_html + "\n"
+			if required
+				form_html += ', :required => true'
+			end
 			form_html = eval(form_html)
 			if root
 				form_html = "<#{root}>" + form_html + "</#{root}>"
@@ -474,9 +476,8 @@ module ApplicationHelper
 
 	def form_field(f, response = nil)
 		id = 'field_' + f.id.to_s
-		html = p(f, 'title')#'<label for="' + id + '">' + f.title + '</label>'
+		html = p(f, 'title')
 
-		#options = ActiveSupport::JSON.decode(options)#JSON.parse(f.options)
 		options = JSON.parse(f.options)
 		if f.field_type == 'multiple'
 			if f.help
@@ -490,25 +491,17 @@ module ApplicationHelper
 			end
 
 			val = response ? ActiveSupport::JSON.decode(response.data) : Hash.new
-			#val = nil
 
 			if f.repeats?
 				is_array = f.is_array?
 				opts.each do |key, value|
-					#html += self.send(options['selection_type'] + '_tag', 'field-' + id)
-					#ActiveSupport::JSON.decode(key)
-					if is_array
-						#x
-					end
-					html += field((id + (is_array ? ('_' + key) : '')).to_sym, options['selection_type'] + '_tag', label: value, value: is_array ? (val ? val[key] : nil) : key, checked: is_array ? (val[key] == "1" || val[key] == "on") : val.to_s == key.to_s)
+					html += field((id + (is_array ? ('_' + key) : '')).to_sym, options['selection_type'] + '_tag', label: value, value: is_array ? (val ? val[key] : nil) : key, checked: is_array ? (val[key] == "1" || val[key] == "on") : val.to_s == key.to_s, required: f.required)
 				end
 			else
-				html += field(id.to_sym, options['selection_type'] + '_tag', opts, value: val)
+				html += field(id.to_sym, options['selection_type'] + '_tag', opts, value: val, required: f.required)
 			end
-			#html += collection_check_boxes nil, nil, opts, nil, :key
 		else
-			#x
-			html += field(id.to_sym, options['input_type'] + '_tag', label: false, placeholder: f.help, value: response ? ActiveSupport::JSON.decode(response.data) : nil)
+			html += field(id.to_sym, options['input_type'] + '_tag', label: false, placeholder: f.help, value: response ? ActiveSupport::JSON.decode(response.data) : nil, required: f.required)
 		end
 
 		html.html_safe

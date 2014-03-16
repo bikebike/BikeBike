@@ -48,7 +48,6 @@ gem "compass-rails", "~> 1.1.3"
 gem 'foundation-rails'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
-#gem 'bcrypt-ruby', git: 'https://github.com/codahale/bcrypt-ruby.git'
 gem 'sorcery', '>= 0.8.1'
 gem 'oauth2', '~> 0.8.0'
 gem 'ruby-drupal-hash'
