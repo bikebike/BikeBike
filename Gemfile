@@ -65,7 +65,7 @@ gem 'geocoder'
 gem 'forgery'
 gem 'paper_trail'
 
-gem 'eventmachine'
+#gem 'eventmachine'
 
 group :development, :test do
 	gem 'debugger'
