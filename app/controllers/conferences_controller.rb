@@ -125,6 +125,12 @@ class ConferencesController < ApplicationController
 		set_conference
 	end
 
+	def workshops
+		set_conference
+		@workshops = Workshop.where(:conference_id => @conference.id)
+		render 'workshops/index'
+	end
+
 	# DELETE /conferences/1
 	def destroy
 		@conference.destroy
@@ -134,7 +140,7 @@ class ConferencesController < ApplicationController
 	private
 		# Use callbacks to share common setup or constraints between actions.
 		def set_conference
-			@conference = Conference.find_by(slug: params[:slug] || params[:conference_slug])
+			@conference = Conference.find_by(slug: params[:conference_slug] || params[:slug])
 			set_conference_registration
 		end
 

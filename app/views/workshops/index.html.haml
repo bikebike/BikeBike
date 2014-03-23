@@ -14,7 +14,6 @@
     %th End time
     %th
     %th
-    %th
 
   - @workshops.each do |workshop|
     %tr
@@ -28,10 +27,9 @@
       %td= workshop.location_id
       %td= workshop.start_time
       %td= workshop.end_time
-      %td= link_to 'Show', workshop
-      %td= link_to 'Edit', edit_workshop_path(workshop)
-      %td= link_to 'Destroy', workshop, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td= link_to 'Show', conference_workshop_path(@conference, workshop)
+      %td= link_to 'Edit', edit_conference_workshop_path(@conference, workshop)
 
 %br
 
-= link_to 'New Workshop', new_workshop_path
+= link_to 'New Workshop', new_conference_workshop_path

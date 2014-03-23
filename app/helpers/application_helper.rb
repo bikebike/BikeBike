@@ -406,7 +406,18 @@ module ApplicationHelper
 			if params[:action] == tab.to_s
 				c << 'current'
 			end
-			tab_list += link_to tab, link || object, :class => c
+			link_html = ''
+			if tab.is_a?(Hash)
+				func = tab.keys[0]
+				val = tab[func]
+				args = val ? (val.is_a?(Array) ? (val.collect { |v| object[v] } ) : [object[val]] ) : nil
+
+				link_html = link_to func.to_s.gsub(/_path$/, ''), args ? self.send(func, args) : self.send(func), :class => c
+			else
+				#x
+				link_html = link_to tab, link || object, :class => c
+			end
+			tab_list += link_html
 		end
 		('<nav class="row centered">
 			<div class="tabs">' + 
@@ -425,6 +436,9 @@ module ApplicationHelper
 			when 'conferences'
 				object = @conference
 				tabs = ConferencesHelper::TABS
+			when 'workshops'
+				object = [@conference, @workshop]
+				tabs = WorkshopsHelper::TABS
 		end
 
 		if object && tabs

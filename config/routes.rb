@@ -1,14 +1,12 @@
 BikeBike::Application.routes.draw do
 
-  resources :events
+	resources :events
 
-  resources :event_types
+	resources :event_types
 
-  resources :workshop_requested_resources
+	resources :workshop_requested_resources
 
-  resources :workshop_facilitators
-
-  resources :workshops
+	resources :workshop_facilitators
 
 	#resources :conference_registration_responses
 
@@ -25,7 +23,7 @@ BikeBike::Application.routes.draw do
 	resources :conferences, :param => 'slug' do
 		get :hosts
 		get :registration
-		get :workshops
+		resources :workshops, :param => 'slug'
 		get :registration
 		#resources :registrations, :path => 'registration' do
 		#	get :form, on: :collection
