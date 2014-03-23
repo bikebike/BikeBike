@@ -67,7 +67,7 @@ gem 'paper_trail'
 
 
 group :development, :test do
-	gem 'thin'
+	#gem 'thin'
 	gem 'debugger'
 	gem 'delorean'
 	gem 'factory_girl_rails'
