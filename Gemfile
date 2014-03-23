@@ -65,6 +65,8 @@ gem 'geocoder'
 gem 'forgery'
 gem 'paper_trail'
 
+gem 'eventmachine'
+
 group :development, :test do
 	gem 'debugger'
 	gem 'delorean'
@@ -95,7 +97,6 @@ group :test do
 	gem 'selenium-webdriver'
 	gem 'simplecov', require: false
 	gem 'webmock', require: false
-	gem 'eventmachine'
 end
 
 group :staging, :production do
