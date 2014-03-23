@@ -319,6 +319,7 @@ DEPENDENCIES
   debugger
   delorean
   email_spec
+  eventmachine
   factory_girl_rails
   forgery
   foundation-rails

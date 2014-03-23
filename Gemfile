@@ -95,6 +95,7 @@ group :test do
 	gem 'selenium-webdriver'
 	gem 'simplecov', require: false
 	gem 'webmock', require: false
+	gem 'eventmachine'
 end
 
 group :staging, :production do
