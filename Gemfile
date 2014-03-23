@@ -9,7 +9,6 @@ gem 'rails', '4.0.0'
 # gem 'puma'
 # gem 'unicorn'
 gem 'eventmachine'
-gem 'thin'
 
 # Multi-environment configuration
 # gem 'simpleconfig'
@@ -68,6 +67,7 @@ gem 'paper_trail'
 
 
 group :development, :test do
+	gem 'thin'
 	gem 'debugger'
 	gem 'delorean'
 	gem 'factory_girl_rails'
