@@ -8,6 +8,7 @@ gem 'rails', '4.0.0'
 # Servers
 # gem 'puma'
 # gem 'unicorn'
+gem 'eventmachine'
 gem 'thin'
 
 # Multi-environment configuration
@@ -65,7 +66,6 @@ gem 'geocoder'
 gem 'forgery'
 gem 'paper_trail'
 
-#gem 'eventmachine'
 
 group :development, :test do
 	gem 'debugger'
