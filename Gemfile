@@ -72,8 +72,8 @@ group :development, :test do
 	gem 'delorean'
 	gem 'factory_girl_rails'
 	#gem 'faker'
-	gem 'pry'
-	gem 'pry-rails'
+	#gem 'pry'
+	#gem 'pry-rails'
 end
 
 group :development do
