@@ -77,7 +77,6 @@ group :development, :test do
 end
 
 group :development do
-<<<<<<< HEAD
   #gem 'perftools.rb'
   gem 'bullet'
   gem 'better_errors'
@@ -86,15 +85,6 @@ group :development do
   gem 'haml-rails'
   gem 'awesome_print'
   gem 'rails-footnotes', :github => 'josevalim/rails-footnotes'
-=======
-	#gem 'perftools.rb'
-	gem 'bullet'
-	gem 'better_errors'
-	gem 'binding_of_caller'
-	gem 'meta_request'
-	gem 'haml-rails'
-	gem 'awesome_print'
->>>>>>> FETCH_HEAD
 end
 
 group :test do

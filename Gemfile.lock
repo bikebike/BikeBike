@@ -1,13 +1,4 @@
 GIT
-<<<<<<< HEAD
-  remote: git://github.com/jim/carmen-rails.git
-  revision: 076dd251e075d07408e0b5268f886956ef2a347c
-  specs:
-    carmen-rails (1.0.0)
-      carmen (~> 1.0.0)
-      rails
-
-GIT
   remote: git://github.com/josevalim/rails-footnotes.git
   revision: 3a6ac1971e91d822f057650cc5916ebfcbd6ee37
   specs:
@@ -15,8 +6,6 @@ GIT
       rails (>= 3.0.0)
 
 GIT
-=======
->>>>>>> FETCH_HEAD
   remote: git://github.com/svenfuchs/i18n-active_record.git
   revision: 55507cf59f8f2173d38e07e18df0e90d25b1f0f6
   specs:
