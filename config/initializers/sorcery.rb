@@ -71,7 +71,7 @@ Rails.application.config.sorcery.configure do |config|
   # What providers are supported by this app, i.e. [:twitter, :facebook, :github, :linkedin, :xing, :google, :liveid] .
   # Default: `[]`
   #
-  # config.external_providers =
+  config.external_providers = [:facebook]
 
 
   # You can change it by your local ca_file. i.e. '/etc/pki/tls/certs/ca-bundle.crt'
@@ -109,13 +109,14 @@ Rails.application.config.sorcery.configure do |config|
   # config.twitter.secret = ""
   # config.twitter.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=twitter"
   # config.twitter.user_info_mapping = {:email => "screen_name"}
-  #
-  # config.facebook.key = ""
-  # config.facebook.secret = ""
-  # config.facebook.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=facebook"
-  # config.facebook.user_info_mapping = {:email => "name"}
-  # config.facebook.access_permissions = ["email", "publish_stream"]
-  #
+  
+  config.facebook.key = "726202304080642"
+  config.facebook.secret = "386a7b717d348af4120aeb1bb0ca3516"
+  config.facebook.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=facebook"
+  config.facebook.user_info_mapping = {:email => "email", :username => "username", :avatar => "picture/data/url"}
+  config.facebook.scope = "email"
+  config.facebook.display = "popup"
+  
   # config.github.key = ""
   # config.github.secret = ""
   # config.github.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=github"
@@ -147,7 +148,7 @@ Rails.application.config.sorcery.configure do |config|
     # specify username attributes, for example: [:username, :email].
     # Default: `[:username]`
     #
-    # user.username_attribute_names =
+    user.username_attribute_names = [:username, :email]
 
 
     # change *virtual* password attribute, the one which is used until an encrypted one is generated.
@@ -214,7 +215,7 @@ Rails.application.config.sorcery.configure do |config|
     # make this configuration inheritable for subclasses. Useful for ActiveRecord's STI.
     # Default: `false`
     #
-    # user.subclasses_inherit_config =
+    user.subclasses_inherit_config = true
 
 
     # -- remember_me --
@@ -411,7 +412,7 @@ Rails.application.config.sorcery.configure do |config|
     # Class which holds the various external provider data for this user.
     # Default: `nil`
     #
-    # user.authentications_class =
+    user.authentications_class = Authentication
 
 
     # User's identifier in authentications class.

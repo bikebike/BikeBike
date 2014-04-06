@@ -23,6 +23,8 @@ require 'capybara/rspec'
 
 #Capybara.ignore_hidden_elements = false # testing hidden fields
 
+include Sorcery::TestHelpers::Rails
+
 RSpec.configure do |config|
   # == Mock Framework
   #
@@ -33,6 +35,7 @@ RSpec.configure do |config|
   # config.mock_with :rr
   # config.mock_with :rspec
 
+  config.include AuthenticationForFeatureRequest, type: :feature
 
   # Run specs in random order to surface order dependencies. If you find an
   # order dependency and want to debug it, you can fix the order by providing

@@ -8,4 +8,6 @@
 			Create an Account
 		%p
 			#{_ 'user.why_register', 'paragraph'}
+			= link_to 'Login with Facebook', auth_at_provider_path(:provider => :facebook)
 			= render '/users/form'
+			
