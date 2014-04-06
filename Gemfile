@@ -83,6 +83,7 @@ group :development do
   gem 'meta_request'
   gem 'haml-rails'
   gem 'awesome_print'
+  gem 'rails-footnotes', :github => 'josevalim/rails-footnotes'
 end
 
 group :test do

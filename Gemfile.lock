@@ -7,6 +7,13 @@ GIT
       rails
 
 GIT
+  remote: git://github.com/josevalim/rails-footnotes.git
+  revision: 3a6ac1971e91d822f057650cc5916ebfcbd6ee37
+  specs:
+    rails-footnotes (3.7.9)
+      rails (>= 3.0.0)
+
+GIT
   remote: git://github.com/svenfuchs/i18n-active_record.git
   revision: 55507cf59f8f2173d38e07e18df0e90d25b1f0f6
   specs:
@@ -46,7 +53,10 @@ GEM
     arel (4.0.2)
     atomic (1.1.14)
     awesome_print (1.2.0)
+    bcrypt (3.1.7)
     bcrypt (3.1.7-x86-mingw32)
+    bcrypt-ruby (3.1.5)
+      bcrypt (>= 3.1.3)
     bcrypt-ruby (3.1.5-x86-mingw32)
       bcrypt (>= 3.1.3)
     better_errors (1.1.0)
@@ -130,6 +140,7 @@ GEM
       i18n (~> 0.5)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
+    ffi (1.9.3)
     ffi (1.9.3-x86-mingw32)
     forgery (0.5.0)
     foundation-rails (5.1.1.0)
@@ -201,6 +212,7 @@ GEM
     paper_trail (3.0.0)
       activerecord (>= 3.0, < 5.0)
       activesupport (>= 3.0, < 5.0)
+    pg (0.17.1)
     pg (0.17.1-x86-mingw32)
     polyglot (0.3.3)
     pry (0.9.12.6)
@@ -321,6 +333,7 @@ GEM
       nokogiri (~> 1.3)
 
 PLATFORMS
+  ruby
   x86-mingw32
 
 DEPENDENCIES
@@ -364,6 +377,7 @@ DEPENDENCIES
   pry
   pry-rails
   rails (= 4.0.0)
+  rails-footnotes!
   rails_12factor
   redis
   rspec
