@@ -35,6 +35,8 @@
 		= render 'shared/navbar'
 
 		%main
+			- flash.each do |key, msg|
+				= content_tag :div, msg, :id => key
 			- if has_banner?
 				%header#banner{banner_attrs(yield_or_default :banner_image)}
 					= yield :banner
