@@ -1,0 +1,21 @@
+%h1 Listing event_types
+
+%table
+  %tr
+    %th Slug
+    %th Info
+    %th
+    %th
+    %th
+
+  - @event_types.each do |event_type|
+    %tr
+      %td= event_type.slug
+      %td= event_type.info
+      %td= link_to 'Show', event_type
+      %td= link_to 'Edit', edit_event_type_path(event_type)
+      %td= link_to 'Destroy', event_type, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Event type', new_event_type_path

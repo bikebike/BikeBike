@@ -1,0 +1,23 @@
+= form_for @workshop, url: conference_workshops_path(@conference, @workshop) do |f|
+	.columns
+		- if @workshop.errors.any?
+			#error_explanation
+				%h2= "#{pluralize(@workshop.errors.count, "error")} prohibited this workshop from being saved:"
+				%ul
+					- @workshop.errors.full_messages.each do |msg|
+						%li= msg
+		= field f, :title, :text_field
+		= field f, :slug, :text_field
+	.columns.medium-4
+		%h2=_'workshop.form.help.title', :t
+		=_'workshop.form.help', :p
+	.columns.medium-8
+		= field f, :info, :text_area
+		= field f, :workshop_stream_id, :number_field
+		= field f, :workshop_presentation_style, :number_field
+		=# field f, :min_facilitators, :number_field
+		=# field f, :location_id, :number_field
+		=# field f, :start_time, :datetime_select
+		=# field f, :end_time, :datetime_select
+	.columns
+		= actions :save

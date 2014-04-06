@@ -1,0 +1,2 @@
+module WorkshopRequestedResourcesHelper
+end

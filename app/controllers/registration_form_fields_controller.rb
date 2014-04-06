@@ -38,7 +38,10 @@ class RegistrationFormFieldsController < ApplicationController
 
 	private
 		def ajax_return(success)
-			@registration_form_fields = RegistrationFormField.all
+			if params[:conference_id]
+				@conference = Conference.find(params[:conference_id])
+				@registration_form_fields = RegistrationFormField.where(["id NOT IN (?)", @conference.registration_form_fields.map(&:id)])
+			end
 			if success
 				@registration_form_field = RegistrationFormField.new
 			end
@@ -54,13 +57,11 @@ class RegistrationFormFieldsController < ApplicationController
 
 		# Only allow a trusted parameter "white list" through.
 		def registration_form_field_params
-			#type = params[:type]
-			#allowed = RegistrationFormField::Types[type]
-			#allowed << 'field_type'
 			rff_params = params.require(:registration_form_field)
 			allowed = RegistrationFormField::GetNonOptionKeys(rff_params[:field_type], rff_params)
 			p = rff_params.send('permit', *allowed)#permit(:title, :help, :required, :field_type, :options, :is_retired)
 			p[:options] = RegistrationFormField::GetOptions(rff_params[:field_type], rff_params).to_json.to_s
+			p[:field_type] = rff_params[:field_type]
 			p
 		end
 end

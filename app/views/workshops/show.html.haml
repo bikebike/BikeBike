@@ -1,0 +1,30 @@
+%p#notice= notice
+
+.row
+	.columns.medium-12
+		%h1= @workshop.title
+
+= tabs!
+
+.row
+	.columns.medium-4
+		%p
+			%b Workshop stream:
+			= @workshop.workshop_stream_id
+		%p
+			%b Workshop presentation style:
+			= @workshop.workshop_presentation_style
+		%p
+			%b Min facilitators:
+			= @workshop.min_facilitators
+		%p
+			%b Location:
+			= @workshop.location_id
+		%p
+			%b Start time:
+			= @workshop.start_time
+		%p
+			%b End time:
+			= @workshop.end_time
+	.columns.medium-8
+		=p @workshop, :info

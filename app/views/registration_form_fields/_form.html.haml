@@ -5,7 +5,8 @@
 			%ul
 				- @registration_form_field.errors.full_messages.each do |msg|
 					%li= msg
-
+	- if @conference
+		= field :conference_id, :hidden_field_tag, value: @conference.id
 	= field f, :field_type, :select, RegistrationFormField::Types.keys
 	- RegistrationFormField::Fields.each do |key, value|
 		- classes = RegistrationFormField::TypesForField(key.to_sym).collect{|v| 'field-type-' + v.to_s}

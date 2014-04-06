@@ -22,7 +22,7 @@
 	- slug	: string
 	- info 	: text
 
-event
+*event
 	- title			: string
 	- slug			: string
 	- conference 	: [conference]
@@ -66,18 +66,12 @@ event
 	- other_option	: *boolean
 	- retired		: boolean
 
-request
-	- comment	: text
-	- object	: Nto1[object]
-	- is_invite	: boolean
-	- state		: list(string)
-
 *user_organization_relationship
 	- user			: [user]
 	- organization	: [organization]
 	- relationship	: string
 
-workshop
+*workshop
 	- title					: string
 	- slug					: string
 	- info					: text
@@ -106,4 +100,3 @@ workshop
 	- slug	: string
 	- info	: text
 
-rails g scaffold 

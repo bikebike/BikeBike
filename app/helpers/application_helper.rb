@@ -90,7 +90,7 @@ module ApplicationHelper
 		return nil
 	end
 
-	def _(key, behavior = nil, behavior_size = nil, fake: nil, vars: {}, html: nil, blockData: {}, &block)
+	def _(key, behavior = nil, behavior_size = nil, vars: {}, html: nil, blockData: {}, &block)
 		
 		queued_keys = nil
 		result = nil
@@ -201,7 +201,7 @@ module ApplicationHelper
 		end
 	end
 
-	def field(form, name, type = nil, param = nil, html: nil, help: false, attrs: [], classes: nil, label: nil, placeholder: nil)
+	def field(form, name, type = nil, param = nil, html: nil, help: false, attrs: [], classes: nil, label: nil, placeholder: nil, value: nil, checked: nil, required: false)
 
 		if form.is_a?(Symbol) || form.is_a?(String)
 			param = type
@@ -226,20 +226,26 @@ module ApplicationHelper
 		end
 
 		select_prompt = nil
-		show_label = true
+		show_label = !(/^hidden_field/.match(type.to_s))
 		label_after = true
+		value_attribute = !form
 
 		if /select(_tag)?$/.match(type.to_s)
-			placeholder = nil
 			if !label
-				select_prompt = 'Select a ' + name.to_s
+				select_prompt = placeholder || (form ? 'Select a ' + name.to_s : 'Select one')
 				label_html = ''
 				show_label = false
 			end
-			label_after = false	
-			if param && param.is_a?(Array)
-				param = options_for_select(param)
+			placeholder = nil
+			label_after = false
+			if param
+				if param.is_a?(Array)
+					param = options_for_select(param, value)
+				elsif param.is_a?(Hash)
+					param = options_from_collection_for_select(param, :first, :last, value)
+				end
 			end
+			value_attribute = false
 		elsif type.to_s == 'image_field' || type.to_s == 'user_select_field' || type.to_s == 'organization_select_field'
 			placeholder = nil
 			label_html = ''
@@ -256,7 +262,7 @@ module ApplicationHelper
 			label_html = eval("(" + (form ? 'form.label' : 'label_tag') + " name, '<span>#{label ? CGI.escapeHTML(label) : name}</span>'.html_safe)")
 		end
 
-		if label === false
+		if label === false || !show_label
 			label_html = ''
 		end
 
@@ -316,14 +322,29 @@ module ApplicationHelper
 			end
 		else
 			ph = ''
+			va = ''
+			if value_attribute
+				if /^(check_box|radio_button)/.match(type.to_s)
+					if checked === nil
+						checked = value == "on" || value.to_s == "1"
+					end
+					if /^(radio_button)/.match(type.to_s)
+						va = ', "' + value + '", checked'
+					else
+						va = ', "1", checked'
+					end
+				else
+					va = ', value'
+				end
+			end
 			if placeholder
 				if form
 					ph = ", :placeholder => '#{placeholder}'"
 				else
-					ph = ", nil, placeholder: '#{placeholder}'"
+					ph = ", placeholder: '#{placeholder}'"
 				end
 			end
-			form_html = (form ? "form.#{type} :#{name}" : "#{type} :#{name}") + ph + (param ? ', param' : '')
+			form_html = (form ? "form.#{type} :#{name}" : "#{type} :#{name}") + va + ph + (param ? ', param' : '')
 			attrs.each_index { |i| form_html += (i >= attrs_used ? ', attrs[' + i.to_s + ']' : '') }
 			if select_prompt
 				if form
@@ -333,7 +354,9 @@ module ApplicationHelper
 				end
 			end
 			form_html += (html_options || '')
-			puts "\n\t" + form_html + "\n"
+			if required
+				form_html += ', :required => true'
+			end
 			form_html = eval(form_html)
 			if root
 				form_html = "<#{root}>" + form_html + "</#{root}>"
@@ -383,7 +406,18 @@ module ApplicationHelper
 			if params[:action] == tab.to_s
 				c << 'current'
 			end
-			tab_list += link_to tab, link || object, :class => c
+			link_html = ''
+			if tab.is_a?(Hash)
+				func = tab.keys[0]
+				val = tab[func]
+				args = val ? (val.is_a?(Array) ? (val.collect { |v| object[v] } ) : [object[val]] ) : nil
+
+				link_html = link_to func.to_s.gsub(/_path$/, ''), args ? self.send(func, args) : self.send(func), :class => c
+			else
+				#x
+				link_html = link_to tab, link || object, :class => c
+			end
+			tab_list += link_html
 		end
 		('<nav class="row centered">
 			<div class="tabs">' + 
@@ -402,6 +436,9 @@ module ApplicationHelper
 			when 'conferences'
 				object = @conference
 				tabs = ConferencesHelper::TABS
+			when 'workshops'
+				object = [@conference, @workshop]
+				tabs = WorkshopsHelper::TABS
 		end
 
 		if object && tabs
@@ -451,9 +488,9 @@ module ApplicationHelper
 		('<p>' + object.send(attribute.to_s).strip.gsub(/\s*\n+\s*/, '</p><p>') + '</p>').html_safe
 	end
 
-	def form_field(f)
+	def form_field(f, response = nil)
 		id = 'field_' + f.id.to_s
-		html = p(f, 'title')#'<label for="' + id + '">' + f.title + '</label>'
+		html = p(f, 'title')
 
 		options = JSON.parse(f.options)
 		if f.field_type == 'multiple'
@@ -466,12 +503,19 @@ module ApplicationHelper
 				kv = value.split(/\s*\|\s*/, 2)
 				opts[kv[0]] = kv[1]
 			end
-			opts.each do |key, value|
-				#html += self.send(options['selection_type'] + '_tag', 'field-' + id)
-				html += field((id + '_' + key), options['selection_type'] + '_tag', label: value)
+
+			val = response ? ActiveSupport::JSON.decode(response.data) : Hash.new
+
+			if f.repeats?
+				is_array = f.is_array?
+				opts.each do |key, value|
+					html += field((id + (is_array ? ('_' + key) : '')).to_sym, options['selection_type'] + '_tag', label: value, value: is_array ? (val ? val[key] : nil) : key, checked: is_array ? (val[key] == "1" || val[key] == "on") : val.to_s == key.to_s, required: f.required)
+				end
+			else
+				html += field(id.to_sym, options['selection_type'] + '_tag', opts, value: val, required: f.required)
 			end
 		else
-			html += field(id.to_sym, options['input_type'] + '_tag', label: false, placeholder: f.help)
+			html += field(id.to_sym, options['input_type'] + '_tag', label: false, placeholder: f.help, value: response ? ActiveSupport::JSON.decode(response.data) : nil, required: f.required)
 		end
 
 		html.html_safe
