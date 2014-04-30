@@ -371,3 +371,11 @@ body.organizations-show {
 		background-color: rgba(#000, 0.5);
 	}
 }
+
+.small-text-centered {
+	text-align: center;
+
+	@media #{$medium-up} {
+		text-align: inherit;
+	}
+}

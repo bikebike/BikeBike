@@ -1,3 +1,5 @@
+include ApplicationHelper
+
 class OrganizationsController < ApplicationController
 	before_action :set_organization, only: [:show, :edit, :update, :destroy]
 
@@ -17,6 +19,10 @@ class OrganizationsController < ApplicationController
 		@organization = Organization.new
 		#@organization.location = Location.new
 		@organization.locations.build
+        @user_location = lookup_ip_location
+        @organization.locations[0].city = @user_location.city
+        @organization.locations[0].country = @user_location.country_code
+        @organization.locations[0].territory = @user_location.state_code
 		@organization.locations_organization.build
 		@organization.user_organization_relationships.build
 	end

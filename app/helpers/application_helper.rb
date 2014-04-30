@@ -178,8 +178,8 @@ module ApplicationHelper
 				translation['untranslated'] = I18n.translate!(config.i18n.default_locale, key, vars)
 				translation['lang'] = config.i18n.default_locale.to_s
 			rescue
-				puts _lorem_ipsum(behavior, behavior_size)
-				translation['untranslated'] = behavior ? _lorem_ipsum(behavior, behavior_size) || key.gsub(/^.*\.(.+)?$/, '\1') : key.gsub(/^.*\.(.+)?$/, '\1')
+				default_translation = I18n::MissingTranslationExceptionHandler.note(key, behavior, behavior_size)
+				translation['untranslated'] = default_translation
 			end
 		end
 		return translation
@@ -232,7 +232,7 @@ module ApplicationHelper
 
 		if /select(_tag)?$/.match(type.to_s)
 			if !label
-				select_prompt = placeholder || (form ? 'Select a ' + name.to_s : 'Select one')
+				select_prompt = placeholder || (form ? 'Select a ' + (_ ('form.select_' + name.to_s)) : 'form.Select_one')
 				label_html = ''
 				show_label = false
 			end
@@ -254,12 +254,12 @@ module ApplicationHelper
 			if /^password/.match(type.to_s)
 				placeholder = nil
 			elsif !placeholder
-				placeholder = 'Type in a ' + name.to_s
+				placeholder = (_ 'form.Enter_your_' + name.to_s)
 			end
 		end
 
 		if show_label
-			label_html = eval("(" + (form ? 'form.label' : 'label_tag') + " name, '<span>#{label ? CGI.escapeHTML(label) : name}</span>'.html_safe)")
+			label_html = eval("(" + (form ? 'form.label' : 'label_tag') + " name, '<span>#{CGI.escapeHTML(_ (label || name.to_s))}</span>'.html_safe)")
 		end
 
 		if label === false || !show_label
@@ -370,8 +370,21 @@ module ApplicationHelper
 		return ("<div class=\"field #{type.to_s.gsub('_', '-').gsub(/\-tag$/, '')} field-#{name.to_s.gsub('_', '-')}#{classes.length > 0 ? ' ' + classes.join(' ') : ''}\">" + (label_after ? '' : label_html) + form_html + (label_after ? label_html : '') + "</div>").html_safe
 	end
 
-	def actions(action)
-		('<div class="actions"><button name="' + action.to_s + '" type="submit">' + action.to_s + '</button></div>').html_safe
+	def actions(actions = [])
+		if !actions.is_a?(Array)
+			actions = [actions]
+		end
+
+		html = '<div class="actions">'
+		actions.each { |action|
+			if action == :facebook_sign_in
+				html += '<a href="' + url_for(auth_at_provider_path(:provider => :facebook)) + '" class="facebook-sign-in button">' + (_ action.to_s) + '</a>'
+			else
+				html += '<button id="' + action.to_s + '" name="' + action.to_s + '" type="submit">' + (_ action.to_s) + '</button>'
+			end
+		}
+		html += '</div>'
+		html.html_safe
 	end
 
 	def sortable(objects, id = 'id', url: nil, &block)
@@ -519,6 +532,18 @@ module ApplicationHelper
 		end
 
 		html.html_safe
+	end
+
+	def t(*a)
+		_(*a)
+	end
+
+	def lookup_ip_location
+		if request.remote_ip == '127.0.0.1'
+			Geocoder.search(session['remote_ip'] || (session['remote_ip'] = open("http://checkip.dyndns.org").first.gsub(/^.*\s([\d\.]+).*$/s, '\1').gsub(/[^\.\d]/, ''))).first
+		else
+			request.location
+		end
 	end
 
 end

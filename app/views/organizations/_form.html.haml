@@ -9,7 +9,7 @@
 		= field f, :name, :text_field
 		= field f, :slug, :text_field
 
-	.columns.medium-4
+	.columns.medium-4.small-text-centered
 		-#%h2=_'organization.create.intro-title', :t
 		-#%p=_'organization.create.intro', :p
 		=# field f, :avatar, :image_field
@@ -21,7 +21,6 @@
 		=#		= f.hidden_field :avatar_cache
 	.columns.medium-8
 		= field f, :email_address, :email_field
-		-#= field f, :url, :text_field
 		= f.fields_for :locations do |b|
 			= field_set_tag 'Location' do
 				= field b, :country, :country_select, {help: 'Select a Country'}

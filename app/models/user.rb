@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 	authenticates_with_sorcery! do |config|
-    config.authentications_class = Authentication
-  end
+        config.authentications_class = Authentication
+    end
 
 	validates :password, presence: true, confirmation: true, length: { minimum: 3 }, unless: ("id?" || "password_confirmation?")
 	validates :password_confirmation, presence: true, unless: ("id?" || "password?")
@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
 
 	has_many :user_organization_relationships
 	has_many :organizations, through: :user_organization_relationships
-  has_many :authentications, :dependent => :destroy
-  accepts_nested_attributes_for :authentications
+    has_many :authentications, :dependent => :destroy
+    accepts_nested_attributes_for :authentications
 
 end

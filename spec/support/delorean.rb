@@ -1,7 +1,7 @@
 RSpec.configure do |config|
-  config.include Delorean
+	config.include Delorean
 
-  config.before(:each) do
-    back_to_the_present
-  end
+	config.before(:each) do
+		back_to_the_present
+	end
 end

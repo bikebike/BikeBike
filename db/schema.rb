@@ -182,8 +182,8 @@ ActiveRecord::Schema.define(version: 20140315183241) do
   end
 
   create_table "user_organization_relationships", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "organization_id"
+    t.integer  "user_id",         null: false
+    t.integer  "organization_id", null: false
     t.string   "relationship"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -221,7 +221,7 @@ ActiveRecord::Schema.define(version: 20140315183241) do
     t.string   "whodunnit"
     t.text     "object"
     t.datetime "created_at"
-    t.string   "value"
+    t.text     "value"
   end
 
   create_table "workshop_facilitators", force: true do |t|

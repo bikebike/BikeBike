@@ -3,11 +3,11 @@ source 'http://rubygems.org'
 ruby '2.0.0'
 gem 'rails', '4.0.0'
 
-#gem 'nokogiri', :git => '/nokogiri/'
-
 # Servers
 # gem 'puma'
 # gem 'unicorn'
+# gem 'openssl', '~> 1.1.0'
+
 gem 'eventmachine'
 
 # Multi-environment configuration
@@ -19,12 +19,9 @@ gem 'eventmachine'
 # ORM
 gem 'pg'
 
-# Performance and Exception management
-# gem 'airbrake'
-# gem 'newrelic_rpm'
-
 # Security
 # gem 'secure_headers'
+gem 'dotenv-rails', :groups => [:development, :test]
 
 # Miscellanea
 # gem 'google-analytics-rails'
@@ -55,11 +52,10 @@ gem 'redis'
 gem 'carrierwave'
 gem 'carrierwave-imageoptimizer'
 gem 'mini_magick'
-#gem 'carmen-rails'#, '~> 1.0.0', github: 'jim/carmen-rails'
+#gem 'carmen', :path => '../carmen /'
+gem 'carmen-rails'
 gem 'nested_form'
 gem 'acts_as_list'
-##gem 'jcrop-rails'
-##gem 'rmagick'
 
 gem 'geocoder'
 gem 'forgery'
@@ -67,17 +63,13 @@ gem 'paper_trail'
 
 
 group :development, :test do
-	#gem 'thin'
 	gem 'debugger'
 	gem 'delorean'
-	gem 'factory_girl_rails'
-	#gem 'faker'
-	#gem 'pry'
-	#gem 'pry-rails'
+	gem 'rspec'
+	gem 'rspec-rails'
 end
 
 group :development do
-  #gem 'perftools.rb'
   gem 'bullet'
   gem 'better_errors'
   gem 'binding_of_caller'
@@ -89,15 +81,16 @@ end
 
 group :test do
 	gem 'capybara'
+	gem 'guard-rspec'
+	gem 'factory_girl_rails'
 	gem 'coveralls', require: false
 	gem 'database_cleaner'
 	gem 'email_spec'
 	gem 'launchy'
-	gem 'rspec'
-	gem 'rspec-rails'
 	gem 'selenium-webdriver'
 	gem 'simplecov', require: false
 	gem 'webmock', require: false
+	gem 'wdm', '>= 0.1.0' if RbConfig::CONFIG['target_os'] =~ /mswin|mingw|cygwin/i
 end
 
 group :staging, :production do

@@ -4,10 +4,8 @@
 	.columns.medium-6
 		= render 'form'
 	.columns.medium-6
-		%h2
-			Create an Account
+		%h2 #{_ 'user.Create_Account'}
+		%p #{_ 'user.why_register', 'paragraph'}
 		%p
-			#{_ 'user.why_register', 'paragraph'}
-			= link_to 'Login with Facebook', auth_at_provider_path(:provider => :facebook)
 			= render '/users/form'
 			

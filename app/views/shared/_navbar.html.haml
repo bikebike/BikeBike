@@ -1,5 +1,5 @@
 
-%nav.top-bar.row
+%nav.top-bar.row{ data: { :topbar => '' } }
 	#nav-inner
 		%ul.title-area
 			/ Title Area
@@ -10,22 +10,28 @@
 			%li.toggle-topbar.menu-icon
 				%a{href: "#"}
 					%span Menu
-		.top-bar-section
+		%section.top-bar-section
 			/ Left Nav Section
 			%ul.left
 				%li.active
-					%a{href: "/conferences/"} Conferences
+					= link_to (_'Conferences'), :controller => :conferences
 				%li
-					%a{href: "/organizations/"} Organizations
+					= link_to (_'Organizations'), :controller =>  :organizations
 				%li
-					%a{href: "/resources/"} Resources
+					= link_to (_'Resources'), '/resources'
 				/ Right Nav Section
 			%ul.right
 				- if current_user
-					%li.has-form.sign-out
-						= link_to "Sign Out", :logout, method: :post, :class => 'button'
-					%li.user-profile
-						= link_to image_tag(current_user.avatar_url(:icon)), current_user
+					%li.has-form.sign-out.hide-for-small
+						= link_to (_"Sign_Out"), :logout, method: :post, :class => 'button'
+					%li.user-profile.has-dropdown
+						= link_to current_user do
+							= image_tag(current_user.avatar_url(:icon))
+							%span
+								%span.show-for-small=current_user.username
+						%ul.dropdown
+							%li= link_to 'View Profile', current_user
+							%li= link_to 'Edit Profile', edit_user_path(current_user.id)
 				- else
 					%li.has-form.sign-in
-						= link_to "Sign In", :login, :class => 'button'
+						= link_to (_"Sign_In"), :login, :class => 'button'
