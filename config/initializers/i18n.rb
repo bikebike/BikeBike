@@ -90,9 +90,11 @@ module I18n
 			end
 
 			def initialize
+				if Rails.env.test? || !File.exist?(filename)
+					File.open(@@translation_cache_file, 'w+')
+				end
 				if Rails.env.test?
 					File.open(@@translations_file, 'w+')
-					File.open(@@translation_cache_file, 'w+')
 				end
 				@@translation_cache = YAML.load(File.read(@@translation_cache_file)) || Hash.new
 				super
