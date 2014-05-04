@@ -9,11 +9,10 @@ namespace :translations do
 			if t['data']
 				t['data'].each { |tt|
 					hash = ActiveSupport::JSON.decode(tt)
-					translation = Translation.find(hash['id'])
-					if translation
-						#t.assign_attributes(hash)
+					begin
+						translation = Translation.find(hash['id'])
 						translation.update_attributes(hash)
-					else
+					rescue
 						Translation.new(hash).save
 					end
 				}
