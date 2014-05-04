@@ -41,6 +41,9 @@ module I18n
 		def self.note(key, behavior = nil, behavior_size = nil)
 			I18n.backend.needs_translation(key)
 			if behavior
+				if behavior.to_s == 'strict'
+					return nil
+				end
 				return self.lorem_ipsum(behavior, behavior_size)
 			end
 			key.to_s.gsub(/^world\..*\.(.+)\.name$/, '\1').gsub(/^.*\.(.+)?$/, '\1').gsub('_', ' ')
@@ -61,11 +64,19 @@ module I18n
 
 			@@translations_file = 'config/locales/.translations.yml'
 			@@translation_cache_file = 'config/locales/.translation-cache.yml'
+			@@pluralization_rules_file = 'config/locales/.pluralization-rules.yml'
 			@@translation_cache
 
 			def needs_translation(key)
 				@@needs_translation ||= Array.new
 				@@needs_translation << key
+			end
+
+			def translate_control(translation)
+				@@translationsOnThisPage = true
+				datakeys = ''
+				translation['vars'].each { |key, value| datakeys += ' data-var-' + key.to_s + '="' + value.to_s.gsub('"', '&quot;') + '"' }
+				('<span class="translate-me ' + (translation['is_translated'] ? '' : 'un') + 'translated lang-' + (translation['lang']) + ' key--' + translation['key'].gsub('.', '--') + '" data-translate-key="' + translation['key'] + '" data-translate-untranslated="' + translation['untranslated'].gsub('"', '&quot;') + (translation['translated'] ? '" data-translate-translated="' + translation['translated'] : '') + '" data-vars="' + (translation['vars'].length ? translation['vars'].to_json.gsub('"', '&quot;') : '') + '" title="' + ('translate.alt_click') + '">' + (translation['html'] || translation['untranslated']) + '</span>').to_s.html_safe
 			end
 
 			def initialized?
@@ -85,45 +96,102 @@ module I18n
 				super
 			end
 
+			def get_translation_info()
+				begin
+					YAML.load_file(@@translations_file) || {}
+				rescue Exception => e
+					# sometimes concurrency issues cause an exception during testing
+					puts e
+					sleep(1/2.0)
+					get_translation_info()
+				end
+			end
+
+			def get_pluralization_rules(locale)
+				rules = YAML.load_file(@@pluralization_rules_file)
+				rules[locale.to_sym]
+			end
+
+			def get_language_codes()
+				YAML.load_file(@@pluralization_rules_file).keys
+			end
+
+			def get_language_completion(lang)
+				total = 0
+				complete = 0
+				get_translation_info().each { |k,v|
+					total += 1
+					complete += v['languages'].include?(lang.to_s) ? 1 : 0
+				}
+				total ? complete / total : 0
+			end
+
+			def request_translation(key, vars, options)
+				locale = options[:locale].to_s
+				options[:locale] = :en
+				translation = I18n.translate(key, vars, options)
+				result = JSON.load(open("http://translate.google.com/translate_a/t?client=t&text=#{URI::escape(translation)}&hl=en&sl=en&tl=#{locale}&ie=UTF-8&oe=UTF-8&multires=1&otf=1&ssel=3&tsel=3&sc=1").read().gsub(/,+/, ',').gsub(/\[,+/, '[').gsub(/,+\]/, ']'))
+				while result.is_a?(Array)
+					result = result[0]
+				end
+				return result
+			end
+
 			protected
 				def lookup(locale, key, scope = [], options = {})
 					result = nil
+
 					if @@translation_cache && @@translation_cache.has_key?(locale.to_s) && @@translation_cache[locale.to_s].has_key?(key.to_s)
 						result = @@translation_cache[locale.to_s][key.to_s]
 					end
 					if !result
 						result = super(locale, key, scope, options)
 
-						if Rails.env.test?
+						if Rails.env.test? && options[:behavior].to_s != 'scrict'
 							if result
 								@@translation_cache[locale.to_s] ||= Hash.new
 								@@translation_cache[locale.to_s][key.to_s] = result
 								File.open(@@translation_cache_file, 'w') { |f| f.write @@translation_cache.to_yaml }
 							end
 
-							translations = YAML.load_file(@@translations_file)
+							translations = get_translation_info()
 							translations ||= Hash.new
 							translations[key.to_s] ||= Hash.new
-							translations[key.to_s]['langauges'] ||= Hash.new
-							if result != nil
-								translations[key.to_s]['langauges'][locale.to_s] = result
-							end
+							translations[key.to_s]['languages'] ||= Array.new
 							translations[key.to_s]['pages'] ||= Array.new
+							if options['behavior']
+								translations[key.to_s]['behavior'] ||= options['behavior']
+							end
+							vars = []
+							options.each { |o,v|
+								if !I18n::RESERVED_KEYS.include?(o.to_sym) && o.to_s != 'behavior' && o.to_s != 'behavior_size'
+									vars << o.to_sym
+								end
+							}
+							if vars.size() > 0
+								translations[key.to_s]['vars'] = vars
+							end
 							unless translations[key.to_s].has_key?('data')
 								translations[key.to_s]['data'] = Array.new
 								DevTranslation.where("key = '#{key.to_s}' OR key LIKE '#{key.to_s}#{I18n::Backend::Flatten::FLATTEN_SEPARATOR}%'").each { |t|
 									translations[key.to_s]['data'] << t.becomes(Translation)
+									unless translations[key.to_s]['languages'].include?(t.locale.to_s)
+										translations[key.to_s]['languages'] << t.locale.to_s
+									end
 								}
 							end
 							path = $page_info[:path]
-							unless translations[key.to_s]['pages'].include?(path)
-								translations[key.to_s]['pages'] << path
+							route = nil
+							Rails.application.routes.routes.each { |r|
+								if !route && r.path.match(path)
+									route = r.path.spec.to_s.gsub(/\s*\(\.:\w+\)\s*$/, '')
+								end
+							}
+							unless translations[key.to_s]['pages'].include?(route)
+								translations[key.to_s]['pages'] << route
 							end
 							File.open(@@translations_file, 'w') { |f| f.write translations.to_yaml }
 						end
-					end
-
-					if Rails.env.test?
 					end
 
 					result

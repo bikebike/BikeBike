@@ -21,7 +21,7 @@ gem 'pg'
 
 # Security
 # gem 'secure_headers'
-gem 'dotenv-rails', :groups => [:development, :test]
+#gem 'dotenv-rails', :groups => [:development, :test]
 
 # Miscellanea
 # gem 'google-analytics-rails'
@@ -43,7 +43,7 @@ gem 'jquery-turbolinks'
 gem 'sass-rails', '~> 4.0.0'
 gem "compass-rails", "~> 1.1.3"
 gem 'foundation-rails'
-gem 'turbolinks'
+#gem 'turbolinks' # This would be great to have working, right now lets focus on gettting it working without it.
 gem 'uglifier', '>= 1.3.0'
 gem 'sorcery', '>= 0.8.1'
 gem 'oauth2', '~> 0.8.0'
@@ -52,7 +52,9 @@ gem 'redis'
 gem 'carrierwave'
 gem 'carrierwave-imageoptimizer'
 gem 'mini_magick'
-#gem 'carmen', :path => '../carmen /'
+if File.directory?('../carmen/')
+	gem 'carmen', :path => '../carmen/', require: false
+end
 gem 'carmen-rails'
 gem 'nested_form'
 gem 'acts_as_list'

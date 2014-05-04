@@ -1,0 +1,88 @@
+table#translations {
+	td.value {
+		position: relative;
+		cursor: text;
+
+		&:hover,
+		.translation-form {
+			color: $white;
+			background-color: $body-font-color;
+		}
+	}
+
+	.not-exists {
+		td.value {
+			font-style: italic;
+			color: lighten($body-font-color, 45);
+		}
+	}
+	
+	.translation-form {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 10;
+		padding: inherit;
+
+		textarea {
+			height: 100%;
+			font-size: inherit;
+			padding: 0;
+			color: inherit;
+			background-color: inherit;
+		}
+
+		button {
+			right: 100%;
+			position: absolute;
+			border-radius: 0;
+			top: 0;
+		}
+	}
+
+	.auto-translate {
+		float: right;
+	}
+}
+
+.grid.links {
+	li > a {
+		display: block;
+		background-color: $color-5;
+		color: $white;
+		padding: 1em;
+		min-height: 7em;
+
+		&:hover {
+			background-color: $color-1;
+		}
+
+		h3 {
+			color: inherit;
+		}
+	}
+}
+
+ul.tags,
+.tags > ul {
+	display: inline;
+	list-style: none;
+	font-size: 0.9em;
+	margin: 0;
+}
+
+.tags {
+	li {
+		display: inline-block;
+		background-color: $black;
+		color: $white;
+		padding: 0 0.5em;
+		margin: 0.6em 0 0 0.3em;
+	}
+	h5 {
+		float: left;
+		color: lighten($body-font-color, 10);
+	}
+}

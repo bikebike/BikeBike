@@ -379,3 +379,13 @@ body.organizations-show {
 		text-align: inherit;
 	}
 }
+
+table {
+	td {
+		vertical-align: top;
+
+		&.primary {
+			width: 100%;
+		}
+	}
+}

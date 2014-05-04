@@ -9,7 +9,7 @@ describe 'Organization Registration' do
 		form = find 'form[action$="/user_sessions"]'
 		form.find("#email_").set(user.email)
 		form.find("#password").set('secret')
-		click_button "sign_in"
+		click_button "Sign_In"
 		visit new_organization_path
 	end
 

@@ -1,0 +1,22 @@
+.row
+	%h1
+		= _ 'languages.list'
+	%h2
+		= _ 'languages.active'
+	%ul.languages.active.small-block-grid-1.medium-block-grid-3.large-block-grid-4.grid.links
+		- @language_codes.each do |code|
+			- if code && @completeness.has_key?(code.to_s)
+				%li.text-center
+					%a{:href => "/translations/#{code}/"}
+						%h3=_"languages.#{code}"
+						- completeness = @completeness[code.to_s]
+						- percent = @total_translations ? ((completeness / @total_translations.to_f) * 100).round() : 0
+						.completeness
+							= "#{completeness} / #{@total_translations} (#{percent}%)"
+	%h2= _ 'languages.inactive'
+	%ul.languages.inactive.small-block-grid-1.medium-block-grid-3.large-block-grid-4.grid.links
+		- @language_codes.each do |code|
+			- if code && !@completeness.has_key?(code.to_s)
+				%li.text-center
+					%a{:href => "/translations/#{code}/"}
+						%h3=_"languages.#{code}"

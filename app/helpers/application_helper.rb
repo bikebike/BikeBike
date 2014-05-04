@@ -60,98 +60,82 @@ module ApplicationHelper
 		content_for?(section) ? content_for(section) : default
 	end
 
-	def _lorem_ipsum(method, size)
-		options = {:random => true}
-		case method.to_s
-		when 'c', 'char', 'character', 'characters'
-			if size
-				return Forgery::LoremIpsum.characters size, options
-			end
-			return Forgery::LoremIpsum.character, options
-		when 'w', 'word', 'words'
-			if size
-				return Forgery::LoremIpsum.words size, options
-			end
-			#return'LOREM'
-			return Forgery::LoremIpsum.word options
-		when 's', 'sentence', 'sentences'
-			if size
-				return Forgery::LoremIpsum.sentences size, options
-			end
-			return Forgery::LoremIpsum.sentence options
-		when 'p', 'paragraph', 'paragraphs'
-			if size
-				return Forgery::LoremIpsum.paragraphs size, options.merge({:sentences => 10})
-			end
-			return Forgery::LoremIpsum.sentences 10, options
-		when 't', 'title'
-			return Forgery::LoremIpsum.sentences 1, options
+	def _(key, behavior = nil, behavior_size = nil, locale: nil, vars: {}, html: nil, blockData: {}, &block)
+		options = vars
+		options[:fallback] = true
+		if behavior
+			options[:behavior] = behavior
+			options[:behavior_size] = behavior_size
 		end
-		return nil
-	end
-
-	def _(key, behavior = nil, behavior_size = nil, vars: {}, html: nil, blockData: {}, &block)
+		if locale
+			options[:locale] = locale.to_sym
+		end
+		#if vars
+		#	puts "\nVARS:\t#{vars}\n"
+		#end
+		I18n.translate(key, options)
 		
-		queued_keys = nil
-		result = nil
-
-		if key.kind_of?(Hash)
-			blockData.merge!(key)
-			key = key.keys
-		end
-
-		if block_given?
-			@@keyQueue ||= Array.new
-
-			if key.kind_of?(Array)
-				@@keyQueue += key
-			else
-				@@keyQueue << key
-			end
-		end
-
-		if key.kind_of?(Array)
-			new_key = key.shift
-			if key.count > 0
-				queued_keys = key.dup
-			end
-			key = new_key
-		end
-
-		if blockData[key]
-			behavior = blockData[key][:behavior] || nil
-			behavior_size = blockData[key][:behavior_size] || nil
-			vars = blockData[key][:vars] || {}
-		end
-
-		@@lastTranslation = nil
-		generate_control = _can_translate?
-
-		translation = _do_translate(key, vars, behavior, behavior_size)
-
-		if block_given?
-			html = capture(&block)
-		end
-
-		if html
-			translation['html'] = html.gsub('%' + key + '%', translation['untranslated'])
-		end
-
-		if generate_control
-			@@lastTranslation = translation
-			@@allTranslations ||= Hash.new
-			@@allTranslations[key] = key
-
-			result = _translate_me(translation)
-		end
-
-		result ||= translation['html'] || translation['untranslated']
-
-		if queued_keys
-			return _ queued_keys, behavior, behavior_size, vars: vars, html: result, blockData: blockData
-		end
-
-		return result
+		#queued_keys = nil
+#		#result = nil
+#
+#		#if key.kind_of?(Hash)
+#		#	blockData.merge!(key)
+#		#	key = key.keys
+#		#end
+#
+#		#if block_given?
+#		#	@@keyQueue ||= Array.new
+#
+#		#	if key.kind_of?(Array)
+#		#		@@keyQueue += key
+#		#	else
+#		#		@@keyQueue << key
+#		#	end
+#		#end
+#
+#		#if key.kind_of?(Array)
+#		#	new_key = key.shift
+#		#	if key.count > 0
+#		#		queued_keys = key.dup
+#		#	end
+#		#	key = new_key
+#		#end
+#
+#		#if blockData[key]
+#		#	behavior = blockData[key][:behavior] || nil
+#		#	behavior_size = blockData[key][:behavior_size] || nil
+#		#	vars = blockData[key][:vars] || {}
+#		#end
+#
+#		#@@lastTranslation = nil
+#		#generate_control = _can_translate?
+#
+#		#puts "\nLLOOCCAALLEE:\t#{locale.to_s}"
+#		#translation = _do_translate(key, vars, behavior, behavior_size, locale)
+#
+#		#if block_given?
+#		#	html = capture(&block)
+#		#end
+#
+#		#if html
+#		#	translation['html'] = html.gsub('%' + key + '%', translation['untranslated'])
+#		#end
+#
+#		#if generate_control
+#		#	@@lastTranslation = translation
+#		#	@@allTranslations ||= Hash.new
+#		#	@@allTranslations[key] = key
+#
+#		#	result = _translate_me(translation)
+#		#end
+#
+#		#result ||= translation['html'] || (behavior.to_s == 'strict' ? nil : translation['untranslated'])
+#
+#		#if queued_keys
+#		#	return _ queued_keys, behavior, behavior_size, vars: vars, html: result, blockData: blockData
+#		#end
+#
+		#return result
 	end
 
 	def _translate_me(translation)
@@ -161,27 +145,39 @@ module ApplicationHelper
 		('<span class="translate-me ' + (translation['is_translated'] ? '' : 'un') + 'translated lang-' + (translation['lang']) + ' key--' + translation['key'].gsub('.', '--') + '" data-translate-key="' + translation['key'] + '" data-translate-untranslated="' + translation['untranslated'].gsub('"', '&quot;') + (translation['translated'] ? '" data-translate-translated="' + translation['translated'] : '') + '" data-vars="' + (translation['vars'].length ? translation['vars'].to_json.gsub('"', '&quot;') : '') + '" title="' + ('translate.alt_click') + '">' + (translation['html'] || translation['untranslated']) + '</span>').to_s.html_safe
 	end
 
-	def _do_translate(key, vars, behavior, behavior_size)
+	def _do_translate(key, vars, behavior, behavior_size, locale)
 		translation = {'key' => key, 'lang' => '0', 'vars' => vars}
 		v = vars.dup
+		#locale ||= I18n.locale
 		begin
 			v[:raise] = true
-			translation['untranslated'] = I18n.translate!(key, v)
-			translation['lang'] = I18n.locale.to_s
+			#v[:locale] = locale.to_sym
+			#v[:fallback] = false
+			#puts "\nSTART\n"
+			options = {:raise => true}
+			if locale
+				options[:locale] = locale.to_sym
+			end
+			#puts "\n#{options.to_json.to_s}\n"
+			translation['untranslated'] = I18n.translate(key, v, options)
+			#puts "\nEND\n"
+			translation['lang'] = locale.to_s
 			translation['is_translated'] = true
 
 			hash = Hash.new
-			translations = Translation.where(["locale = ? AND key LIKE ?", I18n.locale, key + '%']).take(6).each { |o| hash[o.key] = o.value }
+			translations = Translation.where(["locale = ? AND key LIKE ?", locale.to_s, key + '%']).take(6).each { |o| hash[o.key] = o.value }
 			translation['translated'] = hash.to_json.gsub('"', '&quot;')
 		rescue I18n::MissingTranslationData
-			begin
-				translation['untranslated'] = I18n.translate!(config.i18n.default_locale, key, vars)
-				translation['lang'] = config.i18n.default_locale.to_s
-			rescue
-				default_translation = I18n::MissingTranslationExceptionHandler.note(key, behavior, behavior_size)
-				translation['untranslated'] = default_translation
-			end
+			#begin
+			#translation['untranslated'] = I18n.translate!(config.i18n.default_locale, key, vars)
+			#translation['lang'] = config.i18n.default_locale.to_s
+			#rescue
+			#puts "BEHAVIOR:\t#{behavior.to_s}"
+			default_translation = I18n::MissingTranslationExceptionHandler.note(key, behavior, behavior_size)
+			translation['untranslated'] = default_translation
+			#end
 		end
+		puts "TRANSLATION:\t#{translation.to_json.to_s}"
 		return translation
 	end
 

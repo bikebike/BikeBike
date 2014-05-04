@@ -30,7 +30,7 @@ describe 'Login' do
 	it "has a login form" do
 		visit login_path
 		form = find 'form[action$="/user_sessions"]'
-		expect(form).to have_button 'sign in'
+		expect(form).to have_button 'Sign In'
 		expect(form).to have_field 'email_'
 		expect(form).to have_field 'password'
 		expect(form).to have_link 'facebook'
@@ -64,7 +64,7 @@ describe 'Login' do
 			form = find 'form[action$="/user_sessions"]'
 			form.find("#email_").set(user.email)
 			form.find("#password").set('secret')
-			click_button "sign_in"
+			click_button "Sign_In"
 		end
 
 	end

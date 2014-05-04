@@ -8,17 +8,7 @@ BikeBike::Application.routes.draw do
 
 	resources :workshop_facilitators
 
-	#resources :conference_registration_responses
-
-	#resources :conference_registrations
-
-	#resources :conference_registraton_form_fields
-
 	resources :registration_form_fields
-
-	#resources :conference_admins
-
-	#resources :conference_host_organizations
 
 	resources :conferences, :param => 'slug' do
 		get :hosts
@@ -37,8 +27,6 @@ BikeBike::Application.routes.draw do
 		post 'registration/form/reorder' => 'conferences#reorder', as: 'registration_reorder'
 	end
 
-	#resources :user_organization_relationships
-
 	resources :organizations, :param => 'slug' do
 		get :members
 		get :identity
@@ -47,8 +35,6 @@ BikeBike::Application.routes.draw do
 
 	resources :users
 	resources :user_sessions
-
-	#resources :organization_statuses
 
 	resources :conference_types
 
@@ -60,14 +46,17 @@ BikeBike::Application.routes.draw do
 
 	post '/translate/' => 'pages#translate'
 	post '/location/territories/' => 'pages#location_territories'
+	
+	get '/translations/:lang', to: 'pages#translations'
+	get '/translations', to: 'pages#translation_list'
 
 	get		'login' => 'user_sessions#new', :as => :login
 	post	'logout' => 'user_sessions#destroy', :as => :logout
 	get		'register'  => 'users#new', :as => 'register'
   
-  post "oauth/callback" => "oauths#callback"
-  get "oauth/callback" => "oauths#callback"
-  get "oauth/:provider" => "oauths#oauth", :as => :auth_at_provider
+	post "oauth/callback" => "oauths#callback"
+	get "oauth/callback" => "oauths#callback"
+	get "oauth/:provider" => "oauths#oauth", :as => :auth_at_provider
 
 	root 'pages#home'
 

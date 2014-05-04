@@ -1,8 +1,8 @@
 #= require jquery
 #= require jquery_ujs
 #= require jquery.ui.sortable
-#= require jquery.turbolinks
-#= require turbolinks
+# = #require jquery.turbolinks
+# = #require turbolinks
 #= require foundation
 
 # FRONT END
@@ -123,6 +123,50 @@ updateFormFieldList = () ->
 				updateFormFieldList()
 				return
 
+saveTranslation = ($td, $move_to, auto_translate) ->
+	val = ''
+	do_auto_translate = true
+	if typeof auto_translate == "undefined" || !auto_translate
+		val = $td.find('textarea').val()
+		do_auto_translate = false
+	key = $td.parent().data().key
+	params = {translationkey: key, translationvalue: val, translationlang: window.location.href.replace(/^.*\/(\w+)\/$/, '$1')}
+	if do_auto_translate
+		params['auto_translate'] = true
+	$.post '/translate/', params,
+		(json) ->
+			#console.log json
+			$td.html(json.translation)
+			if $td.parent().hasClass('not-exists')
+				$td.parent().removeClass('not-exists')
+				$td.parent().addClass('exists')
+			$('.translation-form').remove()
+			if typeof $move_to != "undefined" && $move_to
+				startTranslating $move_to
+			return
+	return
+
+stopTranslating = () -> $('.translation-form').remove()
+
+startTranslating = ($td) ->
+	stopTranslating()
+	value = if $td.parent().hasClass('not-exists') then '' else $td.html().trim()
+	$tr = $td.parent()
+	key = $tr.data().key
+	$td.append('<div class="translation-form"><textarea>' + value + '</textarea><button class="small" data-key="' + key + '">Save</textarea>')
+	$textarea = $td.find('textarea')
+	$textarea.select()
+	$td.find('.translation-form button').click () -> saveTranslation($td)
+	$textarea.keydown (event) ->
+		if event.keyCode == 9
+			event.preventDefault()
+			$new_tr = if event.shiftKey then $tr.prev() else $tr.next()
+			saveTranslation $td, $new_tr.find('.value')
+		else if event.keyCode == 27
+			stopTranslating()
+		return
+	return
+
 $ ->
 	$(document).foundation();
 	$('.field.country-select select').change () ->
@@ -169,3 +213,16 @@ $ ->
 				#	(json) ->
 				#		console.log json
 				#, 'json'
+	$('table#translations td.value').click () ->
+		$this = $(this)
+		if !$this.find('.translation-form').length
+			startTranslating($this)
+	if $('table#translations').length
+		$(document).click (event) ->
+			$target = $(event.target)
+			if $target.closest('table#translations').length < 1 && !$target.hasClass('auto-translate')
+				stopTranslating()
+		$('.auto-translate').click (event) ->
+			event.preventDefault()
+			$td = $(this).parent()
+			saveTranslation($td, null, true)
