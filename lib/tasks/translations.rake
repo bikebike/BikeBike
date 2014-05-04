@@ -7,7 +7,16 @@ namespace :translations do
 		translations = YAML.load(File.read('config/locales/.translations.yml')) || Hash.new
 		translations.each { |k,t| 
 			if t['data']
-				t['data'].each { |tt| tt.save }
+				t['data'].each { |tt|
+					hash = ActiveSupport::JSON.decode(tt)
+					translation = Translation.find(hash['id'])
+					if translation
+						#t.assign_attributes(hash)
+						translation.update_attributes(hash)
+					else
+						Translation.new(hash).save
+					end
+				}
 			end
 		}
 	end

@@ -1,9 +1,11 @@
 require 'i18n/backend/active_record'
 require 'yaml'
 
-class DevTranslation < Translation
-	self.table_name = 'translations'
-	establish_connection :development
+if Rails.env.test?
+	class DevTranslation < Translation
+		self.table_name = 'translations'
+		establish_connection :development
+	end
 end
 
 module I18n
@@ -101,7 +103,8 @@ module I18n
 					YAML.load_file(@@translations_file) || {}
 				rescue Exception => e
 					# sometimes concurrency issues cause an exception during testing
-					puts e
+					puts e.class
+					x
 					sleep(1/2.0)
 					get_translation_info()
 				end
@@ -174,7 +177,7 @@ module I18n
 							unless translations[key.to_s].has_key?('data')
 								translations[key.to_s]['data'] = Array.new
 								DevTranslation.where("key = '#{key.to_s}' OR key LIKE '#{key.to_s}#{I18n::Backend::Flatten::FLATTEN_SEPARATOR}%'").each { |t|
-									translations[key.to_s]['data'] << t.becomes(Translation)
+									translations[key.to_s]['data'] << ActiveSupport::JSON.encode(t.becomes(Translation))
 									unless translations[key.to_s]['languages'].include?(t.locale.to_s)
 										translations[key.to_s]['languages'] << t.locale.to_s
 									end
