@@ -4,7 +4,7 @@ namespace :translations do
 		#File.open('config/locales/.translations.yml', 'w')
 		#File.open('config/locales/.translation-cache.yml', 'w+')
 
-		translations = YAML.load(File.read('config/locales/.translations.yml')) || Hash.new
+		translations = YAML.load(File.read('config/locales/translation-info.yml')) || Hash.new
 		translations.each { |k,t| 
 			if t['data']
 				t['data'].each { |tt|

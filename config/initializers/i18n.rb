@@ -90,7 +90,7 @@ module I18n
 			end
 
 			def initialize
-				if Rails.env.test? || !File.exist?(filename)
+				if Rails.env.test? || !File.exist?(@@translation_cache_file)
 					File.open(@@translation_cache_file, 'w+')
 				end
 				if Rails.env.test?
