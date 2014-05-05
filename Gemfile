@@ -52,9 +52,7 @@ gem 'redis'
 gem 'carrierwave'
 gem 'carrierwave-imageoptimizer'
 gem 'mini_magick'
-if File.directory?('../carmen/')
-	gem 'carmen', :path => '../carmen/', require: false
-end
+gem 'carmen', :path => '../carmen/' if File.directory?('../carmen/') && RbConfig::CONFIG['target_os'] =~ /mswin|mingw|cygwin/i
 gem 'carmen-rails'
 gem 'nested_form'
 gem 'acts_as_list'
