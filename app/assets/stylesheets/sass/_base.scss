@@ -48,6 +48,10 @@ table#translations {
 }
 
 .grid.links {
+	&.inactive li > a {
+		opacity: 0.75;
+	}
+
 	li > a {
 		display: block;
 		background-color: $color-5;
@@ -55,8 +59,17 @@ table#translations {
 		padding: 1em;
 		min-height: 7em;
 
+		&.complete {
+			background-color: $color-2;
+		}
+
+		&.needs-work {
+			background-color: $color-4;
+		}
+
 		&:hover {
 			background-color: $color-1;
+			opacity: 1;
 		}
 
 		h3 {

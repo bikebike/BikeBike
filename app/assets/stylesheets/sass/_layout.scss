@@ -389,3 +389,9 @@ table {
 		}
 	}
 }
+
+@media #{$medium-up} {
+	.top-bar-section li a:not(.button) {
+		background: transparent !important;
+	}
+}

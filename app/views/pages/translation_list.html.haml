@@ -7,10 +7,10 @@
 		- @language_codes.each do |code|
 			- if code && @completeness.has_key?(code.to_s)
 				%li.text-center
-					%a{:href => "/translations/#{code}/"}
+					- completeness = @completeness[code.to_s]
+					- percent = @total_translations ? ((completeness / @total_translations.to_f) * 100).to_i : 0
+					%a{:href => "/translations/#{code}/", :class => (percent  > 99 ? 'complete' : percent > 67 ? 'needs-work' : nil)}
 						%h3=_"languages.#{code}"
-						- completeness = @completeness[code.to_s]
-						- percent = @total_translations ? ((completeness / @total_translations.to_f) * 100).round() : 0
 						.completeness
 							= "#{completeness} / #{@total_translations} (#{percent}%)"
 	%h2= _ 'languages.inactive'

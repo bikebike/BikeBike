@@ -6,9 +6,6 @@ include ApplicationHelper
 class PagesController < ApplicationController
 
 	def home
-		#password = ""
-		#hash = ""
-		#@testResult = RubyDrupalHash::verify(password, hash)
 	end
 
 	def translate
@@ -91,4 +88,5 @@ class PagesController < ApplicationController
 		end
 		I18n.backend.reload!
 	end
+
 end
