@@ -1,0 +1,11 @@
+= @form.hidden_field(:id, { class: 'id' })
+= @form.check_box(:_destroy, {:no_wrapper => true})
+= @form.label(:_destroy, '×')
+= @form.hidden_field(:organization_id, { class: 'organzation-id'} )
+- if @value && @value.id
+	= form_html = image_tag(@value.avatar.url :thumb)
+	.organizationname=@value.name
+- else
+	%a.select-organization{href: '#'}
+		= image_tag('http://placehold.it/120x120&text=%252B')
+		.organizationname

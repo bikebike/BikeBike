@@ -3,13 +3,6 @@
 = tabs!
 .row
 	= form_for @conference do |f|
-		.columns
-			- if @conference.errors.any?
-				#error_explanation
-					%h2= "#{pluralize(@conference.errors.count, "error")} prohibited this conference from being saved:"
-					%ul
-						- @conference.errors.full_messages.each do |msg|
-							%li= msg
 		.columns.medium-4
 			=sub_tabs!
 			%h2=_'conference.hosts.help.title', :t

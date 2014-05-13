@@ -1,0 +1,8 @@
+.actions
+	- @actions.each do |action|
+		- if action.to_sym == :facebook_sign_in
+			%a.facebook-sign-in.button{href: '/oauth/facebook'}
+				= _ action.to_s			
+		- else
+			%button{id: action.to_s, name: action.to_s, type: 'submit'}
+				= _ action.to_s

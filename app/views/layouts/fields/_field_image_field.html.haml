@@ -1,0 +1,7 @@
+= image_tag (@value || 'http://placehold.it/300x300&text=Click%20to%20upload%20an%20Image')
+- if @form
+	-#	= @form.hidden_field (@name.to_s + '_cache')
+	= @form.file_field @name, {:no_wrapper => true}
+- else
+	= file_field_tag @name, {:no_wrapper => true}
+= hidden_field_tag (@name.to_s + '_cache')

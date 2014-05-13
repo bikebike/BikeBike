@@ -1,0 +1,14 @@
+= @form.hidden_field(:id, { class: 'id' })
+= @form.check_box(:_destroy, {:no_wrapper => true})
+= @form.label(:_destroy, '×')
+= @form.hidden_field(:user_id, { class: 'user-id'} )
+- if @value && @value.id
+	= image_tag(@value.avatar.url :thumb)
+	.username=@value.username
+	- if @options[:relationship]
+		= @form.select(:relationship, options_for_select(UserOrganizationRelationship::AllRelationships, @options[:relationship]), {:no_wrapper => true}, {class: 'small'})
+- else
+	- if @options[:relationship]
+		%a.select-user{href: '#'}=image_tag('http://placehold.it/120x120&text=%252B')
+		.username
+			= @form.select(:relationship, options_for_select(UserOrganizationRelationship::AllRelationships, UserOrganizationRelationship::DefaultRelationship), {:no_wrapper => true}, {class: 'small'})

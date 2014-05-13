@@ -1,0 +1,8 @@
+- label = @options[:label] || _('form.label.' + @name.to_s)
+= label_tag @name do
+	- if @label_position == :inside
+		%div=@html
+		%span
+			%span=label
+	- else
+		%span=label

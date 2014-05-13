@@ -1,6 +1,8 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+#require "#{Rails.root}/app/helpers/bike_bike_form_helper"
+#require '/app/helpers/bike_bike_form_helper.rb'
 #require 'dotenv'; Dotenv.load ".env.local", ".env.#{Rails.env}"
 
 # Require the gems listed in Gemfile, including any gems
@@ -26,5 +28,8 @@ module BikeBike
         config.i18n.enforce_available_locales = false
         #config.middleware.swap 'Rack::MethodOverride', 'Rack::MethodOverrideWithParams'
         #config.i18n.exception_handler = I18n::MissingTranslationExceptionHandler.new
+        #require '/app/helpers/bike_bike_form_helper'
+        #ActionView::Base.default_form_builder
+        #config.action_view.default_form_builder = 'BikeBikeFormHelper::BikeBikeFormBuilder'
 	end
 end

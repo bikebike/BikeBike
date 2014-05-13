@@ -1,0 +1,9 @@
+- # we should render errors here
+- if @record.errors.any?
+	.form-errors
+		%ul
+			- @record.errors.full_messages.each do |msg|
+				- # not sure how this works, we may have to pull
+				- # some sort of error id out of this and construct
+				- # an I18n translation key
+				%li=msg

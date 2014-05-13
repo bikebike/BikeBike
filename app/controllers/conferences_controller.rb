@@ -1,3 +1,6 @@
+require 'geocoder/calculations'
+require 'rest_client'
+
 class ConferencesController < ApplicationController
 	before_action :set_conference, only: [:show, :edit, :update, :destroy]
 
@@ -18,6 +21,14 @@ class ConferencesController < ApplicationController
 
 	# GET /conferences/1/edit
 	def edit
+		@host = @conference.organizations[0].locations[0]
+		#points = Geocoder::Calculations.bounding_box([@host.latitude, @host.longitude], 50, { :unit => :km })
+		result = Geocoder.search(@host.city + ', ' + @host.territory + ' ' + @host.country).first
+		points = Geocoder::Calculations.bounding_box([result.latitude, result.longitude], 5, { :unit => :km })
+		response = RestClient.get 'http://www.panoramio.com/map/get_panoramas.php', :params => {:set => :public, :size => :original, :from => 0, :to => 20, :mapfilter => false, :miny => points[0], :minx => points[1], :maxy => points[2], :maxx => points[3]}
+		if response.code == 200
+			@parse_data = JSON.parse(response.to_str)
+		end
 	end
 
 	# POST /conferences

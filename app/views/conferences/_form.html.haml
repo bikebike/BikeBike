@@ -1,27 +1,24 @@
 = form_for @conference do |f|
 	.columns
-		- if @conference.errors.any?
-			#error_explanation
-				%h2= "#{pluralize(@conference.errors.count, "error")} prohibited this conference from being saved:"
-				%ul
-					- @conference.errors.full_messages.each do |msg|
-						%li= msg
-		= field f, :title, :text_field
-		= field f, :slug, :text_field
+		= f.text_field :title
+		= f.text_field :slug
 	.columns.medium-4
-		= field f, :poster, :image_field, @conference.poster_url
-		= field f, :cover, :image_field, @conference.cover_url
+		= f.image_field :poster, @conference.poster_url
+		= f.image_field :cover, @conference.cover_url
+		- # @parse_data['photos'].each do |img|
+		- #	- if img['width'] > 980
+		- #		%img{src: img['photo_file_url']}
 	.columns.medium-8
-		= field f, :conference_type_id, :collection_select, ConferenceType.all, attrs: [:id, :title]
+		= f.collection_select :conference_type_id, ConferenceType.all, :id, :title
 		.row
 			.columns.small-6
-				= field f, :start_date, :date_field
+				= f.date_field :start_date
 			.columns.small-6
-				= field f, :end_date, :date_field
-		= field f, :workshop_schedule_published, :check_box
-		= field f, :meals_provided, :check_box
-		= field f, :meal_info, :text_area
-		= field f, :travel_info, :text_area
+				= f.date_field :end_date
+		= f.check_box :workshop_schedule_published
+		= f.check_box :meals_provided
+		= f.text_area :meal_info
+		= f.text_area :travel_info
 	.columns
-		= field f, :info, :text_area
-		= actions :save
+		= f.text_area :info
+		= f.actions :save

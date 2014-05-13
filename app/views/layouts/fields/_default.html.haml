@@ -1,0 +1,10 @@
+- namekey = @name.to_s.gsub('_', '-')
+- typekey = @type.gsub('_', '-').gsub(/^(.*?)(\-field)?$/, '\1-field')
+%div{class: ['field', typekey, 'field-' + namekey, @value ? nil : 'new']}
+	- if @options[:help]
+		%p.help=_(("form.#{@options[:_controller]}.#{namekey}.help"), :w, 20)
+	- @label = @label_template ? (render ('layouts/fields/label_' + @label_template)) : nil
+	= @label_position == :before && @label ? @label : ''
+	- if @label_position != :inside
+		%div=@html
+	= @label_position == :after && @label ? '' : @label

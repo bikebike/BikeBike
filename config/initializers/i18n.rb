@@ -15,27 +15,27 @@ module I18n
 			case method.to_s
 			when 'c', 'char', 'character', 'characters'
 				if size
-					return Forgery::LoremIpsum.characters size, options
+					return (Forgery::LoremIpsum.characters size, options).capitalize
 				end
 				return Forgery::LoremIpsum.character, options
 			when 'w', 'word', 'words'
 				if size
-					return Forgery::LoremIpsum.words size, options
+					return (Forgery::LoremIpsum.words size, options).capitalize
 				end
 				#return'LOREM'
-				return Forgery::LoremIpsum.word options
+				return (Forgery::LoremIpsum.word options).capitalize
 			when 's', 'sentence', 'sentences'
 				if size
 					return Forgery::LoremIpsum.sentences size, options
 				end
-				return Forgery::LoremIpsum.sentence options
+				return (Forgery::LoremIpsum.sentence options).capitalize
 			when 'p', 'paragraph', 'paragraphs'
 				if size
 					return Forgery::LoremIpsum.paragraphs size, options.merge({:sentences => 10})
 				end
 				return Forgery::LoremIpsum.sentences 10, options
 			when 't', 'title'
-				return Forgery::LoremIpsum.sentences 1, options
+				return (Forgery::LoremIpsum.sentences 1, options).capitalize
 			end
 			return nil
 		end

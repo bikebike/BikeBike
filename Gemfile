@@ -60,7 +60,7 @@ gem 'acts_as_list'
 gem 'geocoder'
 gem 'forgery'
 gem 'paper_trail'
-
+# gem 'panoramio-rb' # make it easier to let users get nice backdrops for their conferences etc
 
 group :development, :test do
 	gem 'debugger'
@@ -70,13 +70,13 @@ group :development, :test do
 end
 
 group :development do
-  gem 'bullet'
-  gem 'better_errors'
-  gem 'binding_of_caller'
-  gem 'meta_request'
-  gem 'haml-rails'
-  gem 'awesome_print'
-  gem 'rails-footnotes', :github => 'josevalim/rails-footnotes'
+	gem 'bullet'
+	gem 'better_errors'
+	gem 'binding_of_caller'
+	gem 'meta_request'
+	gem 'haml-rails'
+	gem 'awesome_print'
+	gem 'rails-footnotes', :github => 'josevalim/rails-footnotes'
 end
 
 group :test do

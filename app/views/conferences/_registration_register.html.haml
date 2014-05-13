@@ -1,8 +1,8 @@
 .columns.medium-8
-	= field :is_attending, :select_tag, ConferenceRegistration::AttendingOptions, label: 'Are you attending?', value: @conference_registration.try(:is_attending)
+	= select_tag :is_attending, ConferenceRegistration::AttendingOptions, label: 'Are you attending?', value: @conference_registration.try(:is_attending)
 	%ol
 		- @conference.registration_form_fields.each do |ff|
 			%li
 				- response = @conference_registration ? ConferenceRegistrationResponse.find_by(conference_registration_id: @conference_registration.id, registration_form_field_id: ff.id) : nil
 				= form_field ff, response
-= actions :register
+= form_actions :register

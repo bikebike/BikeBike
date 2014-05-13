@@ -1,7 +1,7 @@
 .columns.medium-8
-	= field f, :registration_open, :check_box, help: true
-	= field f, :preregistration_info, :text_area, help: true
-	= field f, :registration_info, :text_area, help: true
-	= field f, :postregistration_info, :text_area, help: true
+	= f.check_box :registration_open, help: true
+	= f.text_area :preregistration_info, help: true
+	= f.text_area :registration_info, help: true
+	= f.text_area :postregistration_info, help: true
 .columns
-	= actions :save
+	= f.actions :save

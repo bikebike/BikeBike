@@ -59,7 +59,7 @@ selectA = (type, event, $emptyObj) ->
 	$overlay = createOverlay()
 	objs = []
 	$('.' + type + '-select-field.added input.' + type + '-id').each () -> obj.push($(this).val())
-	$.post $emptyObj.data().url + (if type == 'organization' then '/nonhosts' else '/nonmembers'), {added: objs},
+	$.post window.location.href.replace(/^(.*\/)(.+?)$/, '$1non$2'), {added: objs},
 		(html) ->
 			setOverlayHTML(html).addClass('' + type + '-select')
 			$('#select-' + type + '-list a').click (event) ->
