@@ -194,17 +194,14 @@ module BikeBikeFormHelper
 		render_field(method, options = get_options(method, options), super(object_name, method, options), get_value(method, options))
 	end
 
-	#def fields_for
 	def form_for(*args, &block)
 		@record = args.first
 
 		template = 'errors_' + @record.class.name.underscore
 		template = 'errors_default' unless lookup_context.exists?(template, [TEMPLATE_DIR], true)
 
-		( render (TEMPLATE_DIR + '/' + template) ) + super(args, &block)
+		( render (TEMPLATE_DIR + '/' + template) ) + super(*args, &block)
 	end
-	#def label
-
 
 	def collection_check_boxes(object, method, collection, value_method, text_method, options = {}, html_options = {}, &block)
 		render_field(method, options = get_options(method, options), super(object, method, collection, value_method, text_method, options, html_options, &block), get_value(method, options))
