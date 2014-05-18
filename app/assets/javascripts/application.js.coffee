@@ -12,13 +12,8 @@
 # require jquery_nested_form
 
 # I18n
-#= require i18n
-#= require i18n/translations
 
 'use strict'
-
-I18n.defaultLocale = '<%= I18n.default_locale %>'
-I18n.locale = $('html').attr 'lang'
 
 try Typekit.load() catch
 

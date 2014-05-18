@@ -96,8 +96,6 @@ The method can be used as follows:
 
 	_ 'basename.my_key', :paragraph
 
-	_ 'basename.my_key' do
-		<input type="text" placeholder="_!" />
 	end
 
 If the key does not exist, the previos lines will produce the following respectively:
@@ -109,10 +107,9 @@ If the key does not exist, the previos lines will produce the following respecti
 		tellus. Proin eget tortor risus. Donec sollicitudin molestie
 		malesuada. Donec rutrum congue leo eget malesuada.'
 
-	<input type="text" placeholder="my_key" />
-
 If the user has sufficient rights, these blocks will also be surrounded by the necessary markup to allow them to be selected and edited by the user.
 
+Translations are recorded during testing and committed to the repository when pushing to github. After pulling down the latest version from github you should always run `rake translations:migrate` to put the latest migrations into your database.
 
 ### Style Guide ###
 
@@ -121,4 +118,4 @@ On hold until our design team determines a director for our identity.
 
 ## Testing Practices ##
 
-Once tests are set up, we will ensure 100% code coverage. This higher than normal amount is due to the fact that the application will capture all translations, on which pages they occur, and which keys are missing languages in each available language.
+Our focus will be on integration testing using Capybara. While testing the app records all translations that it finds, whether or not they exist, and which pages that they were found on.

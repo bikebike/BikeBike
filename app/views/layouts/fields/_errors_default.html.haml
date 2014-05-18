@@ -1,5 +1,5 @@
 - # we should render errors here
-- if @record.errors.any?
+- if @record && @record.errors.any?
 	.form-errors
 		%ul
 			- @record.errors.full_messages.each do |msg|
