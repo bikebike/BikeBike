@@ -60,6 +60,11 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    carmen (1.0.1)
+      unicode_utils (~> 1.4.0)
+    carmen-rails (1.0.1)
+      carmen (~> 1.0.0)
+      rails
     carrierwave (0.10.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
@@ -278,6 +283,7 @@ GEM
     uglifier (2.5.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    unicode_utils (1.4.0)
     wdm (0.1.0)
     webmock (1.18.0)
       addressable (>= 2.3.6)
@@ -296,6 +302,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   capybara
+  carmen-rails
   carrierwave
   carrierwave-imageoptimizer
   coffee-rails (~> 4.0.0)

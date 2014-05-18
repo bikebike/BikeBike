@@ -381,7 +381,9 @@ module BikeBikeFormHelper
 
 		private
 			def custom_field(method, value, options, type)
-				options[:_controller] = params[:controller]
+				if defined? params
+					options[:_controller] = params[:controller]
+				end
 				options[:_record] = object
 				options = BikeBikeFormHelper.get_options(method, options, type)
 				html = BikeBikeFormHelper.send(type + '_tag', method, value, options, self)

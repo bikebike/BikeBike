@@ -109,7 +109,6 @@ module Sorcery
 						end
 
 					end
-					puts "\nHASH:\t#{output}\n"
 					return output
 				end
 			end
