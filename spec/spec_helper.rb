@@ -3,6 +3,7 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
+require 'bike_bike_test_helper'
 #+require 'dotenv'; Dotenv.overload ".env.test"
 
 # Requires supporting ruby files with custom matchers and macros, etc,
@@ -54,6 +55,13 @@ RSpec.configure do |config|
 					(#{t['id']}, #{Translation.sanitize(t['locale'])}, #{Translation.sanitize(t['key'])}, #{Translation.sanitize(t['value'])}, #{Translation.sanitize(t['interpolations'])}, #{Translation.sanitize(t['is_proc'])}, #{Translation.sanitize(t['created_at'])}, #{Translation.sanitize(t['updated_at'])})
 					;")
 		}
+		#visit 1, 2, 3
+	end
+
+	def visit(*args)
+		puts "\n\n========= VISIT!!! =========\n\n"
+		#super(page)
+		session.visit(*args)
 	end
 
 end
