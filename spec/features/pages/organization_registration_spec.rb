@@ -7,7 +7,7 @@ describe 'Organization Registration' do
 	before(:each) do
 		visit login_path
 		form = find 'form[action$="/user_sessions"]'
-		form.find("#email_").set(user.email)
+		form.find("#email").set(user.email)
 		form.find("#password").set('secret')
 		click_button "Sign_In"
 		visit new_organization_path

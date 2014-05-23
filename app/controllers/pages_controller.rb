@@ -1,6 +1,3 @@
-require 'rubygems'
-require 'ruby_drupal_hash'
-
 include ApplicationHelper
 
 class PagesController < ApplicationController

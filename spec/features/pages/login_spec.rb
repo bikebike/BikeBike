@@ -31,7 +31,7 @@ describe 'Login' do
 		visit login_path
 		form = find 'form[action$="/user_sessions"]'
 		expect(form).to have_button 'Sign In'
-		expect(form).to have_field 'email_'
+		expect(form).to have_field 'email'
 		expect(form).to have_field 'password'
 		expect(form).to have_link 'facebook'
 	end
@@ -62,7 +62,7 @@ describe 'Login' do
 		it "allows you to login" do
 			visit login_path
 			form = find 'form[action$="/user_sessions"]'
-			form.find("#email_").set(user.email)
+			form.find("#email").set(user.email)
 			form.find("#password").set('secret')
 			click_button "Sign_In"
 		end

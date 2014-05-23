@@ -1,0 +1,7 @@
+#!/bin/bash
+# The logic to start up your application should be put in this
+# script. The application will work only if it binds to
+# $OPENSHIFT_INTERNAL_IP:8080
+export PATH=$OPENSHIFT_RUNTIME_DIR/bin:$PATH
+cd $OPENSHIFT_REPO_DIR
+rails server -b $OPENSHIFT_INTERNAL_IP -p $OPENSHIFT_INTERNAL_PORT -d
