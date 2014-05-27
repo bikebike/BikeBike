@@ -37,7 +37,7 @@ class OrganizationsController < ApplicationController
 		params[:organization][:locations_attributes].each do |k, v|
 			@organization.locations << Location.new(locations_organization_params(k))
 		end
-		@organization.user_organization_relationship << UserOrganizationRelationship.new(:user_id => current_user.id, :relationship => UserOrganizationRelationship::Administrator)
+		@organization.user_organization_relationships << UserOrganizationRelationship.new(:user_id => current_user.id, :relationship => UserOrganizationRelationship::Administrator)
 
 		if @organization.save!
 			redirect_to @organization, notice: 'Organization was successfully created.'

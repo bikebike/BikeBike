@@ -58,10 +58,4 @@ RSpec.configure do |config|
 		#visit 1, 2, 3
 	end
 
-	def visit(*args)
-		puts "\n\n========= VISIT!!! =========\n\n"
-		#super(page)
-		session.visit(*args)
-	end
-
 end

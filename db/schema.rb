@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140315183241) do
+ActiveRecord::Schema.define(version: 20140525212115) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,9 @@ ActiveRecord::Schema.define(version: 20140315183241) do
     t.text     "preregistration_info"
     t.text     "registration_info"
     t.text     "postregistration_info"
+    t.integer  "cover_attribution_id"
+    t.string   "cover_attribution_name"
+    t.string   "cover_attribution_src"
   end
 
   create_table "event_types", force: true do |t|
@@ -158,6 +161,11 @@ ActiveRecord::Schema.define(version: 20140315183241) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "cover"
+    t.integer  "cover_attribution_id"
+    t.string   "cover_attribution_name"
+    t.string   "cover_attribution_src"
+    t.string   "phone"
+    t.integer  "organization_status_id"
   end
 
   create_table "registration_form_fields", force: true do |t|
@@ -182,8 +190,8 @@ ActiveRecord::Schema.define(version: 20140315183241) do
   end
 
   create_table "user_organization_relationships", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "organization_id"
+    t.integer  "user_id",         null: false
+    t.integer  "organization_id", null: false
     t.string   "relationship"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -208,6 +216,8 @@ ActiveRecord::Schema.define(version: 20140315183241) do
     t.datetime "lock_expires_at"
     t.string   "unlock_token"
     t.string   "avatar"
+    t.text     "about_me"
+    t.string   "role"
   end
 
   add_index "users", ["activation_token"], name: "index_users_on_activation_token", using: :btree
@@ -221,7 +231,7 @@ ActiveRecord::Schema.define(version: 20140315183241) do
     t.string   "whodunnit"
     t.text     "object"
     t.datetime "created_at"
-    t.string   "value"
+    t.text     "value"
   end
 
   create_table "workshop_facilitators", force: true do |t|
