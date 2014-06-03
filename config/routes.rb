@@ -30,6 +30,7 @@ BikeBike::Application.routes.draw do
 	resources :organizations, :param => 'slug' do
 		get :members
 		get :identity
+		get :json
 		post :nonmembers
 	end
 

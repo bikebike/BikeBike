@@ -293,7 +293,7 @@ namespace :migrate do
 			while !data && attempts < 10
 				if attempts > 0
 					sleep 2
-					puts "Download failed, attempt #{attempt + 1} to obtain #{type.singularize} data from live server"
+					puts "Download failed, attempt #{attempts + 1} to obtain #{type.singularize} data from live server"
 				end
 				begin
 					data = get_data(is_entity ? type.singularize : (vocabulary ? 'taxonomy_term' : 'node'), is_entity || vocabulary ? nil : table, vocabulary ? table : nil)

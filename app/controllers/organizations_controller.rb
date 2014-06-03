@@ -12,6 +12,9 @@ class OrganizationsController < ApplicationController
 
 	# GET /organizations/1
 	def show
+		if params[:slug] == 'json'
+			json
+		end
 	end
 
 	# GET /organizations/new
@@ -19,10 +22,10 @@ class OrganizationsController < ApplicationController
 		@organization = Organization.new
 		#@organization.location = Location.new
 		@organization.locations.build
-        @user_location = lookup_ip_location
-        @organization.locations[0].city = @user_location.city
-        @organization.locations[0].country = @user_location.country_code
-        @organization.locations[0].territory = @user_location.state_code
+		@user_location = lookup_ip_location
+		@organization.locations[0].city = @user_location.city
+		@organization.locations[0].country = @user_location.country_code
+		@organization.locations[0].territory = @user_location.state_code
 		@organization.locations_organization.build
 		@organization.user_organization_relationships.build
 	end
@@ -79,6 +82,54 @@ class OrganizationsController < ApplicationController
 
 	def identity
 		set_organization
+	end
+
+	def json
+		orgs = Hash.new
+		order = 0
+		countries = Hash.new
+		Organization.find(:all, :joins => :locations, :order => 'locations.latitude').each { |org|
+			location = org.locations.first
+			if !orgs.has_key?(location.country.downcase)
+				orgs[location.country.downcase] = Hash.new
+				countries[location.country.downcase] = { :country => Carmen::Country.coded(location.country), :territories => Hash.new }
+			end
+			country = countries[location.country.downcase][:country]
+			if !orgs[location.country.downcase].has_key?(location.territory.downcase)
+				orgs[location.country.downcase][location.territory.downcase] = Hash.new
+				countries[location.country.downcase][:territories][location.territory.downcase] = country.subregions.coded(location.territory)
+			end
+			territory = countries[location.country.downcase][:territories][location.territory.downcase]
+			if !orgs[location.country.downcase][location.territory.downcase].has_key?(location.territory.downcase)
+				orgs[location.country.downcase][location.territory.downcase][location.territory.downcase] = Hash.new
+				orgs[location.country.downcase][location.territory.downcase][location.territory.downcase][:latitude] = location.latitude
+				orgs[location.country.downcase][location.territory.downcase][location.territory.downcase][:longitude] = location.longitude
+				orgs[location.country.downcase][location.territory.downcase][location.territory.downcase][:count] = 0
+			end
+			orgs[location.country.downcase][location.territory.downcase][location.territory.downcase][orgs[location.country.downcase][location.territory.downcase][location.territory.downcase]['count']] = { 
+				:title 		=> org.name,
+				:id			=> org.id,
+				:logo		=> org.avatar.url(:thumb),
+				:logo_large	=> org.avatar.url,
+				:location	=> {
+					:street			=> location.street,
+					:city			=> location.city,
+					:province		=> location.territory,
+					:country		=> country.name,
+					:province_name	=> territory ? territory.name : nil,
+					:country_name	=> country.name,
+					:latitude		=> location.latitude,
+					:longitude		=> location.longitude
+				},
+				:website		=> org.url,
+				:year_founded	=> org.year_founded,
+				:url			=> url_for(org),
+				:order			=> order
+			}
+			orgs[location.country.downcase][location.territory.downcase][location.territory.downcase][:count] += 1
+			order += 1
+		}
+		render :json => orgs.to_json
 	end
 
 	private
