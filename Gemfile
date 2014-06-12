@@ -49,6 +49,8 @@ group :test do
 	gem 'selenium-webdriver'
 	gem 'simplecov', require: false
 	gem 'webmock', require: false
+	gem 'cucumber-rails', :require => false
+	gem 'database_cleaner'
 end
 
 group :staging, :production do
