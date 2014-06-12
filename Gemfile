@@ -19,7 +19,6 @@ gem 'oauth2', '~> 0.8.0'
 gem 'carrierwave'
 gem 'carrierwave-imageoptimizer'
 gem 'mini_magick'
-gem 'carmen', :path => '../carmen/' if File.directory?('../carmen/') && RbConfig::CONFIG['target_os'] =~ /mswin|mingw|cygwin/i
 gem 'carmen-rails'
 gem 'nested_form'
 gem 'acts_as_list'
@@ -50,12 +49,20 @@ group :test do
 	gem 'selenium-webdriver'
 	gem 'simplecov', require: false
 	gem 'webmock', require: false
-	gem 'wdm', '>= 0.1.0' if RbConfig::CONFIG['target_os'] =~ /mswin|mingw|cygwin/i
 end
 
 group :staging, :production do
 	gem 'rails_12factor'
 	gem 'capistrano'
 	gem 'rvm-capistrano'
-	gem 'unicorn' if !(RbConfig::CONFIG['target_os'] =~ /mswin|mingw|cygwin/i)
+end
+
+platforms 'mswin', 'mingw' do
+	group :test do
+		gem 'wdm', '>= 0.1.0'
+	end
+
+	group :staging, :production do
+		gem 'unicorn'
+	end
 end
