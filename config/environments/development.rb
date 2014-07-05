@@ -1,6 +1,6 @@
 #require 'perftools'
 
-OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
+#OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 
 BikeBike::Application.configure do
 	# Settings specified here will take precedence over those in config/application.rb.
