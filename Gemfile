@@ -38,7 +38,7 @@ group :development do
 	gem 'meta_request'
 	gem 'haml-rails'
 	gem 'awesome_print'
-	gem 'rails-footnotes', :github => 'josevalim/rails-footnotes'
+	#gem 'rails-footnotes', :github => 'josevalim/rails-footnotes'
 end
 
 group :test do
@@ -50,7 +50,7 @@ group :test do
 	gem 'selenium-webdriver'
 	gem 'simplecov', require: false
 	gem 'webmock', require: false
-	gem 'wdm', '>= 0.1.0' if RbConfig::CONFIG['target_os'] =~ /mswin|mingw|cygwin/i
+	#gem 'wdm', '>= 0.1.0' if RbConfig::CONFIG['target_os'] =~ /mswin|mingw|cygwin/i
 end
 
 group :staging, :production do
