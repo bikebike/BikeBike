@@ -4,6 +4,8 @@ module ApplicationHelper
 	@@lastTranslation = nil
 	@@allTranslations = nil
 	@@no_banner = true
+	@@banner_attribution_details = nil
+    @@banner_image = nil
 
 	def ThereAreTranslationsOnThisPage?
 		@@translationsOnThisPage
@@ -17,13 +19,17 @@ module ApplicationHelper
 		content_for(:title) { page_title.to_s }
 	end
 
-	def banner_image(banner_image)
+	def banner_image(banner_image, name: nil, id: nil, user_id: nil, src: nil)
 		@@no_banner = false
+		if (name || id || user_id || src)
+			@@banner_attribution_details = {:name => name, :id => id, :user_id => user_id, :src => src}
+		end
 		content_for(:banner_image) { banner_image.to_s }
 	end
 
 	def banner_attrs(banner_image)
 		if banner_image.length > 0
+            @@banner_image = banner_image
 			return {style: 'background-image: url(' + banner_image + ');', class: 'has-image' }
 		end
 		{class: 'no-image'}
@@ -37,6 +43,25 @@ module ApplicationHelper
 		@@no_banner = false
 		content_for(:banner) { ('<div class="row"><h1>' + banner_title.to_s + '</h1></div>').html_safe }
 	end
+
+	def banner_attribution
+		if @@banner_image && @@banner_attribution_details
+			src = @@banner_attribution_details[:src]
+			attribution = '<div class="photo-attribution' + (src ? ' ' + src : '') + '">'
+			if src == 'panoramio'
+				attribution += '<a href="http://www.panoramio.com/photo/' + @@banner_attribution_details[:id].to_s + '">' +
+						_('Image_provided_by_panoramio_user') +
+					'</a> <a href="http://www.panoramio.com/user/' + @@banner_attribution_details[:user_id].to_s + '">' + @@banner_attribution_details[:name] + '</a>' +
+					'<span>' + _('Photos_provided_by_Panoramio_are_under_the_copyright_of_their_owners')  + '</span>'
+			end
+			attribution += '</div>'
+			attribution.html_safe
+		end
+	end
+
+    def dom_ready(&block)
+        content_for(:dom_ready, &block)
+    end
 
 	def page_style(style)
 		classes = ['page-style-' + style.to_s]
@@ -148,19 +173,13 @@ module ApplicationHelper
 	def _do_translate(key, vars, behavior, behavior_size, locale)
 		translation = {'key' => key, 'lang' => '0', 'vars' => vars}
 		v = vars.dup
-		#locale ||= I18n.locale
 		begin
 			v[:raise] = true
-			#v[:locale] = locale.to_sym
-			#v[:fallback] = false
-			#puts "\nSTART\n"
 			options = {:raise => true}
 			if locale
 				options[:locale] = locale.to_sym
 			end
-			#puts "\n#{options.to_json.to_s}\n"
 			translation['untranslated'] = I18n.translate(key, v, options)
-			#puts "\nEND\n"
 			translation['lang'] = locale.to_s
 			translation['is_translated'] = true
 
@@ -168,16 +187,9 @@ module ApplicationHelper
 			translations = Translation.where(["locale = ? AND key LIKE ?", locale.to_s, key + '%']).take(6).each { |o| hash[o.key] = o.value }
 			translation['translated'] = hash.to_json.gsub('"', '&quot;')
 		rescue I18n::MissingTranslationData
-			#begin
-			#translation['untranslated'] = I18n.translate!(config.i18n.default_locale, key, vars)
-			#translation['lang'] = config.i18n.default_locale.to_s
-			#rescue
-			#puts "BEHAVIOR:\t#{behavior.to_s}"
 			default_translation = I18n::MissingTranslationExceptionHandler.note(key, behavior, behavior_size)
 			translation['untranslated'] = default_translation
-			#end
 		end
-		puts "TRANSLATION:\t#{translation.to_json.to_s}"
 		return translation
 	end
 
@@ -238,7 +250,7 @@ module ApplicationHelper
 				link_html = link_to func.to_s.gsub(/_path$/, ''), args ? self.send(func, args) : self.send(func), :class => c
 			else
 				#x
-				link_html = link_to tab, link || object, :class => c
+				#link_html = link_to tab, link || object, :class => c
 			end
 			tab_list += link_html
 		end

@@ -4,11 +4,194 @@
 
 */
 
-html, #footer .container {
-	background-color: $primary-color
+html {
+	background-color: $white
 }
 
 body {
+	background-color: $primary-color;
+}
+
+#main-nav {
+	background-color: $white;
+	width: 100%;
+	display: table;
+	font-size: 0.6667em;
+	font-size: 2.4vw;
+
+	p {
+		display: none;
+	}
+
+	.button {
+		width: 29%;
+		margin: 0;
+
+		&.logo {
+			background-color: $white;
+			width: 13%;
+			border: 0;
+			padding: 0;
+			vertical-align: top;
+
+			.logo {
+				width: auto;
+				height: 2.4em;
+			}
+
+			.logo-text {
+				display: none;
+			}
+
+			&:hover {
+				background-color: transparent;
+				color: $black;
+			}
+		}
+	}
+
+	@include breakpoint(medium) {
+		display: block;
+		min-height: 100%;
+		float: left;
+		width: 25%;
+		padding: 2.5%;
+		font-size: 1em;
+
+		.button, p {
+			display: block;
+		}
+
+		p {
+			font-size: 0.9em;
+		}
+		
+		.button {
+			width: auto;
+			margin: 0 0 1.25rem;
+
+			&.logo {
+				width: 100%;
+				margin-bottom: 2em;
+
+				.logo {
+					float: left;
+					width: 40%;
+					height: auto;
+					margin-right: 10%;
+				}
+
+				.logo-text {
+					display: block;
+					width: 50%;
+				}
+			}
+		}
+	}
+}
+
+main {
+	min-height: 100%;
+	//overflow: auto;
+	background-color: $primary-color;
+}
+
+#banner {
+	position: relative;
+	padding-bottom: 4em;
+	background-size: cover;
+	background-position: center 66.6667%;
+	color: $white;
+	background-color: rgba($conference-color, 0.33);
+	background-blend-mode: overlay;
+	overflow: hidden;
+	@include text-shadow(0 0 0.5em $black);
+
+	h1, h2 {
+		color: inherit;
+	}
+
+	.no-blend-modes & {
+		&:before {
+			content: '';
+			display: block;
+			position: absolute;
+			background-color: inherit;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 1;
+		}
+	}
+
+	&:after {
+		content: '';
+		display: block;
+		position: absolute;
+		//background-color: inherit;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 1;
+		@include background-image(linear-gradient(top, rgba(0,0,0,0) 50%, darken($primary-color, 25) 100%));
+		mix-blend-mode: multiply;
+	}
+
+	.row {
+		height: 50%;
+		z-index: 2;
+		position: relative;
+	}
+
+	.button {
+		width: 75%;
+		color: inherit;
+		border-color: inherit;
+		background-color: rgba(darken($article-color, 0), 0.33);
+		padding: 0.75em 1em;
+		@include text-shadow(none);
+
+		&:hover {
+			background-color: $article-color;
+			color: $white;
+			border-color: transparent;
+		}
+	}
+	
+	@include breakpoint(medium) {
+		min-height: 40em;
+		height: 100%;
+		height: 100vh;
+	}
+}
+
+.align-bottom {
+	display: -webkit-flexbox;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-align: flex-end;
+	-ms-flex-align: flex-end;
+	-webkit-align-items: flex-end;
+	align-items: flex-end;
+}
+
+.centered {
+	text-align: center;
+}
+
+#footnotes_debug {
+	display: none;
+}
+
+#footer {
+	min-height: 5em;
+	background-color: inherit;
+}
+
+/*body {
 	height: auto;
 }
 
@@ -27,18 +210,6 @@ main {
 	.no-banner & {
 		//border-top: 0.25em solid $primary-color;
 	}
-
-	/*.no-banner &:before {
-		content: '///////////////';
-		color: #CCC;
-		font-weight: 100;
-		font-family: $header-font-family;
-		letter-spacing: 0.33333em;
-		font-size: 1em;
-		text-align: center;
-		display: block;
-		font-style: italic;
-	}*/
 }
 
 $body-background-color: $white;
@@ -397,7 +568,4 @@ table {
 	}
 }
 
-/*[class*="block-grid-"] {
-	margin: 0;
-}
 */

@@ -10,16 +10,25 @@
  *
  */
 
-
-// Fonts and other external imports
-@import url(http://fonts.googleapis.com/css?family=Fjalla+One);
-@import url(http://fonts.googleapis.com/css?family=Cantarell:400,700,400italic,700italic);
+@font-face {
+	font-family: 'alte_haas_groteskbold';
+	src: url('/assets/ahg.eot');
+	src: url('/assets/ahg.eot?#iefix') format('embedded-opentype'),
+		 url('/assets/ahg.woff') format('woff'),
+		 url('/assets/ahg.ttf') format('truetype'),
+		 url('/assets/ahg.svg#alte_haas_groteskbold') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
 
 // Libraries
 @import "compass";
 @import "foundation_and_overrides";
 
 // Local settings (also edit foundation_and_overrides.scss to modify global variables)
+@import "sass/mixins";
 @import "sass/layout";
 @import "sass/typography";
 @import "sass/base";
+
+#mfPreviewBarShow, #mfPreviewBar { display: none; }

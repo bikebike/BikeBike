@@ -1,4 +1,4 @@
-- label = @options[:label] || _('form.label.' + @name.to_s)
+- label = !@options[:label] || @options[:label] == true ? _('form.label.' + @name.to_s) : @options[:label]
 = label_tag @name do
 	- if @label_position == :inside
 		%div=@html

@@ -1,3 +1,8 @@
+module ActiveRecord
+	class PremissionDenied < RuntimeError
+	end
+end
+
 class ApplicationController < ActionController::Base
 	# Prevent CSRF attacks by raising an exception.
 	# For APIs, you may want to use :null_session instead.
@@ -7,5 +12,13 @@ class ApplicationController < ActionController::Base
 
 	def capture_page_info
 		$page_info = {:path => request.env['PATH_INFO'], :controller => params['controller'], :action => params['action']}
+	end
+
+	rescue_from ActiveRecord::RecordNotFound do |exception|
+		render 'pages/404', status: 404
+	end
+
+	rescue_from ActiveRecord::PremissionDenied do |exception|
+		render 'permission_denied', status: 404
 	end
 end

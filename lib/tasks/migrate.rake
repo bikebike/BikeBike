@@ -188,12 +188,14 @@ namespace :migrate do
 	end
 
 	def conference_post_save(json, object)
-		object.locations << location
 		i = 0
+		#puts "\nORGS:\t" + json[:field_host_organizations].to_json.to_s
 		json[:field_host_organizations]['und'].each { |u|
+			#puts "\nORG:\t" + u.to_json
 			object.conference_host_organizations << ConferenceHostOrganization.new(:organization_id => u['target_id'].to_i, :order => i)
 			i += 1
 		}
+		#puts object.to_json.to_s
 		object.save!
 	end
 
@@ -307,9 +309,9 @@ namespace :migrate do
 					if params
 						new_object = model.class.create(params)
 						post_save = (type.singularize + '_post_save')
-						begin
-							self.send(post_save, object, new_object)
-						rescue;	end
+						self.send(post_save, object, new_object)
+						#begin
+						#rescue;	end
 					end
 				}
 			else

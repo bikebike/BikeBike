@@ -1,0 +1,25 @@
+- banner_image @conference.cover_url, id: 532693, name: 'phil', user_id: 1429589, src: 'panoramio'
+- page_style 'emphasize-banner'
+
+- content_for :banner do
+	.row
+		.columns.small-12
+			%figure
+				%img{src: @conference.poster_url}
+	.row.align-bottom
+		.columns.medium-6
+			%h1='Bike!Bike! '+@conference.start_date.year.to_s
+			%h2
+				- location = @conference.organizations.first.locations.first
+				= location.city + ', ' + (location.territory || location.country)
+			%em
+				= (l @conference.start_date, format: :date) + ' - ' + (l @conference.end_date, format: :date)
+			%p
+				= @conference.info
+		.columns.medium-6.centered
+			- if @conference.registration_open
+				%a.button{href: @conference.url(:register)}
+					=_'conference.Register_Now'
+			- if params['controller'] != 'conferences'
+				%a.button.more{href: @conference.url}
+					=_'conference.More_Info'

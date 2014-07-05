@@ -30,6 +30,8 @@
 		= javascript_include_tag 'nested_form'
 
 	%body{ class: (yield_or_default :page_style) }
+		:javascript
+			var b=document.getElementsByTagName('HTML')[0];b.className+=' '+(window.getComputedStyle(document.body).backgroundBlendMode?'':'no-')+'blend-modes';</script>
 		= render 'shared/translation_control'
 		= render 'shared/navbar'
 
@@ -39,6 +41,7 @@
 			- if has_banner?
 				%header#banner{banner_attrs(yield_or_default :banner_image)}
 					= yield :banner
+					= banner_attribution
 			= yield
 		#footer
 			.container= render 'shared/footer'

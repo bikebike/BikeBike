@@ -101,12 +101,12 @@ class OrganizationsController < ApplicationController
 			end
 			territory = countries[location.country.downcase][:territories][location.territory.downcase]
 			if !orgs[location.country.downcase][location.territory.downcase].has_key?(location.territory.downcase)
-				orgs[location.country.downcase][location.territory.downcase][location.territory.downcase] = Hash.new
-				orgs[location.country.downcase][location.territory.downcase][location.territory.downcase][:latitude] = location.latitude
-				orgs[location.country.downcase][location.territory.downcase][location.territory.downcase][:longitude] = location.longitude
-				orgs[location.country.downcase][location.territory.downcase][location.territory.downcase][:count] = 0
+				orgs[location.country.downcase][location.territory.downcase][location.city.downcase] = Hash.new
+				orgs[location.country.downcase][location.territory.downcase][location.city.downcase][:latitude] = location.latitude
+				orgs[location.country.downcase][location.territory.downcase][location.city.downcase][:longitude] = location.longitude
+				orgs[location.country.downcase][location.territory.downcase][location.city.downcase][:count] = 0
 			end
-			orgs[location.country.downcase][location.territory.downcase][location.territory.downcase][orgs[location.country.downcase][location.territory.downcase][location.territory.downcase]['count']] = { 
+			orgs[location.country.downcase][location.territory.downcase][location.city.downcase][orgs[location.country.downcase][location.territory.downcase][location.city.downcase][:count]] = { 
 				:title 		=> org.name,
 				:id			=> org.id,
 				:logo		=> org.avatar.url(:thumb),
@@ -126,7 +126,7 @@ class OrganizationsController < ApplicationController
 				:url			=> url_for(org),
 				:order			=> order
 			}
-			orgs[location.country.downcase][location.territory.downcase][location.territory.downcase][:count] += 1
+			orgs[location.country.downcase][location.territory.downcase][location.city.downcase][:count] += 1
 			order += 1
 		}
 		render :json => orgs.to_json
@@ -135,7 +135,9 @@ class OrganizationsController < ApplicationController
 	private
 		# Use callbacks to share common setup or constraints between actions.
 		def set_organization
-			@organization = Organization.find_by(slug: params[:slug] || params[:organization_slug])
+            if params[:slug] != 'json'
+                @organization = Organization.find_by!(slug: params[:slug] || params[:organization_slug])
+            end
 		end
 
 		# Only allow a trusted parameter "white list" through.

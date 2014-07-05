@@ -3,6 +3,7 @@ include ApplicationHelper
 class PagesController < ApplicationController
 
 	def home
+		@conference = Conference.find(:first, :order => "start_date DESC")
 	end
 
 	def translate

@@ -304,26 +304,28 @@ module BikeBikeFormHelper
 			params[:value] = value
 
 			template = template_exists?(type) ? type : 'default'
-			params[:label_template] = options[:label] === false ? nil : get_label_template(type)
-			params[:label_position] = options[:label] === false ? :none : label_position(type)
+			params[:label_template] = options[:label] === false ? nil : get_label_template(type, options)
+			params[:label_position] = options[:label] === false ? :none : label_position(type, options)
 			
 			render(template, params)
 		end
 
-		def get_label_template(type)
-			if /select(_field)?$/.match(type.to_s)
+		def get_label_template(type, options)
+			if !options[:label] && /select(_field)?$/.match(type.to_s)
 				return nil
 			end
 			template_exists?('label_' + type) ? type : 'default'
 		end
 
-		def label_position(type)
+		def label_position(type, options)
 			# one of: :before, :after, :inside, or :none
 			case type
 				when 'image_field'
 					return :inside
 				when 'organization_select_field'
 					return :none
+				#when 'select_field'
+				#	return :before
 			end
 			return :before
 		end

@@ -1,30 +1,11 @@
 - title 'Bike!Bike!'
-- banner_image '/assets/columbus.jpg'
-- page_style 'emphasize-banner'
+= render 'conferences/header'
 
-- content_for :banner do
-	.row
-		.columns.medium-6
-			%figure
-				%img{src: '/assets/poster.jpg'}
-		.columns.medium-6.info
-			%h1
-				Bike!Bike! 2014
-			%h2
-				Columbus, Ohio
-			%em
-				August 30 - September 1
-			%p
-				= _ 'nola_2013.about', 'paragraph'
-			.centered
-				%a.button{href: '#'}
-					Register Now
-
-%section
-	.row
-		.columns.medium-6
-			%h1
-				Welcome to Bike!Bike!
-			%p
-				= _ 'home.its_awesome', 'paragraph'
-		.columns.medium-6
+-#%section
+-#	.row
+-#		.columns.medium-6
+-#			%h1
+-#				Welcome to Bike!Bike!
+-#			%p
+-#				= _ 'home.its_awesome', 'paragraph'
+-#		.columns.medium-6

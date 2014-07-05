@@ -17,5 +17,18 @@ class Conference < ActiveRecord::Base
 	def to_param
 		slug
 	end
+#
+	#def self.find_by_param(slug)
+	#	find_by_slug_and_conference_type(slug, ConferenceType.find_by_slug('regional').id)
+	#end
+
+	def url(action = :show)
+		path(action)
+	end
+
+	def path(action = :show)
+		action = action.to_sym
+		'/conferences/' + conference_type.slug + '/' + slug + (action == :show ? '' : '/' + action.to_s)
+	end
 
 end

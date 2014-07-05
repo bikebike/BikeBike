@@ -37,8 +37,8 @@
 
 // We use these to control header font styles
 //$header-font-family: 'ff-ernestine-web-pro', sans-serif;//join("Open Sans", $body-font-family);
-$header-font-family: 'freight-sans-pro', sans-serif;//join("Open Sans", $body-font-family);
-$header-font-weight: 800;
+$header-font-family: 'Alte Haas Grotesk', sans-serif;//join("Open Sans", $body-font-family);
+$header-font-weight: bold;
 // $header-font-style: normal;
 // $header-font-color: #222;
 // $header-line-height: 1.4;
@@ -46,23 +46,25 @@ $header-font-weight: 800;
 // $header-bottom-margin: .5rem;
 // $header-text-rendering: optimizeLegibility;
 
-$color-1: #053E8D; // blue
-$color-2: #94A427; // green
-$color-4: #F4921B; // dark-orange
-$color-3: #F4A71C; // light orange
-$color-5: #DC3637; // red
+$color-1: #00ACEE; // blue
+$color-2: #A0C700; // green
+$color-3: #F11845; // pink
+$color-4: #FFCC00; // yellow
+$color-5: #D3BE9B; // beige
 
-$organization-color: $color-2; // red
+$conference-color:		$color-1;
+$organization-color:	$color-2;
+$article-color: 		$color-3;
 
 //$white: #EEEEE0;
-$white: #FFFFF0;
-$black: #333;
+$white: #FFF;
+$black: #393939;
 $gray: #E1E1E1;
 
 // We use these to control various global styles
-$body-bg: $black;
+$body-bg: $white;
 $body-font-color: $black;
-$body-font-family: 'freight-micro-pro', Helvetica, Arial, sans-serif;
+$body-font-family: 'Scotch Micro', serif;
 // $body-font-weight: normal;
 // $body-font-style: normal;
 
@@ -78,8 +80,8 @@ $primary-color:		$color-1;
 $secondary-color:	$color-2;
 $alert-color:		$color-4;
 $success-color:		$color-2;
-$warning-color:		$color-5;
-$info-color:		$color-3;
+$warning-color:		$color-3;
+$info-color:		$color-5;
 
 // We use these to make sure border radius matches unless we want it different.
 // $global-radius: 3px;
@@ -227,8 +229,8 @@ $align-block-grid-to-grid: true;
 // We use these to build padding for buttons.
 // $button-tny: rem-calc(10);
 $button-sml: 0.25rem;
-// $button-med: rem-calc(16);
-// $button-lrg: rem-calc(18);
+$button-med: 1.3333rem;
+$button-lrg: 2rem;
 
 // We use this to control the display property.
 // $button-display: inline-block;
@@ -236,24 +238,25 @@ $button-sml: 0.25rem;
 
 // We use these to control button text styles.
 $button-font-family: $header-font-family;
-$button-font-color: $primary-color;
+$button-font-color: $white;
 $button-font-color-alt: $secondary-color;
 // $button-font-tny: rem-calc(11);
 // $button-font-sml: rem-calc(13);
 // $button-font-med: rem-calc(16);
 // $button-font-lrg: rem-calc(20);
-// $button-font-weight: normal;
-// $button-font-align: center;
+$button-font-weight: bold;
+$button-font-align: center;
 
 // We use these to control various hover effects.
 // $button-function-factor: 5%;
 
 // We use these to control button border styles.
-$button-border-width: 1px;
+$button-border-width: 0.15em;
 $button-border-style: solid;
+$button-border-color: transparent;
 
 // We use this to set the default radius used throughout the core.
-$button-radius: 1.5em;
+$button-radius: 0;
 // $button-round: $global-rounded;
 
 // We use this to set default opacity for disabled buttons.

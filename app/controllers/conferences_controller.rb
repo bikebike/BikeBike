@@ -11,6 +11,7 @@ class ConferencesController < ApplicationController
 
 	# GET /conferences/1
 	def show
+		#puts params[:slug]
 	end
 
 	# GET /conferences/new
@@ -21,6 +22,9 @@ class ConferencesController < ApplicationController
 
 	# GET /conferences/1/edit
 	def edit
+		if !current_user
+			raise ActiveRecord::PremissionDenied
+		end
 		@host = @conference.organizations[0].locations[0]
 		#points = Geocoder::Calculations.bounding_box([@host.latitude, @host.longitude], 50, { :unit => :km })
 		result = Geocoder.search(@host.city + ', ' + @host.territory + ' ' + @host.country).first
@@ -100,6 +104,23 @@ class ConferencesController < ApplicationController
 		end
 	end
 
+	def register
+		set_conference
+		@user = User.new
+		@sub_action = 'registration_register'
+		render :registration
+	end
+
+	def register_step
+		set_conference
+		data = params
+		if params[:conference][:user][:email]
+			user = User.find_by(:email => params[:conference][:user][:email])
+			data[:conference][:user][:username] = user.username
+		end
+		render json: data
+	end
+
 	def add_field
 		set_conference
 		field = RegistrationFormField.find(params[:field])
@@ -151,8 +172,18 @@ class ConferencesController < ApplicationController
 	private
 		# Use callbacks to share common setup or constraints between actions.
 		def set_conference
-			@conference = Conference.find_by(slug: params[:conference_slug] || params[:slug])
-			set_conference_registration
+			@conference = nil
+			if type = ConferenceType.find_by!(slug: params[:conference_type_slug] || 'bikebike')
+				if @conference = Conference.find_by!(slug: params[:conference_slug] || params[:slug], conference_type_id: type.id)
+					set_conference_registration
+				end
+			end
+			if current_user
+				@host_privledge = :admin
+			end
+			#if !@conference
+			#	raise ActionController::RoutingError.new('Not Found')
+			#end
 		end
 
 		def set_conference_registration

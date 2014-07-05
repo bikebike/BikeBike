@@ -4,46 +4,11 @@
 
 */
 
-$translate-me-bgcolor: rgba(255, 0, 0, 0.25) !default;
-$translate-me-outline-color: rgba(255, 0, 0, 0.5) !default;
-
-.translate-me {
-	cursor: url(translate_cursor-32.png) 8 31, auto;
-
-	&.untranslated {
-		background-color: $translate-me-bgcolor;
-		@include opacity(0.5);
-	}
-
-	&:hover,
-	&.selected {
-		@include opacity(1);
-		outline: 2px solid $translate-me-outline-color;
-		outline-offset: 0;
-		outline-style: dashed;
-	}
-	&.preview {
-		background-color: inherit;
-		outline-style: solid;
-		-webkit-animation: preview-translation 2s infinite;
-	}
-}
-
-@-webkit-keyframes preview-translation {
-	0% {
-		outline-color: rgba(0, 255, 0, 1);
-	}
-	50% {
-		outline-color: rgba(0, 255, 0, 0);
-	}
-	100% {
-		outline-color: rgba(0, 255, 0, 1);
-	}
-}
+//$translate-me-bgcolor: rgba(255, 0, 0, 0.25) !default;
+//$translate-me-outline-color: rgba(255, 0, 0, 0.5) !default;
 
 .button, button, input[type="file"] {
-	background-color: rgba($white, 0.5);
-	border-radius: 1.5em;
+	/*background-color: rgba($white, 0.5);
 	color: $primary-color;
 	border: 1px solid;
 	padding: 0.75em 1.5em;
@@ -52,6 +17,36 @@ $translate-me-outline-color: rgba(255, 0, 0, 0.5) !default;
 
 	&:hover {
 		color: #FFF;
+	}*/
+
+	background-color: $primary-color;
+	color: $white;
+	font-weight: bold;
+	//font-family: $header-font-family;
+	font-size: 1.333em;
+	border: 0.15em solid transparent;
+	padding: 0.5em 1em;
+
+	&.organization, &.secondary {
+		background-color: $organization-color;
+	}
+
+	&.article {
+		background-color: $article-color;
+	}
+
+	&:hover {
+		color: $primary-color;
+		border: 0.15em solid;
+		background-color: transparent;
+
+		&.organization {
+			color: $organization-color;
+		}
+
+		&.article {
+			color: $article-color;
+		}
 	}
 }
 
