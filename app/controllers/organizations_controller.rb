@@ -1,4 +1,5 @@
 include ApplicationHelper
+require 'uri'
 
 class OrganizationsController < ApplicationController
 	before_action :set_organization, only: [:show, :edit, :update, :destroy]
@@ -100,13 +101,14 @@ class OrganizationsController < ApplicationController
 				countries[location.country.downcase][:territories][location.territory.downcase] = country.subregions.coded(location.territory)
 			end
 			territory = countries[location.country.downcase][:territories][location.territory.downcase]
-			if !orgs[location.country.downcase][location.territory.downcase].has_key?(location.territory.downcase)
-				orgs[location.country.downcase][location.territory.downcase][location.city.downcase] = Hash.new
-				orgs[location.country.downcase][location.territory.downcase][location.city.downcase][:latitude] = location.latitude
-				orgs[location.country.downcase][location.territory.downcase][location.city.downcase][:longitude] = location.longitude
-				orgs[location.country.downcase][location.territory.downcase][location.city.downcase][:count] = 0
+            city = URI.encode(location.city.downcase.gsub(/\s/, '-'))
+			if !orgs[location.country.downcase][location.territory.downcase].has_key?(city)
+				orgs[location.country.downcase][location.territory.downcase][city] = Hash.new
+				orgs[location.country.downcase][location.territory.downcase][city][:latitude] = location.latitude
+				orgs[location.country.downcase][location.territory.downcase][city][:longitude] = location.longitude
+				orgs[location.country.downcase][location.territory.downcase][city][:count] = 0
 			end
-			orgs[location.country.downcase][location.territory.downcase][location.city.downcase][orgs[location.country.downcase][location.territory.downcase][location.city.downcase][:count]] = { 
+			orgs[location.country.downcase][location.territory.downcase][city][orgs[location.country.downcase][location.territory.downcase][city][:count]] = { 
 				:title 		=> org.name,
 				:id			=> org.id,
 				:logo		=> org.avatar.url(:thumb),
@@ -126,7 +128,7 @@ class OrganizationsController < ApplicationController
 				:url			=> url_for(org),
 				:order			=> order
 			}
-			orgs[location.country.downcase][location.territory.downcase][location.city.downcase][:count] += 1
+			orgs[location.country.downcase][location.territory.downcase][city][:count] += 1
 			order += 1
 		}
 		render :json => orgs.to_json
