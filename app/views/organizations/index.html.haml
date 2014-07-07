@@ -9,7 +9,7 @@
 - @organizations.sort_by{|k,v|k}.each do |country,territories|
 	%h2=country
 	- territories.sort_by{|k,v|k}.each do |territory,cities|
-		- if territory != 0
+		- if territory.is_a? String
 			%h3=territory
 		- cities.sort_by{|k,v|k}.each do |city,organizations|
 			%ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3.org-list.preview-list
