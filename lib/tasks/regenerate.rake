@@ -3,7 +3,7 @@ namespace :regenerate do
 
 	task conference_posters: :environment do
 		Conference.all.each {|m| m.poster.recreate_versions!}
-        puts Conference.all.to_json.to_s
+        #puts Conference.all.to_json.to_s
 	end
 
 	task organization_avatars: :environment do
