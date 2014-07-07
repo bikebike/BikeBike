@@ -30,7 +30,7 @@ BikeBike::Application.configure do
   config.assets.compile = true
 
   # Generate digests for assets URLs.
-  config.assets.digest = true
+  #config.assets.digest = true
 
   # Version of your assets, change this if you want to expire all your assets.
   config.assets.version = '1.0'
@@ -46,8 +46,8 @@ BikeBike::Application.configure do
   config.log_level = :info
 
   config.cache_classes = true
-  config.serve_static_assets = true
-  config.assets.compile = true
+  #config.serve_static_assets = true
+  #config.assets.compile = true
   # config.assets.digest = true
 
   # Prepend all log lines with the following tags.
