@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
 	before_filter :capture_page_info
 
 	def capture_page_info
+        init_vars
 		$page_info = {:path => request.env['PATH_INFO'], :controller => params['controller'], :action => params['action']}
 	end
 
@@ -19,6 +20,6 @@ class ApplicationController < ActionController::Base
 	end
 
 	rescue_from ActiveRecord::PremissionDenied do |exception|
-		render 'permission_denied', status: 404
+		render 'permission_denied', status: 403
 	end
 end

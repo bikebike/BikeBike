@@ -32,16 +32,18 @@
 	%body{ class: (yield_or_default :page_style) }
 		:javascript
 			var b=document.getElementsByTagName('HTML')[0];b.className+=' '+(window.getComputedStyle(document.body).backgroundBlendMode?'':'no-')+'blend-modes';</script>
-		= render 'shared/translation_control'
-		= render 'shared/navbar'
+		-#= render 'shared/translation_control'
 
 		%main
+			= render 'shared/navbar'
 			- flash.each do |key, msg|
 				= content_tag :div, msg, :id => key
 			- if has_banner?
 				%header#banner{banner_attrs(yield_or_default :banner_image)}
 					= yield :banner
-					= banner_attribution
-			= yield
+			- if has_content?
+				#content=yield
+			- else
+				= yield
 		#footer
 			.container= render 'shared/footer'

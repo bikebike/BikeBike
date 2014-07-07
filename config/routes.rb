@@ -6,7 +6,7 @@ BikeBike::Application.routes.draw do
 	#resources :workshop_facilitators
 	#resources :registration_form_fields
 
-	resources :conference_types, :param => :slug , :path => '/conferences', :as => :conference, :except => :index do
+	resources :conference_types, :param => :type, :path => '/conferences', :as => :conference, :except => :index do
 		resources :conferences, :param => :slug, :path => '/' do
 			get :hosts
 			get :registration

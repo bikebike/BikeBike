@@ -51,6 +51,6 @@ BikeBike::Application.configure do
     #puts "CARMEN\t" + Carmen.i18n_backend.locale_paths
 
     #PerfTools::CpuProfiler.start('/tmp/dev_prof')
-    #config.serve_static_assets = true
+    config.serve_static_assets = true
     #config.assets.precompile = false
 end

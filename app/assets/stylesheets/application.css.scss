@@ -11,14 +11,14 @@
  */
 
 @font-face {
-	font-family: 'alte_haas_groteskbold';
-	src: url('/assets/ahg.eot');
-	src: url('/assets/ahg.eot?#iefix') format('embedded-opentype'),
-		 url('/assets/ahg.woff') format('woff'),
-		 url('/assets/ahg.ttf') format('truetype'),
-		 url('/assets/ahg.svg#alte_haas_groteskbold') format('svg');
-	font-weight: normal;
-	font-style: normal;
+	font-family: 'AlteHaasGroteskBold';
+	src: url('/assets/AlteHaasGroteskBold.eot');
+	src: url('/assets/AlteHaasGroteskBold.eot?#iefix') format('embedded-opentype'),
+		 url('/assets/AlteHaasGroteskBold.woff') format('woff'),
+		 url('/assets/AlteHaasGroteskBold.ttf') format('truetype'),
+		 url('/assets/AlteHaasGroteskBold.svg#alte_haas_groteskbold') format('svg');
+	font-weight: bold;
+	font-style: bold;
 }
 
 // Libraries

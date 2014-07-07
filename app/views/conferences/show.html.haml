@@ -3,56 +3,5 @@
 
 = tabs!
 
-%section
-	.row
-		.columns.medium-6
-			%h1=@conference.title
-			%p=@conference.info.gsub(/\s*\n+\s*/, '</p><p>').html_safe
-		.columns.medium-6
-
-.row
-	%p#notice= notice
-
-	%p
-		%b Conference type:
-		= @conference.conference_type.title
-	%p
-		%b Title:
-		= @conference.title
-	%p
-		%b Slug:
-		= @conference.slug
-	%p
-		%b Start date:
-		= @conference.start_date
-	%p
-		%b End date:
-		= @conference.end_date
-	%p
-		%b Info:
-		= @conference.info
-	%p
-		%b Poster:
-		= @conference.poster
-	%p
-		%b Banner:
-		= @conference.cover
-	%p
-		%b Workshop schedule published:
-		= @conference.workshop_schedule_published
-	%p
-		%b Registration open:
-		= @conference.registration_open
-	%p
-		%b Meals provided:
-		= @conference.meals_provided
-	%p
-		%b Meal info:
-		= @conference.meal_info
-	%p
-		%b Travel info:
-		= @conference.travel_info
-
-	= link_to 'Edit', @conference.path(:edit) #edit_conference_path(@conference.conference_type.slug, @conference)
-	\|
-	= link_to 'Back', 'conferences'
+%h2=('About '+@conference.title)
+%p=@conference.info

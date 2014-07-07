@@ -1,12 +1,14 @@
 %nav#main-nav
-	= link_to '/resources', :class => ['button', 'logo'] do
+	= link_to '/', :class => ['button', 'logo'] do
 		= image_tag('logo.png', class: 'logo')
 		= image_tag('logo-text.png', class: 'logo-text')
-	= link_to (_'Conferences'), {:controller => :conferences}, {:class => ['button', 'conference']}
+	= link_to (_'Conferences'), :conferences, {:class => ['button', 'conference']}
 	= link_to (_'Organizations'), {:controller => :organizations}, {:class => ['button', 'organization']}
 	= link_to (_'Zine'), 'http://zinezine.bikebike.org', :class => ['button', 'article']
-	%p
-		Bike!Bike! is an international annual gathering organized by and for community bicycle projects. The conference is a space for participants from shops and related advocacy groups to converge in a different city each year over a 4 day period to have workshops and strengthen our social network.
+	- if is_this_the_front_page?
+		%p
+			Bike!Bike! is an international annual gathering organized by and for community bicycle projects. The conference is a space for participants from shops and related advocacy groups to converge in a different city each year over a 4 day period to have workshops and strengthen our social network.
+		-#%iframe{:src => "//player.vimeo.com/video/76149097", :width => "500", :height => "281", :frameborder => "0", :webkitallowfullscreen => true, :mozallowfullscreen => true, :allowfullscreen => true}
 	-#- if current_user
 	-#	%li.has-form.sign-out.hide-for-small
 	-#		= link_to (_"Sign_Out"), :logout, method: :post, :class => 'button'

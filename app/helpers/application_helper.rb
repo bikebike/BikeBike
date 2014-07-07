@@ -5,7 +5,29 @@ module ApplicationHelper
 	@@allTranslations = nil
 	@@no_banner = true
 	@@banner_attribution_details = nil
-    @@banner_image = nil
+	@@banner_image = nil
+	@@has_content = true
+	@@front_page = false
+
+	def init_vars
+		@@keyQueue = nil
+		@@translationsOnThisPage = nil
+		@@lastTranslation = nil
+		@@allTranslations = nil
+		@@no_banner = true
+		@@banner_attribution_details = nil
+		@@banner_image = nil
+		@@has_content = true
+		@@front_page = false
+	end
+
+	def this_is_the_front_page
+		@@front_page = true
+	end
+
+	def is_this_the_front_page?
+		return @@front_page
+	end
 
 	def ThereAreTranslationsOnThisPage?
 		@@translationsOnThisPage
@@ -29,7 +51,7 @@ module ApplicationHelper
 
 	def banner_attrs(banner_image)
 		if banner_image.length > 0
-            @@banner_image = banner_image
+			@@banner_image = banner_image
 			return {style: 'background-image: url(' + banner_image + ');', class: 'has-image' }
 		end
 		{class: 'no-image'}
@@ -38,7 +60,15 @@ module ApplicationHelper
 	def has_banner?
 		!@@no_banner
 	end
+	
+	def has_content?
+		@@has_content
+	end
 
+	def has_no_content
+		@@has_content = false
+	end
+	
 	def banner_title(banner_title)
 		@@no_banner = false
 		content_for(:banner) { ('<div class="row"><h1>' + banner_title.to_s + '</h1></div>').html_safe }
@@ -59,9 +89,9 @@ module ApplicationHelper
 		end
 	end
 
-    def dom_ready(&block)
-        content_for(:dom_ready, &block)
-    end
+	def dom_ready(&block)
+		content_for(:dom_ready, &block)
+	end
 
 	def page_style(style)
 		classes = ['page-style-' + style.to_s]

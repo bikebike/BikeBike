@@ -309,9 +309,9 @@ namespace :migrate do
 					if params
 						new_object = model.class.create(params)
 						post_save = (type.singularize + '_post_save')
-						self.send(post_save, object, new_object)
-						#begin
-						#rescue;	end
+						begin
+                            self.send(post_save, object, new_object)
+						rescue;	end
 					end
 				}
 			else

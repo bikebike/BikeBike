@@ -6,12 +6,16 @@ class ConferencesController < ApplicationController
 
 	# GET /conferences
 	def index
+		#Conference.all.each {|m| m.poster.recreate_versions!}
+		puts " ------------- CONFERENCE INDEX -------------- "
+		puts params
 		@conferences = Conference.all
 	end
 
 	# GET /conferences/1
 	def show
-		#puts params[:slug]
+		puts " --------------------------- "
+		puts params[:slug]
 	end
 
 	# GET /conferences/new
