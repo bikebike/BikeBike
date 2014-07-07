@@ -1,12 +1,8 @@
 - title 'Bike!Bike!'
 - has_no_content
 - this_is_the_front_page
-/
-	= @conference.to_json.to_s
-/
-	= @conferences.to_json.to_s
--# if @conference
--#	= render 'conferences/header'
+- if @conference
+	= render 'conferences/header'
 
 -#%section
 -#	.row
