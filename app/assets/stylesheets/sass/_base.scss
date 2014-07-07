@@ -169,14 +169,23 @@ ul.tags,
 			font-size: 1em;
 			padding: 0.25em 0.5em;
 			color: $white;
-			width: 100%;
+			//width: 100%;
 			z-index: 1;
+			left: 0;//.6667em;
+			right: 0;//.6667em;
+		}
+
+		h5 {
+			left: 0.6667em;
+			right: 0.6667em;
 		}
 
 		figure {
 			position: absolute;
-			width: 100%;
+			//width: 100%;
 			height: 100%;
+			left: 0.6667em;
+			right: 0.6667em;
 			margin: 0;
 			bottom: 0;
 			text-align: center;
