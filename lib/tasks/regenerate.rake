@@ -15,6 +15,7 @@ namespace :regenerate do
 	end
 
 	task organization_covers: :environment do
-		Organization.all.each {|m| m.cover.recreate_versions!}
+		#Organization.all.each {|m| m.cover.recreate_versions!}
+        puts Rails.configuration.database_configuration[Rails.env].to_json.to_s
 	end
 end
