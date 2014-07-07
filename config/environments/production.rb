@@ -27,13 +27,13 @@ BikeBike::Application.configure do
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = true
+  #config.assets.compile = true
 
   # Generate digests for assets URLs.
   #config.assets.digest = true
 
   # Version of your assets, change this if you want to expire all your assets.
-  config.assets.version = '1.0'
+  config.assets.version = '1.01'
 
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
@@ -45,7 +45,7 @@ BikeBike::Application.configure do
   # Set to :debug to see everything in the log.
   config.log_level = :info
 
-  config.cache_classes = true
+  #config.cache_classes = true
   #config.serve_static_assets = true
   #config.assets.compile = true
   # config.assets.digest = true
@@ -65,7 +65,7 @@ BikeBike::Application.configure do
   # Precompile additional assets.
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
   # config.assets.precompile += %w( search.js )
-  config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif *.css)
+  config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
