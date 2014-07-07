@@ -177,7 +177,9 @@ class ConferencesController < ApplicationController
 		# Use callbacks to share common setup or constraints between actions.
 		def set_conference
 			@conference = nil
-			if type = ConferenceType.find_by!(slug: params[:conference_type_slug] || 'bikebike')
+			puts ' ---------------------- '
+			puts params
+			if type = ConferenceType.find_by!(slug: params[:conference_type] || params[:conference_type_slug] || 'bikebike')
 				if @conference = Conference.find_by!(slug: params[:conference_slug] || params[:slug], conference_type_id: type.id)
 					set_conference_registration
 				end
