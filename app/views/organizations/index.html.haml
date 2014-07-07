@@ -8,7 +8,7 @@
 
 - @organizations.sort_by{|k,v|k}.each do |country,territories|
 	%h2=country
-	- territories.sort_by{|k,v|k}.each do |territory,cities|
+	- territories.sort_by{|k,v|k.to_s}.each do |territory,cities|
 		- if territory.is_a? String
 			%h3=territory
 		- cities.sort_by{|k,v|k}.each do |city,organizations|
