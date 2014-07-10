@@ -11,7 +11,7 @@
 				%h1='Bike!Bike! '+@conference.start_date.year.to_s
 				%h2
 					- location = @conference.organizations.first.locations.first
-					= location.city + ', ' + (location.territory || location.country)
+					= location.city + ', ' + (location.territory ? Carmen::Country.coded(location.country).subregions.coded(location.territory).name : location.country)
 				%em
 					= (l @conference.start_date, format: :date) + ' - ' + (l @conference.end_date, format: :date)
 				- if params['controller'] != 'conferences'

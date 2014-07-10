@@ -7,7 +7,8 @@
 				= image_tag(@organization.avatar.url)
 		.columns.info{:class => (@organization.avatar.is_landscape? ? nil : ['medium-6', 'medium-pull-6'])}
 			%h1=@organization.name
-			%h2=@organization.locations[0].city + (@organization.locations[0].territory ? ' ' + @organization.locations[0].territory : '') + ', ' + Carmen::Country.coded(@organization.locations[0].country).name
+			- territory = Carmen::Country.coded(@organization.locations[0].country).subregions.coded(@organization.locations[0].territory)
+			%h2=@organization.locations[0].city + (territory ? ' ' + territory.name : '') + ', ' + Carmen::Country.coded(@organization.locations[0].country).name
 
 %p#notice= notice
 

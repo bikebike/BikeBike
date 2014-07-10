@@ -409,6 +409,27 @@ module ApplicationHelper
 		end
 	end
 
+	def hash_to_html_attributes(hash, prefix = '')
+		attributes = ''
+		if hash
+			hash.each { |k,v|
+				k = k.to_s
+				if v
+					if v.is_a?(Hash)
+						attributes += hash_to_html_attributes(v, 'data-')
+					else
+						attributes += " #{k}=\"" + (v.is_a?(Array) ? v.join(' ') : v) + '"'
+					end
+				end
+			}
+		end
+		attributes
+	end
+
+	def icon(id, attributes = nil)
+		('<svg' + hash_to_html_attributes(attributes) + '><use xlink:href="/assets/icons.svg#bb-icon-' + id + '"></use></svg>').html_safe
+	end
+
 	private
 		def _form_field(type, name, value, options)
 			if type == 'check_box'

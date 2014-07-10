@@ -26,6 +26,7 @@ body {
 	.button {
 		width: 29%;
 		margin: 0;
+		clear: left;
 
 		&.logo {
 			background-color: $white;
@@ -33,14 +34,22 @@ body {
 			border: 0;
 			padding: 0;
 			vertical-align: top;
+			overflow: auto;
+
+			/*svg {
+				float: left;
+				width: 50%;
+			}*/
 
 			.logo {
 				width: auto;
 				height: 2.4em;
+				fill: $primary-color;
 			}
 
 			.logo-text {
 				display: none;
+				fill: $black;
 			}
 
 			&:hover {
@@ -72,19 +81,24 @@ body {
 			margin: 0 0 1.25rem;
 
 			&.logo {
+				position: relative;
 				width: 100%;
 				margin-bottom: 2em;
 
 				.logo {
 					float: left;
-					width: 40%;
+					width: 51%;
+					height: 100%;
+					margin-right: 5%;
+				}
+
+				img.logo {
 					height: auto;
-					margin-right: 10%;
 				}
 
 				.logo-text {
 					display: block;
-					width: 50%;
+					width: 44%;
 				}
 			}
 		}

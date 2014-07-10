@@ -1,7 +1,9 @@
 %nav#main-nav
 	= link_to '/', :class => ['button', 'logo'] do
-		= image_tag('logo.png', class: 'logo')
-		= image_tag('logo-text.png', class: 'logo-text')
+		=# image_tag('logo.png', class: 'logo')
+		=# image_tag('logo-text.png', class: 'logo-text')
+		= icon('logo', {:class => 'logo'})
+		= icon('logo-text', {:class => 'logo-text'})
 	= link_to (_'Conferences'), :conferences, {:class => ['button', 'conference']}
 	= link_to (_'Organizations'), {:controller => :organizations}, {:class => ['button', 'organization']}
 	= link_to (_'Zine'), 'http://zinezine.bikebike.org', :class => ['button', 'article']

@@ -163,12 +163,12 @@ startTranslating = ($td) ->
 	return
 
 $ ->
-	trial = document.createElement('script');
-	trial.type = 'text/javascript';
-	trial.async = true;
-	trial.src = 'http://easy.myfonts.net/v2/js?sid=158991(font-family=Scotch+Modern+Bold)&sid=174040(font-family=Scotch+Micro)&key=WPfecRji9L';
-	head = document.getElementsByTagName("head")[0];
-	head.appendChild(trial);
+	#trial = document.createElement('script');
+	#trial.type = 'text/javascript';
+	#trial.async = true;
+	#trial.src = 'http://easy.myfonts.net/v2/js?sid=158991(font-family=Scotch+Modern+Bold)&sid=174040(font-family=Scotch+Micro)&key=WPfecRji9L';
+	#head = document.getElementsByTagName("head")[0];
+	#head.appendChild(trial);
 	#$(document).foundation();
 	$('.field.country-select select').change () ->
 		$country = $(this)

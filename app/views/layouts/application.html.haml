@@ -10,12 +10,11 @@
 		/[if lt IE 9]
 			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
 
-		/ Le styles
-		= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Ubuntu:400,500,700',
-													'application',
-													media: 'all'
+		= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic,700italic', 'application', media: 'all'
 
 		/ Touch icons
+		%link{ href: asset_path('favicon.ico'), rel: 'shortcut icon', type: 'image/x-icon' }
+		%link{ href: asset_path('favicon.ico'), rel: 'icon', type: 'image/x-icon' }
 		%link{ href: asset_path('apple-touch-icon.png'), rel: 'apple-touch-icon' }
 		%link{ href: asset_path('apple-touch-icon-72x72.png'), rel: 'apple-touch-icon', sizes: '72x72' }
 		%link{ href: asset_path('apple-touch-icon-114x114.png'), rel: 'apple-touch-icon', sizes: '114x114' }
@@ -25,13 +24,13 @@
 			Le javascript
 			\==================================================
 		/ Placed at the top of the document 'cause of turbolinks
-		= javascript_include_tag '//use.typekit.net/iqv7hcg.js'
+		=# javascript_include_tag '//use.typekit.net/iqv7hcg.js'
 		= javascript_include_tag 'application'
 		= javascript_include_tag 'nested_form'
 
 	%body{ class: (yield_or_default :page_style) }
 		:javascript
-			var b=document.getElementsByTagName('HTML')[0];b.className+=' '+(window.getComputedStyle(document.body).backgroundBlendMode?'':'no-')+'blend-modes';</script>
+			document.getElementsByTagName('HTML')[0].className+=' '+(window.getComputedStyle(document.body).backgroundBlendMode?'':'no-')+'blend-modes'
 		-#= render 'shared/translation_control'
 
 		%main

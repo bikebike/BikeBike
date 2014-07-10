@@ -47,7 +47,7 @@ $header-font-weight: bold;
 // $header-bottom-margin: .5rem;
 // $header-text-rendering: optimizeLegibility;
 
-$color-1: #00ACEE; // blue
+$color-1: #00ADEF; // blue
 $color-2: #A0C700; // green
 $color-3: #F11845; // pink
 $color-4: #FFCC00; // yellow
@@ -65,7 +65,8 @@ $gray: #E1E1E1;
 // We use these to control various global styles
 $body-bg: $white;
 $body-font-color: $black;
-$body-font-family: 'Scotch Micro', serif;
+//$body-font-family: 'Scotch Micro', serif;
+$body-font-family: 'Source Sans Pro', sans-serif;
 // $body-font-weight: normal;
 // $body-font-style: normal;
 
@@ -1130,8 +1131,8 @@ $include-open-sans: false;
 // We use these to style paragraphs
 // $paragraph-font-family: inherit;
 // $paragraph-font-weight: normal;
-// $paragraph-font-size: 1rem;
-// $paragraph-line-height: 1.6;
+$paragraph-font-size: 1.4rem;
+$paragraph-line-height: 1.5;
 // $paragraph-margin-bottom: rem-calc(20);
 // $paragraph-aside-font-size: rem-calc(14);
 // $paragraph-aside-line-height: 1.35;

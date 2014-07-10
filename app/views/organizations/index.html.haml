@@ -15,7 +15,7 @@
 			%ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3.org-list.preview-list
 				- uri = CGI::escape(city+' '+country)
 				%li.city
-					%figure{:style => "background-image: url('http://maps.googleapis.com/maps/api/staticmap?center=#{uri}&zoom=4&size=600x300&maptype=roadmap&markers=size:small%7C#{uri}&key=AIzaSyDhfT68lGTwJHoUfC02fmA1SYNexO19J3M');"}
+					%figure{:style => "background-image: url('http://maps.googleapis.com/maps/api/staticmap?center=#{uri}&zoom=4&size=600x300&maptype=roadmap&markers=size:small%7C#{uri}&key=AIzaSyAH7U8xUUb8IwDPy1wWuYGprzxf4E1Jj4o');"}
 						%h4=city
 					- organizations.each do |organization|
 						%li=render 'preview', :organization => organization
