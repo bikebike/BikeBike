@@ -1,0 +1,9 @@
+development:
+	enabled: false
+	host: assets.myapp.dev
+
+production:
+	enabled: true
+	host: cdn.bikebike.org
+	protocol: https
+	fallback_protocol: http

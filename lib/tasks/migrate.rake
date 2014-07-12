@@ -258,27 +258,29 @@ namespace :migrate do
 		$panoramios[location] ||= 0
 		$panoramios[location] += 1
 		result = Geocoder.search(location).first
-		if result
-			points = Geocoder::Calculations.bounding_box([result.latitude, result.longitude], 5, { :unit => :km })
-			response = RestClient.get 'http://www.panoramio.com/map/get_panoramas.php', :params => {:set => :public, :size => :original, :from => 0, :to => 20, :mapfilter => false, :miny => points[0], :minx => points[1], :maxy => points[2], :maxx => points[3]}
-			if response.code == 200
-				i = 0
-				JSON.parse(response.to_str)['photos'].each { |img|
-					if img['width'].to_i > 980
-						i += 1
-						if i >= $panoramios[location]
-							params["remote_#{column.to_s}_url".to_sym] = img['photo_file_url']
-							params[column.to_sym] = img['photo_file_url'].gsub(/^.*\/(.*)$/, '\1')
-                            params[:cover_attribution_id] = img['photo_id']
-							params[:cover_attribution_user_id] = img['owner_id']
-							params[:cover_attribution_name] = img['owner_name']
-							params[:cover_attribution_src] = 'panoramio'
-							return params
+		begin
+			if result
+				points = Geocoder::Calculations.bounding_box([result.latitude, result.longitude], 5, { :unit => :km })
+				response = RestClient.get 'http://www.panoramio.com/map/get_panoramas.php', :params => {:set => :public, :size => :original, :from => 0, :to => 20, :mapfilter => false, :miny => points[0], :minx => points[1], :maxy => points[2], :maxx => points[3]}
+				if response.code == 200
+					i = 0
+					JSON.parse(response.to_str)['photos'].each { |img|
+						if img['width'].to_i > 980
+							i += 1
+							if i >= $panoramios[location]
+								params["remote_#{column.to_s}_url".to_sym] = img['photo_file_url']
+								params[column.to_sym] = img['photo_file_url'].gsub(/^.*\/(.*)$/, '\1')
+								params[:cover_attribution_id] = img['photo_id']
+								params[:cover_attribution_user_id] = img['owner_id']
+								params[:cover_attribution_name] = img['owner_name']
+								params[:cover_attribution_src] = 'panoramio'
+								return params
+							end
 						end
-					end
-				}
+					}
+				end
 			end
-		end
+		rescue; end
 		return params
 	end
 
@@ -311,7 +313,7 @@ namespace :migrate do
 						new_object = model.class.create(params)
 						post_save = (type.singularize + '_post_save')
 						begin
-                            self.send(post_save, object, new_object)
+							self.send(post_save, object, new_object)
 						rescue;	end
 					end
 				}

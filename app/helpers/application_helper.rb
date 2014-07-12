@@ -439,6 +439,23 @@ module ApplicationHelper
 		('<svg' + hash_to_html_attributes(attributes) + '><use xlink:href="/assets/icons.svg#bb-icon-' + id + '"></use></svg>').html_safe
 	end
 
+	def static_map(location, zoom, width, height)
+		require 'fileutils'
+		local_file_name = "#{location}-#{width}x#{height}z#{zoom}.png"
+		file = File.join("public", "maps/#{local_file_name}")
+		FileUtils.mkdir_p("public/maps") unless File.directory?("public/maps")
+		if !File.exist?(file)
+			url = "http://maps.googleapis.com/maps/api/staticmap?center=#{location}&zoom=#{zoom}&size=#{width}x#{height}&maptype=roadmap&markers=size:small%7C#{location}&key=AIzaSyAH7U8xUUb8IwDPy1wWuYGprzxf4E1Jj4o"
+			require 'open-uri'
+			open(file, 'wb') do |f|
+  				f << open(url).read
+			end
+			#FileUtils.cp url, file
+		end
+		
+		"maps/#{local_file_name}"
+	end
+
 	private
 		def _form_field(type, name, value, options)
 			if type == 'check_box'

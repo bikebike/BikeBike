@@ -28,6 +28,7 @@ gem 'forgery'
 gem 'paper_trail'
 gem 'font-awesome-rails'
 gem 'wysiwyg-rails'
+gem 'rails-assets-cdn'
 
 group :development, :test do
 	gem 'rspec'
