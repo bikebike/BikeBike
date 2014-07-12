@@ -3,6 +3,7 @@
 
 = tabs!
 
-%h2=('About '+@conference.title)
-%div{data: {editable: true}}
-	%p=@conference.info.html_safe
+%article.row
+	.columns.large-10
+		%h2=('About '+@conference.title)
+		%p=@conference.info.html_safe

@@ -10,6 +10,7 @@ html {
 
 body {
 	background-color: $primary-color;
+	height: auto;
 }
 
 #main-nav {
@@ -41,7 +42,7 @@ body {
 		float: left;
 
 		&:hover {
-			background-color: rgba($white, 0.75);
+			background-color: rgba($white, 0.85);
 		}
 
 		&.active {
@@ -84,7 +85,7 @@ body {
 
 			.logo-text {
 				display: none;
-				fill: $black;
+				fill: $white;
 			}
 
 			&:hover {
@@ -101,7 +102,7 @@ body {
 		//background-color: $white;
 		//background-color: rgba($white, 0.33);
 		background-color: transparent;
-		@include background-image(linear-gradient(left, $white 0%, rgba($white, 0) 50%));
+		@include background-image(linear-gradient(top, #000 0%, rgba(#000, 0) 100%));
 
 		.buttons {
 			display: block;
@@ -170,6 +171,7 @@ body {
 		padding: 2.5%;
 		font-size: 1em;
 		min-height: 100vh;
+		background-image: none;
 
 		.button, p {
 			display: block;
@@ -185,6 +187,10 @@ body {
 				width: 100%;
 				height: auto;
 				float: none;
+
+				.logo-text {
+					fill: $black;
+				}
 			}
 		}
 
@@ -202,20 +208,26 @@ main {
 	min-height: 100%;
 	//overflow: auto;
 	background-color: $white;
+
+	@include breakpoint(medium) {
+		//background-color: $black;
+	}
 }
 
 #content {
 	padding: 1em;
 	overflow: auto;
-	background-color: lighten($color-5, 20);
+	//background-color: lighten($color-5, 20);
+	background-color: $white;
 
 	.organizations & {
-		background-color: lighten(desaturate($organization-color, 25), 50);
+		//background-color: lighten(desaturate($organization-color, 25), 50);
 		min-height: 100vh;
 	}
 
 	.conferences & {
-		background-color: lighten(desaturate($conference-color, 25), 42.5);
+		//background-color: #FFF;
+		//background-color: lighten(desaturate($conference-color, 25), 42.5);
 		min-height: 100vh;
 	}
 
@@ -387,7 +399,7 @@ main {
 				}
 
 				figure img {
-					width: 100%;
+					//width: 100%;
 				}
 			}
 
@@ -410,6 +422,11 @@ main {
 
 	@include breakpoint(large) {
 		padding-top: 0;
+		border-bottom-left-radius: 2.5em;
+
+		&:after {
+			border-bottom-left-radius: inherit;
+		}
 
 		.organizations-index &,
 		.conferences-index & {
