@@ -1,6 +1,15 @@
-%footer
+%footer.row
+	.columns.medium-8.medium-push-1.large-6.large-push-3.text-center
+		%a{href: '/conferences/'}='Conferences'
+		\/
+		%a{href: '/conferences/'}='Organizations'
+		\/
+		%a{href: '/conferences/'}='Zine'
+	.columns.medium-3.large-3.text-right
+		&copy;2014 Bike!Bike!
 :javascript
 	#{yield :scripts}
 	$(function(){
 		#{yield :dom_ready}
 	});
+= yield :footer_scripts

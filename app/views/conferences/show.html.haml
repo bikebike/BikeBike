@@ -4,4 +4,5 @@
 = tabs!
 
 %h2=('About '+@conference.title)
-%p=@conference.info.html_safe
+%div{data: {editable: true}}
+	%p=@conference.info.html_safe

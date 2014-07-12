@@ -15,36 +15,71 @@ body {
 #main-nav {
 	background-color: $white;
 	width: 100%;
-	display: table;
+	display: block;
 	font-size: 0.6667em;
 	font-size: 2.4vw;
+	overflow: hidden;
+	height: 3.1em;
 
 	p {
 		display: none;
 	}
 
+	.buttons {
+		display: block;
+		width: 87%;
+		height: 100%;
+		//overflow: hidden;
+		white-space: nowrap;
+		float: right;
+	}
+
 	.button {
-		width: 29%;
+		width: 33.3%;
+		height: 100%;
 		margin: 0;
-		clear: left;
+		float: left;
+
+		&:hover {
+			background-color: rgba($white, 0.75);
+		}
+
+		&.active {
+			&:after {
+				content: '';
+				width: 0;
+				height: 0;
+				display: block;
+				position: absolute;
+				border-style: solid;
+				border-width: 1em 1em 0 1em;
+				border-color: #a0c700 transparent transparent transparent;
+				left: 0;
+				right: 0;
+				margin: 0.15em auto 0;
+				top: 100%;
+				z-index: 1;
+				border-width: 3vw 5vw 0 5vw;
+			}
+		}
 
 		&.logo {
-			background-color: $white;
+			background-color: transparent;
 			width: 13%;
 			border: 0;
 			padding: 0;
 			vertical-align: top;
-			overflow: auto;
-
-			/*svg {
-				float: left;
-				width: 50%;
-			}*/
+			//overflow: hidden;
+			height: 100%;
+			float: left;
 
 			.logo {
 				width: auto;
-				height: 2.4em;
+				height: 2em;
 				fill: $primary-color;
+				position: absolute;
+				left: 0;
+				margin-top: 0.15em;
 			}
 
 			.logo-text {
@@ -60,7 +95,75 @@ body {
 	}
 
 	@include breakpoint(medium) {
+		height: 5em;
+		position: absolute;
+		z-index: 10;
+		//background-color: $white;
+		//background-color: rgba($white, 0.33);
+		background-color: transparent;
+		@include background-image(linear-gradient(left, $white 0%, rgba($white, 0) 50%));
+
+		.buttons {
+			display: block;
+			width: 70%;
+			height: auto;
+			//overflow: hidden;
+			white-space: normal;
+			font-size: 0.75em;
+			margin-top: 2.5%;
+		}
+
+		p {
+			font-size: 1.25em;
+			font-size: 1.25vw;
+			line-height: 1.2em;
+		}
+		
+		.button {
+			width: auto;
+			height: auto;
+			//float: none;
+			//margin: 0 0 1.25rem;
+			margin: 1%;
+			width: 30%;
+
+			&.logo {
+				position: relative;
+				//width: 100%;
+				//height: auto;
+				//margin-bottom: 2em;
+				//float: none;
+				width: 25%;
+				margin: 0;
+				height: 100%;
+				float: left;
+				padding: 0.25em;
+
+				.logo {
+					position: static;
+					float: left;
+					width: 51%;
+					height: 100%;
+					margin: 0 5% 0 0;
+				}
+
+				img.logo {
+					height: auto;
+				}
+
+				.logo-text {
+					display: block;
+					width: 44%;
+					height: 100%;
+				}
+			}
+		}
+	}
+
+	@include breakpoint(large) {
 		display: block;
+		position: static;
+		height: auto;
 		min-height: 100%;
 		float: left;
 		width: 25%;
@@ -72,35 +175,25 @@ body {
 			display: block;
 		}
 
-		p {
-			font-size: 0.9em;
-		}
-		
 		.button {
-			width: auto;
-			margin: 0 0 1.25rem;
+			width: 100%;
+			height: auto;
+			margin: 0 0 1.25em;
+			float: none;
 
 			&.logo {
-				position: relative;
 				width: 100%;
-				margin-bottom: 2em;
-
-				.logo {
-					float: left;
-					width: 51%;
-					height: 100%;
-					margin-right: 5%;
-				}
-
-				img.logo {
-					height: auto;
-				}
-
-				.logo-text {
-					display: block;
-					width: 44%;
-				}
+				height: auto;
+				float: none;
 			}
+		}
+
+		.buttons {
+			display: block;
+			width: 100%;
+			font-size: 1em;
+			margin: 2em 0 0;
+			float: none;
 		}
 	}
 }
@@ -122,7 +215,7 @@ main {
 	}
 
 	.conferences & {
-		background-color: lighten(desaturate($conference-color, 25), 50);
+		background-color: lighten(desaturate($conference-color, 25), 42.5);
 		min-height: 100vh;
 	}
 
@@ -265,6 +358,7 @@ main {
 		min-height: 40em;
 		height: 100%;
 		height: 100vh;
+		padding-top: 7.5em;
 
 		.organizations-show &,
 		.conferences-show & {
@@ -306,6 +400,21 @@ main {
 
 		.organizations-index &,
 		.conferences-index & {
+			height: 30vw;
+
+			h1 {
+				font-size: 6vw;
+			}
+		}
+	}
+
+	@include breakpoint(large) {
+		padding-top: 0;
+
+		.organizations-index &,
+		.conferences-index & {
+			height: 15vw;
+
 			h1 {
 				font-size: 3.75vw;
 				margin-top: 6vw;

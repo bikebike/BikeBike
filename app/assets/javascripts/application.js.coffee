@@ -1,21 +1,8 @@
-#= require jquery
-#= require jquery_ujs
-#= require jquery.ui.sortable
-# = #require jquery.turbolinks
-# = #require turbolinks
-#= require foundation
-
-# FRONT END
-
-# JS HANDLEBARS TEMPLATES
-# require handlebars.runtime
-# require jquery_nested_form
+#= require froala_editor.min.js
 
 # I18n
 
 'use strict'
-
-try Typekit.load() catch
 
 startSpinner = ->
 	$('#loading-spinner').show()
@@ -170,6 +157,7 @@ $ ->
 	#head = document.getElementsByTagName("head")[0];
 	#head.appendChild(trial);
 	#$(document).foundation();
+	#$('[data-editable]').editable({blockTags: ["n", "p", "h2", "blockquote", "pre"], buttons: ["formatBlock", "bold", "italic", "underline", "insertOrderedList", "insertUnorderedList", "sep", "createLink", "insertImage", "insertVideo", "html", "undo", "redo"]})
 	$('.field.country-select select').change () ->
 		$country = $(this)
 		country = $country.val()
@@ -201,29 +189,29 @@ $ ->
 	updateFormFieldForm()
 	updateFormFieldList()
 
-	$('ul.sortable').sortable
-		handle: '.drag-sort',
-		items: 'li',
-		update: (event, props) ->
-			$(this).children().each (index, child) ->
-				$(child).find('.sortable-position').val(index + 1)
-			url = $(this).data().url
-			if url
-				data = $(this).find('input, select, textarea').serialize()
-				$.post url, data#,
-				#	(json) ->
-				#		console.log json
-				#, 'json'
-	$('table#translations td.value').click () ->
-		$this = $(this)
-		if !$this.find('.translation-form').length
-			startTranslating($this)
-	if $('table#translations').length
-		$(document).click (event) ->
-			$target = $(event.target)
-			if $target.closest('table#translations').length < 1 && !$target.hasClass('auto-translate')
-				stopTranslating()
-		$('.auto-translate').click (event) ->
-			event.preventDefault()
-			$td = $(this).parent()
-			saveTranslation($td, null, true)
+	#$('ul.sortable').sortable
+	#	handle: '.drag-sort',
+	#	items: 'li',
+	#	update: (event, props) ->
+	#		$(this).children().each (index, child) ->
+	#			$(child).find('.sortable-position').val(index + 1)
+	#		url = $(this).data().url
+	#		if url
+	#			data = $(this).find('input, select, textarea').serialize()
+	#			$.post url, data#,
+	#			#	(json) ->
+	#			#		console.log json
+	#			#, 'json'
+	#$('table#translations td.value').click () ->
+	#	$this = $(this)
+	#	if !$this.find('.translation-form').length
+	#		startTranslating($this)
+	#if $('table#translations').length
+	#	$(document).click (event) ->
+	#		$target = $(event.target)
+	#		if $target.closest('table#translations').length < 1 && !$target.hasClass('auto-translate')
+	#			stopTranslating()
+	#	$('.auto-translate').click (event) ->
+	#		event.preventDefault()
+	#		$td = $(this).parent()
+	#		saveTranslation($td, null, true)

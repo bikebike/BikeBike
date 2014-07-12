@@ -532,3 +532,21 @@ input:-webkit-autofill {
 svg {
 	height: 0%;
 }
+
+#footer {
+	color: $white;
+	padding: 2.5em 0;
+	font-size: 1.25em;
+
+	a {
+		margin: 0 1em;
+	}
+
+	a, a:visited {
+		color: $white;
+	}
+
+	a:hover {
+		color: rgba($white, 0.5);
+	}
+}

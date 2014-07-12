@@ -26,6 +26,8 @@ gem 'acts_as_list'
 gem 'geocoder'
 gem 'forgery'
 gem 'paper_trail'
+gem 'font-awesome-rails'
+gem 'wysiwyg-rails'
 
 group :development, :test do
 	gem 'rspec'

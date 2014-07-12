@@ -4,9 +4,10 @@
 		=# image_tag('logo-text.png', class: 'logo-text')
 		= icon('logo', {:class => 'logo'})
 		= icon('logo-text', {:class => 'logo-text'})
-	= link_to (_'Conferences'), :conferences, {:class => ['button', 'conference']}
-	= link_to (_'Organizations'), {:controller => :organizations}, {:class => ['button', 'organization']}
-	= link_to (_'Zine'), 'http://zinezine.bikebike.org', :class => ['button', 'article']
+	.buttons
+		= link_to (_'Conferences'), :conferences, {:class => ['button', 'conference']}
+		= link_to (_'Organizations'), {:controller => :organizations}, {:class => ['button', 'organization']}
+		= link_to (_'Zine'), 'http://zinezine.bikebike.org', :class => ['button', 'article']
 	- if is_this_the_front_page?
 		%p
 			Bike!Bike! is an international annual gathering organized by and for community bicycle projects. The conference is a space for participants from shops and related advocacy groups to converge in a different city each year over a 4 day period to have workshops and strengthen our social network.
