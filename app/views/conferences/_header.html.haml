@@ -1,12 +1,12 @@
-- banner_image @conference.cover_url, id: 532693, name: 'phil', user_id: 1429589, src: 'panoramio'
-- page_style 'emphasize-banner'
+- banner_image @conference.cover_url, id: @conference.cover_attribution_id, name: @conference.cover_attribution_name, user_id: @conference.cover_attribution_user_id, src: @conference.cover_attribution_src
+- page_style (params['controller'] == 'conferences' ? 'article' : 'emphasize-banner')
 
 - content_for :banner do
 	.row
 		.columns.small-12.banner
 			%figure
 				%img{src: @conference.poster_url}
-		.columns.medium-6.align-bottom
+		.columns.medium-8.align-bottom
 			%div
 				%h1='Bike!Bike! '+@conference.start_date.year.to_s
 				%h2
@@ -16,7 +16,7 @@
 					= (l @conference.start_date, format: :date) + ' - ' + (l @conference.end_date, format: :date)
 				- if params['controller'] != 'conferences'
 					%p= ActionView::Base.full_sanitizer.sanitize(@conference.info).gsub(/^(.{300,350}\.)(.*)$/m, '\1...')
-		.columns.medium-6.centered.align-bottom
+		.columns.medium-4.centered.align-bottom
 			%div
 				- if @conference.registration_open
 					%a.button{href: @conference.url(:register)}
@@ -24,4 +24,3 @@
 				- if params['controller'] != 'conferences'
 					%a.button.more{href: @conference.url}
 						=_'conference.More_Info'
-	= banner_attribution

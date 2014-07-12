@@ -26,6 +26,7 @@
 	font-size: 1.333em;
 	border: 0.15em solid transparent;
 	padding: 0.5em 1em;
+	vertical-align: middle;
 
 	&.organization, &.secondary {
 		background-color: $organization-color;
@@ -432,6 +433,7 @@ form > div:first-child + .columns:not([class*="medium-"]) {
 
 .actions {
 	text-align: center;
+	padding-top: 1em;
 }
 
 :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
@@ -548,5 +550,11 @@ svg {
 
 	a:hover {
 		color: rgba($white, 0.5);
+	}
+}
+
+article {
+	p {
+		font-size: 1.4rem;
 	}
 }

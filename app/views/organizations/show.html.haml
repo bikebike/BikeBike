@@ -1,5 +1,5 @@
-- page_style 'organization'
 - banner_image @organization.cover_url
+- page_style 'article'
 - content_for :banner do
 	.row{:class => (@organization.avatar.is_landscape? ? 'landscape' : 'portrait')}
 		.columns{:class => (@organization.avatar.is_landscape? ? nil : ['medium-6', 'medium-push-6'])}

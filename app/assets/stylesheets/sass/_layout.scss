@@ -100,9 +100,12 @@ body {
 		position: absolute;
 		z-index: 10;
 		//background-color: $white;
-		//background-color: rgba($white, 0.33);
-		background-color: transparent;
-		@include background-image(linear-gradient(top, #000 0%, rgba(#000, 0) 100%));
+		background-color: rgba($white, 0.5);
+
+		.has-banner-image & {
+			background-color: transparent;
+			@include background-image(linear-gradient(top, #000 0%, rgba(#000, 0) 100%));
+		}
 
 		.buttons {
 			display: block;
@@ -171,7 +174,10 @@ body {
 		padding: 2.5%;
 		font-size: 1em;
 		min-height: 100vh;
-		background-image: none;
+
+		.has-banner-image & {
+			background-image: none;
+		}
 
 		.button, p {
 			display: block;
@@ -243,45 +249,15 @@ main {
 
 #banner {
 	position: relative;
-	padding-bottom: 4em;
 	background-size: cover;
 	background-position: center 66.6667%;
+	//padding-top: 4em;
 	color: $white;
-	background-color: rgba($conference-color, 0.33);
-	background-blend-mode: overlay;
 	overflow: hidden;
-	@include text-shadow(0 0 0.5em $black);
+	background-color: $black;
 
 	h1, h2 {
 		color: inherit;
-	}
-
-	.no-blend-modes & {
-		&:before {
-			content: '';
-			display: block;
-			position: absolute;
-			background-color: inherit;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			z-index: 1;
-		}
-	}
-
-	&:after {
-		content: '';
-		display: block;
-		position: absolute;
-		//background-color: inherit;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		z-index: 1;
-		@include background-image(linear-gradient(top, rgba(0,0,0,0) 50%, darken($conference-color, 25) 100%));
-		mix-blend-mode: multiply;
 	}
 
 	.row {
@@ -314,6 +290,45 @@ main {
 	}
 
 	.organizations & {
+		background-color: $organization-color;
+	}
+
+	.has-banner-image & {
+		padding-bottom: 4em;
+		background-color: rgba($conference-color, 0.33);
+		background-blend-mode: overlay;
+		@include text-shadow(0 0 0.5em $black);
+
+		.no-blend-modes & {
+			&:before {
+				content: '';
+				display: block;
+				position: absolute;
+				background-color: inherit;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				z-index: 1;
+			}
+		}
+
+		&:after {
+			content: '';
+			display: block;
+			position: absolute;
+			//background-color: inherit;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 1;
+			@include background-image(linear-gradient(top, rgba(0,0,0,0) 50%, darken($conference-color, 25) 100%));
+			mix-blend-mode: multiply;
+		}
+	}
+
+	.has-banner-image.organizations & {
 		background-color: rgba($organization-color, 0.33);
 
 		&:after {
@@ -367,13 +382,15 @@ main {
 	}
 
 	@include breakpoint(medium) {
-		min-height: 40em;
-		height: 100%;
-		height: 100vh;
-		padding-top: 7.5em;
+		padding: 7.5em 4em 1em;
 
-		.organizations-show &,
-		.conferences-show & {
+		.has-banner-image & {
+			min-height: 40em;
+			height: 100%;
+			height: 100vh;
+		}
+
+		.page-style-article & {
 			min-height: 30em;
 			height: 50%;
 			height: 50vh;
@@ -410,26 +427,36 @@ main {
 			}
 		}
 
-		.organizations-index &,
-		.conferences-index & {
+		.page-style-list & {
+			min-height: 10em;
+			height: 30em;
 			height: 30vw;
 
 			h1 {
+				font-size: 6em;
 				font-size: 6vw;
 			}
 		}
 	}
 
 	@include breakpoint(large) {
-		padding-top: 0;
 		border-bottom-left-radius: 2.5em;
+		padding-top: 2em;
+
+		.has-banner-image & {
+			padding-top: 0;
+		}
+
+		.no-content & {
+			border-radius: 0;
+		}
 
 		&:after {
 			border-bottom-left-radius: inherit;
 		}
 
-		.organizations-index &,
-		.conferences-index & {
+		.page-style-list & {
+			height: 15em;
 			height: 15vw;
 
 			h1 {
@@ -464,8 +491,49 @@ main {
 }
 
 #footer {
+	position: relative;
 	min-height: 5em;
 	background-color: inherit;
+	z-index: 1;
+
+	i {
+		display: inline-block;
+		border-left: 3px solid;
+		height: 1em;
+		vertical-align: middle;
+		-webkit-transform: skewX(-15deg);
+		-moz-transform: skewX(-15deg);
+		-ms-transform: skewX(-15deg);
+		transform: skewX(-15deg);
+	}
+}
+
+.photo-attribution {
+	position: absolute;
+	right: 0.25em;
+	font-size: 0.8em;
+	text-align: right;
+	margin: 0.25em 0.25em 0 0;
+	@include opacity(0.5);
+	z-index: 2;
+
+	> span {
+		display: none;
+	}
+
+	&:hover {
+		@include opacity(1);
+
+		> span {
+			display: block;
+		}
+	}
+
+	.no-content & {
+		a, a:visited {
+			color: $white;
+		}
+	}
 }
 
 /*body {

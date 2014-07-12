@@ -43,6 +43,7 @@ module ApplicationHelper
 
 	def banner_image(banner_image, name: nil, id: nil, user_id: nil, src: nil)
 		@@no_banner = false
+		@@banner_image = banner_image
 		if (name || id || user_id || src)
 			@@banner_attribution_details = {:name => name, :id => id, :user_id => user_id, :src => src}
 		end
@@ -50,6 +51,7 @@ module ApplicationHelper
 	end
 
 	def banner_attrs(banner_image)
+		@@no_banner = false
 		if banner_image.length > 0
 			@@banner_image = banner_image
 			return {style: 'background-image: url(' + banner_image + ');', class: 'has-image' }
@@ -79,9 +81,9 @@ module ApplicationHelper
 			src = @@banner_attribution_details[:src]
 			attribution = '<div class="photo-attribution' + (src ? ' ' + src : '') + '">'
 			if src == 'panoramio'
-				attribution += '<a href="http://www.panoramio.com/photo/' + @@banner_attribution_details[:id].to_s + '">' +
-						_('Image_provided_by_panoramio_user') +
-					'</a> <a href="http://www.panoramio.com/user/' + @@banner_attribution_details[:user_id].to_s + '">' + @@banner_attribution_details[:name] + '</a>' +
+				attribution += '<a href="http://www.panoramio.com/photo/' + @@banner_attribution_details[:id].to_s + '" target="_blank">&copy; ' +
+						_('Banner_image_provided_by_panoramio_user') +
+					'</a> <a href="http://www.panoramio.com/user/' + @@banner_attribution_details[:user_id].to_s + '" target="_blank">' + @@banner_attribution_details[:name] + '</a>' +
 					'<span>' + _('Photos_provided_by_Panoramio_are_under_the_copyright_of_their_owners')  + '</span>'
 			end
 			attribution += '</div>'
@@ -95,12 +97,19 @@ module ApplicationHelper
 
 	def page_style(style)
 		classes = ['page-style-' + style.to_s]
-		if @@no_banner
-			classes << 'no-banner'
-		end
+		#if @@no_banner
+		#	classes << 'no-banner'
+		#end
 		if ThereAreTranslationsOnThisPage?
 			classes << 'has-translations'
 		end
+		if !@@has_content
+			classes << 'no-content'
+		end
+		if @@banner_image
+			classes << 'has-banner-image'
+		end
+
 		if params[:controller]
 			classes << params[:controller]
 
