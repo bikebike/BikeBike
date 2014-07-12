@@ -269,7 +269,8 @@ namespace :migrate do
 						if i >= $panoramios[location]
 							params["remote_#{column.to_s}_url".to_sym] = img['photo_file_url']
 							params[column.to_sym] = img['photo_file_url'].gsub(/^.*\/(.*)$/, '\1')
-							params[:cover_attribution_id] = img['owner_id']
+                            params[:cover_attribution_id] = img['photo_id']
+							params[:cover_attribution_user_id] = img['owner_id']
 							params[:cover_attribution_name] = img['owner_name']
 							params[:cover_attribution_src] = 'panoramio'
 							return params
