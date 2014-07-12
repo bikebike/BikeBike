@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140525212115) do
+ActiveRecord::Schema.define(version: 20140712190815) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(version: 20140525212115) do
     t.integer  "cover_attribution_id"
     t.string   "cover_attribution_name"
     t.string   "cover_attribution_src"
+    t.integer  "cover_attribution_user_id"
   end
 
   create_table "event_types", force: true do |t|
@@ -166,6 +167,7 @@ ActiveRecord::Schema.define(version: 20140525212115) do
     t.string   "cover_attribution_src"
     t.string   "phone"
     t.integer  "organization_status_id"
+    t.integer  "cover_attribution_user_id"
   end
 
   create_table "registration_form_fields", force: true do |t|
