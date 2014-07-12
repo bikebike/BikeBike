@@ -450,7 +450,6 @@ module ApplicationHelper
 			open(file, 'wb') do |f|
   				f << open(url).read
 			end
-			#FileUtils.cp url, file
 		end
 		
 		"maps/#{local_file_name}"
