@@ -119,7 +119,7 @@ namespace :migrate do
 			{
 				:id => id,
 				:name => object[:title],
-				:slug => object[:path].gsub(/^.*\/(.*)$/, '\1'),
+				:slug => object[:path].gsub(/^.*\/(.*)$/, '\1').gsub(/[\.\#\?\!]/, ''),
 				:email_address => object[:email] && object[:email].first ? object[:email]['und'][0]['url'] : nil,
 				:url => object[:field_website] && object[:field_website].first ? object[:field_website]['und'][0]['url'] : nil,
 				:year_founded => object[:field_year_founded] && object[:field_year_founded].first ? object[:field_year_founded]['und'][0]['value'] : nil,

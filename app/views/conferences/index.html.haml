@@ -6,6 +6,8 @@
 		.columns
 			%h1=_'page.Conferences'
 
+%h2='All '+(@conference_type ? @conference_type.title+' ' : '')+' Conferences'
+
 %ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3.conference-list.preview-list
 	- @conferences.each do |conference|
 		%li=render 'preview', :conference => conference

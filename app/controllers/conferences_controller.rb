@@ -6,16 +6,18 @@ class ConferencesController < ApplicationController
 
 	# GET /conferences
 	def index
-		#Conference.all.each {|m| m.poster.recreate_versions!}
-		puts " ------------- CONFERENCE INDEX -------------- "
-		puts params
-		@conferences = Conference.all
+		#puts params
+		@conference_type = nil
+		if params['conference_type']
+			@conference_type = ConferenceType.find_by!(:slug => params['conference_type'])
+			@conferences = Conference.where(:conference_type_id => @conference_type.id)
+		else
+			@conferences = Conference.all
+		end
 	end
 
 	# GET /conferences/1
 	def show
-		puts " --------------------------- "
-		puts params[:slug]
 	end
 
 	# GET /conferences/new
@@ -177,8 +179,6 @@ class ConferencesController < ApplicationController
 		# Use callbacks to share common setup or constraints between actions.
 		def set_conference
 			@conference = nil
-			puts ' ---------------------- '
-			puts params
 			if type = ConferenceType.find_by!(slug: params[:conference_type] || params[:conference_type_slug] || 'bikebike')
 				if @conference = Conference.find_by!(slug: params[:conference_slug] || params[:slug], conference_type_id: type.id)
 					set_conference_registration
