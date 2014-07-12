@@ -26,7 +26,7 @@ module BikeBike
         # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
         config.i18n.default_locale = :en #:de
         config.i18n.enforce_available_locales = false
-        config.action_controller.default_url_options = { :trailing_slash => true }
+        # config.action_controller.default_url_options = { :trailing_slash => true }
         #config.middleware.swap 'Rack::MethodOverride', 'Rack::MethodOverrideWithParams'
         #config.i18n.exception_handler = I18n::MissingTranslationExceptionHandler.new
         #require '/app/helpers/bike_bike_form_helper'
