@@ -445,7 +445,7 @@ module ApplicationHelper
 		file = File.join("public", "maps/#{local_file_name}")
 		FileUtils.mkdir_p("public/maps") unless File.directory?("public/maps")
 		if !File.exist?(file)
-			url = "http://maps.googleapis.com/maps/api/staticmap?center=#{location}&zoom=#{zoom}&size=#{width}x#{height}&maptype=roadmap&markers=size:small%7C#{location}&key=AIzaSyAH7U8xUUb8IwDPy1wWuYGprzxf4E1Jj4o"
+			url = "https://maps.googleapis.com/maps/api/staticmap?center=#{location}&zoom=#{zoom}&size=#{width}x#{height}&maptype=roadmap&markers=size:small%7C#{location}&key=AIzaSyAH7U8xUUb8IwDPy1wWuYGprzxf4E1Jj4o"
 			require 'open-uri'
 			open(file, 'wb') do |f|
 				f << open(url).read
