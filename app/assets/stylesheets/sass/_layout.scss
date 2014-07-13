@@ -21,6 +21,7 @@ body {
 	font-size: 2.4vw;
 	overflow: hidden;
 	height: 3.1em;
+	min-height: 42px;
 
 	p {
 		display: none;
@@ -40,6 +41,15 @@ body {
 		height: 100%;
 		margin: 0;
 		float: left;
+		display: -webkit-flexbox;
+		display: -ms-flexbox;
+		display: -webkit-flex;
+		display: flex;
+		-webkit-flex-align: center;
+		-ms-flex-align: center;
+		-webkit-align-items: center;
+		align-items: center;
+		text-align: center;
 
 		&:hover {
 			background-color: rgba($white, 0.85);
@@ -76,7 +86,7 @@ body {
 
 			.logo {
 				width: auto;
-				height: 2em;
+				height: 90%;//2em;
 				fill: $primary-color;
 				position: absolute;
 				left: 0;
@@ -130,6 +140,7 @@ body {
 			//margin: 0 0 1.25rem;
 			margin: 1%;
 			width: 30%;
+			display: block;
 
 			&.logo {
 				position: relative;
