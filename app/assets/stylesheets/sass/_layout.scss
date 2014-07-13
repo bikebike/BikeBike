@@ -567,14 +567,26 @@ main {
 	background-color: $primary-color;
 
 	i {
-		display: inline-block;
-		border-left: 3px solid;
-		height: 1em;
-		vertical-align: middle;
-		-webkit-transform: skewX(-15deg);
-		-moz-transform: skewX(-15deg);
-		-ms-transform: skewX(-15deg);
-		transform: skewX(-15deg);
+		display: block;
+		height: 0.5em
+	}
+
+	.copyright {
+		margin-top: 2em;
+		text-align: right;
+	}
+
+	@include breakpoint(medium) {
+		i {
+			display: inline-block;
+			border-left: 3px solid;
+			height: 1em;
+			vertical-align: middle;
+			-webkit-transform: skewX(-15deg);
+			-moz-transform: skewX(-15deg);
+			-ms-transform: skewX(-15deg);
+			transform: skewX(-15deg);
+		}
 	}
 }
 
