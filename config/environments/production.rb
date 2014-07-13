@@ -66,7 +66,7 @@ BikeBike::Application.configure do
 	# application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 	# config.assets.precompile += %w( search.js )
 	config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
-	config.action_controller.asset_host = "http://cdn.bikebike.org"
+	config.action_controller.asset_host = "https://cdn.bikebike.org"
 
 	# Ignore bad email addresses and do not raise email delivery errors.
 	# Set this to true and configure the email server for immediate delivery to raise delivery errors.
