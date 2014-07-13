@@ -303,7 +303,7 @@ main {
 #banner {
 	position: relative;
 	background-size: cover;
-	background-position: center 66.6667%;
+	background-position: 25% 66.6667%;
 	//padding-top: 4em;
 	color: $white;
 	overflow: visible;
@@ -457,7 +457,7 @@ main {
 
 			figure {
 				img {
-					max-height: 100%;
+					max-height: 75%;
 				}
 			}
 

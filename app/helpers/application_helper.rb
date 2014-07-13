@@ -1,3 +1,4 @@
+
 module ApplicationHelper
 	@@keyQueue = nil
 	@@translationsOnThisPage = nil
@@ -363,7 +364,23 @@ module ApplicationHelper
 	end
 
 	def p(object, attribute)
-		('<p>' + object.send(attribute.to_s).strip.gsub(/\s*\n+\s*/, '</p><p>') + '</p>').html_safe
+		content = object.send(attribute.to_s)
+		result = ''
+		if content =~ /<(p|span|h\d|div)[^>]*>/
+			result = content.gsub(/\s*(style|class|id|width|height|font)=\".*?\"/, '')
+				.gsub(/&nbsp;/, ' ')
+				.gsub(/<(\/)?\s*h\d\s*>/, '<\1h3>')
+				.gsub(/<p>(.*?)<br\s\/?>\s*(<br\s\/?>)+/, '<p>\1</p><p>')
+				.gsub(/<span[^>]*>\s*(.*?)\s*<\/span>/, '\1')
+				.gsub(/<p>\s*<\/p>/, '')
+				.gsub(/<(\/)?div>/, '<\1p>')
+			if !(result =~ /<p[^>]*>/)
+				result = '<p>' + result + '</p>'
+			end
+		else
+			result = '<p>' + content.strip.gsub(/\s*\n+\s*/, '</p><p>') + '</p>'
+		end
+		result.html_safe
 	end
 
 	def form_field(f, response = nil)
