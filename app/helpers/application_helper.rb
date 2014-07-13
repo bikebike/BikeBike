@@ -436,7 +436,7 @@ module ApplicationHelper
 	end
 
 	def icon(id, attributes = nil)
-		('<svg' + hash_to_html_attributes(attributes) + '><use xlink:href="' + cdn('/assets/icons.svg') + '#bb-icon-' + id + '"></use></svg>').html_safe
+		('<svg' + hash_to_html_attributes(attributes) + '><use xlink:href="/assets/icons.svg#bb-icon-' + id + '"></use></svg>').html_safe
 	end
 
 	def static_map(location, zoom, width, height)
