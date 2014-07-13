@@ -47,7 +47,11 @@ class PosterUploader < CarrierWave::Uploader::Base
 			image.format(@format.to_s.downcase) if @format
 			image = yield(image)
 			image.write(current_path)
-			image.run_command("identify", Gem.win_platform? ? '"' + current_path + '"' : current_path)
+			begin
+				image.run_command("identify", current_path)
+			rescue
+				image.run_command("identify", '"' + current_path + '"')
+			end
 		ensure
 			image.destroy!
 		end
