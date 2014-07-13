@@ -452,7 +452,7 @@ module ApplicationHelper
 			end
 		end
 		
-		(Rails.application.config.action_controller.asset_host || '')+"maps/#{local_file_name}"
+		(Rails.application.config.action_controller.asset_host || '')+"/maps/#{local_file_name}"
 	end
 
 	private
