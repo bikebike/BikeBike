@@ -5,5 +5,5 @@ development:
 production:
   enabled: true
   host: cdn.bikebike.org
-  protocol: https
-  fallback_protocol: http
+  protocol: http
+  fallback_protocol: https

@@ -7,3 +7,9 @@
 	.columns.large-10
 		%h2=('About '+@conference.title)
 		%p=@conference.info.html_safe
+
+- content_for :side_bar do
+	%h5= @conference.title+' is hosted by:'
+	%ul.preview-list.org-list.small-block-grid-2.large-block-grid-1
+		- @conference.organizations.each do |organization|
+			%li=render 'organizations/preview', :organization => organization

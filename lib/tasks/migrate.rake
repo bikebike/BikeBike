@@ -8,6 +8,18 @@ $panoramios = Hash.new
 namespace :migrate do
 	desc "Migrates data from live site to current database"
 
+	task test: :environment do
+		#url = 'http://www.panoramio.com/map/get_panoramas.php?set=public&from=0&to=20&minx=-180&miny=-90&maxx=180&maxy=90&size=medium&mapfilter=true'
+		#response = RestClient.get url
+		result = Geocoder.search('Calgary Alberta, Canada').first
+		#begin
+		points = Geocoder::Calculations.bounding_box([result.latitude, result.longitude], 5, { :unit => :km })
+		options = {:set => :public, :size => :original, :from => 0, :to => 20, :mapfilter => false, :miny => points[0], :minx => points[1], :maxy => points[2], :maxx => points[3]}
+		url = 'http://www.panoramio.com/map/get_panoramas.php?' + options.to_query
+		response = JSON.parse(open(url).read)
+		puts response['photos']
+	end
+
 	task all: :environment do
 		migrate! User.new
 		migrate! Location.new
@@ -258,29 +270,31 @@ namespace :migrate do
 		$panoramios[location] ||= 0
 		$panoramios[location] += 1
 		result = Geocoder.search(location).first
-		begin
-			if result
-				points = Geocoder::Calculations.bounding_box([result.latitude, result.longitude], 5, { :unit => :km })
-				response = RestClient.get 'http://www.panoramio.com/map/get_panoramas.php', :params => {:set => :public, :size => :original, :from => 0, :to => 20, :mapfilter => false, :miny => points[0], :minx => points[1], :maxy => points[2], :maxx => points[3]}
-				if response.code == 200
-					i = 0
-					JSON.parse(response.to_str)['photos'].each { |img|
-						if img['width'].to_i > 980
-							i += 1
-							if i >= $panoramios[location]
-								params["remote_#{column.to_s}_url".to_sym] = img['photo_file_url']
-								params[column.to_sym] = img['photo_file_url'].gsub(/^.*\/(.*)$/, '\1')
-								params[:cover_attribution_id] = img['photo_id']
-								params[:cover_attribution_user_id] = img['owner_id']
-								params[:cover_attribution_name] = img['owner_name']
-								params[:cover_attribution_src] = 'panoramio'
-								return params
-							end
-						end
-					}
+		#begin
+		if result
+			points = Geocoder::Calculations.bounding_box([result.latitude, result.longitude], 5, { :unit => :km })
+			options = {:set => :public, :size => :original, :from => 0, :to => 20, :mapfilter => false, :miny => points[0], :minx => points[1], :maxy => points[2], :maxx => points[3]}
+			url = 'http://www.panoramio.com/map/get_panoramas.php?' + options.to_query
+			response = JSON.parse(open(url).read)
+			#if response.code == 200
+			i = 0
+			response['photos'].each { |img|
+				if img['width'].to_i > 980
+					i += 1
+					if i >= $panoramios[location]
+						params["remote_#{column.to_s}_url".to_sym] = img['photo_file_url']
+						params[column.to_sym] = img['photo_file_url'].gsub(/^.*\/(.*)$/, '\1')
+						params[:cover_attribution_id] = img['photo_id']
+						params[:cover_attribution_user_id] = img['owner_id']
+						params[:cover_attribution_name] = img['owner_name']
+						params[:cover_attribution_src] = 'panoramio'
+						return params
+					end
 				end
-			end
-		rescue; end
+			}
+			#end
+		end
+		#rescue; end
 		return params
 	end
 

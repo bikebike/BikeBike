@@ -1,4 +1,4 @@
-- banner_image @organization.cover_url
+- banner_image @organization.cover_url, id: @organization.cover_attribution_id, name: @organization.cover_attribution_name, user_id: @organization.cover_attribution_user_id, src: @organization.cover_attribution_src
 - page_style 'article'
 - content_for :banner do
 	.row{:class => (@organization.avatar.is_landscape? ? 'landscape' : 'portrait')}

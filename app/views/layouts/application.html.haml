@@ -41,7 +41,10 @@
 			- if has_banner?
 				%header#banner{banner_attrs(yield_or_default :banner_image)}
 					= yield :banner
-				= banner_attribution
+					= banner_attribution
+			- if content_for?(:side_bar)
+				%aside#side-bar
+					= yield :side_bar
 			- if has_content?
 				#content=yield
 			- else

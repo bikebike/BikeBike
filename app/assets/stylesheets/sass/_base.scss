@@ -279,6 +279,10 @@ ul.tags,
 
 	@include breakpoint(medium) {
 		margin-left: 3em;
+
+		aside & {
+			margin-left: 0;
+		}
 	}
 }
 

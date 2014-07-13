@@ -168,12 +168,11 @@ body {
 		display: block;
 		position: static;
 		height: auto;
-		min-height: 100%;
+		min-height: 0;
 		float: left;
 		width: 25%;
 		padding: 2.5%;
 		font-size: 1em;
-		min-height: 100vh;
 
 		.has-banner-image & {
 			background-image: none;
@@ -210,13 +209,51 @@ body {
 	}
 }
 
+#side-bar {
+	padding: 2.5%;
+
+	.preview-list {
+
+		li {
+			margin: auto;
+			float: none;
+		}
+	}
+
+	h5 {
+		text-align: center;
+	}
+
+	@include breakpoint(medium) {
+		+ #content {
+			padding-top: 0;
+		}
+	}
+
+	@include breakpoint(large) {
+		float: left;
+		clear: left;
+		width: 25%;
+		font-size: 1vw;
+
+		h5 {
+			text-align: left;
+			font-size: 1.25em;
+		}
+
+		+ #content {
+			padding-top: 4em;
+		}
+	}
+}
+
 main {
 	min-height: 100%;
 	//overflow: auto;
 	background-color: $white;
 
-	@include breakpoint(medium) {
-		//background-color: $black;
+	@include breakpoint(large) {
+		overflow: auto;
 	}
 }
 
@@ -239,6 +276,7 @@ main {
 
 	@include breakpoint(medium) {
 		padding: 4em;
+		clear: right;
 
 		.organizations-show & {
 			min-height: 25em;
@@ -253,7 +291,7 @@ main {
 	background-position: center 66.6667%;
 	//padding-top: 4em;
 	color: $white;
-	overflow: hidden;
+	overflow: visible;
 	background-color: $black;
 
 	h1, h2 {
@@ -265,9 +303,9 @@ main {
 		z-index: 2;
 		position: relative;
 
-		.align-bottom {
-			height: 50%;
-		}
+		//.align-bottom {
+		//	height: 50%;
+		//}
 	}
 
 	.align-bottom > div {
@@ -360,7 +398,7 @@ main {
 
 	.conferences-show & {
 		.columns.banner {
-			height: 75%;
+			//height: 75%;
 			padding-bottom: 1em;
 
 			figure {
@@ -392,8 +430,6 @@ main {
 
 		.page-style-article & {
 			min-height: 30em;
-			height: 50%;
-			height: 50vh;
 
 			.row {
 				height: 100%;
@@ -442,6 +478,8 @@ main {
 	@include breakpoint(large) {
 		border-bottom-left-radius: 2.5em;
 		padding-top: 2em;
+		width: 75%;
+		float: right;
 
 		.has-banner-image & {
 			padding-top: 0;
@@ -463,6 +501,21 @@ main {
 				font-size: 3.75vw;
 				margin-top: 6vw;
 			}
+		}
+
+		.page-style-article & {
+			height: 50%;
+			height: 50vh;
+		}
+
+		.conferences-show & {
+			.columns.banner {
+				height: 75%;
+			}
+		}
+
+		.row .align-bottom {
+			height: 50%;
 		}
 	}
 }
@@ -510,15 +563,19 @@ main {
 
 .photo-attribution {
 	position: absolute;
+	top: 100%;
 	right: 0.25em;
+	margin: 0.25em 0.25em 0 0;
 	font-size: 0.8em;
 	text-align: right;
-	margin: 0.25em 0.25em 0 0;
+	text-shadow: none;
 	@include opacity(0.5);
+	clear: right;
 	z-index: 2;
 
 	> span {
 		display: none;
+		color: $black;
 	}
 
 	&:hover {
@@ -530,8 +587,19 @@ main {
 	}
 
 	.no-content & {
-		a, a:visited {
-			color: $white;
+		top: auto;
+		bottom: 0.25em;
+		color: $white;
+		@include opacity(0.25);
+
+		&:hover {
+			@include opacity(0.5);
+		}
+
+		a,
+		a:visited,
+		span {
+			color: inherit;
 		}
 	}
 }
