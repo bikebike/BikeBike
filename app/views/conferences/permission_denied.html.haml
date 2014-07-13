@@ -1,8 +1,13 @@
-- title 'Bike!Bike!'
+- title @conference.title
 = render 'header'
 
-.row
-	%h1
-		=_'error.title.Permission_Denied'
-	%p
-		=_'error.desc.permission_denied', :p
+%article.row
+	.columns.large-10
+		%h1=_'error.title.Permission_Denied'
+		%p=_'error.desc.permission_denied', :p
+
+- content_for :side_bar do
+	%h5= @conference.title+' is hosted by:'
+	%ul.preview-list.org-list.small-block-grid-2.large-block-grid-1
+		- @conference.organizations.each do |organization|
+			%li=render 'organizations/preview', :organization => organization

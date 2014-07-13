@@ -1,4 +1,8 @@
-- title 'Bike!Bike!'
+- location = @conference.organizations.first.locations.first
+- location_name = location.city + ', ' + (location.territory ? Carmen::Country.coded(location.country).subregions.coded(location.territory).name : location.country)
+
+- title @conference.title
+- description "#{@conference.title} conference in #{location_name} for DIY bicycle collectives, co-ops, and advocacy groups"
 = render 'header'
 
 = tabs!

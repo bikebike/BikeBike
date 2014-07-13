@@ -187,9 +187,6 @@ class ConferencesController < ApplicationController
 			if current_user
 				@host_privledge = :admin
 			end
-			#if !@conference
-			#	raise ActionController::RoutingError.new('Not Found')
-			#end
 		end
 
 		def set_conference_registration

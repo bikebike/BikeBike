@@ -29,6 +29,7 @@ gem 'paper_trail'
 gem 'font-awesome-rails'
 gem 'wysiwyg-rails'
 gem 'rails-assets-cdn'
+gem 'sitemap_generator'
 
 group :development, :test do
 	gem 'rspec'

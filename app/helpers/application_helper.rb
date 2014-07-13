@@ -41,6 +41,10 @@ module ApplicationHelper
 		content_for(:title) { page_title.to_s }
 	end
 
+	def description(page_description)
+		content_for(:description) { page_description.to_s }
+	end
+
 	def banner_image(banner_image, name: nil, id: nil, user_id: nil, src: nil)
 		@@no_banner = false
 		@@banner_image = banner_image
@@ -457,6 +461,18 @@ module ApplicationHelper
 
 	def cdn(file)
 		(Rails.application.config.action_controller.asset_host || '') + file
+	end
+
+	def is_production?
+		Rails.env == 'production'
+	end
+
+	def subdomain
+		request.env['SERVER_NAME'].gsub(/^(\w+)\..*$/, '\1')
+	end
+
+	def is_test_server?
+		subdomain == 'test'
 	end
 
 	private

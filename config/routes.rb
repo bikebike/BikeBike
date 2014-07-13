@@ -60,6 +60,9 @@ BikeBike::Application.routes.draw do
 	get "oauth/callback" => "oauths#callback"
 	get "oauth/:provider" => "oauths#oauth", :as => :auth_at_provider
 
+    get 'robots.txt' => 'pages#robots'
+    get 'resources' => 'pages#resources'
+
 	root 'pages#home'
 
 end

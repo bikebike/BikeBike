@@ -3,17 +3,15 @@
 	%head
 		%meta{ charset: 'utf-8' }
 		%meta{ name: 'viewport', content: 'width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0' }
-		%title= yield_or_default :title, controller.action_name.titlecase
-		%meta{ name: 'description', content: (yield_or_default :description, 'Bike!Bike! is an international annual gathering organized by and for community bicycle projects') }
+		%title= (yield :title) + (content_for?(:title) ? ' | ' : '') + 'Bike!Bike!'
+		%meta{ name: 'description', content: (yield_or_default :description, 'Bike!Bike! conferences for DIY bicycle collectives, co-ops, and advocacy groups') }
 		= csrf_meta_tags
 		= yield :head
-		/ Le HTML5 shim, for IE6-8 support of HTML elements
 		/[if lt IE 9]
 			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
 
 		= stylesheet_link_tag '//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic,700italic', 'application', media: 'all'
 
-		/ Touch icons
 		%link{ href: asset_path('favicon.ico'), rel: 'shortcut icon', type: 'image/x-icon' }
 		%link{ href: asset_path('favicon.ico'), rel: 'icon', type: 'image/x-icon' }
 		%link{ href: asset_path('apple-touch-icon.png'), rel: 'apple-touch-icon' }
@@ -21,10 +19,6 @@
 		%link{ href: asset_path('apple-touch-icon-114x114.png'), rel: 'apple-touch-icon', sizes: '114x114' }
 		%link{ href: asset_path('apple-touch-icon-144x144.png'), rel: 'apple-touch-icon', sizes: '144x144' }
 
-		/
-			Le javascript
-			\==================================================
-		/ Placed at the top of the document 'cause of turbolinks
 		=# javascript_include_tag '//use.typekit.net/iqv7hcg.js'
 		=# javascript_include_tag 'application'
 		=# javascript_include_tag 'nested_form'

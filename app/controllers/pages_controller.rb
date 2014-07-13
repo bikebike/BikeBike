@@ -1,11 +1,14 @@
 include ApplicationHelper
 
 class PagesController < ApplicationController
-    #skip_before_filter :verify_authenticity_token, only: [:translate]
+	#skip_before_filter :verify_authenticity_token, only: [:translate]
 
 	def home
-        @conferences = Conference.all
+		@conferences = Conference.all
 		@conference = Conference.find(:first, :order => "start_date DESC")
+	end
+
+	def resources
 	end
 
 	def translate
@@ -51,12 +54,18 @@ class PagesController < ApplicationController
 	end
 
 	def translations
+		if !current_user
+			raise ActiveRecord::PremissionDenied
+		end
 		@lang = params[:lang]
 		@translations = I18n.backend.get_translation_info
 		I18n.config.enforce_available_locales = false
 	end
 
 	def translation_list
+		if !current_user
+			raise ActiveRecord::PremissionDenied
+		end
 		total = 0
 		complete = 0
 		@completeness = Hash.new
@@ -76,6 +85,11 @@ class PagesController < ApplicationController
 			c1 = @completeness.has_key?(a1.to_s) ? @completeness[a1.to_s] : 0
 			c1 == c2 ? a1 <=> a2 : c2 <=> c1
 		}
+	end
+
+	def robots
+		robot = is_production? && !is_test_server? ? 'live' : 'dev'
+		render :text => File.read("config/robots-#{robot}.txt"), :content_type => 'text/plain'
 	end
 
   private
