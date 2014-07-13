@@ -49,5 +49,14 @@
 				#content=yield
 			- else
 				= yield
+			%footer
 		#footer
 			.container= render 'shared/footer'
+		= javascript_include_tag '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'
+		:javascript
+			#{yield :scripts}
+			!function(a,b,c,d){d&&a.addEventListener("DOMContentLoaded",function(){$.ajax({url:$("use").first().attr("xlink:href").replace(/^(.*)\#.*$/,"$1"),dataType:"text",success:function(a){$("body").append('<div class="hide">'+a+"</div>"),$("use").each(function(){$(this).attr("xlink:href",function(a,b){return b.replace(/^.*(#.*)$/,"$1")})})}})})}(document,navigator,{},/Trident\/[567]\b/.test(navigator.userAgent));
+			$(function(){
+				#{yield :dom_ready}
+			});
+		= yield :footer_scripts

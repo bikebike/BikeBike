@@ -9,7 +9,6 @@ html {
 }
 
 body {
-	background-color: $primary-color;
 	height: auto;
 }
 
@@ -254,6 +253,10 @@ main {
 
 	@include breakpoint(large) {
 		overflow: auto;
+
+		footer {
+			@include clearfix;
+		}
 	}
 }
 
@@ -489,6 +492,7 @@ main {
 			border-radius: 0;
 		}
 
+		&:before,
 		&:after {
 			border-bottom-left-radius: inherit;
 		}
@@ -548,6 +552,7 @@ main {
 	min-height: 5em;
 	background-color: inherit;
 	z-index: 1;
+	background-color: $primary-color;
 
 	i {
 		display: inline-block;
@@ -982,3 +987,6 @@ table {
 }
 
 */
+.clearfix {
+	@include clearfix;
+}
