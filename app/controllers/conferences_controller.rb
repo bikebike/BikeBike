@@ -112,9 +112,28 @@ class ConferencesController < ApplicationController
 
 	def register
 		set_conference
-		@user = User.new
-		@sub_action = 'registration_register'
-		render :registration
+		#@user = User.new
+		#@sub_action = 'registration_register'
+		#render :registration
+		if params['step']
+			begin
+				template = "register_#{params['step']}"
+				if request.xhr?
+					render :partial => template
+				else
+					render template
+				end
+			rescue
+				do_404
+			end
+		else
+			if request.xhr?
+				render :partial => 'register'
+			else
+				@register_step = true
+				render 'show'
+			end
+		end
 	end
 
 	def register_step

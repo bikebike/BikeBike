@@ -2,7 +2,11 @@ namespace :regenerate do
 	desc "Regenerates images"
 
 	task conference_posters: :environment do
-		Conference.all.each {|m| m.poster.recreate_versions!}
+        Conference.all.each { |m|
+            #puts m.title
+            #puts m.poster
+            m.poster.recreate_versions!
+        }
         #puts Conference.all.to_json.to_s
 	end
 

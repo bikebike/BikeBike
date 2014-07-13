@@ -9,8 +9,11 @@
 
 %article.row
 	.columns.large-10
-		%h2=('About '+@conference.title)
-		%p=@conference.info.html_safe
+		- if @register_step
+			%h2='Register!'
+		- else
+			%h2=('About '+@conference.title)
+			=p @conference, :info
 
 - content_for :side_bar do
 	%h5= @conference.title+' is hosted by:'

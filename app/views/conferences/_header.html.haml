@@ -5,10 +5,16 @@
 	.row
 		.columns.small-12.banner
 			%figure
-				%img{src: @conference.poster_url}
+				%img{src: @conference.poster.full.url}
 		.columns.medium-8.align-bottom
+			- title = @conference.conference_type.slug == 'bikebike' ? 'Bike!Bike! '+@conference.start_date.year.to_s : @conference.title
 			%div
-				%h1='Bike!Bike! '+@conference.start_date.year.to_s
+				%h1
+					- if params['controller'] == 'conferences' && params['action'] == 'show'
+						= title
+					- else
+						%a{href: @conference.url}
+							= title
 				%h2
 					- location = @conference.organizations.first.locations.first
 					= location.city + ', ' + (location.territory ? Carmen::Country.coded(location.country).subregions.coded(location.territory).name : location.country)

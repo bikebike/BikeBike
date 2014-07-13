@@ -19,11 +19,19 @@ class ApplicationController < ActionController::Base
 		$page_info = {:path => request.env['PATH_INFO'], :controller => params['controller'], :action => params['action']}
 	end
 
-	rescue_from ActiveRecord::RecordNotFound do |exception|
+	def do_404
 		render 'pages/404', status: 404
 	end
 
-	rescue_from ActiveRecord::PremissionDenied do |exception|
+	def do_403
 		render 'permission_denied', status: 403
+	end
+
+	rescue_from ActiveRecord::RecordNotFound do |exception|
+		do_404
+	end
+
+	rescue_from ActiveRecord::PremissionDenied do |exception|
+		do_403
 	end
 end
