@@ -11,6 +11,7 @@
 	.columns.large-10
 		- if @register_step
 			%h2='Register!'
+			= @register_content.html_safe
 		- else
 			%h2=('About '+@conference.title)
 			=p @conference, :info

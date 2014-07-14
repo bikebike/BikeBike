@@ -1,0 +1,14 @@
+= form_tag (@conference.url + '/register/').gsub(/\/\/+/, '/'), :class => 'row', :method => :post do
+	= hidden_field_tag :step, @register_step
+	- user = session[:registration][:user]
+	.columns.medium-6= text_field_tag :firstname, user ? (user.firstname || user.username) : nil, :required => true
+	.columns.medium-6= text_field_tag :lastname, user ? user.lastname : nil, :required => true
+	.columns
+		= text_field_tag :username, user ? user.username : nil, :readonly => (user && user.username)
+	.columns
+		%h3
+			Attending as: 
+	.columns.small-offset-1
+		= check_box_tag :is_participant
+		= check_box_tag :is_volunteer
+	.columns= form_actions :next

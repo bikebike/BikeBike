@@ -30,6 +30,7 @@ gem 'font-awesome-rails'
 gem 'wysiwyg-rails'
 gem 'rails-assets-cdn'
 gem 'sitemap_generator'
+gem 'activerecord-session_store'
 
 group :development, :test do
 	gem 'rspec'

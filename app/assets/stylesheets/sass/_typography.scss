@@ -249,7 +249,7 @@ fieldset {
 		}
 	}
 
-	&.check-box {
+	&.check-box-field {
 		div {
 			float: left;
 			font-size: 1.75em;
@@ -276,6 +276,12 @@ fieldset {
 			position: relative;
 			margin: 0;
 			display: inline-block;
+			line-height: 1.6em;
+
+			span {
+				display: inline-block;
+				vertical-align: text-top;
+			}
 		}
 	}
 

@@ -110,29 +110,53 @@ class ConferencesController < ApplicationController
 		end
 	end
 
+	def register_submit
+		#set_conference
+		next_step = nil
+		if !session[:registration]
+			session[:registration] = Hash.new
+		end
+		case params['step']
+			when 'register'
+				session[:registration][:email] = params[:email]
+				user = User.find_by(:email => params[:email]) || User.new(:email => params[:email], :role => 'unverified')
+				registration = ConferenceRegistration.new(:conference_id => @conference.id, :is_attending => 'yes', :is_participant => params[:is_participant], :is_volunteer => params[:is_volunteer])
+				session[:registration][:user] = user
+				next_step = 'primary'
+			when 'primary'
+				next_step = user.organizations.length > 0 ? 'questions' : 'organizations'
+				session[:registration][:user].firstname = params[:firstname]
+				session[:registration][:user].firstname = params[:lastname]
+				if !session[:registration][:user].role == 'unverified'
+					session[:registration][:user].username = params[:username]
+				end
+		end
+		next_step
+		#if next_step
+		#	redirect_to :action => :register, :step => next_step
+		#else
+		#	do_404
+		#end
+	end
+	
 	def register
 		set_conference
-		#@user = User.new
-		#@sub_action = 'registration_register'
-		#render :registration
-		if params['step']
-			begin
-				template = "register_#{params['step']}"
-				if request.xhr?
-					render :partial => template
-				else
-					render template
-				end
-			rescue
-				do_404
-			end
+		#template = params['step'] ? "register_#{params['step']}" : 'register'
+		@register_step = request.post? ? register_submit : 'register'
+		template = (@register_step == 'register' ? '' : 'register_') + @register_step
+		if !File.exists?(Rails.root.join("app", "views", params[:controller], "_#{template}.html.haml"))
+			do_404
+			return
+		end
+		#if params['step'] != true
+		#session[:last_step] = params['step']
+		#end
+		@register_step = template#params['step'] || true
+		@register_content = render_to_string :partial => template
+		if request.xhr?
+			render :json => {status: 200, html: @register_content}
 		else
-			if request.xhr?
-				render :partial => 'register'
-			else
-				@register_step = true
-				render 'show'
-			end
+			render 'show'
 		end
 	end
 
