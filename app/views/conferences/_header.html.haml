@@ -13,15 +13,26 @@
 					- if params['controller'] == 'conferences' && params['action'] == 'show'
 						= title
 					- else
-						%a{href: @conference.url}
-							= title
+						%a{href: @conference.url}=title
 				%h2
 					- location = @conference.organizations.first.locations.first
 					= location.city + ', ' + (location.territory ? Carmen::Country.coded(location.country).subregions.coded(location.territory).name : location.country)
 				%em
 					= (l @conference.start_date, format: :date) + ' - ' + (l @conference.end_date, format: :date)
 				- if params['controller'] != 'conferences'
-					%p= ActionView::Base.full_sanitizer.sanitize(@conference.info).gsub(/^(.{300,350}\.)(.*)$/m, '\1...')
+					- info = nil
+					- if @conference.registration_open
+						- if @conference.registration_info
+							- info = @conference.registration_info
+					- elsif @conference.end_date < Time.now
+						- if @conference.preregistration_info
+							- info = @conference.postregistration_info
+					- elsif @conference.preregistration_info
+						- info = @conference.preregistration_info
+					- if info
+						= info.html_safe
+					- else
+						%p= ActionView::Base.full_sanitizer.sanitize(@conference.info).gsub(/^(.{300,350}\.)(.*)$/m, '\1...')
 		.columns.medium-4.centered.align-bottom
 			%div
 				- if @conference.registration_open
