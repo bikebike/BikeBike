@@ -1,4 +1,5 @@
 include ApplicationHelper
+require 'uri'
 
 class OrganizationsController < ApplicationController
 	before_action :set_organization, only: [:show, :edit, :update, :destroy]
@@ -7,7 +8,30 @@ class OrganizationsController < ApplicationController
 
 	# GET /organizations
 	def index
-		@organizations = Organization.all
+		#Organization.all.each {|m| m.avatar.recreate_versions!}
+		#Conferences.all.each {|m| m.poster.recreate_versions!}
+		organizations = Organization.all
+		@organizations = Hash.new
+		countries = Hash.new
+		organizations.each { |organization|
+			location = organization.locations.first
+			if !countries.has_key?(location.country)
+				countries[location.country] = Carmen::Country.coded(location.country)
+			end
+			country = countries[location.country]
+			if !@organizations.has_key?(country.name)
+				@organizations[country.name] = Hash.new
+			end
+			territory = country.subregions.coded(location.territory)
+			territory_name = territory ? territory.name : 0
+			if !@organizations[country.name].has_key?(territory_name)
+				@organizations[country.name][territory_name] = Hash.new
+			end
+			if !@organizations[country.name][territory_name].has_key?(location.city)
+				@organizations[country.name][territory_name][location.city] = Array.new
+			end
+			@organizations[country.name][territory_name][location.city] << organization
+		}
 	end
 
 	# GET /organizations/1
@@ -100,13 +124,14 @@ class OrganizationsController < ApplicationController
 				countries[location.country.downcase][:territories][location.territory.downcase] = country.subregions.coded(location.territory)
 			end
 			territory = countries[location.country.downcase][:territories][location.territory.downcase]
-			if !orgs[location.country.downcase][location.territory.downcase].has_key?(location.territory.downcase)
-				orgs[location.country.downcase][location.territory.downcase][location.territory.downcase] = Hash.new
-				orgs[location.country.downcase][location.territory.downcase][location.territory.downcase][:latitude] = location.latitude
-				orgs[location.country.downcase][location.territory.downcase][location.territory.downcase][:longitude] = location.longitude
-				orgs[location.country.downcase][location.territory.downcase][location.territory.downcase][:count] = 0
+			city = URI.encode(location.city.downcase.gsub(/\s/, '-'))
+			if !orgs[location.country.downcase][location.territory.downcase].has_key?(city)
+				orgs[location.country.downcase][location.territory.downcase][city] = Hash.new
+				orgs[location.country.downcase][location.territory.downcase][city][:latitude] = location.latitude
+				orgs[location.country.downcase][location.territory.downcase][city][:longitude] = location.longitude
+				orgs[location.country.downcase][location.territory.downcase][city][:count] = 0
 			end
-			orgs[location.country.downcase][location.territory.downcase][location.territory.downcase][orgs[location.country.downcase][location.territory.downcase][location.territory.downcase]['count']] = { 
+			orgs[location.country.downcase][location.territory.downcase][city][orgs[location.country.downcase][location.territory.downcase][city][:count]] = { 
 				:title 		=> org.name,
 				:id			=> org.id,
 				:logo		=> org.avatar.url(:thumb),
@@ -126,7 +151,7 @@ class OrganizationsController < ApplicationController
 				:url			=> url_for(org),
 				:order			=> order
 			}
-			orgs[location.country.downcase][location.territory.downcase][location.territory.downcase][:count] += 1
+			orgs[location.country.downcase][location.territory.downcase][city][:count] += 1
 			order += 1
 		}
 		render :json => orgs.to_json
@@ -135,7 +160,9 @@ class OrganizationsController < ApplicationController
 	private
 		# Use callbacks to share common setup or constraints between actions.
 		def set_organization
-			@organization = Organization.find_by(slug: params[:slug] || params[:organization_slug])
+			if params[:slug] != 'json'
+				@organization = Organization.find_by!(slug: params[:slug] || params[:organization_slug])
+			end
 		end
 
 		# Only allow a trusted parameter "white list" through.

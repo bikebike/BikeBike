@@ -6,7 +6,14 @@ class ConferencesController < ApplicationController
 
 	# GET /conferences
 	def index
-		@conferences = Conference.all
+		#puts params
+		@conference_type = nil
+		if params['conference_type']
+			@conference_type = ConferenceType.find_by!(:slug => params['conference_type'])
+			@conferences = Conference.where(:conference_type_id => @conference_type.id)
+		else
+			@conferences = Conference.all
+		end
 	end
 
 	# GET /conferences/1
@@ -21,6 +28,9 @@ class ConferencesController < ApplicationController
 
 	# GET /conferences/1/edit
 	def edit
+		if !current_user
+			raise ActiveRecord::PremissionDenied
+		end
 		@host = @conference.organizations[0].locations[0]
 		#points = Geocoder::Calculations.bounding_box([@host.latitude, @host.longitude], 50, { :unit => :km })
 		result = Geocoder.search(@host.city + ', ' + @host.territory + ' ' + @host.country).first
@@ -100,6 +110,66 @@ class ConferencesController < ApplicationController
 		end
 	end
 
+	def register_submit
+		#set_conference
+		next_step = nil
+		if !session[:registration]
+			session[:registration] = Hash.new
+		end
+		case params['step']
+			when 'register'
+				session[:registration][:email] = params[:email]
+				user = User.find_by(:email => params[:email]) || User.new(:email => params[:email], :role => 'unverified')
+				registration = ConferenceRegistration.new(:conference_id => @conference.id, :is_attending => 'yes', :is_participant => params[:is_participant], :is_volunteer => params[:is_volunteer])
+				session[:registration][:user] = user
+				next_step = 'primary'
+			when 'primary'
+				next_step = user.organizations.length > 0 ? 'questions' : 'organizations'
+				session[:registration][:user].firstname = params[:firstname]
+				session[:registration][:user].firstname = params[:lastname]
+				if !session[:registration][:user].role == 'unverified'
+					session[:registration][:user].username = params[:username]
+				end
+		end
+		next_step
+		#if next_step
+		#	redirect_to :action => :register, :step => next_step
+		#else
+		#	do_404
+		#end
+	end
+	
+	def register
+		set_conference
+		#template = params['step'] ? "register_#{params['step']}" : 'register'
+		@register_step = request.post? ? register_submit : 'register'
+		template = (@register_step == 'register' ? '' : 'register_') + @register_step
+		if !File.exists?(Rails.root.join("app", "views", params[:controller], "_#{template}.html.haml"))
+			do_404
+			return
+		end
+		#if params['step'] != true
+		#session[:last_step] = params['step']
+		#end
+		@register_step = template#params['step'] || true
+		@register_content = render_to_string :partial => template
+		if request.xhr?
+			render :json => {status: 200, html: @register_content}
+		else
+			render 'show'
+		end
+	end
+
+	def register_step
+		set_conference
+		data = params
+		if params[:conference][:user][:email]
+			user = User.find_by(:email => params[:conference][:user][:email])
+			data[:conference][:user][:username] = user.username
+		end
+		render json: data
+	end
+
 	def add_field
 		set_conference
 		field = RegistrationFormField.find(params[:field])
@@ -151,8 +221,15 @@ class ConferencesController < ApplicationController
 	private
 		# Use callbacks to share common setup or constraints between actions.
 		def set_conference
-			@conference = Conference.find_by(slug: params[:conference_slug] || params[:slug])
-			set_conference_registration
+			@conference = nil
+			if type = ConferenceType.find_by!(slug: params[:conference_type] || params[:conference_type_slug] || 'bikebike')
+				if @conference = Conference.find_by!(slug: params[:conference_slug] || params[:slug], conference_type_id: type.id)
+					set_conference_registration
+				end
+			end
+			if current_user
+				@host_privledge = :admin
+			end
 		end
 
 		def set_conference_registration

@@ -1,7 +1,10 @@
+- page_title = (_ 'language_translations', vars: {:language => (_ ('languages.' + @lang))})
+- title page_title
+- banner_title page_title
+- page_style :form
+
 .row
-	%h1
-		= _ 'language_translations', vars: {:language => (_ ('languages.' + @lang))}
-	%table.columns#translations
+	%table.columns#translations{data: {token: form_authenticity_token}}
 		%thead
 			%tr
 				%th.key=_'translations.Key'
@@ -39,3 +42,6 @@
 							= translation_hint ? (_ "languages.#{I18n.locale.to_s}") + " = \"#{translation_hint}\"" : 'Nil'
 						- unless current_translation
 							%a{:href => '#', :class => 'auto-translate button small'}='Auto'
+
+-# content_for :footer_scripts
+= javascript_include_tag 'translations'

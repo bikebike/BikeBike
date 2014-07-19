@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140525212115) do
+ActiveRecord::Schema.define(version: 20140714013645) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,9 @@ ActiveRecord::Schema.define(version: 20140525212115) do
     t.string   "is_attending"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_confirmed"
+    t.boolean  "is_participant"
+    t.boolean  "is_volunteer"
   end
 
   create_table "conference_types", force: true do |t|
@@ -93,6 +96,7 @@ ActiveRecord::Schema.define(version: 20140525212115) do
     t.integer  "cover_attribution_id"
     t.string   "cover_attribution_name"
     t.string   "cover_attribution_src"
+    t.integer  "cover_attribution_user_id"
   end
 
   create_table "event_types", force: true do |t|
@@ -166,6 +170,7 @@ ActiveRecord::Schema.define(version: 20140525212115) do
     t.string   "cover_attribution_src"
     t.string   "phone"
     t.integer  "organization_status_id"
+    t.integer  "cover_attribution_user_id"
   end
 
   create_table "registration_form_fields", force: true do |t|
@@ -178,6 +183,16 @@ ActiveRecord::Schema.define(version: 20140525212115) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "sessions", force: true do |t|
+    t.string   "session_id", null: false
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true, using: :btree
+  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
 
   create_table "translations", force: true do |t|
     t.string   "locale"
@@ -218,6 +233,8 @@ ActiveRecord::Schema.define(version: 20140525212115) do
     t.string   "avatar"
     t.text     "about_me"
     t.string   "role"
+    t.string   "firstname"
+    t.string   "lastname"
   end
 
   add_index "users", ["activation_token"], name: "index_users_on_activation_token", using: :btree

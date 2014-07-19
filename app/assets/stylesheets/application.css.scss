@@ -1,4 +1,8 @@
 /*
+ *= require froala_editor.min.css
+ */
+
+ /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
  *
@@ -10,16 +14,24 @@
  *
  */
 
-
-// Fonts and other external imports
-@import url(http://fonts.googleapis.com/css?family=Fjalla+One);
-@import url(http://fonts.googleapis.com/css?family=Cantarell:400,700,400italic,700italic);
+@font-face {
+	font-family: 'AlteHaasGroteskBold';
+	src: url('/assets/AlteHaasGroteskBold.eot');
+	src: url('/assets/AlteHaasGroteskBold.eot?#iefix') format('embedded-opentype'),
+		 url('/assets/AlteHaasGroteskBold.woff') format('woff'),
+		 url('/assets/AlteHaasGroteskBold.ttf') format('truetype'),
+		 url('/assets/AlteHaasGroteskBold.svg#alte_haas_groteskbold') format('svg');
+	font-weight: bold;
+	font-style: bold;
+}
 
 // Libraries
 @import "compass";
+//@import "font-awesome";
 @import "foundation_and_overrides";
 
 // Local settings (also edit foundation_and_overrides.scss to modify global variables)
+@import "sass/mixins";
 @import "sass/layout";
 @import "sass/typography";
 @import "sass/base";

@@ -1,11 +1,14 @@
+= render 'header'
+
 - page_style :form
 
 = tabs!
 .row
 	= form_for @conference do |f|
-		.columns.medium-4
-			=sub_tabs!
-			%h2=_'conference.hosts.help.title', :t
-			%p=_'conference.hosts.help', :p
+		- if @host_privledges
+			.columns.medium-4
+				=sub_tabs!
+				%h2=_'conference.hosts.help.title', :t
+				%p=_'conference.hosts.help', :p
 		= render @sub_action, :f => f
 	= yield_or_default(:after_form)

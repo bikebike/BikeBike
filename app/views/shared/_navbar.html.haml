@@ -1,37 +1,10 @@
-
-%nav.top-bar.row{ data: { :topbar => '' } }
-	#nav-inner
-		%ul.title-area
-			/ Title Area
-			%li.name
-				%h1
-					%a{href: "/"} Bike!Bike!
-			/ Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone
-			%li.toggle-topbar.menu-icon
-				%a{href: "#"}
-					%span Menu
-		%section.top-bar-section
-			/ Left Nav Section
-			%ul.left
-				%li.active
-					= link_to (_'Conferences'), :controller => :conferences
-				%li
-					= link_to (_'Organizations'), :controller =>  :organizations
-				%li
-					= link_to (_'Resources'), '/resources'
-				/ Right Nav Section
-			%ul.right
-				- if current_user
-					%li.has-form.sign-out.hide-for-small
-						= link_to (_"Sign_Out"), :logout, method: :post, :class => 'button'
-					%li.user-profile.has-dropdown
-						= link_to current_user do
-							= image_tag(current_user.avatar_url(:icon))
-							%span
-								%span.show-for-small=current_user.username
-						%ul.dropdown
-							%li= link_to 'View Profile', current_user
-							%li= link_to 'Edit Profile', edit_user_path(current_user.id)
-				- else
-					%li.has-form.sign-in
-						= link_to (_"Sign_In"), :login, :class => 'button'
+%nav#main-nav
+	= link_to '/', :class => ['button', 'logo'] do
+		=# image_tag('logo.png', class: 'logo')
+		=# image_tag('logo-text.png', class: 'logo-text')
+		= icon('logo', {:class => 'logo'})
+		= icon('logo-text', {:class => 'logo-text'})
+	.buttons
+		= link_to (_'Conferences'), :conferences, {:class => ['button', 'conference']}
+		= link_to (_'Organizations'), {:controller => :organizations}, {:class => ['button', 'organization']}
+		= link_to (_'Resources'), '/resources/', :class => ['button', 'article']

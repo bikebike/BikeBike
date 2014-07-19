@@ -1,9 +1,34 @@
+
 module ApplicationHelper
 	@@keyQueue = nil
 	@@translationsOnThisPage = nil
 	@@lastTranslation = nil
 	@@allTranslations = nil
 	@@no_banner = true
+	@@banner_attribution_details = nil
+	@@banner_image = nil
+	@@has_content = true
+	@@front_page = false
+
+	def init_vars
+		@@keyQueue = nil
+		@@translationsOnThisPage = nil
+		@@lastTranslation = nil
+		@@allTranslations = nil
+		@@no_banner = true
+		@@banner_attribution_details = nil
+		@@banner_image = nil
+		@@has_content = true
+		@@front_page = false
+	end
+
+	def this_is_the_front_page
+		@@front_page = true
+	end
+
+	def is_this_the_front_page?
+		return @@front_page
+	end
 
 	def ThereAreTranslationsOnThisPage?
 		@@translationsOnThisPage
@@ -17,13 +42,23 @@ module ApplicationHelper
 		content_for(:title) { page_title.to_s }
 	end
 
-	def banner_image(banner_image)
+	def description(page_description)
+		content_for(:description) { page_description.to_s }
+	end
+
+	def banner_image(banner_image, name: nil, id: nil, user_id: nil, src: nil)
 		@@no_banner = false
+		@@banner_image = banner_image
+		if (name || id || user_id || src)
+			@@banner_attribution_details = {:name => name, :id => id, :user_id => user_id, :src => src}
+		end
 		content_for(:banner_image) { banner_image.to_s }
 	end
 
 	def banner_attrs(banner_image)
+		@@no_banner = false
 		if banner_image.length > 0
+			@@banner_image = banner_image
 			return {style: 'background-image: url(' + banner_image + ');', class: 'has-image' }
 		end
 		{class: 'no-image'}
@@ -32,20 +67,54 @@ module ApplicationHelper
 	def has_banner?
 		!@@no_banner
 	end
+	
+	def has_content?
+		@@has_content
+	end
 
+	def has_no_content
+		@@has_content = false
+	end
+	
 	def banner_title(banner_title)
 		@@no_banner = false
 		content_for(:banner) { ('<div class="row"><h1>' + banner_title.to_s + '</h1></div>').html_safe }
 	end
 
+	def banner_attribution
+		if @@banner_image && @@banner_attribution_details
+			src = @@banner_attribution_details[:src]
+			attribution = '<div class="photo-attribution' + (src ? ' ' + src : '') + '">'
+			if src == 'panoramio'
+				attribution += '<a href="http://www.panoramio.com/photo/' + @@banner_attribution_details[:id].to_s + '" target="_blank">&copy; ' +
+						_('Banner_image_provided_by_panoramio_user') +
+					'</a> <a href="http://www.panoramio.com/user/' + @@banner_attribution_details[:user_id].to_s + '" target="_blank">' + @@banner_attribution_details[:name] + '</a>' +
+					'<span>' + _('Photos_provided_by_Panoramio_are_under_the_copyright_of_their_owners')  + '</span>'
+			end
+			attribution += '</div>'
+			attribution.html_safe
+		end
+	end
+
+	def dom_ready(&block)
+		content_for(:dom_ready, &block)
+	end
+
 	def page_style(style)
 		classes = ['page-style-' + style.to_s]
-		if @@no_banner
-			classes << 'no-banner'
-		end
+		#if @@no_banner
+		#	classes << 'no-banner'
+		#end
 		if ThereAreTranslationsOnThisPage?
 			classes << 'has-translations'
 		end
+		if !@@has_content
+			classes << 'no-content'
+		end
+		if @@banner_image
+			classes << 'has-banner-image'
+		end
+
 		if params[:controller]
 			classes << params[:controller]
 
@@ -148,19 +217,13 @@ module ApplicationHelper
 	def _do_translate(key, vars, behavior, behavior_size, locale)
 		translation = {'key' => key, 'lang' => '0', 'vars' => vars}
 		v = vars.dup
-		#locale ||= I18n.locale
 		begin
 			v[:raise] = true
-			#v[:locale] = locale.to_sym
-			#v[:fallback] = false
-			#puts "\nSTART\n"
 			options = {:raise => true}
 			if locale
 				options[:locale] = locale.to_sym
 			end
-			#puts "\n#{options.to_json.to_s}\n"
 			translation['untranslated'] = I18n.translate(key, v, options)
-			#puts "\nEND\n"
 			translation['lang'] = locale.to_s
 			translation['is_translated'] = true
 
@@ -168,16 +231,9 @@ module ApplicationHelper
 			translations = Translation.where(["locale = ? AND key LIKE ?", locale.to_s, key + '%']).take(6).each { |o| hash[o.key] = o.value }
 			translation['translated'] = hash.to_json.gsub('"', '&quot;')
 		rescue I18n::MissingTranslationData
-			#begin
-			#translation['untranslated'] = I18n.translate!(config.i18n.default_locale, key, vars)
-			#translation['lang'] = config.i18n.default_locale.to_s
-			#rescue
-			#puts "BEHAVIOR:\t#{behavior.to_s}"
 			default_translation = I18n::MissingTranslationExceptionHandler.note(key, behavior, behavior_size)
 			translation['untranslated'] = default_translation
-			#end
 		end
-		puts "TRANSLATION:\t#{translation.to_json.to_s}"
 		return translation
 	end
 
@@ -238,7 +294,7 @@ module ApplicationHelper
 				link_html = link_to func.to_s.gsub(/_path$/, ''), args ? self.send(func, args) : self.send(func), :class => c
 			else
 				#x
-				link_html = link_to tab, link || object, :class => c
+				#link_html = link_to tab, link || object, :class => c
 			end
 			tab_list += link_html
 		end
@@ -308,7 +364,23 @@ module ApplicationHelper
 	end
 
 	def p(object, attribute)
-		('<p>' + object.send(attribute.to_s).strip.gsub(/\s*\n+\s*/, '</p><p>') + '</p>').html_safe
+		content = object.send(attribute.to_s)
+		result = ''
+		if content =~ /<(p|span|h\d|div)[^>]*>/
+			result = content.gsub(/\s*(style|class|id|width|height|font)=\".*?\"/, '')
+				.gsub(/&nbsp;/, ' ')
+				.gsub(/<(\/)?\s*h\d\s*>/, '<\1h3>')
+				.gsub(/<p>(.*?)<br\s\/?>\s*(<br\s\/?>)+/, '<p>\1</p><p>')
+				.gsub(/<span[^>]*>\s*(.*?)\s*<\/span>/, '\1')
+				.gsub(/<p>\s*<\/p>/, '')
+				.gsub(/<(\/)?div>/, '<\1p>')
+			if !(result =~ /<p[^>]*>/)
+				result = '<p>' + result + '</p>'
+			end
+		else
+			result = '<p>' + content.strip.gsub(/\s*\n+\s*/, '</p><p>') + '</p>'
+		end
+		result.html_safe
 	end
 
 	def form_field(f, response = nil)
@@ -365,6 +437,59 @@ module ApplicationHelper
 		else
 			request.location
 		end
+	end
+
+	def hash_to_html_attributes(hash, prefix = '')
+		attributes = ''
+		if hash
+			hash.each { |k,v|
+				k = k.to_s
+				if v
+					if v.is_a?(Hash)
+						attributes += hash_to_html_attributes(v, 'data-')
+					else
+						attributes += " #{k}=\"" + (v.is_a?(Array) ? v.join(' ') : v) + '"'
+					end
+				end
+			}
+		end
+		attributes
+	end
+
+	def icon(id, attributes = nil)
+		('<svg' + hash_to_html_attributes(attributes) + '><use xlink:href="/assets/icons.svg#bb-icon-' + id + '"></use></svg>').html_safe
+	end
+
+	def static_map(location, zoom, width, height)
+		require 'fileutils'
+		local_file_name = "#{location}-#{width}x#{height}z#{zoom}.png"
+		file = File.join("public", "maps/#{local_file_name}")
+		FileUtils.mkdir_p("public/maps") unless File.directory?("public/maps")
+		if !File.exist?(file)
+			url = "https://maps.googleapis.com/maps/api/staticmap?center=#{location}&zoom=#{zoom}&size=#{width}x#{height}&maptype=roadmap&markers=size:small%7C#{location}&key=AIzaSyAH7U8xUUb8IwDPy1wWuYGprzxf4E1Jj4o"
+			require 'open-uri'
+			open(file, 'wb') do |f|
+				f << open(url).read
+			end
+		end
+		
+		cdn("/maps/#{local_file_name}")
+	end
+
+	def cdn(file)
+		(Rails.application.config.action_controller.asset_host || '') + file
+	end
+
+	def is_production?
+		Rails.env == 'production'
+	end
+
+	def subdomain
+		request.env['SERVER_NAME'].gsub(/^(\w+)\..*$/, '\1')
+	end
+
+	def is_test_server?
+		subdomain == 'test'
 	end
 
 	private

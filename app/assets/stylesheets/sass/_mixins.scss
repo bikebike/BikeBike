@@ -1,0 +1,11 @@
+@mixin breakpoint($query) {
+	@if $query == small {
+		@media #{$small-only} { @content; }
+	} @else if $query == medium {
+		@media #{$medium-up} { @content; }
+	} @else if $query == large {
+		@media #{$large-up} { @content; }
+	} @else {
+		@media #{$query} { @content; }
+	}
+}

@@ -1,41 +1,21 @@
-%h1 Listing organizations
+- title _'page.Organizations'
+- description 'Bike!Bike! list of DIY bicycle collectives, co-ops, coops, community bike projects, advocacy by country, state, provice, and city'
+- banner_image '/assets/orgs.jpg'
+- page_style :list
+- content_for :banner do
+	.row
+		.columns
+			%h1=_'page.Organizations'
 
-%table
-  %tr
-    %th Name
-    %th Slug
-    %th Email address
-    %th Url
-    %th Year founded
-    %th Info
-    %th Logo
-    %th Avatar
-    %th Requires approval
-    %th Secret question
-    %th Secret answer
-    %th User organization replationship
-    %th
-    %th
-    %th
-
-  - @organizations.each do |organization|
-    %tr
-      %td= organization.name
-      %td= organization.slug
-      %td= organization.email_address
-      %td= organization.url
-      %td= organization.year_founded
-      %td= organization.info
-      %td= organization.logo
-      %td= organization.avatar
-      %td= organization.requires_approval
-      %td= organization.secret_question
-      %td= organization.secret_answer
-      %td= organization.user_organization_replationship_id
-      %td= link_to 'Show', organization
-      %td= link_to 'Edit', edit_organization_path(organization)
-      %td= link_to 'Destroy', organization, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Organization', new_organization_path
+- @organizations.sort_by{|k,v|k}.each do |country,territories|
+	%h2=country
+	- territories.sort_by{|k,v|k.to_s}.each do |territory,cities|
+		- if territory.is_a? String
+			%h3=territory
+		- cities.sort_by{|k,v|k}.each do |city,organizations|
+			%ul.small-block-grid-1.medium-block-grid-2.large-block-grid-3.org-list.preview-list
+				%li.city
+					%figure{:style => "background-image: url('" + static_map(CGI::escape(city+' '+country), 4, 600, 300) + "');"}
+						%h4=city
+					- organizations.each do |organization|
+						%li=render 'preview', :organization => organization

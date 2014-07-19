@@ -1,18 +1,25 @@
-- page_style 'organization'
-- banner_image @organization.cover_url
+- territory = Carmen::Country.coded(@organization.locations[0].country).subregions.coded(@organization.locations[0].territory)
+- location_name = @organization.locations[0].city + (territory ? ' ' + territory.name : '') + ', ' + Carmen::Country.coded(@organization.locations[0].country).name
+
+- title @organization.name + ' (' + location_name + ')'
+- description "#{@organization.name} is a bicycle collective, co-op, community bike project, or advocacy group in #{location_name}"
+- banner_image @organization.cover_url, id: @organization.cover_attribution_id, name: @organization.cover_attribution_name, user_id: @organization.cover_attribution_user_id, src: @organization.cover_attribution_src
+- page_style 'article'
 - content_for :banner do
-	.row
-		.columns.medium-6.info
-			%h1=@organization.name
-			%h2=@organization.locations[0].city + (@organization.locations[0].territory ? ' ' + @organization.locations[0].territory : '') + ', ' + Carmen::Country.coded(@organization.locations[0].country).name
-		.columns.medium-6
+	.row{:class => (@organization.avatar.is_landscape? ? 'landscape' : 'portrait')}
+		.columns{:class => (@organization.avatar.is_landscape? ? nil : ['medium-6', 'medium-push-6'])}
 			%figure
-				= image_tag(@organization.avatar_url)
+				= image_tag(@organization.avatar.url)
+		.columns.info{:class => (@organization.avatar.is_landscape? ? nil : ['medium-6', 'medium-pull-6'])}
+			%h1=@organization.name
+			- territory = Carmen::Country.coded(@organization.locations[0].country).subregions.coded(@organization.locations[0].territory)
+			%h2=location_name
 
 %p#notice= notice
 
 = tabs!
 
-.row
-	.columns
+%article.row
+	.columns.large-10
+		%h2=('About '+@organization.name)
 		=p @organization, :info

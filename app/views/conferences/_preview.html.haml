@@ -1,0 +1,5 @@
+= link_to ('/conferences/' + conference.conference_type.slug + '/' + conference.slug) do
+	%h5
+		= conference.title
+	%figure.conference-preview.preview-tile{:style => (conference.cover? ? ('background-image: url(' + conference.cover.preview.url + ')') : nil)}
+		= image_tag conference.poster.preview.url
