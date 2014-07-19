@@ -93,6 +93,7 @@ module BikeBikeFormHelper
 	end
 
 	def country_select_tag(name, value, options={})
+		#options[:no_wrapper] = true
 		render_field(name, options = get_options(name, options), super(name, value, options), value)
 	end
 
@@ -292,7 +293,8 @@ module BikeBikeFormHelper
 		end
 
 		def render_field(type, name, options, html, value = nil)
-			if (options.has_key?(:no_wrapper) && options[:no_wrapper]) || options['type'] == 'hidden'
+			options.symbolize_keys!
+			if (options.has_key?(:no_wrapper) && options[:no_wrapper]) || /country/.match(name.to_s) && /^subregion_select/.match(type.to_s) || options[:type] == 'hidden'
 				return html
 			end
 
@@ -306,7 +308,7 @@ module BikeBikeFormHelper
 			template = template_exists?(type) ? type : 'default'
 			params[:label_template] = options[:label] === false ? nil : get_label_template(type, options)
 			params[:label_position] = options[:label] === false ? :none : label_position(type, options)
-			
+
 			render(template, params)
 		end
 

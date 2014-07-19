@@ -1,0 +1,34 @@
+%h3=_'registration.questions.title','Conference Participant Information'
+.columns.medium-offset-1.end
+	%h4=_'registration.questions.housing','Do you require housing?'
+	%p.help=_'registration.questions.housing.help','We will do our best to accommodate everyone but we will be working on a first come, first serve basis. If we cannot accommodate your needs, we will do our best to let you know ahead of time.'
+.columns.medium-8.medium-offset-2.end
+	= select_tag '[questions][housing]', options_for_select(@housing_options, session[:registration][:questions][:housing])
+	%h5=_'registration.questions.housing_extra.title','Any else we should keep in mind?'
+	= text_area_tag '[questions][housing_extra]', session[:registration][:questions][:housing_extra], :label => false
+
+.columns.medium-offset-1.end
+	%h4=_'registration.questions.loaner_bike','Do you want to borrow a bike?'
+	%p.help=_'registration.questions.loaner_bike.help','Again, we will do our best to find you a suitable bike but it\'s on a first come, first serve basis.'
+.columns.medium-8.medium-offset-2.end
+	= select_tag '[questions][loaner_bike]', options_for_select(@loaner_bike_options, session[:registration][:questions][:loaner_bike])
+
+.columns.medium-offset-1.end
+	%h4=_'registration.questions.diet','We\'ll be serving some food. Do you have any dietary restrictions?'
+.columns.medium-8.medium-offset-2.end
+	= check_box_tag '[questions][diet][no_meat]', session[:registration][:questions][:diet][:no_meat]
+	= check_box_tag '[questions][diet][no_dairy]', session[:registration][:questions][:diet][:no_dairy]
+	= check_box_tag '[questions][diet][no_animal_products]', session[:registration][:questions][:diet][:no_animal_products]
+	= check_box_tag '[questions][diet][no_gluten]', session[:registration][:questions][:diet][:no_gluten]
+	= check_box_tag '[questions][diet][no_nuts]', session[:registration][:questions][:diet][:no_nuts]
+	%h5=_'registration.questions.diet_extra.title','Anything else?'
+	= text_area_tag '[questions][diet][diet_extra]', session[:registration][:questions][:diet_extra], :label => false
+.columns.medium-offset-1.end
+	%h4=_'registration.questions.workshop','Would you ilke to host a workshop?'
+	%p.help=_'registration.questions.workshop.help','Did you have an idea for a workshop that you\d like to help run? If so, we\'ll ask some follow-up questions on the following page.'
+.columns.medium-8.medium-offset-2.end
+	= select_tag :is_workshop_host, options_for_select({(_'Yes') => 1, (_'No') => 0}, session[:registration][:is_workshop_host] || 0)
+.columns.medium-offset-1.end
+	%h4=_'registration.questions.other','Anything else we should know about your visit?'
+.columns.medium-8.medium-offset-2.end
+	= text_area_tag '[questions][other]', session[:registration][:questions][:other], :label => false

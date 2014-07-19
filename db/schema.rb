@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140714013645) do
+ActiveRecord::Schema.define(version: 20140716002152) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,8 @@ ActiveRecord::Schema.define(version: 20140714013645) do
     t.boolean  "is_confirmed"
     t.boolean  "is_participant"
     t.boolean  "is_volunteer"
+    t.string   "confirmation_token"
+    t.binary   "data"
   end
 
   create_table "conference_types", force: true do |t|

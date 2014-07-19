@@ -1,0 +1,37 @@
+- workshop_index = session[:registration][:workshop_index]
+= hidden_field_tag :workshop_index, workshop_index
+- if session[:registration][:workshop].length > 1
+	%h3=_'registration.workshop.list.title','Your Workshops'
+	%ul.columns.medium-10.medium-offset-1
+		- session[:registration][:workshop].each_with_index do |workshop, index|
+			- if workshop[:title]
+				%li
+					- if index == workshop_index
+						%strong=workshop[:title]
+					- else
+						= workshop[:title]
+%h3=_'registration.workshop.title','Workshop Information'
+.columns.medium-10.medium-offset-1= text_field_tag :workshop_title, session[:registration][:workshop][workshop_index][:title], :required => true
+.columns.medium-10.medium-offset-1= text_area_tag :workshop_info, session[:registration][:workshop][workshop_index][:info], :required => true, :data => {:editor => ""}
+.columns.medium-5.medium-offset-1
+	%h4=_'registration.workshop.streams.title','Stream'
+	%p.help=_'registration.workshop.streams.help','Select the stream that best categorizes your workshop'
+	- streams = Hash.new
+	- streams[_'workshop_stream.select_one','Select a stream'] = ''
+	- WorkshopStream.all.each do |stream|
+		- streams[_'workshop_stream.' + stream.slug] = stream.slug
+	= select_tag :workshop_stream, options_for_select(streams, session[:registration][:workshop][workshop_index][:stream] || '')
+.columns.medium-5.end
+	%h4=_'registration.workshop.styles.title','Presentation Style'
+	%p.help=_'registration.workshop.styles.help','Select the style that best describes how you will run your workshop'
+	- styles = Hash.new
+	- styles[_'workshop_presentation_style.select_one','Select a style'] = ''
+	- WorkshopPresentationStyle.all.each do |style|
+		- styles[_'workshop_presentation_style.' + style.slug] = style.slug
+	= select_tag :workshop_presentation_style, options_for_select(styles, session[:registration][:workshop][workshop_index][:presentation_style] || '')
+.columns.medium-10.medium-offset-1
+	- #xx
+	= check_box_tag :add_another_workshop, "1", (workshop_index < session[:registration][:workshop].length - 1)
+
+- content_for :footer_scripts do
+= javascript_include_tag 'editor'

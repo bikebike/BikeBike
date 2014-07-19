@@ -37,7 +37,7 @@ module I18n
 			when 't', 'title'
 				return (Forgery::LoremIpsum.sentences 1, options).capitalize
 			end
-			return nil
+			return method
 		end
 
 		def self.note(key, behavior = nil, behavior_size = nil)

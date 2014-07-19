@@ -5,13 +5,22 @@
 - description "#{@conference.title} conference in #{location_name} for DIY bicycle collectives, co-ops, and advocacy groups"
 = render 'header'
 
-= tabs!
+=# tabs!
 
 %article.row
 	.columns.large-10
 		- if @register_step
 			%h2='Register!'
-			= @register_content.html_safe
+			- if @actions
+				= form_tag (@conference.url + '/register/').gsub(/\/\/+/, '/'), :method => :post do
+					= hidden_field_tag :step, @register_step
+					- if @error_message
+						.columns.medium-8.medium-centered
+							%p.error=@error_message
+					= render @register_template
+					.columns= form_actions @actions
+			- else
+				= render @register_template
 		- else
 			%h2=('About '+@conference.title)
 			=p @conference, :info

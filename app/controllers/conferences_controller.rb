@@ -115,47 +115,245 @@ class ConferencesController < ApplicationController
 		next_step = nil
 		if !session[:registration]
 			session[:registration] = Hash.new
+			session[:registration][:path] = Array.new
 		end
 		case params['step']
 			when 'register'
 				session[:registration][:email] = params[:email]
-				user = User.find_by(:email => params[:email]) || User.new(:email => params[:email], :role => 'unverified')
-				registration = ConferenceRegistration.new(:conference_id => @conference.id, :is_attending => 'yes', :is_participant => params[:is_participant], :is_volunteer => params[:is_volunteer])
-				session[:registration][:user] = user
+				user = User.find_by(:email => params[:email])
+				#registration = ConferenceRegistration.new(:conference_id => @conference.id, :is_attending => 'yes', :is_participant => params[:is_participant], :is_volunteer => params[:is_volunteer])
+				session[:registration][:user] = Hash.new
+				session[:registration][:organizations] = Array.new
+				session[:registration][:user][:id] = user ? user.id : nil
+				if user
+					user.organizations.each { |org| session[:registration][:organizations] << org.id }
+				end
+				session[:registration][:user][:firstname] = user ? (user.firstname || user.username) : nil
+				session[:registration][:user][:lastname] = user ? user.lastname : nil
+				session[:registration][:user][:username] = user ? user.username : nil
 				next_step = 'primary'
 			when 'primary'
-				next_step = user.organizations.length > 0 ? 'questions' : 'organizations'
-				session[:registration][:user].firstname = params[:firstname]
-				session[:registration][:user].firstname = params[:lastname]
-				if !session[:registration][:user].role == 'unverified'
-					session[:registration][:user].username = params[:username]
+				if !params[:firstname] || !params[:lastname]
+					error = _'registration.register.no_name_error','Oh, c\'mon, please tell us your name. We promise not to share it with anyone, we just don\'t want to get you mixed up with someone else.'
+				end
+				session[:registration][:user][:firstname] = params[:firstname]
+				session[:registration][:user][:firstname] = params[:lastname]
+				session[:registration][:is_volunteer] = params[:is_volunteer]
+				session[:registration][:is_participant] = params[:is_participant]
+				if !session[:registration][:user][:id]
+					session[:registration][:user][:username] = params[:username] || (params[:firstname] + ' ' + params[:lastname])
+				end
+
+				if params[:is_volunteer]
+					next_step = 'volunteer_questions'
+				elsif params[:is_participant]
+					next_step = 'organizations'
+				else
+					error = _'registration.register.no_role_error',"Please let us know if you're attending the conference or volunteering (or both)"
+				end
+			when 'organizations'
+				session[:registration][:organizations] = Array.new
+				if params[:org].length > 0
+					params[:org].each { |org| session[:registration][:organizations] << org }
+
+					if params[:add_new_org]
+						session[:registration][:new_organization] ||= Array.new
+						session[:registration][:new_organization][0] ||= Hash.new
+						session[:registration][:new_org_index] = 0
+						if !session[:registration][:new_organization][0][:country]
+							my_location = lookup_ip_location
+							session[:registration][:new_organization][0][:country] = my_location.country_code
+							session[:registration][:new_organization][0][:territory] = my_location.province_code
+							session[:registration][:new_organization][0][:city] = my_location.city
+						end
+						next_step = 'new_organization'
+					else
+						next_step = 'questions'
+					end
+				elsif params[:add_new_org]
+					session[:registration][:questions] ||= Hash.new
+					next_step = 'questions'
+				else
+					error = _'registration.register.no_organization_error',"Please select an organization or enter a new one"
+				end
+			when 'new_organization'
+				if !params[:city]
+					message = _'register.new_organization.no_city_error','Please enter your organization\'s city'
+				end
+				if !params[:street]
+					message = _'register.new_organization.no_street_error','Please enter your organization\'s street address'
+				end
+				if !params[:organization_email]
+					message = _'register.new_organization.no_email_error','Please tell us your organization\'s email address. We need it so that we can send out invitaions for upcoming conferences. No spam, we promise, and you\'ll be able to edit your preferences before we start ending out email.'
+				elsif params[:organization_email].strip.casecmp(session[:registration][:email].strip)
+					message = _'register.new_organization.same_email_as_attendee_error','This email needs to be different than your own personal email, we need to keep in touch with your organization even if you\'re gone in years to come.'
+				end
+				if !params[:name]
+					message = _'register.new_organization.no_name_error','Please tell us your organization\'s name'
+				end
+				i = params[:new_org_index].to_i
+				session[:registration][:new_organization][i][:country] = params[:organization_country]
+				session[:registration][:new_organization][i][:territory] = params[:organization_territory]
+				session[:registration][:new_organization][i][:city] = params[:organization_city]
+				session[:registration][:new_organization][i][:street] = params[:organization_street]
+				session[:registration][:new_organization][i][:info] = params[:organization_info]
+				session[:registration][:new_organization][i][:email] = params[:organization_email]
+				session[:registration][:new_organization][i][:name] = params[:organization_name]
+
+				if params[:organization_logo]
+					if session[:registration][:new_organization][i][:organization_logo]
+						FileUtils.rm session[:registration][:new_organization][i][:organization_logo]
+					end
+					base_dir =  File.join("public", "registration_data")
+					FileUtils.mkdir_p(base_dir) unless File.directory?(base_dir)
+					hash_dir = rand(36**16).to_s(36)
+					dir = File.join(base_dir, hash_dir)
+					while File.directory?(dir)
+						hash_dir = rand(36**16).to_s(36)
+						dir = File.join(base_dir, hash_dir)
+					end
+					FileUtils.mkdir_p(dir)
+					session[:registration][:new_organization][i][:organization_logo] = File.join("registration_data", hash_dir, params[:organization_logo].original_filename)
+					FileUtils.cp params[:organization_logo].tempfile.path, File.join("public", session[:registration][:new_organization][i][:organization_logo])
+				end
+				if params[:add_another_org] && params[:add_another_org].to_sym == :on
+					next_step = 'new_organization'
+					if params[:previous]
+						session[:registration][:new_org_index] = [0, i - 1].max
+					elsif !error
+						session[:registration][:new_org_index] = i + 1
+						session[:registration][:new_organization][i + 1] ||= Hash.new
+						if !session[:registration][:new_organization][i + 1][:country]
+							session[:registration][:new_organization][i + 1][:country] = session[:registration][:new_organization][i][:country]
+							session[:registration][:new_organization][i + 1][:territory] = session[:registration][:new_organization][i][:territory]
+							session[:registration][:new_organization][i + 1][:city] = session[:registration][:new_organization][i][:city]
+						end
+					end
+				else
+					if session[:registration][:new_organization][i + 1]
+						session[:registration][:new_organization] = session[:registration][:new_organization].first(i + 1)
+					end
+					next_step = 'questions'
+				end
+			when 'questions'
+				session[:registration][:questions] = params[:questions].deep_symbolize_keys
+				session[:registration][:is_workshop_host] = params[:is_workshop_host].to_i
+				if !params[:is_workshop_host].to_i.zero?
+					next_step = 'new_workshop'
+					session[:registration][:workshop] ||= Array.new
+					session[:registration][:workshop][0] ||= Hash.new
+					session[:registration][:workshop_index] = 0
+				else
+					next_step = 'submit'
+				end
+			when 'volunteer_questions'
+				session[:registration][:volunteer_questions] = params[:volunteer_questions].deep_symbolize_keys
+				if session[:registration][:is_participant]
+					next_step = 'organizations'
+				else
+					next_step = 'submit'
+				end
+			when 'new_workshop'
+				i = params[:workshop_index].to_i
+				session[:registration][:workshop][i][:title] = params[:workshop_title]
+				session[:registration][:workshop][i][:info] = params[:workshop_info]
+				session[:registration][:workshop][i][:stream] = params[:workshop_stream]
+				session[:registration][:workshop][i][:presentation_style] = params[:workshop_presentation_style]
+
+				if !params[:workshop_info]
+					error = _'registration.register.no_workshop_info_error','Please describe your workshop as best as you can to give other participants an idea of what to expect'
+				end
+
+				if !params[:workshop_title]
+					error = _'registration.register.no_workshop_title_error','Please give your workshop a title'
+				end
+
+				if params[:previous]
+					session[:registration][:workshop_index] = [0, i - 1].max
+				elsif params[:add_another_workshop]
+					next_step = 'new_workshop'
+					if !error
+						session[:registration][:workshop] ||= Array.new
+						session[:registration][:workshop][i + 1] ||= Hash.new
+						session[:registration][:workshop_index] = i + 1
+					end
+				else
+					if session[:registration][:workshop][i + 1]
+						session[:registration][:workshop] = session[:registration][:workshop].first(i + 1)
+					end
+					next_step = 'submit'
+				end
+			when 'submit'
+				UserMailer.conference_registration_email(@conference, session[:registration]).deliver
+				session.delete(:registration)
+				next_step = 'thanks'
+			when 'cancel'
+				if params[:yes]
+					session.delete(:registration)
+					next_step = 'cancelled'
+				else
+					return {error: false, next_step: session[:registration][:path].pop}
 				end
 		end
-		next_step
-		#if next_step
-		#	redirect_to :action => :register, :step => next_step
-		#else
-		#	do_404
-		#end
+		if params[:previous]
+			next_step = session[:registration][:path].pop
+		else
+			if !params[:cancel] && error
+				return {error: true, message: error, next_step: params['step']}
+			end
+			if session[:registration] && params['step']
+				session[:registration][:path] << params['step']
+			end
+		end
+		{error: false, next_step: params[:cancel] ? 'cancel' : next_step}
 	end
 	
 	def register
 		set_conference
-		#template = params['step'] ? "register_#{params['step']}" : 'register'
-		@register_step = request.post? ? register_submit : 'register'
+		data = register_submit
+		@register_step = request.post? ? data[:next_step] : 'register'
+		@error_message = data[:error] ? data[:message] : nil
 		template = (@register_step == 'register' ? '' : 'register_') + @register_step
 		if !File.exists?(Rails.root.join("app", "views", params[:controller], "_#{template}.html.haml"))
 			do_404
 			return
 		end
-		#if params['step'] != true
-		#session[:last_step] = params['step']
-		#end
-		@register_step = template#params['step'] || true
-		@register_content = render_to_string :partial => template
+		if session[:registration]
+			session[:registration][@register_step.to_sym] ||= Hash.new
+		end
+		@actions = nil
+		case @register_step
+			when  'register'
+				@actions = :next
+			when 'primary', 'organizations', 'new_organization', 'new_workshop', 'volunteer_questions'
+				@actions = [:previous, :cancel, :next]
+			when 'submit'
+				@actions = [:previous, :cancel, :submit]
+			when 'cancel'
+				@actions = [:no, :yes]
+			when 'questions'
+				@actions = [:previous, :cancel, :next]
+				@housing_options = {
+					'I will fend for myself thanks' => 'none',
+					'I will need a real bed' => 'bed',
+					'A couch or floor space will be fine' => 'couch',
+					'All I need is a backyard' => 'camp'
+				}
+				session[:registration][:questions][:housing] ||= 'couch'
+				@loaner_bike_options = {
+					'No' => 'no',
+					'Yes' => 'medium',
+					'Yes but a small one please' => 'small',
+					'Yes but a large one please' => 'large'
+				}
+				session[:registration][:questions][:loaner_bike] ||= 'medium'
+				session[:registration][:questions][:diet] ||= Hash.new
+		end
 		if request.xhr?
+			@register_content = render_to_string :partial => template
 			render :json => {status: 200, html: @register_content}
 		else
+			@register_template = template
 			render 'show'
 		end
 	end

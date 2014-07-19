@@ -431,6 +431,14 @@ module ApplicationHelper
 		_(*a)
 	end
 
+	def lookup_ip
+		if request.remote_ip == '127.0.0.1'
+			session['remote_ip'] || (session['remote_ip'] = open("http://checkip.dyndns.org").first.gsub(/^.*\s([\d\.]+).*$/s, '\1').gsub(/[^\.\d]/, ''))
+		else
+			request.remote_ip
+		end
+	end
+
 	def lookup_ip_location
 		if request.remote_ip == '127.0.0.1'
 			Geocoder.search(session['remote_ip'] || (session['remote_ip'] = open("http://checkip.dyndns.org").first.gsub(/^.*\s([\d\.]+).*$/s, '\1').gsub(/[^\.\d]/, ''))).first
@@ -490,6 +498,11 @@ module ApplicationHelper
 
 	def is_test_server?
 		subdomain == 'test'
+	end
+
+	def location(location)
+		territory = Carmen::Country.coded(location.country).subregions.coded(location.territory)
+		location.city + (territory ? ' ' + territory.name : '') + ', ' + Carmen::Country.coded(location.country).name
 	end
 
 	private

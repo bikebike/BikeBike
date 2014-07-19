@@ -70,6 +70,6 @@ platforms 'mswin', 'mingw' do
 	end
 
 	group :staging, :production do
-		gem 'unicorn'
+		gem 'unicorn' if !(RbConfig::CONFIG['target_os'] =~ /mswin|mingw|cygwin/i)
 	end
 end

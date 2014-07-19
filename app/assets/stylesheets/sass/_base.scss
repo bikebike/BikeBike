@@ -286,6 +286,116 @@ ul.tags,
 	}
 }
 
+.org-mini-preview {
+	position: relative;
+	overflow: auto;
+	margin: 0;
+	background-color: $gray;
+	border: 0.25em solid lighten($black, 33);
+
+	&.portrait {
+		img {
+			float: left;
+			max-width: 50%;
+		}
+
+		figcaption {
+			float: right;
+			max-width: 50%;
+		}
+	}
+
+	p {
+		font-size: 0.9em;
+		line-height: 1.25em;
+	}
+
+	figcaption {
+		padding: 0.25em
+	}
+}
+
+.org-list-select {
+
+	&.chosen {
+		display: none;
+	}
+
+	ul {
+		list-style: none;
+		margin: 0;
+		overflow: auto;
+		height: 25em;
+		border: 0.25em solid $gray;
+	}
+
+	li {
+		background-color: lighten($gray, 5);//rgba(225, 225, 225, 0.5);
+		margin: 0.25em;
+
+		&:hover {
+			background-color: lighten($color-4, 25);//desaturate(lighten($organization-color, 33), 33);
+		}
+
+		&.removable:hover {
+			background-color: desaturate(lighten($color-3, 16), 16);
+		}
+		
+		&.selected {
+			background-color: desaturate(lighten($organization-color, 33), 33);
+		}
+
+		&.not-found {
+			display: none;
+		}
+	}
+
+	figure {
+		margin: 0;
+		padding: 0.25em;
+		overflow: auto;
+	}
+
+	img {
+		float: left;
+		margin-right: 1em;
+	}
+
+	h6 {
+		margin: 0;
+	}
+
+	p {
+		font-size: 0.8em;
+		margin: 0;
+	}
+
+	figcaption {
+		overflow: auto;
+	}
+
+	@include breakpoint(medium) {
+		&.chosen {
+			display: block;
+		}
+
+		&.choose {
+			li.selected {
+				display: none;
+			}
+		}
+	}
+}
+
+#org-filter {
+	width: 100%;
+	font-size: 1.25em;
+	padding: 0.333em;
+	border: 3px solid $gray;
+	margin-top: 0.5em;
+	outline: none !important;
+}
+
 @include breakpoint(medium) {
 	.organizations-index,
 	.conferences-index {

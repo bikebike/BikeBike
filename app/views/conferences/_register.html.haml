@@ -1,4 +1,1 @@
-= form_tag (@conference.url + '/register/').gsub(/\/\/+/, '/'), :method => :post do
-	= hidden_field_tag :step, @register_step
-	= email_field_tag :email
-	= form_actions :next
+= email_field_tag :email, session[:registration][:email]

@@ -49,6 +49,28 @@
 			color: $article-color;
 		}
 	}
+	
+	&[id*="previous"],
+	&.less,
+	&.arrow-l {
+		&:before {
+			content: '\f053';
+			font-family: $icons;
+			vertical-align: middle;
+			margin-right: 0.25em;
+		}
+	}
+
+	&[id*="next"],
+	&.more,
+	&.arrow-r {
+		&:after {
+			content: '\f054';
+			font-family: $icons;
+			vertical-align: middle;
+			margin-left: 0.25em;
+		}
+	}
 }
 
 input[type="file"] {
@@ -159,9 +181,9 @@ fieldset {
 		font-size: 1.25em;
 	}
 
-	&.text-area {
+	&.text-area-field {
 		label {
-			top: 1px;
+			/*top: 1px;
 			right: 1px;
 			bottom: 1px;
 			left: 1px;
@@ -173,10 +195,15 @@ fieldset {
 			background-color: rgba(255, 255, 255, 0.5);
 			text-align: center;
 			width: calc(100% - 2px);
-			height: calc(100% - 2px);
+			height: calc(100% - 2px);*/
+			position: static;
+			background-color: #252528;
+			margin-top: 1em;
 
 			span {
-				position: relative;
+				background-color: inherit;
+				color: $white;
+				/*position: relative;
 				top: 50%;
 				text-align: center;
 				font-size: 1.25em;
@@ -185,8 +212,12 @@ fieldset {
 				padding: 0 0.5em;
 				display: inline-block;
 				border-radius: 0.5em;
-				box-shadow: 0 0 1em;
+				box-shadow: 0 0 1em;*/
 			}
+		}
+
+		.froala-element {
+			min-height: 10em;
 		}
 
 		textarea:focus + label {
@@ -250,6 +281,8 @@ fieldset {
 	}
 
 	&.check-box-field {
+		margin-bottom: 0;
+
 		div {
 			float: left;
 			font-size: 1.75em;
@@ -272,6 +305,11 @@ fieldset {
 				content: '✓';
 			}*/
 		}
+
+		input {
+			margin: 0;
+		}
+
 		label {
 			position: relative;
 			margin: 0;
@@ -563,4 +601,27 @@ article {
 	p {
 		font-size: 1.4rem;
 	}
+}
+.error {
+	position: relative;
+	padding: 0.5em 1em;
+	background-color: $warning-color;
+
+	&:before {
+		content: '!';
+		position: absolute;
+		font-family: $header-font-family;
+		background-color: $alert-color;
+		color: $white;
+		font-size: 2em;
+		line-height: 1em;
+		width: 1em;
+		text-align: center;
+		border-radius: 50%;
+		right: -0.333em;
+		top: -0.333em;
+	}
+}
+p.help {
+	font-size: 1.1em;
 }

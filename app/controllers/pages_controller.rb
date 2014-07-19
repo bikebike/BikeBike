@@ -1,6 +1,7 @@
 include ApplicationHelper
 
 class PagesController < ApplicationController
+    protect_from_forgery :except => :location_territories
 	#skip_before_filter :verify_authenticity_token, only: [:translate]
 
 	def home
@@ -49,7 +50,10 @@ class PagesController < ApplicationController
 	def location_territories
 		#render json: (Carmen:::RegionCollection.new(Carmen::Country.coded(params[:country])) || []).to_json
 		territories = {}
-		Carmen::Country.coded(params[:country]).subregions.each { |t| territories[t.code] = t.name }
+		country = Carmen::Country.coded(params[:country])
+        if country
+            country.subregions.each { |t| territories[t.code] = t.name }
+        end
 		render json: territories.to_json
 	end
 

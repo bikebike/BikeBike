@@ -36,7 +36,7 @@
 		.columns.medium-4.centered.align-bottom
 			%div
 				- if @conference.registration_open
-					%a.button{href: @conference.url(:register)}
+					%a.button.arrow-r{href: @conference.url(:register)}
 						=_'conference.Register_Now'
 				- if params['controller'] != 'conferences'
 					%a.button.more{href: @conference.url}

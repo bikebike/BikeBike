@@ -12,6 +12,18 @@ class Organization < ActiveRecord::Base
 	accepts_nested_attributes_for :locations, :reject_if => proc {|l| l[id].blank?}
 	accepts_nested_attributes_for :user_organization_relationships, :reject_if => proc {|u| u[:user_id].blank?}, :allow_destroy => true
 
+	def location
+		locations.first
+	end
+
+	def longitude
+		location.longitude
+	end
+
+	def latitude
+		location.latitude
+	end
+
 	def to_param
 		slug
 	end

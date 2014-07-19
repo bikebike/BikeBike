@@ -406,6 +406,7 @@ main {
 		+ em {
 			display: block;
 			color: $color-5;
+			font-weight: 600;
 			margin-bottom: 1em;
 		}
 	}
@@ -428,11 +429,13 @@ main {
 
 			figure {
 				margin: 2em 0 0;
-
-				img {
-					box-shadow: 0 0 2em $black;
-				}
 			}
+		}
+	}
+
+	.page-style-emphasize-banner & {
+		figure img {
+			box-shadow: 0 0 2em $black;
 		}
 	}
 

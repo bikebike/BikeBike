@@ -14,7 +14,7 @@ BikeBike::Application.routes.draw do
             #resources :workshops, :param => 'slug'
 			#get :register, :param => 'step'
             #post 'register/next' => 'conferences#register_submit'
-            # match 'register(/:step)' => 'conferences#register', via: [:get, :post]
+            match 'register(/:step)' => 'conferences#register', via: [:get, :post]
             #patch 'register/step/:step' => 'conferences#register_step'
 			#resources :registrations, :path => 'registration' do
 			#	get :form, on: :collection

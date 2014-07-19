@@ -1,0 +1,6 @@
+= link_to organization do
+	%figure.org-mini-preview{:class => (organization.avatar.is_landscape? ? 'landscape' : 'portrait')}
+		= image_tag organization.avatar.preview.url
+		%figcaption
+			%h5= organization.name
+			%p= location(organization.locations[0])

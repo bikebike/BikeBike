@@ -1,0 +1,83 @@
+%h3
+	=_'register.organizations.title','Who do you Represent?'
+%p=_'register.organizations.description','Please let us know where you\'re coming from! Find your organizations on the right, they are listed by how close they are to you right now.'
+.columns.medium-6.medium-push-6
+	.org-list-select.choose
+		%h4=_'all_organizations','All Organizations'
+		%ul
+			- my_location = lookup_ip_location
+			- lids = Location.near(my_location.latitude.to_s+', '+my_location.longitude.to_s, 999999, order: 'distance').map{|l|l.id}
+			- orgs = Hash.new
+			-# orgs = Organization.joins(:locations_organization).where('locations_organizations.location_id' => lids)
+			-# orgs.each do |org|
+			- lids.each do |lid|
+				- org = Organization.joins(:locations_organization).where('locations_organizations.location_id' => lid).first
+				- if org && !orgs.has_key?(org.id)
+					- orgs[org.id] = org.id
+					%li{class: 'available', data: {id: org.id}}
+						%a{href: '#'}
+							%figure
+								= image_tag org.avatar.icon.url
+								%figcaption
+									%h6= org.name
+									%p= location(org.locations[0])
+		%input#org-filter{placeholder: (_'orgnizations_filter.placeholder','Filter by typing text here...')}
+.columns.medium-6.medium-pull-6
+	.org-list-select.chosen
+		%h4=_'my_organizations','My Organizations'
+		%ul
+			- session[:registration][:organizations].each do |org_id|
+				- org = Organization.find(org_id.is_a?(Array) ? org_id.first : org_id)
+				%li.removable
+					%a{href: '#'}
+						%figure
+							= image_tag org.avatar.icon.url
+							%figcaption
+								%h6= org.name
+								%p= location(org.locations[0])
+					%input{type: 'hidden', name: "org[#{org.id}]", value: "#{org.id}"}
+	= check_box_tag :add_new_org
+	= check_box_tag :no_org
+
+- content_for :dom_ready do
+	:plain
+		update_orgs();
+		$('#org-filter').keyup(function(){
+			var $this=$(this), search = $this.val().toLowerCase(), terms = search.split(/\s+/);
+			if (search) {
+				$('.org-list-select.choose li').each(function() {
+					var $li = $(this), content = $li.find('h6').html().toLowerCase() + '\n' + $li.find('p').html().toLowerCase(), found = true;
+					for (i = 0; i < terms.length && found; i++) {
+						found = (content.indexOf(terms[i]) >= 0);
+					}
+					$li.removeClass('not-found');
+					if (!found) {
+						$li.addClass('not-found');
+					}
+				});
+			} else {
+				$('.org-list-select.choose li').removeClass('not-found');
+			}
+		});
+		$('.org-list-select').on('click', 'li a', function(e){e.preventDefault();
+			var $li = $(this).parent().clone();
+			if ($li.hasClass('selected')) {
+				$('.org-list-select.chosen li input[value="' + $li.data().id + '"]').parent().remove();
+			} else if ($li.hasClass('available')) {
+				$li.attr('class', 'removable').append('<input type="hidden" name="org[' + $li.data().id + ']" value="' + $li.data().id + '" />');
+				$('.org-list-select.chosen ul').append($li);
+			} else if ($li.hasClass('removable')) {
+				$(this).parent().remove();
+			}
+			update_orgs();
+		});
+
+- content_for :scripts do
+	:plain
+		function update_orgs() {
+			$('.field-no-org').toggle($('.org-list-select.chosen li').length <= 0);
+			$('.org-list-select.choose li.selected').removeClass('selected');
+			$('.org-list-select.chosen li input').each(function() {
+				$('.org-list-select.choose li[data-id="' + $(this).val() + '"]').addClass('selected');
+			});
+		}

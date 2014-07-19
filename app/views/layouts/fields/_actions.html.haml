@@ -4,5 +4,5 @@
 			%a.facebook-sign-in.button{href: '/oauth/facebook'}
 				= _ action.to_s			
 		- else
-			%button{id: action.to_s, name: action.to_s, type: 'submit'}
+			%button{id: action.to_s, name: action.to_s, type: 'submit', formnovalidate: ([:cancel, :previous].include? action.to_sym)}
 				= _ action.to_s

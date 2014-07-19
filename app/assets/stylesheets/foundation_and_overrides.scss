@@ -40,6 +40,7 @@
 //$header-font-family: 'alte_haas_groteskbold', 'Alte Haas Grotesk', sans-serif;//join("Open Sans", $body-font-family);
 $header-font-family: 'AlteHaasGroteskBold', sans-serif;//join("Open Sans", $body-font-family);
 $header-font-weight: bold;
+$icons: FontAwesome;//join("Open Sans", $body-font-family);
 // $header-font-style: normal;
 // $header-font-color: #222;
 // $header-line-height: 1.4;
@@ -80,9 +81,9 @@ $body-font-family: 'Source Sans Pro', sans-serif;
 
 $primary-color:		$color-1;
 $secondary-color:	$color-2;
-$alert-color:		$color-4;
+$alert-color:		$color-3;
 $success-color:		$color-2;
-$warning-color:		$color-3;
+$warning-color:		$color-4;
 $info-color:		$color-5;
 
 // We use these to make sure border radius matches unless we want it different.
