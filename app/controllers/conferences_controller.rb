@@ -525,8 +525,8 @@ class ConferencesController < ApplicationController
 			)
 			response = request.setup(
 				payment_request,
-				host + (@conference.url + "/register/confirm-payment/#{@conference_registration.payment_confirmation_token}/").gsub(/\/\/+/, '/'),
-				host + (@conference.url + "/register/cancel-payment/#{@conference_registration.confirmation_token}/").gsub(/\/\/+/, '/')
+				host + @conference.url,
+				host + @conference.url
 			)
 			redirect_to response.redirect_uri
 		else
