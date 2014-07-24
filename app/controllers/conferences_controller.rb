@@ -506,6 +506,29 @@ class ConferencesController < ApplicationController
 					ddd
 				end
 			end
+		elsif params[:test] == '1'
+			paypal_info = get_secure_info(:paypal)
+			request = Paypal::Express::Request.new(
+				:username   => paypal_info[:username].strip!,
+				:password   => paypal_info[:password].strip!,
+				:signature  => paypal_info[:signature].strip!
+			)
+			payment_request = Paypal::Payment::Request.new(
+				:currency_code => 'USD',   # if nil, PayPal use USD as default
+				:description   => 'Conference Registration Test',    # item description
+				:quantity      => 1,      # item quantity
+				:amount        => 1.0,   # item value
+				:custom_fields => {
+					CARTBORDERCOLOR: "00ADEF",
+					LOGOIMG: "https://cdn.bikebike.org/assets/bblogo.png"
+				}
+			)
+			response = request.setup(
+				payment_request,
+				host + (@conference.url + "/register/confirm-payment/#{@conference_registration.payment_confirmation_token}/").gsub(/\/\/+/, '/'),
+				host + (@conference.url + "/register/cancel-payment/#{@conference_registration.confirmation_token}/").gsub(/\/\/+/, '/')
+			)
+			redirect_to response.redirect_uri
 		else
 			do_404
 		end
