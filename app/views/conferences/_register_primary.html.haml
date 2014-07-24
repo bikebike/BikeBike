@@ -6,5 +6,5 @@
 .columns
 	%h3=_'registration.primary.role_title','Attending as:'
 .columns.small-offset-1
-	= check_box_tag :is_participant, session[:registration][:is_participant]
-	= check_box_tag :is_volunteer, session[:registration][:is_volunteer]
+	= check_box_tag :is_participant, 'true', session[:registration][:is_participant]
+	= check_box_tag :is_volunteer, 'true', session[:registration][:is_volunteer]

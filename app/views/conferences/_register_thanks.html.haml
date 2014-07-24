@@ -1,6 +1,25 @@
-%h3=_'registration.thanks.title','Thanks for submitting your registration'
-.columns.medium-offset-1.end
-	%h4=_'registration.thanks.remember_to_confirm','Remember to confirm your registration upon receiving the confirmation email'
-	%p.help
-		=_'registration.thanks.remember_to_confirm.help','If you experience any technical issues, please contact Godwin directly at'
-		%a{href: 'mailto:goodgodwin@hotmail.com'}='goodgodwin@hotmail.com'
+- if @registration && @registration.complete
+	- city = @conference.organizations.first.locations.first.city
+	%h3=_'registration.thanks.complete.title','Thanks for completing your registration'
+	.columns
+		- if !@registration.is_participant
+			%p=_'registration.thanks.all_done.volunteer','Thanks for submitting your volunteer infomation. We\'ll see you at Bike!Bike!'
+		- elsif @registration.payment_info.nil?
+			%p=_'registration.thanks.all_done.please_pay',"Thank you for completing your registration. We'll see you at Bike!Bike! If you have not already done so, we ask that you pay the registration donation as soon as you can."
+			= form_tag ("#{@conference.url}/register/pay-registration/#{@registration.confirmation_token}/").gsub(/\/\/+/, '/'), :method => :post, :class => 'row' do
+				= hidden_field_tag :confirmation_token, @registration.confirmation_token
+				.columns.small-4.small-offset-2
+					= number_field_tag :payment_amount, 25.00, :step => 0.01, :min => 0.01
+				.columns.small-4.end
+					= form_actions :submit_payment
+		- else
+			%p=_'registration.thanks.all_done.paid',"You're all done and paid up! We'll see you in #{city}.", vars: {:city => city}
+		%p=_'register.email.registration_confirmed.info',"We'll have housing, loaner bikes, and food arranged for your arrival. If you have any other questions or concerns, please email bikebike2014columbus@gmail.com."
+		%p=_'register.email.registration_confirmed.contact',"For urgent/emergency matters, you can reach our Outreach Coordinator, Reda, at 503-984-9191 or Jason at 614-364-3636."
+- else
+	%h3=_'registration.thanks.title','Thanks for submitting your registration'
+	.columns
+		%h4=_'registration.thanks.remember_to_confirm','Remember to confirm your registration upon receiving the confirmation email. If you need it to be resent, just press the button below.'
+%p.help
+	=_'registration.thanks.remember_to_confirm.help','If you experience any technical issues, please contact Godwin directly at'
+	%a{href: 'mailto:goodgodwin@hotmail.com'}='goodgodwin@hotmail.com'

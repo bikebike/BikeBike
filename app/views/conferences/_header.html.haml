@@ -1,12 +1,16 @@
 - banner_image @conference.cover_url, id: @conference.cover_attribution_id, name: @conference.cover_attribution_name, user_id: @conference.cover_attribution_user_id, src: @conference.cover_attribution_src
+- small_banner = (params['controller'] == 'conferences' && params['action'] != 'show')
+- if small_banner
+	- body_class('small-banner')
 - page_style (params['controller'] == 'conferences' ? 'article' : 'emphasize-banner')
 
 - content_for :banner do
 	.row
-		.columns.small-12.banner
-			%figure
-				%img{src: @conference.poster.full.url}
-		.columns.medium-8.align-bottom
+		- if !small_banner
+			.columns.small-12.banner
+				%figure
+					%img{src: @conference.poster.full.url}
+		.columns.medium-7.align-bottom
 			- title = @conference.conference_type.slug == 'bikebike' ? 'Bike!Bike! '+@conference.start_date.year.to_s : @conference.title
 			%div
 				%h1
@@ -33,11 +37,31 @@
 						= info.html_safe
 					- else
 						%p= ActionView::Base.full_sanitizer.sanitize(@conference.info).gsub(/^(.{300,350}\.)(.*)$/m, '\1...')
-		.columns.medium-4.centered.align-bottom
+		.columns.medium-5.centered.align-bottom.buttons
 			%div
-				- if @conference.registration_open
-					%a.button.arrow-r{href: @conference.url(:register)}
-						=_'conference.Register_Now'
 				- if params['controller'] != 'conferences'
 					%a.button.more{href: @conference.url}
 						=_'conference.More_Info'
+				- if @conference.registration_open && !small_banner
+					%a.button#register-now{href: @conference.url(:register)}
+						=_'conference.Register_Now'
+					#register-dlg
+						= form_tag (@conference.url + '/register/').gsub(/\/\/+/, '/'), :method => :post do
+							= hidden_field_tag :step, 'register'
+							= email_field_tag :email
+							= form_actions :register
+- if !small_banner && @conference.registration_open
+	- content_for :dom_ready do
+		:plain
+			$('#register-now').click(function(e) {
+				e.preventDefault();
+				if ($('#register-dlg').hasClass('open')) {
+					$('#register-dlg form').submit();
+				}
+				$('#register-dlg').toggleClass('open');
+			});
+			$('#register-dlg').click(function(e) {
+				if ($(e.target).attr('id') == 'register-dlg') {
+					$('#register-dlg').toggleClass('open');
+				}
+			});

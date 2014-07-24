@@ -19,6 +19,7 @@ gem 'oauth2', '~> 0.8.0'
 gem 'carrierwave'
 gem 'carrierwave-imageoptimizer'
 gem 'mini_magick'
+gem 'carmen', :path => '../carmen/' if File.directory?('../carmen/') && RbConfig::CONFIG['target_os'] =~ /mswin|mingw|cygwin/i
 gem 'carmen-rails'
 gem 'nested_form'
 gem 'acts_as_list'
@@ -30,6 +31,7 @@ gem 'wysiwyg-rails'
 gem 'rails-assets-cdn'
 gem 'sitemap_generator'
 gem 'activerecord-session_store'
+gem 'paypal-express'
 
 group :development, :test do
 	gem 'rspec'
@@ -47,6 +49,7 @@ end
 
 group :test do
 	gem 'capybara'
+    gem 'poltergeist'
 	gem 'guard-rspec'
 	gem 'factory_girl_rails'
 	gem 'coveralls', require: false

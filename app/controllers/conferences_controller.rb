@@ -6,7 +6,6 @@ class ConferencesController < ApplicationController
 
 	# GET /conferences
 	def index
-		#puts params
 		@conference_type = nil
 		if params['conference_type']
 			@conference_type = ConferenceType.find_by!(:slug => params['conference_type'])
@@ -111,50 +110,72 @@ class ConferencesController < ApplicationController
 	end
 
 	def register_submit
-		#set_conference
 		next_step = nil
 		if !session[:registration]
 			session[:registration] = Hash.new
 			session[:registration][:path] = Array.new
 		end
-		case params['step']
+
+		case session[:registration_step] || params['step']
+			when 'confirm'
+				if session[:registration][:is_participant]
+					registration = ConferenceRegistration.find(session[:registration][:registration_id])
+					if registration.completed
+						complete_registration
+						next_step = 'thanks'
+					else
+						next_step = 'organizations'
+					end
+				else
+					complete_registration
+					next_step = 'thanks'
+				end
 			when 'register'
 				session[:registration][:email] = params[:email]
-				user = User.find_by(:email => params[:email])
-				#registration = ConferenceRegistration.new(:conference_id => @conference.id, :is_attending => 'yes', :is_participant => params[:is_participant], :is_volunteer => params[:is_volunteer])
-				session[:registration][:user] = Hash.new
-				session[:registration][:organizations] = Array.new
-				session[:registration][:user][:id] = user ? user.id : nil
-				if user
-					user.organizations.each { |org| session[:registration][:organizations] << org.id }
+				registration = ConferenceRegistration.find_by(:email => params[:email])
+				if !registration.nil?
+					session[:registration] = YAML.load(registration.data)
+					session[:registration][:registration_id] = registration.id
+					next_step = (registration.completed.blank? && registration.is_participant.present? ? 'organizations' : 'thanks')
+				else
+					if !session[:registration][:user] || !session[:registration][:user][:firstname]
+						user = User.find_by(:email => params[:email])
+						session[:registration][:user] = Hash.new
+						session[:registration][:user][:id] = user ? user.id : nil
+						session[:registration][:user][:firstname] = user ? (user.firstname || user.username) : nil
+						session[:registration][:user][:lastname] = user ? user.lastname : nil
+						session[:registration][:user][:username] = user ? user.username : nil
+					end
+					next_step = 'primary'
 				end
-				session[:registration][:user][:firstname] = user ? (user.firstname || user.username) : nil
-				session[:registration][:user][:lastname] = user ? user.lastname : nil
-				session[:registration][:user][:username] = user ? user.username : nil
-				next_step = 'primary'
 			when 'primary'
-				if !params[:firstname] || !params[:lastname]
-					error = _'registration.register.no_name_error','Oh, c\'mon, please tell us your name. We promise not to share it with anyone, we just don\'t want to get you mixed up with someone else.'
+				if params[:firstname].blank? || params[:lastname].blank?
+					error = _'registration.register.no_name_error',"Oh, c'mon, please tell us your name. We promise not to share it with anyone, we just don't want to get you mixed up with someone else."
+				end
+				if (params[:is_volunteer] || 'false').to_sym != :true && (params[:is_participant] || 'false').to_sym != :true
+					error ||= _'registration.register.no_role_error',"Please let us know if you're attending the conference or volunteering (or both)"
 				end
 				session[:registration][:user][:firstname] = params[:firstname]
-				session[:registration][:user][:firstname] = params[:lastname]
-				session[:registration][:is_volunteer] = params[:is_volunteer]
-				session[:registration][:is_participant] = params[:is_participant]
+				session[:registration][:user][:lastname] = params[:lastname]
+				session[:registration][:is_volunteer] = (params[:is_volunteer] || 'false').to_sym == :true
+				session[:registration][:is_participant] = (params[:is_participant] || 'false').to_sym == :true
 				if !session[:registration][:user][:id]
-					session[:registration][:user][:username] = params[:username] || (params[:firstname] + ' ' + params[:lastname])
+					session[:registration][:user][:username] = !error && params[:username].blank? ? (params[:firstname] + ' ' + params[:lastname]) : params[:username]
 				end
 
-				if params[:is_volunteer]
+				if session[:registration][:is_volunteer]
 					next_step = 'volunteer_questions'
-				elsif params[:is_participant]
-					next_step = 'organizations'
-				else
-					error = _'registration.register.no_role_error',"Please let us know if you're attending the conference or volunteering (or both)"
+				elsif session[:registration][:is_participant]
+					next_step = 'questions'
 				end
 			when 'organizations'
-				session[:registration][:organizations] = Array.new
-				if params[:org].length > 0
-					params[:org].each { |org| session[:registration][:organizations] << org }
+				@registration = ConferenceRegistration.find(session[:registration][:registration_id])
+				if (params[:org] && params[:org].length > 0) || params[:add_new_org]
+					session[:registration][:organizations] = Array.new
+					if params[:org]
+						params[:org].each { |org| session[:registration][:organizations] << (org.is_a?(Array) ? org.first : org).to_i }
+					end
+					update_registration_data
 
 					if params[:add_new_org]
 						session[:registration][:new_organization] ||= Array.new
@@ -168,28 +189,43 @@ class ConferencesController < ApplicationController
 						end
 						next_step = 'new_organization'
 					else
-						next_step = 'questions'
+						if session[:registration][:is_workshop_host]
+							next_step = 'new_workshop'
+							session[:registration][:workshop] ||= Array.new
+							session[:registration][:workshop][0] ||= Hash.new
+							session[:registration][:workshop_index] = 0
+						else
+							complete_registration
+							next_step = 'thanks'
+						end
 					end
-				elsif params[:add_new_org]
-					session[:registration][:questions] ||= Hash.new
-					next_step = 'questions'
+				elsif params[:no_org]
+					if !session[:registration][:is_workshop_host]
+						next_step = 'new_workshop'
+						session[:registration][:workshop] ||= Array.new
+						session[:registration][:workshop][0] ||= Hash.new
+						session[:registration][:workshop_index] = 0
+					else
+						complete_registration
+						next_step = 'thanks'
+					end
 				else
 					error = _'registration.register.no_organization_error',"Please select an organization or enter a new one"
 				end
 			when 'new_organization'
-				if !params[:city]
-					message = _'register.new_organization.no_city_error','Please enter your organization\'s city'
+				if params[:name].blank?
+					error = _'register.new_organization.no_name_error',"Please tell us your organization's name"
 				end
-				if !params[:street]
-					message = _'register.new_organization.no_street_error','Please enter your organization\'s street address'
-				end
-				if !params[:organization_email]
-					message = _'register.new_organization.no_email_error','Please tell us your organization\'s email address. We need it so that we can send out invitaions for upcoming conferences. No spam, we promise, and you\'ll be able to edit your preferences before we start ending out email.'
+				if params[:organization_email].blank?
+					error ||= _'register.new_organization.no_email_error',"Please tell us your organization's email address. We need it so that we can send out invitations for upcoming conferences. No spam, we promise, and you'll be able to edit your preferences before we start ending out email."
 				elsif params[:organization_email].strip.casecmp(session[:registration][:email].strip)
-					message = _'register.new_organization.same_email_as_attendee_error','This email needs to be different than your own personal email, we need to keep in touch with your organization even if you\'re gone in years to come.'
+					error ||= _'register.new_organization.same_email_as_attendee_error',"This email needs to be different than your own personal email, we need to keep in touch with your organization even if you're gone in years to come."
 				end
-				if !params[:name]
-					message = _'register.new_organization.no_name_error','Please tell us your organization\'s name'
+				if params[:street].blank?
+					error ||= _'register.new_organization.no_street_error','Please enter your organization\'s street address'
+				end
+				if params[:city].blank?
+					error ||= _'register.new_organization.no_city_error','Please enter your organization\'s city'
 				end
 				i = params[:new_org_index].to_i
 				session[:registration][:new_organization][i][:country] = params[:organization_country]
@@ -200,23 +236,26 @@ class ConferencesController < ApplicationController
 				session[:registration][:new_organization][i][:email] = params[:organization_email]
 				session[:registration][:new_organization][i][:name] = params[:organization_name]
 
-				if params[:organization_logo]
-					if session[:registration][:new_organization][i][:organization_logo]
-						FileUtils.rm session[:registration][:new_organization][i][:organization_logo]
-					end
+				if params[:logo] && !session[:registration][:new_organization][i][:saved]
+					begin
+						if session[:registration][:new_organization][i][:logo]
+							FileUtils.rm session[:registration][:new_organization][i][:logo]
+						end
+					rescue; end
 					base_dir =  File.join("public", "registration_data")
 					FileUtils.mkdir_p(base_dir) unless File.directory?(base_dir)
-					hash_dir = rand(36**16).to_s(36)
+					hash_dir = rand_hash
 					dir = File.join(base_dir, hash_dir)
 					while File.directory?(dir)
-						hash_dir = rand(36**16).to_s(36)
+						hash_dir = rand_hash
 						dir = File.join(base_dir, hash_dir)
 					end
 					FileUtils.mkdir_p(dir)
-					session[:registration][:new_organization][i][:organization_logo] = File.join("registration_data", hash_dir, params[:organization_logo].original_filename)
-					FileUtils.cp params[:organization_logo].tempfile.path, File.join("public", session[:registration][:new_organization][i][:organization_logo])
+					session[:registration][:new_organization][i][:logo] = File.join("registration_data", hash_dir, params[:logo].original_filename)
+					FileUtils.cp params[:logo].tempfile.path, File.join("public", session[:registration][:new_organization][i][:logo])
 				end
-				if params[:add_another_org] && params[:add_another_org].to_sym == :on
+				update_registration_data
+				if params[:add_another_org] && params[:add_another_org].to_sym == :true
 					next_step = 'new_organization'
 					if params[:previous]
 						session[:registration][:new_org_index] = [0, i - 1].max
@@ -233,25 +272,37 @@ class ConferencesController < ApplicationController
 					if session[:registration][:new_organization][i + 1]
 						session[:registration][:new_organization] = session[:registration][:new_organization].first(i + 1)
 					end
-					next_step = 'questions'
+					if session[:registration][:is_workshop_host]
+						next_step = 'new_workshop'
+						session[:registration][:workshop] ||= Array.new
+						session[:registration][:workshop][0] ||= Hash.new
+						session[:registration][:workshop_index] = 0
+					else
+						complete_registration
+						next_step = 'thanks'
+					end
 				end
 			when 'questions'
 				session[:registration][:questions] = params[:questions].deep_symbolize_keys
-				session[:registration][:is_workshop_host] = params[:is_workshop_host].to_i
-				if !params[:is_workshop_host].to_i.zero?
-					next_step = 'new_workshop'
-					session[:registration][:workshop] ||= Array.new
-					session[:registration][:workshop][0] ||= Hash.new
-					session[:registration][:workshop_index] = 0
-				else
-					next_step = 'submit'
+				session[:registration][:is_workshop_host] = !params[:is_workshop_host].to_i.zero?
+				next_step = 'organizations'
+				if params[:submit] || params[:next]
+					if !session[:registration][:organizations]
+						user = User.find_by(:email => session[:registration][:email])
+						session[:registration][:organizations] = Array.new
+						if user
+							user.organizations.each { |org| session[:registration][:organizations] << org.id }
+						end
+					end
+					create_registration
 				end
 			when 'volunteer_questions'
 				session[:registration][:volunteer_questions] = params[:volunteer_questions].deep_symbolize_keys
 				if session[:registration][:is_participant]
-					next_step = 'organizations'
+					next_step = 'questions'
 				else
-					next_step = 'submit'
+					create_registration
+					next_step = 'thanks'
 				end
 			when 'new_workshop'
 				i = params[:workshop_index].to_i
@@ -259,14 +310,17 @@ class ConferencesController < ApplicationController
 				session[:registration][:workshop][i][:info] = params[:workshop_info]
 				session[:registration][:workshop][i][:stream] = params[:workshop_stream]
 				session[:registration][:workshop][i][:presentation_style] = params[:workshop_presentation_style]
+				session[:registration][:workshop][i][:notes] = params[:workshop_notes]
 
-				if !params[:workshop_info]
-					error = _'registration.register.no_workshop_info_error','Please describe your workshop as best as you can to give other participants an idea of what to expect'
-				end
-
-				if !params[:workshop_title]
+				if params[:workshop_title].blank?
 					error = _'registration.register.no_workshop_title_error','Please give your workshop a title'
 				end
+
+				if params[:workshop_info].blank?
+					error ||= _'registration.register.no_workshop_info_error','Please describe your workshop as best as you can to give other participants an idea of what to expect'
+				end
+
+				update_registration_data
 
 				if params[:previous]
 					session[:registration][:workshop_index] = [0, i - 1].max
@@ -281,11 +335,14 @@ class ConferencesController < ApplicationController
 					if session[:registration][:workshop][i + 1]
 						session[:registration][:workshop] = session[:registration][:workshop].first(i + 1)
 					end
-					next_step = 'submit'
+					next_step = 'thanks'
+					complete_registration
 				end
-			when 'submit'
-				UserMailer.conference_registration_email(@conference, session[:registration]).deliver
-				session.delete(:registration)
+			when 'thanks'
+				@registration = ConferenceRegistration.find(session[:registration][:registration_id])
+				if @registration.is_confirmed.blank?
+					send_confirmation
+				end
 				next_step = 'thanks'
 			when 'cancel'
 				if params[:yes]
@@ -294,45 +351,77 @@ class ConferencesController < ApplicationController
 				else
 					return {error: false, next_step: session[:registration][:path].pop}
 				end
+			when 'already_registered'
+				send_confirmation
+				next_step = 'thanks'
+			when 'pay_now', 'payment-confirmed', 'payment-cancelled'
+				next_step = 'thanks'
 		end
-		if params[:previous]
-			next_step = session[:registration][:path].pop
-		else
-			if !params[:cancel] && error
-				return {error: true, message: error, next_step: params['step']}
-			end
-			if session[:registration] && params['step']
-				session[:registration][:path] << params['step']
-			end
+		session.delete(:registration_step)
+		#if params[:previous]
+		#	next_step = session[:registration][:path].pop
+		#else
+		if !params[:cancel] && error
+			return {error: true, message: error, next_step: params['step']}
 		end
+		if session[:registration] && session[:registration][:path] && params['step']
+			session[:registration][:path] << params['step']
+		end
+		#end
 		{error: false, next_step: params[:cancel] ? 'cancel' : next_step}
 	end
 	
 	def register
+		is_post = request.post? || session[:registration_step]
 		set_conference
+
+		if !@conference.registration_open
+			do_404
+			return
+		end
+
 		data = register_submit
-		@register_step = request.post? ? data[:next_step] : 'register'
+		@register_step = is_post ? data[:next_step] : 'register'
 		@error_message = data[:error] ? data[:message] : nil
 		template = (@register_step == 'register' ? '' : 'register_') + @register_step
+
 		if !File.exists?(Rails.root.join("app", "views", params[:controller], "_#{template}.html.haml"))
 			do_404
 			return
 		end
+		
 		if session[:registration]
 			session[:registration][@register_step.to_sym] ||= Hash.new
 		end
 		@actions = nil
+		@multipart = false
 		case @register_step
-			when  'register'
+			when  'register', 'organizations', 'new_organization', 'new_workshop', 'volunteer_questions'
 				@actions = :next
-			when 'primary', 'organizations', 'new_organization', 'new_workshop', 'volunteer_questions'
-				@actions = [:previous, :cancel, :next]
+				if @register_step == 'new_organization'
+					@multipart = true
+				end
+			when 'thanks'
+				@registration = ConferenceRegistration.find(session[:registration][:registration_id])
+				if @registration.is_confirmed.blank?
+					@actions = :resend_confirmation_email
+				end
+				next_step = 'thanks'
+				#if @registration.complete && @registration.is_participant && @registration.payment_info.nil?
+				#`	@actions = [:submit_payment]
+			when 'primary'
+				@actions = [:cancel, :next]
 			when 'submit'
-				@actions = [:previous, :cancel, :submit]
+				@actions = [:cancel, :submit]
 			when 'cancel'
 				@actions = [:no, :yes]
+			when 'already_registered'
+				@registration = ConferenceRegistration.find_by(:email => session[:registration][:email])
+				if !@registration.complete
+					@actions = :resend_confirmation_email
+				end
 			when 'questions'
-				@actions = [:previous, :cancel, :next]
+				@actions = [:cancel, :submit]
 				@housing_options = {
 					'I will fend for myself thanks' => 'none',
 					'I will need a real bed' => 'bed',
@@ -342,19 +431,111 @@ class ConferencesController < ApplicationController
 				session[:registration][:questions][:housing] ||= 'couch'
 				@loaner_bike_options = {
 					'No' => 'no',
-					'Yes' => 'medium',
+					'Yes, an average size should do' => 'medium',
 					'Yes but a small one please' => 'small',
 					'Yes but a large one please' => 'large'
 				}
 				session[:registration][:questions][:loaner_bike] ||= 'medium'
-				session[:registration][:questions][:diet] ||= Hash.new
+				#session[:registration][:questions][:diet] ||= Hash.new
 		end
+
+		#puts ' ------yyyy----------------- '
+		#puts @register_step
+
 		if request.xhr?
 			@register_content = render_to_string :partial => template
 			render :json => {status: 200, html: @register_content}
 		else
 			@register_template = template
 			render 'show'
+		end
+	end
+
+	def register_confirm
+		set_conference
+		@conference_registration = ConferenceRegistration.find_by(confirmation_token: params[:confirmation_token])
+		if !@conference_registration.nil? && @conference_registration.conference_id == @conference.id && !@conference_registration.complete
+			@conference_registration.is_confirmed = true
+			@conference_registration.save!
+			session[:registration] = YAML.load(@conference_registration.data)
+			session[:registration][:path] = Array.new
+			session[:registration][:registration_id] = @conference_registration.id
+			session[:registration_step] = 'confirm'
+			redirect_to action: 'register'
+		else
+			do_404
+		end
+	end
+
+	def register_pay_registration
+		set_conference
+		@conference_registration = ConferenceRegistration.find_by(confirmation_token: params[:confirmation_token])
+		if !@conference_registration.nil? && @conference_registration.conference_id == @conference.id && @conference_registration.complete
+			if params[:payment_amount].nil?
+				session[:registration] = YAML.load(@conference_registration.data)
+				session[:registration][:registration_id] = @conference_registration.id
+				session[:registration][:path] = Array.new
+				session[:registration_step] = 'pay_now'
+				redirect_to action: 'register'
+			else
+				host = "#{request.protocol}#{request.host_with_port}"
+				begin
+					paypal_info = get_secure_info(:paypal)
+					request = Paypal::Express::Request.new(
+						:username   => paypal_info[:username].strip!,
+						:password   => paypal_info[:password].strip!,
+						:signature  => paypal_info[:signature].strip!
+					)
+					payment_request = Paypal::Payment::Request.new(
+						:currency_code => 'USD',   # if nil, PayPal use USD as default
+						:description   => 'Conference Registration',    # item description
+						:quantity      => 1,      # item quantity
+						:amount        => params[:payment_amount].to_f,   # item value
+						:custom_fields => {
+							CARTBORDERCOLOR: "00ADEF",
+							LOGOIMG: "https://cdn.bikebike.org/assets/bblogo.png"
+						}
+					)
+					response = request.setup(
+						payment_request,
+						host + (@conference.url + "/register/confirm-payment/#{@conference_registration.payment_confirmation_token}/").gsub(/\/\/+/, '/'),
+						host + (@conference.url + "/register/cancel-payment/#{@conference_registration.confirmation_token}/").gsub(/\/\/+/, '/')
+					)
+					redirect_to response.redirect_uri
+				rescue Exception => e
+					ddd
+				end
+			end
+		else
+			do_404
+		end
+	end
+
+	def register_confirm_payment
+		set_conference
+		@conference_registration = ConferenceRegistration.find_by(payment_confirmation_token: params[:confirmation_token])
+		if !@conference_registration.nil? && @conference_registration.conference_id == @conference.id && @conference_registration.complete && @conference_registration.payment_info.nil?
+			@conference_registration.payment_info = "#{params[:PayerID]}:#{params[:token]}"
+			@conference_registration.save!
+			session[:registration] = YAML.load(@conference_registration.data)
+			session[:registration][:registration_id] = @conference_registration.id
+			session[:registration][:path] = Array.new
+			session[:registration_step] = 'payment-confirmed'
+			redirect_to action: 'register'
+		else
+			do_404
+		end
+	end
+
+	def register_cancel_payment
+		set_conference
+		@conference_registration = ConferenceRegistration.find_by(confirmation_token: params[:confirmation_token])
+		if !@conference_registration.nil? && @conference_registration.conference_id == @conference.id && @conference_registration.complete && @conference_registration.payment_info.nil?
+			session[:registration] = YAML.load(@conference_registration.data)
+			session[:registration][:registration_id] = @conference_registration.id
+			session[:registration][:path] = Array.new
+			session[:registration_step] = 'payment-cancelled'
+			redirect_to action: 'register'
 		end
 	end
 
@@ -455,5 +636,134 @@ class ConferencesController < ApplicationController
 					return
 				end
 			end
+		end
+
+		def update_registration_data
+			if session[:registration][:registration_id]
+				registration = ConferenceRegistration.find(session[:registration][:registration_id])
+				registration.data = YAML.load(registration.data).merge(session[:registration]).to_yaml
+				registration.save!
+			end
+		end
+
+		def complete_registration
+			if session[:registration][:registration_id]
+				registration = ConferenceRegistration.find(session[:registration][:registration_id])
+				session[:registration] = YAML.load(registration.data)
+				registration.completed = true
+				if registration.is_confirmed
+					registration.complete = true
+
+					user = User.find_by(:email => session[:registration][:email])
+					if !user
+						user = User.new(:email => session[:registration][:email], :username => session[:registration][:user][:username], :role => 'user')
+					end
+					user.firstname = session[:registration][:user][:firstname]
+					user.lastname = session[:registration][:user][:lastname]
+					user.save!
+
+					if session[:registration][:is_participant]
+						UserOrganizationRelationship.destroy_all(:user_id => user.id)
+						session[:registration][:organizations].each { |org_id|
+							found = false
+							org = Organization.find(org_id.is_a?(Array) ? org_id.first : org_id)
+							org.user_organization_relationships.each {|rel| found = found && rel.user_id == user.id}
+							if !found
+								org.user_organization_relationships << UserOrganizationRelationship.new(:user_id => user.id, :relationship => UserOrganizationRelationship::Administrator)
+							end
+							org.save!
+						}
+
+						if session[:registration][:new_organization]
+							session[:registration][:new_organization].each { |new_org|
+								found = false
+								org = Organization.find_by(:email_address => new_org[:email])
+								if org.nil?
+									org = Organization.new(
+										:name			=> new_org[:name],
+										:email_address	=> new_org[:email],
+										:info			=> new_org[:info]
+									)
+									org.locations << Location.new(:country => new_org[:country], :territory => new_org[:territory], :city => new_org[:city], :street => new_org[:street])
+								end
+								org.user_organization_relationships.each {|rel| found = found && rel.user_id == user.id}
+								if !found
+									org.user_organization_relationships << UserOrganizationRelationship.new(:user_id => user.id, :relationship => UserOrganizationRelationship::Administrator)
+								end
+								org.save!
+								org.avatar = "#{request.protocol}#{request.host_with_port}/#{new_org[:logo]}"
+								cover = get_panoramio_image(org.locations.first)
+								org.cover = cover[:image]
+								org.cover_attribution_id = cover[:attribution_id]
+								org.cover_attribution_user_id = cover[:attribution_user_id]
+								org.cover_attribution_name = cover[:attribution_user_name]
+								org.cover_attribution_src = cover[:attribution_src]
+								org.save!
+							}
+						end
+
+						if session[:registration][:is_workshop_host] && session[:registration][:workshop]
+							session[:registration][:workshop].each { |new_workshop|
+								workshop = Workshop.new(
+									:conference_id					=> @conference.id,
+									:title							=> new_workshop[:title],
+									:info							=> new_workshop[:info],
+									:workshop_stream_id				=> WorkshopStream.find_by(:slug => new_workshop[:stream]).id,
+									:workshop_presentation_style	=> WorkshopPresentationStyle.find_by(:slug => new_workshop[:presentation_style])
+								)
+								workshop.workshop_facilitators << WorkshopFacilitator.new(:user_id => user.id)
+								workshop.save!
+							}
+						end
+					end
+
+					send_confirmation_confirmation(registration, session[:registration])
+
+					session.delete(:registration)
+					session[:registration] = Hash.new
+					session[:registration][:registration_id] = registration.id
+				end
+				registration.save!
+			end
+		end
+
+		def create_registration
+			if !session[:registration][:registration_id]
+				registration = ConferenceRegistration.new(
+					:conference_id		=> @conference.id,
+					:user_id			=> session[:registration][:user][:id],
+					:email				=> session[:registration][:email],
+					:is_attending		=> 'yes',
+					:is_participant		=> session[:registration][:is_participant],
+					:is_volunteer		=> session[:registration][:is_volunteer],
+					:is_confirmed		=> false,
+					:complete			=> false,
+					:completed			=> false,
+					:confirmation_token	=> rand_hash(32, :conference_registration, :confirmation_token),
+					:payment_confirmation_token	=> rand_hash(32, :conference_registration, :payment_confirmation_token),
+					:data				=> session[:registration].to_yaml
+				)
+				registration.save!
+				session[:registration][:registration_id] = registration.id
+				send_confirmation(registration, session[:registration])
+			end
+		end
+
+		def send_confirmation(registration = nil, data = nil)
+			registration ||= ConferenceRegistration.find(session[:registration][:registration_id])
+			data ||= YAML.load(registration.data)
+			UserMailer.conference_registration_email(@conference, data, registration).deliver
+		end
+
+		def send_confirmation_confirmation(registration = nil, data = nil)
+			registration ||= ConferenceRegistration.find(session[:registration][:registration_id])
+			data ||= YAML.load(registration.data)
+			UserMailer.conference_registration_confirmed_email(@conference, data, registration).deliver
+		end
+
+		def send_payment_received(registration = nil, data = nil)
+			registration ||= ConferenceRegistration.find(session[:registration][:registration_id])
+			data ||= YAML.load(registration.data)
+			UserMailer.conference_registration_payment_received(@conference, data, registration).deliver
 		end
 end

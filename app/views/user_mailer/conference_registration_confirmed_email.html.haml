@@ -1,0 +1,10 @@
+%img{src: "#{@url}/#{@conference.poster.full.url}", style: "max-width: 100%;"}
+%div{style: 'padding: 25px'}
+	%h1=_'register.email.registration_confirmed.thank_you',"Hi #{@data[:user][:username]}, thank you for completing your registration. We'll see you at Bike!Bike!"
+	%h2=_'register.email.registration_confirmed.please_pay',"If you have not already done so, we ask that you pay the registration donation as soon as you can. At your convenience please visit the link below."
+	%div{style: 'text-align:center'}
+		%h1{style: 'background-color:#F11845;text-align:center;display:inline-block;padding: 5px 20px 10px;'}
+			%a{href: @confirmation_url, style: 'color:#FFF;text-decoration:none;'}
+				=_'register.email.registration_confirmed.pay_now',"Pay Registration Fees"
+	%p=(_'register.email.registration_confirmed.info',"We'll have housing, loaner bikes, and food arranged for your arrival. If you have any other questions or concerns, please email bikebike2014columbus@gmail.com").gsub(/(\w+@\w+\.\w{2,3})/, '<a href="mailto:\1">\1</a>').html_safe
+	%p=_'register.email.registration_confirmed.contact',"For urgent/emergency matters, you can reach our Outreach Coordinator, Reda, at 503-984-9191 or Jason at 614-364-3636."

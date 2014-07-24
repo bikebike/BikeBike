@@ -6,25 +6,31 @@
 	= text_field_tag '[volunteer_questions][address]', session[:registration][:volunteer_questions][:address]
 	= text_field_tag '[volunteer_questions][phone_number]', session[:registration][:volunteer_questions][:phone_number]
 
+-#.columns.medium-offset-1.end
+-#	%h4=_'registration.volunteer_questions.has_kitchen','Do have a kitchen / cook space to offer?'
+-#.columns.medium-8.medium-offset-2.end
+-#	= select_tag '[volunteer_questions][has_kitchen]', options_for_select({(_'Yes') => 1, (_'No') => 0}, session[:registration][:volunteer_questions][:has_kitchen] || 0)
 .columns.medium-offset-1.end
-	%h4=_'registration.volunteer_questions.has_kitchen','Do have a kitchen / cook space to offer?'
+	%h4=_'registration.volunteer_questions.tasks.title','How can you help out?'
 .columns.medium-8.medium-offset-2.end
-	= select_tag '[volunteer_questions][has_kitchen]', options_for_select({(_'Yes') => 1, (_'No') => 0}, session[:registration][:volunteer_questions][:has_kitchen] || 0)
+	- session[:registration][:volunteer_questions][:tasks] ||= Hash.new
+	= check_box_tag '[volunteer_questions][tasks][cooking]', session[:registration][:volunteer_questions][:tasks][:cooking]
+	= check_box_tag '[volunteer_questions][tasks][manual_labour]', session[:registration][:volunteer_questions][:tasks][:manual_labour]
 
 .columns.medium-offset-1.end
 	%h4=_'registration.volunteer_questions.has_housing','Do you have housing to offer for out of town attendees?'
 .columns.medium-offset-2.medium-5
 	%h5=_'registration.volunteer_questions.beds','Spare Beds:'
 .columns.medium-3.end
-	= number_field_tag '[volunteer_questions][beds]', session[:registration][:volunteer_questions][:beds] || 0, :label => false
+	= number_field_tag '[volunteer_questions][beds]', session[:registration][:volunteer_questions][:beds] || 0, :label => false, min: 0
 .columns.medium-offset-2.medium-5
 	%h5=_'registration.volunteer_questions.couch_space','Number you can accomodate on couches/floor space:'
 .columns.medium-3.end
-	= number_field_tag '[volunteer_questions][beds]', session[:registration][:volunteer_questions][:couch_space] || 0, :label => false
+	= number_field_tag '[volunteer_questions][couch_space]', session[:registration][:volunteer_questions][:couch_space] || 0, :label => false, min: 0
 .columns.medium-offset-2.medium-5
 	%h5=_'registration.volunteer_questions.tents','Estimated number of tests you\'d be willing to have in your yard:'
 .columns.medium-3.end
-	= number_field_tag '[volunteer_questions][tents]', session[:registration][:volunteer_questions][:tents] || 0, :label => false
+	= number_field_tag '[volunteer_questions][tents]', session[:registration][:volunteer_questions][:tents] || 0, :label => false, min: 0
 .columns.medium-offset-1.end
 	%h4=_'registration.volunteer_questions.other','Anything else you\'d like to tell us?'
 .columns.medium-8.medium-offset-2.end

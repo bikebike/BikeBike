@@ -15,6 +15,10 @@ BikeBike::Application.routes.draw do
 			#get :register, :param => 'step'
             #post 'register/next' => 'conferences#register_submit'
             match 'register(/:step)' => 'conferences#register', via: [:get, :post]
+            get 'register/confirm/:confirmation_token' => 'conferences#register_confirm'
+            match 'register/pay-registration/:confirmation_token' => 'conferences#register_pay_registration', via: [:get, :post]
+            get 'register/confirm-payment/:confirmation_token' => 'conferences#register_confirm_payment'
+            get 'register/cancel-payment/:confirmation_token' => 'conferences#register_cancel_payment'
             #patch 'register/step/:step' => 'conferences#register_step'
 			#resources :registrations, :path => 'registration' do
 			#	get :form, on: :collection

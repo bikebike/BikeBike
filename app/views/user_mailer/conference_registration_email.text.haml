@@ -1,1 +1,1 @@
-= @data.to_json.to_s
+=_('register.email.registration.please_confirm',"Hi #{@data[:user][:username]}, please confirm your registration for #{@conference.title}", vars: {:username => @data[:user][:username]}) + ": #{@confirmation_url}"

@@ -1,0 +1,9 @@
+- page_title = _'error.no_lang.page_title.Language_not_enabled'
+- title page_title
+- banner_title page_title
+
+.row
+	%h1
+		=(_ 'language_not_yet_translated', vars: {:language => (_ ('languages.' + @lang))})
+	%p
+		=_'error.no_lang.description', :p

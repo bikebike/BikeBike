@@ -45,13 +45,15 @@ BikeBike::Application.configure do
 	}
 	config.action_mailer.raise_delivery_errors = true
 	config.action_mailer.perform_deliveries = true
-    #config.force_ssl = true
+	#config.force_ssl = true
 	#config.action_mailer.default_charset = 'utf-8'
 
-    #Carmen.i18n_backend.locale_paths = ''
-    #puts "CARMEN\t" + Carmen.i18n_backend.locale_paths
+	#Carmen.i18n_backend.locale_paths = ''
+	#puts "CARMEN\t" + Carmen.i18n_backend.locale_paths
 
-    #PerfTools::CpuProfiler.start('/tmp/dev_prof')
-    config.serve_static_assets = true
-    #config.assets.precompile = false
+	#PerfTools::CpuProfiler.start('/tmp/dev_prof')
+	config.serve_static_assets = true
+	#config.assets.precompile = false
+	Paypal.sandbox!
+	#Paypal.sandbox = false
 end

@@ -4,15 +4,12 @@
 - title @conference.title
 - description "#{@conference.title} conference in #{location_name} for DIY bicycle collectives, co-ops, and advocacy groups"
 = render 'header'
-
-=# tabs!
-
 %article.row
 	.columns.large-10
 		- if @register_step
-			%h2='Register!'
+			%h2='Conference Registration'
 			- if @actions
-				= form_tag (@conference.url + '/register/').gsub(/\/\/+/, '/'), :method => :post do
+				= form_tag (@conference.url + '/register/').gsub(/\/\/+/, '/'), :method => :post, :multipart => @multipart do
 					= hidden_field_tag :step, @register_step
 					- if @error_message
 						.columns.medium-8.medium-centered

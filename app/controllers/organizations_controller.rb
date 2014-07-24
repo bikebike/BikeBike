@@ -22,8 +22,8 @@ class OrganizationsController < ApplicationController
 			if !@organizations.has_key?(country.name)
 				@organizations[country.name] = Hash.new
 			end
-			territory = country.subregions.coded(location.territory)
-			territory_name = territory ? territory.name : 0
+			territory = country.subregions? ? country.subregions.coded(location.territory) : nil
+			territory_name = territory.nil? ? 0 : territory.name
 			if !@organizations[country.name].has_key?(territory_name)
 				@organizations[country.name][territory_name] = Hash.new
 			end

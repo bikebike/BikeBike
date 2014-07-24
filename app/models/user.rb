@@ -3,8 +3,8 @@ class User < ActiveRecord::Base
         config.authentications_class = Authentication
     end
 
-	validates :password, presence: true, confirmation: true, length: { minimum: 3 }, unless: ("id?" || "password_confirmation?")
-	validates :password_confirmation, presence: true, unless: ("id?" || "password?")
+	#validates :password, presence: true, confirmation: true, length: { minimum: 3 }, unless: ("id?" || "password_confirmation?")
+	#validates :password_confirmation, presence: true, unless: ("id?" || "password?")
 
 	validates :email, uniqueness: true
 

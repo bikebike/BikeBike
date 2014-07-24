@@ -13,19 +13,19 @@
 .columns.medium-8.medium-offset-2.end
 	= select_tag '[questions][loaner_bike]', options_for_select(@loaner_bike_options, session[:registration][:questions][:loaner_bike])
 
+-#.columns.medium-offset-1.end
+-#	%h4=_'registration.questions.diet','We\'ll be serving some food. Do you have any dietary restrictions?'
+-#.columns.medium-8.medium-offset-2.end
+-#	= check_box_tag '[questions][diet][no_meat]', session[:registration][:questions][:diet][:no_meat]
+-#	= check_box_tag '[questions][diet][no_dairy]', session[:registration][:questions][:diet][:no_dairy]
+-#	= check_box_tag '[questions][diet][no_animal_products]', session[:registration][:questions][:diet][:no_animal_products]
+-#	= check_box_tag '[questions][diet][no_gluten]', session[:registration][:questions][:diet][:no_gluten]
+-#	= check_box_tag '[questions][diet][no_nuts]', session[:registration][:questions][:diet][:no_nuts]
+-#	%h5=_'registration.questions.diet_extra.title','Anything else?'
+-#	= text_area_tag '[questions][diet][diet_extra]', session[:registration][:questions][:diet_extra], :label => false
 .columns.medium-offset-1.end
-	%h4=_'registration.questions.diet','We\'ll be serving some food. Do you have any dietary restrictions?'
-.columns.medium-8.medium-offset-2.end
-	= check_box_tag '[questions][diet][no_meat]', session[:registration][:questions][:diet][:no_meat]
-	= check_box_tag '[questions][diet][no_dairy]', session[:registration][:questions][:diet][:no_dairy]
-	= check_box_tag '[questions][diet][no_animal_products]', session[:registration][:questions][:diet][:no_animal_products]
-	= check_box_tag '[questions][diet][no_gluten]', session[:registration][:questions][:diet][:no_gluten]
-	= check_box_tag '[questions][diet][no_nuts]', session[:registration][:questions][:diet][:no_nuts]
-	%h5=_'registration.questions.diet_extra.title','Anything else?'
-	= text_area_tag '[questions][diet][diet_extra]', session[:registration][:questions][:diet_extra], :label => false
-.columns.medium-offset-1.end
-	%h4=_'registration.questions.workshop','Would you ilke to host a workshop?'
-	%p.help=_'registration.questions.workshop.help','Did you have an idea for a workshop that you\d like to help run? If so, we\'ll ask some follow-up questions on the following page.'
+	%h4=_'registration.questions.workshop','Would you like to host a workshop?'
+	%p.help=_'registration.questions.workshop.help','Did you have an idea for a workshop that you\'d like to help run? If so, we\'ll ask some follow-up questions later on.'
 .columns.medium-8.medium-offset-2.end
 	= select_tag :is_workshop_host, options_for_select({(_'Yes') => 1, (_'No') => 0}, session[:registration][:is_workshop_host] || 0)
 .columns.medium-offset-1.end

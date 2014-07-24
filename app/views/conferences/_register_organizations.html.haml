@@ -1,3 +1,11 @@
+- registration = ConferenceRegistration.find(session[:registration][:registration_id])
+- if registration && registration.is_confirmed
+	%h3=_'register.organizations.confirm_thanks.title','Thanks for confirming!'
+	- if session[:registration][:is_workshop_host]
+		%p=_'register.organizations.confirm_thanks.is_workshop_host.help','Before you finish, we would just like to find out where you\'re coming from and get some info about your workshop.'
+	- else
+		%p=_'register.organizations.confirm_thanks.is_not_workshop_host.help','Before you finish, we would just like to find out where you\'re coming from.'
+	%p=_'register.organizations.confirm_thanks.payment_notice','After that you will also be able to pay for registration.'
 %h3
 	=_'register.organizations.title','Who do you Represent?'
 %p=_'register.organizations.description','Please let us know where you\'re coming from! Find your organizations on the right, they are listed by how close they are to you right now.'
@@ -8,8 +16,6 @@
 			- my_location = lookup_ip_location
 			- lids = Location.near(my_location.latitude.to_s+', '+my_location.longitude.to_s, 999999, order: 'distance').map{|l|l.id}
 			- orgs = Hash.new
-			-# orgs = Organization.joins(:locations_organization).where('locations_organizations.location_id' => lids)
-			-# orgs.each do |org|
 			- lids.each do |lid|
 				- org = Organization.joins(:locations_organization).where('locations_organizations.location_id' => lid).first
 				- if org && !orgs.has_key?(org.id)

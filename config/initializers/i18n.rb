@@ -48,7 +48,8 @@ module I18n
 				end
 				return self.lorem_ipsum(behavior, behavior_size)
 			end
-			key.to_s.gsub(/^world\..*\.(.+)\.name$/, '\1').gsub(/^.*\.(.+)?$/, '\1').gsub('_', ' ')
+			#key.to_s.gsub(/^world\..*\.(.+)\.name$/, '\1').gsub(/^.*\.(.+)?$/, '\1').gsub('_', ' ')
+			key.to_s.gsub(/^world\.(.+)\.name$/, '\1').gsub(/^.*\.(.+)?$/, '\1').gsub('_', ' ')
 		end
 
 		def call(exception, locale, key, options)
@@ -68,6 +69,21 @@ module I18n
 			@@translation_cache_file = 'config/locales/.translation-cache.yml'
 			@@pluralization_rules_file = 'config/locales/pluralization-rules.yml'
 			@@translation_cache
+			@@testing_started = false
+			@@hosts
+
+			def self.init_tests!(new_translations = nil)
+				if Rails.env.test?
+					if !@@testing_started
+						@@testing_started = true
+						File.open(@@translations_file, 'w+')
+						File.open(@@translation_cache_file, 'w+')
+					end
+					if !new_translations.nil?
+						record_translation(new_translations)
+					end
+				end
+			end
 
 			def needs_translation(key)
 				@@needs_translation ||= Array.new
@@ -90,11 +106,8 @@ module I18n
 			end
 
 			def initialize
-				if Rails.env.test? || !File.exist?(@@translation_cache_file)
+				if !File.exist?(@@translation_cache_file)
 					File.open(@@translation_cache_file, 'w+')
-				end
-				if Rails.env.test?
-					File.open(@@translations_file, 'w+')
 				end
 				@@translation_cache = YAML.load(File.read(@@translation_cache_file)) || Hash.new
 				super
@@ -105,8 +118,6 @@ module I18n
 					YAML.load_file(@@translations_file) || {}
 				rescue Exception => e
 					# sometimes concurrency issues cause an exception during testing
-					puts e.class
-					x
 					sleep(1/2.0)
 					get_translation_info()
 				end
@@ -121,6 +132,30 @@ module I18n
 				YAML.load_file(@@pluralization_rules_file).keys
 			end
 
+			def set_locale(host)
+				@@hosts ||= Hash.new
+				default = I18n.default_locale.to_s
+				lang = @@hosts[host]
+				if lang === false
+					lang = nil
+				elsif lang.nil?
+					if (lang = host.gsub(/^(dev|test|www)[\-\.](.*)$/, '\2').gsub(/^(([^\.]+)\.)?[^\.]+\.[^\.]+$/, '\2')).blank?
+						lang = default
+					end
+					if get_language_codes().include? lang
+						if !language_enabled? lang
+							I18n.locale = default
+							return lang
+						end
+					else
+						lang = nil
+					end
+				end
+				I18n.locale = default unless lang.present?
+				# return nil if the language doesn exist, false if it is not enabled, or the code if it is enabled
+				lang.present? ? true : false
+			end
+
 			def get_language_completion(lang)
 				total = 0
 				complete = 0
@@ -128,7 +163,11 @@ module I18n
 					total += 1
 					complete += v['languages'].include?(lang.to_s) ? 1 : 0
 				}
-				total ? complete / total : 0
+				(total ? complete / total.to_f : 0.0) * 100.0
+			end
+
+			def language_enabled?(lang)
+				lang.to_s == I18n.default_locale.to_s || get_language_completion(lang) > 66
 			end
 
 			def request_translation(key, vars, options)
@@ -142,9 +181,25 @@ module I18n
 				return result
 			end
 
+			def record_translation(key)
+				translations = get_translation_info()
+				translations ||= Hash.new
+
+				if key.is_a(Array)
+					key.each { |k| translations[k.to_s] ||= Hash.new }
+				else
+					translations[key.to_s] ||= Hash.new
+				end
+				File.open(@@translations_file, 'w') { |f| f.write translations.to_yaml }
+			end
+
 			protected
 				def lookup(locale, key, scope = [], options = {})
 					result = nil
+
+					if key.is_a?(String)
+						key = key.gsub(/(^\[|\])/, '').gsub(/\[/, '.')
+					end
 
 					if @@translation_cache && @@translation_cache.has_key?(locale.to_s) && @@translation_cache[locale.to_s].has_key?(key.to_s)
 						result = @@translation_cache[locale.to_s][key.to_s]

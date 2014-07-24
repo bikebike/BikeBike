@@ -9,6 +9,8 @@ module ApplicationHelper
 	@@banner_image = nil
 	@@has_content = true
 	@@front_page = false
+	@@body_class = nil
+	@@test_location = nil
 
 	def init_vars
 		@@keyQueue = nil
@@ -20,6 +22,7 @@ module ApplicationHelper
 		@@banner_image = nil
 		@@has_content = true
 		@@front_page = false
+		@@body_class = nil
 	end
 
 	def this_is_the_front_page
@@ -100,6 +103,11 @@ module ApplicationHelper
 		content_for(:dom_ready, &block)
 	end
 
+	def body_class(c)
+		@@body_class ||= Array.new
+		@@body_class << (c.is_a?(Array) ? c.join(' ') : c)
+	end
+
 	def page_style(style)
 		classes = ['page-style-' + style.to_s]
 		#if @@no_banner
@@ -113,6 +121,9 @@ module ApplicationHelper
 		end
 		if @@banner_image
 			classes << 'has-banner-image'
+		end
+		if @@body_class
+			classes << @@body_class.join(' ')
 		end
 
 		if params[:controller]
@@ -440,7 +451,9 @@ module ApplicationHelper
 	end
 
 	def lookup_ip_location
-		if request.remote_ip == '127.0.0.1'
+		if is_test? && ApplicationController::get_location.present?
+			Geocoder.search(ApplicationController::get_location).first
+		elsif request.remote_ip == '127.0.0.1'
 			Geocoder.search(session['remote_ip'] || (session['remote_ip'] = open("http://checkip.dyndns.org").first.gsub(/^.*\s([\d\.]+).*$/s, '\1').gsub(/[^\.\d]/, ''))).first
 		else
 			request.location
@@ -492,6 +505,10 @@ module ApplicationHelper
 		Rails.env == 'production'
 	end
 
+	def is_test?
+		Rails.env == 'test'
+	end
+
 	def subdomain
 		request.env['SERVER_NAME'].gsub(/^(\w+)\..*$/, '\1')
 	end
@@ -503,6 +520,56 @@ module ApplicationHelper
 	def location(location)
 		territory = Carmen::Country.coded(location.country).subregions.coded(location.territory)
 		location.city + (territory ? ' ' + territory.name : '') + ', ' + Carmen::Country.coded(location.country).name
+	end
+
+	def rand_hash(length = 16, model = nil, field = nil)
+		if field
+			hash = rand_hash(length)
+			while !model.to_s.to_s.singularize.classify.constantize.find_by(field => hash).nil?
+				hash = rand_hash(length)
+			end
+		end
+		rand(36**length).to_s(36)
+	end
+
+	def get_panoramio_image(location)
+		if is_test?
+			params[:image] = 'panoramio.jpg'
+			params[:attribution_id] = 1234
+			params[:attribution_user_id] = 5678
+			params[:attribution_name] = 'Some Guy'
+			params[:attribution_src] = 'panoramio'
+			return params
+		end
+
+		location = location.city + ', ' + (location.territory ? location.territory + ' ' : '') + location.country
+		$panoramios ||= Hash.new
+		$panoramios[location] ||= 0
+		$panoramios[location] += 1
+		result = Geocoder.search(location).first
+		if result
+			points = Geocoder::Calculations.bounding_box([result.latitude, result.longitude], 5, { :unit => :km })
+			options = {:set => :public, :size => :original, :from => 0, :to => 20, :mapfilter => false, :miny => points[0], :minx => points[1], :maxy => points[2], :maxx => points[3]}
+			url = 'http://www.panoramio.com/map/get_panoramas.php?' + options.to_query
+			response = JSON.parse(open(url).read)
+			response['photos'].each { |img|
+				if img['width'].to_i > 980
+					if Organization.find_by(:cover_attribution_id => img['photo_id'], :cover_attribution_src => 'panoramio').nil? && Conference.find_by(:cover_attribution_id => img['photo_id'], :cover_attribution_src => 'panoramio').nil?
+						params[:image] = img['photo_file_url']
+						params[:attribution_id] = img['photo_id']
+						params[:attribution_user_id] = img['owner_id']
+						params[:attribution_name] = img['owner_name']
+						params[:attribution_src] = 'panoramio'
+						return params
+					end
+				end
+			}
+		end
+		return nil
+	end
+
+	def get_secure_info(name)
+		YAML.load(File.read(Rails.root.parent.join("secure/#{name.to_s}.yml")))[Rails.env].symbolize_keys
 	end
 
 	private

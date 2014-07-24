@@ -5,6 +5,7 @@
 # files.
 
 require 'cucumber/rails'
+require 'capybara/poltergeist'
 
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
@@ -31,10 +32,52 @@ ActionController::Base.allow_rescue = false
 # Remove/comment out the lines below if your app doesn't have a database.
 # For some databases (like MongoDB and CouchDB) you may need to use :truncation instead.
 begin
-  DatabaseCleaner.strategy = :transaction
+	DatabaseCleaner.strategy = :truncation
+	#DatabaseCleaner.clean_with(:truncation)
 rescue NameError
-  raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
+	raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
 end
+
+add_translations = Array.new
+Carmen::World.instance.subregions.each { |country|
+	add_translations << "world.#{country.code.downcase}.name"
+	if country.subregions?
+		country.subregions.each { |region| add_translations << "world.#{country.code.downcase}.#{region.code.downcase}.name" }
+	end
+}
+
+I18n::Backend::BikeBike::init_tests!# add_translations
+
+#at_exit do
+#	I18n::Backend::BikeBike::end_tests!
+#end
+
+Before('@javascript') do
+	ActiveRecord::Base.shared_connection = nil
+	ActiveRecord::Base.descendants.each do |model|
+		model.shared_connection = nil
+	end
+end
+
+Before do
+	#DatabaseCleaner.start
+	Translation.connection.execute("INSERT INTO translations (locale, key, value) VALUES('en', 'time.formats.date', '%B %d, %Y');")
+	Translation.connection.execute("INSERT INTO translations (locale, key, value, is_proc) VALUES('en', 'date.month_names', '[\"~\", \"January\", \"February\", \"March\", \"April\", \"May\", \"June\", \"July\", \"August\", \"September\", \"October\", \"November\", \"December\"]', TRUE);")
+	ConferenceType.connection.execute("INSERT INTO conference_types (slug) VALUES ('bikebike'), ('regional'), ('bici-congreso')")
+	WorkshopStream.connection.execute("INSERT INTO workshop_streams (slug) VALUES ('mechanics'), ('leisure'), ('interorganizational_relations'), ('ethics_public_relations'), ('organization_management')")
+	WorkshopPresentationStyle.connection.execute("INSERT INTO workshop_presentation_styles (slug) VALUES ('discussion'), ('panel'), ('presentation'), ('hands-on'), ('other')")
+	#host! 'en.bikebike.org'
+	ApplicationController::set_host 'en.bikebike.org'
+	ApplicationController::set_location nil
+end
+
+After do |scenario|
+	save_and_open_page if scenario.failed?
+end
+
+#After do
+#	DatabaseCleaner.clean
+#end
 
 # You may also want to configure DatabaseCleaner to use different strategies for certain features and scenarios.
 # See the DatabaseCleaner documentation for details. Example:
@@ -54,5 +97,46 @@ end
 # Possible values are :truncation and :transaction
 # The :transaction strategy is faster, but might give you threading problems.
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
-Cucumber::Rails::Database.javascript_strategy = :truncation
+Cucumber::Rails::Database.javascript_strategy = :transaction
+Capybara.register_driver :poltergeist_debug do |app|
+	Capybara::Poltergeist::Driver.new(app, :timeout => 120, inspector: true)
+end
+Capybara.javascript_driver = :poltergeist_debug
+Geocoder.configure(:timeout => 60)
 
+def locate(id)
+	page.find('[id$="' + id.gsub(/\s+/, '_') + '"]')[:id]
+end
+
+def create_org(name = nil, location = nil)
+	org = FactoryGirl.create(:org)
+	found_location = nil
+	if !location.nil?
+		l = Geocoder.search(location).first
+		begin
+			found_location = Location.new(city: l.city, territory: l.province_code, country: l.country_code, latitude: l.latitude, longitude: l.longitude)
+		rescue; end
+		if found_location.nil?
+			return
+		end
+	end
+	if !name.nil?
+		org.name = name
+		org.slug = org.generate_slug(name, found_location)
+	end
+	if !found_location.nil?
+		org.locations << found_location
+	end
+	org.save!
+	org
+end
+
+def get_language_code(language)
+	languages = {
+		'english' => 'en',
+		'french' => 'fr',
+		'spanish' => 'es',
+		'german' => 'de'
+	}
+	languages[language.downcase]
+end

@@ -1,12 +1,12 @@
 include ApplicationHelper
 
 class PagesController < ApplicationController
-    protect_from_forgery :except => :location_territories
+	protect_from_forgery :except => :location_territories
 	#skip_before_filter :verify_authenticity_token, only: [:translate]
 
 	def home
-		@conferences = Conference.all
-		@conference = Conference.find(:first, :order => "start_date DESC")
+		#@conferences = Conference.all
+		@conference = Conference.order("start_date DESC").first
 	end
 
 	def resources
@@ -51,23 +51,23 @@ class PagesController < ApplicationController
 		#render json: (Carmen:::RegionCollection.new(Carmen::Country.coded(params[:country])) || []).to_json
 		territories = {}
 		country = Carmen::Country.coded(params[:country])
-        if country
-            country.subregions.each { |t| territories[t.code] = t.name }
-        end
+		if country
+			country.subregions.each { |t| territories[t.code] = t.name }
+		end
 		render json: territories.to_json
 	end
 
 	def translations
-		if !current_user
-			raise ActiveRecord::PremissionDenied
-		end
+		#if !current_user
+		#	raise ActiveRecord::PremissionDenied
+		#end
 		@lang = params[:lang]
-		@translations = I18n.backend.get_translation_info
+		@translations = is_test? ? {} : I18n.backend.get_translation_info
 		I18n.config.enforce_available_locales = false
 	end
 
 	def translation_list
-		if !current_user
+		if !current_user && is_production?
 			raise ActiveRecord::PremissionDenied
 		end
 		total = 0

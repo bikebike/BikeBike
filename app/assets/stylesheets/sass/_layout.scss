@@ -85,7 +85,7 @@ body {
 			float: left;
 
 			.logo {
-				width: auto;
+				width: 100%;
 				height: 90%;//2em;
 				fill: $primary-color;
 				position: absolute;
@@ -236,6 +236,11 @@ body {
 		text-align: center;
 	}
 
+	form {
+		text-align: center;
+		padding: 2em 0;
+	}
+
 	@include breakpoint(medium) {
 		+ #content {
 			padding-top: 0;
@@ -333,22 +338,32 @@ main {
 		//}
 	}
 
-	.align-bottom > div {
-		margin-bottom: 3em;
-	}
+	//.align-bottom > div {
+		//margin-bottom: 3em;
+	//}
 
 	.button {
 		width: 75%;
 		color: inherit;
 		border-color: inherit;
-		background-color: rgba(darken($article-color, 0), 0.33);
+		background-color: rgba(darken($primary-color, 0), 0.33);
 		padding: 0.75em 1em;
+		white-space: nowrap;
 		@include text-shadow(none);
 
 		&:hover {
-			background-color: $article-color;
+			background-color: $primary-color;
 			color: $white;
 			border-color: transparent;
+		}
+
+		&#register-now {
+			background-color: rgba(darken($warning-color, 0), 0.33);
+			margin-top: 0;
+
+			&:hover {
+				background-color: $warning-color;
+			}
 		}
 	}
 
@@ -433,7 +448,8 @@ main {
 		}
 	}
 
-	.page-style-emphasize-banner & {
+	.page-style-emphasize-banner &,
+	.conferences & {
 		figure img {
 			box-shadow: 0 0 2em $black;
 		}
@@ -495,6 +511,10 @@ main {
 			}
 		}
 
+		.page-style-article.small-banner & {
+			min-height: 10em;
+		}
+
 		.page-style-list & {
 			min-height: 10em;
 			height: 30em;
@@ -504,6 +524,10 @@ main {
 				font-size: 6em;
 				font-size: 6vw;
 			}
+		}
+		
+		.row .align-bottom.buttons {
+			height: 14em;
 		}
 	}
 
@@ -524,6 +548,10 @@ main {
 		&:before,
 		&:after {
 			border-bottom-left-radius: inherit;
+		}
+
+		.button {
+			//margin-top: 20%;
 		}
 
 		.page-style-list & {
@@ -560,6 +588,10 @@ main {
 
 			.row .align-bottom {
 				height: auto;
+
+				&.buttons {
+					height: 10em;
+				}
 			}
 		}
 	}
@@ -623,13 +655,15 @@ main {
 	position: absolute;
 	top: 100%;
 	right: 0.25em;
-	margin: 0.25em 0.25em 0 0;
+	//margin: 0.25em 0.25em 0 0;
+	margin: -1em 0.25em 0 0;
 	font-size: 0.8em;
 	text-align: right;
 	text-shadow: none;
 	@include opacity(0.5);
 	clear: right;
 	z-index: 2;
+	mix-blend-mode: luminosity;
 
 	> span {
 		display: none;
@@ -1042,4 +1076,8 @@ table {
 */
 .clearfix {
 	@include clearfix;
+}
+
+article.row {
+	margin-left: 0;
 }

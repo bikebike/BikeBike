@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140716002152) do
+ActiveRecord::Schema.define(version: 20140723183557) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,11 @@ ActiveRecord::Schema.define(version: 20140716002152) do
     t.boolean  "is_volunteer"
     t.string   "confirmation_token"
     t.binary   "data"
+    t.string   "email"
+    t.boolean  "complete"
+    t.boolean  "completed"
+    t.string   "payment_confirmation_token"
+    t.string   "payment_info"
   end
 
   create_table "conference_types", force: true do |t|
@@ -267,6 +272,7 @@ ActiveRecord::Schema.define(version: 20140716002152) do
     t.string   "info"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "order"
   end
 
   create_table "workshop_requested_resources", force: true do |t|
@@ -291,6 +297,7 @@ ActiveRecord::Schema.define(version: 20140716002152) do
     t.string   "info"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "order"
   end
 
   create_table "workshops", force: true do |t|

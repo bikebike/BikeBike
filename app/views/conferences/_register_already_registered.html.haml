@@ -1,0 +1,14 @@
+- if @registration.complete
+	%h3=_'registration.already_registered.complete.title','You Have Already Registered'
+	.columns.medium-10.medium-offset-1.end
+		%p.help
+			=_'registration.already_registered.complete.help','There\'s nothing more to do, you have already registered so we\'ll see you in '
+			= @conference.organizations.first.locations.first.city
+- elsif @registration.is_confirmed
+	%h3=_'registration.already_registered.confirmed.title','You\'re Already Registered but we are missing some Information'
+	.columns.medium-10.medium-offset-1.end
+		%p.help=_'registration.already_registered.complete.help','You\'re already set to go but we had a few more questions for you. If you need us to resed your confirmation, just click the button below.'
+- else
+	%h3=_'registration.already_registered.not_confirmed.title','We\'re awaiting your Confirmation'
+	.columns.medium-10.medium-offset-1.end
+		%p.help=_'registration.already_registered.not_confirmed.help','You already sent us the information we need but we need you to confirm. If you don\'t have the email anymore, we can resend it to you.'

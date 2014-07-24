@@ -14,9 +14,32 @@ class ApplicationController < ActionController::Base
 
 	before_filter :capture_page_info
 
+	@@test_host
+	@@test_location
+
 	def capture_page_info
 		init_vars
 		$page_info = {:path => request.env['PATH_INFO'], :controller => params['controller'], :action => params['action']}
+		ActionMailer::Base.default_url_options = {:host => "#{request.protocol}#{request.host_with_port}"}
+		lang = I18n.backend.set_locale (is_test? && @@test_host.present? ? @@test_host : request.host)
+		if lang.blank?
+			do_404
+		elsif lang != true
+			@lang = lang
+			render 'pages/language_not_enabled', status: 404
+		end
+	end
+
+	def self.set_host(host)
+		@@test_host = host
+	end
+
+	def self.set_location(location)
+		@@test_location = location#.nil? nil : Geocoder.search(location)
+	end
+
+	def self.get_location()
+		@@test_location
 	end
 
 	def do_404
