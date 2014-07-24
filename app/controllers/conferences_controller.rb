@@ -517,7 +517,7 @@ class ConferencesController < ApplicationController
 				:currency_code => 'USD',   # if nil, PayPal use USD as default
 				:description   => 'Conference Registration Test',    # item description
 				:quantity      => 1,      # item quantity
-				:amount        => 1.0,   # item value
+				:amount        => 25.0,   # item value
 				:custom_fields => {
 					CARTBORDERCOLOR: "00ADEF",
 					LOGOIMG: "https://cdn.bikebike.org/assets/bblogo-paypal.png"
