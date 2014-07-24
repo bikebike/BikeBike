@@ -1,6 +1,6 @@
 /*
  *= require froala_editor.min.css
- *= require font-awesome
+ *
  */
 
  /*
@@ -17,13 +17,24 @@
 
 @font-face {
 	font-family: 'AlteHaasGroteskBold';
+	src: url('/assets/fontawesome-webfont.eot');
+	src: url('/assets/fontawesome-webfont.eot?#iefix') format('embedded-opentype'),
+		 url('/assets/fontawesome-webfont.woff') format('woff'),
+		 url('/assets/fontawesome-webfont.ttf') format('truetype'),
+		 url('/assets/fontawesome-webfont.svg#alte_haas_groteskbold') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'AlteHaasGroteskBold';
 	src: url('/assets/AlteHaasGroteskBold.eot');
 	src: url('/assets/AlteHaasGroteskBold.eot?#iefix') format('embedded-opentype'),
 		 url('/assets/AlteHaasGroteskBold.woff') format('woff'),
 		 url('/assets/AlteHaasGroteskBold.ttf') format('truetype'),
 		 url('/assets/AlteHaasGroteskBold.svg#alte_haas_groteskbold') format('svg');
 	font-weight: bold;
-	font-style: bold;
+	font-style: normal;
 }
 
 // Libraries
