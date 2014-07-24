@@ -470,6 +470,7 @@ class ConferencesController < ApplicationController
 	def register_pay_registration
 		set_conference
 		@conference_registration = ConferenceRegistration.find_by(confirmation_token: params[:confirmation_token])
+		host = "#{request.protocol}#{request.host_with_port}"
 		if !@conference_registration.nil? && @conference_registration.conference_id == @conference.id && @conference_registration.complete
 			if params[:payment_amount].nil?
 				session[:registration] = YAML.load(@conference_registration.data)
@@ -478,13 +479,12 @@ class ConferencesController < ApplicationController
 				session[:registration_step] = 'pay_now'
 				redirect_to action: 'register'
 			else
-				host = "#{request.protocol}#{request.host_with_port}"
 				begin
 					paypal_info = get_secure_info(:paypal)
 					request = Paypal::Express::Request.new(
-						:username   => paypal_info[:username].strip!,
-						:password   => paypal_info[:password].strip!,
-						:signature  => paypal_info[:signature].strip!
+						:username   => paypal_info[:username],
+						:password   => paypal_info[:password],
+						:signature  => paypal_info[:signature]
 					)
 					payment_request = Paypal::Payment::Request.new(
 						:currency_code => 'USD',   # if nil, PayPal use USD as default
@@ -509,9 +509,9 @@ class ConferencesController < ApplicationController
 		elsif params[:test]
 			paypal_info = get_secure_info(:paypal)
 			request = Paypal::Express::Request.new(
-				:username   => paypal_info[:username].strip!,
-				:password   => paypal_info[:password].strip!,
-				:signature  => paypal_info[:signature].strip!
+				:username   => paypal_info[:username],
+				:password   => paypal_info[:password],
+				:signature  => paypal_info[:signature]
 			)
 			payment_request = Paypal::Payment::Request.new(
 				:currency_code => 'USD',   # if nil, PayPal use USD as default
