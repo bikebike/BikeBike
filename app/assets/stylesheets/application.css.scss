@@ -1,5 +1,6 @@
 /*
  *= require froala_editor.min.css
+ *= require font-awesome
  */
 
  /*
@@ -27,7 +28,7 @@
 
 // Libraries
 @import "compass";
-@import "font-awesome";
+//@import "font-awesome";
 @import "foundation_and_overrides";
 
 // Local settings (also edit foundation_and_overrides.scss to modify global variables)
