@@ -493,7 +493,7 @@ class ConferencesController < ApplicationController
 						:amount        => params[:payment_amount].to_f,   # item value
 						:custom_fields => {
 							CARTBORDERCOLOR: "00ADEF",
-							LOGOIMG: "https://cdn.bikebike.org/assets/bblogo.png"
+							LOGOIMG: "https://cdn.bikebike.org/assets/bblogo-paypal.png"
 						}
 					)
 					response = request.setup(
@@ -520,7 +520,7 @@ class ConferencesController < ApplicationController
 				:amount        => 1.0,   # item value
 				:custom_fields => {
 					CARTBORDERCOLOR: "00ADEF",
-					LOGOIMG: "https://cdn.bikebike.org/assets/bblogo.png"
+					LOGOIMG: "https://cdn.bikebike.org/assets/bblogo-paypal.png"
 				}
 			)
 			response = request.setup(
