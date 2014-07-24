@@ -506,7 +506,7 @@ class ConferencesController < ApplicationController
 					ddd
 				end
 			end
-		elsif params[:test] == '1'
+		elsif params[:test]
 			paypal_info = get_secure_info(:paypal)
 			request = Paypal::Express::Request.new(
 				:username   => paypal_info[:username].strip!,
