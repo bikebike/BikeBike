@@ -14,8 +14,31 @@ When(/^I go to the (.+) page$/) do |page_name|
 	visit path_to(page_name.to_sym)
 end
 
-When(/^(I )?(finish|cancel) (paying|(the )?payment)$/) do |a, action, b, c|
-	visit path_to((action == 'finish' ? 'confirm' : action) + ' payment')
+When(/^(I )?(finish|cancel) ((with )?paypal)$/) do |a, action, b, c|
+	@last_registration.payment_info = {:payer_id => '1234', :token => '5678', :amount => @last_payment_amount}.to_yaml
+	@last_registration.save!
+	visit path_to((action == 'finish' ? 'confirm' : action) + ' paypal')
+end
+
+Then(/^(I )?pay \$?([\d\.]+)$/) do | a, amount |
+	button = nil
+	begin; button = locate("auto pay #{amount.to_f.to_i}"); rescue; end
+	if button
+		click_link_or_button(button)
+	else
+		fill_in(locate('payment amount'), :with => amount)
+		click_link_or_button(locate('custom amount'))
+	end
+	@last_payment_amount = amount
+end
+
+Then(/^(I )?(don't )?have enough funds$/) do | a, status |
+	if status.blank?
+		info = YAML.load(@last_registration.payment_info)
+		info[:status] = 'Completed'
+		@last_registration.payment_info = info.to_yaml
+		@last_registration.save!
+	end
 end
 
 Given(/^There is an upcoming conference( in .+)?$/) do |location|

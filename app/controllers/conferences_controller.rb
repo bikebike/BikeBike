@@ -361,9 +361,18 @@ class ConferencesController < ApplicationController
 				@registration = ConferenceRegistration.find(session[:registration][:registration_id])
 				if params[:confirm_payment]
 					info = YAML.load(@registration.payment_info)
-					paypal = PayPal!.checkout!(info[:token], info[:payer_id], PayPalRequest(info[:amount]))
-					if paypal.payment_info.first.payment_status == 'Completed'
-						@registration.registration_fees_paid = paypal.payment_info.first.amount.total
+					amount = nil
+					status = nil
+					if is_test?
+						status = info[:status]
+						amount = info[:amount]
+					else
+						paypal = PayPal!.checkout!(info[:token], info[:payer_id], PayPalRequest(info[:amount]))
+						status = paypal.payment_info.first.payment_status
+						amount = paypal.payment_info.first.amount.total
+					end
+					if status == 'Completed'
+						@registration.registration_fees_paid = amount
 						@registration.save!
 					end
 				end
@@ -512,8 +521,12 @@ class ConferencesController < ApplicationController
 		set_conference
 		@conference_registration = ConferenceRegistration.find_by(payment_confirmation_token: params[:confirmation_token])
 		if !@conference_registration.nil? && @conference_registration.conference_id == @conference.id && @conference_registration.complete && @conference_registration.registration_fees_paid.nil?
-			@conference_registration.payment_info = {:payer_id => params[:PayerID], :token => params[:token], :amount => PayPal!.details(params[:token]).amount.total}.to_yaml
-			@conference_registration.save!
+			if !is_test?
+				#@conference_registration.payment_info = {:payer_id => '1234', :token => '5678', :amount => '0.00'}.to_yaml
+			#else
+				@conference_registration.payment_info = {:payer_id => params[:PayerID], :token => params[:token], :amount => PayPal!.details(params[:token]).amount.total}.to_yaml
+				@conference_registration.save!
+			end
 			session[:registration] = YAML.load(@conference_registration.data)
 			session[:registration][:registration_id] = @conference_registration.id
 			session[:registration][:path] = Array.new

@@ -3,6 +3,84 @@ Feature: Registration
 	As a visitor
 
 	@javascript
+	Scenario: Register as really eager participant
+		Given There is an upcoming conference in Moncton NB
+		And Registration is open
+		And an organization named Cool Cats Bikes exists in Sackville NB
+
+		When I go to the landing page
+		Then I see a Register Now link
+		And I click on the Register Now link
+		
+		And I fill in my email with goodgodwin@hotmail.com
+		And I press register
+
+		And I fill in my firstname with Michael
+		And I fill in my lastname with Godwin
+		And I fill in my username with Godwin
+		And I check is_participant
+		And I press next
+		
+		And I see Do you require housing?
+		And I select bed from housing
+		And I fill in housing extra with I have a bad back
+		
+		And I see Do you want to borrow a bike?
+		And I select large from loaner bike
+		
+		And I see Would you like to host a workshop?
+		And I select No from workshop host
+		
+		And I see Anything else
+		And I fill in other with I'm coming two months early
+		And I should not be registered for the conference
+
+		And I press submit
+
+		Then I should be registered for the conference
+		And my registration should not be confirmed
+		And I should get a confirm email
+		And in the email I should see please confirm your registration
+		And in the email I should see a confirmation link
+		And I see Who do you Represent
+
+		When I go to the confirmation page
+		Then I see Thanks for confirming
+		And I see Who do you Represent
+		And my registration is confirmed
+		But my registration is not complete
+		And my registration is not completed
+
+		Then I click on Cool Cats Bikes
+		And press next
+
+		Then I should see Thanks for completing your registration
+		And my registration is complete
+		And my registration is completed
+		But my registration is not paid
+		
+		Then I should get a Thanks email
+		And in the email I should see pay the registration donation
+		And in the email I should see a pay registration link
+		
+		When I go to the pay registration page
+		Then I see Thanks for completing your registration
+		And I see we ask that you pay
+		And I see custom amount
+
+		Then I pay 12.34
+		Then I should see Your order summary
+		
+		When I finish with paypal
+		Then I should see confirm your payment
+		And I should see $12.34
+		And I have enough funds
+		And I press confirm payment
+
+		Then I should see We'll see you in Moncton
+		And my registration is paid
+
+	@javascript
 	Scenario: Register as participant with some second thoughts
 		Given There is an upcoming conference in Moncton NB
 		And Registration is open
@@ -159,88 +237,17 @@ Feature: Registration
 		When I go to the pay registration page
 		Then I see Thanks for completing your registration
 		And I see we ask that you pay
-		And I see payment amount
-		And I see submit payment
+		And I see $25.00
 
-		Then I fill in payment amount with 12.34
-		And press submit payment
+		Then I pay 25.00
 		Then I should see Your order summary
 		
-		When I finish paying
-		Then I should see We'll see you in Moncton
-		And my registration is paid
+		When I finish with paypal
+		Then I should see confirm your payment
+		And I should see $25.00
+		And I have enough funds
+		And I press confirm payment
 
-	@javascript
-	Scenario: Register as really eager participant
-		Given There is an upcoming conference in Moncton NB
-		And Registration is open
-		And an organization named Cool Cats Bikes exists in Sackville NB
-
-		When I go to the landing page
-		Then I see a Register Now link
-		And I click on the Register Now link
-		
-		And I fill in my email with goodgodwin@hotmail.com
-		And I press register
-
-		And I fill in my firstname with Michael
-		And I fill in my lastname with Godwin
-		And I fill in my username with Godwin
-		And I check is_participant
-		And I press next
-		
-		And I see Do you require housing?
-		And I select bed from housing
-		And I fill in housing extra with I have a bad back
-		
-		And I see Do you want to borrow a bike?
-		And I select large from loaner bike
-		
-		And I see Would you like to host a workshop?
-		And I select No from workshop host
-		
-		And I see Anything else
-		And I fill in other with I'm coming two months early
-		And I should not be registered for the conference
-
-		And I press submit
-
-		Then I should be registered for the conference
-		And my registration should not be confirmed
-		And I should get a confirm email
-		And in the email I should see please confirm your registration
-		And in the email I should see a confirmation link
-		And I see Who do you Represent
-
-		When I go to the confirmation page
-		Then I see Thanks for confirming
-		And I see Who do you Represent
-		And my registration is confirmed
-		But my registration is not complete
-		And my registration is not completed
-
-		Then I click on Cool Cats Bikes
-		And press next
-
-		Then I should see Thanks for completing your registration
-		And my registration is complete
-		And my registration is completed
-		But my registration is not paid
-		
-		Then I should get a Thanks email
-		And in the email I should see pay the registration donation
-		And in the email I should see a pay registration link
-		
-		Then I should see Thanks for completing your registration
-		And I see we ask that you pay
-		And I see payment amount
-		And I see submit payment
-
-		Then I fill in payment amount with 12.34
-		And press submit payment
-		Then I should see Your order summary
-		
-		When I finish paying
 		Then I should see We'll see you in Moncton
 		And my registration is paid
 

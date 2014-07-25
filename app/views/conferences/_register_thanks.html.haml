@@ -11,11 +11,11 @@
 				.row
 					.columns.small-12.centered
 						%p=_'registration.thanks.all_done.please_pay.currency','(amounts are in $USD)'
-						%button{name: 'auto_payment_amount', type: 'submit', value: '25.0', :class => 'good'}
+						%button{name: 'auto_payment_amount', id: 'auto_pay_25', type: 'submit', value: '25.0', :class => 'good'}
 							= number_to_currency(25, :unit => '$')
-						%button{name: 'auto_payment_amount', type: 'submit', value: '50.0', :class => 'better'}
+						%button{name: 'auto_payment_amount', id: 'auto_pay_50', type: 'submit', value: '50.0', :class => 'better'}
 							= number_to_currency(50, :unit => '$')
-						%button{name: 'auto_payment_amount', type: 'submit', value: '100.0', :class => 'best'}
+						%button{name: 'auto_payment_amount', id: 'auto_pay_100', type: 'submit', value: '100.0', :class => 'best'}
 							= number_to_currency(100, :unit => '$')
 				.row
 					.columns.small-12.centered

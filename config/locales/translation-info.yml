@@ -1,35 +1,726 @@
 ---
-register.new_organization.no_name_error:
+world.ca.ns.name:
   languages:
   - en
   pages:
+  - "/"
   - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  - "/location/territories"
   data:
-  - '{"id":92008,"locale":"en","key":"register.new_organization.no_name_error","value":"Please
-    tell us your organization''s name","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:06:48.248Z","updated_at":"2014-07-22T00:12:21.428Z"}'
-world.ca.sk.name:
+  - '{"id":1489,"locale":"en","key":"world.ca.ns.name","value":"Nova Scotia","interpolations":[],"is_proc":false,"created_at":"2014-05-04T05:27:57.814Z","updated_at":"2014-05-04T05:27:57.821Z"}'
+time.formats.date:
   languages:
   - en
   pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":1495,"locale":"en","key":"world.ca.sk.name","value":"Saskatchewan","interpolations":[],"is_proc":false,"created_at":"2014-05-04T05:29:29.403Z","updated_at":"2014-05-04T05:29:29.411Z"}'
-world.ca.nb.name:
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
   - "/"
   data:
-  - '{"id":1487,"locale":"en","key":"world.ca.nb.name","value":"New Brunswick","interpolations":[],"is_proc":false,"created_at":"2014-05-04T05:27:41.999Z","updated_at":"2014-05-04T05:27:42.039Z"}'
+  - '{"id":1618,"locale":"en","key":"time.formats.date","value":"%B %d, %Y","interpolations":[],"is_proc":false,"created_at":null,"updated_at":null}'
+date.month_names:
+  languages:
+  - en
+  pages:
+  - "/"
+  data:
+  - '{"id":1620,"locale":"en","key":"date.month_names","value":["~","January","February","March","April","May","June","July","August","September","October","November","December"],"interpolations":[],"is_proc":true,"created_at":"2014-07-06T19:53:45.689Z","updated_at":"2014-07-06T19:53:45.689Z"}'
+conference.More_Info:
+  languages:
+  - en
+  pages:
+  - "/"
+  data:
+  - '{"id":92004,"locale":"en","key":"conference.More_Info","value":"More Info","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:04:56.683Z","updated_at":"2014-07-22T00:04:56.696Z"}'
+Conferences:
+  languages:
+  - de
+  - en
+  pages:
+  - "/"
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  - "/translations"
+  - "/translations/:lang"
+  data:
+  - '{"id":1503,"locale":"de","key":"Conferences","value":"Konferenzen","interpolations":[],"is_proc":false,"created_at":"2014-05-04T14:27:46.772Z","updated_at":"2014-05-04T14:27:46.789Z"}'
+  - '{"id":1481,"locale":"en","key":"Conferences","value":"Conferences","interpolations":[],"is_proc":false,"created_at":"2014-05-04T05:05:06.760Z","updated_at":"2014-05-04T05:26:07.021Z"}'
+Organizations:
+  languages:
+  - en
+  - de
+  pages:
+  - "/"
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  - "/translations"
+  - "/translations/:lang"
+  data:
+  - '{"id":1482,"locale":"en","key":"Organizations","value":"Organizations","interpolations":[],"is_proc":false,"created_at":"2014-05-04T05:05:46.445Z","updated_at":"2014-07-21T01:51:57.345Z"}'
+  - '{"id":1505,"locale":"de","key":"Organizations","value":"Organisationen","interpolations":[],"is_proc":false,"created_at":"2014-05-04T14:29:44.542Z","updated_at":"2014-05-04T14:29:44.557Z"}'
+Resources:
+  languages:
+  - en
+  - de
+  pages:
+  - "/"
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  - "/translations"
+  - "/translations/:lang"
+  data:
+  - '{"id":1483,"locale":"en","key":"Resources","value":"Resources","interpolations":[],"is_proc":false,"created_at":"2014-05-04T05:05:50.964Z","updated_at":"2014-05-04T05:25:53.510Z"}'
+  - '{"id":1506,"locale":"de","key":"Resources","value":"Ressourcen","interpolations":[],"is_proc":false,"created_at":"2014-05-04T14:36:08.331Z","updated_at":"2014-05-04T14:36:08.438Z"}'
+donate.button_label:
+  languages: []
+  pages:
+  - "/"
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+conference.Register_Now:
+  languages:
+  - en
+  pages:
+  - "/"
+  data:
+  - '{"id":92005,"locale":"en","key":"conference.Register_Now","value":"Register Now","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:05:01.141Z","updated_at":"2014-07-22T00:05:01.155Z"}'
 form.placeholder.Enter_your_step:
   languages:
   - en
   pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
   - "/"
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
   data:
   - '{"id":91970,"locale":"en","key":"form.placeholder.Enter_your_step","value":"NIL","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:48:28.017Z","updated_at":"2014-07-21T01:48:28.028Z"}'
+form.placeholder.Enter_your_email:
+  languages:
+  - en
+  pages:
+  - "/"
+  data:
+  - '{"id":91961,"locale":"en","key":"form.placeholder.Enter_your_email","value":"someone@example.com","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:39:53.873Z","updated_at":"2014-07-21T02:17:18.066Z"}'
+form.label.email:
+  languages:
+  - en
+  pages:
+  - "/"
+  data:
+  - '{"id":91944,"locale":"en","key":"form.label.email","value":"Email","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:33:11.129Z","updated_at":"2014-07-21T01:33:11.140Z"}'
+register:
+  languages:
+  - en
+  pages:
+  - "/"
+  data:
+  - '{"id":91980,"locale":"en","key":"register","value":"Register","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:52:22.219Z","updated_at":"2014-07-21T01:52:22.261Z"}'
+  - '{"id":92009,"locale":"en","key":"register.new_organization.no_city_error","value":"Please
+    enter your organization''s city","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:08:55.720Z","updated_at":"2014-07-22T00:08:55.758Z"}'
+  - '{"id":92010,"locale":"en","key":"register.new_organization.no_street_error","value":"Please
+    enter your organization''s street address","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:09:13.603Z","updated_at":"2014-07-22T00:09:13.616Z"}'
+  - '{"id":92012,"locale":"en","key":"register.organizations.confirm_thanks.is_not_workshop_host.help","value":"","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:10:09.190Z","updated_at":"2014-07-22T00:10:09.203Z"}'
+  - '{"id":92013,"locale":"en","key":"register.organizations.confirm_thanks.title","value":"","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:10:13.343Z","updated_at":"2014-07-22T00:10:13.355Z"}'
+  - '{"id":92011,"locale":"en","key":"register.new_organization.same_email_as_attendee_error","value":"This
+    email needs to be different than your own personal email, we need to keep in touch
+    with your organization even if you''re gone in years to come.","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:09:49.895Z","updated_at":"2014-07-22T00:11:24.105Z"}'
+  - '{"id":92008,"locale":"en","key":"register.new_organization.no_name_error","value":"Please
+    tell us your organization''s name","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:06:48.248Z","updated_at":"2014-07-22T00:12:21.428Z"}'
+world.ca.nb.name:
+  languages:
+  - en
+  pages:
+  - "/"
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  - "/location/territories"
+  data:
+  - '{"id":1487,"locale":"en","key":"world.ca.nb.name","value":"New Brunswick","interpolations":[],"is_proc":false,"created_at":"2014-05-04T05:27:41.999Z","updated_at":"2014-05-04T05:27:42.039Z"}'
+form.placeholder.Enter_your_firstname:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":91962,"locale":"en","key":"form.placeholder.Enter_your_firstname","value":"Francis?
+    Frances? Phransiz?","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:40:00.075Z","updated_at":"2014-07-21T01:53:51.732Z"}'
+form.label.firstname:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":91945,"locale":"en","key":"form.label.firstname","value":"First name","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:33:15.267Z","updated_at":"2014-07-21T01:33:15.278Z"}'
+form.placeholder.Enter_your_lastname:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":91963,"locale":"en","key":"form.placeholder.Enter_your_lastname","value":"Smith?
+    Ng?","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:42:51.398Z","updated_at":"2014-07-21T01:42:51.409Z"}'
+form.label.lastname:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":91948,"locale":"en","key":"form.label.lastname","value":"Last name","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:34:35.847Z","updated_at":"2014-07-21T01:34:35.859Z"}'
+form.placeholder.Enter_your_username:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":91971,"locale":"en","key":"form.placeholder.Enter_your_username","value":"How
+    would you like to be known?","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:48:51.318Z","updated_at":"2014-07-21T01:48:56.170Z"}'
+form.label.username:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":91955,"locale":"en","key":"form.label.username","value":"Preferred name","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:36:18.747Z","updated_at":"2014-07-21T01:36:18.758Z"}'
+registration.primary.role_title:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+form.label.is_participant:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":91946,"locale":"en","key":"form.label.is_participant","value":"A conference
+    participant","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:34:27.255Z","updated_at":"2014-07-21T01:34:27.267Z"}'
+form.label.is_volunteer:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":91947,"locale":"en","key":"form.label.is_volunteer","value":"A volunteer","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:34:33.243Z","updated_at":"2014-07-21T01:34:33.255Z"}'
+cancel:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":92003,"locale":"en","key":"cancel","value":"Cancel","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:04:53.461Z","updated_at":"2014-07-22T00:04:53.473Z"}'
+next:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":91977,"locale":"en","key":"next","value":"next","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:51:54.465Z","updated_at":"2014-07-21T01:51:54.477Z"}'
+registration.questions.title:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+registration.questions.housing:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+registration.questions.housing.help:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+registration.questions.housing_extra.title:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+form.placeholder.Enter_your_.questions.housing_extra:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":91959,"locale":"en","key":"form.placeholder.Enter_your_.questions.housing_extra","value":"Preferences?
+    Concerns? Whatever.","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:39:27.543Z","updated_at":"2014-07-21T01:39:27.555Z"}'
+registration.questions.loaner_bike:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+registration.questions.loaner_bike.help:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+registration.questions.workshop:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+registration.questions.workshop.help:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+'Yes':
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":91981,"locale":"en","key":"Yes","value":"Yes","interpolations":[],"is_proc":false,"created_at":"2014-07-21T02:03:02.555Z","updated_at":"2014-07-21T02:03:02.627Z"}'
+'No':
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":91978,"locale":"en","key":"No","value":"No","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:51:55.944Z","updated_at":"2014-07-21T01:51:55.955Z"}'
+registration.questions.other:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+form.placeholder.Enter_your_.questions.other:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":91960,"locale":"en","key":"form.placeholder.Enter_your_.questions.other","value":"Anything
+    else that we should know....","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:39:45.419Z","updated_at":"2014-07-21T01:39:45.431Z"}'
+submit:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+register.email.registration.subject:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  vars:
+  - :conference_title
+  data: []
+register.email.registration.please_confirm:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  vars:
+  - :username
+  data: []
+register.email.registration.confirm_button:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+register.organizations.title:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+register.organizations.description:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+all_organizations:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":92002,"locale":"en","key":"all_organizations","value":"All organizations","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:04:45.086Z","updated_at":"2014-07-22T00:04:48.200Z"}'
+world.ca.name:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":113,"locale":"en","key":"world.ca.name","value":"Canada","interpolations":[],"is_proc":false,"created_at":null,"updated_at":"2014-04-27T21:35:22.347Z"}'
+orgnizations_filter.placeholder:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":91979,"locale":"en","key":"orgnizations_filter.placeholder","value":"Organization
+    name or location","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:52:13.721Z","updated_at":"2014-07-21T01:52:13.732Z"}'
+my_organizations:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":91976,"locale":"en","key":"my_organizations","value":"My Organizations","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:51:51.454Z","updated_at":"2014-07-21T01:51:51.465Z"}'
+form.label.add_new_org:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":91943,"locale":"en","key":"form.label.add_new_org","value":"My organization
+    isn''t listed here","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:33:04.823Z","updated_at":"2014-07-21T01:33:04.834Z"}'
+form.label.no_org:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":91949,"locale":"en","key":"form.label.no_org","value":"I currently do not
+    belong to any organization","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:35:06.287Z","updated_at":"2014-07-21T01:35:06.299Z"}'
+register.organizations.confirm_thanks.title:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":92013,"locale":"en","key":"register.organizations.confirm_thanks.title","value":"","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:10:13.343Z","updated_at":"2014-07-22T00:10:13.355Z"}'
+register.organizations.confirm_thanks.is_not_workshop_host.help:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":92012,"locale":"en","key":"register.organizations.confirm_thanks.is_not_workshop_host.help","value":"","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:10:09.190Z","updated_at":"2014-07-22T00:10:09.203Z"}'
+register.organizations.confirm_thanks.payment_notice:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+register.email.registration_confirmed.subject:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  vars:
+  - :conference_title
+  data: []
+register.email.registration_confirmed.thank_you:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+register.email.registration_confirmed.please_pay:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+register.email.registration_confirmed.pay_now:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+register.email.registration_confirmed.info:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+register.email.registration_confirmed.contact:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+registration.thanks.complete.title:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+registration.thanks.all_done.please_pay:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+form.placeholder.Enter_your_confirmation_token:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+registration.thanks.all_done.please_pay.currency:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+number.format:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+number.currency.format:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+number.precision.format:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+form.placeholder.Enter_your_payment_amount:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+form.label.payment_amount:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+custom_amount:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+registration.thanks.remember_to_confirm.help:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+registration.payment_confirm.title:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+registration.payment_confirm.help:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  vars:
+  - :amount
+  data: []
+cancel_payment:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+confirm_payment:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+registration.thanks.all_done.paid:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  vars:
+  - :city
+  data: []
+registration.cancel.title:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+registration.cancel.help:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+'no':
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+'yes':
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+registration.cancelled.title:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+registration.cancelled.help:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+registration.thanks.title:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+registration.thanks.remember_to_confirm:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+resend_confirmation_email:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+form.placeholder.Enter_your_workshop_index:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":91972,"locale":"en","key":"form.placeholder.Enter_your_workshop_index","value":"NIL","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:48:52.697Z","updated_at":"2014-07-21T01:49:24.130Z"}'
+registration.workshop.title:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+form.placeholder.Enter_your_workshop_title:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":91975,"locale":"en","key":"form.placeholder.Enter_your_workshop_title","value":"Give
+    your workshop a title...","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:51:42.788Z","updated_at":"2014-07-21T01:51:42.799Z"}'
+form.label.workshop_title:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":91957,"locale":"en","key":"form.label.workshop_title","value":"Title","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:36:54.915Z","updated_at":"2014-07-21T01:36:54.927Z"}'
+form.placeholder.Enter_your_workshop_info:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":91973,"locale":"en","key":"form.placeholder.Enter_your_workshop_info","value":"Give
+    the organizers and attendees a good idea of what this thing is about...","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:50:15.811Z","updated_at":"2014-07-21T01:50:15.823Z"}'
+form.label.workshop_info:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":91956,"locale":"en","key":"form.label.workshop_info","value":"Workshop
+    description","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:36:47.728Z","updated_at":"2014-07-21T01:36:47.768Z"}'
+registration.workshop.streams.title:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+registration.workshop.streams.help:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+workshop_stream.select_one:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":92001,"locale":"en","key":"workshop_stream.select_one","value":"Select
+    a stream","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:04:29.472Z","updated_at":"2014-07-22T00:04:29.483Z"}'
+workshop_stream.mechanics:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":91999,"locale":"en","key":"workshop_stream.mechanics","value":"Mechanics","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:03:59.547Z","updated_at":"2014-07-22T00:03:59.559Z"}'
+workshop_stream.leisure:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":91998,"locale":"en","key":"workshop_stream.leisure","value":"Arts and other
+    fun stuff","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:03:50.401Z","updated_at":"2014-07-22T00:03:50.438Z"}'
+workshop_stream.interorganizational_relations:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":91997,"locale":"en","key":"workshop_stream.interorganizational_relations","value":"Inter-organizational
+    relations","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:03:41.576Z","updated_at":"2014-07-22T00:03:41.588Z"}'
+workshop_stream.ethics_public_relations:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":91990,"locale":"en","key":"workshop_stream.ethics_public_relations","value":"Advocacy,
+    ethics, and public relations","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:01:51.146Z","updated_at":"2014-07-22T00:01:51.264Z"}'
+workshop_stream.organization_management:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":92000,"locale":"en","key":"workshop_stream.organization_management","value":"Organization
+    management","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:04:13.299Z","updated_at":"2014-07-22T00:04:13.311Z"}'
+registration.workshop.styles.title:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+registration.workshop.styles.help:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+workshop_presentation_style.select_one:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":91991,"locale":"en","key":"workshop_presentation_style.select_one","value":"Select
+    a style","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:02:02.457Z","updated_at":"2014-07-22T00:02:02.470Z"}'
+workshop_presentation_style.discussion:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":91996,"locale":"en","key":"workshop_presentation_style.discussion","value":"Open
+    discussion","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:03:21.204Z","updated_at":"2014-07-22T00:03:21.217Z"}'
+workshop_presentation_style.panel:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":91993,"locale":"en","key":"workshop_presentation_style.panel","value":"Panel","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:02:34.616Z","updated_at":"2014-07-22T00:02:34.629Z"}'
+workshop_presentation_style.presentation:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":91992,"locale":"en","key":"workshop_presentation_style.presentation","value":"Presentation","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:02:20.711Z","updated_at":"2014-07-22T00:02:20.724Z"}'
+workshop_presentation_style.hands-on:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":91995,"locale":"en","key":"workshop_presentation_style.hands-on","value":"Hands-on","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:02:46.497Z","updated_at":"2014-07-22T00:02:46.509Z"}'
+workshop_presentation_style.other:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":91994,"locale":"en","key":"workshop_presentation_style.other","value":"Other","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:02:40.926Z","updated_at":"2014-07-22T00:02:40.938Z"}'
+registration.workshop.notes.title:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+registration.workshop.notes.help:
+  languages: []
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data: []
+form.placeholder.Enter_your_workshop_notes:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":91974,"locale":"en","key":"form.placeholder.Enter_your_workshop_notes","value":"Only
+    visible to the organizers, enter any special requests or anything else that we
+    might find useful....","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:51:19.490Z","updated_at":"2014-07-21T01:51:19.501Z"}'
+form.label.add_another_workshop:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":91942,"locale":"en","key":"form.label.add_another_workshop","value":"Add
+    another workshop","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:32:45.595Z","updated_at":"2014-07-21T01:32:45.606Z"}'
 form.placeholder.Enter_your_new_org_index:
   languages:
   - en
@@ -379,13 +1070,6 @@ world.bz.name:
   - "/conferences/:conference_type/:conference_slug/register(/:step)"
   data:
   - '{"id":112,"locale":"en","key":"world.bz.name","value":"Belize","interpolations":[],"is_proc":false,"created_at":null,"updated_at":"2014-04-27T21:35:22.345Z"}'
-world.ca.name:
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":113,"locale":"en","key":"world.ca.name","value":"Canada","interpolations":[],"is_proc":false,"created_at":null,"updated_at":"2014-04-27T21:35:22.347Z"}'
 world.cc.name:
   languages:
   - en
@@ -1830,6 +2514,7 @@ world.ca.ab.name:
   - en
   pages:
   - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  - "/location/territories"
   data:
   - '{"id":1484,"locale":"en","key":"world.ca.ab.name","value":"Alberta","interpolations":[],"is_proc":false,"created_at":"2014-05-04T05:27:16.207Z","updated_at":"2014-05-04T05:27:16.214Z"}'
 world.ca.bc.name:
@@ -1837,6 +2522,7 @@ world.ca.bc.name:
   - en
   pages:
   - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  - "/location/territories"
   data:
   - '{"id":1485,"locale":"en","key":"world.ca.bc.name","value":"British Columbia","interpolations":[],"is_proc":false,"created_at":"2014-05-04T05:27:30.352Z","updated_at":"2014-05-04T05:27:30.359Z"}'
 world.ca.mb.name:
@@ -1844,6 +2530,7 @@ world.ca.mb.name:
   - en
   pages:
   - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  - "/location/territories"
   data:
   - '{"id":1486,"locale":"en","key":"world.ca.mb.name","value":"Manitoba","interpolations":[],"is_proc":false,"created_at":"2014-05-04T05:27:34.577Z","updated_at":"2014-05-04T05:27:34.584Z"}'
 world.ca.nl.name:
@@ -1851,20 +2538,15 @@ world.ca.nl.name:
   - en
   pages:
   - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  - "/location/territories"
   data:
   - '{"id":1488,"locale":"en","key":"world.ca.nl.name","value":"Newfoundland and Labrador","interpolations":[],"is_proc":false,"created_at":"2014-05-04T05:27:52.504Z","updated_at":"2014-05-04T05:27:52.512Z"}'
-world.ca.ns.name:
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":1489,"locale":"en","key":"world.ca.ns.name","value":"Nova Scotia","interpolations":[],"is_proc":false,"created_at":"2014-05-04T05:27:57.814Z","updated_at":"2014-05-04T05:27:57.821Z"}'
 world.ca.nt.name:
   languages:
   - en
   pages:
   - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  - "/location/territories"
   data:
   - '{"id":1490,"locale":"en","key":"world.ca.nt.name","value":"Northwest Territories","interpolations":[],"is_proc":false,"created_at":"2014-05-04T05:28:08.537Z","updated_at":"2014-05-04T05:28:08.544Z"}'
 world.ca.nu.name:
@@ -1872,6 +2554,7 @@ world.ca.nu.name:
   - en
   pages:
   - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  - "/location/territories"
   data:
   - '{"id":1491,"locale":"en","key":"world.ca.nu.name","value":"Nunavut","interpolations":[],"is_proc":false,"created_at":"2014-05-04T05:28:20.315Z","updated_at":"2014-05-04T05:28:20.322Z"}'
 world.ca.on.name:
@@ -1895,6 +2578,13 @@ world.ca.qc.name:
   - "/conferences/:conference_type/:conference_slug/register(/:step)"
   data:
   - '{"id":1494,"locale":"en","key":"world.ca.qc.name","value":"Québec","interpolations":[],"is_proc":false,"created_at":"2014-05-04T05:29:14.597Z","updated_at":"2014-05-04T05:29:14.605Z"}'
+world.ca.sk.name:
+  languages:
+  - en
+  pages:
+  - "/conferences/:conference_type/:conference_slug/register(/:step)"
+  data:
+  - '{"id":1495,"locale":"en","key":"world.ca.sk.name","value":"Saskatchewan","interpolations":[],"is_proc":false,"created_at":"2014-05-04T05:29:29.403Z","updated_at":"2014-05-04T05:29:29.411Z"}'
 world.ca.yt.name:
   languages:
   - en
@@ -1917,240 +2607,14 @@ form.label.add_another_org:
   data:
   - '{"id":92006,"locale":"en","key":"form.label.add_another_org","value":"Add another
     organization","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:05:07.844Z","updated_at":"2014-07-22T00:05:13.714Z"}'
-next:
+register.new_organization.no_name_error:
   languages:
   - en
   pages:
   - "/conferences/:conference_type/:conference_slug/register(/:step)"
   data:
-  - '{"id":91977,"locale":"en","key":"next","value":"next","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:51:54.465Z","updated_at":"2014-07-21T01:51:54.477Z"}'
-Conferences:
-  languages:
-  - de
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  - "/"
-  - "/translations"
-  - "/translations/:lang"
-  data:
-  - '{"id":1503,"locale":"de","key":"Conferences","value":"Konferenzen","interpolations":[],"is_proc":false,"created_at":"2014-05-04T14:27:46.772Z","updated_at":"2014-05-04T14:27:46.789Z"}'
-  - '{"id":1481,"locale":"en","key":"Conferences","value":"Conferences","interpolations":[],"is_proc":false,"created_at":"2014-05-04T05:05:06.760Z","updated_at":"2014-05-04T05:26:07.021Z"}'
-Organizations:
-  languages:
-  - en
-  - de
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  - "/"
-  - "/translations"
-  - "/translations/:lang"
-  data:
-  - '{"id":1482,"locale":"en","key":"Organizations","value":"Organizations","interpolations":[],"is_proc":false,"created_at":"2014-05-04T05:05:46.445Z","updated_at":"2014-07-21T01:51:57.345Z"}'
-  - '{"id":1505,"locale":"de","key":"Organizations","value":"Organisationen","interpolations":[],"is_proc":false,"created_at":"2014-05-04T14:29:44.542Z","updated_at":"2014-05-04T14:29:44.557Z"}'
-Resources:
-  languages:
-  - en
-  - de
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  - "/"
-  - "/translations"
-  - "/translations/:lang"
-  data:
-  - '{"id":1483,"locale":"en","key":"Resources","value":"Resources","interpolations":[],"is_proc":false,"created_at":"2014-05-04T05:05:50.964Z","updated_at":"2014-05-04T05:25:53.510Z"}'
-  - '{"id":1506,"locale":"de","key":"Resources","value":"Ressourcen","interpolations":[],"is_proc":false,"created_at":"2014-05-04T14:36:08.331Z","updated_at":"2014-05-04T14:36:08.438Z"}'
-donate.button_label:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  - "/"
-  data: []
-register.email.registration_confirmed.subject:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  vars:
-  - :conference_title
-  data: []
-register.email.registration_confirmed.thank_you:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data: []
-register.email.registration_confirmed.please_pay:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data: []
-register.email.registration_confirmed.pay_now:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data: []
-register.email.registration_confirmed.info:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data: []
-register.email.registration_confirmed.contact:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data: []
-registration.thanks.complete.title:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data: []
-registration.thanks.all_done.please_pay:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data: []
-form.placeholder.Enter_your_confirmation_token:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data: []
-form.placeholder.Enter_your_payment_amount:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data: []
-form.label.payment_amount:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data: []
-submit_payment:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data: []
-registration.thanks.remember_to_confirm.help:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data: []
-conference.More_Info:
-  languages:
-  - en
-  pages:
-  - "/"
-  data:
-  - '{"id":92004,"locale":"en","key":"conference.More_Info","value":"More Info","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:04:56.683Z","updated_at":"2014-07-22T00:04:56.696Z"}'
-conference.Register_Now:
-  languages:
-  - en
-  pages:
-  - "/"
-  data:
-  - '{"id":92005,"locale":"en","key":"conference.Register_Now","value":"Register Now","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:05:01.141Z","updated_at":"2014-07-22T00:05:01.155Z"}'
-form.placeholder.Enter_your_email:
-  languages:
-  - en
-  pages:
-  - "/"
-  data:
-  - '{"id":91961,"locale":"en","key":"form.placeholder.Enter_your_email","value":"someone@example.com","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:39:53.873Z","updated_at":"2014-07-21T02:17:18.066Z"}'
-form.label.email:
-  languages:
-  - en
-  pages:
-  - "/"
-  data:
-  - '{"id":91944,"locale":"en","key":"form.label.email","value":"Email","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:33:11.129Z","updated_at":"2014-07-21T01:33:11.140Z"}'
-register:
-  languages:
-  - en
-  pages:
-  - "/"
-  data:
-  - '{"id":91980,"locale":"en","key":"register","value":"Register","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:52:22.219Z","updated_at":"2014-07-21T01:52:22.261Z"}'
-  - '{"id":92009,"locale":"en","key":"register.new_organization.no_city_error","value":"Please
-    enter your organization''s city","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:08:55.720Z","updated_at":"2014-07-22T00:08:55.758Z"}'
-  - '{"id":92010,"locale":"en","key":"register.new_organization.no_street_error","value":"Please
-    enter your organization''s street address","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:09:13.603Z","updated_at":"2014-07-22T00:09:13.616Z"}'
-  - '{"id":92012,"locale":"en","key":"register.organizations.confirm_thanks.is_not_workshop_host.help","value":"","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:10:09.190Z","updated_at":"2014-07-22T00:10:09.203Z"}'
-  - '{"id":92013,"locale":"en","key":"register.organizations.confirm_thanks.title","value":"","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:10:13.343Z","updated_at":"2014-07-22T00:10:13.355Z"}'
-  - '{"id":92011,"locale":"en","key":"register.new_organization.same_email_as_attendee_error","value":"This
-    email needs to be different than your own personal email, we need to keep in touch
-    with your organization even if you''re gone in years to come.","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:09:49.895Z","updated_at":"2014-07-22T00:11:24.105Z"}'
   - '{"id":92008,"locale":"en","key":"register.new_organization.no_name_error","value":"Please
     tell us your organization''s name","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:06:48.248Z","updated_at":"2014-07-22T00:12:21.428Z"}'
-form.placeholder.Enter_your_firstname:
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":91962,"locale":"en","key":"form.placeholder.Enter_your_firstname","value":"Francis?
-    Frances? Phransiz?","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:40:00.075Z","updated_at":"2014-07-21T01:53:51.732Z"}'
-form.label.firstname:
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":91945,"locale":"en","key":"form.label.firstname","value":"First name","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:33:15.267Z","updated_at":"2014-07-21T01:33:15.278Z"}'
-form.placeholder.Enter_your_lastname:
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":91963,"locale":"en","key":"form.placeholder.Enter_your_lastname","value":"Smith?
-    Ng?","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:42:51.398Z","updated_at":"2014-07-21T01:42:51.409Z"}'
-form.label.lastname:
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":91948,"locale":"en","key":"form.label.lastname","value":"Last name","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:34:35.847Z","updated_at":"2014-07-21T01:34:35.859Z"}'
-form.placeholder.Enter_your_username:
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":91971,"locale":"en","key":"form.placeholder.Enter_your_username","value":"How
-    would you like to be known?","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:48:51.318Z","updated_at":"2014-07-21T01:48:56.170Z"}'
-form.label.username:
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":91955,"locale":"en","key":"form.label.username","value":"Preferred name","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:36:18.747Z","updated_at":"2014-07-21T01:36:18.758Z"}'
-registration.primary.role_title:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data: []
-form.label.is_participant:
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":91946,"locale":"en","key":"form.label.is_participant","value":"A conference
-    participant","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:34:27.255Z","updated_at":"2014-07-21T01:34:27.267Z"}'
-form.label.is_volunteer:
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":91947,"locale":"en","key":"form.label.is_volunteer","value":"A volunteer","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:34:33.243Z","updated_at":"2014-07-21T01:34:33.255Z"}'
-cancel:
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":92003,"locale":"en","key":"cancel","value":"Cancel","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:04:53.461Z","updated_at":"2014-07-22T00:04:53.473Z"}'
 registration.register.no_name_error:
   languages: []
   pages:
@@ -2161,360 +2625,17 @@ registration.register.no_role_error:
   pages:
   - "/conferences/:conference_type/:conference_slug/register(/:step)"
   data: []
-registration.questions.title:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data: []
-registration.questions.housing:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data: []
-registration.questions.housing.help:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data: []
-registration.questions.housing_extra.title:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data: []
-form.placeholder.Enter_your_.questions.housing_extra:
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":91959,"locale":"en","key":"form.placeholder.Enter_your_.questions.housing_extra","value":"Preferences?
-    Concerns? Whatever.","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:39:27.543Z","updated_at":"2014-07-21T01:39:27.555Z"}'
-registration.questions.loaner_bike:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data: []
-registration.questions.loaner_bike.help:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data: []
-registration.questions.workshop:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data: []
-registration.questions.workshop.help:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data: []
-'Yes':
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":91981,"locale":"en","key":"Yes","value":"Yes","interpolations":[],"is_proc":false,"created_at":"2014-07-21T02:03:02.555Z","updated_at":"2014-07-21T02:03:02.627Z"}'
-'No':
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":91978,"locale":"en","key":"No","value":"No","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:51:55.944Z","updated_at":"2014-07-21T01:51:55.955Z"}'
-registration.questions.other:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data: []
-form.placeholder.Enter_your_.questions.other:
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":91960,"locale":"en","key":"form.placeholder.Enter_your_.questions.other","value":"Anything
-    else that we should know....","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:39:45.419Z","updated_at":"2014-07-21T01:39:45.431Z"}'
-submit:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data: []
-register.email.registration.subject:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  vars:
-  - :conference_title
-  data: []
-register.email.registration.please_confirm:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  vars:
-  - :username
-  data: []
-register.email.registration.confirm_button:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data: []
-register.organizations.title:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data: []
-register.organizations.description:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data: []
-all_organizations:
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":92002,"locale":"en","key":"all_organizations","value":"All organizations","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:04:45.086Z","updated_at":"2014-07-22T00:04:48.200Z"}'
-orgnizations_filter.placeholder:
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":91979,"locale":"en","key":"orgnizations_filter.placeholder","value":"Organization
-    name or location","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:52:13.721Z","updated_at":"2014-07-21T01:52:13.732Z"}'
-my_organizations:
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":91976,"locale":"en","key":"my_organizations","value":"My Organizations","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:51:51.454Z","updated_at":"2014-07-21T01:51:51.465Z"}'
-form.label.add_new_org:
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":91943,"locale":"en","key":"form.label.add_new_org","value":"My organization
-    isn''t listed here","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:33:04.823Z","updated_at":"2014-07-21T01:33:04.834Z"}'
-form.label.no_org:
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":91949,"locale":"en","key":"form.label.no_org","value":"I currently do not
-    belong to any organization","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:35:06.287Z","updated_at":"2014-07-21T01:35:06.299Z"}'
 registration.register.no_organization_error:
   languages: []
   pages:
   - "/conferences/:conference_type/:conference_slug/register(/:step)"
   data: []
-form.placeholder.Enter_your_workshop_index:
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":91972,"locale":"en","key":"form.placeholder.Enter_your_workshop_index","value":"NIL","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:48:52.697Z","updated_at":"2014-07-21T01:49:24.130Z"}'
-registration.workshop.title:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data: []
-form.placeholder.Enter_your_workshop_title:
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":91975,"locale":"en","key":"form.placeholder.Enter_your_workshop_title","value":"Give
-    your workshop a title...","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:51:42.788Z","updated_at":"2014-07-21T01:51:42.799Z"}'
-form.label.workshop_title:
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":91957,"locale":"en","key":"form.label.workshop_title","value":"Title","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:36:54.915Z","updated_at":"2014-07-21T01:36:54.927Z"}'
-form.placeholder.Enter_your_workshop_info:
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":91973,"locale":"en","key":"form.placeholder.Enter_your_workshop_info","value":"Give
-    the organizers and attendees a good idea of what this thing is about...","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:50:15.811Z","updated_at":"2014-07-21T01:50:15.823Z"}'
-form.label.workshop_info:
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":91956,"locale":"en","key":"form.label.workshop_info","value":"Workshop
-    description","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:36:47.728Z","updated_at":"2014-07-21T01:36:47.768Z"}'
-registration.workshop.streams.title:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data: []
-registration.workshop.streams.help:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data: []
-workshop_stream.select_one:
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":92001,"locale":"en","key":"workshop_stream.select_one","value":"Select
-    a stream","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:04:29.472Z","updated_at":"2014-07-22T00:04:29.483Z"}'
-workshop_stream.mechanics:
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":91999,"locale":"en","key":"workshop_stream.mechanics","value":"Mechanics","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:03:59.547Z","updated_at":"2014-07-22T00:03:59.559Z"}'
-workshop_stream.leisure:
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":91998,"locale":"en","key":"workshop_stream.leisure","value":"Arts and other
-    fun stuff","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:03:50.401Z","updated_at":"2014-07-22T00:03:50.438Z"}'
-workshop_stream.interorganizational_relations:
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":91997,"locale":"en","key":"workshop_stream.interorganizational_relations","value":"Inter-organizational
-    relations","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:03:41.576Z","updated_at":"2014-07-22T00:03:41.588Z"}'
-workshop_stream.ethics_public_relations:
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":91990,"locale":"en","key":"workshop_stream.ethics_public_relations","value":"Advocacy,
-    ethics, and public relations","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:01:51.146Z","updated_at":"2014-07-22T00:01:51.264Z"}'
-workshop_stream.organization_management:
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":92000,"locale":"en","key":"workshop_stream.organization_management","value":"Organization
-    management","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:04:13.299Z","updated_at":"2014-07-22T00:04:13.311Z"}'
-registration.workshop.styles.title:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data: []
-registration.workshop.styles.help:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data: []
-workshop_presentation_style.select_one:
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":91991,"locale":"en","key":"workshop_presentation_style.select_one","value":"Select
-    a style","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:02:02.457Z","updated_at":"2014-07-22T00:02:02.470Z"}'
-workshop_presentation_style.discussion:
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":91996,"locale":"en","key":"workshop_presentation_style.discussion","value":"Open
-    discussion","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:03:21.204Z","updated_at":"2014-07-22T00:03:21.217Z"}'
-workshop_presentation_style.panel:
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":91993,"locale":"en","key":"workshop_presentation_style.panel","value":"Panel","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:02:34.616Z","updated_at":"2014-07-22T00:02:34.629Z"}'
-workshop_presentation_style.presentation:
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":91992,"locale":"en","key":"workshop_presentation_style.presentation","value":"Presentation","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:02:20.711Z","updated_at":"2014-07-22T00:02:20.724Z"}'
-workshop_presentation_style.hands-on:
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":91995,"locale":"en","key":"workshop_presentation_style.hands-on","value":"Hands-on","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:02:46.497Z","updated_at":"2014-07-22T00:02:46.509Z"}'
-workshop_presentation_style.other:
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":91994,"locale":"en","key":"workshop_presentation_style.other","value":"Other","interpolations":[],"is_proc":false,"created_at":"2014-07-22T00:02:40.926Z","updated_at":"2014-07-22T00:02:40.938Z"}'
-registration.workshop.notes.title:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data: []
-registration.workshop.notes.help:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data: []
-form.placeholder.Enter_your_workshop_notes:
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":91974,"locale":"en","key":"form.placeholder.Enter_your_workshop_notes","value":"Only
-    visible to the organizers, enter any special requests or anything else that we
-    might find useful....","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:51:19.490Z","updated_at":"2014-07-21T01:51:19.501Z"}'
-form.label.add_another_workshop:
-  languages:
-  - en
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data:
-  - '{"id":91942,"locale":"en","key":"form.label.add_another_workshop","value":"Add
-    another workshop","interpolations":[],"is_proc":false,"created_at":"2014-07-21T01:32:45.595Z","updated_at":"2014-07-21T01:32:45.606Z"}'
 registration.register.no_workshop_title_error:
   languages: []
   pages:
   - "/conferences/:conference_type/:conference_slug/register(/:step)"
   data: []
 registration.register.no_workshop_info_error:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data: []
-registration.thanks.title:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data: []
-registration.thanks.remember_to_confirm:
-  languages: []
-  pages:
-  - "/conferences/:conference_type/:conference_slug/register(/:step)"
-  data: []
-resend_confirmation_email:
   languages: []
   pages:
   - "/conferences/:conference_type/:conference_slug/register(/:step)"
