@@ -54,6 +54,6 @@ BikeBike::Application.configure do
 	#PerfTools::CpuProfiler.start('/tmp/dev_prof')
 	config.serve_static_assets = true
 	#config.assets.precompile = false
-	#Paypal.sandbox!
+	Paypal.sandbox!
 	#Paypal.sandbox = false
 end

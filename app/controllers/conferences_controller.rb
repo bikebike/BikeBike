@@ -354,7 +354,21 @@ class ConferencesController < ApplicationController
 			when 'already_registered'
 				send_confirmation
 				next_step = 'thanks'
-			when 'pay_now', 'payment-confirmed', 'payment-cancelled'
+			when 'paypal-confirmed'
+				@registration = ConferenceRegistration.find(session[:registration][:registration_id])
+				next_step = 'confirm_payment'
+			when 'confirm_payment'
+				@registration = ConferenceRegistration.find(session[:registration][:registration_id])
+				if params[:confirm_payment]
+					info = YAML.load(@registration.payment_info)
+					paypal = PayPal!.checkout!(info[:token], info[:payer_id], PayPalRequest(info[:amount]))
+					if paypal.payment_info.first.payment_status == 'Completed'
+						@registration.registration_fees_paid = paypal.payment_info.first.amount.total
+						@registration.save!
+					end
+				end
+				next_step = 'thanks'
+			when 'pay_now', 'payment-confirmed', 'paypal-cancelled'
 				next_step = 'thanks'
 		end
 		session.delete(:registration_step)
@@ -415,6 +429,8 @@ class ConferencesController < ApplicationController
 				@actions = [:cancel, :submit]
 			when 'cancel'
 				@actions = [:no, :yes]
+			when 'confirm_payment'
+				@actions = [:cancel_payment, :confirm_payment]
 			when 'already_registered'
 				@registration = ConferenceRegistration.find_by(:email => session[:registration][:email])
 				if !@registration.complete
@@ -472,92 +488,50 @@ class ConferencesController < ApplicationController
 		@conference_registration = ConferenceRegistration.find_by(confirmation_token: params[:confirmation_token])
 		host = "#{request.protocol}#{request.host_with_port}"
 		if !@conference_registration.nil? && @conference_registration.conference_id == @conference.id && @conference_registration.complete
-			if params[:payment_amount].nil?
+			amount = (params[:auto_payment_amount] || params[:payment_amount]).to_f
+			if amount > 0
+				response = PayPal!.setup(
+					PayPalRequest(amount),
+					host + (@conference.url + "/register/paypal-confirm/#{@conference_registration.payment_confirmation_token}/").gsub(/\/\/+/, '/'),
+					host + (@conference.url + "/register/paypal-cancel/#{@conference_registration.confirmation_token}/").gsub(/\/\/+/, '/')
+				)
+				redirect_to response.redirect_uri
+			else
 				session[:registration] = YAML.load(@conference_registration.data)
 				session[:registration][:registration_id] = @conference_registration.id
 				session[:registration][:path] = Array.new
 				session[:registration_step] = 'pay_now'
 				redirect_to action: 'register'
-			else
-				begin
-					paypal_info = get_secure_info(:paypal)
-					request = Paypal::Express::Request.new(
-						:username   => paypal_info[:username],
-						:password   => paypal_info[:password],
-						:signature  => paypal_info[:signature]
-					)
-					payment_request = Paypal::Payment::Request.new(
-						:currency_code => 'USD',   # if nil, PayPal use USD as default
-						:description   => 'Conference Registration',    # item description
-						:quantity      => 1,      # item quantity
-						:amount        => params[:payment_amount].to_f,   # item value
-						:custom_fields => {
-							CARTBORDERCOLOR: "00ADEF",
-							LOGOIMG: "https://cdn.bikebike.org/assets/bblogo-paypal.png"
-						}
-					)
-					response = request.setup(
-						payment_request,
-						host + (@conference.url + "/register/confirm-payment/#{@conference_registration.payment_confirmation_token}/").gsub(/\/\/+/, '/'),
-						host + (@conference.url + "/register/cancel-payment/#{@conference_registration.confirmation_token}/").gsub(/\/\/+/, '/')
-					)
-					redirect_to response.redirect_uri
-				rescue Exception => e
-					ddd
-				end
 			end
-		elsif params[:test]
-			paypal_info = get_secure_info(:paypal)
-			request = Paypal::Express::Request.new(
-				:username   => paypal_info[:username],
-				:password   => paypal_info[:password],
-				:signature  => paypal_info[:signature]
-			)
-			payment_request = Paypal::Payment::Request.new(
-				:currency_code => 'USD',   # if nil, PayPal use USD as default
-				:description   => 'Conference Registration Test',    # item description
-				:quantity      => 1,      # item quantity
-				:amount        => 25.0,   # item value
-				:custom_fields => {
-					CARTBORDERCOLOR: "00ADEF",
-					LOGOIMG: "https://cdn.bikebike.org/assets/bblogo-paypal.png"
-				}
-			)
-			response = request.setup(
-				payment_request,
-				host + @conference.url,
-				host + @conference.url
-			)
-			redirect_to response.redirect_uri
 		else
 			do_404
 		end
 	end
 
-	def register_confirm_payment
+	def register_paypal_confirm
 		set_conference
 		@conference_registration = ConferenceRegistration.find_by(payment_confirmation_token: params[:confirmation_token])
-		if !@conference_registration.nil? && @conference_registration.conference_id == @conference.id && @conference_registration.complete && @conference_registration.payment_info.nil?
-			@conference_registration.payment_info = "#{params[:PayerID]}:#{params[:token]}"
+		if !@conference_registration.nil? && @conference_registration.conference_id == @conference.id && @conference_registration.complete && @conference_registration.registration_fees_paid.nil?
+			@conference_registration.payment_info = {:payer_id => params[:PayerID], :token => params[:token], :amount => PayPal!.details(params[:token]).amount.total}.to_yaml
 			@conference_registration.save!
 			session[:registration] = YAML.load(@conference_registration.data)
 			session[:registration][:registration_id] = @conference_registration.id
 			session[:registration][:path] = Array.new
-			session[:registration_step] = 'payment-confirmed'
+			session[:registration_step] = 'paypal-confirmed'
 			redirect_to action: 'register'
 		else
 			do_404
 		end
 	end
 
-	def register_cancel_payment
+	def register_paypal_cancel
 		set_conference
 		@conference_registration = ConferenceRegistration.find_by(confirmation_token: params[:confirmation_token])
 		if !@conference_registration.nil? && @conference_registration.conference_id == @conference.id && @conference_registration.complete && @conference_registration.payment_info.nil?
 			session[:registration] = YAML.load(@conference_registration.data)
 			session[:registration][:registration_id] = @conference_registration.id
 			session[:registration][:path] = Array.new
-			session[:registration_step] = 'payment-cancelled'
+			session[:registration_step] = 'paypal-cancelled'
 			redirect_to action: 'register'
 		end
 	end
@@ -789,4 +763,26 @@ class ConferencesController < ApplicationController
 			data ||= YAML.load(registration.data)
 			UserMailer.conference_registration_payment_received(@conference, data, registration).deliver
 		end
+
+	def PayPal!
+		paypal_info = get_secure_info(:paypal)
+		Paypal::Express::Request.new(
+			:username   => paypal_info[:username],
+			:password   => paypal_info[:password],
+			:signature  => paypal_info[:signature]
+		)
+	end
+
+	def PayPalRequest(amount)
+		Paypal::Payment::Request.new(
+			:currency_code => 'USD',   # if nil, PayPal use USD as default
+			:description   => 'Conference Registration',    # item description
+			:quantity      => 1,      # item quantity
+			:amount        => amount.to_f,   # item value
+			:custom_fields => {
+				CARTBORDERCOLOR: "00ADEF",
+				LOGOIMG: "https://cdn.bikebike.org/assets/bblogo-paypal.png"
+			}
+		)
+	end
 end

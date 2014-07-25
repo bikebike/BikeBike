@@ -28,12 +28,16 @@
 	padding: 0.5em 1em;
 	vertical-align: middle;
 
-	&.organization, &.secondary {
+	&.organization, &.secondary, &.best {
 		background-color: $organization-color;
 	}
 
-	&.article {
+	&.article, &.good {
 		background-color: $article-color;
+	}
+
+	&.better {
+		background-color: darken($warning-color, 2);
 	}
 
 	&:hover {
@@ -41,11 +45,15 @@
 		border: 0.15em solid;
 		background-color: transparent;
 
-		&.organization {
+		&.organization, &.secondary, &.best {
 			color: $organization-color;
 		}
 
-		&.article {
+		&.better {
+			color: darken($warning-color, 2);
+		}
+
+		&.article, &.good {
 			color: $article-color;
 		}
 	}
@@ -624,4 +632,25 @@ article {
 }
 p.help {
 	font-size: 1.1em;
+}
+
+.small-form {
+	> .field {
+		display: inline-block;
+		vertical-align: baseline;
+		width: 10em;
+
+		input {
+			text-align: right;
+		}
+
+		label {
+			display: none;
+		}
+	}
+
+	.actions {
+		display: inline-block;
+		vertical-align: middle;
+	}
 }

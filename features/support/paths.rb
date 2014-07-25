@@ -8,10 +8,10 @@ module NavigationHelpers
 				path = "/conferences/bikebike/#{@last_conference.slug}/register/confirm/#{@last_registration.confirmation_token}"
 			when /^pay registration$/i
 				path = "/conferences/bikebike/#{@last_conference.slug}/register/pay-registration/#{@last_registration.confirmation_token}"
-			when /^confirm payment$/i
-				path = "/conferences/bikebike/#{@last_conference.slug}/register/confirm-payment/#{@last_registration.payment_confirmation_token}"
-			when /^cancel payment$/i
-				path = "/conferences/bikebike/#{@last_conference.slug}/register/cancel-payment/#{@last_registration.confirmation_token}"
+			when /^paypal confirm$/i
+				path = "/conferences/bikebike/#{@last_conference.slug}/register/paypal-confirm/#{@last_registration.payment_confirmation_token}"
+			when /^paypal cancel$/i
+				path = "/conferences/bikebike/#{@last_conference.slug}/register/paypal-cancel/#{@last_registration.confirmation_token}"
 			when /^translation list$/i
 				path = '/translations/'
 			when /^(.+) translations?$/i

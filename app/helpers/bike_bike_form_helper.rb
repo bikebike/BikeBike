@@ -41,6 +41,7 @@ module BikeBikeFormHelper
 	end
 
 	def number_field_tag(name, value = nil, options = {})
+        options[:_no_wrapper] = true
 		render_field(name, options = get_options(name, options), super(name, value, options), value)
 	end
 
@@ -77,6 +78,10 @@ module BikeBikeFormHelper
 	end
 
 	def text_field_tag(name, value = nil, options = {})
+        if options[:_no_wrapper]
+            options.delete(:_no_wrapper)
+            options[:no_wrapper] = true
+        end
 		render_field(name, options = get_options(name, options), super(name, value, options), value)
 	end
 
@@ -148,6 +153,7 @@ module BikeBikeFormHelper
 	end
 
 	def number_field(object_name, method, options = {})
+        options[:_no_wrapper] = true
 		render_field(method, options = get_options(method, options), super(object_name, method, options), get_value(method, options))
 	end
 
@@ -180,6 +186,10 @@ module BikeBikeFormHelper
 	end
 
 	def text_field(object_name, method, options = {})
+        if options[:_no_wrapper]
+            options.delete(:_no_wrapper)
+            options[:no_wrapper] = true
+        end
 		render_field(method, options = get_options(method, options), super(object_name, method, options), get_value(method, options))
 	end
 	

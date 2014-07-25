@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140723183557) do
+ActiveRecord::Schema.define(version: 20140725001300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20140723183557) do
     t.boolean  "completed"
     t.string   "payment_confirmation_token"
     t.string   "payment_info"
+    t.integer  "registration_fees_paid"
   end
 
   create_table "conference_types", force: true do |t|

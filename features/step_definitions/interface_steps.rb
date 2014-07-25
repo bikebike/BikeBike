@@ -181,7 +181,7 @@ end
 
 Then (/^my registration (should( not)? be|is( not)?) (confirmed|completed?|paid)$/) do |state, x, y, field|
 	ConferenceRegistration.find_by!(:email => @last_email_entered).
-		send(field == 'confirmed' ? 'is_confirmed' : (field == 'paid' ? 'payment_info' : field)).
+		send(field == 'confirmed' ? 'is_confirmed' : (field == 'paid' ? 'registration_fees_paid' : field)).
 		send(state =~ / not/ ? 'should_not' : 'should', be)
 end
 

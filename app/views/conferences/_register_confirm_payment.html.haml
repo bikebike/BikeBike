@@ -1,0 +1,5 @@
+- if @registration && @registration.is_participant && @registration.complete && @registration.payment_info.present?
+	- info = YAML.load(@registration.payment_info)
+	%h3=_'registration.payment_confirm.title','Please confirm your payment'
+	.columns
+		%p=_'registration.payment_confirm.help',"You are about to confirm your payment of #{number_to_currency(info[:amount], :unit => '$')} USD for registration.", vars: {:amount => number_to_currency(info[:amount], :unit => '$')}
