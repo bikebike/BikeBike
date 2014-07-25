@@ -43,7 +43,7 @@
 					%a.button.more{href: @conference.url}
 						=_'conference.More_Info'
 				- if @conference.registration_open && !small_banner
-					%a.button#register-now{href: @conference.url(:register)}
+					%a.button#register-now.register-now{href: @conference.url(:register)}
 						=_'conference.Register_Now'
 					#register-dlg
 						= form_tag (@conference.url + '/register/').gsub(/\/\/+/, '/'), :method => :post do
@@ -53,7 +53,7 @@
 - if !small_banner && @conference.registration_open
 	- content_for :dom_ready do
 		:plain
-			$('#register-now').click(function(e) {
+			$('a.register-now').click(function(e) {
 				e.preventDefault();
 				if ($('#register-dlg').hasClass('open')) {
 					$('#register-dlg form').submit();

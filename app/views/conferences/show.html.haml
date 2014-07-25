@@ -21,6 +21,11 @@
 		- else
 			%h2=('About '+@conference.title)
 			=p @conference, :info
+			- if @conference.registration_open
+				.columns.small-12.centered
+					%a.button.register-now{href: @conference.url(:register)}
+						=_'conference.Register_Now'
+
 
 - content_for :side_bar do
 	%h5= @conference.title+' is hosted by:'
