@@ -13,7 +13,9 @@ namespace :translations do
 						translation = Translation.find(hash['id'])
 						translation.update_attributes(hash)
 					rescue
-						Translation.new(hash).save
+						begin
+							Translation.new(hash).save
+						rescue; end
 					end
 				}
 			end
