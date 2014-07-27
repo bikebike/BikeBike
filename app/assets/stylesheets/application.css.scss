@@ -1,5 +1,4 @@
 /*
- *= require froala_editor.min.css
  *
  */
 
@@ -44,6 +43,7 @@
 
 // Local settings (also edit foundation_and_overrides.scss to modify global variables)
 @import "sass/mixins";
+@import "sass/froala_editor";
 @import "sass/layout";
 @import "sass/typography";
 @import "sass/base";
