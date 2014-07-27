@@ -394,6 +394,15 @@ class ConferencesController < ApplicationController
 		{error: false, next_step: params[:cancel] ? 'cancel' : next_step}
 	end
 	
+	def workshop_test
+		set_conference
+		@register_step = 'new_workshop'
+		@register_template = 'register_new_workshop'
+		session[:registration] = {:workshop => [Hash.new]}
+		session[:registration][:workshop_index] = 0
+		render 'show'
+	end
+
 	def register
 		is_post = request.post? || session[:registration_step]
 		set_conference
