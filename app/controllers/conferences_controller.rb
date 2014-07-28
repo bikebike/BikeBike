@@ -422,6 +422,10 @@ class ConferencesController < ApplicationController
 			return
 		end
 
+		if data[:next_step].blank?
+			session.delete(:registration)
+		end
+
 		data = register_submit
 		@register_step = is_post ? data[:next_step] : 'register'
 		@error_message = data[:error] ? data[:message] : nil
