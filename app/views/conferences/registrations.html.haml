@@ -60,11 +60,11 @@
 				- if data[:questions][:housing_extra].present?
 					%tr
 						%th='Housing Notes'
-						%td{rowspan: 7}=data[:questions][:housing_extra]
+						%td{colspan: 7}=data[:questions][:housing_extra]
 				- if data[:questions][:other].present?
 					%tr
 						%th='Other Notes'
-						%td{rowspan: 7}=data[:questions][:other]
+						%td{colspan: 7}=data[:questions][:other]
 
 		%h3=_'conference.registrations.workshops.title','Workshops'
 		%ul
