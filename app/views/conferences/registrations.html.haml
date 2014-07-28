@@ -1,0 +1,81 @@
+- location = @conference.organizations.first.locations.first
+- location_name = location.city + ', ' + (location.territory ? Carmen::Country.coded(location.country).subregions.coded(location.territory).name : location.country)
+
+- title @conference.title
+- description "#{@conference.title} conference in #{location_name} for DIY bicycle collectives, co-ops, and advocacy groups"
+= render 'header'
+- stats = {confirmed: 0, completed: 0, total: 0, paid: 0, collected: 0}
+%article.row
+	.columns.large-10
+		%h2=_'conference.registrations.title','Registrations'
+		%table.registrations
+			%tr
+				%th='Email'
+				%th='First Name'
+				%th='Last Name'
+				%th='Preferred Name'
+				%th='Confirmed?'
+				%th='Completed?'
+				%th='Paid?'
+			- @registrations.each do |registration|
+				%tr
+					- data = YAML.load(registration.data)
+					- user = User.find_by(:email => registration.email)
+					- stats[:total] += 1
+					- stats[:confirmed] += (registration.is_confirmed ? 1 : 0)
+					- stats[:completed] += (registration.completed ? 1 : 0)
+					- stats[:paid] += (registration.registration_fees_paid ? 1 : 0)
+					- stats[:collected] += (registration.registration_fees_paid || 0)
+					%td.user{rowspan: 2, id: user ? "user-#{user.id}" : nil}=registration.email
+					%td=data[:user][:firstname]
+					%td=data[:user][:lastname]
+					%td=data[:user][:username]
+					%td=registration.is_confirmed ? 'Yes' : 'No'
+					%td=registration.completed ? 'Yes' : 'No'
+					%td=registration.registration_fees_paid.nil? ? 'No' : 'Yes'
+				- if user.present?
+					%tr
+						%th='Organizations'
+						%td{colspan: 2}
+							- UserOrganizationRelationship.where(:user_id => user.id).each do |rel|
+								- org = Organization.find(rel.organization_id)
+								- location_name = "#{org.locations[0].city}, #{org.locations[0].territory}"
+								= link_to "#{org.name} (#{location_name})", org
+						%th='Workshops'
+						%td{colspan: 2}
+							- Workshop.where('workshop_facilitators.user_id' => user.id, :conference_id => @conference.id).joins(:workshop_facilitators).each do | workshop |
+								%a{href: "#workshop-#{workshop.slug}"}= workshop.title
+
+		%h3=_'conference.registrations.workshops.title','Workshops'
+		%ul
+			- Workshop.where(:conference_id => @conference.id).each do |workshop|
+				%li.workshop{id: "workshop-#{workshop.slug}"}
+					.columns
+						%h4=workshop.title
+					.columns.medium-10.medium-offset-1.end
+						= workshop.info.html_safe
+					.columns.medium-8.medium-offset-2.end
+						%h5='Facilitators'
+						- workshop.workshop_facilitators.each do |facilitator|
+							- user = User.find(facilitator.user_id)
+							%div
+								%a{href: "#user-#{user.id}"}="#{user.username} (#{user.email})"
+
+- content_for :side_bar do
+	%h5='Stats'
+	%table
+		%tr
+			%th='Confirmed Registrations:'
+			%td=stats[:confirmed]
+		%tr
+			%th='Unconfirmed Registrations:'
+			%td=(stats[:total] - stats[:confirmed])
+		%tr
+			%th='Completed Registrations:'
+			%td=stats[:completed]
+		%tr
+			%th='Incomplete Registrations:'
+			%td=(stats[:total] - stats[:completed])
+		%tr
+			%th='Fees Collected:'
+			%td=number_to_currency(stats[:collected], :unit => '$')

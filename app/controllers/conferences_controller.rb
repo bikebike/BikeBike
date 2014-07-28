@@ -2,7 +2,15 @@ require 'geocoder/calculations'
 require 'rest_client'
 
 class ConferencesController < ApplicationController
-	before_action :set_conference, only: [:show, :edit, :update, :destroy]
+	before_action :set_conference, only: [:show, :edit, :update, :destroy, :registrations]
+	before_filter :authenticate, only: [:registrations]
+
+	def authenticate
+		auth = get_secure_info(:registrations_access)
+		authenticate_or_request_with_http_basic('Administration') do |username, password|
+			username == auth[:username] && password == auth[:password]
+		end
+	end
 
 	# GET /conferences
 	def index
@@ -404,15 +412,6 @@ class ConferencesController < ApplicationController
 		#end
 		{error: false, next_step: params[:cancel] ? 'cancel' : next_step}
 	end
-	
-	def workshop_test
-		set_conference
-		@register_step = 'new_workshop'
-		@register_template = 'register_new_workshop'
-		session[:registration] = {:workshop => [Hash.new]}
-		session[:registration][:workshop_index] = 0
-		render 'show'
-	end
 
 	def register
 		is_post = request.post? || session[:registration_step]
@@ -494,6 +493,11 @@ class ConferencesController < ApplicationController
 			@register_template = template
 			render 'show'
 		end
+	end
+
+	def registrations
+		registrations = ConferenceRegistration.where(:conference_id => @conference.id)
+		@registrations = registrations
 	end
 
 	def register_confirm

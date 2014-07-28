@@ -491,3 +491,18 @@ ul.tags,
 		}
 	}
 }
+
+.workshop {
+	list-style: none;
+	overflow: auto;
+
+	&:target {
+		background-color: $color-5;
+	}
+}
+
+.registrations .user {
+	&:target {
+		background-color: $color-5;
+	}
+}

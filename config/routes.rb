@@ -20,6 +20,7 @@ BikeBike::Application.routes.draw do
             match 'register/pay-registration/:confirmation_token' => 'conferences#register_pay_registration', via: [:get, :post]
             get 'register/paypal-confirm/:confirmation_token' => 'conferences#register_paypal_confirm'
             get 'register/paypal-cancel/:confirmation_token' => 'conferences#register_paypal_cancel'
+            get 'registrations' => 'conferences#registrations'
             #patch 'register/step/:step' => 'conferences#register_step'
 			#resources :registrations, :path => 'registration' do
 			#	get :form, on: :collection
