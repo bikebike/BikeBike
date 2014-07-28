@@ -128,7 +128,7 @@ class ConferencesController < ApplicationController
 			when 'confirm'
 				if session[:registration][:is_participant]
 					@registration = ConferenceRegistration.find(session[:registration][:registration_id])
-					if registration.completed
+					if @registration.completed
 						complete_registration
 						next_step = 'thanks'
 					else
