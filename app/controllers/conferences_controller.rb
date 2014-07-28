@@ -513,6 +513,7 @@ class ConferencesController < ApplicationController
 			session[:registration] = YAML.load(@conference_registration.data)
 			session[:registration][:path] = Array.new
 			session[:registration][:registration_id] = @conference_registration.id
+			puts "ID: #{@conference_registration.id}"
 			session[:registration_step] = 'confirm'
 			redirect_to action: 'register'
 		else
