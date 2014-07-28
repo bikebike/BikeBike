@@ -1,4 +1,7 @@
-- registration = ConferenceRegistration.find(session[:registration][:registration_id])
+- puts session[:registration][:registration_id]
+- registration = ConferenceRegistration.find_by(:email => session[:registration][:email])
+- session[:registration][:registration_id] = registration.id
+- puts session[:registration][:registration_id]
 - if registration && registration.is_confirmed
 	%h3=_'register.organizations.confirm_thanks.title','Thanks for confirming!'
 	- if session[:registration][:is_workshop_host]
