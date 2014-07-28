@@ -766,7 +766,7 @@ class ConferencesController < ApplicationController
 		end
 
 		def create_registration
-			if !session[:registration][:registration_id]
+			if session[:registration][:registration_id].blank? || !ConferenceRegistration.exists?(session[:registration][:registration_id])
 				registration = ConferenceRegistration.new(
 					:conference_id		=> @conference.id,
 					:user_id			=> session[:registration][:user][:id],
