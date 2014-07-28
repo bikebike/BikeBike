@@ -146,7 +146,7 @@ class ConferencesController < ApplicationController
 						session[:registration][:user][:lastname] = user ? user.lastname : nil
 						session[:registration][:user][:username] = user ? user.username : nil
 					end
-					next_step = 'primary'
+					next_step = 'questions'
 				end
 			when 'primary'
 				if params[:firstname].blank? || params[:lastname].blank?
@@ -283,6 +283,17 @@ class ConferencesController < ApplicationController
 					end
 				end
 			when 'questions'
+				if params[:firstname].blank? || params[:lastname].blank?
+					error = _'registration.register.no_name_error',"Oh, c'mon, please tell us your name. We promise not to share it with anyone, we just don't want to get you mixed up with someone else."
+				end
+				session[:registration][:user][:firstname] = params[:firstname]
+				session[:registration][:user][:lastname] = params[:lastname]
+				session[:registration][:is_volunteer] = false
+				session[:registration][:is_participant] = true
+				if !session[:registration][:user][:id]
+					session[:registration][:user][:username] = !error && params[:username].blank? ? (params[:firstname] + ' ' + params[:lastname]) : params[:username]
+				end
+
 				session[:registration][:questions] = params[:questions].deep_symbolize_keys
 				session[:registration][:is_workshop_host] = !params[:is_workshop_host].to_i.zero?
 				next_step = 'organizations'

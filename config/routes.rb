@@ -14,7 +14,7 @@ BikeBike::Application.routes.draw do
             #resources :workshops, :param => 'slug'
 			#get :register, :param => 'step'
             #post 'register/next' => 'conferences#register_submit'
-            get 'register/workshop-test/' => 'conferences#workshop_test'
+            # get 'register/workshop-test/' => 'conferences#workshop_test'
             match 'register(/:step)' => 'conferences#register', via: [:get, :post]
             get 'register/confirm/:confirmation_token' => 'conferences#register_confirm'
             match 'register/pay-registration/:confirmation_token' => 'conferences#register_pay_registration', via: [:get, :post]

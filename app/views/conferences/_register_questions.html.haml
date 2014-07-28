@@ -1,4 +1,12 @@
-%h3=_'registration.questions.title','Conference Participant Information'
+.columns
+	%h3=_'registration.questions.title','Attendance Questions'
+.columns.medium-5.medium-offset-1
+	= text_field_tag :firstname, session[:registration][:user][:firstname], :required => true
+.columns.medium-5.end
+	= text_field_tag :lastname, session[:registration][:user][:lastname], :required => true
+.columns.medium-8.medium-offset-2.end
+	- if !session[:registration][:user][:id]
+		= text_field_tag :username, session[:registration][:user][:username]
 .columns.medium-offset-1.end
 	%h4=_'registration.questions.housing','Do you require housing?'
 	%p.help=_'registration.questions.housing.help','We will do our best to accommodate everyone but we will be working on a first come, first serve basis. If we cannot accommodate your needs, we will do our best to let you know ahead of time.'
