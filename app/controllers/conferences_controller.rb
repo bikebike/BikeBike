@@ -221,7 +221,7 @@ class ConferencesController < ApplicationController
 					error = _'registration.register.no_organization_error',"Please select an organization or enter a new one"
 				end
 			when 'new_organization'
-				if params[:name].blank?
+				if params[:organization_name].blank?
 					error = _'register.new_organization.no_name_error',"Please tell us your organization's name"
 				end
 				if params[:organization_email].blank?
@@ -229,10 +229,10 @@ class ConferencesController < ApplicationController
 				elsif params[:organization_email].strip.casecmp(session[:registration][:email].strip)
 					error ||= _'register.new_organization.same_email_as_attendee_error',"This email needs to be different than your own personal email, we need to keep in touch with your organization even if you're gone in years to come."
 				end
-				if params[:street].blank?
+				if params[:organization_street].blank?
 					error ||= _'register.new_organization.no_street_error','Please enter your organization\'s street address'
 				end
-				if params[:city].blank?
+				if params[:organization_city].blank?
 					error ||= _'register.new_organization.no_city_error','Please enter your organization\'s city'
 				end
 				i = params[:new_org_index].to_i
