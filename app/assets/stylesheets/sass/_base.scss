@@ -502,6 +502,8 @@ ul.tags,
 }
 
 .registrations .user {
+	vertical-align: top;
+	
 	&:target {
 		background-color: $color-5;
 	}
