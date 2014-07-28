@@ -26,7 +26,7 @@
 					- stats[:completed] += (registration.completed ? 1 : 0)
 					- stats[:paid] += (registration.registration_fees_paid ? 1 : 0)
 					- stats[:collected] += (registration.registration_fees_paid || 0)
-					%td.user{rowspan: 2, id: user ? "user-#{user.id}" : nil}=registration.email
+					%td.user{rowspan: (user.present? ? 2 : nil), id: user ? "user-#{user.id}" : nil}=registration.email
 					%td=data[:user][:firstname]
 					%td=data[:user][:lastname]
 					%td=data[:user][:username]
