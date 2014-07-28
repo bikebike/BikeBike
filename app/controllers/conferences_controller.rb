@@ -226,7 +226,7 @@ class ConferencesController < ApplicationController
 				end
 				if params[:organization_email].blank?
 					error ||= _'register.new_organization.no_email_error',"Please tell us your organization's email address. We need it so that we can send out invitations for upcoming conferences. No spam, we promise, and you'll be able to edit your preferences before we start ending out email."
-				elsif params[:organization_email].strip.casecmp(session[:registration][:email].strip)
+				elsif params[:organization_email].strip.casecmp(session[:registration][:email].strip) == 0
 					error ||= _'register.new_organization.same_email_as_attendee_error',"This email needs to be different than your own personal email, we need to keep in touch with your organization even if you're gone in years to come."
 				end
 				if params[:organization_street].blank?
