@@ -437,9 +437,6 @@ class ConferencesController < ApplicationController
 		end
 		@actions = nil
 		@multipart = false
-		if @register_step == 'register'
-			session.delete(:registration)
-		end
 		case @register_step
 			when  'register', 'organizations', 'new_organization', 'new_workshop', 'volunteer_questions'
 				@actions = :next
