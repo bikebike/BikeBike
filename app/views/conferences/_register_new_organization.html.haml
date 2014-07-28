@@ -1,10 +1,14 @@
-- org_index = session[:registration][:new_org_index]
+- org_index = session[:registration][:new_org_index] || 0
+- if session[:registration][:new_organization].nil?
+	- session[:registration][:new_organization] = Array.new
+	- session[:registration][:new_organization][0] = Hash.new
+	- org_index = 0
 = hidden_field_tag :new_org_index, org_index
 - if session[:registration][:new_organization].length > 1
 	%h3=_'registration.new_organization.list.title','Your New Organizations'
 	%ul.columns.medium-11.medium-offset-1.end
 		- session[:registration][:new_organization].each_with_index do |new_organization, index|
-			- if new_organization[:name]
+			- if new_organization.present? && new_organization[:name].present?
 				%li
 					- if index == org_index && new_organization[:name]
 						%strong=new_organization[:name]
