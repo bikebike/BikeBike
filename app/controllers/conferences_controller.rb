@@ -127,7 +127,7 @@ class ConferencesController < ApplicationController
 		case session[:registration_step] || params['step']
 			when 'confirm'
 				if session[:registration][:is_participant]
-					registration = ConferenceRegistration.find(session[:registration][:registration_id])
+					@registration = ConferenceRegistration.find(session[:registration][:registration_id])
 					if registration.completed
 						complete_registration
 						next_step = 'thanks'
@@ -305,7 +305,7 @@ class ConferencesController < ApplicationController
 				session[:registration][:questions] = params[:questions].deep_symbolize_keys
 				session[:registration][:is_workshop_host] = !params[:is_workshop_host].to_i.zero?
 				next_step = 'organizations'
-				if params[:submit] || params[:next]
+				if params[:cancel].blank?#params[:submit] || params[:next]
 					if !session[:registration][:organizations]
 						user = User.find_by(:email => session[:registration][:email])
 						session[:registration][:organizations] = Array.new

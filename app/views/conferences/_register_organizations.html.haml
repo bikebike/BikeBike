@@ -1,5 +1,5 @@
-- registration = ConferenceRegistration.find(session[:registration][:registration_id])
-- if registration && registration.is_confirmed
+-# registration = ConferenceRegistration.find(session[:registration][:registration_id])
+- if @registration && @registration.is_confirmed
 	%h3=_'register.organizations.confirm_thanks.title','Thanks for confirming!'
 	- if session[:registration][:is_workshop_host]
 		%p=_'register.organizations.confirm_thanks.is_workshop_host.help','Before you finish, we would just like to find out where you\'re coming from and get some info about your workshop.'
