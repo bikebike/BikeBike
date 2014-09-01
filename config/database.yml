@@ -18,8 +18,8 @@ development:
   adapter: postgresql
   encoding: unicode
   database: bike_bike_dev
-  username: bike_bike
-  password: NewOrleans@)!#
+  username: dylan
+  password: godwin
   host: 127.0.0.1
   port: 5432
   pool: 5
@@ -38,8 +38,8 @@ test: &test
   adapter: postgresql
   encoding: unicode
   database: bike_bike_test
-  username: bike_bike
-  password: NewOrleans@)!#
+  username: dylan
+  password: godwin
   host: 127.0.0.1
   port: 5432
   pool: 5
@@ -48,11 +48,12 @@ production:
   adapter: postgresql
   encoding: unicode
   database: bike_bike
-  username: bike_bike
-  password: NewOrleans@)!#
+  username: dylan
+  password: godwin
   host: 127.0.0.1
   port: 5432
   pool: 5
 
 cucumber:
   <<: *test
+
