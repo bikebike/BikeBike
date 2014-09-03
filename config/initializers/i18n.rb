@@ -65,8 +65,8 @@ module I18n
 		class BikeBike < I18n::Backend::ActiveRecord
 			@@needs_translation
 
-			@@translations_file = 'config/locales/translation-info.yml'
-			@@translation_cache_file = 'config/locales/.translation-cache.yml'
+			@@translations_file = 'tmp/locales/translation-info.yml'
+			@@translation_cache_file = 'tmp/locales/.translation-cache.yml'
 			@@pluralization_rules_file = 'config/locales/pluralization-rules.yml'
 			@@translation_cache
 			@@testing_started = false
