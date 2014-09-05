@@ -68,4 +68,5 @@ brakeman.html
 # Ignore sensitive data
 /config/settings/local.rb
 /nbproject/private/
+<<<<<<< HEAD
 /config/database.yml
