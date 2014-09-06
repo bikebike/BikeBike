@@ -26,7 +26,7 @@ module BikeBike
 		# config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
 		config.i18n.default_locale = :en #:de
 		config.i18n.enforce_available_locales = false
-		self.paths['config/database'] = Rails.root.parent.join("secure/database.yml").to_s
+		self.paths['config/database'] = Rails.root.parent.join('BikeBike', 'config', 'database.yml')
 		# config.action_controller.default_url_options = { :trailing_slash => true }
 		#config.middleware.swap 'Rack::MethodOverride', 'Rack::MethodOverrideWithParams'
 		#config.i18n.exception_handler = I18n::MissingTranslationExceptionHandler.new

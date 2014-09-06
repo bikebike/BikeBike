@@ -19,7 +19,7 @@ development:
   encoding: unicode
   database: bike_bike_dev
   username: bike_bike
-  password: NewOrleans@)!#
+  password: password
   host: 127.0.0.1
   port: 5432
   pool: 5
@@ -39,7 +39,7 @@ test: &test
   encoding: unicode
   database: bike_bike_test
   username: bike_bike
-  password: NewOrleans@)!#
+  password: password
   host: 127.0.0.1
   port: 5432
   pool: 5
@@ -49,10 +49,11 @@ production:
   encoding: unicode
   database: bike_bike
   username: bike_bike
-  password: NewOrleans@)!#
+  password: password
   host: 127.0.0.1
   port: 5432
   pool: 5
 
 cucumber:
   <<: *test
+
