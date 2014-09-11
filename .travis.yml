@@ -7,5 +7,8 @@ before_install:
 before_script:
   - cp config/database.yml.travis config/database.yml
   - psql -c 'create database travis_ci_test;' -U postgres
+  # consider dumping sql via db:structure:dump then loading directly into psql
+  # "psql -U postgres -q -d DB_NAME -f db/structure.sql"
+  - bundle exec rake db:test:prepare
 script: bundle exec cucumber
 env: RAILS_ENV=test
