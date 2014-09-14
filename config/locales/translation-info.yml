@@ -6,6 +6,16 @@ world.ca.ns.name:
   - /conferences/:conference_type/:conference_slug/register(/:step)
   - /location/territories
   data: []
+time.formats.date:
+  languages: []
+  pages:
+  - /
+  data: []
+date.month_names:
+  languages: []
+  pages:
+  - /
+  data: []
 conference.More_Info:
   languages: []
   pages:
