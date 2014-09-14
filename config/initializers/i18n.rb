@@ -139,7 +139,7 @@ module I18n
 				if lang === false
 					lang = nil
 				elsif lang.nil?
-					if (lang = host.gsub(/^(dev|test|www)[\-\.](.*)$/, '\2').gsub(/^(([^\.]+)\.)?[^\.]+\.[^\.]+$/, '\2')).blank?
+					if (lang = host.gsub(/^(dev|test|www)[\-\.](.*)$/, '\2').gsub(/^(([^\.]+)\.)?[^\.]+\.[^\.]+$/, '\2')).blank? || (host == "localhost")
 						lang = default
 					end
 					if get_language_codes().include? lang
