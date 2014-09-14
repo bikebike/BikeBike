@@ -9,7 +9,7 @@ $ ->
 		if $territory.data().country == country
 			$territory.removeClass('can cant').addClass('can')
 			return
-		
+
 		$.post '/location/territories', {country: country},
 			(json) ->
 				$territory.html('')
@@ -23,7 +23,7 @@ $ ->
 					$territory.removeClass('can cant').addClass('cant')
 				return
 		, 'json'
-	$('img + input[type="file"]').change () -> 
+	$('img + input[type="file"]').change () ->
 		readURL(this);
 		return
 

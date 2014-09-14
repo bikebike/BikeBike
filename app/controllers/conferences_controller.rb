@@ -144,6 +144,7 @@ class ConferencesController < ApplicationController
 				if !registration.nil?
 					session[:registration] = YAML.load(registration.data)
 					session[:registration][:registration_id] = registration.id
+					puts 'XXXXXXXXXXXXXXXXXXXXXXXX'
 					next_step = (registration.completed.blank? && registration.is_participant.present? ? 'organizations' : 'thanks')
 				else
 					if !session[:registration][:user] || !session[:registration][:user][:firstname]
@@ -435,7 +436,7 @@ class ConferencesController < ApplicationController
 			do_404
 			return
 		end
-		
+
 		if session[:registration]
 			session[:registration][@register_step.to_sym] ||= Hash.new
 		end
@@ -513,7 +514,6 @@ class ConferencesController < ApplicationController
 			session[:registration] = YAML.load(@conference_registration.data)
 			session[:registration][:path] = Array.new
 			session[:registration][:registration_id] = @conference_registration.id
-			puts "ID: #{@conference_registration.id}"
 			session[:registration_step] = 'confirm'
 			redirect_to action: 'register'
 		else
@@ -594,19 +594,19 @@ class ConferencesController < ApplicationController
 		@conference.registration_form_fields << field
 
 		@registration_form_fields = RegistrationFormField.where(["id NOT IN (?)", @conference.registration_form_fields.map(&:id)])
-		
+
 		form = render_to_string :partial => 'registration_form_fields/conference_form'
 		list = render_to_string :partial => 'registration_form_fields/list'
 		render json: {form: form, list: list}
 	end
-	
+
 	def remove_field
 		set_conference
 		field = RegistrationFormField.find(params[:field])
 		@conference.registration_form_fields.delete(field)
 
 		@registration_form_fields = RegistrationFormField.where(["id NOT IN (?)", @conference.registration_form_fields.map(&:id)])
-		
+
 		form = render_to_string :partial => 'registration_form_fields/conference_form'
 		list = render_to_string :partial => 'registration_form_fields/list'
 		render json: {form: form, list: list}
@@ -619,7 +619,7 @@ class ConferencesController < ApplicationController
 		end
 		render json: [].to_json
 	end
-	
+
 	def form
 		set_conference
 	end

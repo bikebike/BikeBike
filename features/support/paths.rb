@@ -6,6 +6,8 @@ module NavigationHelpers
 				path = :root
 			when /^confirmation$/i
 				path = "/conferences/bikebike/#{@last_conference.slug}/register/confirm/#{@last_registration.confirmation_token}"
+			when /^registration$/i
+				path = "/conferences/bikebike/#{@last_conference.slug}/register/"
 			when /^pay registration$/i
 				path = "/conferences/bikebike/#{@last_conference.slug}/register/pay-registration/#{@last_registration.confirmation_token}"
 			when /^confirm paypal$/i

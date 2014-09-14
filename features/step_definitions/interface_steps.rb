@@ -14,9 +14,11 @@ When(/^I go to the (.+) page$/) do |page_name|
 	visit path_to(page_name.to_sym)
 end
 
-When(/^(I )?(finish|cancel) ((with )?paypal)$/) do |a, action, b, c|
-	@last_registration.payment_info = {:payer_id => '1234', :token => '5678', :amount => @last_payment_amount}.to_yaml
-	@last_registration.save!
+When(/^(I )?(finish|cancel) ((with )?(paypal|the payment))$/) do |a, action, b, c, d|
+	if action != 'cancel'
+		@last_registration.payment_info = {:payer_id => '1234', :token => '5678', :amount => @last_payment_amount}.to_yaml
+		@last_registration.save!
+	end
 	visit path_to((action == 'finish' ? 'confirm' : action) + ' paypal')
 end
 

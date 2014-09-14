@@ -70,7 +70,7 @@ module ApplicationHelper
 	def has_banner?
 		!@@no_banner
 	end
-	
+
 	def has_content?
 		@@has_content
 	end
@@ -78,7 +78,7 @@ module ApplicationHelper
 	def has_no_content
 		@@has_content = false
 	end
-	
+
 	def banner_title(banner_title)
 		@@no_banner = false
 		content_for(:banner) { ('<div class="row"><h1>' + banner_title.to_s + '</h1></div>').html_safe }
@@ -154,7 +154,7 @@ module ApplicationHelper
 		#	puts "\nVARS:\t#{vars}\n"
 		#end
 		I18n.translate(key, options)
-		
+
 		#queued_keys = nil
 #		#result = nil
 #
@@ -310,8 +310,8 @@ module ApplicationHelper
 			tab_list += link_html
 		end
 		('<nav class="row centered">
-			<div class="tabs">' + 
-				tab_list + 
+			<div class="tabs">' +
+				tab_list +
 			'</div>
 		</nav>').html_safe
 	end
@@ -493,7 +493,7 @@ module ApplicationHelper
 				f << open(url).read
 			end
 		end
-		
+
 		cdn("/maps/#{local_file_name}")
 	end
 
@@ -569,7 +569,7 @@ module ApplicationHelper
 	end
 
 	def get_secure_info(name)
-		YAML.load(File.read(Rails.root.parent.join("secure/#{name.to_s}.yml")))[Rails.env].symbolize_keys
+		YAML.load(File.read(Rails.root.join("config/#{name.to_s}.yml")))[Rails.env].symbolize_keys
 	end
 
 	private

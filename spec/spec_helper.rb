@@ -43,7 +43,6 @@ RSpec.configure do |config|
 	config.order = "random"
 
 	config.before(:each) do
-        fu
 		Translation.connection.execute("TRUNCATE TABLE translations RESTART IDENTITY;")
 		translations = DevTranslation.connection.select_all("SELECT * FROM translations")
 
