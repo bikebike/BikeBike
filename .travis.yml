@@ -5,4 +5,10 @@ before_install:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
 before_script:
-  - psql -c 'create database bike_bike_test;' -U postgres
+  - cp config/database.yml.travis config/database.yml
+  - psql -c 'create database travis_ci_test;' -U postgres
+  # consider dumping sql via db:structure:dump then loading directly into psql
+  # "psql -U postgres -q -d DB_NAME -f db/structure.sql"
+  - bundle exec rake db:test:prepare
+script: bundle exec cucumber
+env: RAILS_ENV=test

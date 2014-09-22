@@ -1,0 +1,14 @@
+test: &test
+  adapter: postgresql
+  encoding: unicode
+  database: travis_ci_test
+  username: postgres
+
+development:
+  <<: *test
+
+production:
+  <<: *test
+
+cucumber:
+  <<: *test
