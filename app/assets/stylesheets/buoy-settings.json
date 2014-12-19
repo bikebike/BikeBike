@@ -1,0 +1,60 @@
+{
+    "stylesheets": ["application"],
+    "background-color": "#FFF",
+    "breakpoint-unit": "px",
+    "unresponsive-width": 1000,
+    "row-width": 1000,
+    "total-columns": 12,
+    "platforms": {
+        "mobile": {
+            "range": [0,700]
+        },
+        "desktop": {
+            "range": [0,0]
+        }
+    },
+    "breakpoints": {
+        "small": {
+            "range": [0],
+            "grid": "y",
+            "offset": "n",
+            "reset-order": "n"
+        },
+        "medium": {
+            "range": [640],
+            "grid": "y",
+            "offset": "n",
+            "reset-order": "n"
+        },
+        "large": {
+            "range": [1024],
+            "grid": "y",
+            "offset": "n",
+            "reset-order": "n"
+        },
+        "small-only": {
+            "range": [0,319],
+            "grid": "n",
+            "offset": "n",
+            "reset-order": "n"
+        },
+        "medium-only": {
+            "range": [320,1023],
+            "grid": "n",
+            "offset": "n",
+            "reset-order": "n"
+        }
+    },
+    "grid-push": [1, 2],
+    "grid-pull": [1, 2],
+    "fonts": {
+        "primary": {
+            "name": "AlteHaasGroteskBold",
+            "location": "AlteHaasGroteskBold",
+            "svg_id": "alte_haas_groteskbold",
+            "ttf_type": "ttf",
+            "fallback": ["Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", "sans-serif"]
+        }
+    },
+    "font-loading-method": "deferred"
+}
