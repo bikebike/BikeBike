@@ -8,7 +8,11 @@
 		= csrf_meta_tags
 		/[if lt IE 9]
 			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
-		= stylesheet_link_tag '//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic,700italic', 'application', media: 'all'
+		= stylesheet_link_tag '//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic,700italic', media: 'all'
+		=# stylesheet_link_tag 'application', media: 'all'
+		= inject_css!
+		=#:javascript
+		=#	!function(){function e(e,n){try{if(localStorage[e])t(e);else{var a=new XMLHttpRequest;a.open("GET",n,!0),a.onload=function(){a.status>=200&&a.status<400&&(localStorage[e]=a.responseText,t())},a.send()}}catch(o){}}function t(e){var t=document.createElement("style");t.rel="stylesheet",document.head.appendChild(t),t.textContent=localStorage[e]}e("AlteHaasGroteskBold","/assets/AlteHaasGroteskBold")}();
 		%link{ href: asset_path('favicon.ico'), rel: 'shortcut icon', type: 'image/x-icon' }
 		%link{ href: asset_path('favicon.ico'), rel: 'icon', type: 'image/x-icon' }
 		%link{ href: asset_path('apple-touch-icon.png'), rel: 'apple-touch-icon' }
@@ -16,9 +20,6 @@
 		%link{ href: asset_path('apple-touch-icon-114x114.png'), rel: 'apple-touch-icon', sizes: '114x114' }
 		%link{ href: asset_path('apple-touch-icon-144x144.png'), rel: 'apple-touch-icon', sizes: '144x144' }
 		= yield :head
-		=# javascript_include_tag '//use.typekit.net/iqv7hcg.js'
-		=# javascript_include_tag 'application'
-		=# javascript_include_tag 'nested_form'
 
 	%body{ class: (yield_or_default :page_style) }
 		:javascript
@@ -49,6 +50,11 @@
 				#content=yield
 			- else
 				= yield
+		.row
+			.columns.medium-8
+				here is something to look at
+			.columns.medium-4
+				here is another thing
 		= yield :garbage
 		#footer
 			%footer

@@ -1,49 +1,8 @@
-/*
- *
- */
+//@include fontface('AlteHaasGroteskBold', '/assets/AlteHaasGroteskBold', 'alte_haas_groteskbold', ttf, normal, bold);
 
- /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the top of the
- * compiled file, but it's generally better to create a new file per style scope.
- *
- */
+//body {
+//	font-family: 'AlteHaasGroteskBold';
+//}
 
-@font-face {
-	font-family: 'FontAwesome';
-	src: url('/assets/fontawesome-webfont.eot');
-	src: url('/assets/fontawesome-webfont.eot?#iefix') format('embedded-opentype'),
-		 url('/assets/fontawesome-webfont.woff') format('woff'),
-		 url('/assets/fontawesome-webfont.ttf') format('truetype'),
-		 url('/assets/fontawesome-webfont.svg#alte_haas_groteskbold') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: 'AlteHaasGroteskBold';
-	src: url('/assets/AlteHaasGroteskBold.eot');
-	src: url('/assets/AlteHaasGroteskBold.eot?#iefix') format('embedded-opentype'),
-		 url('/assets/AlteHaasGroteskBold.woff') format('woff'),
-		 url('/assets/AlteHaasGroteskBold.ttf') format('truetype'),
-		 url('/assets/AlteHaasGroteskBold.svg#alte_haas_groteskbold') format('svg');
-	font-weight: bold;
-	font-style: normal;
-}
-
-// Libraries
-@import "compass";
-//@import "font-awesome";
-@import "foundation_and_overrides";
-
-// Local settings (also edit foundation_and_overrides.scss to modify global variables)
-@import "sass/mixins";
-@import "sass/froala_editor";
-@import "sass/layout";
-@import "sass/typography";
-@import "sass/base";
+//@include breakpoint(medium-only) {
+//}

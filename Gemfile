@@ -10,8 +10,11 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'i18n-active_record',
 			:git => 'git://github.com/svenfuchs/i18n-active_record.git',
 			:require => 'i18n/active_record'
-gem 'sass-rails', '~> 4.0.0'
-gem "compass-rails", "~> 1.1.3"
+#gem 'sass', '~> 3.3'
+#gem 'compass'
+#gem 'compass-rails'
+gem 'sass-rails', :git => 'git://github.com/rails/sass-rails.git'
+gem 'buoy', :path => '../buoy'
 gem 'foundation-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'sorcery', '>= 0.8.1'
@@ -19,7 +22,7 @@ gem 'oauth2', '~> 0.8.0'
 gem 'carrierwave'
 gem 'carrierwave-imageoptimizer'
 gem 'mini_magick'
-gem 'carmen', :path => '../carmen/' if File.directory?('../carmen/') && RbConfig::CONFIG['target_os'] =~ /mswin|mingw|cygwin/i
+gem 'carmen', :git => 'git://github.com/eikes/carmen.git'
 gem 'carmen-rails'
 gem 'nested_form'
 gem 'acts_as_list'
@@ -31,7 +34,11 @@ gem 'wysiwyg-rails'
 gem 'rails-assets-cdn'
 gem 'sitemap_generator'
 gem 'activerecord-session_store'
-gem 'paypal-express'
+gem 'paypal-express', '0.7.1'
+gem 'sass-json-vars'
+
+group :assets do
+end
 
 group :development, :test do
 	gem 'rspec'

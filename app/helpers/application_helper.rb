@@ -572,6 +572,9 @@ module ApplicationHelper
 		YAML.load(File.read(Rails.root.join("config/#{name.to_s}.yml")))[Rails.env].symbolize_keys
 	end
 
+	def buoy_stylesheet
+	end
+
 	private
 		def _form_field(type, name, value, options)
 			if type == 'check_box'

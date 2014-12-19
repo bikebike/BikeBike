@@ -24,14 +24,8 @@ module BikeBike
 
 		# The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
 		# config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
-		config.i18n.default_locale = :en #:de
+		config.i18n.default_locale = :en
 		config.i18n.enforce_available_locales = false
 		self.paths['config/database'] = Rails.root.parent.join('BikeBike', 'config', 'database.yml')
-		# config.action_controller.default_url_options = { :trailing_slash => true }
-		#config.middleware.swap 'Rack::MethodOverride', 'Rack::MethodOverrideWithParams'
-		#config.i18n.exception_handler = I18n::MissingTranslationExceptionHandler.new
-		#require '/app/helpers/bike_bike_form_helper'
-		#ActionView::Base.default_form_builder
-		#config.action_view.default_form_builder = 'BikeBikeFormHelper::BikeBikeFormBuilder'
 	end
 end
