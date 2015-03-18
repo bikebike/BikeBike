@@ -3,7 +3,7 @@ module ActiveRecord
 	end
 end
 
-class ApplicationController < ActionController::Base
+class ApplicationController < LinguaFrancaApplicationController
 	# Prevent CSRF attacks by raising an exception.
 	# For APIs, you may want to use :null_session instead.
 	protect_from_forgery with: :exception
@@ -19,15 +19,15 @@ class ApplicationController < ActionController::Base
 
 	def capture_page_info
 		init_vars
-		$page_info = {:path => request.env['PATH_INFO'], :controller => params['controller'], :action => params['action']}
+		#$page_info = {:path => request.env['PATH_INFO'], :controller => params['controller'], :action => params['action']}
 		ActionMailer::Base.default_url_options = {:host => "#{request.protocol}#{request.host_with_port}"}
-		lang = I18n.backend.set_locale (is_test? && @@test_host.present? ? @@test_host : request.host)
-		if lang.blank?
-			do_404
-		elsif lang != true
-			@lang = lang
-			render 'pages/language_not_enabled', status: 404
-		end
+		#lang = I18n.backend.set_locale (is_test? && @@test_host.present? ? @@test_host : request.host)
+		#if lang.blank?
+		#	do_404
+		#elsif lang != true
+		#	@lang = lang
+		#	render 'pages/language_not_enabled', status: 404
+		#end
 	end
 
 	def self.set_host(host)

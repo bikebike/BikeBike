@@ -47,15 +47,15 @@ class PagesController < ApplicationController
 		end
 	end
 
-	def location_territories
+	#def location_territories
 		#render json: (Carmen:::RegionCollection.new(Carmen::Country.coded(params[:country])) || []).to_json
-		territories = {}
-		country = Carmen::Country.coded(params[:country])
-		if country
-			country.subregions.each { |t| territories[t.code] = t.name }
-		end
-		render json: territories.to_json
-	end
+	#	territories = {}
+	#	country = Carmen::Country.coded(params[:country])
+	#	if country
+	#		country.subregions.each { |t| territories[t.code] = t.name }
+	#	end
+	#	render json: territories.to_json
+	#end
 
 	def translations
 		#if !current_user

@@ -1,20 +1,22 @@
 source 'http://rubygems.org'
 
 #ruby '2.0.0'
-gem 'rails', '4.0.0'
+gem 'rails', '4.2.0'
 gem 'pg'
 gem 'haml'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'coffee-rails', '~> 4.0.0'
-gem 'i18n-active_record',
-			:git => 'git://github.com/svenfuchs/i18n-active_record.git',
-			:require => 'i18n/active_record'
+gem 'lingua_franca', :git => 'git://github.com/lingua-franca/lingua_franca.git'
+gem 'tzinfo-data'
+#gem 'i18n-active_record',
+#			:git => 'git://github.com/svenfuchs/i18n-active_record.git',
+#			:require => 'i18n/active_record'
 #gem 'sass', '~> 3.3'
 #gem 'compass'
 #gem 'compass-rails'
 gem 'sass-rails', :git => 'git://github.com/rails/sass-rails.git'
-gem 'buoy', :path => '../buoy'
+gem 'bumbleberry', :git => 'git://github.com/bumbleberry/bumbleberry.git'
 gem 'foundation-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'sorcery', '>= 0.8.1'
@@ -22,12 +24,12 @@ gem 'oauth2', '~> 0.8.0'
 gem 'carrierwave'
 gem 'carrierwave-imageoptimizer'
 gem 'mini_magick'
-gem 'carmen', :git => 'git://github.com/eikes/carmen.git'
-gem 'carmen-rails'
+#gem 'carmen', :git => 'git://github.com/eikes/carmen.git'
+#gem 'carmen-rails'
 gem 'nested_form'
 gem 'acts_as_list'
 gem 'geocoder'
-gem 'forgery'
+#gem 'forgery'
 gem 'paper_trail', '~> 3.0.5'
 gem 'font-awesome-rails'
 gem 'wysiwyg-rails'
@@ -51,7 +53,7 @@ group :development do
 	gem 'meta_request'
 	gem 'haml-rails'
 	gem 'awesome_print'
-	gem 'rails-footnotes', :github => 'josevalim/rails-footnotes'
+	#gem 'rails-footnotes', :github => 'josevalim/rails-footnotes'
 end
 
 group :test do

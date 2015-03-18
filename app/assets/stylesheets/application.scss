@@ -6,3 +6,479 @@
 
 //@include breakpoint(medium-only) {
 //}
+
+@function rems($rems) {
+	@if capable_of(rem) {
+		@return $rems * 1rem;
+	}
+	@return $rems * 16px;
+}
+
+$sidebar-width: rems(19);
+
+$colour-1: #00ADEF;
+$colour-2: #FF015B;
+$colour-3: #E6C229;
+$colour-4: #F17105;
+$colour-5: #8EA604;
+
+body {
+	color: #333;
+	position: relative;
+	z-index: -1;
+}
+
+@mixin default-box-shadow($direction: top, $distance: 1) {
+	@if capable_of(box-shadow) {
+		$offset: 0.2em;
+		@if $direction == right or $direction == bottom {
+			$offset: -$offset;
+		}
+		@if $direction == left or $direction == right {
+			$offset: '#{$offset} 0';
+		} @else {
+			$offset: '0 #{$offset}';
+		}
+		@include _(box-shadow, #{$offset} 0.8em #{-0.2em * $distance} #000);
+	}
+}
+
+h1, h2, h3, h4, h5, label, button {
+	@include font-family(secondary);
+}
+
+h2 {
+	margin: 0;
+	font-size: 6vw;
+}
+
+p {
+	font-size: 4vw;
+}
+
+a {
+	text-decoration: none;
+	color: $colour-1;
+	border-bottom: 0 solid;
+	outline: 0;
+	position: relative;
+
+	&:after {
+		content: '';
+		position: absolute;
+		border-bottom: 0 solid;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		opacity: 0;
+		@include _(transition, all 150ms ease-in-out);
+		@include _(transform, translateY(-1em));
+	}
+
+	&:hover:after,
+	&:active:after,
+	&:focus:after {
+		border-bottom: 0.1em solid;
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+#main-nav {
+	position: relative;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background-color: #FFF;
+	@include default-box-shadow(top, 2);
+	z-index: 1;
+
+	.nav {
+		text-align: center;
+		clear: left;
+		overflow: auto;
+		background-color: $colour-3;
+
+		a {
+			position: relative;
+			display: inline-block;
+			margin: 0;
+			padding: 1em 0;
+			float: left;
+			@include font-family(secondary);
+			text-decoration: none;
+			font-size: 2.25vw;
+			outline: none;
+			border: 0;
+			width: 33.33%;
+			background-color: $colour-5;
+			color: #FFF;
+  			text-shadow: 0 0 0.35em #000;
+
+			&:after {
+				display: none;
+			}
+
+			&:nth-child(2) {
+				background-color: $colour-4;
+			}
+
+			&:nth-child(3) {
+				background-color: $colour-3;
+			}
+		}
+	}
+
+	.actions {
+		text-align: center;
+		position: absolute;
+		top: rems(1.5);
+		right: rems(1);
+	}
+}
+
+#main {
+	position: relative;
+	z-index: -1;
+	max-width: (rems(68) - $sidebar-width) * 2;
+	background-color: #FFF;
+
+	article {
+		padding: rems(1) 7.5%;
+
+		&.supplementary {
+			background-color: $colour-3;
+			@include default-box-shadow(bottom, 2);
+		}
+	}
+}
+
+a.logo {
+	display: inline-block;
+	font-size: rems(5);
+	text-decoration: none;
+	padding: 0.1em;
+	border: 0;
+	float: left;
+	@include clearfix;
+
+	&:hover:after,
+	&:active:after,
+	&:focus:after {
+		display: none;
+	}
+}
+
+@if capable_of(svg) {
+	svg.bb-icon-logo {
+		fill: $colour-1;
+		@include _(transform, rotate(0));
+		@include _(transition, transform 500ms ease-in-out);
+	}
+	svg.bb-icon-logo-text {
+		fill: #333;
+	}
+
+	.logo svg {
+		display: inline-block;
+		height: 1em;
+		width: 1em;
+		float: left;
+	}
+
+	.logo:hover svg.bb-icon-logo {
+		@include _(transform, rotate(360deg));
+	}
+}
+
+#banner {
+	clear: left;
+
+	figure {
+		width: 100%;
+		max-width: rems(60);
+		margin: 0;
+	}
+
+	img {
+		width: 100%;
+		@include default-box-shadow;
+	}
+}
+
+svg {
+	.colour-1 { fill: $colour-1; }
+	.colour-2 { fill: $colour-2; }
+	.colour-3 { fill: $colour-3; }
+	.colour-4 { fill: $colour-4; }
+	.colour-5 { fill: $colour-5; }
+}
+
+$header-tilt: 8deg;
+
+#header-title {
+	font-size: 2.25vw;
+	background-size: cover;
+	background-position: 50% 20%;
+	background-repeat: no-repeat;
+	background-color: $colour-1;
+	overflow: hidden;
+	position: relative;
+	z-index: -1;
+
+	svg {
+		display: none;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+	}
+
+	.title {
+		position: relative;
+		padding: 1%;
+		overflow: hidden;
+		text-align: center;
+		@include _(text-shadow, 0 0.2em 0.5em rgba(32, 32, 32, 0.5))
+	}
+
+	.background {
+		position: absolute;
+		@include _(transform, rotate($header-tilt));
+		color: $colour-1;
+		@include _(opacity, 0.65);
+		margin: -4% -2%;
+		@if capable_of(calc) {
+			font-size: calc(5vw + #{rems(7)});
+		} @else {
+			font-size: rems(11);
+		}
+		display: none;
+	}
+
+	.details {
+		position: relative;
+		display: inline-block;
+		color: #000;
+		@include _(text-shadow, 0 0.2em 0.5em rgba(32, 32, 32, 0.75))
+	}
+
+	.primary {
+		font-size: 2.5em;
+		margin: 0;
+	}
+
+	.secondary {
+		font-size: 1.5em;
+	}
+}
+
+@include breakpoint(medium) {
+	h2 {
+		font-size: 2.25em;
+	}
+
+	p {
+		font-size: 1.4em;
+	}
+
+	#banner {
+		figure {
+			margin: rems(-20) auto rems(2);
+		}
+	}
+	
+	#main {
+		clear: right;
+	}
+
+	#main-nav {
+		height: rems(6);
+
+		.nav {
+			width: 80%;
+			clear: none;
+			padding-top: rems(1.5);
+			background-color: transparent;
+			overflow: visible;
+
+			a {
+				padding: 0;
+				float: none;
+				width: auto;
+				margin: 0 0.5em 0.75em;
+				font-size: 1em;
+				color: #666;
+				background-color: transparent;
+				@include _(text-shadow, 0 0.125em 0.25em #888);
+
+				&:nth-child(n) {
+					background-color: transparent;
+				}
+
+				&.current {
+					color: $colour-1;
+				}
+
+				&:after {
+					content: '';
+					display: block;
+					position: absolute;
+					bottom: -0.1em;
+					right: 0;
+					left: 0;
+					width: 0;
+					margin: 0 auto;
+					opacity: 1;
+					border-bottom: 0.15em solid;
+					@include _(box-shadow, 0 0.075em 0.15em #888);
+					@include _(transition, width 250ms ease-in-out);
+					@include _(transform, none);
+				}
+
+				&:hover:after,
+				&:active:after,
+				&:focus:after {
+					width: 100%;
+				}
+			}
+		}
+
+		.actions {
+			font-size: 2vw;
+		}
+	}
+
+	#header-title {
+		min-height: rems(35);
+		font-size: 1em;
+
+		svg {
+			display: block;
+		}
+
+		.title {
+			text-align: left;
+			width: 110%;
+			background-color: rgba(#FFF, 0.5);
+			@include _(transform, rotate(-$header-tilt) translate3d(0, 0, 0));
+			@include _(transform-origin, 0 100%);
+		}
+
+		.details {
+			text-align: right;
+		}
+
+		.background {
+			display: block;
+		}
+		
+		.primary {
+			padding: 12% 0 0 0.25em;
+		}
+	}
+}
+
+@include breakpoint(large) {
+	#banner {
+		figure {
+			width: 90%;
+		}
+	}
+	
+	#main-nav {
+		position: fixed;
+		width: $sidebar-width;
+		height: 100%;
+		@include default-box-shadow(left, 2);
+
+		.nav {
+			text-align: left;
+			padding-top: rems(9);
+			width: 100%;
+
+			a {
+				font-size: 1.6em;
+				margin: 0.75em 1em;
+			}
+		}
+
+		.actions {
+			position: relative;
+			top: 0;
+			right: 0;
+			font-size: 1em;
+		}
+	}
+
+	#main {
+		padding-left: $sidebar-width;
+	}
+
+	a.logo {
+		display: block;
+		float: none;
+		font-size: rems(7.5);
+		padding: 0.2em;
+	}
+
+	.paypal-button {
+		margin: 4em 2em 0 0;
+	}
+}
+
+button {
+	position: relative;
+	color: #FFF;
+	background-color: $colour-1;
+	border: 0;
+	padding: 0.5em 1em;
+	font-size: 1.25em;
+	outline: 0;
+	border-bottom: 0.125em solid rgba(0, 0, 0, 0.15);
+	@include _(border-radius, 0.15em);
+	@include default-box-shadow(top, 2);
+	overflow: hidden;
+	cursor: pointer;
+
+	&:before,
+	&:after {
+		content: '';
+		position: absolute;
+		display: block;
+		top: 0;
+		right: 100%;
+		font-size: 1.15em;
+		background-color: rgba(0, 0, 0, 0);
+		border-color: transparent;
+		@include _(transition, all 250ms ease-in-out);
+	}
+	&:before {
+		height: 100%;
+		width: 100%;
+		margin-right: 1em;
+	}
+	&:after {
+		border-style: solid;
+		border-width: 1em 0 1em 1em;
+	}
+
+	&:hover:after,
+	&:focus:after,
+	&:hover:before,
+	&:focus:before {
+		right: -1em;
+		border-left-color: rgba(0, 0, 0, 0.15);
+	}
+	&:hover:before,
+	&:focus:before {
+		background-color: rgba(0, 0, 0, 0.15);
+	}
+
+	&:active {
+		@include _(transform, scale(0.95));
+
+		&:after {
+			left: 120%;
+		}
+	}
+}

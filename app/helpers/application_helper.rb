@@ -14,9 +14,6 @@ module ApplicationHelper
 
 	def init_vars
 		@@keyQueue = nil
-		@@translationsOnThisPage = nil
-		@@lastTranslation = nil
-		@@allTranslations = nil
 		@@no_banner = true
 		@@banner_attribution_details = nil
 		@@banner_image = nil
@@ -572,7 +569,28 @@ module ApplicationHelper
 		YAML.load(File.read(Rails.root.join("config/#{name.to_s}.yml")))[Rails.env].symbolize_keys
 	end
 
-	def buoy_stylesheet
+	def location(location)
+		l = Array.new
+		l << location.city
+		l << I18n.t("geography.subregions.#{location.country}.#{location.territory}") if location.territory.present?
+		l << I18n.t("geography.countries.#{location.country}") if !(location.country =~ /^(US|CA)$/)
+		l.join(', ')
+	end
+
+	def nav_link(link, title)
+		link_to title, link, :class => (current_page?(link) ? 'current' : nil)
+	end
+
+	def date_span(date1, date2)
+		key = 'same_month'
+		if date1.year != date2.year
+			key = 'different_year'
+		elsif date1.month != date2.month
+			key = 'same_year'
+		end
+		d1 = I18n.l(date1.to_date, format: "span_#{key}_date_1".to_sym)
+		d2 = I18n.l(date2.to_date, format: "span_#{key}_date_2".to_sym)
+		I18n.t('date.date_span', {:date_1 => d1, :date_2 => d2})
 	end
 
 	private

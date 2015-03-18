@@ -1,5 +1,11 @@
 ---
 en:
-  home:
-    what_is_bikebike: What is Bike!Bike!?
-    its_awesome: It's awesome, that's what it is.
+  date:
+    date_span: '%{date_1} – %{date_2}'
+    formats:
+      span_same_month_date_1: '%B %e'
+      span_same_month_date_2: '%e, %Y'
+      span_same_year_date_1: '%B %e'
+      span_same_year_date_2: '%B %e, %Y'
+      span_different_year_date_1: '%B %e, %Y'
+      span_different_year_date_2: '%B %e, %Y'

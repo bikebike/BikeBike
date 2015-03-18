@@ -2,7 +2,10 @@
 - this_is_the_front_page
 - if @conference
 	= render 'conferences/header'
+	%article
+		%h2=@conference.title
+		=@conference.info.html_safe
 
-- content_for :side_bar do
-	%p
-		Bike!Bike! is an international annual gathering organized by and for community bicycle projects. The conference is a space for participants from shops and related advocacy groups to converge in a different city each year over a 4 day period to have workshops and strengthen our social network.
+%article.supplementary
+	%h2=_'section_titles.bikebike.About_BikeBike'
+	%p=_'section_content.bikebike.about_bikebike', :p

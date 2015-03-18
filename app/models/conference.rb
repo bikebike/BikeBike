@@ -1,4 +1,6 @@
 class Conference < ActiveRecord::Base
+	translates :info
+
 	mount_uploader :cover, CoverUploader
 	mount_uploader :poster, PosterUploader
 
