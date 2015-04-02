@@ -3,6 +3,12 @@ module ActiveRecord
 	end
 end
 
+class Translator
+	def can_translate?
+		true
+	end
+end
+
 class ApplicationController < LinguaFrancaApplicationController
 	# Prevent CSRF attacks by raising an exception.
 	# For APIs, you may want to use :null_session instead.
@@ -18,16 +24,27 @@ class ApplicationController < LinguaFrancaApplicationController
 	@@test_location
 
 	def capture_page_info
-		init_vars
-		#$page_info = {:path => request.env['PATH_INFO'], :controller => params['controller'], :action => params['action']}
+		I18n.config.translator = Translator.new
+		@conference = Conference.order("start_date DESC").first
+		@stylesheets ||= Array.new
+		@stylesheets << params[:controller] if params[:controller] == 'translations'
+
 		ActionMailer::Base.default_url_options = {:host => "#{request.protocol}#{request.host_with_port}"}
-		#lang = I18n.backend.set_locale (is_test? && @@test_host.present? ? @@test_host : request.host)
-		#if lang.blank?
-		#	do_404
-		#elsif lang != true
-		#	@lang = lang
-		#	render 'pages/language_not_enabled', status: 404
-		#end
+	end
+
+	def home
+	end
+
+	def about
+	end
+
+	def robots
+		robot = is_production? && !is_test_server? ? 'live' : 'dev'
+		render :text => File.read("config/robots-#{robot}.txt"), :content_type => 'text/plain'
+	end
+
+	def humans
+		render :text => File.read("config/humans.txt"), :content_type => 'text/plain'
 	end
 
 	def self.set_host(host)
@@ -35,7 +52,7 @@ class ApplicationController < LinguaFrancaApplicationController
 	end
 
 	def self.set_location(location)
-		@@test_location = location#.nil? nil : Geocoder.search(location)
+		@@test_location = location
 	end
 
 	def self.get_location()
@@ -43,11 +60,11 @@ class ApplicationController < LinguaFrancaApplicationController
 	end
 
 	def do_404
-		render 'pages/404', status: 404
+		render 'application/404', status: 404
 	end
 
 	def do_403
-		render 'permission_denied', status: 403
+		render 'application/permission_denied', status: 403
 	end
 
 	rescue_from ActiveRecord::RecordNotFound do |exception|

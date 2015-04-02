@@ -3,10 +3,12 @@
 	%head
 		%meta{ charset: 'utf-8' }
 		%meta{ name: 'viewport', content: 'width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0' }
-		%title= (yield :title) + (content_for?(:title) ? ' | ' : '') + 'Bike!Bike!'
+		%title= (yield :title) + (content_for?(:title) ? _!' | ' : '') + _!'Bike!Bike!'
 		%meta{ name: 'description', content: (yield_or_default :description, I18n.t('page_descriptions.home')) }
 		= csrf_meta_tags
 		= inject_css!
+		- @stylesheets.each do |css|
+			= inject_css! css
 		%link{ href: asset_path('favicon.ico'), rel: 'shortcut icon', type: 'image/x-icon' }
 		%link{ href: asset_path('favicon.ico'), rel: 'icon', type: 'image/x-icon' }
 		%link{ href: asset_path('apple-touch-icon.png'), rel: 'apple-touch-icon' }
@@ -15,7 +17,7 @@
 		%link{ href: asset_path('apple-touch-icon-144x144.png'), rel: 'apple-touch-icon', sizes: '144x144' }
 		= yield :head
 
-	%body{ class: (yield_or_default :page_style) }
+	%body{ class: page_style }
 		= render 'shared/navbar'
 		%main#main
 			- flash.each do |key, msg|
@@ -31,8 +33,7 @@
 				= yield
 		= yield :garbage
 		#footer
-			%footer
-				.container= render 'shared/footer'
+			%footer= render 'shared/footer'
 		- if content_for?(:footer_scripts)
 			= yield :footer_scripts
 		- if content_for?(:scripts) || content_for?(:dom_ready)

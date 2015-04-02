@@ -1,0 +1,30 @@
+$sidebar-width: rems(19);
+
+$colour-1: #00ADEF;
+$colour-2: #FF015B;
+$colour-3: #E6C229;
+$colour-4: #F17105;
+$colour-5: #8EA604;
+
+@mixin default-box-shadow($direction: top, $distance: 1, $inset: false) {
+	@if capable_of(box-shadow) {
+		$offset: 0.2em;
+		@if $direction == right or $direction == bottom {
+			$offset: -$offset;
+		}
+		@if $direction == left or $direction == right {
+			$offset: '#{$offset} 0';
+		} @else {
+			$offset: '0 #{$offset}';
+		}
+		@if $inset {
+			$offset: 'inset #{$offset}';
+		}
+		@include _(box-shadow, #{$offset} 0.8em #{-0.2em * $distance} #000);
+	}
+}
+
+@mixin monospace-font {
+	@include font(monospace);
+	@include font(monospace-bold);
+}

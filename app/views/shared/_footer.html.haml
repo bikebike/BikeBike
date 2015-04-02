@@ -1,0 +1,15 @@
+.github
+	=svg_sprite  'icons', 'bb-icon-github', 'github logo'
+	%a{href: 'https://github.com/bikebike/BikeBike/issues', target: :_blank}
+		=_'links.footer.text.File_an_Issue'
+	|
+	%a{href: 'https://github.com/bikebike/BikeBike/contributing.md', target: :_blank}
+		=_'links.footer.text.Help_contribute'
+.facebook
+	=_'links.footer.help_text.facebook', 'Join our facebook group' do |title|
+		%a{href: 'https://www.facebook.com/groups/648758205249998/', target: :_blank, title: title}
+			=svg_sprite  'icons', 'bb-icon-fb', 'facebook logo'
+.copy
+	=_'links.footer.help_text.contributors', 'Who contributed to building this website' do |title|
+		=link_to :humans_txt, {title: title} do
+			=_!"&copy;#{Date.today.strftime("%Y")} Bike!Bike!"

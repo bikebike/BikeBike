@@ -36,12 +36,12 @@ BikeBike::Application.configure do
 		:enable_starttls_auto => true,
 		:address => 'mail.bikebike.org',
 		:domain => 'bikebike.org',
-		:port => 587,
+		:port => 25,
 		:authentication => :plain,
 		:enable_starttls_auto => true,
 		:openssl_verify_mode  => 'none',
 		:user_name => 'info@bikebike.org',
-		:password => 'NewOrleans@)!#'
+		:password => '!NF)'
 	}
 	config.action_mailer.raise_delivery_errors = true
 	config.action_mailer.perform_deliveries = true

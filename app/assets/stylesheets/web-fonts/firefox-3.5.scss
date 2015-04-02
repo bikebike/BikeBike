@@ -234,7 +234,8 @@ $browser_capabilities: (
 	"background-attachment": a,
 	"currentcolor": y,
 	"input-pattern": n,
-	"registerprotocolhandler": y
+	"registerprotocolhandler": y,
+	"css-snappoints": n
 );
 
 @import "bumbleberry-settings";

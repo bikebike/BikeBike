@@ -1,5 +1,5 @@
 {
-    "stylesheets": ["application"],
+    "stylesheets": ["application", "translations"],
     "background-color": "#E7E7E7",
     "breakpoint-unit": "px",
     "unresponsive-width": 1000,
@@ -47,6 +47,7 @@
     },
     "grid-push": [1, 2],
     "grid-pull": [1, 2],
+    "font-loading-method": "deferred",
     "fonts": {
         "primary": {
             "name": "SourceSansPro-Regular",
@@ -61,9 +62,25 @@
             "svg_id": "alte_haas_groteskbold",
             "ttf_type": "ttf",
             "fallback": ["Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", "sans-serif"]
+        },
+        "monospace": {
+            "name": "NotCourierSans",
+            "location": "NotCourierSans",
+            "svg_id": "notcouriersans",
+            "ttf_type": "ttf",
+            "fallback": ["Courier New", "monospace"],
+            "auto_load": "n"
+        },
+        "monospace-bold": {
+            "name": "NotCourierSans",
+            "location": "NotCourierSans-Bold",
+            "svg_id": "notcouriersansbold",
+            "ttf_type": "ttf",
+            "fallback": ["Courier New", "monospace"],
+            "auto_load": "n",
+            "weight": "bold"
         }
     },
-    "font-loading-method": "deferred",
     "sprites": {
         "icons": {
             "bb-icon-logo": [0, 0, "182px", "149px"],

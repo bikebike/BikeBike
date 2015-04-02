@@ -21,7 +21,7 @@ $browser_capabilities: (
 	"internationalization": n,
 	"queryselector": y,
 	"getelementsbyclassname": y,
-	"forms": n,
+	"forms": y,
 	"html5semantic": a,
 	"offline-apps": n,
 	"webworkers": n,
@@ -29,7 +29,7 @@ $browser_capabilities: (
 	"eot": n,
 	"woff": n,
 	"multibackgrounds": y,
-	"border-image": n,
+	"border-image": ax,
 	"background-img-opts": a,
 	"css-table": y,
 	"css-gencontent": y,
@@ -62,7 +62,7 @@ $browser_capabilities: (
 	"svg-fonts": n,
 	"svg-filters": y,
 	"svg-html": n,
-	"svg-html5": n,
+	"svg-html5": y,
 	"canvas": a,
 	"canvas-text": n,
 	"namevalue-storage": n,
@@ -78,7 +78,7 @@ $browser_capabilities: (
 	"xhtmlsmil": p,
 	"wai-aria": a,
 	"geolocation": n,
-	"flexbox": n,
+	"flexbox": y,
 	"webgl": n,
 	"fileapi": n,
 	"shadowdom": n,
@@ -112,7 +112,7 @@ $browser_capabilities: (
 	"dataset": a,
 	"css-grid": n,
 	"menu": n,
-	"rem": n,
+	"rem": y,
 	"ttf": n,
 	"touch": n,
 	"matchesselector": n,
@@ -233,7 +233,8 @@ $browser_capabilities: (
 	"background-attachment": n,
 	"currentcolor": y,
 	"input-pattern": n,
-	"registerprotocolhandler": n
+	"registerprotocolhandler": n,
+	"css-snappoints": n
 );
 
 @import "bumbleberry-settings";

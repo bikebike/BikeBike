@@ -8,7 +8,7 @@
 		- if capable_of(:svg)
 			= render 'conferences/banner_image.svg'
 		.title
-			%h2.background="#{@conference.start_date.year.to_s}!"
+			%h2.background=_!"#{@conference.start_date.year.to_s}!"
 			.details
 				%h3.primary=location(@conference.organizations.first.locations.first)
 				.secondary

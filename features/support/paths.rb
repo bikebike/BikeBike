@@ -3,7 +3,7 @@ module NavigationHelpers
 		append_root = false
 		case page_name
 			when /^landing$/i
-				path = :root
+				path = :home
 			when /^confirmation$/i
 				path = "/conferences/bikebike/#{@last_conference.slug}/register/confirm/#{@last_registration.confirmation_token}"
 			when /^registration$/i

@@ -1,0 +1,14 @@
+- content_for :banner do
+	- image = image_url('xconference.jpg')
+	#header-title.short{style: capable_of(:svg) ? nil : "background-image: url(#{image})"}
+		- if capable_of(:svg)
+			= render 'application/banner_image.svg', {:image => image}
+		%h1=_'page_titles.About_BikeBike'
+
+%article
+	%h2=_'page_titles.About_BikeBike', :t
+	%p=_'static_text.about.paragraph_1', :p
+
+	%h2=_'page_titles.About_BikeBike_2', :t
+	%figure{style: "background-image: url(#{image_url('columbus_people.jpg')})"}
+	%p=_'static_text.about.paragraph_2', :p

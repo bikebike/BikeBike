@@ -26,8 +26,22 @@ module ApplicationHelper
 		@@front_page = true
 	end
 
+	def header_is_fixed
+		@fixed_header = true
+	end
+
+	def is_header_fixed?
+		@fixed_header ||= false
+	end
+
 	def is_this_the_front_page?
 		return @@front_page
+	end
+
+	def header_classes
+		classes = Array.new
+		classes << 'fixed' if is_header_fixed?
+		return classes
 	end
 
 	def ThereAreTranslationsOnThisPage?
@@ -105,54 +119,52 @@ module ApplicationHelper
 		@@body_class << (c.is_a?(Array) ? c.join(' ') : c)
 	end
 
-	def page_style(style)
-		classes = ['page-style-' + style.to_s]
-		#if @@no_banner
-		#	classes << 'no-banner'
-		#end
-		if ThereAreTranslationsOnThisPage?
-			classes << 'has-translations'
-		end
-		if !@@has_content
-			classes << 'no-content'
-		end
-		if @@banner_image
-			classes << 'has-banner-image'
-		end
-		if @@body_class
-			classes << @@body_class.join(' ')
-		end
+	def page_style#(style)
+		#classes = ['page-style-' + style.to_s]
+		classes = Array.new
+
+		classes << 'has-translations' if ThereAreTranslationsOnThisPage?
+		classes << 'no-content' unless @@has_content
+		classes << 'has-banner-image' if @@banner_image
+		classes << @@body_class.join(' ') if @@body_class
+		classes << 'fixed-banner' if is_header_fixed?
 
 		if params[:controller]
-			classes << params[:controller]
+			if params[:controller] == 'application'
+				if params[:action]
+					classes << params[:action]
+				end
+			else
+				classes << params[:controller] 
 
-			if params[:action]
-				classes << params[:controller] + '-' + params[:action]
+				if params[:action]
+					classes << params[:controller] + '-' + params[:action]
+				end
 			end
 		end
-		content_for(:page_style) { classes.join(' ') }
+		return classes
 	end
 
 	def yield_or_default(section, default = '')
 		content_for?(section) ? content_for(section) : default
 	end
 
-	def _(key, behavior = nil, behavior_size = nil, locale: nil, vars: {}, html: nil, blockData: {}, &block)
-		options = vars
-		options[:fallback] = true
-		if behavior
-			options[:behavior] = behavior
-			options[:behavior_size] = behavior_size
-		end
-		if locale
-			options[:locale] = locale.to_sym
-		end
-		#if vars
-		#	puts "\nVARS:\t#{vars}\n"
-		#end
-		I18n.translate(key, options)
-
-		#queued_keys = nil
+#	def _(key, behavior = nil, behavior_size = nil, locale: nil, vars: {}, html: nil, blockData: {}, &block)
+#		options = vars
+#		options[:fallback] = true
+#		if behavior
+#			options[:behavior] = behavior
+#			options[:behavior_size] = behavior_size
+#		end
+#		if locale
+#			options[:locale] = locale.to_sym
+#		end
+#		#if vars
+#		#	puts "\nVARS:\t#{vars}\n"
+#		#end
+#		I18n.translate(key, options)
+#
+#		#queued_keys = nil
 #		#result = nil
 #
 #		#if key.kind_of?(Hash)
@@ -213,7 +225,7 @@ module ApplicationHelper
 #		#end
 #
 		#return result
-	end
+#	end
 
 	def _translate_me(translation)
 		@@translationsOnThisPage = true
@@ -249,17 +261,17 @@ module ApplicationHelper
 		false
 	end
 
-	def _!()
-		if @@keyQueue
-			return '%' + @@keyQueue.shift + '%'
-		end
-	end
+	#def _!()
+	#	if @@keyQueue
+	#		return '%' + @@keyQueue.shift + '%'
+	#	end
+	#end
 
-	def _?()
-		if @@keyQueue
-			return '%' + @@keyQueue[0] + '%'
-		end
-	end
+	#def _?()
+	#	if @@keyQueue
+	#		return '%' + @@keyQueue[0] + '%'
+	#	end
+	#end
 
 	def sortable(objects, id = 'id', url: nil, &block)
 		result = '<ul class="sortable sortable-' + objects[0].class.name.underscore.gsub('_', '-') + (url ? ('" data-url="' + url) : '') + '" data-id="' + id + '">'

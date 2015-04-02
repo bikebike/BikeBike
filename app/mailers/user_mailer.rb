@@ -9,7 +9,7 @@ class UserMailer < ActionMailer::Base
 	def activation_needed_email(email_address)
 		@greeting = "Hi"
 
-		mail to: 'goodgodwin@hotmail.com'
+		mail to: email_address
 	end
 
 	# Subject can be set in your I18n file at config/locales/en.yml

@@ -1,11 +1,768 @@
 ---
 en:
   date:
-    date_span: '%{date_1} – %{date_2}'
+    abbr_day_names:
+    - Sun
+    - Mon
+    - Tue
+    - Wed
+    - Thu
+    - Fri
+    - Sat
+    abbr_month_names:
+    - 
+    - Jan
+    - Feb
+    - Mar
+    - Apr
+    - May
+    - Jun
+    - Jul
+    - Aug
+    - Sep
+    - Oct
+    - Nov
+    - Dec
+    day_names:
+    - Sunday
+    - Monday
+    - Tuesday
+    - Wednesday
+    - Thursday
+    - Friday
+    - Saturday
     formats:
+      default: '%Y-%m-%d'
+      long: '%B %d, %Y'
+      short: '%b %d'
       span_same_month_date_1: '%B %e'
       span_same_month_date_2: '%e, %Y'
       span_same_year_date_1: '%B %e'
       span_same_year_date_2: '%B %e, %Y'
       span_different_year_date_1: '%B %e, %Y'
       span_different_year_date_2: '%B %e, %Y'
+    month_names:
+    - 
+    - January
+    - February
+    - March
+    - April
+    - May
+    - June
+    - July
+    - August
+    - September
+    - October
+    - November
+    - December
+    order:
+    - year
+    - month
+    - day
+    date_span: '%{date_1} – %{date_2}'
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: about 1 hour
+        other: about %{count} hours
+      about_x_months:
+        one: about 1 month
+        other: about %{count} months
+      about_x_years:
+        one: about 1 year
+        other: about %{count} years
+      almost_x_years:
+        one: almost 1 year
+        other: almost %{count} years
+      half_a_minute: half a minute
+      less_than_x_minutes:
+        one: less than a minute
+        other: less than %{count} minutes
+      less_than_x_seconds:
+        one: less than 1 second
+        other: less than %{count} seconds
+      over_x_years:
+        one: over 1 year
+        other: over %{count} years
+      x_days:
+        one: 1 day
+        other: '%{count} days'
+      x_minutes:
+        one: 1 minute
+        other: '%{count} minutes'
+      x_months:
+        one: 1 month
+        other: '%{count} months'
+      x_seconds:
+        one: 1 second
+        other: '%{count} seconds'
+    prompts:
+      day: Day
+      hour: Hour
+      minute: Minute
+      month: Month
+      second: Seconds
+      year: Year
+  errors:
+    format: '%{attribute} %{message}'
+    messages:
+      accepted: must be accepted
+      blank: can't be blank
+      present: must be blank
+      confirmation: doesn't match %{attribute}
+      empty: can't be empty
+      equal_to: must be equal to %{count}
+      even: must be even
+      exclusion: is reserved
+      greater_than: must be greater than %{count}
+      greater_than_or_equal_to: must be greater than or equal to %{count}
+      inclusion: is not included in the list
+      invalid: is invalid
+      less_than: must be less than %{count}
+      less_than_or_equal_to: must be less than or equal to %{count}
+      not_a_number: is not a number
+      not_an_integer: must be an integer
+      odd: must be odd
+      record_invalid: 'Validation failed: %{errors}'
+      restrict_dependent_destroy:
+        one: Cannot delete record because a dependent %{record} exists
+        many: Cannot delete record because dependent %{record} exist
+      taken: has already been taken
+      too_long:
+        one: is too long (maximum is 1 character)
+        other: is too long (maximum is %{count} characters)
+      too_short:
+        one: is too short (minimum is 1 character)
+        other: is too short (minimum is %{count} characters)
+      wrong_length:
+        one: is the wrong length (should be 1 character)
+        other: is the wrong length (should be %{count} characters)
+      other_than: must be other than %{count}
+      carrierwave_processing_error: failed to be processed
+      carrierwave_integrity_error: is not of an allowed file type
+      carrierwave_download_error: could not be downloaded
+      extension_white_list_error: 'You are not allowed to upload %{extension} files, allowed types: %{allowed_types}'
+      extension_black_list_error: 'You are not allowed to upload %{extension} files, prohibited types: %{prohibited_types}'
+      rmagick_processing_error: 'Failed to manipulate with rmagick, maybe it is not an image? Original Error: %{e}'
+      mime_types_processing_error: 'Failed to process file with MIME::Types, maybe not valid content-type? Original Error: %{e}'
+      mini_magick_processing_error: 'Failed to manipulate with MiniMagick, maybe it is not an image? Original Error: %{e}'
+    template:
+      body: 'There were problems with the following fields:'
+      header:
+        one: 1 error prohibited this %{model} from being saved
+        other: '%{count} errors prohibited this %{model} from being saved'
+  helpers:
+    select:
+      prompt: Please select
+    submit:
+      create: Create %{model}
+      submit: Save %{model}
+      update: Update %{model}
+  number:
+    currency:
+      format:
+        delimiter: ','
+        format: '%u%n'
+        precision: 2
+        separator: .
+        significant: false
+        strip_insignificant_zeros: false
+        unit: $
+    format:
+      delimiter: ','
+      precision: 3
+      separator: .
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: '%n %u'
+        units:
+          billion: Billion
+          million: Million
+          quadrillion: Quadrillion
+          thousand: Thousand
+          trillion: Trillion
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: '%n %u'
+        units:
+          byte:
+            one: Byte
+            other: Bytes
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
+    percentage:
+      format:
+        delimiter: ''
+        format: '%n%'
+    precision:
+      format:
+        delimiter: ''
+  support:
+    array:
+      last_word_connector: ', and '
+      two_words_connector: ' and '
+      words_connector: ', '
+  time:
+    am: am
+    formats:
+      default: '%a, %d %b %Y %H:%M:%S %z'
+      long: '%B %d, %Y %H:%M'
+      short: '%d %b %H:%M'
+    pm: pm
+  languages:
+    af: Afrikaans
+    ar: Arabic
+    az: Azerbaijani
+    bg: Bulgarian
+    bn: Bengali
+    bs: Bosnian
+    ca: Catalan
+    cs: Czech
+    cy: Welsh
+    da: Danish
+    de: German
+    el: Greek
+    en: English
+    eo: Esperanto
+    es: Spanish
+    et: Estonian
+    eu: Basque
+    fa: Persian
+    fi: Finnish
+    fr: French
+    gl: Galician
+    he: Hebrew
+    hi: Hindi
+    hr: Croatian
+    hu: Hungarian
+    id: Indonesian
+    is: Icelandic
+    it: Italian
+    ja: Japanese
+    km: Khmer
+    kn: Kannada
+    ko: Korean
+    lo: Lao
+    lt: Lithuanian
+    lv: Latvian
+    mk: Macedonian
+    mn: Mongolian
+    ms: Malay
+    nb: Norwegian Bokmål
+    ne: Nepali
+    nl: Dutch
+    nn: Norwegian Nynorsk
+    or: Oriya
+    pl: Polish
+    pt: Portuguese
+    rm: Romansh
+    ro: Romanian
+    ru: Russian
+    sk: Slovak
+    sl: Slovenian
+    sr: Serbian
+    sv: Swedish
+    sw: Swahili
+    ta: Tamil
+    th: Thai
+    tl: Tagalog
+    tr: Turkish
+    uk: Ukrainian
+    ur: Urdu
+    uz: Uzbek
+    vi: Vietnamese
+    wo: Wolof
+  geography:
+    countries:
+      AD: Andorra
+      AE: United Arab Emirates
+      AF: Afghanistan
+      AG: Antigua and Barbuda
+      AI: Anguilla
+      AL: Albania
+      AM: Armenia
+      AO: Angola
+      AQ: Antarctica
+      AR: Argentina
+      AS: American Samoa
+      AT: Austria
+      AU: Australia
+      AW: Aruba
+      AX: Åland
+      AZ: Azerbaijan
+      BA: Bosnia and Herzegovina
+      BB: Barbados
+      BD: Bangladesh
+      BE: Belgium
+      BF: Burkina Faso
+      BG: Bulgaria
+      BH: Bahrain
+      BI: Burundi
+      BJ: Benin
+      BL: Saint Barthélemy
+      BM: Bermuda
+      BN: Brunei
+      BO: Bolivia
+      BQ: Bonaire
+      BR: Brazil
+      BS: Bahamas
+      BT: Bhutan
+      BV: Bouvet Island
+      BW: Botswana
+      BY: Belarus
+      BZ: Belize
+      CA: Canada
+      CC: Cocos [Keeling] Islands
+      CD: Democratic Republic of the Congo
+      CF: Central African Republic
+      CG: Republic of the Congo
+      CH: Switzerland
+      CI: Ivory Coast
+      CK: Cook Islands
+      CL: Chile
+      CM: Cameroon
+      CN: China
+      CO: Colombia
+      CR: Costa Rica
+      CU: Cuba
+      CV: Cape Verde
+      CW: Curacao
+      CX: Christmas Island
+      CY: Cyprus
+      CZ: Czech Republic
+      DE: Germany
+      DJ: Djibouti
+      DK: Denmark
+      DM: Dominica
+      DO: Dominican Republic
+      DZ: Algeria
+      EC: Ecuador
+      EE: Estonia
+      EG: Egypt
+      EH: Western Sahara
+      ER: Eritrea
+      ES: Spain
+      ET: Ethiopia
+      FI: Finland
+      FJ: Fiji
+      FK: Falkland Islands
+      FM: Micronesia
+      FO: Faroe Islands
+      FR: France
+      GA: Gabon
+      GB: United Kingdom
+      GD: Grenada
+      GE: Georgia
+      GF: French Guiana
+      GG: Guernsey
+      GH: Ghana
+      GI: Gibraltar
+      GL: Greenland
+      GM: Gambia
+      GN: Guinea
+      GP: Guadeloupe
+      GQ: Equatorial Guinea
+      GR: Greece
+      GS: South Georgia and the South Sandwich Islands
+      GT: Guatemala
+      GU: Guam
+      GW: Guinea-Bissau
+      GY: Guyana
+      HK: Hong Kong
+      HM: Heard Island and McDonald Islands
+      HN: Honduras
+      HR: Croatia
+      HT: Haiti
+      HU: Hungary
+      ID: Indonesia
+      IE: Ireland
+      IL: Israel
+      IM: Isle of Man
+      IN: India
+      IO: British Indian Ocean Territory
+      IQ: Iraq
+      IR: Iran
+      IS: Iceland
+      IT: Italy
+      JE: Jersey
+      JM: Jamaica
+      JO: Jordan
+      JP: Japan
+      KE: Kenya
+      KG: Kyrgyzstan
+      KH: Cambodia
+      KI: Kiribati
+      KM: Comoros
+      KN: Saint Kitts and Nevis
+      KP: North Korea
+      KR: South Korea
+      KW: Kuwait
+      KY: Cayman Islands
+      KZ: Kazakhstan
+      LA: Laos
+      LB: Lebanon
+      LC: Saint Lucia
+      LI: Liechtenstein
+      LK: Sri Lanka
+      LR: Liberia
+      LS: Lesotho
+      LT: Lithuania
+      LU: Luxembourg
+      LV: Latvia
+      LY: Libya
+      MA: Morocco
+      MC: Monaco
+      MD: Moldova
+      ME: Montenegro
+      MF: Saint Martin
+      MG: Madagascar
+      MH: Marshall Islands
+      MK: Macedonia
+      ML: Mali
+      MM: Myanmar [Burma]
+      MN: Mongolia
+      MO: Macao
+      MP: Northern Mariana Islands
+      MQ: Martinique
+      MR: Mauritania
+      MS: Montserrat
+      MT: Malta
+      MU: Mauritius
+      MV: Maldives
+      MW: Malawi
+      MX: Mexico
+      MY: Malaysia
+      MZ: Mozambique
+      NA: Namibia
+      NC: New Caledonia
+      NE: Niger
+      NF: Norfolk Island
+      NG: Nigeria
+      NI: Nicaragua
+      NL: Netherlands
+      'NO': Norway
+      NP: Nepal
+      NR: Nauru
+      NU: Niue
+      NZ: New Zealand
+      OM: Oman
+      PA: Panama
+      PE: Peru
+      PF: French Polynesia
+      PG: Papua New Guinea
+      PH: Philippines
+      PK: Pakistan
+      PL: Poland
+      PM: Saint Pierre and Miquelon
+      PN: Pitcairn Islands
+      PR: Puerto Rico
+      PS: Palestine
+      PT: Portugal
+      PW: Palau
+      PY: Paraguay
+      QA: Qatar
+      RE: Réunion
+      RO: Romania
+      RS: Serbia
+      RU: Russia
+      RW: Rwanda
+      SA: Saudi Arabia
+      SB: Solomon Islands
+      SC: Seychelles
+      SD: Sudan
+      SE: Sweden
+      SG: Singapore
+      SH: Saint Helena
+      SI: Slovenia
+      SJ: Svalbard and Jan Mayen
+      SK: Slovakia
+      SL: Sierra Leone
+      SM: San Marino
+      SN: Senegal
+      SO: Somalia
+      SR: Suriname
+      SS: South Sudan
+      ST: São Tomé and Príncipe
+      SV: El Salvador
+      SX: Sint Maarten
+      SY: Syria
+      SZ: Swaziland
+      TC: Turks and Caicos Islands
+      TD: Chad
+      TF: French Southern Territories
+      TG: Togo
+      TH: Thailand
+      TJ: Tajikistan
+      TK: Tokelau
+      TL: East Timor
+      TM: Turkmenistan
+      TN: Tunisia
+      TO: Tonga
+      TR: Turkey
+      TT: Trinidad and Tobago
+      TV: Tuvalu
+      TW: Taiwan
+      TZ: Tanzania
+      UA: Ukraine
+      UG: Uganda
+      UM: U.S. Minor Outlying Islands
+      US: United States
+      UY: Uruguay
+      UZ: Uzbekistan
+      VA: Vatican City
+      VC: Saint Vincent and the Grenadines
+      VE: Venezuela
+      VG: British Virgin Islands
+      VI: U.S. Virgin Islands
+      VN: Vietnam
+      VU: Vanuatu
+      WF: Wallis and Futuna
+      WS: Samoa
+      XK: Kosovo
+      YE: Yemen
+      YT: Mayotte
+      ZA: South Africa
+      ZM: Zambia
+      ZW: Zimbabwe
+    subregions:
+      AR:
+        BA: Buenos Aires
+      AT:
+        Bgld: Burgenland
+      AU:
+        ACT: Australian Capital Territory
+        NSW: New South Wales
+        NT: Northern Territory
+        QLD: Queensland
+        SA: South Australia
+        TAS: Tasmania
+        VIC: Victoria
+        WA: Western Australia
+      BR:
+        AC: Acre
+        AL: Alagoas
+        AP: Amapá
+        AM: Amazonas
+        BA: Bahia
+        CE: Ceará
+        ES: Espírito Santo
+        DF: Federal District
+        GO: Goiás
+        MA: Maranhão
+        MT: Mato Grosso
+        MS: Mato Grosso do Sul
+        MG: Minas Gerais
+        PB: Paraiba
+        PR: Paraná
+        PA: Pará
+        PE: Pernambuco
+        PI: Piauí
+        RN: Rio Grande do Norte
+        RS: Rio Grande do Sul
+        RJ: Rio de Janeiro
+        RO: Rondônia
+        RR: Roraima
+        SC: Santa Catarina
+        SE: Sergipe
+        SP: São Paulo
+        TO: Tocantins
+      CA:
+        AB: Alberta
+        BC: British Columbia
+        MB: Manitoba
+        NB: New Brunswick
+        NL: Newfoundland and Labrador
+        NT: Northwest Territories
+        NS: Nova Scotia
+        NU: Nunavut
+        'ON': Ontario
+        PE: Prince Edward Island
+        QC: Quebec
+        SK: Saskatchewan
+        YT: Yukon
+      CH:
+        TG: Thurgau
+        VD: Vaud
+        ZH: Zurich
+      DE:
+        HH: Hamburg
+        NRW: North Rhine-Westphalia
+      IT:
+        FVG: Friuli Venezia Giulia
+      MX:
+        Ags: Aguascalientes
+        BCS: Baja California Sur
+        CAM: Campeche
+        CHP: Chiapas
+        CH: Chihuahua
+        COA: Coahuila
+        COL: Colima
+        DUR: Durango
+        BCN: Estado de Baja California
+        MEX: Estado de México
+        GUA: Guanajuato
+        GRO: Guerrero
+        Hgo: Hidalgo
+        JAL: Jalisco
+        Mich: Michoacán
+        MOR: Morelos
+        NAY: Nayarit
+        NL: Nuevo León
+        OAX: Oaxaca
+        PUE: Puebla
+        QUE: Querétaro
+        ROO: Quintana Roo
+        SLP: San Luis Potosí
+        SIN: Sinaloa
+        SON: Sonora
+        TAB: Tabasco
+        TAM: Tamaulipas
+        Tlax: Tlaxcala
+        VER: Veracruz
+        YUC: Yucatán
+        ZAC: Zacatecas
+      MY:
+        JHR: Johor
+        KDH: Kedah
+        KTN: Kelantan
+        KUL: Kuala Lumpur
+        LBN: Labuan
+        MLK: Melaka
+        NSN: Negeri Sembilan
+        PHG: Pahang
+        PNG: Penang
+        PRK: Perak
+        PLS: Perlis
+        PJY: Putrajaya
+        SBH: Sabah
+        SRW: Sarawak
+        SGR: Selangor
+        TRG: Terengganu
+      NI:
+        RAAN: North Atlantic Autonomous Region (RAAN)
+      NL:
+        GLD: Provincie Gelderland
+      PH:
+        ARMM: Autonomous Region in Muslim Mindanao
+      US:
+        AL: Alabama
+        AK: Alaska
+        AZ: Arizona
+        AR: Arkansas
+        Calif: California
+        CO: Colorado
+        CT: Connecticut
+        DE: Delaware
+        FL: Florida
+        GA: Georgia
+        HI: Hawaii
+        ID: Idaho
+        IL: Illinois
+        IN: Indiana
+        IA: Iowa
+        KS: Kansas
+        KY: Kentucky
+        LA: Louisiana
+        ME: Maine
+        MD: Maryland
+        MA: Massachusetts
+        MI: Michigan
+        MN: Minnesota
+        MS: Mississippi
+        MO: Missouri
+        MT: Montana
+        NE: Nebraska
+        NV: Nevada
+        NH: New Hampshire
+        NJ: New Jersey
+        NM: New Mexico
+        NY: New York
+        NC: North Carolina
+        ND: North Dakota
+        OH: Ohio
+        OK: Oklahoma
+        OR: Oregon
+        PA: Pennsylvania
+        RI: Rhode Island
+        SC: South Carolina
+        SD: South Dakota
+        TN: Tennessee
+        TX: Texas
+        UT: Utah
+        VT: Vermont
+        VA: Virginia
+        WA: Washington
+        DC: Washington, D.C.
+        WV: West Virginia
+        WI: Wisconsin
+        WY: Wyoming
+  activerecord:
+    errors:
+      messages:
+        record_invalid: 'Validation failed: %{errors}'
+        restrict_dependent_destroy:
+          one: Cannot delete record because a dependent %{record} exists
+          many: Cannot delete record because dependent %{record} exist
+  translate:
+    translation_pages:
+      Locale_Translations: '%{language} Translations'
+      Enabled_Locales: Enabled Locales
+      Incomplete_Locales: Incomplete Locales
+      Other_Locales: Other Locales
+      pages: 'Pages:'
+      context_title: 'Context:'
+      context:
+        one: '%{context}'
+        other: '%{context} (× %{count})'
+      contexts:
+        character: character
+        sentence: sentence
+        title: title
+        paragraph: paragraph
+        language: language
+        geography: geography
+        other: other
+      pluraliztion_rules:
+        zero: none
+        one: singular
+        two: two
+        few: few
+        many: many
+        other: plural
+      pluraliztion_same_as_other: Same as other
+      no_value: Undefined
+      default_value: Default
+      variables: Variables
+      uses_default_value: This translation will use the plural version for the number
+        0
+      uses_custom_value: This translation has been overridden, normally the number
+        0 is treated as a plural in English
+      use_default_value: Use the default value
+      use_custom_value: Use a custom value
+    content:
+      needs_translations: This page contains untranslated content
+      requires_translation: This %{model} is in %{language}.
+      translation_out_of_date: Translated content on this page may no longer be accurate
+      translation_last_modified: The text in the original language was last modified
+        on %{date}
+      translate_now: Translate it now
+      can_you_help: Can you translate from %{language_a} to %{language_b}?
+      un_translated: Untranslated content
+      outdated_translation: Outdated content
+    volunteer:
+      become_a_volunteer: Become a volunteer translator
+      volunteer: Can you help us translate it?
+    site:
+      locale_is_available: '%{site_name} is available in %{language}.'
+      go_to_locale: See the %{language} site now
+      locale_not_available: Sorry, %{site_name} is not currently available in %{language}.
+      locale_needs_help: Can you help us translate the site into %{language}?

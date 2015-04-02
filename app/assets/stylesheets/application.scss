@@ -1,46 +1,10 @@
-//@include fontface('AlteHaasGroteskBold', '/assets/AlteHaasGroteskBold', 'alte_haas_groteskbold', ttf, normal, bold);
-
-//body {
-//	font-family: 'AlteHaasGroteskBold';
-//}
-
-//@include breakpoint(medium-only) {
-//}
-
-@function rems($rems) {
-	@if capable_of(rem) {
-		@return $rems * 1rem;
-	}
-	@return $rems * 16px;
-}
-
-$sidebar-width: rems(19);
-
-$colour-1: #00ADEF;
-$colour-2: #FF015B;
-$colour-3: #E6C229;
-$colour-4: #F17105;
-$colour-5: #8EA604;
+//@import "bumbleberry";
+@import "settings";
 
 body {
 	color: #333;
 	position: relative;
 	z-index: -1;
-}
-
-@mixin default-box-shadow($direction: top, $distance: 1) {
-	@if capable_of(box-shadow) {
-		$offset: 0.2em;
-		@if $direction == right or $direction == bottom {
-			$offset: -$offset;
-		}
-		@if $direction == left or $direction == right {
-			$offset: '#{$offset} 0';
-		} @else {
-			$offset: '0 #{$offset}';
-		}
-		@include _(box-shadow, #{$offset} 0.8em #{-0.2em * $distance} #000);
-	}
 }
 
 h1, h2, h3, h4, h5, label, button {
@@ -63,7 +27,7 @@ a {
 	outline: 0;
 	position: relative;
 
-	&:after {
+	@include after {
 		content: '';
 		position: absolute;
 		border-bottom: 0 solid;
@@ -75,13 +39,20 @@ a {
 		@include _(transform, translateY(-1em));
 	}
 
-	&:hover:after,
-	&:active:after,
-	&:focus:after {
-		border-bottom: 0.1em solid;
-		opacity: 1;
-		transform: translateY(0);
+	&:hover,
+	&:active,
+	&:focus {
+		@include after {
+			border-bottom: 0.1em solid;
+			opacity: 1;
+			transform: translateY(0);
+		}
 	}
+}
+
+@include selection {
+	background-color: rgba($colour-2, 0.75);
+	color: rgba(#FFF, 0.75);
 }
 
 #main-nav {
@@ -115,16 +86,28 @@ a {
 			color: #FFF;
   			text-shadow: 0 0 0.35em #000;
 
-			&:after {
+			@include after {
 				display: none;
+			}
+
+			@include before {
+				background-color: $colour-5;
 			}
 
 			&:nth-child(2) {
 				background-color: $colour-4;
+
+				@include before {
+					background-color: $colour-4;
+				}
 			}
 
 			&:nth-child(3) {
 				background-color: $colour-3;
+
+				@include before {
+					background-color: $colour-3;
+				}
 			}
 		}
 	}
@@ -142,13 +125,32 @@ a {
 	z-index: -1;
 	max-width: (rems(68) - $sidebar-width) * 2;
 	background-color: #FFF;
+	padding-bottom: rems(2);
 
 	article {
-		padding: rems(1) 7.5%;
+		padding: rems(3.5) 7.5%;
 
 		&.supplementary {
-			background-color: $colour-3;
-			@include default-box-shadow(bottom, 2);
+			//background-color: $colour-3;
+			margin: rems(1) 7.5%;
+			overflow: hidden;
+			border-radius: 0.33em;
+			border: 0.1rem solid #DDD;
+			background-color: #F7F7F7;
+			@include default-box-shadow(top, 2);
+		}
+
+		figure {
+			float: left;
+			background-size: cover;
+			background-position: center;
+			background-repeat: no-repeat;
+			width: 33%;
+			height: 12em;
+			margin-left: -1em;
+			margin-top: 2em;
+			margin-right: 1.5em;
+			margin: 2em 1.5em 1.5em -1.5em;
 		}
 	}
 }
@@ -162,18 +164,31 @@ a.logo {
 	float: left;
 	@include clearfix;
 
-	&:hover:after,
-	&:active:after,
-	&:focus:after {
-		display: none;
+	&:hover,
+	&:active,
+	&:focus {
+		@include after {
+			display: none;
+		}
 	}
 }
 
 @if capable_of(svg) {
+
+	@include keyframes(active-logo) {
+		0% { fill: $colour-1; }
+		15% { fill: $colour-5; }
+		30% { fill: $colour-3; }
+		45% { fill: $colour-4; }
+		60% { fill: $colour-2; }
+	}
+
+	@include keyframes(banner-load) {
+		0% { fill: #888; }
+	}
+
 	svg.bb-icon-logo {
 		fill: $colour-1;
-		@include _(transform, rotate(0));
-		@include _(transition, transform 500ms ease-in-out);
 	}
 	svg.bb-icon-logo-text {
 		fill: #333;
@@ -187,7 +202,7 @@ a.logo {
 	}
 
 	.logo:hover svg.bb-icon-logo {
-		@include _(transform, rotate(360deg));
+		@include _(animation, active-logo 4s infinite);
 	}
 }
 
@@ -206,14 +221,6 @@ a.logo {
 	}
 }
 
-svg {
-	.colour-1 { fill: $colour-1; }
-	.colour-2 { fill: $colour-2; }
-	.colour-3 { fill: $colour-3; }
-	.colour-4 { fill: $colour-4; }
-	.colour-5 { fill: $colour-5; }
-}
-
 $header-tilt: 8deg;
 
 #header-title {
@@ -222,9 +229,34 @@ $header-tilt: 8deg;
 	background-position: 50% 20%;
 	background-repeat: no-repeat;
 	background-color: $colour-1;
+	color: #EEE;
 	overflow: hidden;
 	position: relative;
 	z-index: -1;
+
+	rect {
+		fill: $colour-1;
+	}
+
+	svg {
+		.colour-1 { fill: $colour-1; }
+		.colour-2 { fill: $colour-2; }
+		.colour-3 { fill: $colour-3; }
+		.colour-4 { fill: $colour-4; }
+		.colour-5 { fill: $colour-5; }
+	}
+
+	&.no-image,
+	&.short {
+		h1 {
+			text-align: center;
+			font-size: 3.5em;
+			margin: 0.25em 0.5em;
+			position: relative;
+			z-index: 1;
+			text-shadow: 0 0 0.15em #000;
+		}
+	}
 
 	svg {
 		display: none;
@@ -258,8 +290,8 @@ $header-tilt: 8deg;
 	.details {
 		position: relative;
 		display: inline-block;
-		color: #000;
-		@include _(text-shadow, 0 0.2em 0.5em rgba(32, 32, 32, 0.75))
+		color: #FFF;
+		@include _(text-shadow, 0 0.2em 0.5em rgba(32, 32, 32, 0.75));
 	}
 
 	.primary {
@@ -269,6 +301,69 @@ $header-tilt: 8deg;
 
 	.secondary {
 		font-size: 1.5em;
+	}
+}
+
+#footer {
+	padding: 1em;
+
+	.copy {
+		@include clearfix;
+
+		a {
+			float: right;
+			color: #666;
+		}
+	}
+
+	.facebook {
+		float: left;
+
+		a {
+			@include after {
+				display: none;
+			}
+			svg {
+				@include _(transition, fill 250ms ease-in-out);
+			}
+			&:hover, &:active, &:focus {
+				svg {
+					fill: #3B579D;
+				}
+			}
+		}
+	}
+
+	.github, .facebook {
+		.icons {
+			width: 1.5em;
+			height: 1.5em;
+			fill: #333;
+			vertical-align: middle;
+		}
+	}
+	.github {
+		position: relative;
+		background-color: #FFF;
+		border-radius: 0.25em;
+		border: 0.1em solid #DDD;
+		padding: 0.5em 0.5em 0.5em 2em;
+		text-align: center;
+		z-index: 1;
+		margin-bottom: 0.5em;
+
+		a {
+			margin: 0 0.5em;
+			font-size: 0.8em;
+			font-weight: bold;
+			color: inherit;
+		}
+
+		.icons {
+			position: absolute;
+			left: 0.5em;
+			top: 0.45em;
+		}
 	}
 }
 
@@ -319,7 +414,7 @@ $header-tilt: 8deg;
 					color: $colour-1;
 				}
 
-				&:after {
+				@include after {
 					content: '';
 					display: block;
 					position: absolute;
@@ -335,10 +430,12 @@ $header-tilt: 8deg;
 					@include _(transform, none);
 				}
 
-				&:hover:after,
-				&:active:after,
-				&:focus:after {
-					width: 100%;
+				&:hover,
+				&:active,
+				&:focus {
+					@include after {
+						width: 100%;
+					}
 				}
 			}
 		}
@@ -352,8 +449,41 @@ $header-tilt: 8deg;
 		min-height: rems(35);
 		font-size: 1em;
 
+		&.short {
+			font-size: 2em;
+			min-height: rems(15);
+
+			h1 {
+				position: absolute;
+				bottom: 0;
+				text-align: left;
+				font-size: 2em;
+			}
+
+			@include before {
+				content: '';
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				z-index: 1;
+				@include _(box-shadow, inset 0 -13rem 3em -4rem rgba(0, 0, 0, 0.8));
+				@include _(transition, opacity 250ms ease-in-out);
+			}
+		}
+
+		&.no-image {
+			min-height: 0;
+			font-size: 2em;
+		}
+
 		svg {
 			display: block;
+		}
+
+		svg rect {
+			@include _(animation, banner-load 1s ease-in-out);
 		}
 
 		.title {
@@ -366,6 +496,7 @@ $header-tilt: 8deg;
 
 		.details {
 			text-align: right;
+			color: #000;
 		}
 
 		.background {
@@ -376,10 +507,30 @@ $header-tilt: 8deg;
 			padding: 12% 0 0 0.25em;
 		}
 	}
+
+	#footer {
+		.github {
+			bottom: 0.5em;
+			left: 2em;
+			float: left;
+		}
+		.facebook {
+			position: absolute;
+			left: 0.5em;
+		}
+	}
 }
 
 @include breakpoint(large) {
 	#banner {
+		body.fixed-banner & {
+			position: fixed;
+			top: 0;
+			right: 0;
+			left: $sidebar-width;
+			z-index: 1;
+		}
+
 		figure {
 			width: 90%;
 		}
@@ -399,6 +550,56 @@ $header-tilt: 8deg;
 			a {
 				font-size: 1.6em;
 				margin: 0.75em 1em;
+				display: block;
+
+				@include after {
+					display: none;
+					@include _(transition, none);
+					position: absolute;
+					font-size: 0.25em;
+					top: 1.5em;
+					right: -1em;
+					bottom: 0;
+					left: auto;
+					margin: auto;
+					width: 0;
+					height: 0;
+					border-style: solid;
+					border-width: 1em 0 1em 1.5em;
+					border-color: transparent transparent transparent rgba(#000, 0.25);
+					max-width: 0;
+					@include _(box-shadow, none);
+				}
+
+				@include before {
+					content: '';
+					position: absolute;
+					top: -0.5em;
+					right: -1em;
+					left: -1em;
+					height: 2em;
+					z-index: -1;
+					@include _(transform, skewY(3.3deg) translate3d(0, 0, 0));
+					@include _(opacity, 0.5)
+				}
+
+				&.current {
+					color: #333;
+					@include before {
+						@include _(opacity, 0.75);
+					}
+					@include after {
+						display: block;
+					}
+				}
+
+				&:hover, &:active, &:focus {
+					color: #333;
+
+					@include before {
+						@include _(opacity, 1)
+					}
+				}
 			}
 		}
 
@@ -414,6 +615,22 @@ $header-tilt: 8deg;
 		padding-left: $sidebar-width;
 	}
 
+	#header-title {
+		&.no-image {
+			min-height: rems(10);
+		}
+		&.short {
+			min-height: rems(25);
+		}
+		&.no-image,
+		&.short {
+			h1 {
+				position: absolute;
+				bottom: 0;
+			}
+		}
+	}
+
 	a.logo {
 		display: block;
 		float: none;
@@ -423,6 +640,58 @@ $header-tilt: 8deg;
 
 	.paypal-button {
 		margin: 4em 2em 0 0;
+	}
+	
+	#footer {
+		position: fixed;
+		z-index: 1;
+		bottom: 0;
+		left: 0;
+		width: $sidebar-width;
+
+		.github {
+			position: absolute;
+			border-color: transparent;
+			max-width: 2.25em;
+			height: 2.25em;
+			left: 0.5em;
+			overflow: hidden;
+			color: transparent;
+			@include _(transition, all 250ms ease-in-out);
+
+			&:hover {
+				@if capable_of(calc) {
+					max-width: calc(100% - 1em);
+				} @else {
+					max-width: 100%;
+				}
+				color: #333;
+				border-color: #DDD;
+				@include default-box-shadow(top, 2, true);
+			}
+
+			.icons {
+				left: 0.5em;
+				top: 0.45em;
+				width: 1.5em;
+				height: 1.5em;
+				fill: #333;
+				vertical-align: middle;
+				position: absolute;
+			}
+
+			a {
+				margin: 0 0.5em;
+				font-size: 0.8em;
+				font-weight: bold;
+				color: inherit;
+			}
+		}
+		.facebook {
+			position: relative;
+			left: 2.5em;
+  			bottom: 0.25em;
+		}
 	}
 }
 
@@ -440,8 +709,7 @@ button {
 	overflow: hidden;
 	cursor: pointer;
 
-	&:before,
-	&:after {
+	@include before-and-after {
 		content: '';
 		position: absolute;
 		display: block;
@@ -452,33 +720,61 @@ button {
 		border-color: transparent;
 		@include _(transition, all 250ms ease-in-out);
 	}
-	&:before {
+	@include before {
 		height: 100%;
 		width: 100%;
 		margin-right: 1em;
 	}
-	&:after {
+	@include after {
 		border-style: solid;
 		border-width: 1em 0 1em 1em;
 	}
 
-	&:hover:after,
-	&:focus:after,
-	&:hover:before,
-	&:focus:before {
-		right: -1em;
-		border-left-color: rgba(0, 0, 0, 0.15);
+	&:hover,
+	&:focus,
+	&:hover,
+	&:focus {
+		@include before-and-after {
+			right: -1em;
+			border-left-color: rgba(0, 0, 0, 0.15);
+		}
 	}
-	&:hover:before,
-	&:focus:before {
-		background-color: rgba(0, 0, 0, 0.15);
+	&:hover,
+	&:focus {
+		@include before {
+			background-color: rgba(0, 0, 0, 0.15);
+		}
 	}
 
 	&:active {
 		@include _(transform, scale(0.95));
 
-		&:after {
+		@include after {
 			left: 120%;
 		}
 	}
+
+	&:disabled {
+		@include _(opacity, 0.5);
+		cursor: inherit;
+
+		@include before-and-after {
+			display: none;
+		}
+	}
 }
+
+@mixin header-colour($page, $colour) {
+	body.#{$page} {
+		#header-title {
+			background-color: $colour;
+
+			rect {
+				fill: $colour;
+			}
+		}
+	}
+}
+
+@include header-colour(about, $colour-4);
+@include header-colour(policy, $colour-3);

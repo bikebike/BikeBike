@@ -1,0 +1,10 @@
+- content_for :banner do
+	- image = image_url('grafitti.jpg')
+	#header-title.short{style: capable_of(:svg) ? nil : "background-image: url(#{image})"}
+		- if capable_of(:svg)
+			= render 'application/banner_image.svg', {:image => image}
+		%h1=_'page_titles.Translations'
+
+%h1=_'translate.Translations'
+%article=render 'translations/list'
+

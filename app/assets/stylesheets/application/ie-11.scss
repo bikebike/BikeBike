@@ -213,7 +213,7 @@ $browser_capabilities: (
 	"autofocus": y,
 	"css-clip-path": n,
 	"getrandomvalues": yx,
-	"screen-orientation": yx,
+	"screen-orientation": ax,
 	"font-loading": n,
 	"font-unicode-range": a,
 	"gamepad": n,
@@ -233,7 +233,8 @@ $browser_capabilities: (
 	"background-attachment": y,
 	"currentcolor": y,
 	"input-pattern": y,
-	"registerprotocolhandler": n
+	"registerprotocolhandler": n,
+	"css-snappoints": ax
 );
 
 @import "bumbleberry-settings";
