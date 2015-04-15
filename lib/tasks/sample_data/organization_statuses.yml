@@ -1,0 +1,13 @@
+---
+unknown:
+  id: 1
+  slug: unknown
+new:
+  id: 2
+  slug: new
+open:
+  id: 3
+  slug: open
+closed:
+  id: 4
+  slug: closed

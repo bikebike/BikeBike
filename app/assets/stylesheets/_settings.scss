@@ -6,7 +6,7 @@ $colour-3: #E6C229;
 $colour-4: #F17105;
 $colour-5: #8EA604;
 
-@mixin default-box-shadow($direction: top, $distance: 1, $inset: false) {
+@mixin default-box-shadow($direction: top, $distance: 1, $inset: false, $additional-shadow: false) {
 	@if capable_of(box-shadow) {
 		$offset: 0.2em;
 		@if $direction == right or $direction == bottom {
@@ -20,7 +20,10 @@ $colour-5: #8EA604;
 		@if $inset {
 			$offset: 'inset #{$offset}';
 		}
-		@include _(box-shadow, #{$offset} 0.8em #{-0.2em * $distance} #000);
+		@if $additional-shadow {
+			$additional-shadow: ', #{$additional-shadow}';
+		}
+		@include _(box-shadow, #{$offset} 0.8em #{-0.2em * $distance} #000#{$additional-shadow});
 	}
 }
 

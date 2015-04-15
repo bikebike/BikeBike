@@ -1,4 +1,3 @@
-//@import "bumbleberry";
 @import "settings";
 
 body {
@@ -48,6 +47,173 @@ a {
 			transform: translateY(0);
 		}
 	}
+}
+
+button {
+	position: relative;
+	color: #FFF;
+	background-color: $colour-1;
+	border: 0;
+	padding: 0.5em 1em;
+	font-size: 1.25em;
+	outline: 0;
+	border-bottom: 0.125em solid rgba(0, 0, 0, 0.15);
+	@include _(border-radius, 0.15em);
+	@include default-box-shadow(top, 2);
+	overflow: hidden;
+	cursor: pointer;
+
+	@include before-and-after {
+		content: '';
+		position: absolute;
+		display: block;
+		top: 0;
+		right: 100%;
+		font-size: 1.15em;
+		background-color: rgba(0, 0, 0, 0);
+		border-color: transparent;
+		@include _(transition, all 250ms ease-in-out);
+	}
+	@include before {
+		height: 100%;
+		width: 100%;
+		margin-right: 1em;
+	}
+	@include after {
+		border-style: solid;
+		border-width: 1em 0 1em 1em;
+	}
+
+	&:hover,
+	&:focus,
+	&:hover,
+	&:focus {
+		@include before-and-after {
+			right: -1em;
+			border-left-color: rgba(0, 0, 0, 0.15);
+		}
+	}
+	&:hover,
+	&:focus {
+		@include before {
+			background-color: rgba(0, 0, 0, 0.15);
+		}
+	}
+
+	&:active {
+		@include _(transform, scale(0.95));
+
+		@include after {
+			left: 120%;
+		}
+	}
+
+	&:disabled {
+		@include _(opacity, 0.5);
+		cursor: inherit;
+
+		@include before-and-after {
+			display: none;
+		}
+	}
+
+	#main &[type="submit"] {
+		background-color: $colour-5;
+	}
+}
+
+textarea {
+	$line-height: 2em;
+	display: block;
+	width: 100%;
+	min-height: $line-height * 4;
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding: 0 0.5em;
+	line-height: $line-height;
+	border: 0.1rem solid #E8E8E8;
+	outline: 0;
+	background: linear-gradient(
+		to bottom,
+		transparent,
+		transparent ($line-height - 0.05em),
+		rgba($colour-1, 0.33) 0.05em,
+		rgba($colour-1, 0.33)
+	);
+	background-size: 100% $line-height;
+	border-radius: 0 0 1em 0;
+	color: #000;
+	font-weight: bold;
+	@include default-box-shadow(top, 2);
+	@include _(transition, box-shadow 100ms ease-in-out);
+
+	&:hover, &:focus, &:active {
+		@include default-box-shadow(top, 1);
+	}
+}
+
+input {
+	&[type="text"], &[type="password"], &[type="telephone"], &[type="search"], &[type="email"], &[type="url"] {
+		display: block;
+		font-size: 1.25em;
+		outline: 0;
+		border: 0;
+		margin: 1em 0;
+		width: 100%;
+		padding: 0.25em 0.5em;
+		border-bottom: 0.15em solid transparent;
+		//@include default-box-shadow(top, 2, false, 0 0.05em 0 0 #666);
+		//@include _(transition, box-shadow 100ms ease-in-out);
+
+		&:hover, &:focus, &:active {
+			//@include default-box-shadow(top, 2, false, 0 0.15em 0 0 $colour-1);
+		}
+	}
+}
+
+.email-field {
+	position: relative;
+	overflow: hidden;
+	@include default-box-shadow(top, 2, false, 0 0.05em 0 0 #666);
+	@include _(transition, box-shadow 100ms ease-in-out);
+
+	label {
+		//position: absolute;
+		font-size: 1em;
+		float: left;
+		//@include font-family(primary);
+		//font-weight: bold;
+		//left: 0;
+		//top: 0;
+		padding: 0.25em 0.667em;
+		width: auto;
+		background-color: #333;
+		color: #FFF;
+		//@include _(transition, transform 250ms ease-in-out);
+		//@include _(transform-origin, left center);
+		//@include _(transform, scale(1) translateY(0));
+	}
+
+	&:hover, &:focus, &:active {
+		@include default-box-shadow(top, 2, false, 0 0.15em 0 0 $colour-1);
+
+		label {
+			background-color: $colour-1;
+		}
+	}
+	/*input {
+		&:focus, &:active, &:not([value=""]) {
+			+ label {
+				@include _(transform, scale(0.75) translateY(-20%));
+				top: -0.5em;
+			}
+		}
+	}*/
+}
+
+::-webkit-resizer {
+    visibility: hidden;
+    cursor: nw-resize;
 }
 
 @include selection {
@@ -316,7 +482,7 @@ $header-tilt: 8deg;
 		}
 	}
 
-	.facebook {
+	.facebook, .locale {
 		float: left;
 
 		a {
@@ -342,6 +508,7 @@ $header-tilt: 8deg;
 			vertical-align: middle;
 		}
 	}
+
 	.github {
 		position: relative;
 		background-color: #FFF;
@@ -363,6 +530,131 @@ $header-tilt: 8deg;
 			position: absolute;
 			left: 0.5em;
 			top: 0.45em;
+			@include _(transition, 150ms fill ease-in-out);
+		}
+
+		&:hover .icons {
+			fill: #4183C4;
+		}
+	}
+
+	.locale {
+		@if capable_of(css3_selectors) {
+			margin: 0 0.5em;
+
+			#select-language {
+				position: absolute;
+				visibility: hidden;
+			}
+
+			.launch {
+				display: block;
+				height: 1.5em;
+				padding: 0 0.125em;
+				border-radius: 0.1em;
+				background-color: #888;
+				color: #E7E7E7;
+				text-align: center;
+				line-height: 1.5em;
+				@include font-family(secondary);
+				@include _(transition, 150ms background-color ease-in-out);
+				cursor: pointer;
+
+				&:hover {
+					background-color: #333;
+				}
+
+				@include after {
+					content: '×';
+					display: block;
+					position: fixed;
+					top: 0.5em;
+					left: -1em;
+					z-index: 11;
+					color: #333;
+					font-size: 2em;
+					opacity: 0;
+					@include _(transition, 250ms left ease-in-out);
+				}
+			}
+
+			.selector {
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				padding: 1em 4em;
+				overflow: auto;
+				background-color: #FFF;
+				z-index: 10;
+				@include _(transform, scale(0));
+				@include _(transform-origin, 6.25em _calc('100% - 2em', 98%));
+				@include _(transition, 250ms all ease-in-out);
+			}
+
+			ul {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+				text-align: center;
+			}
+
+			li {
+				position: relative;
+				display: inline-block;
+				min-width: 6em;
+				margin: 1em;
+				text-align: center;
+				border-radius: 0.33em;
+				overflow: hidden;
+				@include default-box-shadow;
+				@include _(transform, scale(1));
+				@include _(transition, 100ms transform ease-in-out);
+
+				a {
+					display: block;
+					position: static;
+					background-color: $colour-1;
+					@include font-family(secondary);
+					line-height: 1.5em;
+					color: #FFF;
+
+					@include before {
+						content: '';
+						position: absolute;
+						top: 0;
+						right: 0;
+						bottom: 0;
+						left: 0;
+						z-index: 1;
+					}
+				}
+
+				span {
+					padding: 1em;
+					height: 3.25em;
+					display: block;
+				}
+
+				&:hover {
+					@include _(transform, scale(1.25));
+				}
+			}
+
+			#select-language:checked ~ label {
+				@include after {
+					display: block;
+					left: 0.25em;
+					opacity: 1;
+				}
+				}
+
+			#select-language:checked ~ .selector {
+				@include _(transform, scale(1));
+			}
+		} @else {
+			display: none;
 		}
 	}
 }
@@ -423,10 +715,10 @@ $header-tilt: 8deg;
 					left: 0;
 					width: 0;
 					margin: 0 auto;
-					opacity: 1;
+					opacity: 0;
 					border-bottom: 0.15em solid;
 					@include _(box-shadow, 0 0.075em 0.15em #888);
-					@include _(transition, width 250ms ease-in-out);
+					@include _(transition, all 250ms ease-in-out);
 					@include _(transform, none);
 				}
 
@@ -434,6 +726,7 @@ $header-tilt: 8deg;
 				&:active,
 				&:focus {
 					@include after {
+						opacity: 1;
 						width: 100%;
 					}
 				}
@@ -511,12 +804,16 @@ $header-tilt: 8deg;
 	#footer {
 		.github {
 			bottom: 0.5em;
-			left: 2em;
+			left: 4em;
 			float: left;
 		}
 		.facebook {
 			position: absolute;
 			left: 0.5em;
+		}
+		.locale {
+			position: absolute;
+			left: 2em;
 		}
 	}
 }
@@ -550,48 +847,7 @@ $header-tilt: 8deg;
 			a {
 				font-size: 1.6em;
 				margin: 0.75em 1em;
-				display: block;
-
-				@include after {
-					display: none;
-					@include _(transition, none);
-					position: absolute;
-					font-size: 0.25em;
-					top: 1.5em;
-					right: -1em;
-					bottom: 0;
-					left: auto;
-					margin: auto;
-					width: 0;
-					height: 0;
-					border-style: solid;
-					border-width: 1em 0 1em 1.5em;
-					border-color: transparent transparent transparent rgba(#000, 0.25);
-					max-width: 0;
-					@include _(box-shadow, none);
-				}
-
-				@include before {
-					content: '';
-					position: absolute;
-					top: -0.5em;
-					right: -1em;
-					left: -1em;
-					height: 2em;
-					z-index: -1;
-					@include _(transform, skewY(3.3deg) translate3d(0, 0, 0));
-					@include _(opacity, 0.5)
-				}
-
-				&.current {
-					color: #333;
-					@include before {
-						@include _(opacity, 0.75);
-					}
-					@include after {
-						display: block;
-					}
-				}
+				@include _(transition, color 250ms ease-in-out);
 
 				&:hover, &:active, &:focus {
 					color: #333;
@@ -655,29 +911,27 @@ $header-tilt: 8deg;
 			max-width: 2.25em;
 			height: 2.25em;
 			left: 0.5em;
+			bottom: 0.333em;
 			overflow: hidden;
 			color: transparent;
+			padding: 0.333em;
+			line-height: 1.5em;
 			@include _(transition, all 250ms ease-in-out);
 
 			&:hover {
-				@if capable_of(calc) {
-					max-width: calc(100% - 1em);
-				} @else {
-					max-width: 100%;
-				}
+				max-width: _calc('100% - 1em', 100%);
 				color: #333;
 				border-color: #DDD;
 				@include default-box-shadow(top, 2, true);
 			}
 
 			.icons {
-				left: 0.5em;
-				top: 0.45em;
+				float: left;
 				width: 1.5em;
 				height: 1.5em;
 				fill: #333;
 				vertical-align: middle;
-				position: absolute;
+				position: static;
 			}
 
 			a {
@@ -685,81 +939,21 @@ $header-tilt: 8deg;
 				font-size: 0.8em;
 				font-weight: bold;
 				color: inherit;
+				position: static;
+
+				&:hover {
+					text-decoration: underline;
+					
+					@include after {
+						display: none;
+					}
+				}
 			}
 		}
-		.facebook {
+		.facebook, .locale {
 			position: relative;
 			left: 2.5em;
   			bottom: 0.25em;
-		}
-	}
-}
-
-button {
-	position: relative;
-	color: #FFF;
-	background-color: $colour-1;
-	border: 0;
-	padding: 0.5em 1em;
-	font-size: 1.25em;
-	outline: 0;
-	border-bottom: 0.125em solid rgba(0, 0, 0, 0.15);
-	@include _(border-radius, 0.15em);
-	@include default-box-shadow(top, 2);
-	overflow: hidden;
-	cursor: pointer;
-
-	@include before-and-after {
-		content: '';
-		position: absolute;
-		display: block;
-		top: 0;
-		right: 100%;
-		font-size: 1.15em;
-		background-color: rgba(0, 0, 0, 0);
-		border-color: transparent;
-		@include _(transition, all 250ms ease-in-out);
-	}
-	@include before {
-		height: 100%;
-		width: 100%;
-		margin-right: 1em;
-	}
-	@include after {
-		border-style: solid;
-		border-width: 1em 0 1em 1em;
-	}
-
-	&:hover,
-	&:focus,
-	&:hover,
-	&:focus {
-		@include before-and-after {
-			right: -1em;
-			border-left-color: rgba(0, 0, 0, 0.15);
-		}
-	}
-	&:hover,
-	&:focus {
-		@include before {
-			background-color: rgba(0, 0, 0, 0.15);
-		}
-	}
-
-	&:active {
-		@include _(transform, scale(0.95));
-
-		@include after {
-			left: 120%;
-		}
-	}
-
-	&:disabled {
-		@include _(opacity, 0.5);
-		cursor: inherit;
-
-		@include before-and-after {
-			display: none;
 		}
 	}
 }

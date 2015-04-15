@@ -3,12 +3,6 @@ module ActiveRecord
 	end
 end
 
-class Translator
-	def can_translate?
-		true
-	end
-end
-
 class ApplicationController < LinguaFrancaApplicationController
 	# Prevent CSRF attacks by raising an exception.
 	# For APIs, you may want to use :null_session instead.
@@ -24,7 +18,10 @@ class ApplicationController < LinguaFrancaApplicationController
 	@@test_location
 
 	def capture_page_info
-		I18n.config.translator = Translator.new
+		#u = User.find_by_email('goodgodwin@hotmail.com')
+		#auto_login(u)
+		#logout()
+		I18n.config.translator = current_user
 		@conference = Conference.order("start_date DESC").first
 		@stylesheets ||= Array.new
 		@stylesheets << params[:controller] if params[:controller] == 'translations'
@@ -63,7 +60,8 @@ class ApplicationController < LinguaFrancaApplicationController
 		render 'application/404', status: 404
 	end
 
-	def do_403
+	def do_403(template = nil)
+		@template = template
 		render 'application/permission_denied', status: 403
 	end
 
@@ -73,5 +71,9 @@ class ApplicationController < LinguaFrancaApplicationController
 
 	rescue_from ActiveRecord::PremissionDenied do |exception|
 		do_403
+	end
+
+	rescue_from AbstractController::ActionNotFound do |exception|
+		do_403 'translator_login'
 	end
 end

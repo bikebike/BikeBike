@@ -9,7 +9,19 @@
 	=_'links.footer.help_text.facebook', 'Join our facebook group' do |title|
 		%a{href: 'https://www.facebook.com/groups/648758205249998/', target: :_blank, title: title}
 			=svg_sprite  'icons', 'bb-icon-fb', 'facebook logo'
+.locale
+	=_'links.footer.help_text.select_language', 'Select your language' do |title|
+		%input{type: :checkbox, id: 'select-language'}
+		%label.launch{title: title, for: 'select-language'}
+			=I18n.locale.upcase
+		.selector
+			%ul
+				-I18n.backend.available_locales.each do |locale|
+					%li
+						%a{href: request.original_url.gsub(/^(https?:\/\/)(..\.)?(.*)$/, '\1' + locale + '.\3')}
+							=_! locale.upcase
+						%span=I18n.t("languages.#{locale}", locale: locale, context: I18n.t("languages.#{locale}"))
 .copy
 	=_'links.footer.help_text.contributors', 'Who contributed to building this website' do |title|
 		=link_to :humans_txt, {title: title} do
-			=_!"&copy;#{Date.today.strftime("%Y")} Bike!Bike!"
+			=(_!"&copy;#{Date.today.strftime("%Y")} Bike!Bike!").html_safe

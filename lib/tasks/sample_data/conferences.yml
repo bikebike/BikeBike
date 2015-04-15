@@ -1,0 +1,27 @@
+---
+new_orleans:
+  id: 1
+  title: New Orleans 2013
+  slug: new_orleans
+  start_date: 
+  end_date: 
+  info: This was an awesome conference
+  poster: 
+  cover: 
+  workshop_schedule_published: 
+  registration_open: 
+  meals_provided: 
+  meal_info: 
+  travel_info: 
+  conference_type_id: 
+  created_at: 
+  updated_at: 
+  preregistration_info: 
+  registration_info: 
+  postregistration_info: 
+  cover_attribution_id: 
+  cover_attribution_name: 
+  cover_attribution_src: 
+  cover_attribution_user_id: 
+  organizations:
+    - plan_b

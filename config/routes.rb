@@ -75,6 +75,10 @@ BikeBike::Application.routes.draw do
     get '/robots.txt' => 'application#robots', :as => :robots_txt
     get '/humans.txt' => 'application#humans', :as => :humans_txt
     # get 'resources' => 'pages#resources'
+    # 
+    get '/confirm/:token' => 'application#confirm', :as => :confirm
+    post '/doconfirm' => 'application#do_confirm', :as => :do_confirm
+    post '/translator-request' => 'application#translator_request', :as => :translator_request
 
 	get '/about' => 'application#about', :as => :about
 	get '/policy' => 'application#policy', :as => :policy

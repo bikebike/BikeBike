@@ -1,9 +1,15 @@
-- page_title = _'error.403.page_title.Permission_Denied'
-- title page_title
-- banner_title page_title
+- content_for :banner do
+	- image = image_url('403.jpg')
+	#header-title.short{style: capable_of(:svg) ? nil : "background-image: url(#{image})"}
+		- if capable_of(:svg)
+			= render 'application/banner_image.svg', {:image => image}
+		%h1=_'page_titles.Permission_Denied'
 
-.row
-	%h1
-		=_'error.403.title','This page is inaccessible to you'
-	%p
-		=_'error.403.description', :p
+%article
+	- if @template
+		=render @template
+	- else
+		%h2
+			=_'articles.permission_denied.headings.main','Sorry, you currently don\'t have access to this page'
+		%p
+			=_'articles.permission_denied.paragraphs.main', :p

@@ -23,6 +23,10 @@ class UserMailer < ActionMailer::Base
 		mail to: "to@example.org"
 	end
 
+	def test_email
+		mail to: 'goodgodwin@hotmail.com', subject: 'This is a test'
+	end
+
     def conference_registration_email(conference, data, conference_registration)
         @data = data
         @conference = conference
