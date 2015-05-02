@@ -26,7 +26,7 @@ module BikeBike
 		# config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
 		config.i18n.default_locale = :en
 		config.i18n.enforce_available_locales = false
-		self.paths['config/database'] = Rails.root.parent.join('BikeBike', 'config', 'database.yml')
+		self.paths['config/database'] = Rails.root.join('config', 'database.yml')
 		config.active_record.raise_in_transactional_callbacks = true
 	end
 end

@@ -1,6 +1,5 @@
 source 'http://rubygems.org'
 
-#ruby '2.0.0'
 gem 'rails', '4.2.0'
 gem 'pg'
 gem 'haml'
@@ -9,12 +8,6 @@ gem 'jquery-ui-rails'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'lingua_franca', :git => 'git://github.com/lingua-franca/lingua_franca.git'
 gem 'tzinfo-data'
-#gem 'i18n-active_record',
-#			:git => 'git://github.com/svenfuchs/i18n-active_record.git',
-#			:require => 'i18n/active_record'
-#gem 'sass', '~> 3.3'
-#gem 'compass'
-#gem 'compass-rails'
 gem 'sass', '~> 3.4.13'
 gem 'sass-rails', :git => 'git://github.com/rails/sass-rails.git'
 gem 'bumbleberry', :git => 'git://github.com/bumbleberry/bumbleberry.git'
@@ -25,12 +18,9 @@ gem 'oauth2', '~> 0.8.0'
 gem 'carrierwave'
 gem 'carrierwave-imageoptimizer'
 gem 'mini_magick'
-#gem 'carmen', :git => 'git://github.com/eikes/carmen.git'
-#gem 'carmen-rails'
 gem 'nested_form'
 gem 'acts_as_list'
 gem 'geocoder'
-#gem 'forgery'
 gem 'paper_trail', '~> 3.0.5'
 gem 'font-awesome-rails'
 gem 'wysiwyg-rails'
@@ -40,8 +30,7 @@ gem 'activerecord-session_store'
 gem 'paypal-express', '0.7.1'
 gem 'sass-json-vars'
 
-group :assets do
-end
+gem 'copydb'
 
 group :development, :test do
 	gem 'rspec'
@@ -54,7 +43,6 @@ group :development do
 	gem 'meta_request'
 	gem 'haml-rails'
 	gem 'awesome_print'
-	#gem 'rails-footnotes', :github => 'josevalim/rails-footnotes'
 end
 
 group :test do
