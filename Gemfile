@@ -63,14 +63,11 @@ group :staging, :production do
 	gem 'rails_12factor'
 	gem 'capistrano'
 	gem 'rvm-capistrano'
+	gem 'unicorn'
 end
 
 platforms 'mswin', 'mingw' do
 	group :test do
 		gem 'wdm', '>= 0.1.0'
-	end
-
-	group :staging, :production do
-		gem 'unicorn' if !(RbConfig::CONFIG['target_os'] =~ /mswin|mingw|cygwin/i)
 	end
 end
