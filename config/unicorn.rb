@@ -19,7 +19,7 @@ end
 working_directory directory
 
 # Listen on unix socket
-listen port, :backlog => 64
+listen "127.0.0.1:#{port}", :backlog => 64
 
 pid "/home/unicorn/#{ENV['RAILS_ENV']}.pid"
 
