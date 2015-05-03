@@ -7,7 +7,7 @@
 		%meta{ name: 'description', content: (yield_or_default :description, I18n.t('page_descriptions.home')) }
 		= csrf_meta_tags
 		= inject_css!
-		- @stylesheets.each do |css|
+		- (@stylesheets || []).each do |css|
 			= inject_css! css
 		%link{ href: asset_path('favicon.ico'), rel: 'shortcut icon', type: 'image/x-icon' }
 		%link{ href: asset_path('favicon.ico'), rel: 'icon', type: 'image/x-icon' }

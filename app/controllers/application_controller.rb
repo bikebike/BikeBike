@@ -7,10 +7,6 @@ class ApplicationController < LinguaFrancaApplicationController
 	# Prevent CSRF attacks by raising an exception.
 	# For APIs, you may want to use :null_session instead.
 	protect_from_forgery with: :exception
-	
-	#if ENV['RAILS_ENV'] || 'production'
-	#	force_ssl only: :success
-	#end
 
 	before_filter :capture_page_info
 
@@ -21,12 +17,22 @@ class ApplicationController < LinguaFrancaApplicationController
 		#u = User.find_by_email('goodgodwin@hotmail.com')
 		#auto_login(u)
 		#logout()
+
+		# set the translator to the current user if we're logged in
 		I18n.config.translator = current_user
+
+		# get the current confernece and set it globally
 		@conference = Conference.order("start_date DESC").first
+
+		# add some style sheets
 		@stylesheets ||= Array.new
+		# add the translations stylesheet if translating
 		@stylesheets << params[:controller] if params[:controller] == 'translations'
 
 		ActionMailer::Base.default_url_options = {:host => "#{request.protocol}#{request.host_with_port}"}
+
+		# call the base method to detect the language
+		super
 	end
 
 	def home
