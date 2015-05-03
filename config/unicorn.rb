@@ -8,7 +8,7 @@ dir = 'rails'
 worker_processes 2
 
 # We deploy with capistrano, so "current" links to root dir of current release
-directory "/home/rails"
+directory = "/home/rails"
 port = 8080
 
 if ENV['RAILS_ENV'] == 'preview'
