@@ -8,7 +8,7 @@ dir = 'rails'
 worker_processes 2
 
 # We deploy with capistrano, so "current" links to root dir of current release
-directory = "/home/rails"
+directory = '/home/rails'
 port = 8080
 
 if ENV['RAILS_ENV'] == 'preview'
@@ -23,5 +23,5 @@ listen port, :backlog => 64
 
 pid "/home/unicorn/#{ENV['RAILS_ENV']}.pid"
 
-stderr_path "#{working_directory}/log/unicorn.log"
-stdout_path "#{working_directory}/log/unicorn.log"
+stderr_path "#{directory}/log/unicorn.log"
+stdout_path "#{directory}/log/unicorn.log"
