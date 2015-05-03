@@ -2,6 +2,12 @@ development:
   enabled: false
   host: bikebike.org
 
+preview:
+  enabled: true
+  host: preview-cdn.bikebike.org
+  protocol: https
+  fallback_protocol: http
+
 production:
   enabled: true
   host: cdn.bikebike.org

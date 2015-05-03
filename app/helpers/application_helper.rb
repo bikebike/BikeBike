@@ -511,7 +511,7 @@ module ApplicationHelper
 	end
 
 	def is_production?
-		Rails.env == 'production'
+		Rails.env == 'production' || Rails.env == 'preview'
 	end
 
 	def is_test?

@@ -59,7 +59,7 @@ group :test do
 	gem 'database_cleaner'
 end
 
-group :staging, :production do
+group :staging, :production, :preview do
 	gem 'rails_12factor'
 	gem 'capistrano'
 	gem 'rvm-capistrano'
