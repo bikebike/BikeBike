@@ -6,7 +6,7 @@ body {
 	z-index: -1;
 }
 
-h1, h2, h3, h4, h5, label, button {
+h1, h2, h3, h4, h5, label, button, .button {
 	@include font-family(secondary);
 }
 
@@ -49,8 +49,10 @@ a {
 	}
 }
 
-button {
+button,
+.button {
 	position: relative;
+	display: inline-block;
 	color: #FFF;
 	background-color: $colour-1;
 	border: 0;
@@ -62,6 +64,7 @@ button {
 	@include default-box-shadow(top, 2);
 	overflow: hidden;
 	cursor: pointer;
+	@include _(text-stroke, 1px rgba(0, 0, 0, 0.25));
 
 	@include before-and-after {
 		content: '';
@@ -120,6 +123,24 @@ button {
 	#main &[type="submit"] {
 		background-color: $colour-5;
 	}
+
+	&.register {
+		background-color: $colour-4;
+		text-shadow: 0 0 0.15em rgba(0, 0, 0, 0.5);
+	}
+
+	form.logout & {
+		background-color: #666;
+	}
+}
+
+a.button {
+	@include after {
+		border-bottom: 1em solid transparent;
+		left: auto;
+		bottom: auto;
+		@include _(transform, none);
+	}
 }
 
 textarea {
@@ -171,34 +192,87 @@ input {
 	}
 }
 
-.email-field {
+.number-field,
+.email-field,
+.text-field {
 	position: relative;
-	overflow: hidden;
-	@include default-box-shadow(top, 2, false, 0 0.05em 0 0 #666);
-	@include _(transition, box-shadow 100ms ease-in-out);
+	//overflow: hidden;
+	margin-bottom: 2em;
+	background-color: #F8F8F8;
+	@include default-box-shadow(top, 1.5, false, 0 0.05em 0 0 #666);
+	@include _(transition, background-image 100ms ease-in-out);
+	$fn: '';
+	$capability: get_capability(map-get($compatibility-map, css-gradients));
+	@if $capability == yx or $capability == ax or $capability == y or $capability == a {
+		$fn: '-#{$browser_prefix}-';
+	}
+	@include _(background-size, 8px 8px);
 
 	label {
-		//position: absolute;
+		position: absolute;
+		z-index: 2;
 		font-size: 1em;
-		float: left;
+		//float: left;
 		//@include font-family(primary);
 		//font-weight: bold;
 		//left: 0;
 		//top: 0;
 		padding: 0.25em 0.667em;
 		width: auto;
-		background-color: #333;
-		color: #FFF;
-		//@include _(transition, transform 250ms ease-in-out);
+		//background-color: #333;
+		@include _(transition, 'transform 250ms ease-in-out, color 250ms ease-in-out, background-color 250ms ease-in-out');
 		//@include _(transform-origin, left center);
 		//@include _(transform, scale(1) translateY(0));
+		top: 100%;
+		//@include _(transform, translateY(100%) scale(0.75));
+		@include _(transform, translateY(0) scale(0.75));
+		@include _(transform-origin, 0 0);
+		//line-height: 1em;
+		line-height: 1.5em;
+		background-color: transparent;
+		color: #333;
 	}
 
-	&:hover, &:focus, &:active {
-		@include default-box-shadow(top, 2, false, 0 0.15em 0 0 $colour-1);
-
+	&.empty {
+		background-color: #FFF;//#E8E8E8;
+		background-image:
+			#{$fn}repeating-linear-gradient(
+				-45deg, #DDD,
+				#DDD 1px, transparent 1px,
+				transparent 6px
+			);
 		label {
-			background-color: $colour-1;
+			z-index: 0;
+			@include _(transform, translateY(-100%) scale(1));
+			background-color: transparent;
+			color: #888;
+		}
+		input {
+			//@include _(box-shadow, none);
+		}
+	}
+
+	input {
+		margin: 0;
+		position: relative;
+		z-index: 1;
+		padding: 0.15em 0.5em;
+		background-color: transparent;
+		//@include _(box-shadow, inset 0 0 1em 1em #E8E8E8);
+		//background-image: repeating-linear-gradient(45deg, #FFF, #FFF 5px, #E8E8E8 1px, );
+		//background-image: #{$fn}linear-gradient(45deg, #DDD 25%, transparent 25%, transparent 75%, #EEE 75%, #EEE 100%);//, #{$fn}linear-gradient(45deg, #EEE 25%,  transparent 25%, transparent 75%, #EEE 75%, #EEE 100%);
+		//background-image: linear-gradient(-45deg, black 12.5%, transparent 12.5%, transparent 50%, black 50%, black 87.5%, transparent 87.5%, transparent);
+		border: 0;
+	}
+
+	&:focus, &:active {
+		label {
+			color: #333;
+		}
+	}
+	input {
+		&:focus, &:active {
+			@include _(box-shadow, inset 0 0 1em 1em #E8E8E8);
 		}
 	}
 	/*input {
@@ -209,6 +283,131 @@ input {
 			}
 		}
 	}*/
+}
+
+.number-field {
+	display: inline-block;
+	font-size: 1.5em;
+
+	input {
+		text-align: right;
+	}
+}
+
+.radio-button-field {
+	@include clearfix;
+	margin-bottom: 1em;
+	position: relative;
+	
+	label {
+		float: left;
+		width: 7em;
+		height: 5em;
+		@include default-box-shadow(top);
+		//background-color: lighten($colour-4, 25);
+		background-color: $colour-2;
+		text-align: center;
+		position: relative;
+		margin: 0 1em 3em;
+		padding: 0.5em;
+		cursor: pointer;
+		@include _(transition, #{'transform, background-color 100ms, 100ms ease-in-out, ease-in-out'});
+
+		&:hover {
+			//background-color: #EEE;
+			@include _(transform, scale(1.1));
+		}
+
+		@include before-and-after {
+			content: '';
+			position: absolute;
+			visibility: hidden;
+			@include _(transition, transform 200ms ease-in-out);
+			@include _(transition, transform 200ms cubic-bezier(0, 0.38, 0.9, 2));
+		}
+
+		@include before {
+			background-color: $colour-5;
+			bottom: -0.3em;
+			right: -0.5em;
+			width: 2em;
+			height: 2em;
+			border-radius: 50%;
+			@include _(transform, scale(0));
+			@include default-box-shadow(top);
+		}
+
+		@include after {
+			border: 0.5em solid #FFF;
+			border-left: none;
+			border-top: none;
+			width: 1em;
+			height: 2em;
+			font-size: 0.6em;
+			bottom: 0.3em;
+			right: 0.3em;
+			@include _(transform, scale(0) rotate(45deg));
+		}
+	}
+
+	svg {
+		width: 100%;
+		height: 100%;
+		margin-bottom: 0.75em;
+		fill: #FFF;
+		stroke: rgba(0, 0, 0, 0.667);
+		stroke-width: 0.05em;
+	}
+
+	input {
+		position: absolute;
+		opacity: 0;
+    	left: 1em;
+    	bottom: 0.5em;
+
+		&:checked + label {
+			background-color: $colour-1;
+			@include _(transform, scale(1.25));
+
+			@include before {
+				visibility: visible;
+				@include _(transform, scale(1));
+			}
+
+			@include after {
+				visibility: visible;
+				@include _(transform, scale(1) rotate(45deg));
+			}
+		}
+	}
+}
+
+.date-span {
+	margin-left: 1em;
+
+	label, input {
+		display: block;
+		height: 1.5em;
+		margin: 0 0.5em 1em 0;
+	}
+
+	label {
+		height: 1.5em;
+	}
+
+	input {
+		@include default-box-shadow(top);
+		background-color: $colour-1;
+		color: #FFF;
+		border: 0;
+		padding: 0 0.25em;
+		@include font-family(secondary);
+		@include _(text-stroke, 0.5px #000)
+	}
+
+	.date-labels {
+		float: left;
+	}
 }
 
 ::-webkit-resizer {
@@ -676,6 +875,12 @@ $header-tilt: 8deg;
 	
 	#main {
 		clear: right;
+
+		.columns {
+			form {
+				margin-top: 2em;
+			}
+		}
 	}
 
 	#main-nav {
@@ -869,6 +1074,7 @@ $header-tilt: 8deg;
 
 	#main {
 		padding-left: $sidebar-width;
+	    min-height: 100vh;
 	}
 
 	#header-title {
@@ -894,7 +1100,7 @@ $header-tilt: 8deg;
 		padding: 0.2em;
 	}
 
-	.paypal-button {
+	.actions {
 		margin: 4em 2em 0 0;
 	}
 	
@@ -972,3 +1178,176 @@ $header-tilt: 8deg;
 
 @include header-colour(about, $colour-4);
 @include header-colour(policy, $colour-3);
+
+#bike_small + label {
+	padding: 0.5em 2.5em;
+}
+
+#bike_medium + label {
+	padding: 0.5em 1.5em;
+}
+
+#main .three-options {
+	text-align: center;
+
+	button {
+		background-color: $colour-4;
+		width: 6em;
+		font-size: 1.5em;
+		margin: 0.25em;
+
+		&:first-child {
+			background-color: $colour-3;
+		}
+
+		&:last-child {
+			background-color: $colour-5;
+		}
+	}
+}
+
+#main form.payment {
+	text-align: center;
+
+	input[type="number"] {
+		margin-top: 1em;
+		font-size: 1.5em;
+		text-align: center;
+		width: 4em;
+		height: 1.9em;
+		border: 0;
+		@include default-box-shadow(top);
+		background-color: #333;
+		color: $colour-3;
+		vertical-align: bottom;
+	}
+
+	> button {
+		background-color: $colour-1;
+	}
+
+	.currency {
+		color: #888;
+		font-size: 1.667em;
+	}
+}
+
+#main ul.workshops {
+	list-style: none;
+	padding: 0;// 1em;
+	text-align: center;
+	@include default-box-shadow(top, 2, true);
+	background-color: #F8F8F8;
+
+	li {
+		display: inline-block;
+		margin: 0.5em;
+		vertical-align: middle;
+
+		@include before {
+			content: '';
+			display: none;
+			position: fixed;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			background-color: #000;
+			z-index: 99;
+			@include _(opacity, 0.5);
+		}
+
+		&.view {
+			@include before {
+				display: block;
+			}
+			
+			.info {
+				//display: block;
+				left: 0;
+				right: 0;
+				top: 50%;
+				@include _(transform, translateY(-50%) scale(1));
+
+				@include breakpoint(large) {
+					left: 19rem;
+				}
+			}
+		}
+	}
+
+	h4, h5 {
+		color: #FFF;
+		background-color: $colour-1;
+		@include _(text-stroke, 1px rgba(0, 0, 0, 0.25));
+	}
+
+	h4 {
+		max-width: 10em;
+		cursor: pointer;
+		margin: 0;
+		padding: 1em;
+		position: relative;
+		@include default-box-shadow(top);
+		@include _(transition, transform 100ms ease-in-out);
+
+		&:hover {
+			z-index: 2;
+			@include _(transform, scale(1.25));
+		}
+	}
+
+	h5 {
+		font-size: 1.5em;
+		margin: 0;
+		padding: 0.5em 1em;
+
+		+ p {
+			margin-top: 0;
+		}
+	}
+
+	p {
+		padding: 1em;
+		max-height: 50vh;
+    	overflow-y: auto;
+	}
+
+	form {
+		text-align: center;
+	}
+
+	button {
+		margin: 1em 0.5em;
+	}
+
+	[contenteditable] {
+		outline: none;
+	}
+
+	.info {
+		//display: none;
+		position: fixed;
+		background-color: #FFF;
+		color: #333;
+		left: auto;
+		right: auto;
+		top: auto;
+		z-index: 100;
+		max-width: 40em;
+		max-height: 40em;
+		margin: auto;
+		text-align: left;
+		@include _(transition, all 250ms ease-in-out);
+		@include _(transform, translateY(0) scale(0));
+		@include default-box-shadow(top);
+	}
+
+	[value="delete"] {
+		background-color: $colour-2;
+	}
+
+	[value="cancel"] {
+		background-color: $colour-4;
+	}
+}

@@ -71,6 +71,8 @@ BikeBike::Application.routes.draw do
 	# get "oauth/:provider" => "oauths#oauth", :as => :auth_at_provider
 
     get '/organizations/json' => 'organizations#json', :as => :organizations_json
+    match '/conferences/:slug/register' => 'conferences#register', :as => :register, via: [:get, :post]
+	get '/conferences/:slug/register/:button/:confirmation_token' => 'conferences#register', :as => :register_paypal_confirm
 
     get '/robots.txt' => 'application#robots', :as => :robots_txt
     get '/humans.txt' => 'application#humans', :as => :humans_txt
@@ -78,6 +80,7 @@ BikeBike::Application.routes.draw do
     # 
     get '/confirm/:token' => 'application#confirm', :as => :confirm
     post '/doconfirm' => 'application#do_confirm', :as => :do_confirm
+    post '/logout' => 'application#user_logout', :as => :logout
     post '/translator-request' => 'application#translator_request', :as => :translator_request
 
 	get '/about' => 'application#about', :as => :about

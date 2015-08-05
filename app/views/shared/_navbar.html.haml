@@ -7,4 +7,13 @@
 		= nav_link '/about', (_'page_titles.About_BikeBike')
 		= nav_link '/policy', (_'page_titles.Safe_Space_Policy')
 	.actions
-		= render 'shared/donate_button', :email_address => (@conference.paypal_email_address || @conference.email_address)
+		- if current_user
+			= form_tag :logout, class: :logout do
+				=hidden_field_tag :url, request.fullpath
+				=button_tag :Log_out
+		- elsif @conference.registration_open
+			- if params[:action] != 'register'
+				= link_to register_path(@conference.slug), class: [:button, :register] do
+					=_'conference.actions.Register'
+		- else
+			= render 'shared/donate_button', :email_address => (@conference.paypal_email_address || @conference.email_address)

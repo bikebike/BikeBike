@@ -144,7 +144,6 @@ class ConferencesController < ApplicationController
 				if !registration.nil?
 					session[:registration] = YAML.load(registration.data)
 					session[:registration][:registration_id] = registration.id
-					puts 'XXXXXXXXXXXXXXXXXXXXXXXX'
 					next_step = (registration.completed.blank? && registration.is_participant.present? ? 'organizations' : 'thanks')
 				else
 					if !session[:registration][:user] || !session[:registration][:user][:firstname]
@@ -418,86 +417,189 @@ class ConferencesController < ApplicationController
 		is_post = request.post? || session[:registration_step]
 		set_conference
 
-		if !@conference.registration_open
+		if !@this_conference.registration_open
 			do_404
 			return
 		end
 
-		#if data[:next_step].blank?
-		#	session.delete(:registration)
-		#end
+		set_conference_registration
 
-		data = register_submit
-		@register_step = is_post ? data[:next_step] : 'register'
-		@error_message = data[:error] ? data[:message] : nil
-		template = (@register_step == 'register' ? '' : 'register_') + @register_step
+		@register_template = nil
 
-		if !File.exists?(Rails.root.join("app", "views", params[:controller], "_#{template}.html.haml"))
-			do_404
-			return
+		if logged_in?
+			# if the user is logged in start them off on the policy
+			#  page, unless they have already begun registration then
+			#  start them off with questions
+			@register_template = @registration ? :questions : :policy
+
+			@name = current_user.firstname
+			# we should phase out last names
+			@name += " #{current_user.lastname}" if current_user.lastname
 		end
 
-		if session[:registration]
-			session[:registration][@register_step.to_sym] ||= Hash.new
+		# process data from the last view
+		case (params[:button] || '').to_sym
+		when :confirm_email
+			@register_template = :email_sent if is_post
+		when :policy
+			@register_template = :questions if is_post
+		when :save
+			if is_post
+				@registration ||= ConferenceRegistration.new
+
+				@registration.conference_id = @this_conference.id
+				@registration.user_id = current_user.id
+				@registration.is_attending = 'yes'
+				@registration.is_confirmed = true
+				@registration.city = params[:location]
+				@registration.arrival = params[:arrival]
+				@registration.departure = params[:departure]
+				@registration.housing = params[:housing]
+				@registration.bike = params[:bike]
+				@registration.other = params[:other]
+				@registration.save
+
+				current_user.firstname = params[:name].squish
+				current_user.lastname = nil
+				current_user.save
+
+				@register_template = @registration.registration_fees_paid ? :workshops : :payment
+			end
+		when :payment
+			if is_post && @registration
+				amount = params[:amount].to_f
+
+				if amount
+					@registration.payment_confirmation_token = Digest::SHA256.hexdigest(rand(Time.now.to_f * 1000000).to_i.to_s)
+					@registration.save
+					
+					host = "#{request.protocol}#{request.host_with_port}"
+					response = PayPal!.setup(
+						PayPalRequest(amount),
+						register_paypal_confirm_url(@this_conference.slug, :paypal_confirm, @registration.payment_confirmation_token),
+						register_paypal_confirm_url(@this_conference.slug, :paypal_cancel, @registration.payment_confirmation_token)
+					)
+					redirect_to response.redirect_uri
+					return
+				end
+				@register_template = :workshops
+			end
+		when :paypal_confirm
+			if @registration && @registration.payment_confirmation_token == params[:confirmation_token]
+
+				if ENV['RAILS_ENV'] != 'test'
+					# testing this does't work in test but it works in devo and prod
+					@registration.payment_info = {:payer_id => params[:PayerID], :token => params[:token], :amount => PayPal!.details(params[:token]).amount.total}.to_yaml
+				end
+
+				#@registration.payment_confirmation_token = nil
+				@registration.save!
+				@register_template = :workshops
+			end
+		when :paypal_cancel
+			if @registration
+				@registration.payment_confirmation_token = nil
+				@registration.save
+				@register_template = :payment
+			end
 		end
-		@actions = nil
-		@multipart = false
-		case @register_step
-			when  'register', 'organizations', 'new_organization', 'new_workshop', 'volunteer_questions'
-				@actions = :next
-				if @register_step == 'new_organization'
-					@multipart = true
-				end
-			when 'thanks'
-				@registration = ConferenceRegistration.find(session[:registration][:registration_id])
-				if @registration.is_confirmed.blank?
-					@actions = :resend_confirmation_email
-				end
-				next_step = 'thanks'
-				#if @registration.complete && @registration.is_participant && @registration.payment_info.nil?
-				#`	@actions = [:submit_payment]
-			when 'primary'
-				@actions = [:cancel, :next]
-			when 'submit'
-				@actions = [:cancel, :submit]
-			when 'cancel'
-				@actions = [:no, :yes]
-			when 'confirm_payment'
-				@actions = [:cancel_payment, :confirm_payment]
-			when 'already_registered'
-				@registration = ConferenceRegistration.find_by(:email => session[:registration][:email])
-				if !@registration.complete
-					@actions = :resend_confirmation_email
-				end
-			when 'questions'
-				@actions = [:cancel, :submit]
-				@housing_options = {
-					'I will fend for myself thanks' => 'none',
-					'I will need a real bed' => 'bed',
-					'A couch or floor space will be fine' => 'couch',
-					'All I need is a backyard' => 'camp'
+
+		# prepare data for the next view
+		case @register_template
+		when :questions
+			@registration ||= ConferenceRegistration.new(
+					:conference_id => @this_conference.id,
+					:user_id => current_user.id,
+					:is_attending => 'yes',
+					:is_confirmed => true,
+					:city => view_context.location(view_context.lookup_ip_location),
+					:arrival => @this_conference.start_date,
+					:departure => @this_conference.end_date,
+					:housing => nil,
+					:bike => nil,
+					:other => ''
+				);
+		when :workshops
+			@my_workshops = [1,2,3,4].map { |i|
+				{
+					:title => (Forgery::LoremIpsum.sentence({:random => true}).gsub(/\.$/, '').titlecase),
+					:info => (Forgery::LoremIpsum.sentences(rand(1...5), {:random => true}))
 				}
-				session[:registration][:questions][:housing] ||= 'couch'
-				@loaner_bike_options = {
-					'No' => 'no',
-					'Yes, an average size should do' => 'medium',
-					'Yes but a small one please' => 'small',
-					'Yes but a large one please' => 'large'
-				}
-				session[:registration][:questions][:loaner_bike] ||= 'medium'
-				#session[:registration][:questions][:diet] ||= Hash.new
+			}
 		end
 
-		#puts ' ------yyyy----------------- '
-		#puts @register_step
+		#session.delete(:last_action)
 
-		if request.xhr?
-			@register_content = render_to_string :partial => template
-			render :json => {status: 200, html: @register_content}
-		else
-			@register_template = template
-			render 'show'
-		end
+		# render :register
+
+		# data = register_submit
+		# @register_step = is_post ? data[:next_step] : 'register'
+		# @error_message = data[:error] ? data[:message] : nil
+		# template = (@register_step == 'register' ? '' : 'register_') + @register_step
+
+		# if !File.exists?(Rails.root.join("app", "views", params[:controller], "_#{template}.html.haml"))
+		# 	do_404
+		# 	return
+		# end
+
+		# if session[:registration]
+		# 	session[:registration][@register_step.to_sym] ||= Hash.new
+		# end
+		# @actions = nil
+		# @multipart = false
+		# case @register_step
+		# 	when  'register', 'organizations', 'new_organization', 'new_workshop', 'volunteer_questions'
+		# 		@actions = :next
+		# 		if @register_step == 'new_organization'
+		# 			@multipart = true
+		# 		end
+		# 	when 'thanks'
+		# 		@registration = ConferenceRegistration.find(session[:registration][:registration_id])
+		# 		if @registration.is_confirmed.blank?
+		# 			@actions = :resend_confirmation_email
+		# 		end
+		# 		next_step = 'thanks'
+		# 		#if @registration.complete && @registration.is_participant && @registration.payment_info.nil?
+		# 		#`	@actions = [:submit_payment]
+		# 	when 'primary'
+		# 		@actions = [:cancel, :next]
+		# 	when 'submit'
+		# 		@actions = [:cancel, :submit]
+		# 	when 'cancel'
+		# 		@actions = [:no, :yes]
+		# 	when 'confirm_payment'
+		# 		@actions = [:cancel_payment, :confirm_payment]
+		# 	when 'already_registered'
+		# 		@registration = ConferenceRegistration.find_by(:email => session[:registration][:email])
+		# 		if !@registration.complete
+		# 			@actions = :resend_confirmation_email
+		# 		end
+		# 	when 'questions'
+		# 		@actions = [:cancel, :submit]
+		# 		@housing_options = {
+		# 			'I will fend for myself thanks' => 'none',
+		# 			'I will need a real bed' => 'bed',
+		# 			'A couch or floor space will be fine' => 'couch',
+		# 			'All I need is a backyard' => 'camp'
+		# 		}
+		# 		session[:registration][:questions][:housing] ||= 'couch'
+		# 		@loaner_bike_options = {
+		# 			'No' => 'no',
+		# 			'Yes, an average size should do' => 'medium',
+		# 			'Yes but a small one please' => 'small',
+		# 			'Yes but a large one please' => 'large'
+		# 		}
+		# 		session[:registration][:questions][:loaner_bike] ||= 'medium'
+		# 		#session[:registration][:questions][:diet] ||= Hash.new
+		# end
+
+		# if request.xhr?
+		# 	@register_content = render_to_string :partial => template
+		# 	render :json => {status: 200, html: @register_content}
+		# else
+		# 	@register_template = template
+		# 	render 'register'
+		# end
 	end
 
 	def registrations
@@ -571,9 +673,6 @@ class ConferencesController < ApplicationController
 		@conference_registration = ConferenceRegistration.find_by(confirmation_token: params[:confirmation_token])
 		if !@conference_registration.nil? && @conference_registration.conference_id == @conference.id && @conference_registration.complete && @conference_registration.payment_info.nil?
 			session[:registration] = YAML.load(@conference_registration.data)
-			session[:registration][:registration_id] = @conference_registration.id
-			session[:registration][:path] = Array.new
-			session[:registration_step] = 'paypal-cancelled'
 			redirect_to action: 'register'
 		end
 	end
@@ -639,9 +738,9 @@ class ConferencesController < ApplicationController
 	private
 		# Use callbacks to share common setup or constraints between actions.
 		def set_conference
-			@conference = nil
+			@this_conference = nil
 			if type = ConferenceType.find_by!(slug: params[:conference_type] || params[:conference_type_slug] || 'bikebike')
-				if @conference = Conference.find_by!(slug: params[:conference_slug] || params[:slug], conference_type_id: type.id)
+				if @this_conference = Conference.find_by!(slug: params[:conference_slug] || params[:slug], conference_type_id: type.id)
 					set_conference_registration
 				end
 			end
@@ -651,12 +750,7 @@ class ConferencesController < ApplicationController
 		end
 
 		def set_conference_registration
-			if !@conference || !current_user
-				@conference_registration = nil
-				return
-			end
-
-			@conference_registration = ConferenceRegistration.find_by(conference_id: @conference.id, user_id: current_user.id)
+			@registration = logged_in? ? ConferenceRegistration.find_by(:user_id => current_user.id, :conference_id => @this_conference.id) : nil
 		end
 
 		# Only allow a trusted parameter "white list" through.
@@ -807,11 +901,10 @@ class ConferencesController < ApplicationController
 		end
 
 	def PayPal!
-		paypal_info = get_secure_info(:paypal)
 		Paypal::Express::Request.new(
-			:username   => paypal_info[:username],
-			:password   => paypal_info[:password],
-			:signature  => paypal_info[:signature]
+			:username   => @this_conference.paypal_username,
+			:password   => @this_conference.paypal_password,
+			:signature  => @this_conference.paypal_signature
 		)
 	end
 

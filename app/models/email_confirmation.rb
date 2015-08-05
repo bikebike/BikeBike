@@ -24,7 +24,11 @@ class EmailConfirmation < ActiveRecord::Base
 	end
 
 	def valid_for_user?(user)
-		user.id == user_id && expiry < Time.now
+		user.id == user_id && !expired?
+	end
+
+	def expired?
+		expiry >= Time.now
 	end
 
 	protected

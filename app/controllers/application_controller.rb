@@ -80,6 +80,99 @@ class ApplicationController < LinguaFrancaApplicationController
 	end
 
 	rescue_from AbstractController::ActionNotFound do |exception|
-		do_403 'translator_login'
+		@banner_image = 'grafitti.jpg'
+		
+		if current_user
+			@page_title = nil#'page_titles.Please_Login'
+			do_403 'not_a_translator'
+			#return
+		else
+			@page_title = 'page_titles.403.Please_Login'
+			do_403 'translator_login'
+		end
 	end
+
+	def generate_confirmation(user, url, expiry = nil)
+		if user.is_a? String
+			user = User.find_by_email(user)
+
+			# if the user doesn't exist, just show them a 403
+			do_403 unless user
+		end
+		expiry ||= (Time.now + 12.hours)
+		session[:confirm_uid] = user.id
+		confirmation = EmailConfirmation.create(user_id: user.id, expiry: expiry, url: url)
+		UserMailer.email_confirmation(confirmation).deliver
+	end
+
+	def do_confirm(settings = nil)
+		settings ||= {:template => 'login_confirmation_sent'}
+		if params[:email]
+			# see if we've already sent the confirmation email and are just confirming
+			#  the email address
+			if params[:token]
+				user = User.find_by_email(params[:email])
+				confirm(user)
+				return
+			end
+			user = User.find_by_email(params[:email])
+
+			if !user
+				# not really a good UX so we should fix this later
+				do_404
+				return
+			end
+
+			# genereate the confirmation, send the email and show the 403
+			generate_confirmation(params[:email], request.referer.gsub(/^.*?\/\/.*?\//, '/'))
+			#@confirmation_sent = true
+			template = 'login_confirmation_sent'
+			@page_title ||= 'page_titles.403.Please_Check_Email'
+		end
+		
+		@banner_image = 'grafitti.jpg'
+		@page_title ||= 'page_titles.403.Please_Login'
+
+		do_403 (template || 'translator_login')
+	end
+
+	def confirm(uid = nil)
+		@confirmation = EmailConfirmation.find_by_token!(params[:token])
+
+		confirm_user = nil
+		if uid.is_a?(User)
+			confirm_user = uid
+			uid = confirm_user.id
+		end
+		# check to see if we were given a user id to confirm against
+		#  if we were, make sure it was the same one
+		if (uid ||= (params[:uid] || session[:confirm_uid]))
+			if uid == @confirmation.user_id
+				session[:uid] = nil
+				confirm_user ||= User.find uid
+				auto_login(confirm_user)
+			else
+				@confirmation.delete
+			end
+
+			redirect_to (@confirmation.url || '/')
+			return
+		end
+
+		@banner_image = 'grafitti.jpg'
+		@page_title = 'page_titles.403.Please_Confirm_Email'
+		do_403 'login_confirm'
+	end
+
+	def translator_request
+		@banner_image = 'grafitti.jpg'
+		@page_title = 'page_titles.403.Translator_Request_Sent'
+		do_403 'translator_request_sent'
+	end
+
+	def user_logout
+		logout()
+		redirect_to (params[:url] || '/')
+	end
+
 end

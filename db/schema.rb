@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150412203357) do
+ActiveRecord::Schema.define(version: 20150804032547) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,12 @@ ActiveRecord::Schema.define(version: 20150412203357) do
     t.string   "payment_confirmation_token", limit: 255
     t.string   "payment_info",               limit: 255
     t.integer  "registration_fees_paid"
+    t.string   "city"
+    t.datetime "arrival"
+    t.datetime "departure"
+    t.string   "housing"
+    t.string   "bike"
+    t.text     "other"
   end
 
   create_table "conference_types", force: :cascade do |t|
@@ -108,6 +114,9 @@ ActiveRecord::Schema.define(version: 20150412203357) do
     t.string   "locale"
     t.string   "email_address"
     t.string   "paypal_email_address"
+    t.string   "paypal_username"
+    t.string   "paypal_password"
+    t.string   "paypal_signature"
   end
 
   create_table "dynamic_translation_records", force: :cascade do |t|

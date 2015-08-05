@@ -63,6 +63,9 @@ group :staging, :production, :preview do
 	gem 'rails_12factor'
 	gem 'capistrano'
 	gem 'rvm-capistrano'
+end
+
+group :production, :preview do
 	gem 'unicorn'
 end
 

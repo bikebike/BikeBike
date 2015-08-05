@@ -452,7 +452,7 @@ module ApplicationHelper
 	end
 
 	def lookup_ip
-		if request.remote_ip == '127.0.0.1'
+		if request.remote_ip == '127.0.0.1' || request.remote_ip == '::1'
 			session['remote_ip'] || (session['remote_ip'] = open("http://checkip.dyndns.org").first.gsub(/^.*\s([\d\.]+).*$/s, '\1').gsub(/[^\.\d]/, ''))
 		else
 			request.remote_ip
@@ -460,12 +460,16 @@ module ApplicationHelper
 	end
 
 	def lookup_ip_location
-		if is_test? && ApplicationController::get_location.present?
-			Geocoder.search(ApplicationController::get_location).first
-		elsif request.remote_ip == '127.0.0.1'
-			Geocoder.search(session['remote_ip'] || (session['remote_ip'] = open("http://checkip.dyndns.org").first.gsub(/^.*\s([\d\.]+).*$/s, '\1').gsub(/[^\.\d]/, ''))).first
-		else
-			request.location
+		begin
+			if is_test? && ApplicationController::get_location.present?
+				Geocoder.search(ApplicationController::get_location).first
+			elsif request.remote_ip == '127.0.0.1' || request.remote_ip == '::1'
+				Geocoder.search(session['remote_ip'] || (session['remote_ip'] = open("http://checkip.dyndns.org").first.gsub(/^.*\s([\d\.]+).*$/s, '\1').gsub(/[^\.\d]/, ''))).first
+			else
+				request.location
+			end
+		rescue
+			nil
 		end
 	end
 
@@ -526,10 +530,10 @@ module ApplicationHelper
 		subdomain == 'test'
 	end
 
-	def location(location)
-		territory = Carmen::Country.coded(location.country).subregions.coded(location.territory)
-		location.city + (territory ? ' ' + territory.name : '') + ', ' + Carmen::Country.coded(location.country).name
-	end
+	#def location(location)
+	#	territory = Carmen::Country.coded(location.country).subregions.coded(location.territory)
+	#	location.city + (territory ? ' ' + territory.name : '') + ', ' + Carmen::Country.coded(location.country).name
+	#end
 
 	def rand_hash(length = 16, model = nil, field = nil)
 		if field
@@ -582,10 +586,11 @@ module ApplicationHelper
 	end
 
 	def location(location)
+		return nil if location.blank?
 		l = Array.new
-		l << location.city
-		l << I18n.t("geography.subregions.#{location.country}.#{location.territory}") if location.territory.present?
-		l << I18n.t("geography.countries.#{location.country}") if !(location.country =~ /^(US|CA)$/)
+		l << location.data['city']
+		l << I18n.t("geography.subregions.#{location.data['country_code']}.#{location.data['region_code']}") if location.data['region_code'].present?
+		l << I18n.t("geography.countries.#{location.data['country_code']}") if !(location.data['country_code'] =~ /^(US|CA)$/)
 		l.join(', ')
 	end
 
@@ -603,6 +608,10 @@ module ApplicationHelper
 		d1 = I18n.l(date1.to_date, format: "span_#{key}_date_1".to_sym)
 		d2 = I18n.l(date2.to_date, format: "span_#{key}_date_2".to_sym)
 		I18n.t('date.date_span', {:date_1 => d1, :date_2 => d2})
+	end
+
+	def generate_confirmation(user, url, expiry = nil)
+		ApplicationController::generate_confirmation(user, url, expiry)
 	end
 
 	private
