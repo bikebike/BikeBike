@@ -9,6 +9,7 @@ FactoryGirl.define do
 		start_date 			Date.today - 30.days
 		end_date 			Date.today - 26.days
 		conference_type_id	(ConferenceType.find_by(:slug => 'bikebike') || ConferenceType.create(:slug => 'bikebike')).id
+		paypal_username		'joe'
 	end
 
 	factory :org, :class => 'Organization' do

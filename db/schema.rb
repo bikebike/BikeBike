@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150804032547) do
+ActiveRecord::Schema.define(version: 20150819042431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,9 @@ ActiveRecord::Schema.define(version: 20150804032547) do
     t.string   "housing"
     t.string   "bike"
     t.text     "other"
+    t.string   "allergies"
+    t.string   "languages"
+    t.string   "food"
   end
 
   create_table "conference_types", force: :cascade do |t|
@@ -118,6 +121,22 @@ ActiveRecord::Schema.define(version: 20150804032547) do
     t.string   "paypal_password"
     t.string   "paypal_signature"
   end
+
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "dynamic_translation_records", force: :cascade do |t|
     t.string  "locale"
@@ -260,7 +279,7 @@ ActiveRecord::Schema.define(version: 20150804032547) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "username",                        limit: 255,             null: false
+    t.string   "username"
     t.string   "email",                           limit: 255
     t.string   "crypted_password",                limit: 255
     t.string   "salt",                            limit: 255
@@ -354,6 +373,11 @@ ActiveRecord::Schema.define(version: 20150804032547) do
     t.datetime "end_time"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "languages"
+    t.string   "needs"
+    t.string   "space"
+    t.string   "theme"
+    t.text     "host_info"
   end
 
 end

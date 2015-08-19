@@ -1,2 +1,11 @@
-= email_field_tag :email, session[:registration][:email]
-
+%article
+	= columns(medium: 12) do
+		%h2=_'articles.conference_registration.headings.Enter_Your_Email','Enter your email address'
+	= columns(medium: 6, large: 7) do
+		%p=_'articles.conference_registration.paragraphs.confirm_email_address', :p
+	= columns(medium: 6, large: 5) do
+		= form_tag :do_confirm, :method => :post do
+			.email-field.input-field
+				= email_field_tag :email, nil, required: true
+				= label_tag :email
+			= button_tag :register, :value => :register

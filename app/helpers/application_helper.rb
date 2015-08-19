@@ -1,3 +1,4 @@
+require 'redcarpet'
 
 module ApplicationHelper
 	@@keyQueue = nil
@@ -383,8 +384,8 @@ module ApplicationHelper
 		end
 	end
 
-	def p(object, attribute)
-		content = object.send(attribute.to_s)
+	def paragraph(object, attribute = nil)
+		content = attribute ? object.send(attribute.to_s) : object
 		result = ''
 		if content =~ /<(p|span|h\d|div)[^>]*>/
 			result = content.gsub(/\s*(style|class|id|width|height|font)=\".*?\"/, '')
@@ -398,7 +399,17 @@ module ApplicationHelper
 				result = '<p>' + result + '</p>'
 			end
 		else
-			result = '<p>' + content.strip.gsub(/\s*\n+\s*/, '</p><p>') + '</p>'
+			@markdown ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML.new({
+					filter_html: true,
+					hard_wrap: true,
+					space_after_headers: true,
+					fenced_code_blocks: true
+				}), {
+					autolink: true,
+					superscript: true,
+					disable_indented_code_blocks: true
+				})
+			result = @markdown.render(content)
 		end
 		result.html_safe
 	end
@@ -459,14 +470,18 @@ module ApplicationHelper
 		end
 	end
 
+	def get_remote_location
+		Geocoder.search(session['remote_ip'] || (session['remote_ip'] = open("http://checkip.dyndns.org").first.gsub(/^.*\s([\d\.]+).*$/s, '\1').gsub(/[^\.\d]/, ''))).first
+	end
+
 	def lookup_ip_location
 		begin
 			if is_test? && ApplicationController::get_location.present?
 				Geocoder.search(ApplicationController::get_location).first
 			elsif request.remote_ip == '127.0.0.1' || request.remote_ip == '::1'
-				Geocoder.search(session['remote_ip'] || (session['remote_ip'] = open("http://checkip.dyndns.org").first.gsub(/^.*\s([\d\.]+).*$/s, '\1').gsub(/[^\.\d]/, ''))).first
+				get_remote_location
 			else
-				request.location
+				request.location || get_remote_location
 			end
 		rescue
 			nil
@@ -587,15 +602,32 @@ module ApplicationHelper
 
 	def location(location)
 		return nil if location.blank?
+
+		city = nil
+		region = nil
+		country = nil
+		if location.is_a?(Location)
+			country = location.country
+			region = location.territory
+			city = location.city
+		else
+			country = location.data['country_code']
+			region = location.data['region_code']
+			city = location.data['city']
+		end
 		l = Array.new
-		l << location.data['city']
-		l << I18n.t("geography.subregions.#{location.data['country_code']}.#{location.data['region_code']}") if location.data['region_code'].present?
-		l << I18n.t("geography.countries.#{location.data['country_code']}") if !(location.data['country_code'] =~ /^(US|CA)$/)
-		l.join(', ')
+		l << (_!city)
+		l << I18n.t("geography.subregions.#{country}.#{region}") if region.present?
+		l << I18n.t("geography.countries.#{country}") if !(country =~ /^(US|CA)$/)
+		l.join(_!', ')
 	end
 
 	def nav_link(link, title)
 		link_to title, link, :class => (current_page?(link) ? 'current' : nil)
+	end
+
+	def date(date, format = :long)
+		I18n.l(date, :format => format) # default, long, short
 	end
 
 	def date_span(date1, date2)
@@ -612,6 +644,16 @@ module ApplicationHelper
 
 	def generate_confirmation(user, url, expiry = nil)
 		ApplicationController::generate_confirmation(user, url, expiry)
+	end
+
+	def money(amount)
+		return _!('$0.00') if amount == 0
+		_!((amount * 100).to_i.to_s.gsub(/^(.*)(\d\d)$/, '$\1.\2'))
+	end
+
+	def percent(p)
+		return _!('0.00%') if p == 0
+		_!((p * 10000).to_i.to_s.gsub(/^(.*)(\d\d)$/, '\1.\2%'))
 	end
 
 	private

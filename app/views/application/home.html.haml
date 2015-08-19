@@ -1,5 +1,3 @@
--# EmailConfirmation.create(user: User.find_by_email('goodgodwin@hotmail.com'), url: '/')
-
 - this_is_the_front_page
 - if @conference
 	= render 'conferences/header'
@@ -7,6 +5,6 @@
 		%h2=_!@conference.title
 		=@conference.info.html_safe
 
-%article.supplementary
-	%h2=_'section_titles.bikebike.About_BikeBike'
-	%p=_'section_content.bikebike.about_bikebike', :p
+- # %article.supplementary
+- # 	%h2=_'section_titles.bikebike.About_BikeBike'
+- # 	%p=_'section_content.bikebike.about_bikebike', :p

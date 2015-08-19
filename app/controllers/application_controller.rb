@@ -14,10 +14,6 @@ class ApplicationController < LinguaFrancaApplicationController
 	@@test_location
 
 	def capture_page_info
-		#u = User.find_by_email('goodgodwin@hotmail.com')
-		#auto_login(u)
-		#logout()
-
 		# set the translator to the current user if we're logged in
 		I18n.config.translator = current_user
 
@@ -35,10 +31,8 @@ class ApplicationController < LinguaFrancaApplicationController
 		super
 	end
 
-	def home
-	end
-
-	def about
+	def policy
+		@is_policy_page = true
 	end
 
 	def robots
@@ -64,6 +58,10 @@ class ApplicationController < LinguaFrancaApplicationController
 
 	def do_404
 		render 'application/404', status: 404
+	end
+
+	def error_404
+		render 'application/404'
 	end
 
 	def do_403(template = nil)
@@ -102,7 +100,7 @@ class ApplicationController < LinguaFrancaApplicationController
 		expiry ||= (Time.now + 12.hours)
 		session[:confirm_uid] = user.id
 		confirmation = EmailConfirmation.create(user_id: user.id, expiry: expiry, url: url)
-		UserMailer.email_confirmation(confirmation).deliver
+		UserMailer.email_confirmation(confirmation).deliver_now
 	end
 
 	def do_confirm(settings = nil)
@@ -119,18 +117,27 @@ class ApplicationController < LinguaFrancaApplicationController
 
 			if !user
 				# not really a good UX so we should fix this later
-				do_404
-				return
+				#do_404
+				#return
+				user = User.new(:email => params[:email])
+				user.save!
+				user = User.find_by_email(params[:email])
 			end
 
 			# genereate the confirmation, send the email and show the 403
-			generate_confirmation(params[:email], request.referer.gsub(/^.*?\/\/.*?\//, '/'))
-			#@confirmation_sent = true
+			referrer = request.referer.gsub(/^.*?\/\/.*?\//, '/')
+			generate_confirmation(params[:email], referrer)
 			template = 'login_confirmation_sent'
 			@page_title ||= 'page_titles.403.Please_Check_Email'
+
+			if (conference = /^\/conferences\/(\w+)\/register\/?$/.match(request.referrer.gsub(/^https?:\/\/.*?\//, '/')))
+				@this_conference = Conference.find_by!(slug: conference[1])
+				@banner_image = @this_conference.cover_url
+				template = 'conferences/email_confirm'
+			end
 		end
 		
-		@banner_image = 'grafitti.jpg'
+		@banner_image ||= 'grafitti.jpg'
 		@page_title ||= 'page_titles.403.Please_Login'
 
 		do_403 (template || 'translator_login')
@@ -173,6 +180,10 @@ class ApplicationController < LinguaFrancaApplicationController
 	def user_logout
 		logout()
 		redirect_to (params[:url] || '/')
+	end
+
+	def login_user(u)
+		auto_login(u)
 	end
 
 end

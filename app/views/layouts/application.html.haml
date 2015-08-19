@@ -24,6 +24,12 @@
 				= content_tag :div, msg, :id => key
 			%header#banner
 				= yield :banner
+			- if @submenu
+				=row do
+					= columns(medium: 12) do
+						%nav.sub-menu
+							- @submenu.each do |href,key|
+								%a{href: href, class: request.fullpath.start_with?(href) ? 'current' : nil}=_"menu.submenu.#{key}"
 			- if content_for?(:side_bar)
 				%aside#side-bar
 					= yield :side_bar

@@ -9,7 +9,12 @@ class PosterUploader < CarrierWave::Uploader::Base
 	storage :file
 	process :optimize
 
-	@@sizes = {:thumb => [120, 120], :icon => [48, 48], :preview => [360, 120], :full => [1024, 1024]}
+	@@sizes = {
+		:thumb   => [120,  120],
+		:icon    => [48,   48],
+		:preview => [512,  512],
+		:full    => [1024, 1024]
+	}
 
 	def store_dir
 		"uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"

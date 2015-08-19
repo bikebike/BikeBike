@@ -1,6 +1,45 @@
-- page_style :form
+= render 'conferences/page_header', :page_key => (@workshop ? 'Edit_Workshop' : 'Create_Workshop')
+%article
+	= row do
+		= form_tag save_workshop_path(@this_conference.slug), class: 'composition' do
+			= (hidden_field_tag :workshop_id, @workshop.id) if @workshop
+			= columns(medium: 12) do
+				%p=(_'articles.workshops.paragraphs.info','Please accurately describe your workshop in detail. This will help hosts decide if they wish to add it to the schedule and when it should best be scheduled. Enter normal text but if you want to get fancy you can use <a href="http://daringfireball.net/projects/markdown/basics" target="_blank">Markdown</a>.').html_safe
+				.text-field.input-field.big
+					= label_tag :title
+					= text_field_tag :title, @title, :required => true
+				.text-area-field.input-field
+					= label_tag :info
+					= text_area_tag :info, @info, :required => true
+			= columns(medium: 6) do
+				%h3=_'articles.workshops.headings.languages','Workshop Language'
+				.check-box-field.input-field
+					- [:en, :es, :fr].each do |language|
+						= check_box_tag "languages[#{language}]", 1, @languages.include?(language)
+						= label_tag "languages_#{language}" do
+							= _"languages.#{language}"
+				%h3=_'articles.workshops.headings.theme','Theme'
+				%p=_'articles.workshops.paragraphs.theme', :p
+				.check-box-field.input-field
+					- [:race_gender, :mechanics, :funding, :organization, :community, :other].each do |theme|
+						= radio_button_tag :theme, theme, @theme == theme
+						= label_tag "theme_#{theme}" do
+							= _"workshop.options.theme.#{theme}"
+			= columns(medium: 6) do
+				%h3=_'articles.workshops.headings.needs','What do you need?'
+				.check-box-field.input-field
+					- [:sound, :projector, :tools].each do |need|
+						= check_box_tag "needs[#{need}]", 1, @needs.include?(need)
+						= label_tag "needs_#{need}" do
+							= _"workshop.options.needs.#{need}"
+				%h3=_'articles.workshops.headings.space','Type of space'
+				%p=_'articles.workshops.paragraphs.space', :p
+				.check-box-field.input-field
+					- [:workshop, :meeting_room, :outdoor_meeting].each do |space|
+						= radio_button_tag :space, space, @space == space
+						= label_tag "space_#{space}" do
+							= _"workshop.options.space.#{space}"
+			= columns(medium: 12) do
+				.actions.right
+					= button_tag :save, :value => :save
 
-= tabs!
-
-.row
-	= render 'form'

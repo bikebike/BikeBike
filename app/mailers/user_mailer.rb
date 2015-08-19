@@ -1,4 +1,6 @@
 class UserMailer < ActionMailer::Base
+	add_template_helper(ApplicationHelper)
+
 	default from: "Bike!Bike! <noreply@bikebike.org>"
 
 	# Subject can be set in your I18n file at config/locales/en.yml
@@ -49,4 +51,14 @@ class UserMailer < ActionMailer::Base
 		mail to: confirmation.user.email,
 			 subject: (I18n.t 'email.subject.confirm_email','Please confirm your email address')
 	end
+
+	def broadcast(host, subject, content, user, conference)
+		@host = host
+		@content = content
+		@banner = (@host || 'http://localhost/') + (conference ? (conference.poster.preview.url || '') : image_url('logo.png'))
+		if user && user.email
+			mail to: user.email, subject: "[#{conference ? conference.title : 'Bike!Bike!'}] #{subject}"
+		end
+	end
+
 end

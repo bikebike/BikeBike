@@ -1,14 +1,26 @@
-- content_for :banner do
-	- image = image_url('xconference.jpg')
-	#header-title.short{style: capable_of(:svg) ? nil : "background-image: url(#{image})"}
-		- if capable_of(:svg)
-			= render 'application/banner_image.svg', {:image => image}
-		%h1=_'page_titles.About_BikeBike'
-
+= render :partial => 'application/header', :locals => {:page_group => 'about', :page_key => 'About_BikeBike', :image_file => 'xconference.jpg'}
 %article
-	%h2=_'articles.about_bikebike.headings.About_BikeBike', :t
-	%p=_'articles.about_bikebike.paragraphs.paragraph_1', :p
+	= row do
+		= columns(medium: 12) do
+			%h2=_'articles.about_bikebike.headings.What_is_BikeBike', :t
+			%p=_'articles.about_bikebike.paragraphs.What_is_BikeBike', :p
 
-	%h2=_'articles.about_bikebike.headings.About_BikeBike_2', :t
-	%figure{style: "background-image: url(#{image_url('columbus_people.jpg')})"}
-	%p=_'articles.about_bikebike.paragraphs.paragraph_2', :p
+		= columns(medium: 12) do
+			%h3=_'articles.about_bikebike.headings.bicycle_project', :t
+			%p=_'articles.about_bikebike.paragraphs.bicycle_project_paragraph', :p
+			%ul
+				- [:non_profit, :no_money, :education, :volunteer_run, :export_bikes, :low_cost, :recycle_parts].each do |term|
+					%li=_"articles.about_bikebike.term.#{term.to_s}", :s, 2
+		= columns(medium: 12) do
+			%h3=_'articles.about_bikebike.headings.Who_is_Invited', :t
+			%p=_'articles.about_bikebike.paragraphs.Who_is_Invited', :p
+		= columns(medium: 12) do
+			%h3=_'articles.about_bikebike.headings.Types_of_Workshops', :t
+			%figure{style: "background-image: url(#{image_url('columbus_people.jpg')})"}
+			%p=_'articles.about_bikebike.paragraphs.Types_of_Workshops', :p
+		= columns(medium: 12) do
+			%h3=_'articles.about_bikebike.headings.Amenities', :t
+			%p=_'articles.about_bikebike.paragraphs.Amenities', :p
+		= columns(medium: 12) do
+			%h3=_'articles.about_bikebike.headings.Volunteer', :t
+			%p=_'articles.about_bikebike.paragraphs.Volunteer', :p

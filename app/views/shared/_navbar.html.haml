@@ -3,17 +3,17 @@
 		= svg_sprite('icons', "bb-icon-logo", "Logo")
 		= svg_sprite('icons', "bb-icon-logo-text", "Logo Text")
 	.nav
-		= nav_link '/', (@conference ? @conference.title : 'Bike!Bike!')
-		= nav_link '/about', (_'page_titles.About_BikeBike')
-		= nav_link '/policy', (_'page_titles.Safe_Space_Policy')
+		= nav_link home_path, (@conference ? @conference.title : 'Bike!Bike!')
+		= nav_link about_path, (_'page_titles.About_BikeBike')
+		= nav_link policy_path, (_'page_titles.Safe_Space_Policy')
 	.actions
-		- if current_user
-			= form_tag :logout, class: :logout do
-				=hidden_field_tag :url, request.fullpath
-				=button_tag :Log_out
-		- elsif @conference.registration_open
-			- if params[:action] != 'register'
+		- if @conference.registration_open
+			- if params[:action] != 'register' && !@registration
 				= link_to register_path(@conference.slug), class: [:button, :register] do
 					=_'conference.actions.Register'
 		- else
 			= render 'shared/donate_button', :email_address => (@conference.paypal_email_address || @conference.email_address)
+		- if current_user
+			= form_tag :logout, class: :logout do
+				=hidden_field_tag :url, request.fullpath
+				=button_tag :Log_out

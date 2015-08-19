@@ -8,8 +8,8 @@ gem 'jquery-ui-rails'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'lingua_franca', :git => 'git://github.com/lingua-franca/lingua_franca.git'
 gem 'tzinfo-data'
-gem 'sass', '~> 3.4.13'
-gem 'sass-rails', :git => 'git://github.com/rails/sass-rails.git'
+gem 'sass'#, '~> 3.4.13'
+gem 'sass-rails'#, :git => 'git://github.com/rails/sass-rails.git', :tag => 'v4.0.5'
 gem 'bumbleberry', :git => 'git://github.com/bumbleberry/bumbleberry.git'
 gem 'foundation-rails'
 gem 'uglifier', '>= 1.3.0'
@@ -29,6 +29,8 @@ gem 'sitemap_generator'
 gem 'activerecord-session_store'
 gem 'paypal-express', '0.7.1'
 gem 'sass-json-vars'
+gem 'delayed_job_active_record'
+gem 'redcarpet'
 
 gem 'copydb'
 
@@ -66,7 +68,8 @@ group :staging, :production, :preview do
 end
 
 group :production, :preview do
-	gem 'unicorn'
+	#gem 'unicorn'
+	gem 'daemon-spawn'
 end
 
 platforms 'mswin', 'mingw' do
