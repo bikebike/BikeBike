@@ -1,0 +1,23 @@
+---
+bob:
+  id: 1
+  username: bob
+  email: bob@bikebike.org
+  crypted_password: bobspassword
+  activation_state: 
+  avatar: 
+  about_me: I am Bob
+  role: 
+  firstname: Bob
+  lastname: MacDonald
+alice:
+  id: 2
+  username: alice
+  email: alice@bikebike.org
+  crypted_password: alicespassword
+  activation_state: 
+  avatar: 
+  about_me: I am Alice
+  role: 
+  firstname: Alice
+  lastname: Smith

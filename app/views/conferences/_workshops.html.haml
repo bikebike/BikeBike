@@ -1,0 +1,42 @@
+= columns(medium: 12) do
+	%h2=_'articles.conference_registration.headings.Workshops','Workshops'
+= columns(medium: 6) do
+	%h3=_'articles.conference_registration.headings.Add_Workshop'
+	= form_tag register_path(@this_conference.slug) do
+		.text-field.input-field
+			= text_field_tag :title, nil, required: true
+			= label_tag :title
+		= text_area_tag :info, nil, required: true
+		= button_tag :add
+= columns(medium: 6) do
+	%h3=_'articles.conference_registration.headings.Your_Workshops'
+	%ul.workshops.my-workshops
+		- @my_workshops.each do |workshop|
+			%li
+				%h4=workshop[:title]
+				.info
+					%h5{:contenteditable => true}=workshop[:title]
+					%p{:contenteditable => true}=workshop[:info]
+					= form_tag register_path(@this_conference.slug) do
+						= button_tag :save, :value => :save
+						= button_tag :delete, :value => :delete
+						= button_tag :cancel, :value => :cancel
+= columns(medium: 12) do
+	= form_tag register_path(@this_conference.slug) do
+		= button_tag :previous, :value => :registration
+		= button_tag :next, :value => :workshops
+:javascript
+	function makeWorkshopsClickable() {
+		var workshops = document.querySelectorAll('ul.workshops h4');
+		for (var i = 0; i < workshops.length; i++) {
+			workshops[i].addEventListener('click', function(e) {
+				var workshop = e.target.parentElement;
+				workshop.className = 'view';
+				workshop.querySelector('form').onsubmit = function() {
+					workshop.removeAttribute('class');
+					return false;
+				}
+			}, false);
+		}
+	}
+	makeWorkshopsClickable();

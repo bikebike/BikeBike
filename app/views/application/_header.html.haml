@@ -1,0 +1,15 @@
+- content_for :banner do
+	- image = image_url(image_file || 'empty-racks.jpg')
+	- style = nil
+	- cover = nil
+	- figure = nil
+	- if capable_of(:css_mixblendmode) || ENV['RAILS_ENV'] == 'test'
+		- cover = "<div class=\"cover\" style=\"background-image: url(#{image})\"></div>"
+	- elsif capable_of(:svg)
+		- banner_image = 'application/banner_image.svg'
+	- else
+		- style = "background-image: url(#{image})"
+	#header-title.short{style: style}
+		= (render banner_image, {:image => image}) if banner_image
+		= cover.html_safe if cover
+		%h1=_(@page_title || "page_titles.#{page_group.to_s}.#{page_key.to_s}")

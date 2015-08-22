@@ -12,6 +12,29 @@ class Workshop < ActiveRecord::Base
         slug
     end
 
+    def role(user)
+        workshop_facilitators.each do |u|
+            return u.role.to_sym if u.user_id == user.id
+        end
+        return nil
+    end
+
+    def facilitator?(user)
+        !!role(user)
+    end
+
+    def creator?(user)
+        role(user) == :creator
+    end
+
+    def can_edit?(user)
+        creator?(user)
+    end
+
+    def can_delete?(user)
+        creator?(user)
+    end
+
     private
         def make_slug
             if !self.slug

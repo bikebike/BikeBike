@@ -144,7 +144,6 @@ class ConferencesController < ApplicationController
 				if !registration.nil?
 					session[:registration] = YAML.load(registration.data)
 					session[:registration][:registration_id] = registration.id
-					puts 'XXXXXXXXXXXXXXXXXXXXXXXX'
 					next_step = (registration.completed.blank? && registration.is_participant.present? ? 'organizations' : 'thanks')
 				else
 					if !session[:registration][:user] || !session[:registration][:user][:firstname]
@@ -414,89 +413,243 @@ class ConferencesController < ApplicationController
 		{error: false, next_step: params[:cancel] ? 'cancel' : next_step}
 	end
 
+	def broadcast
+		set_conference
+		set_conference_registration
+		raise ActiveRecord::PremissionDenied unless (current_user && @this_conference.host?(current_user))
+
+		@subject = params[:subject]
+		@content = params[:content]
+
+		if request.post?
+			if params[:button] == 'edit'
+				@email_sent = :edit
+			elsif params[:button] == 'test'
+				@email_sent = :test
+				UserMailer.broadcast(
+					"#{request.protocol}#{request.host_with_port}",
+					@subject,
+					@content,
+					current_user,
+					@this_conference).deliver_now
+			elsif params[:button] == 'preview'
+				@email_sent = :preview
+			elsif params[:button] == 'send'
+				ConferenceRegistration.where(:conference_id => @this_conference.id).each do |r|
+					if r.user_id
+						UserMailer.broadcast("#{request.protocol}#{request.host_with_port}",
+							@subject,
+							@content,
+							User.find(r.user_id),
+							@this_conference).deliver_later
+					end
+				end
+				@email_sent = :yes
+			end
+		end
+	end
+
+	def stats
+		set_conference
+		set_conference_registration
+		raise ActiveRecord::PremissionDenied unless (current_user && @this_conference.host?(current_user))
+
+		@registrations = ConferenceRegistration.where(:conference_id => @this_conference.id)
+		@total_registrations = 0
+		@donation_count = 0
+		@total_donations = 0
+		@housing = {}
+		@bikes = {}
+		@bike_count = 0
+		@languages = {}
+		@food = {}
+		@allergies = []
+		@other = []
+
+		@registrations.each do |r|
+			if r.is_attending
+				@total_registrations += 1
+				
+				@donation_count += 1 if r.registration_fees_paid
+				@total_donations += r.registration_fees_paid unless r.registration_fees_paid.blank?
+
+				@housing[r.housing.to_sym] ||= 0
+				@housing[r.housing.to_sym] += 1
+				
+				@bikes[r.bike.to_sym] ||= 0
+				@bikes[r.bike.to_sym] += 1
+				@bike_count += 1 unless r.bike.to_sym == :none
+
+				@food[r.food.to_sym] ||= 0
+				@food[r.food.to_sym] += 1
+
+				@allergies << r.allergies unless r.allergies.blank?
+				@other << r.other unless r.other.blank?
+
+				JSON.parse(r.languages).each do |l|
+					@languages[l.to_sym] ||= 0
+					@languages[l.to_sym] += 1
+				end
+			end
+		end
+	end
+
 	def register
 		is_post = request.post? || session[:registration_step]
 		set_conference
 
-		if !@conference.registration_open
+		if !@this_conference.registration_open
 			do_404
 			return
 		end
 
-		#if data[:next_step].blank?
-		#	session.delete(:registration)
-		#end
+		set_conference_registration
 
-		data = register_submit
-		@register_step = is_post ? data[:next_step] : 'register'
-		@error_message = data[:error] ? data[:message] : nil
-		template = (@register_step == 'register' ? '' : 'register_') + @register_step
+		@register_template = nil
 
-		if !File.exists?(Rails.root.join("app", "views", params[:controller], "_#{template}.html.haml"))
-			do_404
-			return
+		if logged_in?
+			# if the user is logged in start them off on the policy
+			#  page, unless they have already begun registration then
+			#  start them off with questions
+			@register_template = @registration ? (@registration.registration_fees_paid ? :done : :payment) : :policy
+
+			@name = current_user.firstname
+			# we should phase out last names
+			@name += " #{current_user.lastname}" if current_user.lastname
+
+			@is_host = @this_conference.host? current_user
 		end
 
-		if session[:registration]
-			session[:registration][@register_step.to_sym] ||= Hash.new
+		# process data from the last view
+		case (params[:button] || '').to_sym
+		when :confirm_email
+			@register_template = :email_sent if is_post
+		when :policy
+			@register_template = :questions if is_post
+		when :save
+			if is_post
+				@registration ||= ConferenceRegistration.new
+
+				@registration.conference_id = @this_conference.id
+				@registration.user_id = current_user.id
+				@registration.is_attending = 'yes'
+				@registration.is_confirmed = true
+				@registration.city = params[:location]
+				@registration.arrival = params[:arrival]
+				@registration.languages = params[:languages].keys.to_json
+				@registration.departure = params[:departure]
+				@registration.housing = params[:housing]
+				@registration.bike = params[:bike]
+				@registration.food = params[:food]
+				@registration.allergies = params[:allergies]
+				@registration.other = params[:other]
+				@registration.save
+
+				current_user.firstname = params[:name].squish
+				current_user.lastname = nil
+				current_user.save
+
+				@register_template = @registration.registration_fees_paid ? :done : :payment
+			end
+		when :payment
+			if is_post && @registration
+				amount = params[:amount].to_f
+
+				if amount > 0
+					@registration.payment_confirmation_token = ENV['RAILS_ENV'] == 'test' ? 'token' : Digest::SHA256.hexdigest(rand(Time.now.to_f * 1000000).to_i.to_s)
+					@registration.save
+					
+					host = "#{request.protocol}#{request.host_with_port}"
+					response = PayPal!.setup(
+						PayPalRequest(amount),
+						register_paypal_confirm_url(@this_conference.slug, :paypal_confirm, @registration.payment_confirmation_token),
+						register_paypal_confirm_url(@this_conference.slug, :paypal_cancel, @registration.payment_confirmation_token)
+					)
+					if ENV['RAILS_ENV'] != 'test'
+						redirect_to response.redirect_uri
+					end
+					return
+				end
+				@register_template = :done
+			end
+		when :paypal_confirm
+			if @registration && @registration.payment_confirmation_token == params[:confirmation_token]
+
+				if ENV['RAILS_ENV'] == 'test'
+					@amount = YAML.load(@registration.payment_info)[:amount]
+				else
+					@amount = PayPal!.details(params[:token]).amount.total
+					# testing this does't work in test but it works in devo and prod
+					@registration.payment_info = {:payer_id => params[:PayerID], :token => params[:token], :amount => @amount}.to_yaml
+				end
+
+				@amount = (@amount * 100).to_i.to_s.gsub(/^(.*)(\d\d)$/, '\1.\2')
+
+				@registration.save!
+				@register_template = :paypal_confirm
+			end
+		when :paypal_confirmed
+			info = YAML.load(@registration.payment_info)
+			@amount = nil
+			status = nil
+			if ENV['RAILS_ENV'] == 'test'
+				status = info[:status]
+				@amount = info[:amount]
+			else
+				paypal = PayPal!.checkout!(info[:token], info[:payer_id], PayPalRequest(info[:amount]))
+				status = paypal.payment_info.first.payment_status
+				@amount = paypal.payment_info.first.amount.total
+			end
+			if status == 'Completed'
+				@registration.registration_fees_paid = @amount
+				@registration.save!
+				@register_template = :done
+			else
+				@register_template = :payment
+			end
+		when :paypal_cancel
+			if @registration
+				@registration.payment_confirmation_token = nil
+				@registration.save
+				@register_template = :payment
+			end
+		when :register
+			@register_template = :questions
 		end
-		@actions = nil
-		@multipart = false
-		case @register_step
-			when  'register', 'organizations', 'new_organization', 'new_workshop', 'volunteer_questions'
-				@actions = :next
-				if @register_step == 'new_organization'
-					@multipart = true
-				end
-			when 'thanks'
-				@registration = ConferenceRegistration.find(session[:registration][:registration_id])
-				if @registration.is_confirmed.blank?
-					@actions = :resend_confirmation_email
-				end
-				next_step = 'thanks'
-				#if @registration.complete && @registration.is_participant && @registration.payment_info.nil?
-				#`	@actions = [:submit_payment]
-			when 'primary'
-				@actions = [:cancel, :next]
-			when 'submit'
-				@actions = [:cancel, :submit]
-			when 'cancel'
-				@actions = [:no, :yes]
-			when 'confirm_payment'
-				@actions = [:cancel_payment, :confirm_payment]
-			when 'already_registered'
-				@registration = ConferenceRegistration.find_by(:email => session[:registration][:email])
-				if !@registration.complete
-					@actions = :resend_confirmation_email
-				end
-			when 'questions'
-				@actions = [:cancel, :submit]
-				@housing_options = {
-					'I will fend for myself thanks' => 'none',
-					'I will need a real bed' => 'bed',
-					'A couch or floor space will be fine' => 'couch',
-					'All I need is a backyard' => 'camp'
+
+		if @register_template == :payment && !@this_conference.paypal_username
+			@register_template = :done
+		end
+
+		# prepare data for the next view
+		case @register_template
+		when :questions
+			@registration ||= ConferenceRegistration.new(
+					:conference_id => @this_conference.id,
+					:user_id => current_user.id,
+					:is_attending => 'yes',
+					:is_confirmed => true,
+					:city => view_context.location(view_context.lookup_ip_location),
+					:arrival => @this_conference.start_date,
+					:departure => @this_conference.end_date,
+					:housing => nil,
+					:bike => nil,
+					:other => ''
+				);
+			@languages = [I18n.locale.to_sym]
+
+			if @registration.languages
+				@languages = JSON.parse(@registration.languages).map &:to_sym
+			end
+		when :workshops
+			@my_workshops = [1,2,3,4].map { |i|
+				{
+					:title => (Forgery::LoremIpsum.sentence({:random => true}).gsub(/\.$/, '').titlecase),
+					:info => (Forgery::LoremIpsum.sentences(rand(1...5), {:random => true}))
 				}
-				session[:registration][:questions][:housing] ||= 'couch'
-				@loaner_bike_options = {
-					'No' => 'no',
-					'Yes, an average size should do' => 'medium',
-					'Yes but a small one please' => 'small',
-					'Yes but a large one please' => 'large'
-				}
-				session[:registration][:questions][:loaner_bike] ||= 'medium'
-				#session[:registration][:questions][:diet] ||= Hash.new
-		end
-
-		#puts ' ------yyyy----------------- '
-		#puts @register_step
-
-		if request.xhr?
-			@register_content = render_to_string :partial => template
-			render :json => {status: 200, html: @register_content}
-		else
-			@register_template = template
-			render 'show'
+			}
+		when :done
+			@amount = ((@registration.registration_fees_paid || 0) * 100).to_i.to_s.gsub(/^(.*)(\d\d)$/, '\1.\2')
 		end
 	end
 
@@ -546,34 +699,31 @@ class ConferencesController < ApplicationController
 		end
 	end
 
-	def register_paypal_confirm
-		set_conference
-		@conference_registration = ConferenceRegistration.find_by(payment_confirmation_token: params[:confirmation_token])
-		if !@conference_registration.nil? && @conference_registration.conference_id == @conference.id && @conference_registration.complete && @conference_registration.registration_fees_paid.nil?
-			if !is_test?
-				#@conference_registration.payment_info = {:payer_id => '1234', :token => '5678', :amount => '0.00'}.to_yaml
-			#else
-				@conference_registration.payment_info = {:payer_id => params[:PayerID], :token => params[:token], :amount => PayPal!.details(params[:token]).amount.total}.to_yaml
-				@conference_registration.save!
-			end
-			session[:registration] = YAML.load(@conference_registration.data)
-			session[:registration][:registration_id] = @conference_registration.id
-			session[:registration][:path] = Array.new
-			session[:registration_step] = 'paypal-confirmed'
-			redirect_to action: 'register'
-		else
-			do_404
-		end
-	end
+	# def register_paypal_confirm
+	# 	set_conference
+	# 	@conference_registration = ConferenceRegistration.find_by(payment_confirmation_token: params[:confirmation_token])
+	# 	if !@conference_registration.nil? && @conference_registration.conference_id == @conference.id && @conference_registration.complete && @conference_registration.registration_fees_paid.nil?
+	# 		if !is_test?
+	# 			#@conference_registration.payment_info = {:payer_id => '1234', :token => '5678', :amount => '0.00'}.to_yaml
+	# 		#else
+	# 			@conference_registration.payment_info = {:payer_id => params[:PayerID], :token => params[:token], :amount => PayPal!.details(params[:token]).amount.total}.to_yaml
+	# 			@conference_registration.save!
+	# 		end
+	# 		session[:registration] = YAML.load(@conference_registration.data)
+	# 		session[:registration][:registration_id] = @conference_registration.id
+	# 		session[:registration][:path] = Array.new
+	# 		session[:registration_step] = 'paypal-confirmed'
+	# 		redirect_to action: 'register'
+	# 	else
+	# 		do_404
+	# 	end
+	# end
 
 	def register_paypal_cancel
 		set_conference
 		@conference_registration = ConferenceRegistration.find_by(confirmation_token: params[:confirmation_token])
 		if !@conference_registration.nil? && @conference_registration.conference_id == @conference.id && @conference_registration.complete && @conference_registration.payment_info.nil?
 			session[:registration] = YAML.load(@conference_registration.data)
-			session[:registration][:registration_id] = @conference_registration.id
-			session[:registration][:path] = Array.new
-			session[:registration_step] = 'paypal-cancelled'
 			redirect_to action: 'register'
 		end
 	end
@@ -626,37 +776,123 @@ class ConferencesController < ApplicationController
 
 	def workshops
 		set_conference
-		@workshops = Workshop.where(:conference_id => @conference.id)
+		set_conference_registration
+		@workshops = Workshop.where(:conference_id => @this_conference.id)
+		@my_workshops = Workshop.joins(:workshop_facilitators).where(:workshop_facilitators => {:user_id => current_user.id}, :conference_id => @this_conference.id)#, :workshop_facilitator => current_user.id)
 		render 'workshops/index'
 	end
 
-	# DELETE /conferences/1
-	def destroy
-		@conference.destroy
-		redirect_to conferences_url, notice: 'Conference was successfully destroyed.'
+	def view_workshop
+		set_conference
+		set_conference_registration
+		@workshop = Workshop.find_by_id_and_conference_id(params[:workshop_id], @this_conference.id)
+		do_404 unless @workshop
+		render 'workshops/show'
 	end
+
+	def create_workshop
+		set_conference
+		set_conference_registration
+		@languages = []
+		@needs = []
+		render 'workshops/new'
+	end
+
+	def edit_workshop
+		set_conference
+		set_conference_registration
+		@workshop = Workshop.find_by_id_and_conference_id(params[:workshop_id], @this_conference.id)
+		do_404 unless @workshop
+		do_403 unless @workshop.can_edit?(current_user)
+		@title = @workshop.title
+		@info = @workshop.info
+		@needs = JSON.parse(@workshop.needs || '[]').map &:to_sym
+		@languages = JSON.parse(@workshop.languages || '[]').map &:to_sym
+		@space = @workshop.space.to_sym if @workshop.space
+		@theme = @workshop.theme.to_sym if @workshop.theme
+		@notes = @workshop.notes
+		render 'workshops/new'
+	end
+
+	def delete_workshop
+		set_conference
+		set_conference_registration
+		@workshop = Workshop.find_by_id_and_conference_id(params[:workshop_id], @this_conference.id)
+
+		if !@workshop
+			do_404
+			return
+		end
+
+		if !@workshop.can_delete?(current_user)
+			do_403
+			return
+		end
+
+		if request.post?
+			if params[:button] == 'confirm'
+				if @workshop
+					@workshop.workshop_facilitators.destroy_all
+					@workshop.destroy
+				end
+
+				redirect_to workshops_url
+				return
+			end
+			redirect_to edit_workshop_url(@this_conference.slug, @workshop.id)
+			return
+		end
+
+		render 'workshops/delete'
+	end
+	
+	def save_workshop
+		set_conference
+		set_conference_registration
+		if params[:workshop_id]
+			workshop = Workshop.find(params[:workshop_id])
+		else
+			workshop = Workshop.new(:conference_id => @this_conference.id)
+			workshop.workshop_facilitators = [WorkshopFacilitator.new(:user_id => current_user.id, :role => :creator)]
+		end
+
+		workshop.title     = params[:title]
+		workshop.info      = params[:info]
+		workshop.languages = (params[:languages] || {}).keys.to_json
+		workshop.needs     = (params[:needs] || {}).keys.to_json
+		workshop.theme     = params[:theme] == 'other' ? params[:other_theme] : params[:theme]
+		workshop.space     = params[:space]
+		workshop.notes     = params[:notes]
+
+		workshop.save
+		redirect_to view_workshop_url(@this_conference.slug, workshop.id)
+	end
+
+	# DELETE /conferences/1
+	#def destroy
+	#	@conference.destroy
+	#	redirect_to conferences_url, notice: 'Conference was successfully destroyed.'
+	#end
 
 	private
 		# Use callbacks to share common setup or constraints between actions.
 		def set_conference
-			@conference = nil
-			if type = ConferenceType.find_by!(slug: params[:conference_type] || params[:conference_type_slug] || 'bikebike')
-				if @conference = Conference.find_by!(slug: params[:conference_slug] || params[:slug], conference_type_id: type.id)
-					set_conference_registration
-				end
-			end
-			if current_user
-				@host_privledge = :admin
-			end
+			@this_conference = Conference.find_by!(slug: params[:conference_slug] || params[:slug])
 		end
 
 		def set_conference_registration
-			if !@conference || !current_user
-				@conference_registration = nil
-				return
+			@registration = logged_in? ? ConferenceRegistration.find_by(:user_id => current_user.id, :conference_id => @this_conference.id) : nil
+			@is_host = @conference.host?(current_user)
+			if @registration || @is_host
+				@submenu = {
+					register_path(@conference.slug) => 'registration.Registration',
+					workshops_path(@conference.slug) => 'registration.Workshops'
+				}
+				if @is_host
+					@submenu[stats_path(@conference.slug)] = 'registration.Stats'
+					@submenu[broadcast_path(@conference.slug)] = 'registration.Broadcast'
+				end
 			end
-
-			@conference_registration = ConferenceRegistration.find_by(conference_id: @conference.id, user_id: current_user.id)
 		end
 
 		# Only allow a trusted parameter "white list" through.
@@ -807,11 +1043,10 @@ class ConferencesController < ApplicationController
 		end
 
 	def PayPal!
-		paypal_info = get_secure_info(:paypal)
 		Paypal::Express::Request.new(
-			:username   => paypal_info[:username],
-			:password   => paypal_info[:password],
-			:signature  => paypal_info[:signature]
+			:username   => @this_conference.paypal_username,
+			:password   => @this_conference.paypal_password,
+			:signature  => @this_conference.paypal_signature
 		)
 	end
 

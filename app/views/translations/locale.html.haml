@@ -1,0 +1,7 @@
+- header_is_fixed
+- content_for :banner do
+	#header-title.no-image
+		%h1=_'translate.translation_pages.Locale_Translations', @locale[:name], :vars => {:language => @locale[:name]}
+	.lingua-franca-translations
+		=render 'translations/translation_control'
+%article=render 'translations/key_wrapper'

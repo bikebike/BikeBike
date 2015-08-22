@@ -1,0 +1,5 @@
+= columns(medium: 12) do
+	%h3=_'articles.conference_registration.headings.payment_confirm','Please confirm your payment'
+	%p=_'articles.conference_registration.paragraphs.payment_confirm',"You are about to confirm your payment of $ #{@amount} USD for registration.", vars: {:amount => @amount}
+	= form_tag register_path(@this_conference.slug), :class => :payment do
+		= button_tag :confirm_amount, :value => :paypal_confirmed

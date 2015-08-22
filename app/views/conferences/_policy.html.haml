@@ -1,0 +1,10 @@
+%article
+	= columns(medium: 12) do
+		%h2=_'articles.conference_registration.headings.Policy_Agreement'
+		%p=_'articles.conference_registration.paragraphs.Policy_Agreement', :s, 2
+	= columns(medium: 10, push: 1) do
+		= render 'application/policy'
+	= columns(medium: 12) do
+		%p=_'articles.conference_registration.paragraphs.Confirm_Agreement', :p
+		= form_tag register_path(@this_conference.slug) do
+			.actions= button_tag :agree, :value => :policy

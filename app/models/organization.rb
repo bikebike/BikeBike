@@ -29,6 +29,14 @@ class Organization < ActiveRecord::Base
 		slug
 	end
 
+	def host?(user)
+		return false unless user.present?
+		users.each do |u|
+			return true if u.id == user.id
+		end
+		return false
+	end
+
 	def generate_slug(name, location = nil)
 		s = name.gsub(/[^a-z1-9]+/i, '-').chomp('-').gsub(/\-([A-Z])/, '\1')
 		if Organization.find_by(:slug => s).present? && !location.nil?

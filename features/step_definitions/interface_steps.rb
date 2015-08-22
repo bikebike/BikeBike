@@ -1,5 +1,15 @@
-Given(/^I am on the (.+) page$/) do |page_name|
-	visit path_to(page_name.to_sym)
+Given(/^(I )?(am on |visit )the (.+) page$/) do |a, b, page_name|
+	visit path_to(page_name)
+end
+
+Given(/^I am on a (.+) error page$/) do |page_name|
+	case page_name
+	when '404'
+		path = '/error_404'
+	else
+		raise "Unknown error page #{page_name}"
+	end
+	visit path
 end
 
 Given(/^I am on the (.+) site$/) do |language|
@@ -11,27 +21,41 @@ Given(/^I am in (.+)$/) do |location|
 end
 
 When(/^I go to the (.+) page$/) do |page_name|
-	visit path_to(page_name.to_sym)
+	visit path_to(page_name)
 end
 
 When(/^(I )?(finish|cancel) ((with )?(paypal|the payment))$/) do |a, action, b, c, d|
 	if action != 'cancel'
-		@last_registration.payment_info = {:payer_id => '1234', :token => '5678', :amount => @last_payment_amount}.to_yaml
+		@last_registration = ConferenceRegistration.find(@last_registration.id)
+		@last_registration.payment_confirmation_token = 'token'
 		@last_registration.save!
+		url = register_paypal_confirm_path(@last_conference.slug, :paypal_confirm, 'token')
+		visit url
 	end
-	visit path_to((action == 'finish' ? 'confirm' : action) + ' paypal')
 end
 
 Then(/^(I )?pay \$?([\d\.]+)$/) do | a, amount |
 	button = nil
-	begin; button = locate("auto pay #{amount.to_f.to_i}"); rescue; end
-	if button
-		click_link_or_button(button)
-	else
-		fill_in(locate('payment amount'), :with => amount)
-		click_link_or_button(locate('custom amount'))
-	end
+
+	paypal_info = YAML.load(File.read(Rails.root.join("config/paypal.yml")))['test'].symbolize_keys
+	@last_conference.paypal_username = paypal_info[:username]
+	@last_conference.paypal_password = paypal_info[:password]
+	@last_conference.paypal_signature = paypal_info[:signature]
+	@last_conference.save!
+
+	@last_registration.payment_info = {:payer_id => '1234', :token => '5678', :amount => amount.to_f, :status => 'Completed'}.to_yaml
+	@last_registration.save!
+
+	control = page.all("[value^=\"#{amount}\"]")
+	
 	@last_payment_amount = amount
+
+	if control.length > 0
+		control.first.trigger('click')
+	else
+		fill_in(locate('amount'), :with => amount)
+		click_link_or_button(locate('payment'))
+	end
 end
 
 Then(/^(I )?(don't )?have enough funds$/) do | a, status |
@@ -55,8 +79,6 @@ end
 Given(/^an organization( named .+)? exists( in .+)?$/) do |name, location|
 	if location =~ /every country/i
 		Carmen::World.instance.subregions.each { |country|
-			#puts "#{country.code}"
-
 			if country.subregions?
 				country.subregions.each { |region|
 					org = Organization.new(name: rand(36**16).to_s(36), slug: rand(36**16).to_s(36))#create_org#(Forgery::LoremIpsum.sentence)
@@ -79,41 +101,71 @@ Given(/^Registration is (open|closed)$/) do |status|
 	@last_conference.save!
 end
 
-Then(/^I (should )?see (.+)$/) do | a, item |
+Then(/^(I )?(should )?(not )?see (.+)$/) do | a, b, no, item |
 	if /(the )?Bike!Bike! logo$/ =~ item
-		expect(page).to have_selector('svg.logo')
+		if no.present?
+			expect(page).not_to have_selector('.bb-icon-logo')
+		else
+			expect(page).to have_selector('.bb-icon-logo')
+		end
 	elsif /(the|a)?\s?(.+) menu item$/ =~ item
-		within('#main-nav') { expect(page).to have_link Regexp.last_match(2) }
+		within('#main-nav') {
+			if no.present?
+				expect(page).not_to have_link Regexp.last_match(2)
+			else
+				expect(page).to have_link Regexp.last_match(2)
+			end
+		}
 	elsif /(the|a)?\s?(.+) image$/ =~ item
-		expect(page).to have_selector('#'+Regexp.last_match(2)+' img')
+		if no.present?
+			expect(page).not_to have_selector("##{Regexp.last_match(2)} img")
+		else
+			expect(page).to have_selector("##{Regexp.last_match(2)} img")
+		end
 	elsif /(the|a)?\s?(.+) link$/ =~ item
-		expect(page).to have_link Regexp.last_match(2)
+		if no.present?
+			expect(page).not_to have_link Regexp.last_match(2)
+		else
+			expect(page).to have_link Regexp.last_match(2)
+		end
 	else
-		expect(page).to have_text item
+		if no.present?
+			expect(page).not_to have_text item
+		else
+			expect(page).to have_text item
+		end
 	end
 end
 
+Then(/^(I )?wait (\d+) seconds$/) do | a, time |
+	sleep time.to_i
+end
 
 ##  =======   Forms   =======  ##
 
-Then(/^(I )?click on (.+?)( button| link| which is hidden)?$/) do | a, item, type |
+Then(/^(I )?click (on )?(the first )?(.+?)( button| link| which is hidden)?$/) do | a, b, first, item, type |
 	item = item.gsub(/^\s*(a|the)\s*(.*)$/, '\2')
 	if type && type.strip == 'button'
 		click_button(item)
 	elsif type && type.strip == 'link'
+		#print page.html
 		click_link(item)
 	elsif type && type =~ /hidden/
 		find('[id$="' + item.gsub(/\s+/, '_') + '"]', :visible => false).click
 	else
-		page.find_link(item).trigger('click')
+		if first.present?
+			page.first(:link, item).trigger('click')
+		else
+			page.find_link(item).trigger('click')
+		end
 	end
 end
 
 Then(/^(I )?press (.+)$/) do | a, item |
-	click_link_or_button(locate(item))
+	click_link_or_button(page.find('button[value$="' + item.gsub(/\s+/, '_') + '"]').text)#locate(item))
 end
 
-Then(/^I (un)?check (.+)$/) do | state, item |
+Then(/^(I )?(un)?check (.+)$/) do | a, state, item |
 	if state == 'un'
 		uncheck(locate(item))
 	else
@@ -121,7 +173,28 @@ Then(/^I (un)?check (.+)$/) do | state, item |
 	end
 end
 
-Then(/^I fill in (.+?) with (.+)$/) do | field, value |
+#      (a ) (b                 ) (c        ) (value)(d                       ) (group)
+Then(/^(I )?(select|choose|want) (an? |the )?(.+?)( as my| as the| as an?| for)? (.+)$/) do | a, b, c, value, d, group |
+	if (control = page.all("[name=\"#{group.pluralize}[#{value}]\"]".gsub(/^\s+$/, '_'))).length > 0
+		method = check(control.first[:id])
+	elsif (control = page.all("[name=\"#{group}\"][value=\"#{value}\"]".gsub(/^\s+$/, '_'))).length > 0
+		control.first.trigger('click')
+	else
+		raise "Could not find control to select"
+	end
+
+end
+
+Then(/^(I )?fill in (.+?) with (.+)$/) do | a, field, value |
+	field = field.gsub(/^\s*(my|the)\s*(.+)$/, '\2')
+	fill_in(locate(field), :with => value)
+
+	if /email/ =~ field && !(/organization/ =~ field)
+		@last_email_entered = value
+	end
+end
+
+Then(/^(I )?enter (.+?) (as my |as the |in the|as an? )(.+)$/) do | a, value, b, field |
 	field = field.gsub(/^\s*(my|the)\s*(.+)$/, '\2')
 	fill_in(locate(field), :with => value)
 
@@ -156,9 +229,12 @@ Then(/^(I )wait for (.+?) to appear$/) do | a, field |
 	end
 end
 
-Then(/^show the page$/) do
-	print page.html
-	save_and_open_page
+Then(/^(I )?show the (page|url)$/) do | a, item |
+	if item == 'url'
+		print current_url
+	else
+		print page.html
+	end
 end
 
 Then(/^I select (.+?) from (.+)$/) do | value, field |
@@ -179,28 +255,105 @@ Then (/^I should get an? (.+) email$/) do |subject|
 	@last_email.subject.should include(subject)
 end
 
-Then (/^the email should contain (.+)$/) do |value|
-	@last_email.parts.first.body.raw_source.should include(value)
-	@last_email.parts.last.body.raw_source.should include(value)
-end
+Then (/^th(e|at) email should contain (.+)$/) do |a, value|
+	@last_email = ActionMailer::Base.deliveries.last
 
-Then (/^in the email I should see (.+)$/) do |value|
-	if /(an?|the|my) (.+) link/ =~ value
-		test = path_to Regexp.last_match(2)
-		@last_email.parts.first.body.raw_source.should include(test)
-		@last_email.parts.last.body.raw_source.should include(test)
-	else
+	if @last_email.parts && @last_email.parts.first
 		@last_email.parts.first.body.raw_source.should include(value)
 		@last_email.parts.last.body.raw_source.should include(value)
+	else
+		@last_email.body.raw_source.should include(value)
 	end
 end
 
+Then (/^in th(e|at) email I should see (.+)$/) do |a, value|
+	@last_email = ActionMailer::Base.deliveries.last
+
+	if /(an?|the|my) (.+) link/ =~ value
+		value = path_to Regexp.last_match(2)
+	end
+
+	if @last_email.parts
+		@last_email.parts.first.body.raw_source.should include(value)
+		@last_email.parts.last.body.raw_source.should include(value)
+	else
+		@last_email.body.raw_source.should include(value)
+	end
+end
+
+Then(/^(I )?confirm my account$/) do | a |
+	@my_account = User.find_by(:email => @last_email_entered)
+	@confirmation = EmailConfirmation.where(["user_id = ?", @my_account.id]).order("created_at DESC").first
+	visit "/confirm/#{@confirmation.token}"
+end
+
 Then (/^I should (not )?be registered for the conference$/) do |state|
-	@last_registration = ConferenceRegistration.find_by(:email => @last_email_entered)
+	@my_account = User.find_by(:email => @last_email_entered)
+	@last_registration = ConferenceRegistration.find_by(:user_id => @my_account.id, :conference_id => @last_conference.id)
 	if state && state.strip == 'not'
 		@last_registration.should be_nil
 	else
 		@last_registration.should_not be_nil
+	end
+end
+
+Given (/^(I )?am logged in as (.+)$/) do |a, email|
+	#include Sorcery::TestHelpers::Rails
+	@my_account = User.create(:email => email)
+	EmailConfirmation.create(:token => 'test', :user_id => @my_account.id)
+	visit "/confirm/test"
+	fill_in(locate('email'), :with => email)
+	click_link_or_button(page.find('button[type="submit"]').text)
+end
+
+Given (/^My name is (.+)$/) do |name|
+	@my_account.firstname = name
+	@my_account.save
+end
+
+Given (/^(I )?am registered for the conference$/) do |a|
+	@last_registration = ConferenceRegistration.create(
+		:user_id        => @my_account.id,
+		:conference_id  => @last_conference.id,
+		:is_attending   => true,
+		:is_confirmed   => true,
+		:is_participant => true,
+		:user_id        => @my_account.id,
+		:city           => 'Somewhere',
+		:arrival        => '2015-09-28 00:00:00',
+		:departure      => '2015-09-28 00:00:00',
+		:housing        => 'house',
+		:bike           => 'medium',
+		:other          => '',
+		:allergies      => '',
+		:languages      => '["en"]',
+		:food           => 'meat'
+	)
+end
+
+Given (/^(I )?have paid( \$?\d+|\$?\d+\.\d+)? for registration$/) do |a, amount|
+	@last_registration.registration_fees_paid = amount ? amount.to_f : 50.0
+	@last_registration.save
+end
+
+Given (/^(I )?am a conference host$/) do |a|
+	org = @last_conference.organizations.first
+	org.users ||= Array.new
+	org.users << @my_account
+	org.save
+end
+
+Then (/^(I )?save (my |the )workshop$/) do |a, b|
+	title = find('[name=title]').value
+	click_button('save')
+	@last_workshop = Workshop.order('created_at DESC').first
+end
+
+Then (/^(I )?(view|edit|delete) (my |the )workshop$/) do |a, action, b|
+	if action == 'view'
+		visit "/conferences/#{@last_conference.slug}/workshops/#{@last_workshop.id}"
+	else
+		visit "/conferences/#{@last_conference.slug}/workshops/#{@last_workshop.id}/#{action}"
 	end
 end
 

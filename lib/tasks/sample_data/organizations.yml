@@ -1,0 +1,50 @@
+---
+adelaide_bike_kitchen:
+  id: 1
+  name: Adelaide Bike Kitchen
+  slug: adelaide_bike_kitchen
+  email_address: adelaide_bike_kitchen@bikebike.org
+  url: http://adelaidebikekitchen.org
+  year_founded: 2000
+  info: Whatever
+  logo: 
+  avatar: 
+  requires_approval: 
+  secret_question: 
+  secret_answer: 
+  created_at: 
+  updated_at: 
+  cover: 
+  cover_attribution_id: 
+  cover_attribution_name: 
+  cover_attribution_src: 
+  phone: 
+  organization_status: open
+  cover_attribution_user_id:
+  users: 
+    bob: administrator
+vienna_bike_kitchen:
+  id: 2
+  name: Vienna Bike Kitchen
+  slug: vienna_bike_kitchen
+  email_address: vienna_bike_kitchen@bikebike.org
+  url: http://viennabikekitchen.org
+  year_founded: 2000
+  info: Whatever
+  logo: 
+  avatar: 
+  requires_approval: 
+  secret_question: 
+  secret_answer: 
+  user_organization_replationship_id: 
+  created_at: 
+  updated_at: 
+  cover: 
+  cover_attribution_id: 
+  cover_attribution_name: 
+  cover_attribution_src: 
+  phone: 
+  organization_status: open
+  cover_attribution_user_id: 
+  users: 
+    alice: administrator

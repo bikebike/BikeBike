@@ -1,3 +1,4 @@
+require 'redcarpet'
 
 module ApplicationHelper
 	@@keyQueue = nil
@@ -14,9 +15,6 @@ module ApplicationHelper
 
 	def init_vars
 		@@keyQueue = nil
-		@@translationsOnThisPage = nil
-		@@lastTranslation = nil
-		@@allTranslations = nil
 		@@no_banner = true
 		@@banner_attribution_details = nil
 		@@banner_image = nil
@@ -29,8 +27,22 @@ module ApplicationHelper
 		@@front_page = true
 	end
 
+	def header_is_fixed
+		@fixed_header = true
+	end
+
+	def is_header_fixed?
+		@fixed_header ||= false
+	end
+
 	def is_this_the_front_page?
 		return @@front_page
+	end
+
+	def header_classes
+		classes = Array.new
+		classes << 'fixed' if is_header_fixed?
+		return classes
 	end
 
 	def ThereAreTranslationsOnThisPage?
@@ -108,54 +120,52 @@ module ApplicationHelper
 		@@body_class << (c.is_a?(Array) ? c.join(' ') : c)
 	end
 
-	def page_style(style)
-		classes = ['page-style-' + style.to_s]
-		#if @@no_banner
-		#	classes << 'no-banner'
-		#end
-		if ThereAreTranslationsOnThisPage?
-			classes << 'has-translations'
-		end
-		if !@@has_content
-			classes << 'no-content'
-		end
-		if @@banner_image
-			classes << 'has-banner-image'
-		end
-		if @@body_class
-			classes << @@body_class.join(' ')
-		end
+	def page_style#(style)
+		#classes = ['page-style-' + style.to_s]
+		classes = Array.new
+
+		classes << 'has-translations' if ThereAreTranslationsOnThisPage?
+		classes << 'no-content' unless @@has_content
+		classes << 'has-banner-image' if @@banner_image
+		classes << @@body_class.join(' ') if @@body_class
+		classes << 'fixed-banner' if is_header_fixed?
 
 		if params[:controller]
-			classes << params[:controller]
+			if params[:controller] == 'application'
+				if params[:action]
+					classes << params[:action]
+				end
+			else
+				classes << params[:controller] 
 
-			if params[:action]
-				classes << params[:controller] + '-' + params[:action]
+				if params[:action]
+					classes << params[:controller] + '-' + params[:action]
+				end
 			end
 		end
-		content_for(:page_style) { classes.join(' ') }
+		return classes
 	end
 
 	def yield_or_default(section, default = '')
 		content_for?(section) ? content_for(section) : default
 	end
 
-	def _(key, behavior = nil, behavior_size = nil, locale: nil, vars: {}, html: nil, blockData: {}, &block)
-		options = vars
-		options[:fallback] = true
-		if behavior
-			options[:behavior] = behavior
-			options[:behavior_size] = behavior_size
-		end
-		if locale
-			options[:locale] = locale.to_sym
-		end
-		#if vars
-		#	puts "\nVARS:\t#{vars}\n"
-		#end
-		I18n.translate(key, options)
-
-		#queued_keys = nil
+#	def _(key, behavior = nil, behavior_size = nil, locale: nil, vars: {}, html: nil, blockData: {}, &block)
+#		options = vars
+#		options[:fallback] = true
+#		if behavior
+#			options[:behavior] = behavior
+#			options[:behavior_size] = behavior_size
+#		end
+#		if locale
+#			options[:locale] = locale.to_sym
+#		end
+#		#if vars
+#		#	puts "\nVARS:\t#{vars}\n"
+#		#end
+#		I18n.translate(key, options)
+#
+#		#queued_keys = nil
 #		#result = nil
 #
 #		#if key.kind_of?(Hash)
@@ -216,7 +226,7 @@ module ApplicationHelper
 #		#end
 #
 		#return result
-	end
+#	end
 
 	def _translate_me(translation)
 		@@translationsOnThisPage = true
@@ -252,17 +262,17 @@ module ApplicationHelper
 		false
 	end
 
-	def _!()
-		if @@keyQueue
-			return '%' + @@keyQueue.shift + '%'
-		end
-	end
+	#def _!()
+	#	if @@keyQueue
+	#		return '%' + @@keyQueue.shift + '%'
+	#	end
+	#end
 
-	def _?()
-		if @@keyQueue
-			return '%' + @@keyQueue[0] + '%'
-		end
-	end
+	#def _?()
+	#	if @@keyQueue
+	#		return '%' + @@keyQueue[0] + '%'
+	#	end
+	#end
 
 	def sortable(objects, id = 'id', url: nil, &block)
 		result = '<ul class="sortable sortable-' + objects[0].class.name.underscore.gsub('_', '-') + (url ? ('" data-url="' + url) : '') + '" data-id="' + id + '">'
@@ -374,8 +384,9 @@ module ApplicationHelper
 		end
 	end
 
-	def p(object, attribute)
-		content = object.send(attribute.to_s)
+	def paragraph(object, attribute = nil)
+		return '' unless object
+		content = attribute ? object.send(attribute.to_s) : object
 		result = ''
 		if content =~ /<(p|span|h\d|div)[^>]*>/
 			result = content.gsub(/\s*(style|class|id|width|height|font)=\".*?\"/, '')
@@ -389,7 +400,18 @@ module ApplicationHelper
 				result = '<p>' + result + '</p>'
 			end
 		else
-			result = '<p>' + content.strip.gsub(/\s*\n+\s*/, '</p><p>') + '</p>'
+			@markdown ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML.new({
+					filter_html: true,
+					hard_wrap: true,
+					space_after_headers: true,
+					fenced_code_blocks: true,
+					link_attributes: { target: "_blank" }
+				}), {
+					autolink: true,
+					disable_indented_code_blocks: true,
+					superscript: true
+				})
+			result = @markdown.render(content)
 		end
 		result.html_safe
 	end
@@ -443,20 +465,28 @@ module ApplicationHelper
 	end
 
 	def lookup_ip
-		if request.remote_ip == '127.0.0.1'
+		if request.remote_ip == '127.0.0.1' || request.remote_ip == '::1'
 			session['remote_ip'] || (session['remote_ip'] = open("http://checkip.dyndns.org").first.gsub(/^.*\s([\d\.]+).*$/s, '\1').gsub(/[^\.\d]/, ''))
 		else
 			request.remote_ip
 		end
 	end
 
+	def get_remote_location
+		Geocoder.search(session['remote_ip'] || (session['remote_ip'] = open("http://checkip.dyndns.org").first.gsub(/^.*\s([\d\.]+).*$/s, '\1').gsub(/[^\.\d]/, ''))).first
+	end
+
 	def lookup_ip_location
-		if is_test? && ApplicationController::get_location.present?
-			Geocoder.search(ApplicationController::get_location).first
-		elsif request.remote_ip == '127.0.0.1'
-			Geocoder.search(session['remote_ip'] || (session['remote_ip'] = open("http://checkip.dyndns.org").first.gsub(/^.*\s([\d\.]+).*$/s, '\1').gsub(/[^\.\d]/, ''))).first
-		else
-			request.location
+		begin
+			if is_test? && ApplicationController::get_location.present?
+				Geocoder.search(ApplicationController::get_location).first
+			elsif request.remote_ip == '127.0.0.1' || request.remote_ip == '::1'
+				get_remote_location
+			else
+				request.location || get_remote_location
+			end
+		rescue
+			nil
 		end
 	end
 
@@ -502,7 +532,7 @@ module ApplicationHelper
 	end
 
 	def is_production?
-		Rails.env == 'production'
+		Rails.env == 'production' || Rails.env == 'preview'
 	end
 
 	def is_test?
@@ -517,10 +547,10 @@ module ApplicationHelper
 		subdomain == 'test'
 	end
 
-	def location(location)
-		territory = Carmen::Country.coded(location.country).subregions.coded(location.territory)
-		location.city + (territory ? ' ' + territory.name : '') + ', ' + Carmen::Country.coded(location.country).name
-	end
+	#def location(location)
+	#	territory = Carmen::Country.coded(location.country).subregions.coded(location.territory)
+	#	location.city + (territory ? ' ' + territory.name : '') + ', ' + Carmen::Country.coded(location.country).name
+	#end
 
 	def rand_hash(length = 16, model = nil, field = nil)
 		if field
@@ -570,6 +600,62 @@ module ApplicationHelper
 
 	def get_secure_info(name)
 		YAML.load(File.read(Rails.root.join("config/#{name.to_s}.yml")))[Rails.env].symbolize_keys
+	end
+
+	def location(location)
+		return nil if location.blank?
+
+		city = nil
+		region = nil
+		country = nil
+		if location.is_a?(Location)
+			country = location.country
+			region = location.territory
+			city = location.city
+		else
+			country = location.data['country_code']
+			region = location.data['region_code']
+			city = location.data['city']
+		end
+		l = Array.new
+		l << (_!city)
+		l << I18n.t("geography.subregions.#{country}.#{region}") if region.present?
+		l << I18n.t("geography.countries.#{country}") if !(country =~ /^(US|CA)$/)
+		l.join(_!', ')
+	end
+
+	def nav_link(link, title)
+		link_to title, link, :class => (current_page?(link) ? 'current' : nil)
+	end
+
+	def date(date, format = :long)
+		I18n.l(date, :format => format) # default, long, short
+	end
+
+	def date_span(date1, date2)
+		key = 'same_month'
+		if date1.year != date2.year
+			key = 'different_year'
+		elsif date1.month != date2.month
+			key = 'same_year'
+		end
+		d1 = I18n.l(date1.to_date, format: "span_#{key}_date_1".to_sym)
+		d2 = I18n.l(date2.to_date, format: "span_#{key}_date_2".to_sym)
+		I18n.t('date.date_span', {:date_1 => d1, :date_2 => d2})
+	end
+
+	def generate_confirmation(user, url, expiry = nil)
+		ApplicationController::generate_confirmation(user, url, expiry)
+	end
+
+	def money(amount)
+		return _!('$0.00') if amount == 0
+		_!((amount * 100).to_i.to_s.gsub(/^(.*)(\d\d)$/, '$\1.\2'))
+	end
+
+	def percent(p)
+		return _!('0.00%') if p == 0
+		_!((p * 10000).to_i.to_s.gsub(/^(.*)(\d\d)$/, '\1.\2%'))
 	end
 
 	private

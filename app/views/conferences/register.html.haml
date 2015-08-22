@@ -1,0 +1,4 @@
+= render :partial => 'page_header', :locals => {:page_key => 'Conference_Registration'}
+%article
+	= row do
+		= render (@register_template || :register).to_s

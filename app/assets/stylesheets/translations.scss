@@ -1,0 +1,251 @@
+$bumbleberry-no-markup: true;
+
+@import "bumbleberry";
+@import "settings";
+
+@include monospace-font;
+
+.translation-list {
+	list-style: none;
+	padding: 0;
+	text-align: center;
+	@include clearfix;
+
+	li {
+		display: inline-block;
+		float: left;
+		width: 25%;
+		padding: 1em;
+	}
+
+	a {
+		display: block;
+		position: relative;
+		height: 7em;
+		border: 0.1em solid #DDD;
+		color: inherit;
+		overflow: hidden;
+		@include _(border-radius, 0.25em);
+		@include default-box-shadow(top, 2);
+		@include _(transform, scale(1));
+		@include _(transition, transform 100ms ease-in-out);
+
+		&:hover,
+		&:focus {
+			@include _(transform, scale(1.125));
+		}
+		&:active {
+			@include _(transform, scale(1.25));
+		}
+
+		&:after {
+			display: none;
+		}
+	}
+	.locale-name {
+		font-size: 1.25em;
+		padding: 0.5em 0;
+		background-color: $colour-2;
+		color: #EEE;
+		@include font-family(secondary);
+	}
+	
+	.locale-completion {
+		font-size: 2em;
+		@include font-family(monospace);
+		letter-spacing: -0.15em;
+	}
+
+	&.enabled-translations {
+		.locale-name {
+			background-color: $colour-5;
+		}
+	}
+}
+
+#lingua-franca-translation-form {
+	padding: rems(1) 7.5%;
+	background-color: #FFF;
+	@include default-box-shadow(bottom, 2);
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: #FFF;
+	z-index: 1;
+	max-width: 100%;
+
+	button[type="submit"] {
+		position: absolute;
+		right: 7.5%;
+		top: 1em;
+		@include _(opacity, 1);
+		@include _(transition, opacity 250ms ease-in-out);
+
+		&:disabled {
+			cursor: default;
+			@include _(opacity, 0);
+		}
+	}
+}
+
+#lingua-franca-translation-form h2,
+#translation-value,
+.variables button {
+	@include font-family(monospace);
+}
+
+#translation-value {
+	border: 1px solid #CCC;
+	outline: none;
+	padding: 1em 1.75em;
+	color: $colour-3;
+	background-color: #333;
+	position: relative;
+
+	input {
+		border: 0;
+		background-color: transparent;
+		padding: 0;
+		margin: 0;
+		font-weight: bold;
+		color: $colour-1;
+
+		&.special {
+			color: $colour-4;
+		}
+	}
+}
+
+#translation-control-variables {
+	background-color: #CCC;
+	padding: 0.25em;
+	min-height: 2.9em;
+
+	strong {
+		float: left;
+		padding: 0.25em 0.5em;
+	}
+
+	.variables {
+		font-weight: bold;
+
+		em {
+			line-height: 1.75em;
+		}
+
+		button {
+			top: auto;
+			right: auto;
+			position: relative;
+			border-radius: 0.25em;
+			font-size: 0.65em;
+			margin-bottom: 1em;
+			vertical-align: sub;
+
+			&.special {
+				background-color: $colour-4;
+			}
+		}
+	}
+}
+
+#lingua-franca-translation-form .enable-translation {
+	display: none;
+}
+
+#lingua-franca-translation-form.optional .enable-translation {
+	display: block;
+}
+
+#lingua-franca-translation-form.optional.enabled .uses-default-value {
+	display: none;
+}
+
+#lingua-franca-translation-form.optional.disabled .uses-custom-value,
+#lingua-franca-translation-form.optional.disabled .translation-control {
+	display: none;
+}
+
+#lingua-franca-keys {
+	width: 100%;
+	overflow: hidden;
+	margin-bottom: 100%;
+
+	th {
+		text-align: left;
+
+		&, td {
+			@include font-family(monospace);
+		}
+	}
+
+	td a {
+		color: inherit;
+		@include _(opacity, 0.85);
+	}
+
+	.variable {
+		color: $colour-1;
+		font-weight: bold;
+
+		&.special {
+			color: $colour-4;
+		}
+	}
+
+	.parent-keys span {
+		color: transparent;
+		width: 1em;
+		display: inline-block;
+	}
+
+	a {
+		display: block;
+
+		&:after {
+			display: none;
+		}
+	}
+
+	tr.selectable-key:hover {
+		background-color: $colour-1;
+
+		a {
+			color: #FFF;
+
+			.variable {
+				color: inherit;
+			}
+		}
+	}
+
+	.lingua-franca-value {
+		display: none;
+	}
+}
+
+@include breakpoint(medium) {
+	#lingua-franca-keys {
+		.lingua-franca-value {
+			display: table-cell;
+		}
+	}
+}
+
+@include breakpoint(large) {
+	body.fixed-banner #main {
+		padding-top: rems(24);
+	}
+
+	#lingua-franca-keys {
+		margin-bottom: 0;
+	}
+
+	#lingua-franca-translation-form {
+		position: relative;
+		padding: 1rem 7.5%;
+		background-color: #FFF;
+		@include default-box-shadow(top, 2);
+	}
+}

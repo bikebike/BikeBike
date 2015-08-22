@@ -1,0 +1,5 @@
+= render :partial => 'application/header', :locals => {:page_group => :policy, :page_key => 'Safer_Spaces_Policy', :image_file => 'columbus_group.jpg'}
+%article
+	= row do
+		= columns(medium: 12) do
+			= render 'application/policy'

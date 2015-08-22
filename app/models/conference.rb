@@ -1,4 +1,6 @@
 class Conference < ActiveRecord::Base
+	translates :info, :title
+
 	mount_uploader :cover, CoverUploader
 	mount_uploader :poster, PosterUploader
 
@@ -17,10 +19,13 @@ class Conference < ActiveRecord::Base
 	def to_param
 		slug
 	end
-#
-	#def self.find_by_param(slug)
-	#	find_by_slug_and_conference_type(slug, ConferenceType.find_by_slug('regional').id)
-	#end
+
+	def host?(user)
+		organizations.each do |o|
+			return true if o.host?(user)
+		end
+		return false
+	end
 
 	def url(action = :show)
 		path(action)

@@ -1,10 +1,27 @@
-%footer.row
-	.columns.medium-8.medium-push-1.large-6.large-push-2.text-center
-		%a{href: '/conferences/'}='Conferences'
-		%i
-		%a{href: '/conferences/'}='Organizations'
-		%i
-		%a{href: '/resources/'}='Resources'
-	.columns.medium-3.large-3.copyright
-		&copy;2014 Bike!Bike!
-
+.github
+	=svg_sprite  'icons', 'bb-icon-github', 'github logo'
+	%a{href: 'https://github.com/bikebike/BikeBike/issues', target: :_blank}
+		=_'links.footer.text.File_an_Issue'
+	=_!'|'
+	%a{href: 'https://github.com/bikebike/BikeBike/contributing.md', target: :_blank}
+		=_'links.footer.text.Help_contribute'
+.facebook
+	=_'links.footer.help_text.facebook', 'Join our facebook group' do |title|
+		%a{href: 'https://www.facebook.com/groups/648758205249998/', target: :_blank, title: title}
+			=svg_sprite  'icons', 'bb-icon-fb', 'facebook logo'
+.locale
+	=_'links.footer.help_text.select_language', 'Select your language' do |title|
+		%input{type: :checkbox, id: 'select-language'}
+		%label.launch{title: title, for: 'select-language'}
+			=_!I18n.locale.upcase
+		.selector
+			%ul
+				-I18n.backend.available_locales.each do |locale|
+					%li
+						%a{href: request.original_url.gsub(/^(https?:\/\/)(preview\-)?(..\.)?(.*)$/, '\1\2' + locale + '.\4')}
+							=_! locale.upcase
+						%span=I18n.t("languages.#{locale}", locale: locale, context: I18n.t("languages.#{locale}"))
+.copy
+	=_'links.footer.help_text.contributors', 'Who contributed to building this website' do |title|
+		=link_to :humans_txt, {title: title} do
+			=((_!"&copy;#{Date.today.strftime("%Y")} Bike!Bike!") || '').html_safe

@@ -3,12 +3,12 @@
 	%head
 		%meta{ charset: 'utf-8' }
 		%meta{ name: 'viewport', content: 'width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0' }
-		%title= (yield :title) + (content_for?(:title) ? ' | ' : '') + 'Bike!Bike!'
-		%meta{ name: 'description', content: (yield_or_default :description, 'Bike!Bike! conferences for DIY bicycle collectives, co-ops, and advocacy groups') }
+		%title= (yield :title) + (content_for?(:title) ? (_!' | ') : '') + (_!'Bike!Bike!')
+		%meta{ name: 'description', content: (yield_or_default :description, I18n.t('page_descriptions.home')) }
 		= csrf_meta_tags
-		/[if lt IE 9]
-			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
-		= stylesheet_link_tag '//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic,700italic', 'application', media: 'all'
+		= inject_css!
+		- (@stylesheets || []).each do |css|
+			= inject_css! css
 		%link{ href: asset_path('favicon.ico'), rel: 'shortcut icon', type: 'image/x-icon' }
 		%link{ href: asset_path('favicon.ico'), rel: 'icon', type: 'image/x-icon' }
 		%link{ href: asset_path('apple-touch-icon.png'), rel: 'apple-touch-icon' }
@@ -16,48 +16,66 @@
 		%link{ href: asset_path('apple-touch-icon-114x114.png'), rel: 'apple-touch-icon', sizes: '114x114' }
 		%link{ href: asset_path('apple-touch-icon-144x144.png'), rel: 'apple-touch-icon', sizes: '144x144' }
 		= yield :head
-		=# javascript_include_tag '//use.typekit.net/iqv7hcg.js'
-		=# javascript_include_tag 'application'
-		=# javascript_include_tag 'nested_form'
 
-	%body{ class: (yield_or_default :page_style) }
-		:javascript
-			document.getElementsByTagName('HTML')[0].className+=' '+(window.getComputedStyle(document.body).backgroundBlendMode?'':'no-')+'blend-modes'
-		-#= render 'shared/translation_control'
-
-		%main
-			= render 'shared/navbar'
+	%body{ class: page_style }
+		= render 'shared/navbar'
+		%main#main
 			- flash.each do |key, msg|
 				= content_tag :div, msg, :id => key
-			- if has_banner?
-				%header#banner{banner_attrs(yield_or_default :banner_image)}
-					= yield :banner
-					= banner_attribution
+			%header#banner
+				= yield :banner
+			- if @submenu
+				=row do
+					= columns(medium: 12) do
+						%nav.sub-menu
+							- @submenu.each do |href,key|
+								%a{href: href, class: request.fullpath.start_with?(href) ? 'current' : nil}=_"menu.submenu.#{key}"
 			- if content_for?(:side_bar)
 				%aside#side-bar
 					= yield :side_bar
-					%form{action: 'https://www.paypal.com/cgi-bin/webscr', method: 'post', target: '_top'}
-						%input{type: 'hidden', name: 'cmd', value: '_donations'}
-						%input{type: 'hidden', name: 'business', value: 'info@thirdhand.org'}
-						%input{type: 'hidden', name: 'lc', value: 'US'}
-						%input{type: 'hidden', name: 'item_name', value: 'Bike!Bike!'}
-						%input{type: 'hidden', name: 'no_note', value: '0'}
-						%input{type: 'hidden', name: 'currency_code', value: 'USD'}
-						%button{type: 'submit', value: 'PP-DonationsBF:paypal_logo.png:NonHostedGuest'}=_'donate.button_label','Make a Donation!'
-
 			- if has_content?
 				#content=yield
 			- else
 				= yield
 		= yield :garbage
 		#footer
-			%footer
-				.container= render 'shared/footer'
-		= javascript_include_tag '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'
-		:javascript
-			window.jQuery||document.write('<script src="/javascripts/jquery.min.js"><\/script>');(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create','UA-42449204-1');ga('send','pageview');!function(a,b,c,d){d&&a.addEventListener("DOMContentLoaded",function(){$.ajax({url:$("use").first().attr("xlink:href").replace(/^(.*)\#.*$/,"$1"),dataType:"text",success:function(a){$("body").append('<div class="hide">'+a+"</div>"),$("use").each(function(){$(this).attr("xlink:href",function(a,b){return b.replace(/^.*(#.*)$/,"$1")})})}})})}(document,navigator,{},/Trident\/[567]\b/.test(navigator.userAgent));
+			%footer= render 'shared/footer'
 		- if content_for?(:footer_scripts)
 			= yield :footer_scripts
-		- if content_for?(:scripts) || content_for?(:dom_ready)
-			:javascript
-				#{content_for?(:scripts) ? "#{yield :scripts}" : ''}#{content_for?(:dom_ready) ? "$(function(){#{yield :dom_ready}});" : ''}
+			-# if content_for?(:scripts) || content_for?(:dom_ready)
+			-#	#{content_for?(:scripts) ? "#{yield :scripts}" : ''}#{content_for?(:dom_ready) ? "$(function(){#{yield :dom_ready}});" : ''}
+		:javascript
+			(function() {
+				if (!String.prototype.trim) {
+					(function() {
+						var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+						String.prototype.trim = function() {
+							return this.replace(rtrim, '');
+						};
+					})();
+				}
+
+				function classExists(elem,className){var p = new RegExp('(^| )'+className+'( |$)');return (elem.className && elem.className.match(p));}
+				function addClass(elem,className){if(classExists(elem,className)){return true;}elem.className += ' '+className;}
+				function removeClass(elem,className){var c = elem.className;var p = new RegExp('(^| )'+className+'( |$)');c = c.replace(p,' ').replace(/  /g,' ');elem.className = c.trim();}
+
+				[].slice.call(document.querySelectorAll('.input-field input')).forEach(function(inputEl) {
+					if (inputEl.value.trim() === '') {
+						inputEl.parentNode.className = inputEl.parentNode.className + ' empty';
+					}
+
+					inputEl.addEventListener('focus', onInputFocus);
+					inputEl.addEventListener('blur', onInputBlur);
+				});
+
+				function onInputFocus(ev) {
+					removeClass(ev.target.parentNode, 'empty')
+				}
+
+				function onInputBlur(ev) {
+					if (ev.target.value.trim() === '') {
+						addClass(ev.target.parentNode, 'empty');
+					}
+				}
+			})();
+		

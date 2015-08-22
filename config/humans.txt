@@ -1,0 +1,25 @@
+/* TEAM */
+	Lead Designer and Developer:Godwin
+	Contact: goodgodwin [at] hotmail.com
+	Twitter: @__Godwin__
+	From:Seattle, Washington, USA
+
+	Other Developers:See our Github
+	Website: https://github.com/bikebike/BikeBike
+
+	Primary ES Translator:Jim Mayerstein
+	Contact: jimbikefreak [at] gmail.com
+	From:Mexico City, Jalisco, Mexico
+
+	Primary EN Copywriter:Sarah Schaan
+	Contact: sarah.schaan [at] gmail.com
+	From: Fargo, Noth Dakota, USA
+
+/* THANKS */
+	Thanks to everyone else who contributed translations, code, copy, photography, and general support!
+
+/* SITE */
+	Last update:2015/03/25
+	Language: English
+	Doctype:HTML5
+	IDE: Sublime Text, Photoshop

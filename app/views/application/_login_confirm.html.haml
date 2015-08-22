@@ -1,0 +1,10 @@
+= row do
+	= columns(medium: 12) do
+		%h2=_'articles.permission_denied.headings.confirm_email','Please confirm your email address'
+	= columns(medium: 6, large: 5) do
+		= form_tag :do_confirm do
+			.email-field.input-field
+				= email_field_tag :email, nil, required: true
+				= label_tag :email
+			= hidden_field_tag :token, @confirmation.token
+			= button_tag :login

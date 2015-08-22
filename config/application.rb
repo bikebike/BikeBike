@@ -24,14 +24,20 @@ module BikeBike
 
 		# The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
 		# config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
-		config.i18n.default_locale = :en #:de
+		config.i18n.default_locale = :en
 		config.i18n.enforce_available_locales = false
-		self.paths['config/database'] = Rails.root.parent.join('BikeBike', 'config', 'database.yml')
-		# config.action_controller.default_url_options = { :trailing_slash => true }
-		#config.middleware.swap 'Rack::MethodOverride', 'Rack::MethodOverrideWithParams'
-		#config.i18n.exception_handler = I18n::MissingTranslationExceptionHandler.new
-		#require '/app/helpers/bike_bike_form_helper'
-		#ActionView::Base.default_form_builder
-		#config.action_view.default_form_builder = 'BikeBikeFormHelper::BikeBikeFormBuilder'
+		self.paths['config/database'] = Rails.root.join('config', 'database.yml')
+		config.active_record.raise_in_transactional_callbacks = true
+
+		if Rails.env == 'development' || Rails.env == 'test'
+			I18n.config.language_detection_method = I18n::Config::DETECT_LANGUAGE_FROM_URL_PARAM
+		else
+			# detect the language using the subdimain
+			I18n.config.language_detection_method = I18n::Config::DETECT_LANGUAGE_FROM_SUBDOMAIN
+		end
+		# if we are in our preview environment, set the locale regex to detect the preview- prefix
+		I18n.config.host_locale_regex = /^preview\-([a-z]{2})\.bikebike\.org$/ if Rails.env == 'preview'
+
+		config.active_job.queue_adapter = :delayed_job
 	end
 end

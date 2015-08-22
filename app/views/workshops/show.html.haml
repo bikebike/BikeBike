@@ -1,30 +1,35 @@
-%p#notice= notice
-
-.row
-	.columns.medium-12
-		%h1= @workshop.title
-
-= tabs!
-
-.row
-	.columns.medium-4
-		%p
-			%b Workshop stream:
-			= @workshop.workshop_stream_id
-		%p
-			%b Workshop presentation style:
-			= @workshop.workshop_presentation_style
-		%p
-			%b Min facilitators:
-			= @workshop.min_facilitators
-		%p
-			%b Location:
-			= @workshop.location_id
-		%p
-			%b Start time:
-			= @workshop.start_time
-		%p
-			%b End time:
-			= @workshop.end_time
-	.columns.medium-8
-		=p @workshop, :info
+= render 'conferences/page_header', :page_key => 'View_Workshop'
+%article
+	= row do
+		= columns(medium: 12) do
+			%h2=_!@workshop.title
+			=paragraph _!(@workshop.info) || ''
+		= columns(medium: 6) do
+			%h3=_'articles.workshops.headings.facilitators'
+			.facilitators
+				- @workshop.workshop_facilitators.each do |f|
+					.facilitator
+						- u = User.find(f.user_id)
+						.name=_!(u.firstname || u.username || u.email)
+						.role=_"roles.workshops.facilitator.#{f.role}"
+		- if @workshop.languages
+			= columns(medium: 6) do
+				%h3=_'articles.workshops.headings.languages','Workshop Language'
+				%p= _!((JSON.parse(@workshop.languages || '[]').map { |x| _"languages.#{x}" }).join(', ').to_s.html_safe)
+		- if @workshop.theme
+			= columns(medium: 6) do
+				%h3=_'articles.workshops.headings.theme','Theme'
+				%p= [:race_gender, :mechanics, :funding, :organization, :community].include?((@workshop.theme || '').to_sym) ? (_"workshop.options.theme.#{@workshop.theme}") : @workshop.theme
+		- if @workshop.can_edit?(current_user) || @this_conference.host?(current_user)
+			- if @workshop.needs
+				= columns(medium: 6) do
+					%h3=_'articles.workshops.headings.needs','What do you need?'
+					%p= _!((JSON.parse(@workshop.needs || '[]').map { |x| _"workshop.options.needs.#{x}" }).join(', ').to_s.html_safe)
+			- if @workshop.notes
+				= columns(medium: 12) do
+					%h3=_'articles.workshops.headings.notes','Notes'
+					=paragraph _!(@workshop.notes)
+		= columns(medium: 12) do
+			.actions
+				= (link_to (_'actions.workshops.Edit'), edit_workshop_path(@this_conference.slug, @workshop.id), :class => 'button modify') if @workshop.can_edit?(current_user)
+				= (link_to (_'actions.workshops.Delete'), delete_workshop_path(@this_conference.slug, @workshop.id), :class => 'button delete') if @workshop.can_delete?(current_user)

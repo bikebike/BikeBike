@@ -1,35 +1,26 @@
-%h1 Listing workshops
-
-%table
-  %tr
-    %th Title
-    %th Slug
-    %th Info
-    %th Conference
-    %th Workshop stream
-    %th Workshop presentation style
-    %th Min facilitators
-    %th Location
-    %th Start time
-    %th End time
-    %th
-    %th
-
-  - @workshops.each do |workshop|
-    %tr
-      %td= workshop.title
-      %td= workshop.slug
-      %td= workshop.info
-      %td= workshop.conference_id
-      %td= workshop.workshop_stream_id
-      %td= workshop.workshop_presentation_style
-      %td= workshop.min_facilitators
-      %td= workshop.location_id
-      %td= workshop.start_time
-      %td= workshop.end_time
-      %td= link_to 'Show', conference_workshop_path(@conference, workshop)
-      %td= link_to 'Edit', edit_conference_workshop_path(@conference, workshop)
-
-%br
-
-= link_to 'New Workshop', new_conference_workshop_path
+= render 'conferences/page_header', :page_key => 'Workshops'
+%article
+	= row do
+		= columns(medium: 12) do
+			%h2=_'articles.workshops.headings.Workshops'
+		= columns(medium: 6) do
+			%p=_'articles.workshops.paragraphs.Workshops', :p
+		= columns(medium: 6) do
+			%h3=_'articles.workshops.headings.Your_Workshops'
+			%ul.workshop-previews
+				- @my_workshops.each do |w|
+					- if w.title
+						%li
+							=link_to view_workshop_path(@this_conference.slug, w.id) do
+								%h4=_!(w.title)
+								=paragraph _!(w.info)
+			= link_to (_'actions.workshops.create','New Workshop'), create_workshop_path(@this_conference.slug), class: :button
+	= row do
+		%ul.workshop-previews
+			- @workshops.each do |w|
+				- if w.title
+					%li
+						= columns(medium: 6) do
+							=link_to view_workshop_path(@this_conference.slug, w.id) do
+								%h4=_!(w.title)
+								=paragraph _!(w.info)
