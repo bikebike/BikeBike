@@ -4,7 +4,7 @@
 		= form_tag save_workshop_path(@this_conference.slug), class: 'composition' do
 			= (hidden_field_tag :workshop_id, @workshop.id) if @workshop
 			= columns(medium: 12) do
-				%p=(_'articles.workshops.paragraphs.info','Please accurately describe your workshop in detail. This will help hosts decide if they wish to add it to the schedule and when it should best be scheduled. Enter normal text but if you want to get fancy you can use <a href="http://daringfireball.net/projects/markdown/basics" target="_blank">Markdown</a>.').html_safe
+				=paragraph(_'articles.workshops.paragraphs.new_workshop','Please accurately describe your workshop in detail. This will help hosts decide if they wish to add it to the schedule and when it should best be scheduled. Enter normal text but if you want to get fancy you can use [Markdown](http://daringfireball.net/projects/markdown/basics).').html_safe
 				.text-field.input-field.big
 					= label_tag :title
 					= text_field_tag :title, @title, :required => true
@@ -13,32 +13,47 @@
 					= text_area_tag :info, @info, :required => true
 			= columns(medium: 6) do
 				%h3=_'articles.workshops.headings.languages','Workshop Language'
-				.check-box-field.input-field
-					- [:en, :es, :fr].each do |language|
-						= check_box_tag "languages[#{language}]", 1, @languages.include?(language)
+				- [:en, :es, :fr].each do |language|
+					.single-check-box-field.input-field
 						= label_tag "languages_#{language}" do
+							= check_box_tag "languages[#{language}]", 1, @languages && @languages.include?(language)
 							= _"languages.#{language}"
 				%h3=_'articles.workshops.headings.theme','Theme'
-				%p=_'articles.workshops.paragraphs.theme', :p
-				.check-box-field.input-field
-					- [:race_gender, :mechanics, :funding, :organization, :community, :other].each do |theme|
-						= radio_button_tag :theme, theme, @theme == theme
+				.input-field-help=_'articles.workshops.paragraphs.theme', :p
+				- theme_found = false
+				- [:race_gender, :mechanics, :funding, :organization, :community].each do |theme|
+					.single-radio-button-field.input-field
 						= label_tag "theme_#{theme}" do
+							- is_selected = (@theme == theme)
+							- theme_found ||= is_selected
+							= radio_button_tag :theme, theme, is_selected
 							= _"workshop.options.theme.#{theme}"
+				.single-radio-button-field.other-field.input-field
+					= label_tag "theme_other" do
+						= radio_button_tag :theme, :other, (@theme && !theme_found)
+						%div
+							= _"workshop.options.theme.other"
+							= text_field_tag :other_theme, (@theme && !theme_found ? @theme : nil)
 			= columns(medium: 6) do
 				%h3=_'articles.workshops.headings.needs','What do you need?'
-				.check-box-field.input-field
-					- [:sound, :projector, :tools].each do |need|
-						= check_box_tag "needs[#{need}]", 1, @needs.include?(need)
+				- [:sound, :projector, :tools].each do |need|
+					.single-check-box-field.input-field
 						= label_tag "needs_#{need}" do
+							= check_box_tag "needs[#{need}]", 1, @needs.include?(need)
 							= _"workshop.options.needs.#{need}"
 				%h3=_'articles.workshops.headings.space','Type of space'
-				%p=_'articles.workshops.paragraphs.space', :p
-				.check-box-field.input-field
-					- [:workshop, :meeting_room, :outdoor_meeting].each do |space|
-						= radio_button_tag :space, space, @space == space
+				.input-field-help=_'articles.workshops.paragraphs.space', :p
+				- [:meeting_room, :workshop, :outdoor_meeting].each do |space|
+					.single-radio-button-field.input-field
 						= label_tag "space_#{space}" do
+							= radio_button_tag :space, space, @space == space
 							= _"workshop.options.space.#{space}"
+			= columns(medium: 12) do
+				%h3=_'articles.workshops.headings.notes','Notes for Conference Organizers and Workshop Facilitators'
+				%p=_'articles.workshops.paragraphs.notes','Notes are only viewable by conference hosts and workshop facilitators'
+				.text-area-field.input-field
+					= label_tag :notes
+					= text_area_tag :notes, @notes
 			= columns(medium: 12) do
 				.actions.right
 					= button_tag :save, :value => :save

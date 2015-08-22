@@ -385,6 +385,7 @@ module ApplicationHelper
 	end
 
 	def paragraph(object, attribute = nil)
+		return '' unless object
 		content = attribute ? object.send(attribute.to_s) : object
 		result = ''
 		if content =~ /<(p|span|h\d|div)[^>]*>/
@@ -403,11 +404,12 @@ module ApplicationHelper
 					filter_html: true,
 					hard_wrap: true,
 					space_after_headers: true,
-					fenced_code_blocks: true
+					fenced_code_blocks: true,
+					link_attributes: { target: "_blank" }
 				}), {
 					autolink: true,
-					superscript: true,
-					disable_indented_code_blocks: true
+					disable_indented_code_blocks: true,
+					superscript: true
 				})
 			result = @markdown.render(content)
 		end

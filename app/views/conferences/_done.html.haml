@@ -1,0 +1,50 @@
+= columns(medium: 12) do
+	%h2=_'articles.conference_registration.headings.Youre_Done', 'You\'re Done!'
+= columns(medium: 6, large: 7) do
+	%p=_'articles.conference_registration.paragraphs.done', :p
+	%p=_'articles.conference_registration.paragraphs.workshops', 'You can now take a look at proposed workshops and even propose one yourself if you like.'
+	.actions
+		= link_to (_'articles.conference_registration.actions.View_Workshops'), workshops_path(@conference.slug), :class => 'button'
+= columns(medium: 6, large: 5) do
+	%h3=_'articles.conference_registration.headings.Your_Registration'
+	%table
+		%tr
+			%th=_'articles.conference_registration.headings.name'
+			%td=_!current_user.firstname
+		%tr
+			%th=_'articles.conference_registration.headings.location'
+			%td=_!@registration.city
+		%tr
+			%th=_'articles.conference_registration.headings.arrival'
+			%td=date(@registration.arrival)
+		%tr
+			%th=_'articles.conference_registration.headings.departure'
+			%td=date(@registration.departure)
+		%tr
+			%th=_'articles.conference_registration.headings.languages'
+			%td=_!((JSON.parse(@registration.languages).map { |x| _"languages.#{x}" }).join(', ').to_s).html_safe
+		%tr
+			%th=_'articles.conference_registration.headings.housing'
+			%td=_"articles.conference_registration.questions.housing.#{@registration.housing}"
+		%tr
+			%th=_'articles.conference_registration.headings.bike'
+			%td=_"articles.conference_registration.questions.bike.#{@registration.bike}"
+		%tr
+			%th=_'articles.conference_registration.headings.food'
+			%td=_"articles.conference_registration.questions.food.#{@registration.food}"
+		%tr
+			%th=_'articles.conference_registration.headings.allergies'
+			%td
+				- if @registration.allergies.blank?
+					=_'articles.conference_registration.none'
+				- else
+					=_!@registration.allergies
+		%tr
+			%th=_'articles.conference_registration.headings.other'
+			%td=_!@registration.other
+		%tr
+			%th=_'articles.conference_registration.headings.payment'
+			%td=_!('$' + @amount)
+	= form_tag register_path(@this_conference.slug) do
+		.actions
+			= button_tag :edit_registration, :value => :register

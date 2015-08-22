@@ -1,0 +1,6 @@
+%article
+	= columns(medium: 12) do
+		%h2=_'articles.conference_registration.headings.Confirm_You_Email_Address','Confirm Email Address'
+	= columns(medium: 6, large: 5) do
+		= form_tag register_path(@this_conference.slug) do
+			= button_tag :continue, :value => :confirm_email

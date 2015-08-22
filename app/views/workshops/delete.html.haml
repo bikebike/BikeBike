@@ -1,0 +1,10 @@
+= render 'conferences/page_header', :page_key => 'Delete_Workshop'
+%article
+	= row do
+		= columns(medium: 12) do
+			%h2=_'articles.workshops.headings.Delete_Workshop',"Are you sure you want to delete the workshop: <em>#{@workshop.title}</em>?", :vars => {:title => "<em>#{@workshop.title}</em>".html_safe}
+			= form_tag delete_workshop_path(@this_conference.slug, @workshop.id), class: 'composition' do
+				.actions
+					= button_tag :confirm, :value => :confirm, :class => :delete
+					= button_tag :cancel, :value => :cancel
+

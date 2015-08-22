@@ -2,11 +2,11 @@
 %article
 	= row do
 		= columns(medium: 12) do
-			%h2=_'articles.conference_registration.headings.Workshops'
+			%h2=_'articles.workshops.headings.Workshops'
 		= columns(medium: 6) do
-			%p=_'articles.conference_registration.paragraphs.Workshops', :p
+			%p=_'articles.workshops.paragraphs.Workshops', :p
 		= columns(medium: 6) do
-			%h3=_'articles.conference_registration.headings.Your_Workshops'
+			%h3=_'articles.workshops.headings.Your_Workshops'
 			%ul.workshop-previews
 				- @my_workshops.each do |w|
 					- if w.title

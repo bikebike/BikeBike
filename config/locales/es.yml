@@ -1,0 +1,854 @@
+---
+es:
+  date:
+    abbr_day_names:
+    - dom
+    - lun
+    - mar
+    - mié
+    - jue
+    - vie
+    - sáb
+    abbr_month_names:
+    - 
+    - ene
+    - feb
+    - mar
+    - abr
+    - may
+    - jun
+    - jul
+    - ago
+    - sep
+    - oct
+    - nov
+    - dic
+    day_names:
+    - domingo
+    - lunes
+    - martes
+    - miércoles
+    - jueves
+    - viernes
+    - sábado
+    formats:
+      default: '%d/%m/%Y'
+      long: '%d de %B de %Y'
+      short: '%d de %b'
+    month_names:
+    - 
+    - enero
+    - febrero
+    - marzo
+    - abril
+    - mayo
+    - junio
+    - julio
+    - agosto
+    - septiembre
+    - octubre
+    - noviembre
+    - diciembre
+    order:
+    - :day
+    - :month
+    - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: alrededor de 1 hora
+        other: alrededor de %{count} horas
+      about_x_months:
+        one: alrededor de 1 mes
+        other: alrededor de %{count} meses
+      about_x_years:
+        one: alrededor de 1 año
+        other: alrededor de %{count} años
+      almost_x_years:
+        one: casi 1 año
+        other: casi %{count} años
+      half_a_minute: medio minuto
+      less_than_x_minutes:
+        one: menos de 1 minuto
+        other: menos de %{count} minutos
+      less_than_x_seconds:
+        one: menos de 1 segundo
+        other: menos de %{count} segundos
+      over_x_years:
+        one: más de 1 año
+        other: más de %{count} años
+      x_days:
+        one: 1 día
+        other: '%{count} días'
+      x_minutes:
+        one: 1 minuto
+        other: '%{count} minutos'
+      x_months:
+        one: 1 mes
+        other: '%{count} meses'
+      x_seconds:
+        one: 1 segundo
+        other: '%{count} segundos'
+    prompts:
+      day: Día
+      hour: Hora
+      minute: Minutos
+      month: Mes
+      second: Segundos
+      year: Año
+  errors:
+    format: '%{attribute} %{message}'
+    messages:
+      accepted: debe ser aceptado
+      blank: no puede estar en blanco
+      confirmation: no coincide
+      empty: no puede estar vacío
+      equal_to: debe ser igual a %{count}
+      even: debe ser par
+      exclusion: está reservado
+      greater_than: debe ser mayor que %{count}
+      greater_than_or_equal_to: debe ser mayor que o igual a %{count}
+      inclusion: no está incluido en la lista
+      invalid: no es válido
+      less_than: debe ser menor que %{count}
+      less_than_or_equal_to: debe ser menor que o igual a %{count}
+      not_a_number: no es un número
+      not_an_integer: debe ser un entero
+      odd: debe ser impar
+      record_invalid: 'La validación falló: %{errors}'
+      taken: ya está en uso
+      too_long: es demasiado largo (%{count} caracteres máximo)
+      too_short: es demasiado corto (%{count} caracteres mínimo)
+      wrong_length: no tiene la longitud correcta (%{count} caracteres exactos)
+    template:
+      body: 'Se encontraron problemas con los siguientes campos:'
+      header:
+        one: No se pudo guardar este/a %{model} porque se encontró 1 error
+        other: No se pudo guardar este/a %{model} porque se encontraron %{count} errores
+  helpers:
+    select:
+      prompt: Por favor seleccione
+    submit:
+      create: Crear %{model}
+      submit: Guardar %{model}
+      update: Actualizar %{model}
+  number:
+    currency:
+      format:
+        delimiter: .
+        format: '%n %u'
+        precision: 2
+        separator: ','
+        significant: false
+        strip_insignificant_zeros: false
+        unit: €
+    format:
+      delimiter: .
+      precision: 3
+      separator: ','
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: '%n %u'
+        units:
+          billion: mil millones
+          million: millón
+          quadrillion: mil billones
+          thousand: mil
+          trillion: billón
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 1
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: '%n %u'
+        units:
+          byte:
+            one: Byte
+            other: Bytes
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
+    percentage:
+      format:
+        delimiter: ''
+    precision:
+      format:
+        delimiter: ''
+  support:
+    array:
+      last_word_connector: ', y '
+      two_words_connector: ' y '
+      words_connector: ', '
+  time:
+    am: am
+    formats:
+      default: '%A, %d de %B de %Y %H:%M:%S %z'
+      long: '%d de %B de %Y %H:%M'
+      short: '%d de %b %H:%M'
+    pm: pm
+  languages:
+    af: afrikáans
+    ar: árabe
+    az: azerí
+    bg: búlgaro
+    bn: bengalí
+    bs: bosnio
+    ca: catalán
+    cs: checo
+    cy: galés
+    da: danés
+    de: alemán
+    el: griego
+    en: inglés
+    eo: esperanto
+    es: español
+    et: estonio
+    eu: euskera
+    fa: persa
+    fi: finés
+    fr: francés
+    gl: gallego
+    he: hebreo
+    hi: hindi
+    hr: croata
+    hu: húngaro
+    id: indonesio
+    is: islandés
+    it: italiano
+    ja: japonés
+    km: jemer
+    kn: canarés
+    ko: coreano
+    lo: laosiano
+    lt: lituano
+    lv: letón
+    mk: macedonio
+    mn: mongol
+    ms: malayo
+    nb: bokmal noruego
+    ne: nepalí
+    nl: neerlandés
+    nn: nynorsk noruego
+    or: oriya
+    pl: polaco
+    pt: portugués
+    rm: retorrománico
+    ro: rumano
+    ru: ruso
+    sk: eslovaco
+    sl: esloveno
+    sr: serbio
+    sv: sueco
+    sw: swahili
+    ta: tamil
+    th: tailandés
+    tl: tagalo
+    tr: turco
+    uk: ucraniano
+    ur: urdu
+    uz: uzbeko
+    vi: vietnamita
+    wo: wólof
+  geography:
+    countries:
+      AD: Andorra
+      AE: Emiratos Árabes Unidos
+      AF: Afganistán
+      AG: Antigua y Barbuda
+      AI: Anguila
+      AL: Albania
+      AM: Armenia
+      AO: Angola
+      AQ: Antártida
+      AR: Argentina
+      AS: Samoa Americana
+      AT: Austria
+      AU: Australia
+      AW: Aruba
+      AX: Islas de Åland
+      AZ: Azerbaiyán
+      BA: Bosnia y Herzegovina
+      BB: Barbados
+      BD: Bangladesh
+      BE: Bélgica
+      BF: Burkina Faso
+      BG: Bulgaria
+      BH: Bahréin
+      BI: Burundi
+      BJ: Benín
+      BL: San Bartolomé
+      BM: Bermudas
+      BN: Brunéi
+      BO: Bolivia
+      BQ: Bonaire
+      BR: Brasil
+      BS: Bahamas
+      BT: Bután
+      BV: Isla Bouvet
+      BW: Botsuana
+      BY: Bielorrusia
+      BZ: Belice
+      CA: Canadá
+      CC: Islas Cocos
+      CD: República Democrática del Congo
+      CF: República Centroafricana
+      CG: Congo [República]
+      CH: Suiza
+      CI: Costa de Marfil
+      CK: Islas Cook
+      CL: Chile
+      CM: Camerún
+      CN: China
+      CO: Colombia
+      CR: Costa Rica
+      CU: Cuba
+      CV: Cabo Verde
+      CW: Curazao
+      CX: Isla Christmas
+      CY: Chipre
+      CZ: República Checa
+      DE: Alemania
+      DJ: Yibuti
+      DK: Dinamarca
+      DM: Dominica
+      DO: República Dominicana
+      DZ: Argelia
+      EC: Ecuador
+      EE: Estonia
+      EG: Egipto
+      EH: Sáhara Occidental
+      ER: Eritrea
+      ES: España
+      ET: Etiopía
+      FI: Finlandia
+      FJ: Fiyi
+      FK: Islas Malvinas
+      FM: Micronesia
+      FO: Islas Feroe
+      FR: Francia
+      GA: Gabón
+      GB: Reino Unido
+      GD: Granada
+      GE: Georgia
+      GF: Guayana Francesa
+      GG: Guernsey
+      GH: Ghana
+      GI: Gibraltar
+      GL: Groenlandia
+      GM: Gambia
+      GN: Guinea
+      GP: Guadalupe
+      GQ: Guinea Ecuatorial
+      GR: Grecia
+      GS: Islas Georgia del Sur y Sandwich del Sur
+      GT: Guatemala
+      GU: Guam
+      GW: Guinea-Bissáu
+      GY: Guyana
+      HK: Hong Kong
+      HM: Islas Heard y McDonald
+      HN: Honduras
+      HR: Croacia
+      HT: Haití
+      HU: Hungría
+      ID: Indonesia
+      IE: Irlanda
+      IL: Israel
+      IM: Isla de Man
+      IN: India
+      IO: Territorio Británico del Océano Índico
+      IQ: Irak
+      IR: Irán
+      IS: Islandia
+      IT: Italia
+      JE: Jersey
+      JM: Jamaica
+      JO: Jordania
+      JP: Japón
+      KE: Kenia
+      KG: Kirguistán
+      KH: Camboya
+      KI: Kiribati
+      KM: Comoras
+      KN: San Cristóbal y Nieves
+      KP: Corea del Norte
+      KR: Corea del Sur
+      KW: Kuwait
+      KY: Islas Caimán
+      KZ: Kazajstán
+      LA: Laos
+      LB: Líbano
+      LC: Santa Lucía
+      LI: Liechtenstein
+      LK: Sri Lanka
+      LR: Liberia
+      LS: Lesotho
+      LT: Lituania
+      LU: Luxemburgo
+      LV: Letonia
+      LY: Libia
+      MA: Marruecos
+      MC: Mónaco
+      MD: Moldavia
+      ME: Montenegro
+      MF: San Martín
+      MG: Madagascar
+      MH: Islas Marshall
+      MK: Macedonia
+      ML: Mali
+      MM: Myanmar [Birmania]
+      MN: Mongolia
+      MO: Macao
+      MP: Islas Marianas del Norte
+      MQ: Martinica
+      MR: Mauritania
+      MS: Montserrat
+      MT: Malta
+      MU: Mauricio
+      MV: Maldivas
+      MW: Malaui
+      MX: México
+      MY: Malasia
+      MZ: Mozambique
+      NA: Namibia
+      NC: Nueva Caledonia
+      NE: Níger
+      NF: Isla Norfolk
+      NG: Nigeria
+      NI: República de Nicaragua
+      NL: Holanda
+      'NO': Noruega
+      NP: Nepal
+      NR: Nauru
+      NU: Isla Niue
+      NZ: Nueva Zelanda
+      OM: Omán
+      PA: Panamá
+      PE: Perú
+      PF: Polinesia Francesa
+      PG: Papúa-Nueva Guinea
+      PH: Filipinas
+      PK: Pakistán
+      PL: Polonia
+      PM: San Pedro y Miquelón
+      PN: Islas Pitcairn
+      PR: Puerto Rico
+      PS: Territorios Palestinos
+      PT: Portugal
+      PW: Palau
+      PY: Paraguay
+      QA: Qatar
+      RE: Reunión
+      RO: Rumanía
+      RS: Serbia
+      RU: Rusia
+      RW: Ruanda
+      SA: Arabia Saudí
+      SB: Islas Salomón
+      SC: Seychelles
+      SD: Sudán
+      SE: Suecia
+      SG: Singapur
+      SH: Santa Elena
+      SI: Eslovenia
+      SJ: Svalbard y Jan Mayen
+      SK: Eslovaquia
+      SL: Sierra Leona
+      SM: San Marino
+      SN: Senegal
+      SO: Somalia
+      SR: Surinam
+      SS: Sudán del Sur
+      ST: Santo Tomé y Príncipe
+      SV: El Salvador
+      SX: San Martín
+      SY: Siria
+      SZ: Suazilandia
+      TC: Islas Turcas y Caicos
+      TD: Chad
+      TF: Territorios Australes Franceses
+      TG: Togo
+      TH: Tailandia
+      TJ: Tayikistán
+      TK: Tokelau
+      TL: Timor Oriental
+      TM: Turkmenistán
+      TN: Túnez
+      TO: Tonga
+      TR: Turquía
+      TT: Trinidad y Tobago
+      TV: Tuvalu
+      TW: Taiwán
+      TZ: Tanzania
+      UA: Ucrania
+      UG: Uganda
+      UM: Islas menores alejadas de los Estados Unidos
+      US: Estados Unidos
+      UY: Uruguay
+      UZ: Uzbekistán
+      VA: Ciudad del Vaticano
+      VC: San Vicente y las Granadinas
+      VE: Venezuela
+      VG: Islas Vírgenes
+      VI: Islas Vírgenes de los Estados Unidos
+      VN: Vietnam
+      VU: Vanuatu
+      WF: Wallis y Futuna
+      WS: Samoa
+      XK: Kosovo
+      YE: Yemen
+      YT: Mayotte
+      ZA: Sudáfrica
+      ZM: Zambia
+      ZW: Zimbawe
+    subregions:
+      AR:
+        BA: Buenos Aires
+      AT:
+        Bgld: Burgenland
+      AU:
+        ACT: Australian Capital Territory
+        NSW: New South Wales
+        NT: Territorio del Norte
+        QLD: Queensland
+        SA: South Australia
+        TAS: Tasmania
+        VIC: Victoria
+        WA: Western Australia
+      BR:
+        AC: Acre
+        AL: Alagoas
+        AP: Amapá
+        AM: Amazonas
+        BA: Bahía
+        CE: Ceará
+        ES: Espírito Santo
+        DF: Distrito Federal
+        GO: Goiás
+        MA: Maranhão
+        MT: Mato Grosso
+        MS: Mato Grosso del Sur
+        MG: Minas Gerais
+        PB: Paraíba
+        PR: Paraná
+        PA: Pará
+        PE: Pernambuco
+        PI: Piauí
+        RN: Río Grande del Norte
+        RS: Río Grande del Sur
+        RJ: Río de Janeiro
+        RO: Rondonia
+        RR: Roraima
+        SC: Santa Catarina
+        SE: Sergipe
+        SP: São Paulo
+        TO: Tocantins
+      CA:
+        AB: Alberta
+        BC: Columbia Británica
+        MB: Manitoba
+        NB: Nuevo Brunswick
+        NL: New Foundland - Labrador
+        NT: Northwest Territories
+        NS: Nueva Escocia
+        NU: Nunavut
+        'ON': Ontario
+        PE: Isla del Príncipe Eduardo
+        QC: Quebec
+        SK: Saskatchewan
+        YT: Yukón
+      CH:
+        TG: Thurgau
+        VD: Vaud
+        ZH: Zurich
+      DE:
+        HH: Hamburgo
+        NRW: Renania del Norte-Westfalia
+      IT:
+        FVG: Friuli-Venecia Julia
+      MX:
+        Ags: Aguascalientes
+        BCS: Baja California Sur
+        CAM: Campeche
+        CHP: Chiapas
+        CH: Chihuahua
+        COA: Coahuila de Zaragoza
+        COL: Colima
+        DUR: Durango
+        BCN: Baja California
+        MEX: México
+        GUA: Guanajuato
+        GRO: Guerrero
+        Hgo: Hidalgo
+        JAL: Jalisco
+        Mich: Michoacán de Ocampo
+        MOR: Morelos
+        NAY: Nayarit
+        NL: Nuevo León
+        OAX: Oaxaca
+        PUE: Puebla
+        QUE: Querétaro de Arteaga
+        ROO: Quintana Roo
+        SLP: San Luis Potosí
+        SIN: Sinaloa
+        SON: Sonora
+        TAB: Tabasco
+        TAM: Tamaulipas
+        Tlax: Tlaxcala
+        VER: Veracruz-Llave
+        YUC: Yucatán
+        ZAC: Zacatecas
+      MY:
+        JHR: Johor
+        KDH: Kedah
+        KTN: Kelantan
+        KUL: Kuala Lumpur
+        LBN: Labuan
+        MLK: Melaka
+        NSN: Negeri Sembilan
+        PHG: Pahang
+        PNG: Penang
+        PRK: Perak
+        PLS: Perlis
+        PJY: Putrajaya
+        SBH: Sabah
+        SRW: Sarawak
+        SGR: Selangor
+        TRG: Terengganu
+      NI:
+        RAAN: North Atlantic Autonomous Region (RAAN)
+      NL:
+        GLD: Güeldres
+      PH:
+        ARMM: Mindanao Musulmán
+      US:
+        AL: Alabama
+        AK: Alaska
+        AZ: Arizona
+        AR: Arkansas
+        Calif: California
+        CO: Colorado
+        CT: Connecticut
+        DE: Delaware
+        FL: Florida
+        GA: Georgia
+        HI: Hawai
+        ID: Idaho
+        IL: Illinois
+        IN: Indiana
+        IA: Iowa
+        KS: Kansas
+        KY: Kentucky
+        LA: Louisiana
+        ME: Maine
+        MD: Maryland
+        MA: Massachusetts
+        MI: Michigan
+        MN: Minnesota
+        MS: Mississippi
+        MO: Missouri
+        MT: Montana
+        NE: Nebraska
+        NV: Nevada
+        NH: Nueva Hampshire
+        NJ: Nueva Jersey
+        NM: Nuevo México
+        NY: Nueva York
+        NC: Carolina del Norte
+        ND: Dakota del Norte
+        OH: Ohio
+        OK: Oklahoma
+        OR: Oregón
+        PA: Pensilvania
+        RI: Rhode Island
+        SC: Carolina del Sur
+        SD: Dakota del Sur
+        TN: Tennessee
+        TX: Texas
+        UT: Utah
+        VT: Vermont
+        VA: Virginia
+        WA: Washington
+        DC: Washington D.C.
+        WV: Virginia Occidental
+        WI: Wisconsin
+        WY: Wyoming
+  conference:
+    actions:
+      Register: Registrate
+  donate:
+    button_label: donar
+  articles:
+    conference_registration:
+      headings:
+        Registration_Info: Registro
+        arrival_and_departure: ¿Que día llegas a Guadalajara?
+        allergies: ¿Eres alergico a algo?
+        languages: ¿Hablas?
+        food: ¿Que comes?
+        Enter_Your_Email: Correo electrónico
+        location: Ciudad y pais 
+        name: Nombre
+        Allergies: ¿Eres alergico a algo?
+        Workshops: Actividades
+        Your_Workshops: Actividades
+        Policy_Agreement: Acuerdo del Espacio Mas Seguro
+        Preview: Preestreno
+      paragraphs:
+        Registration_Info: EL REGISTRO ESTÁ ABIERTOOOOO! :) Por favor llénalo lo más
+          pronto que puedas, cualquier pregunta o mejora puedes comentarla más abajo,
+          estamos preparando una página de preguntas frecuentes sobre el evento para
+          la página web.
+        Payment: Las y los esperamos del 1 al 4 de octubre del 2015.Más información
+          en: bikebike@gdlenbici.org
+        Workshops: 'Título de la actividad: Que necesitas? Tipo de espacio? Tema?
+          Quién es responsable? Descripción? Tiempo?'
+        Policy_Agreement: Acuerdo del espacio mas Seguro
+      questions:
+        food:
+          meat: Carnivoro
+          vegetarian: Vegetariano
+          vegan: Vegano
+        bike:
+          large: Grande
+          medium: Mediano
+          small: Pequeno
+          none: Nada
+        housing:
+          house: Lugar interior
+          none: Yo voy a encontrar mis accomodaciones.
+          tent: La carpa
+      terms:
+        Bikes: Bici
+        Donation_Count: Donar
+        Languages: ¿Hablas?
+        Total_Donations: Donar
+    about_bikebike:
+      paragraphs:
+        Who_is_Invited: No es necesario ser personas o grupos expertas solo tener
+          las ganas y la disposición de compartir lo que sabes de organización estructural,
+          mecánica, del cambio social, de alternativas contra la desigualdad o un
+          mejor acceso al uso de la bici y el conocimiento y otros problemas sociales
+          en tu barrio o ciudad.
+        bicycle_project_paragraph: La siguiente lista usa el criterio utilizado en
+          la vieja Bicycle Organization Organization Project (Proyecto de Organización
+          de Organizaciones Ciclistas) para definir qué constituye un taller comunitario
+          de bicis. El proyecto no necesariamente debe cumplir con todos los criterios.
+          En cambio, es una lista general de las cualidades que son comunes entre
+          varios proyectos ciclistas.
+        What_is_BikeBike: 'Bike!Bike! es una reunión internacional anual organizada
+          por y para proyectos comunitarios que trabajan en proyectos de bici. La
+          conferencia es un espacio para que los participantes, principalmente miembros
+          de talleres de y grupos de activismo ciclista, se reúnan en una ciudad distinta
+          cada año durante cuatro días para llevar a cabo talleres informativos y
+          fortalecer nuestra red comunitaria y social. '
+        Types_of_Workshops: 'Los talleres son organizados e impartidos por los participantes.
+          Pueden ser sobre cualquier tema de interés para los proyectos comunitarios
+          de bici y pueden ser en cualquier formato, incluyendo: presentaciones, talleres
+          prácticos, grupos de discusión y rodadas en bici. Si quieres impartir tu
+          propio taller, puedes ingresar los detalles después de registrarse. Los
+          que terminan en el programa final y cuándo son programados, es decisión
+          de los anfitriones de la conferencia. '
+        Amenities: 'Tradicionalmente, los anfitriones de la conferencia coordinan
+          hospedaje compartido, proveen una o dos comidas al día y hay bicicletas
+          disponibles para los participantes registrados; sin embargo, debes checar
+          los detalles particulares sobre la conferencia de cada año. Más información
+          sobre cómo puedes obtener hospedaje por tu cuenta y otros lugares recomendados
+          para visitar, también debe ser proveída por el anfitrión en la página de
+          la conferencia o en un documento físico al llegar a la conferencia. '
+        Volunteer: '¡Sí, por favor! '
+      headings:
+        Amenities: Donde puedo dormir? Donde puedo comer? Como puedo ir de vuelta?
+        Types_of_Workshops: Que tipos de actividades va ver?
+        Volunteer: Puedo hacer voluntario?
+        What_is_BikeBike: Que es Bike!Bike!?
+        Who_is_Invited: Quienes son los invitados?
+        bicycle_project: Que es una proyecto bicicleta de la comunidad?
+      term:
+        education: Los talleres tienen un enfoque en la educación, en enseñar a otros
+          cómo arreglar bicicletas
+        export_bikes: ''
+        low_cost: Hay organizaciones que envían bicicletas donadas a comunidades en
+          otros países
+        no_money: Hay organizaciones que reciclan bicicletas y algunas de sus partes
+        non_profit: Los talleres son accesibles para gente sin dinero
+        recycle_parts: Son organizaciones sin fines de lucro
+        volunteer_run: Los talleres son operados por voluntarios
+    workshops:
+      paragraphs:
+        info: 'Título de la actividad: Que necesitas? Tipo de espacio? Tema? Quién
+          es responsable? Descripción? Tiempo?'
+      headings:
+        facilitators: facilitadores
+        Delete_Workshop: Eliminar Actividad
+    policy:
+      headings:
+        The_Agreement: Acuerdo del Espacio Mas Seguro
+    permission_denied:
+      paragraphs:
+        translator_not_logged_in: Sorry you must be a translator to view this page
+      headings:
+        login_required: Please Login
+  forms:
+    labels:
+      generic:
+        title: Título de la actividad
+        info: Descripción
+        allergies: Alergias
+        email: Correo electrónico
+        location: Ciudad y pais
+        name: Nombre
+    actions:
+      generic:
+        agree: Estoy en acuerdo.
+        register: Registrar
+        edit_registration: Cambiar mi registracion
+        custom_amount: Cantidad diferente
+        Log_out: Salir
+        login: Inicia session
+  links:
+    footer:
+      help_text:
+        contributors: Contribuyentes
+        select_language: Cambia tu idioma
+        facebook: Unirte a nuestro grupo de Facebook
+  page_titles:
+    About_BikeBike: Quienes Bike!Bike!
+    about:
+      About_BikeBike: Quienes Bike!Bike!
+    Safe_Space_Policy: Acuerdo del Espacio Mas Seguro
+    conferences:
+      Conference_Registration: Registro
+  actions:
+    workshops:
+      create: Crear
+      Delete: Eliminar
+      Edit: Editar
+  error:
+    '404':
+      description: Descripcion
+      title: Titulo
+  translate:
+    content:
+      translate_now: Translar ahora
+    pages:
+      contexts:
+        geography: geografia
+        language: idioma
+        other: otra
+        sentence: oracion
+        title: titulo
+        character: caracter
+      pluraliztion_rules:
+        few: poco
+        many: muchos
+  menu:
+    submenu:
+      registration:
+        Registration: Registro
+        Workshops: Actividades

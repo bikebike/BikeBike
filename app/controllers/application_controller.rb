@@ -137,10 +137,14 @@ class ApplicationController < LinguaFrancaApplicationController
 			end
 		end
 		
-		@banner_image ||= 'grafitti.jpg'
-		@page_title ||= 'page_titles.403.Please_Login'
+		if request.post?
+			@banner_image ||= 'grafitti.jpg'
+			@page_title ||= 'page_titles.403.Please_Login'
 
-		do_403 (template || 'translator_login')
+			do_403 (template || 'translator_login')
+		else
+			do_404
+		end
 	end
 
 	def confirm(uid = nil)

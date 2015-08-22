@@ -806,14 +806,11 @@ class ConferencesController < ApplicationController
 		do_403 unless @workshop.can_edit?(current_user)
 		@title = @workshop.title
 		@info = @workshop.info
-		JSON.parse(r.languages).each do |l|
-			@languages[l.to_sym] ||= 0
-			@languages[l.to_sym] += 1
-		end
-		@languages = JSON.parse(@workshop.languages).map &:to_sym
-		@needs = JSON.parse(@workshop.needs).map &:to_sym
+		@needs = JSON.parse(@workshop.needs || '[]').map &:to_sym
+		@languages = JSON.parse(@workshop.languages || '[]').map &:to_sym
 		@space = @workshop.space.to_sym if @workshop.space
 		@theme = @workshop.theme.to_sym if @workshop.theme
+		@notes = @workshop.notes
 		render 'workshops/new'
 	end
 
@@ -821,18 +818,31 @@ class ConferencesController < ApplicationController
 		set_conference
 		set_conference_registration
 		@workshop = Workshop.find_by_id_and_conference_id(params[:workshop_id], @this_conference.id)
-		do_404 unless @workshop
-		do_403 unless @workshop.can_delete?(current_user)
+
+		if !@workshop
+			do_404
+			return
+		end
+
+		if !@workshop.can_delete?(current_user)
+			do_403
+			return
+		end
 
 		if request.post?
 			if params[:button] == 'confirm'
-				@workshop.workshop_facilitators.destroy_all
-				@workshop.destroy
+				if @workshop
+					@workshop.workshop_facilitators.destroy_all
+					@workshop.destroy
+				end
+
 				redirect_to workshops_url
+				return
 			end
 			redirect_to edit_workshop_url(@this_conference.slug, @workshop.id)
+			return
 		end
-		
+
 		render 'workshops/delete'
 	end
 	
@@ -841,14 +851,21 @@ class ConferencesController < ApplicationController
 		set_conference_registration
 		if params[:workshop_id]
 			workshop = Workshop.find(params[:workshop_id])
-			workshop.title = params[:title]
-			workshop.info = params[:info]
 		else
-			workshop = Workshop.new(:conference_id => @this_conference.id, :title => params[:title], :info => params[:info])
+			workshop = Workshop.new(:conference_id => @this_conference.id)
 			workshop.workshop_facilitators = [WorkshopFacilitator.new(:user_id => current_user.id, :role => :creator)]
 		end
+
+		workshop.title     = params[:title]
+		workshop.info      = params[:info]
+		workshop.languages = (params[:languages] || {}).keys.to_json
+		workshop.needs     = (params[:needs] || {}).keys.to_json
+		workshop.theme     = params[:theme] == 'other' ? params[:other_theme] : params[:theme]
+		workshop.space     = params[:space]
+		workshop.notes     = params[:notes]
+
 		workshop.save
-		redirect_to workshops_url
+		redirect_to view_workshop_url(@this_conference.slug, workshop.id)
 	end
 
 	# DELETE /conferences/1

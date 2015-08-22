@@ -21,8 +21,8 @@ date.formats.span_same_month_date_1:
   - 6
   - 8
   - 8
-  - 12
-  - 12
+  - 15
+  - 15
 date.month_names:
   pages:
   - /
@@ -40,8 +40,8 @@ date.month_names:
   - 6
   - 8
   - 8
-  - 12
-  - 12
+  - 15
+  - 15
 date.formats.span_same_month_date_2:
   pages:
   - /
@@ -56,8 +56,8 @@ date.formats.span_same_month_date_2:
   - 6
   - 8
   - 8
-  - 12
-  - 12
+  - 15
+  - 15
 date.date_span:
   pages:
   - /
@@ -75,8 +75,8 @@ date.date_span:
   - 6
   - 8
   - 8
-  - 12
-  - 12
+  - 15
+  - 15
 page_descriptions.home:
   pages:
   - /
@@ -88,6 +88,8 @@ page_descriptions.home:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -123,14 +125,21 @@ page_descriptions.home:
   - 11
   - 12
   - 12
-  - 12
-  - 12
-  - 13
   - 13
   - 14
+  - 14
+  - 15
+  - 15
+  - 15
   - 15
   - 16
   - 16
+  - 16
+  - 16
+  - 17
+  - 18
+  - 19
+  - 19
 page_titles.About_BikeBike:
   pages:
   - /
@@ -142,6 +151,8 @@ page_titles.About_BikeBike:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -177,14 +188,21 @@ page_titles.About_BikeBike:
   - 11
   - 12
   - 12
-  - 12
-  - 12
-  - 13
   - 13
   - 14
+  - 14
+  - 15
+  - 15
+  - 15
   - 15
   - 16
   - 16
+  - 16
+  - 16
+  - 17
+  - 18
+  - 19
+  - 19
 page_titles.Safe_Space_Policy:
   pages:
   - /
@@ -196,6 +214,8 @@ page_titles.Safe_Space_Policy:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -231,14 +251,21 @@ page_titles.Safe_Space_Policy:
   - 11
   - 12
   - 12
-  - 12
-  - 12
-  - 13
   - 13
   - 14
+  - 14
+  - 15
+  - 15
+  - 15
   - 15
   - 16
   - 16
+  - 16
+  - 16
+  - 17
+  - 18
+  - 19
+  - 19
 donate.button_label:
   pages:
   - /
@@ -249,10 +276,10 @@ donate.button_label:
   examples:
   - 1
   - 1
-  - 14
-  - 15
-  - 16
-  - 16
+  - 17
+  - 18
+  - 19
+  - 19
 links.footer.text.File_an_Issue:
   pages:
   - /
@@ -264,6 +291,8 @@ links.footer.text.File_an_Issue:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -299,14 +328,21 @@ links.footer.text.File_an_Issue:
   - 11
   - 12
   - 12
-  - 12
-  - 12
-  - 13
   - 13
   - 14
+  - 14
+  - 15
+  - 15
+  - 15
   - 15
   - 16
   - 16
+  - 16
+  - 16
+  - 17
+  - 18
+  - 19
+  - 19
 links.footer.text.Help_contribute:
   pages:
   - /
@@ -318,6 +354,8 @@ links.footer.text.Help_contribute:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -353,14 +391,21 @@ links.footer.text.Help_contribute:
   - 11
   - 12
   - 12
-  - 12
-  - 12
-  - 13
   - 13
   - 14
+  - 14
+  - 15
+  - 15
+  - 15
   - 15
   - 16
   - 16
+  - 16
+  - 16
+  - 17
+  - 18
+  - 19
+  - 19
 links.footer.help_text.facebook:
   pages:
   - /
@@ -372,6 +417,8 @@ links.footer.help_text.facebook:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -408,14 +455,21 @@ links.footer.help_text.facebook:
   - 11
   - 12
   - 12
-  - 12
-  - 12
-  - 13
   - 13
   - 14
+  - 14
+  - 15
+  - 15
+  - 15
   - 15
   - 16
   - 16
+  - 16
+  - 16
+  - 17
+  - 18
+  - 19
+  - 19
 links.footer.help_text.select_language:
   pages:
   - /
@@ -427,6 +481,8 @@ links.footer.help_text.select_language:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -463,14 +519,21 @@ links.footer.help_text.select_language:
   - 11
   - 12
   - 12
-  - 12
-  - 12
-  - 13
   - 13
   - 14
+  - 14
+  - 15
+  - 15
+  - 15
   - 15
   - 16
   - 16
+  - 16
+  - 16
+  - 17
+  - 18
+  - 19
+  - 19
 languages.af:
   pages:
   - /
@@ -482,6 +545,8 @@ languages.af:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -577,21 +642,24 @@ languages.af:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
   - 13
   - 13
   - 13
   - 14
   - 14
   - 14
+  - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 15
@@ -601,6 +669,24 @@ languages.af:
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 17
+  - 18
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
   context: Afrikaans
 languages.ar:
   pages:
@@ -613,6 +699,8 @@ languages.ar:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -678,22 +766,36 @@ languages.ar:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
   - 13
   - 13
   - 14
   - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 16
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
   context: Arabic
 languages.az:
   pages:
@@ -706,6 +808,8 @@ languages.az:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -801,21 +905,24 @@ languages.az:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
   - 13
   - 13
   - 13
   - 14
   - 14
   - 14
+  - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 15
@@ -825,6 +932,24 @@ languages.az:
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 17
+  - 18
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
   context: Azerbaijani
 languages.be:
   pages:
@@ -837,6 +962,8 @@ languages.be:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -932,21 +1059,24 @@ languages.be:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
   - 13
   - 13
   - 13
   - 14
   - 14
   - 14
+  - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 15
@@ -956,7 +1086,25 @@ languages.be:
   - 16
   - 16
   - 16
-  context: be
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 17
+  - 18
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
+  context: Belarusian
 languages.bg:
   pages:
   - /
@@ -968,6 +1116,8 @@ languages.bg:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -1063,21 +1213,24 @@ languages.bg:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
   - 13
   - 13
   - 13
   - 14
   - 14
   - 14
+  - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 15
@@ -1087,6 +1240,24 @@ languages.bg:
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 17
+  - 18
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
   context: Bulgarian
 languages.bn:
   pages:
@@ -1099,6 +1270,8 @@ languages.bn:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -1194,21 +1367,24 @@ languages.bn:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
   - 13
   - 13
   - 13
   - 14
   - 14
   - 14
+  - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 15
@@ -1218,6 +1394,24 @@ languages.bn:
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 17
+  - 18
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
   context: Bengali
 languages.bs:
   pages:
@@ -1230,6 +1424,8 @@ languages.bs:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -1325,21 +1521,24 @@ languages.bs:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
   - 13
   - 13
   - 13
   - 14
   - 14
   - 14
+  - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 15
@@ -1349,6 +1548,24 @@ languages.bs:
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 17
+  - 18
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
   context: Bosnian
 languages.ca:
   pages:
@@ -1361,6 +1578,8 @@ languages.ca:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -1426,22 +1645,36 @@ languages.ca:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
   - 13
   - 13
   - 14
   - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 16
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
   context: Catalan
 languages.cs:
   pages:
@@ -1454,6 +1687,8 @@ languages.cs:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -1519,22 +1754,36 @@ languages.cs:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
   - 13
   - 13
   - 14
   - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 16
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
   context: Czech
 languages.cy:
   pages:
@@ -1547,6 +1796,8 @@ languages.cy:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -1642,21 +1893,24 @@ languages.cy:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
   - 13
   - 13
   - 13
   - 14
   - 14
   - 14
+  - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 15
@@ -1666,6 +1920,24 @@ languages.cy:
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 17
+  - 18
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
   context: Welsh
 languages.da:
   pages:
@@ -1678,6 +1950,8 @@ languages.da:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -1743,22 +2017,36 @@ languages.da:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
   - 13
   - 13
   - 14
   - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 16
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
   context: Danish
 languages.de:
   pages:
@@ -1771,6 +2059,8 @@ languages.de:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -1836,22 +2126,36 @@ languages.de:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
   - 13
   - 13
   - 14
   - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 16
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
   context: German
 languages.el:
   pages:
@@ -1864,6 +2168,8 @@ languages.el:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -1929,22 +2235,36 @@ languages.el:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
   - 13
   - 13
   - 14
   - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 16
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
   context: Greek
 languages.en:
   pages:
@@ -1957,6 +2277,8 @@ languages.en:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -2027,21 +2349,36 @@ languages.en:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
   - 13
   - 13
   - 14
   - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 16
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
   context: English
 languages.eo:
   pages:
@@ -2054,6 +2391,8 @@ languages.eo:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -2149,21 +2488,24 @@ languages.eo:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
   - 13
   - 13
   - 13
   - 14
   - 14
   - 14
+  - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 15
@@ -2173,6 +2515,24 @@ languages.eo:
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 17
+  - 18
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
   context: Esperanto
 languages.es:
   pages:
@@ -2185,6 +2545,8 @@ languages.es:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -2253,21 +2615,36 @@ languages.es:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
   - 13
   - 13
   - 14
   - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 16
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
   context: Spanish
 languages.et:
   pages:
@@ -2280,6 +2657,8 @@ languages.et:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -2375,21 +2754,24 @@ languages.et:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
   - 13
   - 13
   - 13
   - 14
   - 14
   - 14
+  - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 15
@@ -2399,6 +2781,24 @@ languages.et:
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 17
+  - 18
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
   context: Estonian
 languages.eu:
   pages:
@@ -2411,6 +2811,8 @@ languages.eu:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -2506,21 +2908,24 @@ languages.eu:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
   - 13
   - 13
   - 13
   - 14
   - 14
   - 14
+  - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 15
@@ -2530,6 +2935,24 @@ languages.eu:
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 17
+  - 18
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
   context: Basque
 languages.fa:
   pages:
@@ -2542,6 +2965,8 @@ languages.fa:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -2637,21 +3062,24 @@ languages.fa:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
   - 13
   - 13
   - 13
   - 14
   - 14
   - 14
+  - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 15
@@ -2661,6 +3089,24 @@ languages.fa:
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 17
+  - 18
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
   context: Persian
 languages.fi:
   pages:
@@ -2673,6 +3119,8 @@ languages.fi:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -2738,22 +3186,36 @@ languages.fi:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
   - 13
   - 13
   - 14
   - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 16
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
   context: Finnish
 languages.fr:
   pages:
@@ -2766,6 +3228,8 @@ languages.fr:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -2834,21 +3298,36 @@ languages.fr:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
   - 13
   - 13
   - 14
   - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 16
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
   context: French
 languages.gl:
   pages:
@@ -2861,6 +3340,8 @@ languages.gl:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -2956,21 +3437,24 @@ languages.gl:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
   - 13
   - 13
   - 13
   - 14
   - 14
   - 14
+  - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 15
@@ -2980,6 +3464,24 @@ languages.gl:
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 17
+  - 18
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
   context: Galician
 languages.he:
   pages:
@@ -2992,6 +3494,8 @@ languages.he:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -3057,22 +3561,36 @@ languages.he:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
   - 13
   - 13
   - 14
   - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 16
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
   context: Hebrew
 languages.hi:
   pages:
@@ -3085,6 +3603,8 @@ languages.hi:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -3150,22 +3670,36 @@ languages.hi:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
   - 13
   - 13
   - 14
   - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 16
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
   context: Hindi
 languages.hr:
   pages:
@@ -3178,6 +3712,8 @@ languages.hr:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -3243,22 +3779,36 @@ languages.hr:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
   - 13
   - 13
   - 14
   - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 16
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
   context: Croatian
 languages.hu:
   pages:
@@ -3271,6 +3821,8 @@ languages.hu:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -3336,22 +3888,36 @@ languages.hu:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
   - 13
   - 13
   - 14
   - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 16
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
   context: Hungarian
 languages.id:
   pages:
@@ -3364,6 +3930,8 @@ languages.id:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -3459,21 +4027,24 @@ languages.id:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
   - 13
   - 13
   - 13
   - 14
   - 14
   - 14
+  - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 15
@@ -3483,6 +4054,24 @@ languages.id:
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 17
+  - 18
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
   context: Indonesian
 languages.is:
   pages:
@@ -3495,6 +4084,8 @@ languages.is:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -3590,21 +4181,24 @@ languages.is:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
   - 13
   - 13
   - 13
   - 14
   - 14
   - 14
+  - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 15
@@ -3614,6 +4208,24 @@ languages.is:
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 17
+  - 18
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
   context: Icelandic
 languages.it:
   pages:
@@ -3626,6 +4238,8 @@ languages.it:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -3691,22 +4305,36 @@ languages.it:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
   - 13
   - 13
   - 14
   - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 16
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
   context: Italian
 languages.ja:
   pages:
@@ -3719,6 +4347,8 @@ languages.ja:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -3784,22 +4414,36 @@ languages.ja:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
   - 13
   - 13
   - 14
   - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 16
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
   context: Japanese
 languages.km:
   pages:
@@ -3812,6 +4456,8 @@ languages.km:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -3907,21 +4553,24 @@ languages.km:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
   - 13
   - 13
   - 13
   - 14
   - 14
   - 14
+  - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 15
@@ -3931,6 +4580,24 @@ languages.km:
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 17
+  - 18
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
   context: Khmer
 languages.kn:
   pages:
@@ -3943,6 +4610,8 @@ languages.kn:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -4038,21 +4707,24 @@ languages.kn:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
   - 13
   - 13
   - 13
   - 14
   - 14
   - 14
+  - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 15
@@ -4062,6 +4734,24 @@ languages.kn:
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 17
+  - 18
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
   context: Kannada
 languages.ko:
   pages:
@@ -4074,6 +4764,8 @@ languages.ko:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -4139,22 +4831,36 @@ languages.ko:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
   - 13
   - 13
   - 14
   - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 16
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
   context: Korean
 languages.lo:
   pages:
@@ -4167,6 +4873,8 @@ languages.lo:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -4262,21 +4970,24 @@ languages.lo:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
   - 13
   - 13
   - 13
   - 14
   - 14
   - 14
+  - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 15
@@ -4286,6 +4997,24 @@ languages.lo:
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 17
+  - 18
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
   context: Lao
 languages.lt:
   pages:
@@ -4298,6 +5027,8 @@ languages.lt:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -4393,21 +5124,24 @@ languages.lt:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
   - 13
   - 13
   - 13
   - 14
   - 14
   - 14
+  - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 15
@@ -4417,6 +5151,24 @@ languages.lt:
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 17
+  - 18
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
   context: Lithuanian
 languages.lv:
   pages:
@@ -4429,6 +5181,8 @@ languages.lv:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -4524,21 +5278,24 @@ languages.lv:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
   - 13
   - 13
   - 13
   - 14
   - 14
   - 14
+  - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 15
@@ -4548,6 +5305,24 @@ languages.lv:
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 17
+  - 18
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
   context: Latvian
 languages.mk:
   pages:
@@ -4560,6 +5335,8 @@ languages.mk:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -4655,21 +5432,24 @@ languages.mk:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
   - 13
   - 13
   - 13
   - 14
   - 14
   - 14
+  - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 15
@@ -4679,6 +5459,24 @@ languages.mk:
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 17
+  - 18
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
   context: Macedonian
 languages.mn:
   pages:
@@ -4691,6 +5489,8 @@ languages.mn:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -4786,21 +5586,24 @@ languages.mn:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
   - 13
   - 13
   - 13
   - 14
   - 14
   - 14
+  - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 15
@@ -4810,6 +5613,24 @@ languages.mn:
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 17
+  - 18
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
   context: Mongolian
 languages.ms:
   pages:
@@ -4822,6 +5643,8 @@ languages.ms:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -4917,21 +5740,24 @@ languages.ms:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
   - 13
   - 13
   - 13
   - 14
   - 14
   - 14
+  - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 15
@@ -4941,6 +5767,24 @@ languages.ms:
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 17
+  - 18
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
   context: Malay
 languages.nb:
   pages:
@@ -4953,6 +5797,8 @@ languages.nb:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -5018,22 +5864,36 @@ languages.nb:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
   - 13
   - 13
   - 14
   - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 16
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
   context: Norwegian Bokmål
 languages.ne:
   pages:
@@ -5046,6 +5906,8 @@ languages.ne:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -5141,21 +6003,24 @@ languages.ne:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
   - 13
   - 13
   - 13
   - 14
   - 14
   - 14
+  - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 15
@@ -5165,6 +6030,24 @@ languages.ne:
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 17
+  - 18
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
   context: Nepali
 languages.nl:
   pages:
@@ -5177,6 +6060,8 @@ languages.nl:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -5242,22 +6127,36 @@ languages.nl:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
   - 13
   - 13
   - 14
   - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 16
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
   context: Dutch
 languages.nn:
   pages:
@@ -5270,6 +6169,8 @@ languages.nn:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -5365,21 +6266,24 @@ languages.nn:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
   - 13
   - 13
   - 13
   - 14
   - 14
   - 14
+  - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 15
@@ -5389,6 +6293,24 @@ languages.nn:
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 17
+  - 18
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
   context: Norwegian Nynorsk
 languages.or:
   pages:
@@ -5401,6 +6323,8 @@ languages.or:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -5496,21 +6420,24 @@ languages.or:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
   - 13
   - 13
   - 13
   - 14
   - 14
   - 14
+  - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 15
@@ -5520,6 +6447,24 @@ languages.or:
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 17
+  - 18
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
   context: Oriya
 languages.pl:
   pages:
@@ -5532,6 +6477,8 @@ languages.pl:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -5597,22 +6544,36 @@ languages.pl:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
   - 13
   - 13
   - 14
   - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 16
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
   context: Polish
 languages.pt:
   pages:
@@ -5625,6 +6586,8 @@ languages.pt:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -5690,22 +6653,36 @@ languages.pt:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
   - 13
   - 13
   - 14
   - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 16
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
   context: Portuguese
 languages.rm:
   pages:
@@ -5718,6 +6695,8 @@ languages.rm:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -5813,21 +6792,24 @@ languages.rm:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
   - 13
   - 13
   - 13
   - 14
   - 14
   - 14
+  - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 15
@@ -5837,6 +6819,24 @@ languages.rm:
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 17
+  - 18
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
   context: Romansh
 languages.ro:
   pages:
@@ -5849,6 +6849,8 @@ languages.ro:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -5914,22 +6916,36 @@ languages.ro:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
   - 13
   - 13
   - 14
   - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 16
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
   context: Romanian
 languages.ru:
   pages:
@@ -5942,6 +6958,8 @@ languages.ru:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -6007,22 +7025,36 @@ languages.ru:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
   - 13
   - 13
   - 14
   - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 16
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
   context: Russian
 languages.sk:
   pages:
@@ -6035,6 +7067,8 @@ languages.sk:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -6100,22 +7134,36 @@ languages.sk:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
   - 13
   - 13
   - 14
   - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 16
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
   context: Slovak
 languages.sl:
   pages:
@@ -6128,6 +7176,8 @@ languages.sl:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -6193,22 +7243,36 @@ languages.sl:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
   - 13
   - 13
   - 14
   - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 16
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
   context: Slovenian
 languages.sr:
   pages:
@@ -6221,6 +7285,8 @@ languages.sr:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -6286,22 +7352,36 @@ languages.sr:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
   - 13
   - 13
   - 14
   - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 16
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
   context: Serbian
 languages.sv:
   pages:
@@ -6314,6 +7394,8 @@ languages.sv:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -6379,22 +7461,36 @@ languages.sv:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
   - 13
   - 13
   - 14
   - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 16
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
   context: Swedish
 languages.sw:
   pages:
@@ -6407,6 +7503,8 @@ languages.sw:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -6502,21 +7600,24 @@ languages.sw:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
   - 13
   - 13
   - 13
   - 14
   - 14
   - 14
+  - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 15
@@ -6526,6 +7627,24 @@ languages.sw:
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 17
+  - 18
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
   context: Swahili
 languages.ta:
   pages:
@@ -6538,6 +7657,8 @@ languages.ta:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -6633,21 +7754,24 @@ languages.ta:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
   - 13
   - 13
   - 13
   - 14
   - 14
   - 14
+  - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 15
@@ -6657,6 +7781,24 @@ languages.ta:
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 17
+  - 18
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
   context: Tamil
 languages.th:
   pages:
@@ -6669,6 +7811,8 @@ languages.th:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -6734,22 +7878,36 @@ languages.th:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
   - 13
   - 13
   - 14
   - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 16
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
   context: Thai
 languages.tl:
   pages:
@@ -6762,6 +7920,8 @@ languages.tl:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -6857,21 +8017,24 @@ languages.tl:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
   - 13
   - 13
   - 13
   - 14
   - 14
   - 14
+  - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 15
@@ -6881,6 +8044,24 @@ languages.tl:
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 17
+  - 18
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
   context: Tagalog
 languages.tr:
   pages:
@@ -6893,6 +8074,8 @@ languages.tr:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -6958,22 +8141,36 @@ languages.tr:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
   - 13
   - 13
   - 14
   - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 16
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
   context: Turkish
 languages.tt:
   pages:
@@ -6986,6 +8183,8 @@ languages.tt:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -7081,21 +8280,24 @@ languages.tt:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
   - 13
   - 13
   - 13
   - 14
   - 14
   - 14
+  - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 15
@@ -7105,7 +8307,25 @@ languages.tt:
   - 16
   - 16
   - 16
-  context: tt
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 17
+  - 18
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
+  context: Tatar
 languages.uk:
   pages:
   - /
@@ -7117,6 +8337,8 @@ languages.uk:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -7182,22 +8404,36 @@ languages.uk:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
   - 13
   - 13
   - 14
   - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 16
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
   context: Ukrainian
 languages.ur:
   pages:
@@ -7210,6 +8446,8 @@ languages.ur:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -7305,21 +8543,24 @@ languages.ur:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
   - 13
   - 13
   - 13
   - 14
   - 14
   - 14
+  - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 15
@@ -7329,6 +8570,24 @@ languages.ur:
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 17
+  - 18
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
   context: Urdu
 languages.uz:
   pages:
@@ -7341,6 +8600,8 @@ languages.uz:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -7436,21 +8697,24 @@ languages.uz:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
   - 13
   - 13
   - 13
   - 14
   - 14
   - 14
+  - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 15
@@ -7460,6 +8724,24 @@ languages.uz:
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 17
+  - 18
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
   context: Uzbek
 languages.vi:
   pages:
@@ -7472,6 +8754,8 @@ languages.vi:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -7537,22 +8821,36 @@ languages.vi:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
   - 13
   - 13
   - 14
   - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 16
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
   context: Vietnamese
 languages.wo:
   pages:
@@ -7565,6 +8863,8 @@ languages.wo:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -7660,21 +8960,24 @@ languages.wo:
   - 12
   - 12
   - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
   - 13
   - 13
   - 13
   - 14
   - 14
   - 14
+  - 14
+  - 14
+  - 14
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
+  - 15
   - 15
   - 15
   - 15
@@ -7684,6 +8987,24 @@ languages.wo:
   - 16
   - 16
   - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 16
+  - 17
+  - 17
+  - 17
+  - 18
+  - 18
+  - 18
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
+  - 19
   context: Wolof
 links.footer.help_text.contributors:
   pages:
@@ -7696,6 +9017,8 @@ links.footer.help_text.contributors:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   - /about
   - /policy
@@ -7732,14 +9055,21 @@ links.footer.help_text.contributors:
   - 11
   - 12
   - 12
-  - 12
-  - 12
-  - 13
   - 13
   - 14
+  - 14
+  - 15
+  - 15
+  - 15
   - 15
   - 16
   - 16
+  - 16
+  - 16
+  - 17
+  - 18
+  - 19
+  - 19
 geography.subregions.CA.NB:
   pages:
   - /
@@ -7766,10 +9096,10 @@ conference.actions.Register:
   - 8
   - 8
   - 8
-  - 12
-  - 12
-  - 12
-  - 12
+  - 15
+  - 15
+  - 15
+  - 15
 page_titles.conferences.Conference_Registration:
   pages:
   - /conferences/:slug/register
@@ -7797,17 +9127,15 @@ articles.conference_registration.paragraphs.confirm_email_address:
 forms.labels.generic.email:
   pages:
   - /conferences/:slug/register
-  - /doconfirm
   - /confirm/:token
   examples:
   - 3
-  - 3
   - 6
   - 6
   - 8
   - 8
-  - 12
-  - 12
+  - 15
+  - 15
 forms.actions.generic.register:
   pages:
   - /conferences/:slug/register
@@ -7827,6 +9155,11 @@ email.confirmation.paragraph.please_confirm:
   examples:
   - 3
   - 3
+email.confirmation.link.please_confirm:
+  pages:
+  - /doconfirm
+  examples:
+  - 3
 page_titles.403.Please_Check_Email:
   pages:
   - /doconfirm
@@ -7844,35 +9177,32 @@ articles.conference_registration.paragraphs.email_confirm:
   context: p
   examples:
   - 3
-page_titles.403.Please_Login:
+page_titles.404.Page_Not_Found:
   pages:
   - /doconfirm
+  - /error_404
   examples:
   - 3
-articles.permission_denied.headings.login_required:
+  - 19
+  - 19
+error.404.title:
   pages:
   - /doconfirm
-  context: Sorry you must be logged in to view this page
+  - /error_404
+  context: This page does not exist!
   examples:
   - 3
-articles.permission_denied.paragraphs.translator_not_logged_in:
+  - 19
+  - 19
+error.404.description:
   pages:
   - /doconfirm
+  - /error_404
   context: p
   examples:
   - 3
-forms.actions.generic.login:
-  pages:
-  - /doconfirm
-  - /confirm/:token
-  examples:
-  - 3
-  - 6
-  - 6
-  - 8
-  - 8
-  - 12
-  - 12
+  - 19
+  - 19
 articles.conference_registration.headings.Policy_Agreement:
   pages:
   - /conferences/:slug/register
@@ -7890,7 +9220,7 @@ articles.policy.headings.The_Agreement:
   - /policy
   examples:
   - 4
-  - 15
+  - 18
 articles.policy.term.commitment:
   pages:
   - /conferences/:slug/register
@@ -7898,7 +9228,7 @@ articles.policy.term.commitment:
   context: s
   examples:
   - 4
-  - 15
+  - 18
 articles.policy.term.respect:
   pages:
   - /conferences/:slug/register
@@ -7906,7 +9236,7 @@ articles.policy.term.respect:
   context: s
   examples:
   - 4
-  - 15
+  - 18
 articles.policy.term.empowerment:
   pages:
   - /conferences/:slug/register
@@ -7914,7 +9244,7 @@ articles.policy.term.empowerment:
   context: s
   examples:
   - 4
-  - 15
+  - 18
 articles.policy.term.accessible:
   pages:
   - /conferences/:slug/register
@@ -7922,7 +9252,7 @@ articles.policy.term.accessible:
   context: s
   examples:
   - 4
-  - 15
+  - 18
 articles.policy.term.peaceful:
   pages:
   - /conferences/:slug/register
@@ -7930,7 +9260,7 @@ articles.policy.term.peaceful:
   context: s
   examples:
   - 4
-  - 15
+  - 18
 articles.policy.term.spaces:
   pages:
   - /conferences/:slug/register
@@ -7938,7 +9268,7 @@ articles.policy.term.spaces:
   context: s
   examples:
   - 4
-  - 15
+  - 18
 articles.policy.term.hearing:
   pages:
   - /conferences/:slug/register
@@ -7946,7 +9276,7 @@ articles.policy.term.hearing:
   context: s
   examples:
   - 4
-  - 15
+  - 18
 articles.policy.term.intent:
   pages:
   - /conferences/:slug/register
@@ -7954,7 +9284,7 @@ articles.policy.term.intent:
   context: s
   examples:
   - 4
-  - 15
+  - 18
 articles.policy.term.open_minds:
   pages:
   - /conferences/:slug/register
@@ -7962,7 +9292,7 @@ articles.policy.term.open_minds:
   context: s
   examples:
   - 4
-  - 15
+  - 18
 articles.policy.term.learning:
   pages:
   - /conferences/:slug/register
@@ -7970,7 +9300,7 @@ articles.policy.term.learning:
   context: s
   examples:
   - 4
-  - 15
+  - 18
 articles.policy.headings.Why:
   pages:
   - /conferences/:slug/register
@@ -7978,7 +9308,7 @@ articles.policy.headings.Why:
   context: Why have a Safer Space Agreement?
   examples:
   - 4
-  - 15
+  - 18
 articles.policy.paragraphs.Why:
   pages:
   - /conferences/:slug/register
@@ -7986,7 +9316,7 @@ articles.policy.paragraphs.Why:
   context: p
   examples:
   - 4
-  - 15
+  - 18
 articles.policy.headings.How:
   pages:
   - /conferences/:slug/register
@@ -7994,7 +9324,7 @@ articles.policy.headings.How:
   context: How is the policy enforced?
   examples:
   - 4
-  - 15
+  - 18
 articles.policy.paragraphs.How:
   pages:
   - /conferences/:slug/register
@@ -8002,7 +9332,7 @@ articles.policy.paragraphs.How:
   context: p
   examples:
   - 4
-  - 15
+  - 18
 articles.conference_registration.paragraphs.Confirm_Agreement:
   pages:
   - /conferences/:slug/register
@@ -8023,6 +9353,8 @@ forms.actions.generic.Log_out:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   examples:
   - 4
@@ -8043,7 +9375,14 @@ forms.actions.generic.Log_out:
   - 12
   - 12
   - 13
-  - 13
+  - 14
+  - 14
+  - 15
+  - 15
+  - 16
+  - 16
+  - 16
+  - 16
 articles.conference_registration.headings.Registration_Info:
   pages:
   - /conferences/:slug/register
@@ -8262,6 +9601,8 @@ menu.submenu.registration.Registration:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   examples:
   - 5
@@ -8272,8 +9613,15 @@ menu.submenu.registration.Registration:
   - 10
   - 10
   - 11
+  - 12
+  - 12
   - 13
-  - 13
+  - 14
+  - 14
+  - 16
+  - 16
+  - 16
+  - 16
 menu.submenu.registration.Workshops:
   pages:
   - /conferences/:slug/register/:button/:confirmation_token
@@ -8282,6 +9630,8 @@ menu.submenu.registration.Workshops:
   - /conferences/:slug/workshops
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   examples:
   - 5
@@ -8292,8 +9642,15 @@ menu.submenu.registration.Workshops:
   - 10
   - 10
   - 11
+  - 12
+  - 12
   - 13
-  - 13
+  - 14
+  - 14
+  - 16
+  - 16
+  - 16
+  - 16
 articles.conference_registration.headings.Youre_Done:
   pages:
   - /conferences/:slug/register
@@ -8334,6 +9691,12 @@ time.formats.long:
   examples:
   - 5
   - 5
+time.am:
+  pages:
+  - /conferences/:slug/register
+  examples:
+  - 5
+  - 5
 articles.conference_registration.headings.departure:
   pages:
   - /conferences/:slug/register
@@ -8362,8 +9725,8 @@ page_titles.403.Please_Confirm_Email:
   - 6
   - 8
   - 8
-  - 12
-  - 12
+  - 15
+  - 15
 articles.permission_denied.headings.confirm_email:
   pages:
   - /confirm/:token
@@ -8373,8 +9736,18 @@ articles.permission_denied.headings.confirm_email:
   - 6
   - 8
   - 8
-  - 12
-  - 12
+  - 15
+  - 15
+forms.actions.generic.login:
+  pages:
+  - /confirm/:token
+  examples:
+  - 6
+  - 6
+  - 8
+  - 8
+  - 15
+  - 15
 geography.subregions.US.AK:
   pages:
   - /
@@ -8448,246 +9821,377 @@ menu.submenu.registration.Stats:
   - /conferences/:slug/broadcast
   examples:
   - 7
-  - 13
-  - 13
+  - 16
+  - 16
+  - 16
+  - 16
 menu.submenu.registration.Broadcast:
   pages:
   - /conferences/:slug/stats
   - /conferences/:slug/broadcast
   examples:
   - 7
-  - 13
-  - 13
+  - 16
+  - 16
+  - 16
+  - 16
 geography.subregions.US.TX:
   pages:
   - /
   examples:
   - 8
   - 8
-  - 12
-  - 12
+  - 15
+  - 15
 page_titles.conferences.Workshops:
   pages:
   - /conferences/:slug/workshops
   examples:
   - 10
-  - 10
-articles.conference_registration.headings.Workshops:
+  - 14
+articles.workshops.headings.Workshops:
   pages:
   - /conferences/:slug/workshops
   examples:
   - 10
-  - 10
-articles.conference_registration.paragraphs.Workshops:
+  - 14
+articles.workshops.paragraphs.Workshops:
   pages:
   - /conferences/:slug/workshops
   context: p
   examples:
   - 10
-  - 10
-articles.conference_registration.headings.Your_Workshops:
+  - 14
+articles.workshops.headings.Your_Workshops:
   pages:
   - /conferences/:slug/workshops
   examples:
   - 10
-  - 10
+  - 14
 actions.workshops.create:
   pages:
   - /conferences/:slug/workshops
   context: New Workshop
   examples:
   - 10
-  - 10
+  - 14
 page_titles.conferences.Create_Workshop:
   pages:
   - /conferences/:slug/workshops/create
   examples:
   - 10
-articles.workshops.paragraphs.info:
+articles.workshops.paragraphs.new_workshop:
   pages:
   - /conferences/:slug/workshops/create
+  - /conferences/:slug/workshops/:workshop_id/edit
   context: Please accurately describe your workshop in detail. This will help hosts
     decide if they wish to add it to the schedule and when it should best be scheduled.
-    Enter normal text but if you want to get fancy you can use <a href="http://daringfireball.net/projects/markdown/basics"
-    target="_blank">Markdown</a>.
+    Enter normal text but if you want to get fancy you can use [Markdown](http://daringfireball.net/projects/markdown/basics).
   examples:
   - 10
+  - 12
 forms.labels.generic.title:
   pages:
   - /conferences/:slug/workshops/create
+  - /conferences/:slug/workshops/:workshop_id/edit
   examples:
   - 10
+  - 12
 forms.labels.generic.info:
   pages:
   - /conferences/:slug/workshops/create
+  - /conferences/:slug/workshops/:workshop_id/edit
   examples:
   - 10
+  - 12
 articles.workshops.headings.languages:
   pages:
   - /conferences/:slug/workshops/create
+  - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
   context: Workshop Language
   examples:
   - 10
+  - 10
+  - 11
+  - 12
+  - 12
+  - 13
 articles.workshops.headings.theme:
   pages:
   - /conferences/:slug/workshops/create
+  - /conferences/:slug/workshops/:workshop_id/edit
   context: Theme
   examples:
   - 10
+  - 12
 articles.workshops.paragraphs.theme:
   pages:
   - /conferences/:slug/workshops/create
+  - /conferences/:slug/workshops/:workshop_id/edit
   context: p
   examples:
   - 10
+  - 12
 workshop.options.theme.race_gender:
   pages:
   - /conferences/:slug/workshops/create
+  - /conferences/:slug/workshops/:workshop_id/edit
   examples:
   - 10
+  - 12
 workshop.options.theme.mechanics:
   pages:
   - /conferences/:slug/workshops/create
+  - /conferences/:slug/workshops/:workshop_id/edit
   examples:
   - 10
+  - 12
 workshop.options.theme.funding:
   pages:
   - /conferences/:slug/workshops/create
+  - /conferences/:slug/workshops/:workshop_id/edit
   examples:
   - 10
+  - 12
 workshop.options.theme.organization:
   pages:
   - /conferences/:slug/workshops/create
+  - /conferences/:slug/workshops/:workshop_id/edit
   examples:
   - 10
+  - 12
 workshop.options.theme.community:
   pages:
   - /conferences/:slug/workshops/create
+  - /conferences/:slug/workshops/:workshop_id/edit
   examples:
   - 10
+  - 12
 workshop.options.theme.other:
   pages:
   - /conferences/:slug/workshops/create
+  - /conferences/:slug/workshops/:workshop_id/edit
   examples:
   - 10
+  - 12
 articles.workshops.headings.needs:
   pages:
   - /conferences/:slug/workshops/create
+  - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
   context: What do you need?
   examples:
   - 10
+  - 10
+  - 11
+  - 12
+  - 12
+  - 13
 workshop.options.needs.sound:
   pages:
   - /conferences/:slug/workshops/create
+  - /conferences/:slug/workshops/:workshop_id/edit
   examples:
   - 10
+  - 12
 workshop.options.needs.projector:
   pages:
   - /conferences/:slug/workshops/create
+  - /conferences/:slug/workshops/:workshop_id/edit
   examples:
   - 10
+  - 12
 workshop.options.needs.tools:
   pages:
   - /conferences/:slug/workshops/create
+  - /conferences/:slug/workshops/:workshop_id/edit
   examples:
   - 10
+  - 12
 articles.workshops.headings.space:
   pages:
   - /conferences/:slug/workshops/create
+  - /conferences/:slug/workshops/:workshop_id/edit
   context: Type of space
   examples:
   - 10
+  - 12
 articles.workshops.paragraphs.space:
   pages:
   - /conferences/:slug/workshops/create
+  - /conferences/:slug/workshops/:workshop_id/edit
   context: p
   examples:
   - 10
-workshop.options.space.workshop:
-  pages:
-  - /conferences/:slug/workshops/create
-  examples:
-  - 10
+  - 12
 workshop.options.space.meeting_room:
   pages:
   - /conferences/:slug/workshops/create
+  - /conferences/:slug/workshops/:workshop_id/edit
   examples:
   - 10
+  - 12
+workshop.options.space.workshop:
+  pages:
+  - /conferences/:slug/workshops/create
+  - /conferences/:slug/workshops/:workshop_id/edit
+  examples:
+  - 10
+  - 12
 workshop.options.space.outdoor_meeting:
   pages:
   - /conferences/:slug/workshops/create
+  - /conferences/:slug/workshops/:workshop_id/edit
   examples:
   - 10
+  - 12
+articles.workshops.headings.notes:
+  pages:
+  - /conferences/:slug/workshops/create
+  - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  context: Notes for Conference Organizers and Workshop Facilitators
+  examples:
+  - 10
+  - 10
+  - 11
+  - 12
+  - 12
+  - 13
+articles.workshops.paragraphs.notes:
+  pages:
+  - /conferences/:slug/workshops/create
+  - /conferences/:slug/workshops/:workshop_id/edit
+  context: Notes are only viewable by conference hosts and workshop facilitators
+  examples:
+  - 10
+  - 12
+forms.labels.generic.notes:
+  pages:
+  - /conferences/:slug/workshops/create
+  - /conferences/:slug/workshops/:workshop_id/edit
+  examples:
+  - 10
+  - 12
 forms.actions.generic.save:
   pages:
   - /conferences/:slug/workshops/create
+  - /conferences/:slug/workshops/:workshop_id/edit
   examples:
   - 10
+  - 12
 page_titles.conferences.View_Workshop:
   pages:
   - /conferences/:slug/workshops/:workshop_id
   examples:
+  - 10
   - 11
+  - 12
+  - 13
 articles.workshops.headings.facilitators:
   pages:
   - /conferences/:slug/workshops/:workshop_id
   examples:
+  - 10
   - 11
+  - 12
+  - 13
 roles.workshops.facilitator.creator:
   pages:
   - /conferences/:slug/workshops/:workshop_id
   examples:
+  - 10
   - 11
+  - 12
+  - 13
 actions.workshops.Edit:
   pages:
   - /conferences/:slug/workshops/:workshop_id
   examples:
+  - 10
   - 11
+  - 12
+  - 13
 actions.workshops.Delete:
   pages:
   - /conferences/:slug/workshops/:workshop_id
   examples:
+  - 10
   - 11
+  - 12
+  - 13
+page_titles.conferences.Edit_Workshop:
+  pages:
+  - /conferences/:slug/workshops/:workshop_id/edit
+  examples:
+  - 12
+page_titles.conferences.Delete_Workshop:
+  pages:
+  - /conferences/:slug/workshops/:workshop_id/delete
+  examples:
+  - 14
+articles.workshops.headings.Delete_Workshop:
+  pages:
+  - /conferences/:slug/workshops/:workshop_id/delete
+  context: 'Are you sure you want to delete the workshop: <em>Super Awesome Workshop</em>?'
+  vars:
+  - :title
+  examples:
+  - 14
+forms.actions.generic.confirm:
+  pages:
+  - /conferences/:slug/workshops/:workshop_id/delete
+  examples:
+  - 14
+forms.actions.generic.cancel:
+  pages:
+  - /conferences/:slug/workshops/:workshop_id/delete
+  examples:
+  - 14
 page_titles.conferences.Email_Participants:
   pages:
   - /conferences/:slug/broadcast
   examples:
-  - 13
-  - 13
+  - 16
+  - 16
+  - 16
+  - 16
 articles.conference_registration.paragraphs.Email_Participants:
   pages:
   - /conferences/:slug/broadcast
-  context: This page is used to contact all participants. Text can be entered as <a
-    href="http://daringfireball.net/projects/markdown/basics" target="_blank">Markdown</a>.
+  context: This page is used to contact all participants. Text can be entered as [Markdown](http://daringfireball.net/projects/markdown/basics).
     Pressing 'test' will send the email only to you, make sure you do this and use
-    caution ingeneral before pressing 'send'
+    caution in general before pressing 'send'
   examples:
-  - 13
-  - 13
+  - 16
+  - 16
+  - 16
 forms.labels.generic.subject:
   pages:
   - /conferences/:slug/broadcast
   examples:
-  - 13
-  - 13
+  - 16
+  - 16
 forms.labels.generic.content:
   pages:
   - /conferences/:slug/broadcast
   examples:
-  - 13
-  - 13
+  - 16
+  - 16
 forms.actions.generic.preview:
   pages:
   - /conferences/:slug/broadcast
   examples:
-  - 13
-  - 13
+  - 16
+  - 16
 forms.actions.generic.test:
   pages:
   - /conferences/:slug/broadcast
   examples:
-  - 13
-  - 13
+  - 16
+  - 16
+  - 16
 articles.conference_registration.notes.Test_Email_Sent:
   pages:
   - /conferences/:slug/broadcast
@@ -8695,148 +10199,152 @@ articles.conference_registration.notes.Test_Email_Sent:
   vars:
   - :email_address
   examples:
-  - 13
+  - 16
+articles.conference_registration.headings.Preview:
+  pages:
+  - /conferences/:slug/broadcast
+  examples:
+  - 16
+  - 16
+forms.actions.generic.edit:
+  pages:
+  - /conferences/:slug/broadcast
+  examples:
+  - 16
+forms.actions.generic.send:
+  pages:
+  - /conferences/:slug/broadcast
+  examples:
+  - 16
+articles.conference_registration.paragraphs.participants_emailed:
+  pages:
+  - /conferences/:slug/broadcast
+  context: All participants of My Bike!Bike! have been emailed.
+  vars:
+  - :conference_title
+  examples:
+  - 16
 page_titles.about.About_BikeBike:
   pages:
   - /about
   examples:
-  - 14
+  - 17
 articles.about_bikebike.headings.What_is_BikeBike:
   pages:
   - /about
   context: t
   examples:
-  - 14
+  - 17
 articles.about_bikebike.paragraphs.What_is_BikeBike:
   pages:
   - /about
   context: p
   examples:
-  - 14
+  - 17
 articles.about_bikebike.headings.bicycle_project:
   pages:
   - /about
   context: t
   examples:
-  - 14
+  - 17
 articles.about_bikebike.paragraphs.bicycle_project_paragraph:
   pages:
   - /about
   context: p
   examples:
-  - 14
+  - 17
 articles.about_bikebike.term.non_profit:
   pages:
   - /about
   context: s
   examples:
-  - 14
+  - 17
 articles.about_bikebike.term.no_money:
   pages:
   - /about
   context: s
   examples:
-  - 14
+  - 17
 articles.about_bikebike.term.education:
   pages:
   - /about
   context: s
   examples:
-  - 14
+  - 17
 articles.about_bikebike.term.volunteer_run:
   pages:
   - /about
   context: s
   examples:
-  - 14
+  - 17
 articles.about_bikebike.term.export_bikes:
   pages:
   - /about
   context: s
   examples:
-  - 14
+  - 17
 articles.about_bikebike.term.low_cost:
   pages:
   - /about
   context: s
   examples:
-  - 14
+  - 17
 articles.about_bikebike.term.recycle_parts:
   pages:
   - /about
   context: s
   examples:
-  - 14
+  - 17
 articles.about_bikebike.headings.Who_is_Invited:
   pages:
   - /about
   context: t
   examples:
-  - 14
+  - 17
 articles.about_bikebike.paragraphs.Who_is_Invited:
   pages:
   - /about
   context: p
   examples:
-  - 14
+  - 17
 articles.about_bikebike.headings.Types_of_Workshops:
   pages:
   - /about
   context: t
   examples:
-  - 14
+  - 17
 articles.about_bikebike.paragraphs.Types_of_Workshops:
   pages:
   - /about
   context: p
   examples:
-  - 14
+  - 17
 articles.about_bikebike.headings.Amenities:
   pages:
   - /about
   context: t
   examples:
-  - 14
+  - 17
 articles.about_bikebike.paragraphs.Amenities:
   pages:
   - /about
   context: p
   examples:
-  - 14
+  - 17
 articles.about_bikebike.headings.Volunteer:
   pages:
   - /about
   context: t
   examples:
-  - 14
+  - 17
 articles.about_bikebike.paragraphs.Volunteer:
   pages:
   - /about
   context: p
   examples:
-  - 14
+  - 17
 page_titles.policy.Safer_Spaces_Policy:
   pages:
   - /policy
   examples:
-  - 15
-page_titles.404.Page_Not_Found:
-  pages:
-  - /error_404
-  examples:
-  - 16
-  - 16
-error.404.title:
-  pages:
-  - /error_404
-  context: This page does not exist!
-  examples:
-  - 16
-  - 16
-error.404.description:
-  pages:
-  - /error_404
-  context: p
-  examples:
-  - 16
-  - 16
+  - 18

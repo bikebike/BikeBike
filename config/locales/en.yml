@@ -32,15 +32,15 @@ en:
     - Friday
     - Saturday
     formats:
-      default: "%Y-%m-%d"
-      long: "%B %d, %Y"
-      short: "%b %d"
-      span_same_month_date_1: "%B %e"
-      span_same_month_date_2: "%e, %Y"
-      span_same_year_date_1: "%B %e"
-      span_same_year_date_2: "%B %e, %Y"
-      span_different_year_date_1: "%B %e, %Y"
-      span_different_year_date_2: "%B %e, %Y"
+      default: '%Y-%m-%d'
+      long: '%B %d, %Y'
+      short: '%b %d'
+      span_same_month_date_1: '%B %e'
+      span_same_month_date_2: '%e, %Y'
+      span_same_year_date_1: '%B %e'
+      span_same_year_date_2: '%B %e, %Y'
+      span_different_year_date_1: '%B %e, %Y'
+      span_different_year_date_2: '%B %e, %Y'
     month_names:
     - 
     - January
@@ -59,7 +59,7 @@ en:
     - year
     - month
     - day
-    date_span: "%{date_1} – %{date_2}"
+    date_span: '%{date_1} – %{date_2}'
   datetime:
     distance_in_words:
       about_x_hours:
@@ -86,16 +86,16 @@ en:
         other: over %{count} years
       x_days:
         one: 1 day
-        other: "%{count} days"
+        other: '%{count} days'
       x_minutes:
         one: 1 minute
-        other: "%{count} minutes"
+        other: '%{count} minutes'
       x_months:
         one: 1 month
-        other: "%{count} months"
+        other: '%{count} months'
       x_seconds:
         one: 1 second
-        other: "%{count} seconds"
+        other: '%{count} seconds'
     prompts:
       day: Day
       hour: Hour
@@ -104,7 +104,7 @@ en:
       second: Seconds
       year: Year
   errors:
-    format: "%{attribute} %{message}"
+    format: '%{attribute} %{message}'
     messages:
       accepted: must be accepted
       blank: can't be blank
@@ -155,7 +155,7 @@ en:
       body: 'There were problems with the following fields:'
       header:
         one: 1 error prohibited this %{model} from being saved
-        other: "%{count} errors prohibited this %{model} from being saved"
+        other: '%{count} errors prohibited this %{model} from being saved'
   helpers:
     select:
       prompt: Please select
@@ -166,22 +166,22 @@ en:
   number:
     currency:
       format:
-        delimiter: ","
-        format: "%u%n"
+        delimiter: ','
+        format: '%u%n'
         precision: 2
-        separator: "."
+        separator: .
         significant: false
         strip_insignificant_zeros: false
-        unit: "$"
+        unit: $
     format:
-      delimiter: ","
+      delimiter: ','
       precision: 3
-      separator: "."
+      separator: .
       significant: false
       strip_insignificant_zeros: false
     human:
       decimal_units:
-        format: "%n %u"
+        format: '%n %u'
         units:
           billion: Billion
           million: Million
@@ -195,7 +195,7 @@ en:
         significant: true
         strip_insignificant_zeros: true
       storage_units:
-        format: "%n %u"
+        format: '%n %u'
         units:
           byte:
             one: Byte
@@ -207,21 +207,21 @@ en:
     percentage:
       format:
         delimiter: ''
-        format: "%n%"
+        format: '%n%'
     precision:
       format:
         delimiter: ''
   support:
     array:
-      last_word_connector: ", and "
-      two_words_connector: " and "
-      words_connector: ", "
+      last_word_connector: ', and '
+      two_words_connector: ' and '
+      words_connector: ', '
   time:
     am: am
     formats:
-      default: "%a, %d %b %Y %H:%M:%S %z"
-      long: "%B %d, %Y"
-      short: "%d %b %H:%M"
+      default: '%a, %d %b %Y %H:%M:%S %z'
+      long: '%l%P, %B %e, %Y'
+      short: '%d %b %H:%M'
     pm: pm
   languages:
     af: Afrikaans
@@ -304,7 +304,7 @@ en:
       AT: Austria
       AU: Australia
       AW: Aruba
-      AX: "Åland"
+      AX: Åland
       AZ: Azerbaijan
       BA: Bosnia and Herzegovina
       BB: Barbados
@@ -996,9 +996,9 @@ en:
       - Zambia
       - Zimbabwe
       street_address:
-      - "#####"
-      - "####"
-      - "###"
+      - '#####'
+      - '####'
+      - '###'
       street_suffix:
       - Alley
       - Avenue
@@ -1229,8 +1229,8 @@ en:
       - 'Apt. ###'
       - 'Suite ###'
       postcode:
-      - "#####"
-      - "#####-####"
+      - '#####'
+      - '#####-####'
       state:
       - Alabama
       - Alaska
@@ -5133,37 +5133,37 @@ en:
         - :last_name
     phone_number:
       formats:
-      - "###-###-####"
-      - "(###)###-####"
+      - '###-###-####'
+      - (###)###-####
       - 1-###-###-####
-      - "###.###.####"
-      - "###-###-####"
-      - "(###)###-####"
+      - '###.###.####'
+      - '###-###-####'
+      - (###)###-####
       - 1-###-###-####
-      - "###.###.####"
-      - "###-###-#### x###"
-      - "(###)###-#### x###"
+      - '###.###.####'
+      - '###-###-#### x###'
+      - (###)###-#### x###
       - 1-###-###-#### x###
-      - "###.###.#### x###"
-      - "###-###-#### x####"
-      - "(###)###-#### x####"
+      - '###.###.#### x###'
+      - '###-###-#### x####'
+      - (###)###-#### x####
       - 1-###-###-#### x####
-      - "###.###.#### x####"
-      - "###-###-#### x#####"
-      - "(###)###-#### x#####"
+      - '###.###.#### x####'
+      - '###-###-#### x#####'
+      - (###)###-#### x#####
       - 1-###-###-#### x#####
-      - "###.###.#### x#####"
+      - '###.###.#### x#####'
   translate:
     pages:
-      Locale_Translations: "%{language} Translations"
+      Locale_Translations: '%{language} Translations'
       Enabled_Locales: Enabled Locales
       Incomplete_Locales: Incomplete Locales
       Other_Locales: Other Locales
       pages: 'Pages:'
       context_title: 'Context:'
       context:
-        one: "%{context}"
-        other: "%{context} (× %{count})"
+        one: '%{context}'
+        other: '%{context} (× %{count})'
       contexts:
         character: character
         sentence: sentence
@@ -5209,20 +5209,20 @@ en:
       become_a_volunteer: Become a volunteer translator
       volunteer: Can you help us translate it?
     site:
-      locale_is_available: "%{site_name} is available in %{language}."
+      locale_is_available: '%{site_name} is available in %{language}.'
       go_to_locale: See the %{language} site now
       locale_not_available: Sorry, %{site_name} is not currently available in %{language}.
       locale_needs_help: Can you help us translate the site into %{language}?
     translation_pages:
-      Locale_Translations: "%{language} Translations"
+      Locale_Translations: '%{language} Translations'
       Enabled_Locales: Enabled Locales
       Incomplete_Locales: Incomplete Locales
       Other_Locales: Other Locales
       pages: 'Pages:'
       context_title: 'Context:'
       context:
-        one: "%{context}"
-        other: "%{context} (× %{count})"
+        one: '%{context}'
+        other: '%{context} (× %{count})'
       contexts:
         character: character
         sentence: sentence
@@ -5311,6 +5311,7 @@ en:
         Workshops: Workshops
         Your_Workshops: Your Workshops
         payment_confirm: Please confirm your payment
+        Preview: Preview
       paragraphs:
         Policy_Agreement: Safer Space Agreement
         Confirm_Agreement: By clicking the "I Agree" button, you are pledging to do
@@ -5323,7 +5324,7 @@ en:
           Payment is by donation and can be done now or upon arrival but to help us
           fund the conference, we ask that you pay the registration donation as soon
           as you can.
-        currency: "(amounts are in $USD)"
+        currency: (amounts are in $USD)
         email_confirm: Go to your inbox! You should see an email from Bike!Bike! in
           just a few moments. There will be a link in the email for you to click on.
           Check your spam box if you do not see it. If you encounter any problems,
@@ -5341,8 +5342,14 @@ en:
         Stats: Check Out who's coming and what they've paid so far. See at a glance
           how much accommodation is needed and what people prefer to eat.
         done: Thank you for registering for Bike!Bike!
-        Email_Participants: Email Participants
+        Email_Participants: This page is used to contact all participants. Text can
+          be entered as [Markdown](http://daringfireball.net/projects/markdown/basics).
+          Pressing 'test' will send the email only to you, make sure you do this and
+          use caution in general before pressing 'send'
         payment_confirm: You are about to confirm your payment of %{amount} for registration.
+        participants_emailed: Your email has been sent to all participants of %%{conference_title}.
+        workshops: You can now take a look at proposed workshops and even propose
+          one yourself if you like.
       questions:
         bike:
           large: Large
@@ -5357,7 +5364,9 @@ en:
           house: Indoor Location
           none: I'll take care of it
           tent: Tent Space
-      none: "(none)"
+        bikes:
+          medium: Medium
+      none: (none)
       actions:
         View_Workshops: View Workshops
       notes:
@@ -5436,12 +5445,29 @@ en:
         needs: Needs
         space: Space
         theme: Theme
+        Delete_Workshop: Delete Workshop
+        notes: Notes
+        Workshops: Workshops
+        Your_Workshops: Your Workshops
       paragraphs:
-        info: Description
+        info: Please accurately describe your workshop in detail. This will help hosts
+          decide if they wish to add it to the schedule and when it should best be
+          scheduled. Enter normal text but if you want to get fancy you can use [Markdown](http://daringfireball.net/projects/markdown/basics)
         space: What kind of space do you need for your workshop?
         theme: Which of the themes below best match your workshop? This will help
           hosts to avoid scheduling conflicts. Select other if none of the options
           match in any way.
+        new_workshop: Workshops are organized and run by attendees, they can be about
+          anything that might concern community bicycle projects and can be in any
+          format including presentations, hands-on workshops, discussion groups, and
+          bicycle rides. If you would like to host you own workshop you can click
+          on the "create workshop" button.
+        Workshops: Duis bibendum, felis sed interdum venenatis, turpis enim blandit
+          mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est
+          congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit
+          id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien
+          placerat ante. Nulla justo. Aliquam quis turpis eget elit sodales scelerisque.
+          Mauris sit amet eros. Suspendisse accumsan tortor quis turpis. Sed ante
   section_content:
     bikebike:
       about_bikebike: Bike!Bike! is an international annual gathering organized by
@@ -5462,6 +5488,7 @@ en:
         title: Title
         info: Info
         content: Content
+        notes: Notes
     actions:
       generic:
         login: Sign In
@@ -5474,6 +5501,10 @@ en:
         test: Test
         preview: Preview
         confirm_amount: Confirm
+        cancel: Cancel
+        confirm: Confirm
+        edit: Edit
+        send: Send
   page_titles:
     '403':
       Please_Confirm_Email: Please confirm your email
@@ -5539,7 +5570,7 @@ en:
       space:
         meeting_room: Meeting Room
         outdoor_meeting: Outdoor Space
-        workshop: Collaborative Workshop
+        workshop: Repair Space
       theme:
         community: Community Outreach
         funding: Funding
@@ -5550,8 +5581,9 @@ en:
   email:
     confirmation:
       paragraph:
-        please_confirm: 'Hello! To gain access to registration and other features
-          of Bike!Bike!, please confirm your email address by clicking on following
-          link:'
+        please_confirm: Hello! To gain access to registration and other features of
+          Bike!Bike!, please confirm your email address.
+      link:
+        please_confirm: Confirm now
     subject:
       confirm_email: Confirmation Email

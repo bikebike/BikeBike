@@ -375,6 +375,43 @@ input {
 	}*/
 }
 
+.input-field.other-field label {
+
+	input {
+		float: left;
+		margin: 0.33em 0;
+
+		&:checked {
+			+ div input {
+				//display: block;
+				z-index: 1;
+				@include _(opacity, 1);
+			}
+		}
+	}
+
+	div {
+		float: left;
+		position: relative;
+		margin: 0 0.25em;
+		font-size: 1em;
+
+		input {
+			//display: none;
+			@include _(opacity, 0);
+			@include _(transition, opacity 250ms ease-in-out);
+			z-index: -1;
+			position: absolute;
+			width: auto;
+			margin: 0;
+			border: 1px solid #CCC;
+			height: 1.5em;
+			left: 0;
+			top: 0;
+		}
+	}
+}
+
 .number-field {
 	display: inline-block;
 	font-size: 1.5em;
@@ -382,6 +419,11 @@ input {
 	input {
 		text-align: right;
 	}
+}
+
+.input-field-help {
+	margin-bottom: 1em;
+	margin-left: 1em;
 }
 
 .check-box-field,
@@ -501,6 +543,10 @@ input {
 		width: 7em;
 		height: 5em;
 	}
+}
+.single-check-box-field,
+.single-radio-button-field {
+	margin-left: 1em;
 }
 
 .date-span {
@@ -1086,6 +1132,22 @@ $header-tilt: 8deg;
 					margin-left: 1em;
 					margin-bottom: 1em;
 					@include font-family(primary);
+				}
+			}
+
+			.current {
+				@include before {
+					content: '';
+					display: block;
+					position: absolute;
+					width: 0;
+					height: 0;
+					left: -1.5em;
+					top: 0.6667em;
+					border-width: 1em 0 1em 1em;
+					border-color: transparent transparent transparent #333;
+					border-style: solid;
+					font-size: 0.25em;
 				}
 			}
 		}
@@ -1770,7 +1832,7 @@ html #lingua-franca-translation-form {
 
 .email-preview {
 	max-width: 40rem;
-	margin-top: 2em;
+	margin: 2em auto 0;
 	padding: 0.25em 1em;
 	background-color: #F8F8F8;
 	@include default-box-shadow(top, 2, true);
@@ -1829,6 +1891,7 @@ html #lingua-franca-translation-form {
 		@include _(transition, transform 150ms ease-in-out);
 
 		&:hover, &:focus, &:active {
+			z-index: 1;
 			@include _(transform, scale(1.1));
 		}
 

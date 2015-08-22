@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+
+# CarrierWave rake tasks
+#
+# Task:   reprocess
+# Desc:   Reprocess all images for a given class
+# Usage:  rake carrierwave:reprocess class=<ClassName> mount_uploader=<mount_uploader>
+
+namespace :carrierwave do
+  task :reprocess, [:class, :mount_uploader] => :environment do |task, args|
+    desc "Reprocess all images for a given class."
+    args[:class].constantize.all.each do |object|
+      begin
+        object.update_attribute(args[:mount_uploader].to_sym, object.instance_eval(args[:mount_uploader]))
+      rescue
+        false
+      end
+    end
+  end
+end
