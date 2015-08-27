@@ -27,6 +27,10 @@ class ApplicationController < LinguaFrancaApplicationController
 
 		ActionMailer::Base.default_url_options = {:host => "#{request.protocol}#{request.host_with_port}"}
 
+		if request.post? && params[:action] == 'do_confirm'
+			halt_redirection!
+		end
+
 		# call the base method to detect the language
 		super
 	end
