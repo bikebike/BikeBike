@@ -89,13 +89,13 @@ BikeBike::Application.configure do
 	config.action_mailer.smtp_settings = {
 		:enable_starttls_auto => true,
 		:address => 'mail.bikebike.org',
-		:domain => 'bikebike.org',
+		:domain => 'preview.bikebike.org',
 		:port => 587,
 		:authentication => :plain,
 		:enable_starttls_auto => true,
 		:openssl_verify_mode  => 'none',
-		:user_name => 'info@bikebike.org',
-		:password => 'NewOrleans@)!#'
+		:user_name => 'info@preview.bikebike.org',
+		:password => 'test'
 	}
 	config.action_mailer.raise_delivery_errors = true
 	config.action_mailer.perform_deliveries = true
