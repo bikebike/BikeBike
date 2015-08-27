@@ -6,11 +6,23 @@ gem 'haml'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'coffee-rails', '~> 4.0.0'
-gem 'lingua_franca', :git => 'git://github.com/lingua-franca/lingua_franca.git'
+
+if Dir.exists?('../lingua_franca')
+	gem 'lingua_franca', :path => '../lingua_franca'
+else
+	gem 'lingua_franca', :git => 'git://github.com/lingua-franca/lingua_franca.git'
+end
+
 gem 'tzinfo-data'
 gem 'sass'#, '~> 3.4.13'
-gem 'sass-rails'#, :git => 'git://github.com/rails/sass-rails.git', :tag => 'v4.0.5'
-gem 'bumbleberry', :git => 'git://github.com/bumbleberry/bumbleberry.git'
+gem 'sass-rails'
+
+if Dir.exists?('../bumbleberry')
+	gem 'bumbleberry', :path => "../bumbleberry"
+else
+	gem 'bumbleberry', :git => 'git://github.com/bumbleberry/bumbleberry.git'
+end
+
 gem 'foundation-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'sorcery', '>= 0.8.1'
@@ -24,7 +36,7 @@ gem 'geocoder'
 gem 'paper_trail', '~> 3.0.5'
 gem 'font-awesome-rails'
 gem 'wysiwyg-rails'
-gem 'rails-assets-cdn'
+#gem 'rails-assets-cdn'
 gem 'sitemap_generator'
 gem 'activerecord-session_store'
 gem 'paypal-express', '0.7.1'
@@ -68,7 +80,7 @@ group :staging, :production, :preview do
 end
 
 group :production, :preview do
-	#gem 'unicorn'
+	gem 'unicorn'
 	gem 'daemon-spawn'
 end
 

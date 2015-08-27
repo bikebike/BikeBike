@@ -791,9 +791,7 @@ es:
         The_Agreement: Acuerdo del Espacio Mas Seguro
     permission_denied:
       paragraphs:
-        translator_not_logged_in: Sorry you must be a translator to view this page
       headings:
-        login_required: Please Login
   forms:
     labels:
       generic:

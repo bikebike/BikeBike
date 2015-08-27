@@ -16,7 +16,7 @@
 			=_!I18n.locale.upcase
 		.selector
 			%ul
-				-I18n.backend.available_locales.each do |locale|
+				-I18n.backend.enabled_locales.each do |locale|
 					%li
 						%a{href: request.original_url.gsub(/^(https?:\/\/)(preview\-)?(..\.)?(.*)$/, '\1\2' + locale + '.\4')}
 							=_! locale.upcase

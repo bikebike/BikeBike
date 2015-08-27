@@ -5191,9 +5191,6 @@ en:
       use_custom_value: Use a custom value
       explain_zero_fallback: This translation will use the plural version for the
         number 0
-      test:
-        one: Test
-        other: Tests
     content:
       needs_translations: This page contains untranslated content
       requires_translation: This %{model} is in %{language}.
@@ -5457,17 +5454,19 @@ en:
         theme: Which of the themes below best match your workshop? This will help
           hosts to avoid scheduling conflicts. Select other if none of the options
           match in any way.
-        new_workshop: Workshops are organized and run by attendees, they can be about
-          anything that might concern community bicycle projects and can be in any
-          format including presentations, hands-on workshops, discussion groups, and
-          bicycle rides. If you would like to host you own workshop you can click
-          on the "create workshop" button.
-        Workshops: Duis bibendum, felis sed interdum venenatis, turpis enim blandit
-          mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est
-          congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit
-          id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien
-          placerat ante. Nulla justo. Aliquam quis turpis eget elit sodales scelerisque.
-          Mauris sit amet eros. Suspendisse accumsan tortor quis turpis. Sed ante
+        new_workshop: 'Workshops in the past have tended to fit into a few broad categories:
+          structural/organizational (how to start a shop, how to register a non-profit,
+          consensus decision making, etc,) mechanical (how to weld two tandems to
+          a tall bike, building 3-speed hubs out of fishing tackle and old socks,
+          etc,) anti-oppression (safe spaces, women’s workshops, etc,) and recreational
+          (touring tips, yoga for cyclists, etc.) This year we would like to try a
+          panel, a forum, or other types of settings that you think might facilitate
+          learning – be inventive, let us know what you want to see!'
+        Workshops: Do you have an exciting skill to share with us?  Want to chat about
+          creating safe community spaces?  Want to make sure we fit a good bike ride
+          into the weekend?  Propose a workshop!  Don’t worry if you’re not an expert,
+          we want to hear about everyone’s experience within the many configurations
+          of community shops we’re coming from.
   section_content:
     bikebike:
       about_bikebike: Bike!Bike! is an international annual gathering organized by
@@ -5521,6 +5520,8 @@ en:
       Registration_Stats: Registration Stats
       View_Workshop: View Workshop
       Workshops: Workshops
+      Delete_Workshop: Create Workshop
+      Edit_Workshop: Edit Workshop
     policy:
       Safer_Spaces_Policy: Safer Space Agreement
     '404':

@@ -65,8 +65,9 @@ BikeBike::Application.configure do
 	# Precompile additional assets.
 	# application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 	# config.assets.precompile += %w( search.js )
-	config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
-	config.action_controller.asset_host = "https://cdn.bikebike.org"
+	#config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
+	config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif *.svg application/*.scss web-fonts/*.scss)
+	#config.action_controller.asset_host = "https://cdn.bikebike.org"
 
 	# Ignore bad email addresses and do not raise email delivery errors.
 	# Set this to true and configure the email server for immediate delivery to raise delivery errors.
@@ -89,13 +90,13 @@ BikeBike::Application.configure do
 	config.action_mailer.smtp_settings = {
 		:enable_starttls_auto => true,
 		:address => 'mail.bikebike.org',
-		:domain => 'bikebike.org',
+		:domain => 'preview.bikebike.org',
 		:port => 587,
 		:authentication => :plain,
 		:enable_starttls_auto => true,
 		:openssl_verify_mode  => 'none',
-		:user_name => 'info@bikebike.org',
-		:password => 'NewOrleans@)!#'
+		:user_name => 'info@preview.bikebike.org',
+		:password => 'test'
 	}
 	config.action_mailer.raise_delivery_errors = true
 	config.action_mailer.perform_deliveries = true
