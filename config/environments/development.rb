@@ -56,4 +56,6 @@ BikeBike::Application.configure do
 	#config.assets.precompile = false
 	Paypal.sandbox!
 	#Paypal.sandbox = false
+
+	config.i18n.language_threshold = 1
 end
