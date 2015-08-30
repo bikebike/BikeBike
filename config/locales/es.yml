@@ -35,6 +35,7 @@ es:
       default: '%d/%m/%Y'
       long: '%d de %B de %Y'
       short: '%d de %b'
+      span_same_month_date_2: '%e, %Y'
     month_names:
     - 
     - enero
@@ -789,9 +790,35 @@ es:
     policy:
       headings:
         The_Agreement: Acuerdo del Espacio Mas Seguro
-    permission_denied:
+        How: ¿Cómo se hace cumplir esta política?
       paragraphs:
-      headings:
+        How: La ciudad anfitriona tiene la responsabilidad de mediar en cualquier
+          situación concerniente a Espacios Más Seguros. Ellas decidirán qué amerita
+          una advertencia y qué amerita una expulsión de la conferencia.
+        Why: Para establecer un punto de partida, declaramos nuestras creencias y
+          deseos compartidos para el espacio que es Bike!Bike!. Nos reunimos alrededor
+          de estas ideas para inspirarnos y para asegurar que si existen conductas
+          que no nos hagan sentir seguras haya algo en qué basarnos. Al aceptar un
+          compromiso de respeto mutuo esperamos que, de surgir un conflicto, recordaremos
+          a qué nos comprometimos y actuaremos en consecuencia.
+      term:
+        empowerment: Apoyamos el empoderamiento de cada persona y cada grupo.
+        peaceful: Somos pacíficxs y honestxs.
+        spaces: Respetamos los cuerpos y espacios de cada quién.
+        hearing: Nos comprometemos a escucharnos y a crear oportunidades para que
+          todas las voces sean escuchadas.
+        commitment: Entramos con un compromiso hacia el respeto mutuo, la ayuda mutua,
+          el apoyo anti-opresión, la resolución de conflictos, la anti-violencia y
+          la construcción de comunidad.
+        respect: Respetamos los nombres de todxs, sus pronombres de género preferidos,
+          sus identidades expresas y sus experiencias.
+        accessible: Nos comprometemos a hacer los espacios tan accesible como sea
+          posible; fisica, social y personalmente.
+        intent: Aceptamos una responsabilidad compartida para hacernos responsables
+          a nosotrxs mismxs y a lxs demás de los propósitos de este acuerdo.
+    permission_denied:
+      paragraphs: 
+      headings: 
   forms:
     labels:
       generic:
@@ -815,6 +842,8 @@ es:
         contributors: Contribuyentes
         select_language: Cambia tu idioma
         facebook: Unirte a nuestro grupo de Facebook
+      text:
+        Help_contribute: ayudar a contribuir
   page_titles:
     About_BikeBike: Quienes Bike!Bike!
     about:
@@ -822,6 +851,8 @@ es:
     Safe_Space_Policy: Acuerdo del Espacio Mas Seguro
     conferences:
       Conference_Registration: Registro
+    policy:
+      Safer_Spaces_Policy: Acuerdo del Espacio Mas Seguro
   actions:
     workshops:
       create: Crear
@@ -834,6 +865,10 @@ es:
   translate:
     content:
       translate_now: Translar ahora
+      can_you_help: ¿Se puede traducir del %%{language_a} al %%{language_b}?
+      outdated_translation: El contenido que ha sido superado
+      translation_out_of_date: Contenido traducido en esta página puede no ser exacta
+      un_translated: Contenido sin traducir
     pages:
       contexts:
         geography: geografia
@@ -845,8 +880,23 @@ es:
       pluraliztion_rules:
         few: poco
         many: muchos
+        zero: ninguno
+      Incomplete_Locales: Incomplete Languages
+      Locale_Translations: '%{language} Traducciones'
+      context:
+        other: '%{context} (× %{count})'
+      context_title: 'Contexto:'
+      default_value: Predeterminado
+      no_value: Indefinido
+      pages: 'Páginas:'
+      pluraliztion_same_as_other: Igual que el otro
+      test:
+        one: ''
   menu:
     submenu:
       registration:
         Registration: Registro
         Workshops: Actividades
+  page_descriptions:
+    home: Bike! Bike! Una conferencia de colectivos en bicicleta, cooperativas, tiendas
+      de bicicletas de bricolaje sin fines de lucro
