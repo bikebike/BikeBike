@@ -424,7 +424,7 @@ html #lingua-franca-translation-form {
     @include _(transition, #{transform $transition-time ease-in-out, z-index 0ms linear $transition-time});
 
 	&.editing {
-		z-index: 1;
+		z-index: 98;
     	@include _(transform, scale(1));
     	@include _(transition, transform $transition-time ease-in-out);
 	}
