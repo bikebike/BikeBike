@@ -139,6 +139,7 @@ GEM
       nokogiri (~> 1.5)
       rails (>= 3, < 5)
     daemon-spawn (0.4.2)
+    daemons (1.2.3)
     database_cleaner (1.4.1)
     debug_inspector (0.0.2)
     delayed_job (4.0.6)
@@ -478,6 +479,7 @@ DEPENDENCIES
   coveralls
   cucumber-rails
   daemon-spawn
+  daemons
   database_cleaner
   delayed_job_active_record
   factory_girl_rails

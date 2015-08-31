@@ -35,62 +35,21 @@ class ConferencesController < ApplicationController
 
 	# GET /conferences/1/edit
 	def edit
-		if !current_user
-			raise ActiveRecord::PremissionDenied
-		end
-		@host = @conference.organizations[0].locations[0]
-		#points = Geocoder::Calculations.bounding_box([@host.latitude, @host.longitude], 50, { :unit => :km })
-		result = Geocoder.search(@host.city + ', ' + @host.territory + ' ' + @host.country).first
-		points = Geocoder::Calculations.bounding_box([result.latitude, result.longitude], 5, { :unit => :km })
-		response = RestClient.get 'http://www.panoramio.com/map/get_panoramas.php', :params => {:set => :public, :size => :original, :from => 0, :to => 20, :mapfilter => false, :miny => points[0], :minx => points[1], :maxy => points[2], :maxx => points[3]}
-		if response.code == 200
-			@parse_data = JSON.parse(response.to_str)
-		end
-	end
-
-	# POST /conferences
-	def create
-		@conference = Conference.new(conference_params)
-
-		if @conference.save
-			redirect_to @conference, notice: 'Conference was successfully created.'
-		else
-			render action: 'new'
-		end
+		set_conference
+		set_conference_registration
+		raise ActiveRecord::PremissionDenied unless (current_user && @this_conference.host?(current_user))
 	end
 
 	# PATCH/PUT /conferences/1
-	def update
-		if params[:register]
-			registration = ConferenceRegistration.find_by(:user_id => current_user.id, :conference_id => @conference.id)
-			if registration
-				registration.conference_registration_responses.destroy_all
-				registration.is_attending = params[:is_attending]
-			else
-				registration = ConferenceRegistration.new(user_id: current_user.id, conference_id: @conference.id, is_attending: params[:is_attending])
-			end
-			data = Hash.new
-			params.each do |key, value|
-				matches = /^field_(\d+)(_(\d+|other))?/.match(key)
-				if matches
-					if matches[3] == nil
-						data[matches[1]] = value
-					else
-						data[matches[1]] ||= Hash.new
-						data[matches[1]][matches[3]] = value
-					end
-				end
-			end
-			data.each do |key, value|
-				registration.conference_registration_responses << ConferenceRegistrationResponse.new(registration_form_field_id: key.to_i, data: value.to_json)
-			end
-			registration.save!
-			render action: 'show'
-		elsif @conference.update(conference_params)
-			redirect_to @conference, notice: 'Conference was successfully updated.'
-		else
-			render action: 'edit'
-		end
+	def save
+		set_conference
+		set_conference_registration
+		raise ActiveRecord::PremissionDenied unless (current_user && @this_conference.host?(current_user))
+
+		@this_conference.info = params[:info]
+		@this_conference.save
+
+		redirect_to edit_conference_path @this_conference
 	end
 
 	def hosts
@@ -889,6 +848,7 @@ class ConferencesController < ApplicationController
 					workshops_path(@conference.slug) => 'registration.Workshops'
 				}
 				if @is_host
+					@submenu[edit_conference_path(@conference.slug)] = 'registration.Edit'
 					@submenu[stats_path(@conference.slug)] = 'registration.Stats'
 					@submenu[broadcast_path(@conference.slug)] = 'registration.Broadcast'
 				end

@@ -1738,3 +1738,10 @@ $header-tilt: 8deg;
 		}
 	}
 }
+
+.froala-wrapper + div {
+	width: 0;
+	height: 0;
+	overflow: hidden;
+	opacity: 0;
+}

@@ -1,5 +1,26 @@
-- page_style :form
+= render 'page_header', :page_key => 'Edit'
+%article
+	= row do
+		= columns(medium: 12) do
+			= form_tag save_conference_path(@this_conference.slug), class: 'composition' do
+				.text-editor.input-field
+					= label_tag :info
+					= text_area_tag :info, @this_conference.info, :required => true
+				.actions.right
+					= button_tag :save, :value => :save
 
-= tabs!
-.row
-	= render 'form'
+:javascript
+	window.jQuery || document.write('<script src="https://code.jquery.com/jquery-2.1.3.min.js"><\/script>')
+= javascript_include_tag "froala_editor.min.js"
+= stylesheet_link_tag "froala_editor.min.css"
+= stylesheet_link_tag "font-awesome.min.css"
+:javascript
+	$(function() {
+		$('.text-editor textarea').editable({
+			language: '<% I18n.locale.to_s %>',
+			inlineMode: false,
+			blockTags: ["n", "p", "h2", "blockquote", "pre"],
+			buttons: ["formatBlock", "bold", "italic", "underline", "insertOrderedList", "insertUnorderedList", "sep", "createLink", "html", "undo", "redo"],
+			colors: ['#00ADEF', '#DD57EF', '#E6C74B', 'REMOVE']
+		});
+	});
