@@ -592,6 +592,7 @@ form {
 
 	button, .button {
 		margin: 0 0.25em;
+	    vertical-align: middle;
 	}
 
 	&.right {
@@ -1116,45 +1117,6 @@ $header-tilt: 8deg;
 			form {
 				margin-top: 2em;
 			}
-		}
-
-		.lingua-franca-navigation {
-			width: 25%;
-			@include clearfix;
-
-			ul {
-				padding: 0;
-				list-style: none;
-				font-weight: normal;
-				@include font-family(secondary);
-
-				ul {
-					margin-left: 1em;
-					margin-bottom: 1em;
-					@include font-family(primary);
-				}
-			}
-
-			.current {
-				@include before {
-					content: '';
-					display: block;
-					position: absolute;
-					width: 0;
-					height: 0;
-					left: -1.5em;
-					top: 0.6667em;
-					border-width: 1em 0 1em 1em;
-					border-color: transparent transparent transparent #333;
-					border-style: solid;
-					font-size: 0.25em;
-				}
-			}
-		}
-
-		#lingua-franca-keys {
-			width: 75%;
-			float: right;
 		}
 	}
 

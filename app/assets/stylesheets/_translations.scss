@@ -65,17 +65,10 @@ $bumbleberry-no-markup: true;
 
 #lingua-franca-translation-form {
 	padding: rems(1) 7.5%;
-	background-color: #FFF;
 	@include default-box-shadow(bottom, 2);
-	position: fixed;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	background-color: #FFF;
-	z-index: 1;
 	max-width: 100%;
 
-	button[type="submit"] {
+	/*button[type="submit"] {
 		position: absolute;
 		right: 7.5%;
 		top: 1em;
@@ -86,7 +79,7 @@ $bumbleberry-no-markup: true;
 			cursor: default;
 			@include _(opacity, 0);
 		}
-	}
+	}*/
 }
 
 #lingua-franca-translation-form h2,
@@ -171,6 +164,8 @@ $bumbleberry-no-markup: true;
 	width: 100%;
 	overflow: hidden;
 	margin-bottom: 100%;
+	background-color: transparent;
+	@include _(box-shadow, none);
 
 	th {
 		text-align: left;
@@ -212,7 +207,7 @@ $bumbleberry-no-markup: true;
 		background-color: $colour-1;
 
 		a {
-			color: #FFF;
+			color: $white;
 
 			.variable {
 				color: inherit;
@@ -231,13 +226,40 @@ $bumbleberry-no-markup: true;
 			display: table-cell;
 		}
 	}
+
+	.lingua-franca-navigation {
+		ul {
+			padding: 0;
+			list-style: none;
+			font-weight: normal;
+			@include font-family(secondary);
+
+			ul {
+				margin-left: 1em;
+				margin-bottom: 1em;
+				@include font-family(primary);
+			}
+		}
+
+		.current {
+			@include before {
+				content: '';
+				display: block;
+				position: absolute;
+				width: 0;
+				height: 0;
+				left: -1.5em;
+				top: 0.6667em;
+				border-width: 1em 0 1em 1em;
+				border-color: transparent transparent transparent #333;
+				border-style: solid;
+				font-size: 0.25em;
+			}
+		}
+	}
 }
 
 @include breakpoint(large) {
-	body.fixed-banner #main {
-		padding-top: rems(24);
-	}
-
 	#lingua-franca-keys {
 		margin-bottom: 0;
 	}
@@ -245,7 +267,7 @@ $bumbleberry-no-markup: true;
 	#lingua-franca-translation-form {
 		position: relative;
 		padding: 1rem 7.5%;
-		background-color: #FFF;
+		background-color: $white;
 		@include default-box-shadow(top, 2);
 	}
 }
@@ -255,12 +277,11 @@ $bumbleberry-no-markup: true;
 	@include default-box-shadow(top, 2);
 }
 
-.lingua-franca-translations .translation-examples {
-	//width: 100%;
-	padding: 0 7.5%;
-	z-index: 1;
-	background-color: $white;
-	padding-bottom: 0.5vh;
+.lingua-franca-translations {
+	.translation-examples, #lingua-franca-translation-history {
+		padding: 0 7.5%;
+		padding-bottom: 0.5vh;
+	}
 }
 
 html #lingua-franca-translation-form {
@@ -341,17 +362,16 @@ html #lingua-franca-translation-form {
 			position: fixed;
 			z-index: 99;
 		}
-		
-		/*@include before {
-			content: '';
-			position: fixed;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			left: 0;
-			z-index: 101;
-			cursor: pointer;
-		}*/
+	}
+
+	@include breakpoint(large) {
+		&.open {
+			iframe {
+				width: 100%;
+				height: 100%;
+				@include _(transform, scale(0.9) translate(0, 0));
+			}
+		}
 	}
 }
 
@@ -363,19 +383,23 @@ html #lingua-franca-translation-form {
     margin-right: 0.25em;
 }
 
-.translation-history .translation-diff-info,
-.translation-history .diff ul {
+#lingua-franca-keys .translation-history {
+	display: none;
+}
+
+#lingua-franca-translation-history .translation-diff-info,
+#lingua-franca-translation-history .diff ul {
     list-style: none;
     padding: 0;
 }
 
-.translation-history .translation-diff-info li {
+#lingua-franca-translation-history .translation-diff-info li {
     margin-bottom: 0.5em;
     font-style: italic;
 }
 
-.translation-history .translation-diff-info li,
-.translation-history .diff li {
+#lingua-franca-translation-history .translation-diff-info li,
+#lingua-franca-translation-history .diff li {
     width: 50%;
     display: inline-block;
     float: left;
@@ -384,4 +408,34 @@ html #lingua-franca-translation-form {
 #lingua-franca-keys td a .undefined {
 	font-style: italic;
 	color: #888;
+}
+
+.lingua-franca-translations {
+    position: fixed;
+    z-index: -2;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    background-color: $white;
+    @include _(transform, scale(0));
+    $transition-time: 250ms;
+    @include _(transition, #{transform $transition-time ease-in-out, z-index 0ms linear $transition-time});
+
+	&.editing {
+		z-index: 1;
+    	@include _(transform, scale(1));
+    	@include _(transition, transform $transition-time ease-in-out);
+	}
+}
+
+@include breakpoint(large) {
+	.lingua-franca-translations {
+		left: $sidebar-width;
+	}
+
+	.actions {
+		margin-top: 1em;
+	}
 }
