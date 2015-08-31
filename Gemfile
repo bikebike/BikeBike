@@ -82,6 +82,7 @@ end
 group :production, :preview do
 	gem 'unicorn'
 	gem 'daemon-spawn'
+	gem 'daemons'
 end
 
 platforms 'mswin', 'mingw' do
