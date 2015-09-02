@@ -13,7 +13,7 @@
 <link href="/apple-touch-icon-144x144.png" rel="apple-touch-icon" sizes="144x144">
 
 </head>
-<body class="do_confirm">
+<body class="conferences conferences-register">
 <nav>
 <div id="main-nav">
 <div class="inner-nav">
@@ -25,43 +25,37 @@
 <a href="/policy/"><span><span class="translated-content" data-i18n-key="page_titles.Safe_Space_Policy" data-i18n-needs-translation="0">Safer Space Agreement</span></span></a>
 </div>
 <div class="actions">
-<a class="button register" href="/conferences/MyBikeBike/register/"><span class="translated-content" data-i18n-key="conference.actions.Register" data-i18n-needs-translation="0">Register</span>
-</a></div>
+</div>
 </div>
 </div>
 </nav>
 
 <main id="main">
 <header id="banner">
-<div class="short" id="header-title">
-<svg>
-  <defs>
-    <filter id="saturate">
-      <feColorMatrix in="SourceGraphic" type="saturate" values=".25" result="A"></feColorMatrix>
-    </filter>
-    <image x="0" y="0" width="100%" height="100%" href="/assets/grafitti.jpg" id="banner-image" preserveAspectRatio="xMidYMid slice" filter="url(#saturate)"></image>
-  
-    <filter id="banner-img" x="0" y="0" width="1" height="1">
-      <feImage href="#banner-image" result="banner-image"></feImage>
-      <feBlend mode="multiply" in="banner-image" in2="SourceGraphic"></feBlend>
-    </filter>
-  </defs>
- 
-  <rect x="0" y="0" width="100%" height="100%" filter="url(#banner-img)"></rect>
-</svg>
+<div class="short" id="header-title" style="background-image: url(/assets/empty-racks.jpg)">
 
-<h1><span class="translated-content" data-i18n-key="page_titles.403.Please_Check_Email" data-i18n-needs-translation="0">Please check your email</span></h1>
+
+<h1><span class="translated-content" data-i18n-key="page_titles.conferences.Conference_Registration" data-i18n-needs-translation="0">Conference Registration</span></h1>
 </div>
 
 </header>
-<div id="content"><article>
-<article>
-<div class="row"><div class="columns medium-12"><h2><span class="translated-content" data-i18n-key="articles.conference_registration.headings.email_confirm" data-i18n-needs-translation="0">Confirm Email</span></h2>
-</div><div class="columns medium-12"><span class="translated-content" data-i18n-key="articles.conference_registration.paragraphs.email_confirm" data-i18n-needs-translation="0"><p>Go to your inbox! You should see an email from Bike!Bike! in just a few moments. There will be a link in the email for you to click on. Check your spam box if you do not see it. If you encounter any problems, please email to <a href="mailto:admin@bikebike.org" target="_blank">admin@bikebike.org</a>.</p>
-</span>
-</div></div></article>
+<div id="content">
 
-</article>
+<article>
+<div class="row"><article>
+<div class="columns medium-12"><h2><span class="translated-content" data-i18n-key="articles.conference_registration.headings.Enter_Your_Email" data-i18n-needs-translation="0">Enter your email address</span></h2>
+</div><div class="columns medium-6 large-7"><p><span class="translated-content" data-i18n-key="articles.conference_registration.paragraphs.confirm_email_address" data-i18n-needs-translation="0">We ask that you first confirm your email address, once your email address is confirmed you will be able to complete registration, add workshops and pay your registration donation fee. If you have already registered, you can&nbsp;re-confirm you e-mail address to modify your&nbsp;your registration details.</span></p>
+</div><div class="columns medium-6 large-5"><form action="/doconfirm/" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓">
+<div class="email-field input-field">
+<input type="email" name="email" id="email" required="required">
+<label for="email"><span class="translated-content" data-i18n-key="forms.labels.generic.email" data-i18n-needs-translation="0">Email address</span></label>
+</div>
+<span class="translated-content" data-i18n-key="forms.actions.generic.register" data-i18n-needs-translation="0"><button name="button" type="submit" value="register">Register</button></span>
+</form>
+
+</div></article>
+
+</div></article>
 </div>
 </main>
 
@@ -77,19 +71,19 @@
 </a>
 </div>
 <div class="facebook">
-<span class="translated-content" data-i18n-key="links.footer.help_text.facebook" data-i18n-needs-translation="0"><a href="https://www.facebook.com/groups/648758205249998/" target="_blank" title="Join our Facebook group">
+<span class="translated-contentblock" data-i18n-key="links.footer.help_text.facebook" data-i18n-needs-translation="0"><a href="https://www.facebook.com/groups/648758205249998/" target="_blank" title="Join our Facebook group">
 <img src="/assets/bb-icon-fb.png" class="sprite icons bb-icon-fb">
 </a>
 </span></div>
 <div class="locale">
-<span class="translated-content" data-i18n-key="links.footer.help_text.select_language" data-i18n-needs-translation="0"><input id="select-language" type="checkbox">
+<span class="translated-contentblock" data-i18n-key="links.footer.help_text.select_language" data-i18n-needs-translation="0"><input id="select-language" type="checkbox">
 <label class="launch" for="select-language" title="Change your language">
 EN
 </label>
 <div class="selector">
 <ul>
 <li>
-<a href="/doconfirm/">
+<a href="/conferences/MyBikeBike/register/">
 EN
 </a>
 <span>English</span>
@@ -98,7 +92,7 @@ EN
 </div>
 </span></div>
 <div class="copy">
-<span class="translated-content" data-i18n-key="links.footer.help_text.contributors" data-i18n-needs-translation="0"><a title="Contributors" href="/humans.txt">©2015 Bike!Bike!
+<span class="translated-contentblock" data-i18n-key="links.footer.help_text.contributors" data-i18n-needs-translation="0"><a title="Contributors" href="/humans.txt">©2015 Bike!Bike!
 </a></span></div>
 </footer>
 </div>

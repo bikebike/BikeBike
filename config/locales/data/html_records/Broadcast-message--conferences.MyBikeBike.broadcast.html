@@ -54,13 +54,23 @@
 </div></div><div id="content">
 
 <article>
-<div class="row"><div class="columns medium-12"><p><span class="translated-content" data-i18n-key="articles.conference_registration.paragraphs.participants_emailed" data-i18n-needs-translation="0">Your email has been sent to all participants of&nbsp;%{conference_title}.</span></p>
-<h2><span class="translated-content" data-i18n-key="articles.conference_registration.headings.Preview" data-i18n-needs-translation="0">Preview</span></h2>
-<div class="email-preview">
-<h3>My Subject</h3>
-&lt;p&gt;Lorem Ipsum&lt;/p&gt;
-
+<div class="row"><div class="columns medium-12"><span class="translated-contentblock" data-i18n-key="articles.conference_registration.paragraphs.Email_Participants" data-i18n-needs-translation="0"><p>This page is used to contact all participants. Text can be entered as <a href="http://daringfireball.net/projects/markdown/basics" target="_blank">Markdown</a>. Pressing 'test' will send the email only to you, make sure you do this and use caution in general before pressing 'send'</p>
+</span>
+<form class="composition" action="/conferences/MyBikeBike/broadcast/" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓">
+<div class="text-field input-field big">
+<label for="subject"><span class="translated-content" data-i18n-key="forms.labels.generic.subject" data-i18n-needs-translation="0">Subject</span></label>
+<input type="text" name="subject" id="subject" required="required">
 </div>
+<div class="select-field input-field">
+<label for="content"><span class="translated-content" data-i18n-key="forms.labels.generic.content" data-i18n-needs-translation="0">Content</span></label>
+<textarea name="content" id="content" required="required"></textarea>
+</div>
+<div class="actions right">
+<span class="translated-content" data-i18n-key="forms.actions.generic.preview" data-i18n-needs-translation="0"><button name="button" type="submit" value="preview">Preview</button></span>
+<span class="translated-content" data-i18n-key="forms.actions.generic.test" data-i18n-needs-translation="0"><button name="button" type="submit" value="test">Test</button></span>
+</div>
+</form>
+
 </div></div></article>
 </div>
 </main>
@@ -77,12 +87,12 @@
 </a>
 </div>
 <div class="facebook">
-<span class="translated-content" data-i18n-key="links.footer.help_text.facebook" data-i18n-needs-translation="0"><a href="https://www.facebook.com/groups/648758205249998/" target="_blank" title="Join our Facebook group">
+<span class="translated-contentblock" data-i18n-key="links.footer.help_text.facebook" data-i18n-needs-translation="0"><a href="https://www.facebook.com/groups/648758205249998/" target="_blank" title="Join our Facebook group">
 <img src="/assets/bb-icon-fb.png" class="sprite icons bb-icon-fb">
 </a>
 </span></div>
 <div class="locale">
-<span class="translated-content" data-i18n-key="links.footer.help_text.select_language" data-i18n-needs-translation="0"><input id="select-language" type="checkbox">
+<span class="translated-contentblock" data-i18n-key="links.footer.help_text.select_language" data-i18n-needs-translation="0"><input id="select-language" type="checkbox">
 <label class="launch" for="select-language" title="Change your language">
 EN
 </label>
@@ -98,7 +108,7 @@ EN
 </div>
 </span></div>
 <div class="copy">
-<span class="translated-content" data-i18n-key="links.footer.help_text.contributors" data-i18n-needs-translation="0"><a title="Contributors" href="/humans.txt">©2015 Bike!Bike!
+<span class="translated-contentblock" data-i18n-key="links.footer.help_text.contributors" data-i18n-needs-translation="0"><a title="Contributors" href="/humans.txt">©2015 Bike!Bike!
 </a></span></div>
 </footer>
 </div>

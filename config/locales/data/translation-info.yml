@@ -4,60 +4,60 @@ geography.subregions.CA.NS:
   - /
   examples:
   - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
+  - See-a-more-info-link---1
+  - Start-registration-from-landing-page--
+  - Start-registration-from-landing-page---1
 date.formats.span_same_month_date_1:
   pages:
   - /
   examples:
   - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
+  - See-a-more-info-link---1
+  - See-a-register-link--
+  - See-a-register-link---1
+  - Start-registration-from-landing-page--
+  - Start-registration-from-landing-page---1
   - View-stats--
-  - View-stats--
+  - View-stats---1
   - Create-workshop--
-  - Create-workshop--
+  - Create-workshop---1
   - Broadcast-message--
-  - Broadcast-message--
+  - Broadcast-message---1
 date.month_names:
   pages:
   - /
   - /conferences/:slug/register
   examples:
   - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - See-a-more-info-link---1
+  - See-a-register-link--
+  - See-a-register-link---1
+  - Start-registration-from-landing-page--
+  - Start-registration-from-landing-page---1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
   - View-stats--
-  - View-stats--
+  - View-stats---1
   - Create-workshop--
-  - Create-workshop--
+  - Create-workshop---1
   - Broadcast-message--
-  - Broadcast-message--
+  - Broadcast-message---1
 date.formats.span_same_month_date_2:
   pages:
   - /
   examples:
   - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
+  - See-a-more-info-link---1
+  - See-a-register-link--
+  - See-a-register-link---1
+  - Start-registration-from-landing-page--
+  - Start-registration-from-landing-page---1
   - View-stats--
-  - View-stats--
+  - View-stats---1
   - Create-workshop--
-  - Create-workshop--
+  - Create-workshop---1
   - Broadcast-message--
-  - Broadcast-message--
+  - Broadcast-message---1
 date.date_span:
   pages:
   - /
@@ -66,17 +66,17 @@ date.date_span:
   - :date_2
   examples:
   - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
+  - See-a-more-info-link---1
+  - See-a-register-link--
+  - See-a-register-link---1
+  - Start-registration-from-landing-page--
+  - Start-registration-from-landing-page---1
   - View-stats--
-  - View-stats--
+  - View-stats---1
   - Create-workshop--
-  - Create-workshop--
+  - Create-workshop---1
   - Broadcast-message--
-  - Broadcast-message--
+  - Broadcast-message---1
 page_descriptions.home:
   pages:
   - /
@@ -96,52 +96,52 @@ page_descriptions.home:
   - /error_404
   examples:
   - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
+  - See-a-more-info-link---1
+  - See-a-register-link--
+  - See-a-register-link---1
+  - Start-registration-from-landing-page--
+  - Start-registration-from-landing-page---1
   - Start-registration-from-landing-page--conferences.MyBikeBike.register
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
   - Start-registration-from-landing-page--doconfirm
-  - Start-registration-from-landing-page--doconfirm
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
+  - Start-registration-from-landing-page--doconfirm-1
   - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-4
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-5
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
   - View-stats--confirm.test
-  - View-stats--confirm.test
+  - View-stats--confirm.test-1
   - View-stats--
-  - View-stats--
+  - View-stats---1
   - View-stats--conferences.MyBikeBike.stats
   - Create-workshop--confirm.test
-  - Create-workshop--confirm.test
+  - Create-workshop--confirm.test-1
   - Create-workshop--
-  - Create-workshop--
+  - Create-workshop---1
   - Create-workshop--conferences.MyBikeBike.register
   - Create-workshop--conferences.MyBikeBike.workshops
   - Create-workshop--conferences.MyBikeBike.workshops.create
   - Create-workshop--conferences.MyBikeBike.workshops.1
-  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
   - Create-workshop--conferences.MyBikeBike.workshops.1.edit
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-2
+  - Create-workshop--conferences.MyBikeBike.workshops.1-3
   - Create-workshop--conferences.MyBikeBike.workshops.1.delete
   - Create-workshop--conferences.MyBikeBike.workshops-1
   - Broadcast-message--confirm.test
-  - Broadcast-message--confirm.test
+  - Broadcast-message--confirm.test-1
   - Broadcast-message--
-  - Broadcast-message--
+  - Broadcast-message---1
   - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast-1
+  - Broadcast-message--conferences.MyBikeBike.broadcast-2
+  - Broadcast-message--conferences.MyBikeBike.broadcast-3
   - Read-the-about-page--about
   - Read-the-policy-page--policy
   - See-a-404-page--error_404
-  - See-a-404-page--error_404
+  - See-a-404-page--error_404-1
 page_titles.About_BikeBike:
   pages:
   - /
@@ -161,52 +161,52 @@ page_titles.About_BikeBike:
   - /error_404
   examples:
   - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
+  - See-a-more-info-link---1
+  - See-a-register-link--
+  - See-a-register-link---1
+  - Start-registration-from-landing-page--
+  - Start-registration-from-landing-page---1
   - Start-registration-from-landing-page--conferences.MyBikeBike.register
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
   - Start-registration-from-landing-page--doconfirm
-  - Start-registration-from-landing-page--doconfirm
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
+  - Start-registration-from-landing-page--doconfirm-1
   - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-4
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-5
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
   - View-stats--confirm.test
-  - View-stats--confirm.test
+  - View-stats--confirm.test-1
   - View-stats--
-  - View-stats--
+  - View-stats---1
   - View-stats--conferences.MyBikeBike.stats
   - Create-workshop--confirm.test
-  - Create-workshop--confirm.test
+  - Create-workshop--confirm.test-1
   - Create-workshop--
-  - Create-workshop--
+  - Create-workshop---1
   - Create-workshop--conferences.MyBikeBike.register
   - Create-workshop--conferences.MyBikeBike.workshops
   - Create-workshop--conferences.MyBikeBike.workshops.create
   - Create-workshop--conferences.MyBikeBike.workshops.1
-  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
   - Create-workshop--conferences.MyBikeBike.workshops.1.edit
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-2
+  - Create-workshop--conferences.MyBikeBike.workshops.1-3
   - Create-workshop--conferences.MyBikeBike.workshops.1.delete
   - Create-workshop--conferences.MyBikeBike.workshops-1
   - Broadcast-message--confirm.test
-  - Broadcast-message--confirm.test
+  - Broadcast-message--confirm.test-1
   - Broadcast-message--
-  - Broadcast-message--
+  - Broadcast-message---1
   - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast-1
+  - Broadcast-message--conferences.MyBikeBike.broadcast-2
+  - Broadcast-message--conferences.MyBikeBike.broadcast-3
   - Read-the-about-page--about
   - Read-the-policy-page--policy
   - See-a-404-page--error_404
-  - See-a-404-page--error_404
+  - See-a-404-page--error_404-1
 page_titles.Safe_Space_Policy:
   pages:
   - /
@@ -226,52 +226,52 @@ page_titles.Safe_Space_Policy:
   - /error_404
   examples:
   - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
+  - See-a-more-info-link---1
+  - See-a-register-link--
+  - See-a-register-link---1
+  - Start-registration-from-landing-page--
+  - Start-registration-from-landing-page---1
   - Start-registration-from-landing-page--conferences.MyBikeBike.register
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
   - Start-registration-from-landing-page--doconfirm
-  - Start-registration-from-landing-page--doconfirm
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
+  - Start-registration-from-landing-page--doconfirm-1
   - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-4
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-5
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
   - View-stats--confirm.test
-  - View-stats--confirm.test
+  - View-stats--confirm.test-1
   - View-stats--
-  - View-stats--
+  - View-stats---1
   - View-stats--conferences.MyBikeBike.stats
   - Create-workshop--confirm.test
-  - Create-workshop--confirm.test
+  - Create-workshop--confirm.test-1
   - Create-workshop--
-  - Create-workshop--
+  - Create-workshop---1
   - Create-workshop--conferences.MyBikeBike.register
   - Create-workshop--conferences.MyBikeBike.workshops
   - Create-workshop--conferences.MyBikeBike.workshops.create
   - Create-workshop--conferences.MyBikeBike.workshops.1
-  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
   - Create-workshop--conferences.MyBikeBike.workshops.1.edit
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-2
+  - Create-workshop--conferences.MyBikeBike.workshops.1-3
   - Create-workshop--conferences.MyBikeBike.workshops.1.delete
   - Create-workshop--conferences.MyBikeBike.workshops-1
   - Broadcast-message--confirm.test
-  - Broadcast-message--confirm.test
+  - Broadcast-message--confirm.test-1
   - Broadcast-message--
-  - Broadcast-message--
+  - Broadcast-message---1
   - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast-1
+  - Broadcast-message--conferences.MyBikeBike.broadcast-2
+  - Broadcast-message--conferences.MyBikeBike.broadcast-3
   - Read-the-about-page--about
   - Read-the-policy-page--policy
   - See-a-404-page--error_404
-  - See-a-404-page--error_404
+  - See-a-404-page--error_404-1
 donate.button_label:
   pages:
   - /
@@ -281,11 +281,11 @@ donate.button_label:
   context: Donate!
   examples:
   - See-a-more-info-link--
-  - See-a-more-info-link--
+  - See-a-more-info-link---1
   - Read-the-about-page--about
   - Read-the-policy-page--policy
   - See-a-404-page--error_404
-  - See-a-404-page--error_404
+  - See-a-404-page--error_404-1
 links.footer.text.File_an_Issue:
   pages:
   - /
@@ -305,52 +305,52 @@ links.footer.text.File_an_Issue:
   - /error_404
   examples:
   - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
+  - See-a-more-info-link---1
+  - See-a-register-link--
+  - See-a-register-link---1
+  - Start-registration-from-landing-page--
+  - Start-registration-from-landing-page---1
   - Start-registration-from-landing-page--conferences.MyBikeBike.register
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
   - Start-registration-from-landing-page--doconfirm
-  - Start-registration-from-landing-page--doconfirm
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
+  - Start-registration-from-landing-page--doconfirm-1
   - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-4
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-5
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
   - View-stats--confirm.test
-  - View-stats--confirm.test
+  - View-stats--confirm.test-1
   - View-stats--
-  - View-stats--
+  - View-stats---1
   - View-stats--conferences.MyBikeBike.stats
   - Create-workshop--confirm.test
-  - Create-workshop--confirm.test
+  - Create-workshop--confirm.test-1
   - Create-workshop--
-  - Create-workshop--
+  - Create-workshop---1
   - Create-workshop--conferences.MyBikeBike.register
   - Create-workshop--conferences.MyBikeBike.workshops
   - Create-workshop--conferences.MyBikeBike.workshops.create
   - Create-workshop--conferences.MyBikeBike.workshops.1
-  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
   - Create-workshop--conferences.MyBikeBike.workshops.1.edit
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-2
+  - Create-workshop--conferences.MyBikeBike.workshops.1-3
   - Create-workshop--conferences.MyBikeBike.workshops.1.delete
   - Create-workshop--conferences.MyBikeBike.workshops-1
   - Broadcast-message--confirm.test
-  - Broadcast-message--confirm.test
+  - Broadcast-message--confirm.test-1
   - Broadcast-message--
-  - Broadcast-message--
+  - Broadcast-message---1
   - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast-1
+  - Broadcast-message--conferences.MyBikeBike.broadcast-2
+  - Broadcast-message--conferences.MyBikeBike.broadcast-3
   - Read-the-about-page--about
   - Read-the-policy-page--policy
   - See-a-404-page--error_404
-  - See-a-404-page--error_404
+  - See-a-404-page--error_404-1
 links.footer.text.Help_contribute:
   pages:
   - /
@@ -370,52 +370,52 @@ links.footer.text.Help_contribute:
   - /error_404
   examples:
   - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
+  - See-a-more-info-link---1
+  - See-a-register-link--
+  - See-a-register-link---1
+  - Start-registration-from-landing-page--
+  - Start-registration-from-landing-page---1
   - Start-registration-from-landing-page--conferences.MyBikeBike.register
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
   - Start-registration-from-landing-page--doconfirm
-  - Start-registration-from-landing-page--doconfirm
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
+  - Start-registration-from-landing-page--doconfirm-1
   - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-4
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-5
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
   - View-stats--confirm.test
-  - View-stats--confirm.test
+  - View-stats--confirm.test-1
   - View-stats--
-  - View-stats--
+  - View-stats---1
   - View-stats--conferences.MyBikeBike.stats
   - Create-workshop--confirm.test
-  - Create-workshop--confirm.test
+  - Create-workshop--confirm.test-1
   - Create-workshop--
-  - Create-workshop--
+  - Create-workshop---1
   - Create-workshop--conferences.MyBikeBike.register
   - Create-workshop--conferences.MyBikeBike.workshops
   - Create-workshop--conferences.MyBikeBike.workshops.create
   - Create-workshop--conferences.MyBikeBike.workshops.1
-  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
   - Create-workshop--conferences.MyBikeBike.workshops.1.edit
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-2
+  - Create-workshop--conferences.MyBikeBike.workshops.1-3
   - Create-workshop--conferences.MyBikeBike.workshops.1.delete
   - Create-workshop--conferences.MyBikeBike.workshops-1
   - Broadcast-message--confirm.test
-  - Broadcast-message--confirm.test
+  - Broadcast-message--confirm.test-1
   - Broadcast-message--
-  - Broadcast-message--
+  - Broadcast-message---1
   - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast-1
+  - Broadcast-message--conferences.MyBikeBike.broadcast-2
+  - Broadcast-message--conferences.MyBikeBike.broadcast-3
   - Read-the-about-page--about
   - Read-the-policy-page--policy
   - See-a-404-page--error_404
-  - See-a-404-page--error_404
+  - See-a-404-page--error_404-1
 links.footer.help_text.facebook:
   pages:
   - /
@@ -436,52 +436,52 @@ links.footer.help_text.facebook:
   context: Join our facebook group
   examples:
   - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
+  - See-a-more-info-link---1
+  - See-a-register-link--
+  - See-a-register-link---1
+  - Start-registration-from-landing-page--
+  - Start-registration-from-landing-page---1
   - Start-registration-from-landing-page--conferences.MyBikeBike.register
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
   - Start-registration-from-landing-page--doconfirm
-  - Start-registration-from-landing-page--doconfirm
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
+  - Start-registration-from-landing-page--doconfirm-1
   - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-4
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-5
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
   - View-stats--confirm.test
-  - View-stats--confirm.test
+  - View-stats--confirm.test-1
   - View-stats--
-  - View-stats--
+  - View-stats---1
   - View-stats--conferences.MyBikeBike.stats
   - Create-workshop--confirm.test
-  - Create-workshop--confirm.test
+  - Create-workshop--confirm.test-1
   - Create-workshop--
-  - Create-workshop--
+  - Create-workshop---1
   - Create-workshop--conferences.MyBikeBike.register
   - Create-workshop--conferences.MyBikeBike.workshops
   - Create-workshop--conferences.MyBikeBike.workshops.create
   - Create-workshop--conferences.MyBikeBike.workshops.1
-  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
   - Create-workshop--conferences.MyBikeBike.workshops.1.edit
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-2
+  - Create-workshop--conferences.MyBikeBike.workshops.1-3
   - Create-workshop--conferences.MyBikeBike.workshops.1.delete
   - Create-workshop--conferences.MyBikeBike.workshops-1
   - Broadcast-message--confirm.test
-  - Broadcast-message--confirm.test
+  - Broadcast-message--confirm.test-1
   - Broadcast-message--
-  - Broadcast-message--
+  - Broadcast-message---1
   - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast-1
+  - Broadcast-message--conferences.MyBikeBike.broadcast-2
+  - Broadcast-message--conferences.MyBikeBike.broadcast-3
   - Read-the-about-page--about
   - Read-the-policy-page--policy
   - See-a-404-page--error_404
-  - See-a-404-page--error_404
+  - See-a-404-page--error_404-1
 links.footer.help_text.select_language:
   pages:
   - /
@@ -502,52 +502,52 @@ links.footer.help_text.select_language:
   context: Select your language
   examples:
   - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
+  - See-a-more-info-link---1
+  - See-a-register-link--
+  - See-a-register-link---1
+  - Start-registration-from-landing-page--
+  - Start-registration-from-landing-page---1
   - Start-registration-from-landing-page--conferences.MyBikeBike.register
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
   - Start-registration-from-landing-page--doconfirm
-  - Start-registration-from-landing-page--doconfirm
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
+  - Start-registration-from-landing-page--doconfirm-1
   - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-4
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-5
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
   - View-stats--confirm.test
-  - View-stats--confirm.test
+  - View-stats--confirm.test-1
   - View-stats--
-  - View-stats--
+  - View-stats---1
   - View-stats--conferences.MyBikeBike.stats
   - Create-workshop--confirm.test
-  - Create-workshop--confirm.test
+  - Create-workshop--confirm.test-1
   - Create-workshop--
-  - Create-workshop--
+  - Create-workshop---1
   - Create-workshop--conferences.MyBikeBike.register
   - Create-workshop--conferences.MyBikeBike.workshops
   - Create-workshop--conferences.MyBikeBike.workshops.create
   - Create-workshop--conferences.MyBikeBike.workshops.1
-  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
   - Create-workshop--conferences.MyBikeBike.workshops.1.edit
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-2
+  - Create-workshop--conferences.MyBikeBike.workshops.1-3
   - Create-workshop--conferences.MyBikeBike.workshops.1.delete
   - Create-workshop--conferences.MyBikeBike.workshops-1
   - Broadcast-message--confirm.test
-  - Broadcast-message--confirm.test
+  - Broadcast-message--confirm.test-1
   - Broadcast-message--
-  - Broadcast-message--
+  - Broadcast-message---1
   - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast-1
+  - Broadcast-message--conferences.MyBikeBike.broadcast-2
+  - Broadcast-message--conferences.MyBikeBike.broadcast-3
   - Read-the-about-page--about
   - Read-the-policy-page--policy
   - See-a-404-page--error_404
-  - See-a-404-page--error_404
+  - See-a-404-page--error_404-1
 languages.en:
   pages:
   - /
@@ -568,57 +568,57 @@ languages.en:
   examples:
   - See-a-more-info-link--
   - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
+  - See-a-more-info-link---1
+  - See-a-more-info-link---1
+  - See-a-register-link--
+  - See-a-register-link--
+  - See-a-register-link---1
+  - See-a-register-link---1
+  - Start-registration-from-landing-page--
+  - Start-registration-from-landing-page--
+  - Start-registration-from-landing-page---1
+  - Start-registration-from-landing-page---1
   - Start-registration-from-landing-page--conferences.MyBikeBike.register
   - Start-registration-from-landing-page--conferences.MyBikeBike.register
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
   - Start-registration-from-landing-page--doconfirm
   - Start-registration-from-landing-page--doconfirm
-  - Start-registration-from-landing-page--doconfirm
-  - Start-registration-from-landing-page--doconfirm
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--doconfirm-1
+  - Start-registration-from-landing-page--doconfirm-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-4
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-4
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-5
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-5
   - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
   - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
   - View-stats--confirm.test
   - View-stats--confirm.test
-  - View-stats--confirm.test
-  - View-stats--confirm.test
+  - View-stats--confirm.test-1
+  - View-stats--confirm.test-1
   - View-stats--
   - View-stats--
-  - View-stats--
-  - View-stats--
+  - View-stats---1
+  - View-stats---1
   - View-stats--conferences.MyBikeBike.stats
   - View-stats--conferences.MyBikeBike.stats
   - View-stats--conferences.MyBikeBike.stats
   - Create-workshop--confirm.test
   - Create-workshop--confirm.test
-  - Create-workshop--confirm.test
-  - Create-workshop--confirm.test
+  - Create-workshop--confirm.test-1
+  - Create-workshop--confirm.test-1
   - Create-workshop--
   - Create-workshop--
-  - Create-workshop--
-  - Create-workshop--
+  - Create-workshop---1
+  - Create-workshop---1
   - Create-workshop--conferences.MyBikeBike.register
   - Create-workshop--conferences.MyBikeBike.register
   - Create-workshop--conferences.MyBikeBike.workshops
@@ -628,43 +628,43 @@ languages.en:
   - Create-workshop--conferences.MyBikeBike.workshops.create
   - Create-workshop--conferences.MyBikeBike.workshops.1
   - Create-workshop--conferences.MyBikeBike.workshops.1
-  - Create-workshop--conferences.MyBikeBike.workshops.1
-  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
   - Create-workshop--conferences.MyBikeBike.workshops.1.edit
   - Create-workshop--conferences.MyBikeBike.workshops.1.edit
   - Create-workshop--conferences.MyBikeBike.workshops.1.edit
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-2
+  - Create-workshop--conferences.MyBikeBike.workshops.1-2
+  - Create-workshop--conferences.MyBikeBike.workshops.1-3
+  - Create-workshop--conferences.MyBikeBike.workshops.1-3
   - Create-workshop--conferences.MyBikeBike.workshops.1.delete
   - Create-workshop--conferences.MyBikeBike.workshops.1.delete
   - Create-workshop--conferences.MyBikeBike.workshops-1
   - Create-workshop--conferences.MyBikeBike.workshops-1
   - Broadcast-message--confirm.test
   - Broadcast-message--confirm.test
-  - Broadcast-message--confirm.test
-  - Broadcast-message--confirm.test
+  - Broadcast-message--confirm.test-1
+  - Broadcast-message--confirm.test-1
   - Broadcast-message--
   - Broadcast-message--
-  - Broadcast-message--
-  - Broadcast-message--
+  - Broadcast-message---1
+  - Broadcast-message---1
   - Broadcast-message--conferences.MyBikeBike.broadcast
   - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast-1
+  - Broadcast-message--conferences.MyBikeBike.broadcast-1
+  - Broadcast-message--conferences.MyBikeBike.broadcast-2
+  - Broadcast-message--conferences.MyBikeBike.broadcast-2
+  - Broadcast-message--conferences.MyBikeBike.broadcast-3
+  - Broadcast-message--conferences.MyBikeBike.broadcast-3
   - Read-the-about-page--about
   - Read-the-about-page--about
   - Read-the-policy-page--policy
   - Read-the-policy-page--policy
   - See-a-404-page--error_404
   - See-a-404-page--error_404
-  - See-a-404-page--error_404
-  - See-a-404-page--error_404
+  - See-a-404-page--error_404-1
+  - See-a-404-page--error_404-1
   context: English
 links.footer.help_text.contributors:
   pages:
@@ -686,95 +686,95 @@ links.footer.help_text.contributors:
   context: Who contributed to building this website
   examples:
   - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
+  - See-a-more-info-link---1
+  - See-a-register-link--
+  - See-a-register-link---1
+  - Start-registration-from-landing-page--
+  - Start-registration-from-landing-page---1
   - Start-registration-from-landing-page--conferences.MyBikeBike.register
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
   - Start-registration-from-landing-page--doconfirm
-  - Start-registration-from-landing-page--doconfirm
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
+  - Start-registration-from-landing-page--doconfirm-1
   - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-4
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-5
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
   - View-stats--confirm.test
-  - View-stats--confirm.test
+  - View-stats--confirm.test-1
   - View-stats--
-  - View-stats--
+  - View-stats---1
   - View-stats--conferences.MyBikeBike.stats
   - Create-workshop--confirm.test
-  - Create-workshop--confirm.test
+  - Create-workshop--confirm.test-1
   - Create-workshop--
-  - Create-workshop--
+  - Create-workshop---1
   - Create-workshop--conferences.MyBikeBike.register
   - Create-workshop--conferences.MyBikeBike.workshops
   - Create-workshop--conferences.MyBikeBike.workshops.create
   - Create-workshop--conferences.MyBikeBike.workshops.1
-  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
   - Create-workshop--conferences.MyBikeBike.workshops.1.edit
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-2
+  - Create-workshop--conferences.MyBikeBike.workshops.1-3
   - Create-workshop--conferences.MyBikeBike.workshops.1.delete
   - Create-workshop--conferences.MyBikeBike.workshops-1
   - Broadcast-message--confirm.test
-  - Broadcast-message--confirm.test
+  - Broadcast-message--confirm.test-1
   - Broadcast-message--
-  - Broadcast-message--
+  - Broadcast-message---1
   - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast-1
+  - Broadcast-message--conferences.MyBikeBike.broadcast-2
+  - Broadcast-message--conferences.MyBikeBike.broadcast-3
   - Read-the-about-page--about
   - Read-the-policy-page--policy
   - See-a-404-page--error_404
-  - See-a-404-page--error_404
+  - See-a-404-page--error_404-1
 geography.subregions.CA.NB:
   pages:
   - /
   examples:
-  - See-a-more-info-link--
-  - See-a-more-info-link--
+  - See-a-register-link--
+  - See-a-register-link---1
 conference.actions.Register:
   pages:
   - /
   - /doconfirm
   - /confirm/:token
   examples:
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
-  - See-a-more-info-link--
+  - See-a-register-link--
+  - See-a-register-link---1
+  - Start-registration-from-landing-page--
+  - Start-registration-from-landing-page---1
   - Start-registration-from-landing-page--doconfirm
-  - Start-registration-from-landing-page--doconfirm
+  - Start-registration-from-landing-page--doconfirm-1
   - View-stats--confirm.test
-  - View-stats--confirm.test
+  - View-stats--confirm.test-1
   - View-stats--
-  - View-stats--
+  - View-stats---1
   - Create-workshop--confirm.test
-  - Create-workshop--confirm.test
+  - Create-workshop--confirm.test-1
   - Create-workshop--
-  - Create-workshop--
+  - Create-workshop---1
   - Broadcast-message--confirm.test
-  - Broadcast-message--confirm.test
+  - Broadcast-message--confirm.test-1
   - Broadcast-message--
-  - Broadcast-message--
+  - Broadcast-message---1
 page_titles.conferences.Conference_Registration:
   pages:
   - /conferences/:slug/register
   - /conferences/:slug/register/:button/:confirmation_token
   examples:
   - Start-registration-from-landing-page--conferences.MyBikeBike.register
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register
   - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
   - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-4
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-5
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
   - Create-workshop--conferences.MyBikeBike.register
 articles.conference_registration.headings.Enter_Your_Email:
   pages:
@@ -782,34 +782,34 @@ articles.conference_registration.headings.Enter_Your_Email:
   context: Enter your email address
   examples:
   - Start-registration-from-landing-page--conferences.MyBikeBike.register
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
 articles.conference_registration.paragraphs.confirm_email_address:
   pages:
   - /conferences/:slug/register
   context: p
   examples:
   - Start-registration-from-landing-page--conferences.MyBikeBike.register
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
 forms.labels.generic.email:
   pages:
   - /conferences/:slug/register
   - /confirm/:token
   examples:
   - Start-registration-from-landing-page--conferences.MyBikeBike.register
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
   - View-stats--confirm.test
-  - View-stats--confirm.test
+  - View-stats--confirm.test-1
   - Create-workshop--confirm.test
-  - Create-workshop--confirm.test
+  - Create-workshop--confirm.test-1
   - Broadcast-message--confirm.test
-  - Broadcast-message--confirm.test
+  - Broadcast-message--confirm.test-1
 forms.actions.generic.register:
   pages:
   - /conferences/:slug/register
   examples:
   - Start-registration-from-landing-page--conferences.MyBikeBike.register
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register
   - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
 email.subject.confirm_email:
   pages:
   - /doconfirm
@@ -850,44 +850,44 @@ page_titles.404.Page_Not_Found:
   - /doconfirm
   - /error_404
   examples:
-  - Start-registration-from-landing-page--doconfirm
+  - Start-registration-from-landing-page--doconfirm-1
   - See-a-404-page--error_404
-  - See-a-404-page--error_404
+  - See-a-404-page--error_404-1
 error.404.title:
   pages:
   - /doconfirm
   - /error_404
   context: This page does not exist!
   examples:
-  - Start-registration-from-landing-page--doconfirm
+  - Start-registration-from-landing-page--doconfirm-1
   - See-a-404-page--error_404
-  - See-a-404-page--error_404
+  - See-a-404-page--error_404-1
 error.404.description:
   pages:
   - /doconfirm
   - /error_404
   context: p
   examples:
-  - Start-registration-from-landing-page--doconfirm
+  - Start-registration-from-landing-page--doconfirm-1
   - See-a-404-page--error_404
-  - See-a-404-page--error_404
+  - See-a-404-page--error_404-1
 articles.conference_registration.headings.Policy_Agreement:
   pages:
   - /conferences/:slug/register
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
 articles.conference_registration.paragraphs.Policy_Agreement:
   pages:
   - /conferences/:slug/register
   context: s
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
 articles.policy.headings.The_Agreement:
   pages:
   - /conferences/:slug/register
   - /policy
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
   - Read-the-policy-page--policy
 articles.policy.term.commitment:
   pages:
@@ -895,7 +895,7 @@ articles.policy.term.commitment:
   - /policy
   context: s
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
   - Read-the-policy-page--policy
 articles.policy.term.respect:
   pages:
@@ -903,7 +903,7 @@ articles.policy.term.respect:
   - /policy
   context: s
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
   - Read-the-policy-page--policy
 articles.policy.term.empowerment:
   pages:
@@ -911,7 +911,7 @@ articles.policy.term.empowerment:
   - /policy
   context: s
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
   - Read-the-policy-page--policy
 articles.policy.term.accessible:
   pages:
@@ -919,7 +919,7 @@ articles.policy.term.accessible:
   - /policy
   context: s
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
   - Read-the-policy-page--policy
 articles.policy.term.peaceful:
   pages:
@@ -927,7 +927,7 @@ articles.policy.term.peaceful:
   - /policy
   context: s
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
   - Read-the-policy-page--policy
 articles.policy.term.spaces:
   pages:
@@ -935,7 +935,7 @@ articles.policy.term.spaces:
   - /policy
   context: s
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
   - Read-the-policy-page--policy
 articles.policy.term.hearing:
   pages:
@@ -943,7 +943,7 @@ articles.policy.term.hearing:
   - /policy
   context: s
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
   - Read-the-policy-page--policy
 articles.policy.term.intent:
   pages:
@@ -951,7 +951,7 @@ articles.policy.term.intent:
   - /policy
   context: s
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
   - Read-the-policy-page--policy
 articles.policy.term.open_minds:
   pages:
@@ -959,7 +959,7 @@ articles.policy.term.open_minds:
   - /policy
   context: s
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
   - Read-the-policy-page--policy
 articles.policy.term.learning:
   pages:
@@ -967,7 +967,7 @@ articles.policy.term.learning:
   - /policy
   context: s
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
   - Read-the-policy-page--policy
 articles.policy.headings.Why:
   pages:
@@ -975,7 +975,7 @@ articles.policy.headings.Why:
   - /policy
   context: Why have a Safer Space Agreement?
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
   - Read-the-policy-page--policy
 articles.policy.paragraphs.Why:
   pages:
@@ -983,7 +983,7 @@ articles.policy.paragraphs.Why:
   - /policy
   context: p
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
   - Read-the-policy-page--policy
 articles.policy.headings.How:
   pages:
@@ -991,7 +991,7 @@ articles.policy.headings.How:
   - /policy
   context: How is the policy enforced?
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
   - Read-the-policy-page--policy
 articles.policy.paragraphs.How:
   pages:
@@ -999,19 +999,19 @@ articles.policy.paragraphs.How:
   - /policy
   context: p
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
   - Read-the-policy-page--policy
 articles.conference_registration.paragraphs.Confirm_Agreement:
   pages:
   - /conferences/:slug/register
   context: p
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
 forms.actions.generic.agree:
   pages:
   - /conferences/:slug/register
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
 forms.actions.generic.Log_out:
   pages:
   - /conferences/:slug/register
@@ -1025,99 +1025,99 @@ forms.actions.generic.Log_out:
   - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
   - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-4
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-5
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
   - View-stats--
-  - View-stats--
+  - View-stats---1
   - View-stats--conferences.MyBikeBike.stats
   - Create-workshop--
-  - Create-workshop--
+  - Create-workshop---1
   - Create-workshop--conferences.MyBikeBike.register
   - Create-workshop--conferences.MyBikeBike.workshops
   - Create-workshop--conferences.MyBikeBike.workshops.create
   - Create-workshop--conferences.MyBikeBike.workshops.1
-  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
   - Create-workshop--conferences.MyBikeBike.workshops.1.edit
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-2
+  - Create-workshop--conferences.MyBikeBike.workshops.1-3
   - Create-workshop--conferences.MyBikeBike.workshops.1.delete
   - Create-workshop--conferences.MyBikeBike.workshops-1
   - Broadcast-message--
-  - Broadcast-message--
+  - Broadcast-message---1
   - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast-1
+  - Broadcast-message--conferences.MyBikeBike.broadcast-2
+  - Broadcast-message--conferences.MyBikeBike.broadcast-3
 articles.conference_registration.headings.Registration_Info:
   pages:
   - /conferences/:slug/register
   context: Registration Info
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
 articles.conference_registration.paragraphs.Registration_Info:
   pages:
   - /conferences/:slug/register
   context: p
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
 articles.conference_registration.headings.name:
   pages:
   - /conferences/:slug/register
   context: What is your name?
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
 forms.labels.generic.name:
   pages:
   - /conferences/:slug/register
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
 articles.conference_registration.headings.location:
   pages:
   - /conferences/:slug/register
   context: Where are you coming from?
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
 forms.labels.generic.location:
   pages:
   - /conferences/:slug/register
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
 articles.conference_registration.headings.arrival_and_departure:
   pages:
   - /conferences/:slug/register
   context: How long do you plan to spend in the area?
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
 forms.labels.generic.arrival:
   pages:
   - /conferences/:slug/register
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
 forms.labels.generic.departure:
   pages:
   - /conferences/:slug/register
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
 articles.conference_registration.headings.languages:
   pages:
   - /conferences/:slug/register
   context: Which languages do you speak?
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
 languages.es:
   pages:
   - /conferences/:slug/register
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id/edit
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
   - Create-workshop--conferences.MyBikeBike.workshops.create
   - Create-workshop--conferences.MyBikeBike.workshops.1.edit
 languages.fr:
@@ -1126,7 +1126,7 @@ languages.fr:
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id/edit
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
   - Create-workshop--conferences.MyBikeBike.workshops.create
   - Create-workshop--conferences.MyBikeBike.workshops.1.edit
 articles.conference_registration.headings.housing:
@@ -1134,111 +1134,113 @@ articles.conference_registration.headings.housing:
   - /conferences/:slug/register
   context: Do you need a place to stay?
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
 articles.conference_registration.questions.housing.none:
   pages:
   - /conferences/:slug/register
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
 articles.conference_registration.questions.housing.tent:
   pages:
   - /conferences/:slug/register
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
 articles.conference_registration.questions.housing.house:
   pages:
   - /conferences/:slug/register
   - /conferences/:slug/stats
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
   - View-stats--conferences.MyBikeBike.stats
 articles.conference_registration.headings.bike:
   pages:
   - /conferences/:slug/register
   context: Do you need a bike?
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
 articles.conference_registration.questions.bike.none:
   pages:
   - /conferences/:slug/register
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
 articles.conference_registration.questions.bike.small:
   pages:
   - /conferences/:slug/register
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
 articles.conference_registration.questions.bike.medium:
   pages:
   - /conferences/:slug/register
+  - /conferences/:slug/stats
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
+  - View-stats--conferences.MyBikeBike.stats
 articles.conference_registration.questions.bike.large:
   pages:
   - /conferences/:slug/register
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
 articles.conference_registration.headings.food:
   pages:
   - /conferences/:slug/register
   context: What are your eating habits?
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
 articles.conference_registration.questions.food.meat:
   pages:
   - /conferences/:slug/register
   - /conferences/:slug/stats
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
   - View-stats--conferences.MyBikeBike.stats
 articles.conference_registration.questions.food.vegetarian:
   pages:
   - /conferences/:slug/register
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
 articles.conference_registration.questions.food.vegan:
   pages:
   - /conferences/:slug/register
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
 articles.conference_registration.headings.allergies:
   pages:
   - /conferences/:slug/register
   context: Do you have any allergies?
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
 forms.labels.generic.allergies:
   pages:
   - /conferences/:slug/register
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
 articles.conference_registration.headings.other:
   pages:
   - /conferences/:slug/register
   - /conferences/:slug/stats
   context: Anything else we should know about your visit?
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
   - View-stats--conferences.MyBikeBike.stats
 forms.labels.generic.other:
   pages:
   - /conferences/:slug/register
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
 articles.conference_registration.headings.Payment:
   pages:
   - /conferences/:slug/register
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-4
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-5
   - Create-workshop--conferences.MyBikeBike.register
 articles.conference_registration.paragraphs.Payment:
   pages:
@@ -1247,23 +1249,23 @@ articles.conference_registration.paragraphs.Payment:
     Payment is by donation and can be done now or upon arrival but to help us fund
     the conference, we ask that you pay the registration donation as soon as you can.
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-4
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-5
   - Create-workshop--conferences.MyBikeBike.register
 forms.actions.generic.custom_amount:
   pages:
   - /conferences/:slug/register
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-4
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-5
   - Create-workshop--conferences.MyBikeBike.register
 articles.conference_registration.paragraphs.currency:
   pages:
   - /conferences/:slug/register
   context: (amounts are in $USD)
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-4
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-5
   - Create-workshop--conferences.MyBikeBike.register
 menu.submenu.registration.Registration:
   pages:
@@ -1277,24 +1279,24 @@ menu.submenu.registration.Registration:
   - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-5
   - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
   - View-stats--conferences.MyBikeBike.stats
   - Create-workshop--conferences.MyBikeBike.register
   - Create-workshop--conferences.MyBikeBike.workshops
   - Create-workshop--conferences.MyBikeBike.workshops.create
   - Create-workshop--conferences.MyBikeBike.workshops.1
-  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
   - Create-workshop--conferences.MyBikeBike.workshops.1.edit
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-2
+  - Create-workshop--conferences.MyBikeBike.workshops.1-3
   - Create-workshop--conferences.MyBikeBike.workshops.1.delete
   - Create-workshop--conferences.MyBikeBike.workshops-1
   - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast-1
+  - Broadcast-message--conferences.MyBikeBike.broadcast-2
+  - Broadcast-message--conferences.MyBikeBike.broadcast-3
 menu.submenu.registration.Workshops:
   pages:
   - /conferences/:slug/register
@@ -1307,24 +1309,24 @@ menu.submenu.registration.Workshops:
   - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-5
   - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
   - View-stats--conferences.MyBikeBike.stats
   - Create-workshop--conferences.MyBikeBike.register
   - Create-workshop--conferences.MyBikeBike.workshops
   - Create-workshop--conferences.MyBikeBike.workshops.create
   - Create-workshop--conferences.MyBikeBike.workshops.1
-  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
   - Create-workshop--conferences.MyBikeBike.workshops.1.edit
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-2
+  - Create-workshop--conferences.MyBikeBike.workshops.1-3
   - Create-workshop--conferences.MyBikeBike.workshops.1.delete
   - Create-workshop--conferences.MyBikeBike.workshops-1
   - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast-1
+  - Broadcast-message--conferences.MyBikeBike.broadcast-2
+  - Broadcast-message--conferences.MyBikeBike.broadcast-3
 articles.conference_registration.headings.payment_confirm:
   pages:
   - /conferences/:slug/register/:button/:confirmation_token
@@ -1349,104 +1351,104 @@ articles.conference_registration.headings.Youre_Done:
   - /conferences/:slug/register
   context: You're Done!
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
 articles.conference_registration.paragraphs.done:
   pages:
   - /conferences/:slug/register
   context: p
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
 articles.conference_registration.paragraphs.workshops:
   pages:
   - /conferences/:slug/register
   context: You can now take a look at proposed workshops and even propose one yourself
     if you like.
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
 articles.conference_registration.actions.View_Workshops:
   pages:
   - /conferences/:slug/register
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
 articles.conference_registration.headings.Your_Registration:
   pages:
   - /conferences/:slug/register
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
 articles.conference_registration.headings.arrival:
   pages:
   - /conferences/:slug/register
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
 time.formats.long:
   pages:
   - /conferences/:slug/register
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
 time.am:
   pages:
   - /conferences/:slug/register
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
 articles.conference_registration.headings.departure:
   pages:
   - /conferences/:slug/register
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
 articles.conference_registration.none:
   pages:
   - /conferences/:slug/register
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
 articles.conference_registration.headings.payment:
   pages:
   - /conferences/:slug/register
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
 forms.actions.generic.edit_registration:
   pages:
   - /conferences/:slug/register
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
 page_titles.403.Please_Confirm_Email:
   pages:
   - /confirm/:token
   examples:
   - View-stats--confirm.test
-  - View-stats--confirm.test
+  - View-stats--confirm.test-1
   - Create-workshop--confirm.test
-  - Create-workshop--confirm.test
+  - Create-workshop--confirm.test-1
   - Broadcast-message--confirm.test
-  - Broadcast-message--confirm.test
+  - Broadcast-message--confirm.test-1
 articles.permission_denied.headings.confirm_email:
   pages:
   - /confirm/:token
   context: Please confirm your email address
   examples:
   - View-stats--confirm.test
-  - View-stats--confirm.test
+  - View-stats--confirm.test-1
   - Create-workshop--confirm.test
-  - Create-workshop--confirm.test
+  - Create-workshop--confirm.test-1
   - Broadcast-message--confirm.test
-  - Broadcast-message--confirm.test
+  - Broadcast-message--confirm.test-1
 forms.actions.generic.login:
   pages:
   - /confirm/:token
   examples:
   - View-stats--confirm.test
-  - View-stats--confirm.test
+  - View-stats--confirm.test-1
   - Create-workshop--confirm.test
-  - Create-workshop--confirm.test
+  - Create-workshop--confirm.test-1
   - Broadcast-message--confirm.test
-  - Broadcast-message--confirm.test
+  - Broadcast-message--confirm.test-1
 geography.subregions.US.AK:
   pages:
   - /
   examples:
   - View-stats--
-  - View-stats--
+  - View-stats---1
 page_titles.conferences.Registration_Stats:
   pages:
   - /conferences/:slug/stats
@@ -1488,11 +1490,6 @@ articles.conference_registration.terms.Bikes:
   - /conferences/:slug/stats
   examples:
   - View-stats--conferences.MyBikeBike.stats
-articles.conference_registration.questions.bikes.medium:
-  pages:
-  - /conferences/:slug/stats
-  examples:
-  - View-stats--conferences.MyBikeBike.stats
 articles.conference_registration.terms.Food:
   pages:
   - /conferences/:slug/stats
@@ -1515,9 +1512,9 @@ menu.submenu.registration.Edit:
   examples:
   - View-stats--conferences.MyBikeBike.stats
   - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast-1
+  - Broadcast-message--conferences.MyBikeBike.broadcast-2
+  - Broadcast-message--conferences.MyBikeBike.broadcast-3
 menu.submenu.registration.Stats:
   pages:
   - /conferences/:slug/stats
@@ -1525,9 +1522,9 @@ menu.submenu.registration.Stats:
   examples:
   - View-stats--conferences.MyBikeBike.stats
   - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast-1
+  - Broadcast-message--conferences.MyBikeBike.broadcast-2
+  - Broadcast-message--conferences.MyBikeBike.broadcast-3
 menu.submenu.registration.Broadcast:
   pages:
   - /conferences/:slug/stats
@@ -1535,17 +1532,17 @@ menu.submenu.registration.Broadcast:
   examples:
   - View-stats--conferences.MyBikeBike.stats
   - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast-1
+  - Broadcast-message--conferences.MyBikeBike.broadcast-2
+  - Broadcast-message--conferences.MyBikeBike.broadcast-3
 geography.subregions.US.TX:
   pages:
   - /
   examples:
   - Create-workshop--
-  - Create-workshop--
+  - Create-workshop---1
   - Broadcast-message--
-  - Broadcast-message--
+  - Broadcast-message---1
 page_titles.conferences.Workshops:
   pages:
   - /conferences/:slug/workshops
@@ -1616,10 +1613,10 @@ articles.workshops.headings.languages:
   examples:
   - Create-workshop--conferences.MyBikeBike.workshops.create
   - Create-workshop--conferences.MyBikeBike.workshops.1
-  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
   - Create-workshop--conferences.MyBikeBike.workshops.1.edit
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-2
+  - Create-workshop--conferences.MyBikeBike.workshops.1-3
 articles.workshops.headings.theme:
   pages:
   - /conferences/:slug/workshops/create
@@ -1687,10 +1684,10 @@ articles.workshops.headings.needs:
   examples:
   - Create-workshop--conferences.MyBikeBike.workshops.create
   - Create-workshop--conferences.MyBikeBike.workshops.1
-  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
   - Create-workshop--conferences.MyBikeBike.workshops.1.edit
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-2
+  - Create-workshop--conferences.MyBikeBike.workshops.1-3
 workshop.options.needs.sound:
   pages:
   - /conferences/:slug/workshops/create
@@ -1758,10 +1755,10 @@ articles.workshops.headings.notes:
   examples:
   - Create-workshop--conferences.MyBikeBike.workshops.create
   - Create-workshop--conferences.MyBikeBike.workshops.1
-  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
   - Create-workshop--conferences.MyBikeBike.workshops.1.edit
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-2
+  - Create-workshop--conferences.MyBikeBike.workshops.1-3
 articles.workshops.paragraphs.notes:
   pages:
   - /conferences/:slug/workshops/create
@@ -1789,41 +1786,41 @@ page_titles.conferences.View_Workshop:
   - /conferences/:slug/workshops/:workshop_id
   examples:
   - Create-workshop--conferences.MyBikeBike.workshops.1
-  - Create-workshop--conferences.MyBikeBike.workshops.1
   - Create-workshop--conferences.MyBikeBike.workshops.1-1
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-2
+  - Create-workshop--conferences.MyBikeBike.workshops.1-3
 articles.workshops.headings.facilitators:
   pages:
   - /conferences/:slug/workshops/:workshop_id
   examples:
   - Create-workshop--conferences.MyBikeBike.workshops.1
-  - Create-workshop--conferences.MyBikeBike.workshops.1
   - Create-workshop--conferences.MyBikeBike.workshops.1-1
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-2
+  - Create-workshop--conferences.MyBikeBike.workshops.1-3
 roles.workshops.facilitator.creator:
   pages:
   - /conferences/:slug/workshops/:workshop_id
   examples:
   - Create-workshop--conferences.MyBikeBike.workshops.1
-  - Create-workshop--conferences.MyBikeBike.workshops.1
   - Create-workshop--conferences.MyBikeBike.workshops.1-1
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-2
+  - Create-workshop--conferences.MyBikeBike.workshops.1-3
 actions.workshops.Edit:
   pages:
   - /conferences/:slug/workshops/:workshop_id
   examples:
   - Create-workshop--conferences.MyBikeBike.workshops.1
-  - Create-workshop--conferences.MyBikeBike.workshops.1
   - Create-workshop--conferences.MyBikeBike.workshops.1-1
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-2
+  - Create-workshop--conferences.MyBikeBike.workshops.1-3
 actions.workshops.Delete:
   pages:
   - /conferences/:slug/workshops/:workshop_id
   examples:
   - Create-workshop--conferences.MyBikeBike.workshops.1
-  - Create-workshop--conferences.MyBikeBike.workshops.1
   - Create-workshop--conferences.MyBikeBike.workshops.1-1
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-2
+  - Create-workshop--conferences.MyBikeBike.workshops.1-3
 page_titles.conferences.Edit_Workshop:
   pages:
   - /conferences/:slug/workshops/:workshop_id/edit
@@ -1857,9 +1854,9 @@ page_titles.conferences.Email_Participants:
   - /conferences/:slug/broadcast
   examples:
   - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast-1
+  - Broadcast-message--conferences.MyBikeBike.broadcast-2
+  - Broadcast-message--conferences.MyBikeBike.broadcast-3
 articles.conference_registration.paragraphs.Email_Participants:
   pages:
   - /conferences/:slug/broadcast
@@ -1868,33 +1865,33 @@ articles.conference_registration.paragraphs.Email_Participants:
     caution in general before pressing 'send'
   examples:
   - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast-1
+  - Broadcast-message--conferences.MyBikeBike.broadcast-2
 forms.labels.generic.subject:
   pages:
   - /conferences/:slug/broadcast
   examples:
   - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast-1
 forms.labels.generic.content:
   pages:
   - /conferences/:slug/broadcast
   examples:
   - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast-1
 forms.actions.generic.preview:
   pages:
   - /conferences/:slug/broadcast
   examples:
   - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast-1
 forms.actions.generic.test:
   pages:
   - /conferences/:slug/broadcast
   examples:
   - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast-1
+  - Broadcast-message--conferences.MyBikeBike.broadcast-2
 articles.conference_registration.notes.Test_Email_Sent:
   pages:
   - /conferences/:slug/broadcast
@@ -1902,23 +1899,23 @@ articles.conference_registration.notes.Test_Email_Sent:
   vars:
   - :email_address
   examples:
-  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast-1
 articles.conference_registration.headings.Preview:
   pages:
   - /conferences/:slug/broadcast
   examples:
-  - Broadcast-message--conferences.MyBikeBike.broadcast
-  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast-2
+  - Broadcast-message--conferences.MyBikeBike.broadcast-3
 forms.actions.generic.edit:
   pages:
   - /conferences/:slug/broadcast
   examples:
-  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast-2
 forms.actions.generic.send:
   pages:
   - /conferences/:slug/broadcast
   examples:
-  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast-2
 articles.conference_registration.paragraphs.participants_emailed:
   pages:
   - /conferences/:slug/broadcast
@@ -1926,7 +1923,7 @@ articles.conference_registration.paragraphs.participants_emailed:
   vars:
   - :conference_title
   examples:
-  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast-3
 page_titles.about.About_BikeBike:
   pages:
   - /about

@@ -1784,16 +1784,14 @@ $header-tilt: 8deg;
 }
 
 #lingua-franca-pointer {
-	$colour: $colour-2;
+	$colour: $colour-5;
 	width: 0.6667em;
 	height: 1.25em;
 	background-color: $colour;
-	//border: 1px solid $white;
-	//opacity: 0.75;
 	z-index: 1000;
 	margin-left: -0.5em;
     margin-top: -2em;
-    @include _(mix-blend-mode, multiply);
+    @include _(mix-blend-mode, exclusion);
 	@include default-box-shadow(top, 2);
 	@include _(animation, bouncy 1s infinite alternate);
 
@@ -1822,7 +1820,6 @@ $header-tilt: 8deg;
 	}
 }
 
-.translated-content {
-	//overflow: auto;
+.translated-content.block {
 	display: inherit;
 }

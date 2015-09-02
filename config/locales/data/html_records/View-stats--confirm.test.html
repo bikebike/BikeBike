@@ -13,7 +13,7 @@
 <link href="/apple-touch-icon-144x144.png" rel="apple-touch-icon" sizes="144x144">
 
 </head>
-<body class="confirm">
+<body class="conferences conferences-register">
 <nav>
 <div id="main-nav">
 <div class="inner-nav">
@@ -25,48 +25,95 @@
 <a href="/policy/"><span><span class="translated-content" data-i18n-key="page_titles.Safe_Space_Policy" data-i18n-needs-translation="0">Safer Space Agreement</span></span></a>
 </div>
 <div class="actions">
-<a class="button register" href="/conferences/MyBikeBike/register/"><span class="translated-content" data-i18n-key="conference.actions.Register" data-i18n-needs-translation="0">Register</span>
-</a></div>
+<form class="logout" action="/logout/" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓">
+<input type="hidden" name="url" id="url" value="/conferences/MyBikeBike/register">
+<span class="translated-content" data-i18n-key="forms.actions.generic.Log_out" data-i18n-needs-translation="0"><button name="button" type="submit">Sign out</button></span>
+</form>
+
+</div>
 </div>
 </div>
 </nav>
 
 <main id="main">
 <header id="banner">
-<div class="short" id="header-title">
-<svg>
-  <defs>
-    <filter id="saturate">
-      <feColorMatrix in="SourceGraphic" type="saturate" values=".25" result="A"></feColorMatrix>
-    </filter>
-    <image x="0" y="0" width="100%" height="100%" href="/assets/grafitti.jpg" id="banner-image" preserveAspectRatio="xMidYMid slice" filter="url(#saturate)"></image>
-  
-    <filter id="banner-img" x="0" y="0" width="1" height="1">
-      <feImage href="#banner-image" result="banner-image"></feImage>
-      <feBlend mode="multiply" in="banner-image" in2="SourceGraphic"></feBlend>
-    </filter>
-  </defs>
- 
-  <rect x="0" y="0" width="100%" height="100%" filter="url(#banner-img)"></rect>
-</svg>
+<div class="short" id="header-title" style="background-image: url(/assets/empty-racks.jpg)">
 
-<h1><span class="translated-content" data-i18n-key="page_titles.403.Please_Confirm_Email" data-i18n-needs-translation="0">Please confirm your email</span></h1>
+
+<h1><span class="translated-content" data-i18n-key="page_titles.conferences.Conference_Registration" data-i18n-needs-translation="0">Conference Registration</span></h1>
 </div>
 
 </header>
-<div id="content"><article>
-<div class="row"><div class="columns medium-12"><h2><span class="translated-content" data-i18n-key="articles.permission_denied.headings.confirm_email" data-i18n-needs-translation="0">Please confirm your email address</span></h2>
-</div><div class="columns medium-6 large-5"><form action="/doconfirm/" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓">
-<div class="email-field input-field">
-<input type="email" name="email" id="email" required="required">
-<label for="email"><span class="translated-content" data-i18n-key="forms.labels.generic.email" data-i18n-needs-translation="0">Email address</span></label>
+<div class="row"><div class="columns medium-12"><nav class="sub-menu">
+<a href="/conferences/MyBikeBike/register/"><span class="translated-content" data-i18n-key="menu.submenu.registration.Registration" data-i18n-needs-translation="0">Registration</span></a>
+<a href="/conferences/MyBikeBike/workshops/"><span class="translated-content" data-i18n-key="menu.submenu.registration.Workshops" data-i18n-needs-translation="0">Workshops</span></a>
+</nav>
+</div></div><div id="content">
+
+<article>
+<div class="row"><div class="columns medium-12"><h2><span class="translated-content" data-i18n-key="articles.conference_registration.headings.Youre_Done" data-i18n-needs-translation="0">You're Done!</span></h2>
+</div><div class="columns medium-6 large-7"><p><span class="translated-content" data-i18n-key="articles.conference_registration.paragraphs.done" data-i18n-needs-translation="0">Thank you for registering for Bike!Bike!</span></p>
+<p><span class="translated-content" data-i18n-key="articles.conference_registration.paragraphs.workshops" data-i18n-needs-translation="0">You can now take a look at proposed workshops and even propose one yourself if you like.</span></p>
+<div class="actions">
+<a class="button" href="/conferences/MyBikeBike/workshops/"><span class="translated-content" data-i18n-key="articles.conference_registration.actions.View_Workshops" data-i18n-needs-translation="0">View Workshops</span></a>
 </div>
-<input type="hidden" name="token" id="token" value="test">
-<span class="translated-content" data-i18n-key="forms.actions.generic.login" data-i18n-needs-translation="0"><button name="button" type="submit">Sign In</button></span>
+</div><div class="columns medium-6 large-5"><h3><span class="translated-content" data-i18n-key="articles.conference_registration.headings.Your_Registration" data-i18n-needs-translation="0">Your Registration</span></h3>
+<table>
+<tbody><tr>
+<th><span class="translated-content" data-i18n-key="articles.conference_registration.headings.name" data-i18n-needs-translation="0">What is your name?</span></th>
+<td>John Doe</td>
+</tr>
+<tr>
+<th><span class="translated-content" data-i18n-key="articles.conference_registration.headings.location" data-i18n-needs-translation="0">Where are you coming from?</span></th>
+<td>Mushaboom, NS</td>
+</tr>
+<tr>
+<th><span class="translated-content" data-i18n-key="articles.conference_registration.headings.arrival" data-i18n-needs-translation="0">Arrival</span></th>
+<td>12am,&nbsp;January  1, 2016</td>
+</tr>
+<tr>
+<th><span class="translated-content" data-i18n-key="articles.conference_registration.headings.departure" data-i18n-needs-translation="0">Departure</span></th>
+<td>12am,&nbsp;January  4, 2016</td>
+</tr>
+<tr>
+<th><span class="translated-content" data-i18n-key="articles.conference_registration.headings.languages" data-i18n-needs-translation="0">Which languages do you speak?</span></th>
+<td><span class="translated-content" data-i18n-key="languages.en" data-i18n-needs-translation="0">English</span></td>
+</tr>
+<tr>
+<th><span class="translated-content" data-i18n-key="articles.conference_registration.headings.housing" data-i18n-needs-translation="0">Do you need a place to stay?</span></th>
+<td><span class="translated-content" data-i18n-key="articles.conference_registration.questions.housing.none" data-i18n-needs-translation="0">I'll take care of it</span></td>
+</tr>
+<tr>
+<th><span class="translated-content" data-i18n-key="articles.conference_registration.headings.bike" data-i18n-needs-translation="0">Do you need a bike?</span></th>
+<td><span class="translated-content" data-i18n-key="articles.conference_registration.questions.bike.small" data-i18n-needs-translation="0">Small</span></td>
+</tr>
+<tr>
+<th><span class="translated-content" data-i18n-key="articles.conference_registration.headings.food" data-i18n-needs-translation="0">What are your eating habits?</span></th>
+<td><span class="translated-content" data-i18n-key="articles.conference_registration.questions.food.vegan" data-i18n-needs-translation="0">Vegan</span></td>
+</tr>
+<tr>
+<th><span class="translated-content" data-i18n-key="articles.conference_registration.headings.allergies" data-i18n-needs-translation="0">Do you have any allergies?</span></th>
+<td>
+<span class="translated-content" data-i18n-key="articles.conference_registration.none" data-i18n-needs-translation="0">(none)</span>
+</td>
+</tr>
+<tr>
+<th><span class="translated-content" data-i18n-key="articles.conference_registration.headings.other" data-i18n-needs-translation="0">Is there anything else you'd like to tell us?</span></th>
+<td></td>
+</tr>
+<tr>
+<th><span class="translated-content" data-i18n-key="articles.conference_registration.headings.payment" data-i18n-needs-translation="0">Fees paid</span></th>
+<td>$50.00</td>
+</tr>
+</tbody></table>
+<form action="/conferences/MyBikeBike/register/" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓">
+<div class="actions">
+<span class="translated-content" data-i18n-key="forms.actions.generic.edit_registration" data-i18n-needs-translation="0"><button name="button" type="submit" value="register">Edit my registration</button></span>
+</div>
 </form>
 
-</div></div>
-</article>
+</div>
+</div></article>
 </div>
 </main>
 
@@ -82,19 +129,19 @@
 </a>
 </div>
 <div class="facebook">
-<span class="translated-content" data-i18n-key="links.footer.help_text.facebook" data-i18n-needs-translation="0"><a href="https://www.facebook.com/groups/648758205249998/" target="_blank" title="Join our Facebook group">
+<span class="translated-contentblock" data-i18n-key="links.footer.help_text.facebook" data-i18n-needs-translation="0"><a href="https://www.facebook.com/groups/648758205249998/" target="_blank" title="Join our Facebook group">
 <img src="/assets/bb-icon-fb.png" class="sprite icons bb-icon-fb">
 </a>
 </span></div>
 <div class="locale">
-<span class="translated-content" data-i18n-key="links.footer.help_text.select_language" data-i18n-needs-translation="0"><input id="select-language" type="checkbox">
+<span class="translated-contentblock" data-i18n-key="links.footer.help_text.select_language" data-i18n-needs-translation="0"><input id="select-language" type="checkbox">
 <label class="launch" for="select-language" title="Change your language">
 EN
 </label>
 <div class="selector">
 <ul>
 <li>
-<a href="/confirm/test">
+<a href="/conferences/MyBikeBike/register/">
 EN
 </a>
 <span>English</span>
@@ -103,7 +150,7 @@ EN
 </div>
 </span></div>
 <div class="copy">
-<span class="translated-content" data-i18n-key="links.footer.help_text.contributors" data-i18n-needs-translation="0"><a title="Contributors" href="/humans.txt">©2015 Bike!Bike!
+<span class="translated-contentblock" data-i18n-key="links.footer.help_text.contributors" data-i18n-needs-translation="0"><a title="Contributors" href="/humans.txt">©2015 Bike!Bike!
 </a></span></div>
 </footer>
 </div>

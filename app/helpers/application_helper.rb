@@ -386,7 +386,7 @@ module ApplicationHelper
 
 	def m(*args)
 		_(*args) { |t|
-			markdown(t).html_safe
+			markdown(t)
 		}
 	end
 
@@ -404,7 +404,7 @@ module ApplicationHelper
 				disable_indented_code_blocks: true,
 				superscript: true
 			})
-		@markdown.render(content)
+		@markdown.render(content).html_safe
 	end
 
 	def paragraph(object, attribute = nil)

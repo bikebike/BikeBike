@@ -25,11 +25,6 @@
 <a href="/policy/"><span><span class="translated-content" data-i18n-key="page_titles.Safe_Space_Policy" data-i18n-needs-translation="0">Safer Space Agreement</span></span></a>
 </div>
 <div class="actions">
-<form class="logout" action="/logout/" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓">
-<input type="hidden" name="url" id="url" value="/conferences/MyBikeBike/register">
-<span class="translated-content" data-i18n-key="forms.actions.generic.Log_out" data-i18n-needs-translation="0"><button name="button" type="submit">Sign out</button></span>
-</form>
-
 </div>
 </div>
 </div>
@@ -47,25 +42,18 @@
 <div id="content">
 
 <article>
-<div class="row"><div class="columns medium-12"><h2><span class="translated-content" data-i18n-key="articles.conference_registration.headings.Payment" data-i18n-needs-translation="0">Payment</span></h2>
-<p><span class="translated-content" data-i18n-key="articles.conference_registration.paragraphs.Payment" data-i18n-needs-translation="0">Thank you for completing your registration. We'll see you at Bike!Bike! Payment is by donation and can be done now or upon arrival but to help us fund the conference, we ask that you pay the registration donation as soon as you can.</span></p>
-</div><div class="columns large-9 push-1"><form class="payment" action="/conferences/MyBikeBike/register/" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓">
-<input type="hidden" name="button" id="button" value="payment">
-<div class="three-options">
-<button name="amount" type="submit" value="25.0">$25.00
-</button><button name="amount" type="submit" value="50.0">$50.00
-</button><button name="amount" type="submit" value="100.0">$100.00
-</button></div>
+<div class="row"><article>
+<div class="columns medium-12"><h2><span class="translated-content" data-i18n-key="articles.conference_registration.headings.Enter_Your_Email" data-i18n-needs-translation="0">Enter your email address</span></h2>
+</div><div class="columns medium-6 large-7"><p><span class="translated-content" data-i18n-key="articles.conference_registration.paragraphs.confirm_email_address" data-i18n-needs-translation="0">We ask that you first confirm your email address, once your email address is confirmed you will be able to complete registration, add workshops and pay your registration donation fee. If you have already registered, you can&nbsp;re-confirm you e-mail address to modify your&nbsp;your registration details.</span></p>
+</div><div class="columns medium-6 large-5"><form action="/doconfirm/" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓">
+<div class="email-field input-field">
+<input type="email" name="email" id="email" required="required">
+<label for="email"><span class="translated-content" data-i18n-key="forms.labels.generic.email" data-i18n-needs-translation="0">Email address</span></label>
+</div>
+<span class="translated-content" data-i18n-key="forms.actions.generic.register" data-i18n-needs-translation="0"><button name="button" type="submit" value="register">Register</button></span>
 </form>
 
-<form class="payment" action="/conferences/MyBikeBike/register/" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓">
-<span class="currency">$</span>
-<input type="number" name="amount" id="amount" required="required" step="0.01" min="0.0">
-<span class="translated-content" data-i18n-key="forms.actions.generic.custom_amount" data-i18n-needs-translation="0"><button name="button" type="submit" value="payment">Custom amount</button></span>
-<p><span class="translated-content" data-i18n-key="articles.conference_registration.paragraphs.currency" data-i18n-needs-translation="0">(amounts are in $USD)</span></p>
-</form>
-
-</div><div class="columns large-2"></div>
+</div></article>
 
 </div></article>
 </div>
@@ -83,12 +71,12 @@
 </a>
 </div>
 <div class="facebook">
-<span class="translated-content" data-i18n-key="links.footer.help_text.facebook" data-i18n-needs-translation="0"><a href="https://www.facebook.com/groups/648758205249998/" target="_blank" title="Join our Facebook group">
+<span class="translated-contentblock" data-i18n-key="links.footer.help_text.facebook" data-i18n-needs-translation="0"><a href="https://www.facebook.com/groups/648758205249998/" target="_blank" title="Join our Facebook group">
 <img src="/assets/bb-icon-fb.png" class="sprite icons bb-icon-fb">
 </a>
 </span></div>
 <div class="locale">
-<span class="translated-content" data-i18n-key="links.footer.help_text.select_language" data-i18n-needs-translation="0"><input id="select-language" type="checkbox">
+<span class="translated-contentblock" data-i18n-key="links.footer.help_text.select_language" data-i18n-needs-translation="0"><input id="select-language" type="checkbox">
 <label class="launch" for="select-language" title="Change your language">
 EN
 </label>
@@ -104,7 +92,7 @@ EN
 </div>
 </span></div>
 <div class="copy">
-<span class="translated-content" data-i18n-key="links.footer.help_text.contributors" data-i18n-needs-translation="0"><a title="Contributors" href="/humans.txt">©2015 Bike!Bike!
+<span class="translated-contentblock" data-i18n-key="links.footer.help_text.contributors" data-i18n-needs-translation="0"><a title="Contributors" href="/humans.txt">©2015 Bike!Bike!
 </a></span></div>
 </footer>
 </div>
