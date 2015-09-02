@@ -1,0 +1,141 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" name="viewport">
+<title>Bike!Bike!</title>
+<meta content="Bike!Bike! A conference for bike collectives, co-ops, non-profit DIY bike shops" name="description">
+
+<link href="/assets/application/safari-7.css" rel="stylesheet" media="all" type="text/css"><link href="/assets/web-fonts/safari-7.css" rel="stylesheet" media="all" type="text/css">
+<link href="/assets/favicon.ico" rel="shortcut icon" type="image/x-icon">
+<link href="/assets/favicon.ico" rel="icon" type="image/x-icon">
+<link href="/apple-touch-icon.png" rel="apple-touch-icon">
+<link href="/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
+<link href="/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
+<link href="/apple-touch-icon-144x144.png" rel="apple-touch-icon" sizes="144x144">
+
+</head>
+<body class="home">
+<nav>
+<div id="main-nav">
+<div class="inner-nav">
+<a class="logo" href="/"><img src="/assets/bb-icon-logo.png" class="sprite icons bb-icon-logo">
+<img src="/assets/bb-icon-logo-text.png" class="sprite icons bb-icon-logo-text">
+</a><div class="nav">
+<a class="current" href="/"><span>My Bike!Bike!</span></a>
+<a href="/about/"><span><span class="translated-content" data-i18n-key="page_titles.About_BikeBike" data-i18n-needs-translation="0">About Bike!Bike!</span></span></a>
+<a href="/policy/"><span><span class="translated-content" data-i18n-key="page_titles.Safe_Space_Policy" data-i18n-needs-translation="0">Safer Space Agreement</span></span></a>
+</div>
+<div class="actions">
+<a class="button register" href="/conferences/MyBikeBike/register/"><span class="translated-content" data-i18n-key="conference.actions.Register" data-i18n-needs-translation="0">Register</span>
+</a><form class="logout" action="/logout/" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓">
+<input type="hidden" name="url" id="url" value="/">
+<span class="translated-content" data-i18n-key="forms.actions.generic.Log_out" data-i18n-needs-translation="0"><button name="button" type="submit">Sign out</button></span>
+</form>
+
+</div>
+</div>
+</div>
+</nav>
+
+<main id="main">
+<header id="banner">
+<div id="header-title">
+
+<div class="cover" style="background-image: url()"></div>
+<div class="title">
+<h2 class="background">2015!</h2>
+<div class="details">
+<h3 class="primary">Anchorage, Alaska</h3>
+<div class="secondary">
+August  2 –  6, 2015
+</div>
+</div>
+</div>
+</div>
+<figure>
+<img>
+</figure>
+
+</header>
+<div id="content">
+<article>
+<h2>My Bike!Bike!</h2>
+Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.
+</article>
+</div>
+</main>
+
+<div id="footer">
+<footer><div class="github">
+<img src="/assets/bb-icon-github.png" class="sprite icons bb-icon-github">
+<a href="https://github.com/bikebike/BikeBike/issues" target="_blank">
+<span class="translated-content" data-i18n-key="links.footer.text.File_an_Issue" data-i18n-needs-translation="0">File an issue</span>
+</a>
+|
+<a href="https://github.com/bikebike/BikeBike/contributing.md" target="_blank">
+<span class="translated-content" data-i18n-key="links.footer.text.Help_contribute" data-i18n-needs-translation="0">Help contribute</span>
+</a>
+</div>
+<div class="facebook">
+<span class="translated-content" data-i18n-key="links.footer.help_text.facebook" data-i18n-needs-translation="0"><a href="https://www.facebook.com/groups/648758205249998/" target="_blank" title="Join our Facebook group">
+<img src="/assets/bb-icon-fb.png" class="sprite icons bb-icon-fb">
+</a>
+</span></div>
+<div class="locale">
+<span class="translated-content" data-i18n-key="links.footer.help_text.select_language" data-i18n-needs-translation="0"><input id="select-language" type="checkbox">
+<label class="launch" for="select-language" title="Change your language">
+EN
+</label>
+<div class="selector">
+<ul>
+<li>
+<a href="/">
+EN
+</a>
+<span>English</span>
+</li>
+</ul>
+</div>
+</span></div>
+<div class="copy">
+<span class="translated-content" data-i18n-key="links.footer.help_text.contributors" data-i18n-needs-translation="0"><a title="Contributors" href="/humans.txt">©2015 Bike!Bike!
+</a></span></div>
+</footer>
+</div>
+<script>
+  (function() {
+  	if (!String.prototype.trim) {
+  		(function() {
+  			var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+  			String.prototype.trim = function() {
+  				return this.replace(rtrim, '');
+  			};
+  		})();
+  	}
+  
+  	function classExists(elem,className){var p = new RegExp('(^| )'+className+'( |$)');return (elem.className && elem.className.match(p));}
+  	function addClass(elem,className){if(classExists(elem,className)){return true;}elem.className += ' '+className;}
+  	function removeClass(elem,className){var c = elem.className;var p = new RegExp('(^| )'+className+'( |$)');c = c.replace(p,' ').replace(/  /g,' ');elem.className = c.trim();}
+  
+  	[].slice.call(document.querySelectorAll('.input-field input')).forEach(function(inputEl) {
+  		if (inputEl.value.trim() === '') {
+  			inputEl.parentNode.className = inputEl.parentNode.className + ' empty';
+  		}
+  
+  		inputEl.addEventListener('focus', onInputFocus);
+  		inputEl.addEventListener('blur', onInputBlur);
+  	});
+  
+  	function onInputFocus(ev) {
+  		removeClass(ev.target.parentNode, 'empty')
+  	}
+  
+  	function onInputBlur(ev) {
+  		if (ev.target.value.trim() === '') {
+  			addClass(ev.target.parentNode, 'empty');
+  		}
+  	}
+  })();
+</script>
+
+
+</body></html>
