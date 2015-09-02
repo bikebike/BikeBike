@@ -4,7 +4,7 @@
 		= form_tag save_workshop_path(@this_conference.slug), class: 'composition' do
 			= (hidden_field_tag :workshop_id, @workshop.id) if @workshop
 			= columns(medium: 12) do
-				=paragraph(_'articles.workshops.paragraphs.new_workshop','Please accurately describe your workshop in detail. This will help hosts decide if they wish to add it to the schedule and when it should best be scheduled. Enter normal text but if you want to get fancy you can use [Markdown](http://daringfireball.net/projects/markdown/basics).').html_safe
+				=m('articles.workshops.paragraphs.new_workshop','Please accurately describe your workshop in detail. This will help hosts decide if they wish to add it to the schedule and when it should best be scheduled. Enter normal text but if you want to get fancy you can use [Markdown](http://daringfireball.net/projects/markdown/basics).')
 				.text-field.input-field.big
 					= label_tag :title
 					= text_field_tag :title, @title, :required => true

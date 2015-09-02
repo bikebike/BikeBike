@@ -3,9 +3,9 @@
 	- style = nil
 	- cover = nil
 	- figure = nil
-	- if capable_of(:css_mixblendmode) || ENV['RAILS_ENV'] == 'test'
+	- if capable_of(:css_mixblendmode)
 		- cover = "<div class=\"cover\" style=\"background-image: url(#{image})\"></div>"
-	- elsif capable_of(:svg)
+	- elsif capable_of(:svg) && Rails.env != 'test'
 		- banner_image = 'application/banner_image.svg'
 	- else
 		- style = "background-image: url(#{image})"

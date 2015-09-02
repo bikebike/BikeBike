@@ -49,7 +49,7 @@ class ConferencesController < ApplicationController
 		@this_conference.info = params[:info]
 		@this_conference.save
 
-		redirect_to edit_conference_path @this_conference
+		redirect_to edit_conference_path(@this_conference)
 	end
 
 	def hosts

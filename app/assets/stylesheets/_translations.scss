@@ -13,9 +13,9 @@ $bumbleberry-no-markup: true;
 
 	li {
 		display: inline-block;
-		float: left;
 		width: 25%;
 		padding: 1em;
+		min-width: 10em;
 	}
 
 	a {
@@ -135,6 +135,7 @@ $bumbleberry-no-markup: true;
 			font-size: 0.65em;
 			margin-bottom: 1em;
 			vertical-align: sub;
+			@include _(text-stroke, 0);
 
 			&.special {
 				background-color: $colour-4;
@@ -348,9 +349,9 @@ html #lingua-franca-translation-form {
 			@include _(transform, scale(0.75) translate(0, 0));
 			@include default-box-shadow(top, 2);
 			
-			@include breakpoint(large) {
-				left: 8.75rem;
-			}
+			//@include breakpoint(large) {
+			//	left: 8.75rem;
+			//}
 		}
 
 		@include after {
@@ -388,6 +389,9 @@ html #lingua-franca-translation-form {
 }
 
 #lingua-franca-translation-history .translation-diff-info,
+#lingua-franca-translation-history .diff {
+	@include clearfix;
+}
 #lingua-franca-translation-history .diff ul {
     list-style: none;
     padding: 0;
@@ -430,12 +434,6 @@ html #lingua-franca-translation-form {
 	}
 }
 
-@include breakpoint(large) {
-	.lingua-franca-translations {
-		left: $sidebar-width;
-	}
-
-	.actions {
-		margin-top: 1em;
-	}
+.actions {
+	margin-top: 1em;
 }

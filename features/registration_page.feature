@@ -10,6 +10,8 @@ Feature: Registration Page
 		Then I see the Bike!Bike! logo
 		And I see a Register link
 		And I click on the Register link
+
+		Then I am on the registration page
 		And I fill in email with myemail@bikebike.org
 		And press register
 		

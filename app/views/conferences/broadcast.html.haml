@@ -5,12 +5,12 @@
 			- if @email_sent == :yes
 				%p=_('articles.conference_registration.paragraphs.participants_emailed',"All participants of #{@this_conference.title} have been emailed.", :vars => {:conference_title => @this_conference.title})
 			- if @email_sent != :yes
-				=paragraph(_'articles.conference_registration.paragraphs.Email_Participants','This page is used to contact all participants. Text can be entered as [Markdown](http://daringfireball.net/projects/markdown/basics). Pressing \'test\' will send the email only to you, make sure you do this and use caution in general before pressing \'send\'')
+				=m('articles.conference_registration.paragraphs.Email_Participants','This page is used to contact all participants. Text can be entered as [Markdown](http://daringfireball.net/projects/markdown/basics). Pressing \'test\' will send the email only to you, make sure you do this and use caution in general before pressing \'send\'')
 			- if @email_sent == :yes || @email_sent == :preview
 				%h2=_'articles.conference_registration.headings.Preview'
 				.email-preview
 					%h3=@subject
-					=paragraph @content
+					=markdown @content
 			- if @email_sent != :yes
 				= form_tag broadcast_path(@this_conference.slug), class: 'composition' do
 					- if @email_sent == :preview

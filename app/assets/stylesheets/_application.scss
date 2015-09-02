@@ -1,10 +1,12 @@
 @import "bumbleberry";
 @import "settings";
 
+$zindex-base: 0;
+
 html, body {
 	color: #333;
 	position: relative;
-	z-index: -1;
+	z-index: $zindex-base;
 }
 
 h1, h2, h3, h4, h5, label, button, .button, dt, th, nav.sub-menu {
@@ -300,7 +302,7 @@ input {
 
 	label {
 		position: absolute;
-		z-index: 2;
+		z-index: $zindex-base + 3;
 		font-size: 1em;
 		//float: left;
 		//@include font-family(primary);
@@ -332,7 +334,7 @@ input {
 				transparent 6px
 			);
 		label {
-			z-index: 0;
+			z-index: $zindex-base + 1;
 			@include _(transform, translateY(-100%) scale(1));
 			background-color: transparent;
 			color: #888;
@@ -345,7 +347,7 @@ input {
 	input {
 		margin: 0;
 		position: relative;
-		z-index: 1;
+		z-index: $zindex-base + 2;
 		padding: 0.15em 0.5em;
 		background-color: transparent;
 		border: 0;
@@ -384,7 +386,7 @@ input {
 		&:checked {
 			+ div input {
 				//display: block;
-				z-index: 1;
+				z-index: $zindex-base + 2;
 				@include _(opacity, 1);
 			}
 		}
@@ -400,7 +402,7 @@ input {
 			//display: none;
 			@include _(opacity, 0);
 			@include _(transition, opacity 250ms ease-in-out);
-			z-index: -1;
+			z-index: $zindex-base;
 			position: absolute;
 			width: auto;
 			margin: 0;
@@ -624,19 +626,29 @@ form {
 	width: 100%;
 	background-color: $white;
 	@include default-box-shadow(top, 2);
-	z-index: 1;
+	z-index: $zindex-base + 2;
 
 	.nav {
 		text-align: center;
 		clear: left;
 		overflow: auto;
 		background-color: $colour-3;
+		height: 2em;
+
+		span {
+			display: table-cell;
+			text-align: center;
+			width: 100%;
+			height: 100%;
+			vertical-align: middle;
+		}
 
 		a {
 			position: relative;
-			display: inline-block;
 			margin: 0;
-			padding: 1em 0;
+			display: table;
+			height: 100%;
+			overflow: hidden;
 			float: left;
 			font-weight: normal;
 			@include font-family(secondary);
@@ -691,7 +703,7 @@ form {
 
 #main {
 	position: relative;
-	z-index: -1;
+	//z-index: $zindex-base;
 	max-width: (rems(68) - $sidebar-width) * 2;
 	background-color: $white;
 	padding-bottom: rems(2);
@@ -763,22 +775,23 @@ a.logo {
 		fill: #333;
 	}
 
-	.logo svg {
-		display: inline-block;
-		height: 1em;
-		width: 1em;
-		float: left;
-	}
-
 	.logo:hover svg.bb-icon-logo {
 		@include _(animation, active-logo 4s infinite);
 	}
+}
+
+.logo .icons {
+	display: inline-block;
+	height: 1em;
+	width: 1em;
+	float: left;
 }
 
 #banner {
 	clear: left;
 
 	figure {
+		position: relative;
 		width: 100%;
 		max-width: rems(60);
 		margin: 0;
@@ -801,7 +814,7 @@ $header-tilt: 8deg;
 	color: #EEE;
 	overflow: hidden;
 	position: relative;
-	z-index: -1;
+	z-index: $zindex-base;
 
 	rect {
 		fill: $colour-1;
@@ -837,7 +850,7 @@ $header-tilt: 8deg;
 			right: 0;
 			bottom: 0;
 			left: 0;
-			z-index: -1;
+			z-index: $zindex-base;
 			background-size: inherit;
 			background-position: inherit;
 			-webkit-filter: saturate(25%);
@@ -853,7 +866,7 @@ $header-tilt: 8deg;
 			font-size: 3.5em;
 			margin: 0.25em 0.5em;
 			position: relative;
-			z-index: 1;
+			z-index: $zindex-base + 2;
 			@include _(text-shadow, 0 0 0.15em #000);
 		}
 	}
@@ -950,7 +963,7 @@ $header-tilt: 8deg;
 		border: 0.1em solid #DDD;
 		padding: 0.5em 0.5em 0.5em 2em;
 		text-align: center;
-		z-index: 1;
+		z-index: $zindex-base + 2;
 		margin-bottom: 0.5em;
 
 		a {
@@ -1005,7 +1018,7 @@ $header-tilt: 8deg;
 					position: fixed;
 					top: 0.5em;
 					left: -1em;
-					z-index: 11;
+					z-index: $zindex-base + 12;
 					color: #333;
 					font-size: 2em;
 					opacity: 0;
@@ -1022,7 +1035,7 @@ $header-tilt: 8deg;
 				padding: 1em 4em;
 				overflow: auto;
 				background-color: $white;
-				z-index: 10;
+				z-index: $zindex-base + 11;
 				@include _(transform, scale(0));
 				@include _(transform-origin, 6.25em _calc('100% - 2em', 98%));
 				@include _(transition, 250ms all ease-in-out);
@@ -1063,7 +1076,7 @@ $header-tilt: 8deg;
 						right: 0;
 						bottom: 0;
 						left: 0;
-						z-index: 1;
+						z-index: $zindex-base + 2;
 					}
 				}
 
@@ -1124,13 +1137,20 @@ $header-tilt: 8deg;
 		height: rems(6);
 
 		.nav {
+			height: auto;
 			width: 80%;
 			clear: none;
 			padding-top: rems(1.5);
 			background-color: transparent;
 			overflow: visible;
 
+			span {
+				display: inline;
+			}
+
 			a {
+				display: inline-block;
+				overflow: visible;
 				padding: 0;
 				float: none;
 				width: auto;
@@ -1202,7 +1222,7 @@ $header-tilt: 8deg;
 				right: 0;
 				bottom: 0;
 				left: 0;
-				z-index: 1;
+				z-index: $zindex-base + 2;
 				@include _(box-shadow, inset 0 -13rem 3em -4rem rgba(0, 0, 0, 0.8));
 				@include _(transition, opacity 250ms ease-in-out);
 			}
@@ -1267,7 +1287,7 @@ $header-tilt: 8deg;
 			top: 0;
 			right: 0;
 			left: $sidebar-width;
-			z-index: 1;
+			z-index: $zindex-base + 2;
 		}
 
 		figure {
@@ -1342,10 +1362,22 @@ $header-tilt: 8deg;
 	
 	#footer {
 		position: fixed;
-		z-index: 1;
-		bottom: 0;
+		z-index: $zindex-base + 2;
+		width: 0;
+		overflow: visible;
+		padding: 0;
+		top: 0;
+		min-height: 42em;
+		height: 100%;
 		left: 0;
-		width: $sidebar-width;
+
+		footer {
+			position: absolute;
+			height: 3.5em;
+			width: $sidebar-width;
+			bottom: 0;
+			padding: 1em;
+		}
 
 		.github {
 			position: absolute;
@@ -1528,7 +1560,7 @@ $header-tilt: 8deg;
 		@include _(transition, transform 100ms ease-in-out);
 
 		&:hover {
-			z-index: 2;
+			z-index: $zindex-base + 3;
 			@include _(transform, scale(1.25));
 		}
 	}
@@ -1630,7 +1662,7 @@ $header-tilt: 8deg;
 
 	.value {
 		position: relative;
-		z-index: 1;
+		z-index: $zindex-base + 2;
 	}
 
 	.stat-with-label {
@@ -1717,7 +1749,7 @@ $header-tilt: 8deg;
 		@include _(transition, transform 150ms ease-in-out);
 
 		&:hover, &:focus, &:active {
-			z-index: 1;
+			z-index: $zindex-base + 2;
 			@include _(transform, scale(1.1));
 		}
 
@@ -1728,7 +1760,7 @@ $header-tilt: 8deg;
 			right: 0;
 			bottom: 0;
 			left: 0;
-			z-index: 1;
+			z-index: $zindex-base + 2;
 			cursor: pointer;
 			@include _(box-shadow, inset 0em -2em 2em -1em $white);
 		}
@@ -1744,4 +1776,53 @@ $header-tilt: 8deg;
 	height: 0;
 	overflow: hidden;
 	opacity: 0;
+}
+
+@include keyframes(bouncy) {
+	from { transform: translateY(-0.25em); }
+	to   { transform: translateY(0.25em); }
+}
+
+#lingua-franca-pointer {
+	$colour: $colour-2;
+	width: 0.6667em;
+	height: 1.25em;
+	background-color: $colour;
+	//border: 1px solid $white;
+	//opacity: 0.75;
+	z-index: 1000;
+	margin-left: -0.5em;
+    margin-top: -2em;
+    @include _(mix-blend-mode, multiply);
+	@include default-box-shadow(top, 2);
+	@include _(animation, bouncy 1s infinite alternate);
+
+	$twidth: 0.8em;
+	@include after {
+		content: '';
+		width: 0;
+		height: 0;
+		position: absolute;
+		border-style: solid;
+		border-color: $colour transparent transparent;
+		border-width: $twidth $twidth 0;
+		top: 100%;
+		left: -.4em;
+	}
+
+	&.up {
+    	margin-top: 2em;
+
+		@include after {
+			top: auto;
+			bottom: 100%;
+			border-color: transparent transparent $colour;
+			border-width: 0 $twidth $twidth;
+		}
+	}
+}
+
+.translated-content {
+	//overflow: auto;
+	display: inherit;
 }

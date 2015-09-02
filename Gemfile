@@ -71,6 +71,7 @@ group :test do
 	gem 'webmock', require: false
 	gem 'cucumber-rails', :require => false
 	gem 'database_cleaner'
+	gem 'mocha'
 end
 
 group :staging, :production, :preview do

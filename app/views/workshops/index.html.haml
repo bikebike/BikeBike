@@ -13,7 +13,7 @@
 						%li
 							=link_to view_workshop_path(@this_conference.slug, w.id) do
 								%h4=_!(w.title)
-								=paragraph _!(w.info)
+								=markdown _!(w.info)
 			= link_to (_'actions.workshops.create','New Workshop'), create_workshop_path(@this_conference.slug), class: :button
 	= row do
 		%ul.workshop-previews
@@ -23,4 +23,4 @@
 						= columns(medium: 6) do
 							=link_to view_workshop_path(@this_conference.slug, w.id) do
 								%h4=_!(w.title)
-								=paragraph _!(w.info)
+								=markdown _!(w.info)

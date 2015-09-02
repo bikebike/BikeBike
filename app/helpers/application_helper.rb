@@ -384,6 +384,29 @@ module ApplicationHelper
 		end
 	end
 
+	def m(*args)
+		_(*args) { |t|
+			markdown(t).html_safe
+		}
+	end
+
+	def markdown(object, attribute = nil)
+		return '' unless object
+		content = attribute ? object.send(attribute.to_s) : object
+		@markdown ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML.new({
+				filter_html: true,
+				hard_wrap: true,
+				space_after_headers: true,
+				fenced_code_blocks: true,
+				link_attributes: { target: "_blank" }
+			}), {
+				autolink: true,
+				disable_indented_code_blocks: true,
+				superscript: true
+			})
+		@markdown.render(content)
+	end
+
 	def paragraph(object, attribute = nil)
 		return '' unless object
 		content = attribute ? object.send(attribute.to_s) : object
@@ -400,18 +423,7 @@ module ApplicationHelper
 				result = '<p>' + result + '</p>'
 			end
 		else
-			@markdown ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML.new({
-					filter_html: true,
-					hard_wrap: true,
-					space_after_headers: true,
-					fenced_code_blocks: true,
-					link_attributes: { target: "_blank" }
-				}), {
-					autolink: true,
-					disable_indented_code_blocks: true,
-					superscript: true
-				})
-			result = @markdown.render(content)
+			result = markdown(object, attribute)
 		end
 		result.html_safe
 	end
@@ -625,7 +637,7 @@ module ApplicationHelper
 	end
 
 	def nav_link(link, title)
-		link_to title, link, :class => (current_page?(link) ? 'current' : nil)
+		link_to "<span>#{title}</span>".html_safe, link, :class => (current_page?(link) ? 'current' : nil)
 	end
 
 	def date(date, format = :long)

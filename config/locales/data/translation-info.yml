@@ -3,61 +3,61 @@ geography.subregions.CA.NS:
   pages:
   - /
   examples:
-  - 1
-  - 1
-  - 3
-  - 3
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
 date.formats.span_same_month_date_1:
   pages:
   - /
   examples:
-  - 1
-  - 1
-  - 2
-  - 2
-  - 3
-  - 3
-  - 6
-  - 6
-  - 8
-  - 8
-  - 15
-  - 15
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - View-stats--
+  - View-stats--
+  - Create-workshop--
+  - Create-workshop--
+  - Broadcast-message--
+  - Broadcast-message--
 date.month_names:
   pages:
   - /
   - /conferences/:slug/register
   examples:
-  - 1
-  - 1
-  - 2
-  - 2
-  - 3
-  - 3
-  - 5
-  - 5
-  - 6
-  - 6
-  - 8
-  - 8
-  - 15
-  - 15
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - View-stats--
+  - View-stats--
+  - Create-workshop--
+  - Create-workshop--
+  - Broadcast-message--
+  - Broadcast-message--
 date.formats.span_same_month_date_2:
   pages:
   - /
   examples:
-  - 1
-  - 1
-  - 2
-  - 2
-  - 3
-  - 3
-  - 6
-  - 6
-  - 8
-  - 8
-  - 15
-  - 15
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - View-stats--
+  - View-stats--
+  - Create-workshop--
+  - Create-workshop--
+  - Broadcast-message--
+  - Broadcast-message--
 date.date_span:
   pages:
   - /
@@ -65,18 +65,18 @@ date.date_span:
   - :date_1
   - :date_2
   examples:
-  - 1
-  - 1
-  - 2
-  - 2
-  - 3
-  - 3
-  - 6
-  - 6
-  - 8
-  - 8
-  - 15
-  - 15
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - View-stats--
+  - View-stats--
+  - Create-workshop--
+  - Create-workshop--
+  - Broadcast-message--
+  - Broadcast-message--
 page_descriptions.home:
   pages:
   - /
@@ -95,51 +95,53 @@ page_descriptions.home:
   - /policy
   - /error_404
   examples:
-  - 1
-  - 1
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 10
-  - 10
-  - 10
-  - 11
-  - 12
-  - 12
-  - 13
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 18
-  - 19
-  - 19
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--doconfirm
+  - Start-registration-from-landing-page--doconfirm
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - View-stats--confirm.test
+  - View-stats--confirm.test
+  - View-stats--
+  - View-stats--
+  - View-stats--conferences.MyBikeBike.stats
+  - Create-workshop--confirm.test
+  - Create-workshop--confirm.test
+  - Create-workshop--
+  - Create-workshop--
+  - Create-workshop--conferences.MyBikeBike.register
+  - Create-workshop--conferences.MyBikeBike.workshops
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1.delete
+  - Create-workshop--conferences.MyBikeBike.workshops-1
+  - Broadcast-message--confirm.test
+  - Broadcast-message--confirm.test
+  - Broadcast-message--
+  - Broadcast-message--
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Read-the-about-page--about
+  - Read-the-policy-page--policy
+  - See-a-404-page--error_404
+  - See-a-404-page--error_404
 page_titles.About_BikeBike:
   pages:
   - /
@@ -158,51 +160,53 @@ page_titles.About_BikeBike:
   - /policy
   - /error_404
   examples:
-  - 1
-  - 1
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 10
-  - 10
-  - 10
-  - 11
-  - 12
-  - 12
-  - 13
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 18
-  - 19
-  - 19
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--doconfirm
+  - Start-registration-from-landing-page--doconfirm
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - View-stats--confirm.test
+  - View-stats--confirm.test
+  - View-stats--
+  - View-stats--
+  - View-stats--conferences.MyBikeBike.stats
+  - Create-workshop--confirm.test
+  - Create-workshop--confirm.test
+  - Create-workshop--
+  - Create-workshop--
+  - Create-workshop--conferences.MyBikeBike.register
+  - Create-workshop--conferences.MyBikeBike.workshops
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1.delete
+  - Create-workshop--conferences.MyBikeBike.workshops-1
+  - Broadcast-message--confirm.test
+  - Broadcast-message--confirm.test
+  - Broadcast-message--
+  - Broadcast-message--
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Read-the-about-page--about
+  - Read-the-policy-page--policy
+  - See-a-404-page--error_404
+  - See-a-404-page--error_404
 page_titles.Safe_Space_Policy:
   pages:
   - /
@@ -221,51 +225,53 @@ page_titles.Safe_Space_Policy:
   - /policy
   - /error_404
   examples:
-  - 1
-  - 1
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 10
-  - 10
-  - 10
-  - 11
-  - 12
-  - 12
-  - 13
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 18
-  - 19
-  - 19
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--doconfirm
+  - Start-registration-from-landing-page--doconfirm
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - View-stats--confirm.test
+  - View-stats--confirm.test
+  - View-stats--
+  - View-stats--
+  - View-stats--conferences.MyBikeBike.stats
+  - Create-workshop--confirm.test
+  - Create-workshop--confirm.test
+  - Create-workshop--
+  - Create-workshop--
+  - Create-workshop--conferences.MyBikeBike.register
+  - Create-workshop--conferences.MyBikeBike.workshops
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1.delete
+  - Create-workshop--conferences.MyBikeBike.workshops-1
+  - Broadcast-message--confirm.test
+  - Broadcast-message--confirm.test
+  - Broadcast-message--
+  - Broadcast-message--
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Read-the-about-page--about
+  - Read-the-policy-page--policy
+  - See-a-404-page--error_404
+  - See-a-404-page--error_404
 donate.button_label:
   pages:
   - /
@@ -274,12 +280,12 @@ donate.button_label:
   - /error_404
   context: Donate!
   examples:
-  - 1
-  - 1
-  - 17
-  - 18
-  - 19
-  - 19
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - Read-the-about-page--about
+  - Read-the-policy-page--policy
+  - See-a-404-page--error_404
+  - See-a-404-page--error_404
 links.footer.text.File_an_Issue:
   pages:
   - /
@@ -298,51 +304,53 @@ links.footer.text.File_an_Issue:
   - /policy
   - /error_404
   examples:
-  - 1
-  - 1
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 10
-  - 10
-  - 10
-  - 11
-  - 12
-  - 12
-  - 13
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 18
-  - 19
-  - 19
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--doconfirm
+  - Start-registration-from-landing-page--doconfirm
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - View-stats--confirm.test
+  - View-stats--confirm.test
+  - View-stats--
+  - View-stats--
+  - View-stats--conferences.MyBikeBike.stats
+  - Create-workshop--confirm.test
+  - Create-workshop--confirm.test
+  - Create-workshop--
+  - Create-workshop--
+  - Create-workshop--conferences.MyBikeBike.register
+  - Create-workshop--conferences.MyBikeBike.workshops
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1.delete
+  - Create-workshop--conferences.MyBikeBike.workshops-1
+  - Broadcast-message--confirm.test
+  - Broadcast-message--confirm.test
+  - Broadcast-message--
+  - Broadcast-message--
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Read-the-about-page--about
+  - Read-the-policy-page--policy
+  - See-a-404-page--error_404
+  - See-a-404-page--error_404
 links.footer.text.Help_contribute:
   pages:
   - /
@@ -361,51 +369,53 @@ links.footer.text.Help_contribute:
   - /policy
   - /error_404
   examples:
-  - 1
-  - 1
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 10
-  - 10
-  - 10
-  - 11
-  - 12
-  - 12
-  - 13
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 18
-  - 19
-  - 19
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--doconfirm
+  - Start-registration-from-landing-page--doconfirm
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - View-stats--confirm.test
+  - View-stats--confirm.test
+  - View-stats--
+  - View-stats--
+  - View-stats--conferences.MyBikeBike.stats
+  - Create-workshop--confirm.test
+  - Create-workshop--confirm.test
+  - Create-workshop--
+  - Create-workshop--
+  - Create-workshop--conferences.MyBikeBike.register
+  - Create-workshop--conferences.MyBikeBike.workshops
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1.delete
+  - Create-workshop--conferences.MyBikeBike.workshops-1
+  - Broadcast-message--confirm.test
+  - Broadcast-message--confirm.test
+  - Broadcast-message--
+  - Broadcast-message--
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Read-the-about-page--about
+  - Read-the-policy-page--policy
+  - See-a-404-page--error_404
+  - See-a-404-page--error_404
 links.footer.help_text.facebook:
   pages:
   - /
@@ -425,51 +435,53 @@ links.footer.help_text.facebook:
   - /error_404
   context: Join our facebook group
   examples:
-  - 1
-  - 1
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 10
-  - 10
-  - 10
-  - 11
-  - 12
-  - 12
-  - 13
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 18
-  - 19
-  - 19
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--doconfirm
+  - Start-registration-from-landing-page--doconfirm
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - View-stats--confirm.test
+  - View-stats--confirm.test
+  - View-stats--
+  - View-stats--
+  - View-stats--conferences.MyBikeBike.stats
+  - Create-workshop--confirm.test
+  - Create-workshop--confirm.test
+  - Create-workshop--
+  - Create-workshop--
+  - Create-workshop--conferences.MyBikeBike.register
+  - Create-workshop--conferences.MyBikeBike.workshops
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1.delete
+  - Create-workshop--conferences.MyBikeBike.workshops-1
+  - Broadcast-message--confirm.test
+  - Broadcast-message--confirm.test
+  - Broadcast-message--
+  - Broadcast-message--
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Read-the-about-page--about
+  - Read-the-policy-page--policy
+  - See-a-404-page--error_404
+  - See-a-404-page--error_404
 links.footer.help_text.select_language:
   pages:
   - /
@@ -489,1783 +501,53 @@ links.footer.help_text.select_language:
   - /error_404
   context: Select your language
   examples:
-  - 1
-  - 1
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 10
-  - 10
-  - 10
-  - 11
-  - 12
-  - 12
-  - 13
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 18
-  - 19
-  - 19
-languages.af:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 17
-  - 18
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Afrikaans
-languages.ar:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Arabic
-languages.az:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 17
-  - 18
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Azerbaijani
-languages.be:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 17
-  - 18
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Belarusian
-languages.bg:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 17
-  - 18
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Bulgarian
-languages.bn:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 17
-  - 18
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Bengali
-languages.bs:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 17
-  - 18
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Bosnian
-languages.ca:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Catalan
-languages.cs:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Czech
-languages.cy:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 17
-  - 18
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Welsh
-languages.da:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Danish
-languages.de:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  context: German
-languages.el:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Greek
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--doconfirm
+  - Start-registration-from-landing-page--doconfirm
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - View-stats--confirm.test
+  - View-stats--confirm.test
+  - View-stats--
+  - View-stats--
+  - View-stats--conferences.MyBikeBike.stats
+  - Create-workshop--confirm.test
+  - Create-workshop--confirm.test
+  - Create-workshop--
+  - Create-workshop--
+  - Create-workshop--conferences.MyBikeBike.register
+  - Create-workshop--conferences.MyBikeBike.workshops
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1.delete
+  - Create-workshop--conferences.MyBikeBike.workshops-1
+  - Broadcast-message--confirm.test
+  - Broadcast-message--confirm.test
+  - Broadcast-message--
+  - Broadcast-message--
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Read-the-about-page--about
+  - Read-the-policy-page--policy
+  - See-a-404-page--error_404
+  - See-a-404-page--error_404
 languages.en:
   pages:
   - /
@@ -2284,6728 +566,106 @@ languages.en:
   - /policy
   - /error_404
   examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--doconfirm
+  - Start-registration-from-landing-page--doconfirm
+  - Start-registration-from-landing-page--doconfirm
+  - Start-registration-from-landing-page--doconfirm
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - View-stats--confirm.test
+  - View-stats--confirm.test
+  - View-stats--confirm.test
+  - View-stats--confirm.test
+  - View-stats--
+  - View-stats--
+  - View-stats--
+  - View-stats--
+  - View-stats--conferences.MyBikeBike.stats
+  - View-stats--conferences.MyBikeBike.stats
+  - View-stats--conferences.MyBikeBike.stats
+  - Create-workshop--confirm.test
+  - Create-workshop--confirm.test
+  - Create-workshop--confirm.test
+  - Create-workshop--confirm.test
+  - Create-workshop--
+  - Create-workshop--
+  - Create-workshop--
+  - Create-workshop--
+  - Create-workshop--conferences.MyBikeBike.register
+  - Create-workshop--conferences.MyBikeBike.register
+  - Create-workshop--conferences.MyBikeBike.workshops
+  - Create-workshop--conferences.MyBikeBike.workshops
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1.delete
+  - Create-workshop--conferences.MyBikeBike.workshops.1.delete
+  - Create-workshop--conferences.MyBikeBike.workshops-1
+  - Create-workshop--conferences.MyBikeBike.workshops-1
+  - Broadcast-message--confirm.test
+  - Broadcast-message--confirm.test
+  - Broadcast-message--confirm.test
+  - Broadcast-message--confirm.test
+  - Broadcast-message--
+  - Broadcast-message--
+  - Broadcast-message--
+  - Broadcast-message--
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Read-the-about-page--about
+  - Read-the-about-page--about
+  - Read-the-policy-page--policy
+  - Read-the-policy-page--policy
+  - See-a-404-page--error_404
+  - See-a-404-page--error_404
+  - See-a-404-page--error_404
+  - See-a-404-page--error_404
   context: English
-languages.eo:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 17
-  - 18
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Esperanto
-languages.es:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Spanish
-languages.et:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 17
-  - 18
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Estonian
-languages.eu:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 17
-  - 18
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Basque
-languages.fa:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 17
-  - 18
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Persian
-languages.fi:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Finnish
-languages.fr:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  context: French
-languages.gl:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 17
-  - 18
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Galician
-languages.he:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Hebrew
-languages.hi:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Hindi
-languages.hr:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Croatian
-languages.hu:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Hungarian
-languages.id:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 17
-  - 18
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Indonesian
-languages.is:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 17
-  - 18
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Icelandic
-languages.it:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Italian
-languages.ja:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Japanese
-languages.km:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 17
-  - 18
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Khmer
-languages.kn:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 17
-  - 18
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Kannada
-languages.ko:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Korean
-languages.lo:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 17
-  - 18
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Lao
-languages.lt:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 17
-  - 18
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Lithuanian
-languages.lv:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 17
-  - 18
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Latvian
-languages.mk:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 17
-  - 18
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Macedonian
-languages.mn:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 17
-  - 18
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Mongolian
-languages.ms:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 17
-  - 18
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Malay
-languages.nb:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Norwegian Bokmål
-languages.ne:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 17
-  - 18
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Nepali
-languages.nl:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Dutch
-languages.nn:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 17
-  - 18
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Norwegian Nynorsk
-languages.or:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 17
-  - 18
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Oriya
-languages.pl:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Polish
-languages.pt:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Portuguese
-languages.rm:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 17
-  - 18
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Romansh
-languages.ro:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Romanian
-languages.ru:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Russian
-languages.sk:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Slovak
-languages.sl:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Slovenian
-languages.sr:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Serbian
-languages.sv:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Swedish
-languages.sw:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 17
-  - 18
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Swahili
-languages.ta:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 17
-  - 18
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Tamil
-languages.th:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Thai
-languages.tl:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 17
-  - 18
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Tagalog
-languages.tr:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Turkish
-languages.tt:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 17
-  - 18
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Tatar
-languages.uk:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Ukrainian
-languages.ur:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 17
-  - 18
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Urdu
-languages.uz:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 17
-  - 18
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Uzbek
-languages.vi:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Vietnamese
-languages.wo:
-  pages:
-  - /
-  - /conferences/:slug/register
-  - /doconfirm
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /confirm/:token
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  - /about
-  - /policy
-  - /error_404
-  examples:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 7
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 9
-  - 9
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 11
-  - 11
-  - 11
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 12
-  - 13
-  - 13
-  - 13
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 17
-  - 17
-  - 18
-  - 18
-  - 18
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  - 19
-  context: Wolof
 links.footer.help_text.contributors:
   pages:
   - /
@@ -9025,325 +685,333 @@ links.footer.help_text.contributors:
   - /error_404
   context: Who contributed to building this website
   examples:
-  - 1
-  - 1
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 6
-  - 6
-  - 6
-  - 6
-  - 7
-  - 8
-  - 8
-  - 8
-  - 8
-  - 9
-  - 10
-  - 10
-  - 10
-  - 11
-  - 12
-  - 12
-  - 13
-  - 14
-  - 14
-  - 15
-  - 15
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
-  - 17
-  - 18
-  - 19
-  - 19
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--doconfirm
+  - Start-registration-from-landing-page--doconfirm
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - View-stats--confirm.test
+  - View-stats--confirm.test
+  - View-stats--
+  - View-stats--
+  - View-stats--conferences.MyBikeBike.stats
+  - Create-workshop--confirm.test
+  - Create-workshop--confirm.test
+  - Create-workshop--
+  - Create-workshop--
+  - Create-workshop--conferences.MyBikeBike.register
+  - Create-workshop--conferences.MyBikeBike.workshops
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1.delete
+  - Create-workshop--conferences.MyBikeBike.workshops-1
+  - Broadcast-message--confirm.test
+  - Broadcast-message--confirm.test
+  - Broadcast-message--
+  - Broadcast-message--
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Read-the-about-page--about
+  - Read-the-policy-page--policy
+  - See-a-404-page--error_404
+  - See-a-404-page--error_404
 geography.subregions.CA.NB:
   pages:
   - /
   examples:
-  - 2
-  - 2
+  - See-a-more-info-link--
+  - See-a-more-info-link--
 conference.actions.Register:
   pages:
   - /
   - /doconfirm
   - /confirm/:token
   examples:
-  - 2
-  - 2
-  - 3
-  - 3
-  - 3
-  - 3
-  - 6
-  - 6
-  - 6
-  - 6
-  - 8
-  - 8
-  - 8
-  - 8
-  - 15
-  - 15
-  - 15
-  - 15
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - See-a-more-info-link--
+  - Start-registration-from-landing-page--doconfirm
+  - Start-registration-from-landing-page--doconfirm
+  - View-stats--confirm.test
+  - View-stats--confirm.test
+  - View-stats--
+  - View-stats--
+  - Create-workshop--confirm.test
+  - Create-workshop--confirm.test
+  - Create-workshop--
+  - Create-workshop--
+  - Broadcast-message--confirm.test
+  - Broadcast-message--confirm.test
+  - Broadcast-message--
+  - Broadcast-message--
 page_titles.conferences.Conference_Registration:
   pages:
   - /conferences/:slug/register
   - /conferences/:slug/register/:button/:confirmation_token
   examples:
-  - 3
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 9
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Create-workshop--conferences.MyBikeBike.register
 articles.conference_registration.headings.Enter_Your_Email:
   pages:
   - /conferences/:slug/register
   context: Enter your email address
   examples:
-  - 3
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register
 articles.conference_registration.paragraphs.confirm_email_address:
   pages:
   - /conferences/:slug/register
   context: p
   examples:
-  - 3
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register
 forms.labels.generic.email:
   pages:
   - /conferences/:slug/register
   - /confirm/:token
   examples:
-  - 3
-  - 6
-  - 6
-  - 8
-  - 8
-  - 15
-  - 15
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - View-stats--confirm.test
+  - View-stats--confirm.test
+  - Create-workshop--confirm.test
+  - Create-workshop--confirm.test
+  - Broadcast-message--confirm.test
+  - Broadcast-message--confirm.test
 forms.actions.generic.register:
   pages:
   - /conferences/:slug/register
   examples:
-  - 3
-  - 4
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
 email.subject.confirm_email:
   pages:
   - /doconfirm
   examples:
-  - 3
+  - Start-registration-from-landing-page--doconfirm
 email.confirmation.paragraph.please_confirm:
   pages:
   - /doconfirm
   context: 'Hello! To gain access to registration and other features of Bike!Bike!,
     please confirm your email address by clicking on following link:'
   examples:
-  - 3
-  - 3
+  - Start-registration-from-landing-page--doconfirm
+  - Start-registration-from-landing-page--doconfirm
 email.confirmation.link.please_confirm:
   pages:
   - /doconfirm
   examples:
-  - 3
+  - Start-registration-from-landing-page--doconfirm
 page_titles.403.Please_Check_Email:
   pages:
   - /doconfirm
   examples:
-  - 3
+  - Start-registration-from-landing-page--doconfirm
 articles.conference_registration.headings.email_confirm:
   pages:
   - /doconfirm
   context: Please confirm your email address
   examples:
-  - 3
+  - Start-registration-from-landing-page--doconfirm
 articles.conference_registration.paragraphs.email_confirm:
   pages:
   - /doconfirm
   context: p
   examples:
-  - 3
+  - Start-registration-from-landing-page--doconfirm
 page_titles.404.Page_Not_Found:
   pages:
   - /doconfirm
   - /error_404
   examples:
-  - 3
-  - 19
-  - 19
+  - Start-registration-from-landing-page--doconfirm
+  - See-a-404-page--error_404
+  - See-a-404-page--error_404
 error.404.title:
   pages:
   - /doconfirm
   - /error_404
   context: This page does not exist!
   examples:
-  - 3
-  - 19
-  - 19
+  - Start-registration-from-landing-page--doconfirm
+  - See-a-404-page--error_404
+  - See-a-404-page--error_404
 error.404.description:
   pages:
   - /doconfirm
   - /error_404
   context: p
   examples:
-  - 3
-  - 19
-  - 19
+  - Start-registration-from-landing-page--doconfirm
+  - See-a-404-page--error_404
+  - See-a-404-page--error_404
 articles.conference_registration.headings.Policy_Agreement:
   pages:
   - /conferences/:slug/register
   examples:
-  - 4
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
 articles.conference_registration.paragraphs.Policy_Agreement:
   pages:
   - /conferences/:slug/register
   context: s
   examples:
-  - 4
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
 articles.policy.headings.The_Agreement:
   pages:
   - /conferences/:slug/register
   - /policy
   examples:
-  - 4
-  - 18
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Read-the-policy-page--policy
 articles.policy.term.commitment:
   pages:
   - /conferences/:slug/register
   - /policy
   context: s
   examples:
-  - 4
-  - 18
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Read-the-policy-page--policy
 articles.policy.term.respect:
   pages:
   - /conferences/:slug/register
   - /policy
   context: s
   examples:
-  - 4
-  - 18
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Read-the-policy-page--policy
 articles.policy.term.empowerment:
   pages:
   - /conferences/:slug/register
   - /policy
   context: s
   examples:
-  - 4
-  - 18
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Read-the-policy-page--policy
 articles.policy.term.accessible:
   pages:
   - /conferences/:slug/register
   - /policy
   context: s
   examples:
-  - 4
-  - 18
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Read-the-policy-page--policy
 articles.policy.term.peaceful:
   pages:
   - /conferences/:slug/register
   - /policy
   context: s
   examples:
-  - 4
-  - 18
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Read-the-policy-page--policy
 articles.policy.term.spaces:
   pages:
   - /conferences/:slug/register
   - /policy
   context: s
   examples:
-  - 4
-  - 18
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Read-the-policy-page--policy
 articles.policy.term.hearing:
   pages:
   - /conferences/:slug/register
   - /policy
   context: s
   examples:
-  - 4
-  - 18
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Read-the-policy-page--policy
 articles.policy.term.intent:
   pages:
   - /conferences/:slug/register
   - /policy
   context: s
   examples:
-  - 4
-  - 18
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Read-the-policy-page--policy
 articles.policy.term.open_minds:
   pages:
   - /conferences/:slug/register
   - /policy
   context: s
   examples:
-  - 4
-  - 18
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Read-the-policy-page--policy
 articles.policy.term.learning:
   pages:
   - /conferences/:slug/register
   - /policy
   context: s
   examples:
-  - 4
-  - 18
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Read-the-policy-page--policy
 articles.policy.headings.Why:
   pages:
   - /conferences/:slug/register
   - /policy
   context: Why have a Safer Space Agreement?
   examples:
-  - 4
-  - 18
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Read-the-policy-page--policy
 articles.policy.paragraphs.Why:
   pages:
   - /conferences/:slug/register
   - /policy
   context: p
   examples:
-  - 4
-  - 18
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Read-the-policy-page--policy
 articles.policy.headings.How:
   pages:
   - /conferences/:slug/register
   - /policy
   context: How is the policy enforced?
   examples:
-  - 4
-  - 18
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Read-the-policy-page--policy
 articles.policy.paragraphs.How:
   pages:
   - /conferences/:slug/register
   - /policy
   context: p
   examples:
-  - 4
-  - 18
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Read-the-policy-page--policy
 articles.conference_registration.paragraphs.Confirm_Agreement:
   pages:
   - /conferences/:slug/register
   context: p
   examples:
-  - 4
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
 forms.actions.generic.agree:
   pages:
   - /conferences/:slug/register
   examples:
-  - 4
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
 forms.actions.generic.Log_out:
   pages:
   - /conferences/:slug/register
@@ -9357,201 +1025,221 @@ forms.actions.generic.Log_out:
   - /conferences/:slug/workshops/:workshop_id/delete
   - /conferences/:slug/broadcast
   examples:
-  - 4
-  - 4
-  - 4
-  - 5
-  - 5
-  - 6
-  - 6
-  - 7
-  - 8
-  - 8
-  - 9
-  - 10
-  - 10
-  - 10
-  - 11
-  - 12
-  - 12
-  - 13
-  - 14
-  - 14
-  - 15
-  - 15
-  - 16
-  - 16
-  - 16
-  - 16
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - View-stats--
+  - View-stats--
+  - View-stats--conferences.MyBikeBike.stats
+  - Create-workshop--
+  - Create-workshop--
+  - Create-workshop--conferences.MyBikeBike.register
+  - Create-workshop--conferences.MyBikeBike.workshops
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1.delete
+  - Create-workshop--conferences.MyBikeBike.workshops-1
+  - Broadcast-message--
+  - Broadcast-message--
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
 articles.conference_registration.headings.Registration_Info:
   pages:
   - /conferences/:slug/register
   context: Registration Info
   examples:
-  - 4
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
 articles.conference_registration.paragraphs.Registration_Info:
   pages:
   - /conferences/:slug/register
   context: p
   examples:
-  - 4
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
 articles.conference_registration.headings.name:
   pages:
   - /conferences/:slug/register
   context: What is your name?
   examples:
-  - 4
-  - 5
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
 forms.labels.generic.name:
   pages:
   - /conferences/:slug/register
   examples:
-  - 4
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
 articles.conference_registration.headings.location:
   pages:
   - /conferences/:slug/register
   context: Where are you coming from?
   examples:
-  - 4
-  - 5
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
 forms.labels.generic.location:
   pages:
   - /conferences/:slug/register
   examples:
-  - 4
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
 articles.conference_registration.headings.arrival_and_departure:
   pages:
   - /conferences/:slug/register
   context: How long do you plan to spend in the area?
   examples:
-  - 4
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
 forms.labels.generic.arrival:
   pages:
   - /conferences/:slug/register
   examples:
-  - 4
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
 forms.labels.generic.departure:
   pages:
   - /conferences/:slug/register
   examples:
-  - 4
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
 articles.conference_registration.headings.languages:
   pages:
   - /conferences/:slug/register
   context: Which languages do you speak?
   examples:
-  - 4
-  - 5
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+languages.es:
+  pages:
+  - /conferences/:slug/register
+  - /conferences/:slug/workshops/create
+  - /conferences/:slug/workshops/:workshop_id/edit
+  examples:
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
+languages.fr:
+  pages:
+  - /conferences/:slug/register
+  - /conferences/:slug/workshops/create
+  - /conferences/:slug/workshops/:workshop_id/edit
+  examples:
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
 articles.conference_registration.headings.housing:
   pages:
   - /conferences/:slug/register
   context: Do you need a place to stay?
   examples:
-  - 4
-  - 5
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
 articles.conference_registration.questions.housing.none:
   pages:
   - /conferences/:slug/register
   examples:
-  - 4
-  - 5
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
 articles.conference_registration.questions.housing.tent:
   pages:
   - /conferences/:slug/register
   examples:
-  - 4
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
 articles.conference_registration.questions.housing.house:
   pages:
   - /conferences/:slug/register
   - /conferences/:slug/stats
   examples:
-  - 4
-  - 7
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - View-stats--conferences.MyBikeBike.stats
 articles.conference_registration.headings.bike:
   pages:
   - /conferences/:slug/register
   context: Do you need a bike?
   examples:
-  - 4
-  - 5
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
 articles.conference_registration.questions.bike.none:
   pages:
   - /conferences/:slug/register
   examples:
-  - 4
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
 articles.conference_registration.questions.bike.small:
   pages:
   - /conferences/:slug/register
   examples:
-  - 4
-  - 5
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
 articles.conference_registration.questions.bike.medium:
   pages:
   - /conferences/:slug/register
   examples:
-  - 4
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
 articles.conference_registration.questions.bike.large:
   pages:
   - /conferences/:slug/register
   examples:
-  - 4
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
 articles.conference_registration.headings.food:
   pages:
   - /conferences/:slug/register
   context: What are your eating habits?
   examples:
-  - 4
-  - 5
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
 articles.conference_registration.questions.food.meat:
   pages:
   - /conferences/:slug/register
   - /conferences/:slug/stats
   examples:
-  - 4
-  - 7
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - View-stats--conferences.MyBikeBike.stats
 articles.conference_registration.questions.food.vegetarian:
   pages:
   - /conferences/:slug/register
   examples:
-  - 4
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
 articles.conference_registration.questions.food.vegan:
   pages:
   - /conferences/:slug/register
   examples:
-  - 4
-  - 5
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
 articles.conference_registration.headings.allergies:
   pages:
   - /conferences/:slug/register
   context: Do you have any allergies?
   examples:
-  - 4
-  - 5
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
 forms.labels.generic.allergies:
   pages:
   - /conferences/:slug/register
   examples:
-  - 4
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
 articles.conference_registration.headings.other:
   pages:
   - /conferences/:slug/register
   - /conferences/:slug/stats
   context: Anything else we should know about your visit?
   examples:
-  - 4
-  - 5
-  - 7
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - View-stats--conferences.MyBikeBike.stats
 forms.labels.generic.other:
   pages:
   - /conferences/:slug/register
   examples:
-  - 4
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
 articles.conference_registration.headings.Payment:
   pages:
   - /conferences/:slug/register
   examples:
-  - 4
-  - 9
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Create-workshop--conferences.MyBikeBike.register
 articles.conference_registration.paragraphs.Payment:
   pages:
   - /conferences/:slug/register
@@ -9559,27 +1247,90 @@ articles.conference_registration.paragraphs.Payment:
     Payment is by donation and can be done now or upon arrival but to help us fund
     the conference, we ask that you pay the registration donation as soon as you can.
   examples:
-  - 4
-  - 9
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Create-workshop--conferences.MyBikeBike.register
 forms.actions.generic.custom_amount:
   pages:
   - /conferences/:slug/register
   examples:
-  - 4
-  - 9
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Create-workshop--conferences.MyBikeBike.register
 articles.conference_registration.paragraphs.currency:
   pages:
   - /conferences/:slug/register
   context: (amounts are in $USD)
   examples:
-  - 4
-  - 9
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Create-workshop--conferences.MyBikeBike.register
+menu.submenu.registration.Registration:
+  pages:
+  - /conferences/:slug/register
+  - /conferences/:slug/register/:button/:confirmation_token
+  - /conferences/:slug/stats
+  - /conferences/:slug/workshops
+  - /conferences/:slug/workshops/create
+  - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
+  - /conferences/:slug/broadcast
+  examples:
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - View-stats--conferences.MyBikeBike.stats
+  - Create-workshop--conferences.MyBikeBike.register
+  - Create-workshop--conferences.MyBikeBike.workshops
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1.delete
+  - Create-workshop--conferences.MyBikeBike.workshops-1
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+menu.submenu.registration.Workshops:
+  pages:
+  - /conferences/:slug/register
+  - /conferences/:slug/register/:button/:confirmation_token
+  - /conferences/:slug/stats
+  - /conferences/:slug/workshops
+  - /conferences/:slug/workshops/create
+  - /conferences/:slug/workshops/:workshop_id
+  - /conferences/:slug/workshops/:workshop_id/edit
+  - /conferences/:slug/workshops/:workshop_id/delete
+  - /conferences/:slug/broadcast
+  examples:
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - View-stats--conferences.MyBikeBike.stats
+  - Create-workshop--conferences.MyBikeBike.register
+  - Create-workshop--conferences.MyBikeBike.workshops
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1.delete
+  - Create-workshop--conferences.MyBikeBike.workshops-1
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
 articles.conference_registration.headings.payment_confirm:
   pages:
   - /conferences/:slug/register/:button/:confirmation_token
   context: Please confirm your payment
   examples:
-  - 5
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
 articles.conference_registration.paragraphs.payment_confirm:
   pages:
   - /conferences/:slug/register/:button/:confirmation_token
@@ -9587,299 +1338,251 @@ articles.conference_registration.paragraphs.payment_confirm:
   vars:
   - :amount
   examples:
-  - 5
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
 forms.actions.generic.confirm_amount:
   pages:
   - /conferences/:slug/register/:button/:confirmation_token
   examples:
-  - 5
-menu.submenu.registration.Registration:
-  pages:
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /conferences/:slug/register
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  examples:
-  - 5
-  - 5
-  - 7
-  - 9
-  - 10
-  - 10
-  - 10
-  - 11
-  - 12
-  - 12
-  - 13
-  - 14
-  - 14
-  - 16
-  - 16
-  - 16
-  - 16
-menu.submenu.registration.Workshops:
-  pages:
-  - /conferences/:slug/register/:button/:confirmation_token
-  - /conferences/:slug/register
-  - /conferences/:slug/stats
-  - /conferences/:slug/workshops
-  - /conferences/:slug/workshops/create
-  - /conferences/:slug/workshops/:workshop_id
-  - /conferences/:slug/workshops/:workshop_id/edit
-  - /conferences/:slug/workshops/:workshop_id/delete
-  - /conferences/:slug/broadcast
-  examples:
-  - 5
-  - 5
-  - 7
-  - 9
-  - 10
-  - 10
-  - 10
-  - 11
-  - 12
-  - 12
-  - 13
-  - 14
-  - 14
-  - 16
-  - 16
-  - 16
-  - 16
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register.paypal_confirm.token
 articles.conference_registration.headings.Youre_Done:
   pages:
   - /conferences/:slug/register
   context: You're Done!
   examples:
-  - 5
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
 articles.conference_registration.paragraphs.done:
   pages:
   - /conferences/:slug/register
   context: p
   examples:
-  - 5
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
 articles.conference_registration.paragraphs.workshops:
   pages:
   - /conferences/:slug/register
   context: You can now take a look at proposed workshops and even propose one yourself
     if you like.
   examples:
-  - 5
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
 articles.conference_registration.actions.View_Workshops:
   pages:
   - /conferences/:slug/register
   examples:
-  - 5
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
 articles.conference_registration.headings.Your_Registration:
   pages:
   - /conferences/:slug/register
   examples:
-  - 5
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
 articles.conference_registration.headings.arrival:
   pages:
   - /conferences/:slug/register
   examples:
-  - 5
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
 time.formats.long:
   pages:
   - /conferences/:slug/register
   examples:
-  - 5
-  - 5
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
 time.am:
   pages:
   - /conferences/:slug/register
   examples:
-  - 5
-  - 5
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
 articles.conference_registration.headings.departure:
   pages:
   - /conferences/:slug/register
   examples:
-  - 5
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
 articles.conference_registration.none:
   pages:
   - /conferences/:slug/register
   examples:
-  - 5
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
 articles.conference_registration.headings.payment:
   pages:
   - /conferences/:slug/register
   examples:
-  - 5
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
 forms.actions.generic.edit_registration:
   pages:
   - /conferences/:slug/register
   examples:
-  - 5
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-2
 page_titles.403.Please_Confirm_Email:
   pages:
   - /confirm/:token
   examples:
-  - 6
-  - 6
-  - 8
-  - 8
-  - 15
-  - 15
+  - View-stats--confirm.test
+  - View-stats--confirm.test
+  - Create-workshop--confirm.test
+  - Create-workshop--confirm.test
+  - Broadcast-message--confirm.test
+  - Broadcast-message--confirm.test
 articles.permission_denied.headings.confirm_email:
   pages:
   - /confirm/:token
   context: Please confirm your email address
   examples:
-  - 6
-  - 6
-  - 8
-  - 8
-  - 15
-  - 15
+  - View-stats--confirm.test
+  - View-stats--confirm.test
+  - Create-workshop--confirm.test
+  - Create-workshop--confirm.test
+  - Broadcast-message--confirm.test
+  - Broadcast-message--confirm.test
 forms.actions.generic.login:
   pages:
   - /confirm/:token
   examples:
-  - 6
-  - 6
-  - 8
-  - 8
-  - 15
-  - 15
+  - View-stats--confirm.test
+  - View-stats--confirm.test
+  - Create-workshop--confirm.test
+  - Create-workshop--confirm.test
+  - Broadcast-message--confirm.test
+  - Broadcast-message--confirm.test
 geography.subregions.US.AK:
   pages:
   - /
   examples:
-  - 6
-  - 6
+  - View-stats--
+  - View-stats--
 page_titles.conferences.Registration_Stats:
   pages:
   - /conferences/:slug/stats
   examples:
-  - 7
+  - View-stats--conferences.MyBikeBike.stats
 articles.conference_registration.headings.Stats:
   pages:
   - /conferences/:slug/stats
   examples:
-  - 7
+  - View-stats--conferences.MyBikeBike.stats
 articles.conference_registration.paragraphs.Stats:
   pages:
   - /conferences/:slug/stats
   context: p
   examples:
-  - 7
+  - View-stats--conferences.MyBikeBike.stats
 articles.conference_registration.terms.Total_Registrations:
   pages:
   - /conferences/:slug/stats
   examples:
-  - 7
+  - View-stats--conferences.MyBikeBike.stats
 articles.conference_registration.terms.Total_Donations:
   pages:
   - /conferences/:slug/stats
   examples:
-  - 7
+  - View-stats--conferences.MyBikeBike.stats
 articles.conference_registration.terms.Donation_Count:
   pages:
   - /conferences/:slug/stats
   examples:
-  - 7
+  - View-stats--conferences.MyBikeBike.stats
 articles.conference_registration.terms.Housing:
   pages:
   - /conferences/:slug/stats
   examples:
-  - 7
+  - View-stats--conferences.MyBikeBike.stats
 articles.conference_registration.terms.Bikes:
   pages:
   - /conferences/:slug/stats
   examples:
-  - 7
+  - View-stats--conferences.MyBikeBike.stats
 articles.conference_registration.questions.bikes.medium:
   pages:
   - /conferences/:slug/stats
   examples:
-  - 7
+  - View-stats--conferences.MyBikeBike.stats
 articles.conference_registration.terms.Food:
   pages:
   - /conferences/:slug/stats
   examples:
-  - 7
+  - View-stats--conferences.MyBikeBike.stats
 articles.conference_registration.terms.Languages:
   pages:
   - /conferences/:slug/stats
   examples:
-  - 7
+  - View-stats--conferences.MyBikeBike.stats
 articles.conference_registration.headings.Allergies:
   pages:
   - /conferences/:slug/stats
   examples:
-  - 7
+  - View-stats--conferences.MyBikeBike.stats
+menu.submenu.registration.Edit:
+  pages:
+  - /conferences/:slug/stats
+  - /conferences/:slug/broadcast
+  examples:
+  - View-stats--conferences.MyBikeBike.stats
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
 menu.submenu.registration.Stats:
   pages:
   - /conferences/:slug/stats
   - /conferences/:slug/broadcast
   examples:
-  - 7
-  - 16
-  - 16
-  - 16
-  - 16
+  - View-stats--conferences.MyBikeBike.stats
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
 menu.submenu.registration.Broadcast:
   pages:
   - /conferences/:slug/stats
   - /conferences/:slug/broadcast
   examples:
-  - 7
-  - 16
-  - 16
-  - 16
-  - 16
+  - View-stats--conferences.MyBikeBike.stats
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
 geography.subregions.US.TX:
   pages:
   - /
   examples:
-  - 8
-  - 8
-  - 15
-  - 15
+  - Create-workshop--
+  - Create-workshop--
+  - Broadcast-message--
+  - Broadcast-message--
 page_titles.conferences.Workshops:
   pages:
   - /conferences/:slug/workshops
   examples:
-  - 10
-  - 14
+  - Create-workshop--conferences.MyBikeBike.workshops
+  - Create-workshop--conferences.MyBikeBike.workshops-1
 articles.workshops.headings.Workshops:
   pages:
   - /conferences/:slug/workshops
   examples:
-  - 10
-  - 14
+  - Create-workshop--conferences.MyBikeBike.workshops
+  - Create-workshop--conferences.MyBikeBike.workshops-1
 articles.workshops.paragraphs.Workshops:
   pages:
   - /conferences/:slug/workshops
   context: p
   examples:
-  - 10
-  - 14
+  - Create-workshop--conferences.MyBikeBike.workshops
+  - Create-workshop--conferences.MyBikeBike.workshops-1
 articles.workshops.headings.Your_Workshops:
   pages:
   - /conferences/:slug/workshops
   examples:
-  - 10
-  - 14
+  - Create-workshop--conferences.MyBikeBike.workshops
+  - Create-workshop--conferences.MyBikeBike.workshops-1
 actions.workshops.create:
   pages:
   - /conferences/:slug/workshops
   context: New Workshop
   examples:
-  - 10
-  - 14
+  - Create-workshop--conferences.MyBikeBike.workshops
+  - Create-workshop--conferences.MyBikeBike.workshops-1
 page_titles.conferences.Create_Workshop:
   pages:
   - /conferences/:slug/workshops/create
   examples:
-  - 10
+  - Create-workshop--conferences.MyBikeBike.workshops.create
 articles.workshops.paragraphs.new_workshop:
   pages:
   - /conferences/:slug/workshops/create
@@ -9888,22 +1591,22 @@ articles.workshops.paragraphs.new_workshop:
     decide if they wish to add it to the schedule and when it should best be scheduled.
     Enter normal text but if you want to get fancy you can use [Markdown](http://daringfireball.net/projects/markdown/basics).
   examples:
-  - 10
-  - 12
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
 forms.labels.generic.title:
   pages:
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id/edit
   examples:
-  - 10
-  - 12
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
 forms.labels.generic.info:
   pages:
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id/edit
   examples:
-  - 10
-  - 12
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
 articles.workshops.headings.languages:
   pages:
   - /conferences/:slug/workshops/create
@@ -9911,70 +1614,70 @@ articles.workshops.headings.languages:
   - /conferences/:slug/workshops/:workshop_id/edit
   context: Workshop Language
   examples:
-  - 10
-  - 10
-  - 11
-  - 12
-  - 12
-  - 13
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
 articles.workshops.headings.theme:
   pages:
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id/edit
   context: Theme
   examples:
-  - 10
-  - 12
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
 articles.workshops.paragraphs.theme:
   pages:
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id/edit
   context: p
   examples:
-  - 10
-  - 12
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
 workshop.options.theme.race_gender:
   pages:
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id/edit
   examples:
-  - 10
-  - 12
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
 workshop.options.theme.mechanics:
   pages:
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id/edit
   examples:
-  - 10
-  - 12
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
 workshop.options.theme.funding:
   pages:
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id/edit
   examples:
-  - 10
-  - 12
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
 workshop.options.theme.organization:
   pages:
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id/edit
   examples:
-  - 10
-  - 12
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
 workshop.options.theme.community:
   pages:
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id/edit
   examples:
-  - 10
-  - 12
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
 workshop.options.theme.other:
   pages:
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id/edit
   examples:
-  - 10
-  - 12
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
 articles.workshops.headings.needs:
   pages:
   - /conferences/:slug/workshops/create
@@ -9982,70 +1685,70 @@ articles.workshops.headings.needs:
   - /conferences/:slug/workshops/:workshop_id/edit
   context: What do you need?
   examples:
-  - 10
-  - 10
-  - 11
-  - 12
-  - 12
-  - 13
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
 workshop.options.needs.sound:
   pages:
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id/edit
   examples:
-  - 10
-  - 12
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
 workshop.options.needs.projector:
   pages:
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id/edit
   examples:
-  - 10
-  - 12
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
 workshop.options.needs.tools:
   pages:
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id/edit
   examples:
-  - 10
-  - 12
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
 articles.workshops.headings.space:
   pages:
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id/edit
   context: Type of space
   examples:
-  - 10
-  - 12
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
 articles.workshops.paragraphs.space:
   pages:
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id/edit
   context: p
   examples:
-  - 10
-  - 12
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
 workshop.options.space.meeting_room:
   pages:
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id/edit
   examples:
-  - 10
-  - 12
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
 workshop.options.space.workshop:
   pages:
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id/edit
   examples:
-  - 10
-  - 12
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
 workshop.options.space.outdoor_meeting:
   pages:
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id/edit
   examples:
-  - 10
-  - 12
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
 articles.workshops.headings.notes:
   pages:
   - /conferences/:slug/workshops/create
@@ -10053,84 +1756,84 @@ articles.workshops.headings.notes:
   - /conferences/:slug/workshops/:workshop_id/edit
   context: Notes for Conference Organizers and Workshop Facilitators
   examples:
-  - 10
-  - 10
-  - 11
-  - 12
-  - 12
-  - 13
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
 articles.workshops.paragraphs.notes:
   pages:
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id/edit
   context: Notes are only viewable by conference hosts and workshop facilitators
   examples:
-  - 10
-  - 12
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
 forms.labels.generic.notes:
   pages:
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id/edit
   examples:
-  - 10
-  - 12
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
 forms.actions.generic.save:
   pages:
   - /conferences/:slug/workshops/create
   - /conferences/:slug/workshops/:workshop_id/edit
   examples:
-  - 10
-  - 12
+  - Create-workshop--conferences.MyBikeBike.workshops.create
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
 page_titles.conferences.View_Workshop:
   pages:
   - /conferences/:slug/workshops/:workshop_id
   examples:
-  - 10
-  - 11
-  - 12
-  - 13
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
 articles.workshops.headings.facilitators:
   pages:
   - /conferences/:slug/workshops/:workshop_id
   examples:
-  - 10
-  - 11
-  - 12
-  - 13
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
 roles.workshops.facilitator.creator:
   pages:
   - /conferences/:slug/workshops/:workshop_id
   examples:
-  - 10
-  - 11
-  - 12
-  - 13
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
 actions.workshops.Edit:
   pages:
   - /conferences/:slug/workshops/:workshop_id
   examples:
-  - 10
-  - 11
-  - 12
-  - 13
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
 actions.workshops.Delete:
   pages:
   - /conferences/:slug/workshops/:workshop_id
   examples:
-  - 10
-  - 11
-  - 12
-  - 13
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
 page_titles.conferences.Edit_Workshop:
   pages:
   - /conferences/:slug/workshops/:workshop_id/edit
   examples:
-  - 12
+  - Create-workshop--conferences.MyBikeBike.workshops.1.edit
 page_titles.conferences.Delete_Workshop:
   pages:
   - /conferences/:slug/workshops/:workshop_id/delete
   examples:
-  - 14
+  - Create-workshop--conferences.MyBikeBike.workshops.1.delete
 articles.workshops.headings.Delete_Workshop:
   pages:
   - /conferences/:slug/workshops/:workshop_id/delete
@@ -10138,25 +1841,25 @@ articles.workshops.headings.Delete_Workshop:
   vars:
   - :title
   examples:
-  - 14
+  - Create-workshop--conferences.MyBikeBike.workshops.1.delete
 forms.actions.generic.confirm:
   pages:
   - /conferences/:slug/workshops/:workshop_id/delete
   examples:
-  - 14
+  - Create-workshop--conferences.MyBikeBike.workshops.1.delete
 forms.actions.generic.cancel:
   pages:
   - /conferences/:slug/workshops/:workshop_id/delete
   examples:
-  - 14
+  - Create-workshop--conferences.MyBikeBike.workshops.1.delete
 page_titles.conferences.Email_Participants:
   pages:
   - /conferences/:slug/broadcast
   examples:
-  - 16
-  - 16
-  - 16
-  - 16
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
 articles.conference_registration.paragraphs.Email_Participants:
   pages:
   - /conferences/:slug/broadcast
@@ -10164,34 +1867,34 @@ articles.conference_registration.paragraphs.Email_Participants:
     Pressing 'test' will send the email only to you, make sure you do this and use
     caution in general before pressing 'send'
   examples:
-  - 16
-  - 16
-  - 16
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
 forms.labels.generic.subject:
   pages:
   - /conferences/:slug/broadcast
   examples:
-  - 16
-  - 16
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
 forms.labels.generic.content:
   pages:
   - /conferences/:slug/broadcast
   examples:
-  - 16
-  - 16
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
 forms.actions.generic.preview:
   pages:
   - /conferences/:slug/broadcast
   examples:
-  - 16
-  - 16
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
 forms.actions.generic.test:
   pages:
   - /conferences/:slug/broadcast
   examples:
-  - 16
-  - 16
-  - 16
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
 articles.conference_registration.notes.Test_Email_Sent:
   pages:
   - /conferences/:slug/broadcast
@@ -10199,23 +1902,23 @@ articles.conference_registration.notes.Test_Email_Sent:
   vars:
   - :email_address
   examples:
-  - 16
+  - Broadcast-message--conferences.MyBikeBike.broadcast
 articles.conference_registration.headings.Preview:
   pages:
   - /conferences/:slug/broadcast
   examples:
-  - 16
-  - 16
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast
 forms.actions.generic.edit:
   pages:
   - /conferences/:slug/broadcast
   examples:
-  - 16
+  - Broadcast-message--conferences.MyBikeBike.broadcast
 forms.actions.generic.send:
   pages:
   - /conferences/:slug/broadcast
   examples:
-  - 16
+  - Broadcast-message--conferences.MyBikeBike.broadcast
 articles.conference_registration.paragraphs.participants_emailed:
   pages:
   - /conferences/:slug/broadcast
@@ -10223,128 +1926,128 @@ articles.conference_registration.paragraphs.participants_emailed:
   vars:
   - :conference_title
   examples:
-  - 16
+  - Broadcast-message--conferences.MyBikeBike.broadcast
 page_titles.about.About_BikeBike:
   pages:
   - /about
   examples:
-  - 17
+  - Read-the-about-page--about
 articles.about_bikebike.headings.What_is_BikeBike:
   pages:
   - /about
   context: t
   examples:
-  - 17
+  - Read-the-about-page--about
 articles.about_bikebike.paragraphs.What_is_BikeBike:
   pages:
   - /about
   context: p
   examples:
-  - 17
+  - Read-the-about-page--about
 articles.about_bikebike.headings.bicycle_project:
   pages:
   - /about
   context: t
   examples:
-  - 17
+  - Read-the-about-page--about
 articles.about_bikebike.paragraphs.bicycle_project_paragraph:
   pages:
   - /about
   context: p
   examples:
-  - 17
+  - Read-the-about-page--about
 articles.about_bikebike.term.non_profit:
   pages:
   - /about
   context: s
   examples:
-  - 17
+  - Read-the-about-page--about
 articles.about_bikebike.term.no_money:
   pages:
   - /about
   context: s
   examples:
-  - 17
+  - Read-the-about-page--about
 articles.about_bikebike.term.education:
   pages:
   - /about
   context: s
   examples:
-  - 17
+  - Read-the-about-page--about
 articles.about_bikebike.term.volunteer_run:
   pages:
   - /about
   context: s
   examples:
-  - 17
+  - Read-the-about-page--about
 articles.about_bikebike.term.export_bikes:
   pages:
   - /about
   context: s
   examples:
-  - 17
+  - Read-the-about-page--about
 articles.about_bikebike.term.low_cost:
   pages:
   - /about
   context: s
   examples:
-  - 17
+  - Read-the-about-page--about
 articles.about_bikebike.term.recycle_parts:
   pages:
   - /about
   context: s
   examples:
-  - 17
+  - Read-the-about-page--about
 articles.about_bikebike.headings.Who_is_Invited:
   pages:
   - /about
   context: t
   examples:
-  - 17
+  - Read-the-about-page--about
 articles.about_bikebike.paragraphs.Who_is_Invited:
   pages:
   - /about
   context: p
   examples:
-  - 17
+  - Read-the-about-page--about
 articles.about_bikebike.headings.Types_of_Workshops:
   pages:
   - /about
   context: t
   examples:
-  - 17
+  - Read-the-about-page--about
 articles.about_bikebike.paragraphs.Types_of_Workshops:
   pages:
   - /about
   context: p
   examples:
-  - 17
+  - Read-the-about-page--about
 articles.about_bikebike.headings.Amenities:
   pages:
   - /about
   context: t
   examples:
-  - 17
+  - Read-the-about-page--about
 articles.about_bikebike.paragraphs.Amenities:
   pages:
   - /about
   context: p
   examples:
-  - 17
+  - Read-the-about-page--about
 articles.about_bikebike.headings.Volunteer:
   pages:
   - /about
   context: t
   examples:
-  - 17
+  - Read-the-about-page--about
 articles.about_bikebike.paragraphs.Volunteer:
   pages:
   - /about
   context: p
   examples:
-  - 17
+  - Read-the-about-page--about
 page_titles.policy.Safer_Spaces_Policy:
   pages:
   - /policy
   examples:
-  - 18
+  - Read-the-policy-page--policy

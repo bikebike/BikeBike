@@ -3,7 +3,7 @@
 	= row do
 		= columns(medium: 12) do
 			%h2=_!@workshop.title
-			=paragraph _!(@workshop.info) || ''
+			=markdown _!(@workshop.info) || ''
 		= columns(medium: 6) do
 			%h3=_'articles.workshops.headings.facilitators'
 			.facilitators
@@ -28,7 +28,7 @@
 			- if @workshop.notes
 				= columns(medium: 12) do
 					%h3=_'articles.workshops.headings.notes','Notes'
-					=paragraph _!(@workshop.notes)
+					=markdown _!(@workshop.notes)
 		= columns(medium: 12) do
 			.actions
 				= (link_to (_'actions.workshops.Edit'), edit_workshop_path(@this_conference.slug, @workshop.id), :class => 'button modify') if @workshop.can_edit?(current_user)

@@ -36,6 +36,7 @@ es:
       long: '%d de %B de %Y'
       short: '%d de %b'
       span_same_month_date_2: '%e, %Y'
+      span_same_month_date_1: '%B %e'
     month_names:
     - 
     - enero
@@ -255,6 +256,8 @@ es:
     uz: uzbeko
     vi: vietnamita
     wo: wólof
+    be: bielorruso
+    tt: tártaro
   geography:
     countries:
       AD: Andorra
@@ -700,6 +703,7 @@ es:
         Your_Workshops: Actividades
         Policy_Agreement: Acuerdo del Espacio Mas Seguro
         Preview: Preestreno
+        Stats: Estadísticas
       paragraphs:
         Registration_Info: EL REGISTRO ESTÁ ABIERTOOOOO! :) Por favor llénalo lo más
           pronto que puedas, cualquier pregunta o mejora puedes comentarla más abajo,

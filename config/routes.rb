@@ -20,8 +20,8 @@ BikeBike::Application.routes.draw do
     # get 'resources' => 'pages#resources'
     # 
     get '/confirm/:token' => 'application#confirm', :as => :confirm
+    match '/doconfirm' => 'application#do_confirm', :as => :do_confirm, via: [:get, :post]
     #post '/doconfirm' => 'application#do_confirm', :as => :do_confirm
-    post '/doconfirm' => 'application#do_confirm', :as => :do_confirm
     post '/logout' => 'application#user_logout', :as => :logout
     post '/translator-request' => 'application#translator_request', :as => :translator_request
 

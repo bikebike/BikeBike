@@ -7,6 +7,7 @@
 require 'cucumber/rails'
 require 'capybara/poltergeist'
 require 'lingua_franca/capybara'
+require 'mocha/mini_test'
 
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
@@ -47,8 +48,12 @@ Before('@javascript') do
 end
 
 Before do
-	#ApplicationController::set_host 'en.bikebike.org'
-	#ApplicationController::set_location nil
+	user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A"
+	#request.stub!(:user_agent).and_return()
+	#controller.request.stub!(:user_agent).and_return(user_agent)
+	ActionDispatch::Request.any_instance.stubs(:user_agent).returns(user_agent)
+	#page.driver.browser.header('User-Agent', user_agent)
+	#page.driver.headers = { "User-Agent" => "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2403.157 Safari/537.36" }
 end
 
 After do |scenario|
@@ -84,7 +89,7 @@ end
 # The :transaction strategy is faster, but might give you threading problems.
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Capybara.register_driver :bb_poltergeist do |app|
-  Capybara::LinguaFrancaPoltergeist::Driver.new(app, :inspector => true, :timeout => 120)
+	I18n.backend.start_recording_html(Capybara::LinguaFrancaPoltergeist::Driver.new(app, :inspector => true, :timeout => 120))
 end
 
 Cucumber::Rails::Database.javascript_strategy = :transaction
