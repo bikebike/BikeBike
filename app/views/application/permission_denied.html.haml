@@ -1,5 +1,5 @@
 - content_for :banner do
-	- image = image_url(@banner_image || '403.jpg')
+	- image = image_path(@banner_image || '403.jpg')
 	#header-title.short{style: capable_of(:svg) ? nil : "background-image: url(#{image})"}
 		- if capable_of(:svg)
 			= render 'application/banner_image.svg', {:image => image}
