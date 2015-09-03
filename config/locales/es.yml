@@ -55,6 +55,7 @@ es:
     - :day
     - :month
     - :year
+    date_span: '%{date_1} – %{date_2}'
   datetime:
     distance_in_words:
       about_x_hours:
@@ -704,6 +705,17 @@ es:
         Policy_Agreement: Acuerdo del Espacio Mas Seguro
         Preview: Preestreno
         Stats: Estadísticas
+        Payment: Pago
+        Your_Registration: Tu registro
+        Youre_Done: ¡Estás listx!
+        arrival: Llegada
+        bike: ¿Necesitas una bici?
+        departure: Salida
+        email_confirm: Confirmar correo electrónico
+        housing: ¿Necesitas hospedaje?
+        other: ¿Hay algo más que quisieras decirnos?
+        payment: Cargos pagados
+        payment_confirm: Por favor confirma tu pago
       paragraphs:
         Registration_Info: EL REGISTRO ESTÁ ABIERTOOOOO! :) Por favor llénalo lo más
           pronto que puedas, cualquier pregunta o mejora puedes comentarla más abajo,
@@ -714,6 +726,29 @@ es:
         Workshops: 'Título de la actividad: Que necesitas? Tipo de espacio? Tema?
           Quién es responsable? Descripción? Tiempo?'
         Policy_Agreement: Acuerdo del espacio mas Seguro
+        Confirm_Agreement: Al hacer click en el botón "Acepto", estás comprometiéndote
+          a cumplir el Acuerdo de Espacios Más Seguros de Bike!Bike!. ¡Gracias!
+        Email_Participants: Esta página se usa para contactar a todxs lxs participantes.
+          El texto se puede ingresar como [Markdown](http://daringfireball.net/projects/markdown/basics).
+          Presionar "prueba" enviará el correo solamente a tí, asegurate de hacerlo
+          y sé cuidadosx antes de presionar 'enviar'.
+        Stats: Ve quién vendrá y lo que han pagado hasta ahora. Ve en resumen cuánto
+          hospedaje se necesita y qué prefiere comer la gente.
+        confirm_email_address: Te pedimos confirmar tu dirección de e-mail primero,
+          al ser confirmada podrás completar el registro, agregar talleres y pagar
+          el donativo de registro. Si ya te registraste puedes re-confirmar tu dirección
+          de e-mail para modificar los detalles de tu registro.
+        currency: (cantidades en dólares americanos $USD)
+        done: ¡Gracias por registrarte para Bike!Bike!
+        email_confirm: ¡Ve a tu bandeja de entrada! Deberías ver un e-mail por parte
+          de Bike!Bike! en unos momentos. Contendrá un enlace sobre el cual debes
+          hacer click. Revisa tu bandeja de correo no deseado si no lo ves. Si tienes
+          algún problema, por favor envía un e-mail a admin@bikebike.org
+        participants_emailed: Tu correo ha sido enviado a todxs lxs participantes
+          de %{conference_title}.
+        payment_confirm: Estás por confirmar tu pago de %{amount} para el registro.
+        workshops: Ahora puedes revisar los talleres propuestos e incluso proponer
+          uno si quieres.
       questions:
         food:
           meat: Carnivoro
@@ -733,6 +768,14 @@ es:
         Donation_Count: Donar
         Languages: ¿Hablas?
         Total_Donations: Donar
+        Food: Comida
+        Housing: Hospedaje
+        Total_Registrations: Registros totales
+      actions:
+        View_Workshops: Ver Talleres
+      none: (ninguno)
+      notes:
+        Test_Email_Sent: Un email fue enviado a %{email_address}
     about_bikebike:
       paragraphs:
         Who_is_Invited: No es necesario ser personas o grupos expertas solo tener
@@ -788,13 +831,42 @@ es:
       paragraphs:
         info: 'Título de la actividad: Que necesitas? Tipo de espacio? Tema? Quién
           es responsable? Descripción? Tiempo?'
+        Workshops: ¿Tienes alguna habilidad emocionante que quieres compartir con
+          nosotros? ¿Quieres charlar sobre crear espacios comunitarios seguros? ¿Quieres
+          asegurarte de que hagamos un buen paseo el fin de semana? ¡Propón un taller!
+          No te preocupes si no eres unx expertx, queremos escuchar acerca de las
+          experiencias de todxs dentro de los diferentes talleres comunitarios de
+          los que venimos con sus diferentes configuraciones.
+        new_workshop: 'Anteriormente los talleres se han podido integrar en una serie
+          de categorías amplias: organización/estructura (cómo iniciar un taller comunitario,
+          cómo registrar una asociación sin fines de lucro, toma de decisiones mediante
+          consenso, etc) mecánica (cómo soldar dos tandems en una tall-bike, cómo
+          construir una masa de cambios internos con accesorios de pesca y calcetines
+          viejos, etc) y recreación (tips de cicloturismo, yoga para ciclistas, etc.)
+          Este año quisieramos intentar páneles, foros u otro tipo de contextos que
+          creas que puedan facilitar el aprendizaje - sé inventivx, ¡Dinos qué quieres
+          ver!'
+        notes: Las notas se comparten solo con lxs organizadorxs de la conferencia
+          y con lxs facilitadorxs de los talleres.
+        space: ¿Qué tipo de espacio necesitas para tu taller?
+        theme: ¿Cuáles de estos temas describen mejor tu taller? Esto ayudará a los
+          anfitriones a evitar conflictos de horario. Seleciona 'otro' si ninguna
+          de las opciones se relaciona de ninguna forma.
       headings:
         facilitators: facilitadores
         Delete_Workshop: Eliminar Actividad
+        Workshops: Talleres
+        Your_Workshops: Tus talleres
+        languages: Lenguajes
+        needs: Necesidades
+        notes: Notas
+        space: Espacio
+        theme: Tema
     policy:
       headings:
         The_Agreement: Acuerdo del Espacio Mas Seguro
         How: ¿Cómo se hace cumplir esta política?
+        Why: ¿Porqué tener un Acuerdo de Espacios Más Seguros?
       paragraphs:
         How: La ciudad anfitriona tiene la responsabilidad de mediar en cualquier
           situación concerniente a Espacios Más Seguros. Ellas decidirán qué amerita
@@ -820,9 +892,13 @@ es:
           posible; fisica, social y personalmente.
         intent: Aceptamos una responsabilidad compartida para hacernos responsables
           a nosotrxs mismxs y a lxs demás de los propósitos de este acuerdo.
+        learning: Promovemos espacios de aprendizaje y preguntas incluyentes en el
+          espíritu de crecimiento personal.
+        open_minds: Fomentamos mentes y corazones abiertxs.
     permission_denied:
       paragraphs: 
-      headings: 
+      headings:
+        confirm_email: Por favor confirma tu dirección de e-mail.
   forms:
     labels:
       generic:
@@ -832,6 +908,12 @@ es:
         email: Correo electrónico
         location: Ciudad y pais
         name: Nombre
+        arrival: Fecha de llegada
+        content: Contenido
+        departure: Fecha de salida
+        notes: Notas
+        other: Discapacidades, preferencias de hospedaje, etc.
+        subject: Tema
     actions:
       generic:
         agree: Estoy en acuerdo.
@@ -840,6 +922,14 @@ es:
         custom_amount: Cantidad diferente
         Log_out: Salir
         login: Inicia session
+        cancel: Cancelar
+        confirm: Confirmar
+        confirm_amount: Confirmar
+        edit: Editar
+        preview: Vista previa
+        save: Guardar
+        send: Enviar
+        test: Prueba
   links:
     footer:
       help_text:
@@ -848,6 +938,7 @@ es:
         facebook: Unirte a nuestro grupo de Facebook
       text:
         Help_contribute: ayudar a contribuir
+        File_an_Issue: Reportar un problema
   page_titles:
     About_BikeBike: Quienes Bike!Bike!
     about:
@@ -855,8 +946,20 @@ es:
     Safe_Space_Policy: Acuerdo del Espacio Mas Seguro
     conferences:
       Conference_Registration: Registro
+      Create_Workshop: Crear taller
+      Delete_Workshop: Eliminar taller
+      Edit_Workshop: Editar taller
+      Email_Participants: Enviar e-mail a los participantes
+      Registration_Stats: Estadísticas de registro
+      View_Workshop: Ver talleres
+      Workshops: Talleres
     policy:
       Safer_Spaces_Policy: Acuerdo del Espacio Mas Seguro
+    '403':
+      Please_Check_Email: Por favor confirma tu e-mail
+      Please_Confirm_Email: Página no encontrada
+    '404':
+      Page_Not_Found: Crear un taller
   actions:
     workshops:
       create: Crear
@@ -873,6 +976,9 @@ es:
       outdated_translation: El contenido que ha sido superado
       translation_out_of_date: Contenido traducido en esta página puede no ser exacta
       un_translated: Contenido sin traducir
+      not_translation: No es una traducción
+      translation_last_modified: El texto en el idioma original fue modificada por
+        última vez el %%{date}
     pages:
       contexts:
         geography: geografia
@@ -881,10 +987,14 @@ es:
         sentence: oracion
         title: titulo
         character: caracter
+        paragraph: párrafo
       pluraliztion_rules:
         few: poco
         many: muchos
         zero: ninguno
+        one: singular
+        other: plural
+        two: dos
       Incomplete_Locales: Incomplete Languages
       Locale_Translations: '%{language} Traducciones'
       context:
@@ -896,11 +1006,62 @@ es:
       pluraliztion_same_as_other: Igual que el otro
       test:
         one: ''
+      Enabled_Locales: Idiomas habilitados
+      History: Historia
+      Locale_Translation: Traducción en %%{language}
+      Other_Locales: Otros idiomas
+      Save: Ahorre
+      explain_zero_fallback: Esta traducción se utilice la versión plural para el
+        número 0
+      use_custom_value: Utilice un valor personalizado
+      use_default_value: Utilice el valor predeterminado
+      variables: Variables
+    site:
+      go_to_locale: Ver el sitio %%{language} ahora
+      locale_is_available: '%%{site_name} está disponible en %%{language}'
+      locale_needs_help: ¿Puedes ayudar a traducir el sitio al %%{language}?
+      locale_not_available: Lo sentimos, %%{site_name} no está disponible en %%{language}.
+    volunteer:
+      become_a_volunteer: Conviértete en un traductor voluntario
+      volunteer: ¿Puedes ayudar a traducir esto?
   menu:
     submenu:
       registration:
         Registration: Registro
         Workshops: Actividades
+        Broadcast: Emitir
+        Edit: Estadísticas
+        Stats: Por favor revisa tu e-mail
   page_descriptions:
     home: Bike! Bike! Una conferencia de colectivos en bicicleta, cooperativas, tiendas
       de bicicletas de bricolaje sin fines de lucro
+  email:
+    confirmation:
+      link:
+        please_confirm: Confirmar ahora
+      paragraph:
+        please_confirm: ¡Hola! Para ingresar al registro y otras funciones de Bike!Bike!
+          confirma tu dirección de e-mail por favor.
+    subject:
+      confirm_email: E-mail de confirmación
+  roles:
+    workshops:
+      facilitator:
+        creator: Creador
+  workshop:
+    options:
+      needs:
+        projector: Proyector
+        sound: Sistema de sonido
+        tools: Herramientas
+      space:
+        meeting_room: Sala de juntas
+        outdoor_meeting: Espacio exterior
+        workshop: Espacio para reparación
+      theme:
+        community: Participación comunitaria
+        funding: Fondeo
+        mechanics: Mecánica
+        organization: Asuntos organizacionales
+        other: Otro
+        race_gender: Políticas de raza, género o clase

@@ -5191,6 +5191,9 @@ en:
       use_custom_value: Use a custom value
       explain_zero_fallback: This translation will use the plural version for the
         number 0
+      History: History
+      Locale_Translation: '%%{language} Translation'
+      Save: Save
     content:
       needs_translations: This page contains untranslated content
       requires_translation: This %{model} is in %{language}.
@@ -5467,6 +5470,7 @@ en:
           into the weekend?  Propose a workshop!  Don’t worry if you’re not an expert,
           we want to hear about everyone’s experience within the many configurations
           of community shops we’re coming from.
+        notes: Notes are only viewable by conference hosts and workshop facilitators
   section_content:
     bikebike:
       about_bikebike: Bike!Bike! is an international annual gathering organized by
@@ -5547,6 +5551,7 @@ en:
         Workshops: Workshops
         Stats: Stats
         Broadcast: Broadcast
+        Edit: Edit Conference
   actions:
     workshops:
       create: New Workshop
