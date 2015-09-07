@@ -1,5 +1,23 @@
 class UserMailer < ActionMailer::Base
 	add_template_helper(ApplicationHelper)
+	#add_template_helper(LinguaFrancaHelper)
+	include LinguaFrancaHelper
+
+	#def self.before(*names)
+	#	names.each do |name|
+	#		m = instance_method(name)
+	#		define_method(name) do |*args, &block|  
+	#			#yield
+	#			if ![:send_action].include?(name.to_sym)
+	#				puts " ====== #{name} ====== "
+	#				I18n.backend.set_page_name(name)
+	#				m.bind(self).(*args, &block)
+	#			else
+	#				puts " ------ #{name} ------ "
+	#			end
+	#		end
+	#	end
+	#end
 
 	default from: "Bike!Bike! <noreply@bikebike.org>"
 
@@ -46,13 +64,15 @@ class UserMailer < ActionMailer::Base
 	end
 
 	def email_confirmation(confirmation)
+		#puts " == #{instance_methods.to_json.to_s} == "
 		@confirmation = confirmation
 		@host = UserMailer.default_url_options[:host]
 		mail to: confirmation.user.email,
-			 subject: (I18n.t 'email.subject.confirm_email','Please confirm your email address')
+			 subject: (_'email.subject.confirm_email','Please confirm your email address')
 	end
 
 	def broadcast(host, subject, content, user, conference)
+		#puts " == #{instance_methods.to_json.to_s} == "
 		@host = host
 		@content = content
 		@banner = (@host || 'http://localhost/') + (conference ? (conference.poster.preview.url || '') : image_url('logo.png'))
@@ -61,4 +81,5 @@ class UserMailer < ActionMailer::Base
 		end
 	end
 
+	#before(*instance_methods) { }
 end

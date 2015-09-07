@@ -1,6 +1,6 @@
 /*
  *	../translations
- *	Browser: IE 7 (approximately 0.07% of all users)
+ *	Browser: IE 7 (approximately 0.05% of all users)
  *
  */
 
@@ -106,7 +106,7 @@ $browser_capabilities: (
 	"mpeg4": n,
 	"ogv": n,
 	"wordwrap": a,
-	"progressmeter": n,
+	"pointerlock": n,
 	"object-fit": n,
 	"xhr2": n,
 	"minmaxwh": y,
@@ -272,7 +272,28 @@ $browser_capabilities: (
 	"fieldset-disabled": a,
 	"font-variant-alternates": n,
 	"form-attribute": n,
-	"es5": n
+	"es5": n,
+	"page-transition-events": n,
+	"ogg-vorbis": n,
+	"meter": n,
+	"progress": n,
+	"css-filter-function": n,
+	"css-element-function": n,
+	"u2f": n,
+	"aac": n,
+	"link-rel-prefetch": n,
+	"ol-reversed": n,
+	"css-first-letter": a,
+	"wbr-element": y,
+	"css-all": n,
+	"css-initial-value": n,
+	"css-letter-spacing": a,
+	"css-unset-value": n,
+	"insertadjacenthtml": a,
+	"let": n,
+	"link-rel-prerender": n,
+	"css-writing-mode": a,
+	"addeventlistener": n
 );
 
 @import "bumbleberry-settings";

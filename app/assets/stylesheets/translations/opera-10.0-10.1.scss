@@ -1,6 +1,6 @@
 /*
  *	../translations
- *	Browser: Opera 10.0-10.1 (approximately 0.02% of all users)
+ *	Browser: Opera 10.0-10.1 (approximately 0.04% of all users)
  *
  */
 
@@ -106,7 +106,7 @@ $browser_capabilities: (
 	"mpeg4": n,
 	"ogv": n,
 	"wordwrap": n,
-	"progressmeter": n,
+	"pointerlock": n,
 	"object-fit": n,
 	"xhr2": n,
 	"minmaxwh": y,
@@ -272,7 +272,28 @@ $browser_capabilities: (
 	"fieldset-disabled": y,
 	"font-variant-alternates": n,
 	"form-attribute": y,
-	"es5": a
+	"es5": a,
+	"page-transition-events": n,
+	"ogg-vorbis": n,
+	"meter": n,
+	"progress": n,
+	"css-filter-function": n,
+	"css-element-function": n,
+	"u2f": n,
+	"aac": n,
+	"link-rel-prefetch": n,
+	"ol-reversed": n,
+	"css-first-letter": a,
+	"wbr-element": y,
+	"css-all": n,
+	"css-initial-value": n,
+	"css-letter-spacing": a,
+	"css-unset-value": n,
+	"insertadjacenthtml": y,
+	"let": n,
+	"link-rel-prerender": n,
+	"css-writing-mode": n,
+	"addeventlistener": y
 );
 
 @import "bumbleberry-settings";

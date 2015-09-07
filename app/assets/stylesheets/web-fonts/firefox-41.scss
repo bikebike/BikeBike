@@ -1,6 +1,6 @@
 /*
  *	web-fonts
- *	Browser: Firefox 41 (approximately 0.0% of all users)
+ *	Browser: Firefox 41 (approximately 0.13% of all users)
  *
  */
 
@@ -107,7 +107,7 @@ $browser_capabilities: (
 	"mpeg4": y,
 	"ogv": y,
 	"wordwrap": a,
-	"progressmeter": y,
+	"pointerlock": yx,
 	"object-fit": y,
 	"xhr2": y,
 	"minmaxwh": y,
@@ -119,7 +119,7 @@ $browser_capabilities: (
 	"svg-img": y,
 	"datalist": a,
 	"dataset": y,
-	"css-grid": u,
+	"css-grid": pd,
 	"menu": a,
 	"css-zoom": n,
 	"rem": y,
@@ -166,7 +166,7 @@ $browser_capabilities: (
 	"svg-fragment": y,
 	"outline": y,
 	"download": y,
-	"pointer": y,
+	"pointer": a,
 	"user-select-none": yx,
 	"webp": p,
 	"input-autocomplete-onoff": a,
@@ -230,7 +230,7 @@ $browser_capabilities: (
 	"css-clip-path": a,
 	"getrandomvalues": y,
 	"screen-orientation": ax,
-	"font-loading": nd,
+	"font-loading": y,
 	"font-unicode-range": nd,
 	"gamepad": y,
 	"css-font-stretch": y,
@@ -273,7 +273,28 @@ $browser_capabilities: (
 	"fieldset-disabled": y,
 	"font-variant-alternates": y,
 	"form-attribute": y,
-	"es5": y
+	"es5": y,
+	"page-transition-events": y,
+	"ogg-vorbis": y,
+	"meter": y,
+	"progress": y,
+	"css-filter-function": n,
+	"css-element-function": yx,
+	"u2f": n,
+	"aac": a,
+	"link-rel-prefetch": y,
+	"ol-reversed": y,
+	"css-first-letter": y,
+	"wbr-element": y,
+	"css-all": y,
+	"css-initial-value": y,
+	"css-letter-spacing": y,
+	"css-unset-value": y,
+	"insertadjacenthtml": y,
+	"let": nd,
+	"link-rel-prerender": n,
+	"css-writing-mode": y,
+	"addeventlistener": y
 );
 
 @import "bumbleberry-settings";

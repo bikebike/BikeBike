@@ -1,6 +1,6 @@
 /*
  *	web-fonts
- *	Browser: IE 10 (approximately 1.23% of all users)
+ *	Browser: IE 10 (approximately 1.03% of all users)
  *
  */
 
@@ -107,7 +107,7 @@ $browser_capabilities: (
 	"mpeg4": y,
 	"ogv": p,
 	"wordwrap": a,
-	"progressmeter": a,
+	"pointerlock": n,
 	"object-fit": n,
 	"xhr2": a,
 	"minmaxwh": y,
@@ -273,7 +273,28 @@ $browser_capabilities: (
 	"fieldset-disabled": a,
 	"font-variant-alternates": n,
 	"form-attribute": n,
-	"es5": y
+	"es5": y,
+	"page-transition-events": n,
+	"ogg-vorbis": n,
+	"meter": n,
+	"progress": y,
+	"css-filter-function": n,
+	"css-element-function": n,
+	"u2f": n,
+	"aac": y,
+	"link-rel-prefetch": n,
+	"ol-reversed": n,
+	"css-first-letter": y,
+	"wbr-element": n,
+	"css-all": n,
+	"css-initial-value": n,
+	"css-letter-spacing": y,
+	"css-unset-value": n,
+	"insertadjacenthtml": y,
+	"let": n,
+	"link-rel-prerender": n,
+	"css-writing-mode": a,
+	"addeventlistener": y
 );
 
 @import "bumbleberry-settings";

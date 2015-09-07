@@ -1778,48 +1778,8 @@ $header-tilt: 8deg;
 	opacity: 0;
 }
 
-@include keyframes(bouncy) {
-	from { transform: translateY(-0.25em); }
-	to   { transform: translateY(0.25em); }
-}
-
-#lingua-franca-pointer {
-	$colour: $colour-5;
-	width: 0.6667em;
-	height: 1.25em;
-	background-color: $colour;
-	z-index: 1000;
-	margin-left: -0.5em;
-    margin-top: -2em;
-    @include _(mix-blend-mode, exclusion);
-	@include default-box-shadow(top, 2);
-	@include _(animation, bouncy 1s infinite alternate);
-
-	$twidth: 0.8em;
-	@include after {
-		content: '';
-		width: 0;
-		height: 0;
-		position: absolute;
-		border-style: solid;
-		border-color: $colour transparent transparent;
-		border-width: $twidth $twidth 0;
-		top: 100%;
-		left: -.4em;
-	}
-
-	&.up {
-    	margin-top: 2em;
-
-		@include after {
-			top: auto;
-			bottom: 100%;
-			border-color: transparent transparent $colour;
-			border-width: 0 $twidth $twidth;
-		}
-	}
-}
-
 .translated-content.block {
 	display: inherit;
 }
+
+@include translation-pointer;

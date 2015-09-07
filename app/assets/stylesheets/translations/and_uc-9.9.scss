@@ -1,6 +1,6 @@
 /*
  *	../translations
- *	Browser: UC Browser for Android 9.9 (approximately 5.94% of all users)
+ *	Browser: UC Browser for Android 9.9 (approximately 7.1% of all users)
  *
  */
 
@@ -106,7 +106,7 @@ $browser_capabilities: (
 	"mpeg4": a,
 	"ogv": y,
 	"wordwrap": a,
-	"progressmeter": y,
+	"pointerlock": n,
 	"object-fit": n,
 	"xhr2": a,
 	"minmaxwh": y,
@@ -272,7 +272,28 @@ $browser_capabilities: (
 	"fieldset-disabled": y,
 	"font-variant-alternates": n,
 	"form-attribute": y,
-	"es5": y
+	"es5": y,
+	"page-transition-events": y,
+	"ogg-vorbis": y,
+	"meter": y,
+	"progress": y,
+	"css-filter-function": n,
+	"css-element-function": n,
+	"u2f": n,
+	"aac": y,
+	"link-rel-prefetch": n,
+	"ol-reversed": y,
+	"css-first-letter": y,
+	"wbr-element": y,
+	"css-all": n,
+	"css-initial-value": y,
+	"css-letter-spacing": a,
+	"css-unset-value": n,
+	"insertadjacenthtml": y,
+	"let": n,
+	"link-rel-prerender": n,
+	"css-writing-mode": yx,
+	"addeventlistener": y
 );
 
 @import "bumbleberry-settings";

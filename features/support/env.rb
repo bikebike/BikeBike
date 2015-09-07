@@ -115,7 +115,9 @@ def create_org(name = nil, location = nil)
 			found_location = Location.new(city: l.city, territory: l.province_code, country: l.country_code, latitude: l.latitude, longitude: l.longitude)
 		rescue; end
 		if found_location.nil?
-			return
+			# let it though, we might be offline
+			org.save!
+			return org
 		end
 	end
 	if !name.nil?
