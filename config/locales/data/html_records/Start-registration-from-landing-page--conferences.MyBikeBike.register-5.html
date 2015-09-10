@@ -44,75 +44,29 @@
 </div>
 
 </header>
-<div class="row"><div class="columns medium-12"><nav class="sub-menu">
-<a href="/conferences/MyBikeBike/register/"><span class="translated-content" data-i18n-key="menu.submenu.registration.Registration" data-i18n-needs-translation="0">Registration</span></a>
-<a href="/conferences/MyBikeBike/workshops/"><span class="translated-content" data-i18n-key="menu.submenu.registration.Workshops" data-i18n-needs-translation="0">Workshops</span></a>
-</nav>
-</div></div><div id="content">
+<div id="content">
 
 <article>
-<div class="row"><div class="columns medium-12"><h2><span class="translated-content" data-i18n-key="articles.conference_registration.headings.Youre_Done" data-i18n-needs-translation="0">You're Done!</span></h2>
-</div><div class="columns medium-6 large-7"><p><span class="translated-content" data-i18n-key="articles.conference_registration.paragraphs.done" data-i18n-needs-translation="0">Thank you for registering for Bike!Bike!</span></p>
-<p><span class="translated-content" data-i18n-key="articles.conference_registration.paragraphs.workshops" data-i18n-needs-translation="0">You can now take a look at proposed workshops and even propose one yourself if you like.</span></p>
-<div class="actions">
-<a class="button" href="/conferences/MyBikeBike/workshops/"><span class="translated-content" data-i18n-key="articles.conference_registration.actions.View_Workshops" data-i18n-needs-translation="0">View Workshops</span></a>
-</div>
-</div><div class="columns medium-6 large-5"><h3><span class="translated-content" data-i18n-key="articles.conference_registration.headings.Your_Registration" data-i18n-needs-translation="0">Your Registration</span></h3>
-<table>
-<tbody><tr>
-<th><span class="translated-content" data-i18n-key="articles.conference_registration.headings.name" data-i18n-needs-translation="0">What is your name?</span></th>
-<td>John Doe</td>
-</tr>
-<tr>
-<th><span class="translated-content" data-i18n-key="articles.conference_registration.headings.location" data-i18n-needs-translation="0">Where are you coming from?</span></th>
-<td>Mushaboom, NS</td>
-</tr>
-<tr>
-<th><span class="translated-content" data-i18n-key="articles.conference_registration.headings.arrival" data-i18n-needs-translation="0">Arrival</span></th>
-<td>12am,&nbsp;January  1, 2016</td>
-</tr>
-<tr>
-<th><span class="translated-content" data-i18n-key="articles.conference_registration.headings.departure" data-i18n-needs-translation="0">Departure</span></th>
-<td>12am,&nbsp;January  4, 2016</td>
-</tr>
-<tr>
-<th><span class="translated-content" data-i18n-key="articles.conference_registration.headings.languages" data-i18n-needs-translation="0">Which languages do you speak?</span></th>
-<td><span class="translated-content" data-i18n-key="languages.en" data-i18n-needs-translation="0">English</span></td>
-</tr>
-<tr>
-<th><span class="translated-content" data-i18n-key="articles.conference_registration.headings.housing" data-i18n-needs-translation="0">Do you need a place to stay?</span></th>
-<td><span class="translated-content" data-i18n-key="articles.conference_registration.questions.housing.none" data-i18n-needs-translation="0">I'll take care of it</span></td>
-</tr>
-<tr>
-<th><span class="translated-content" data-i18n-key="articles.conference_registration.headings.bike" data-i18n-needs-translation="0">Do you need a bike?</span></th>
-<td><span class="translated-content" data-i18n-key="articles.conference_registration.questions.bike.small" data-i18n-needs-translation="0">Small</span></td>
-</tr>
-<tr>
-<th><span class="translated-content" data-i18n-key="articles.conference_registration.headings.food" data-i18n-needs-translation="0">What are your eating habits?</span></th>
-<td><span class="translated-content" data-i18n-key="articles.conference_registration.questions.food.vegan" data-i18n-needs-translation="0">Vegan</span></td>
-</tr>
-<tr>
-<th><span class="translated-content" data-i18n-key="articles.conference_registration.headings.allergies" data-i18n-needs-translation="0">Do you have any allergies?</span></th>
-<td>
-<span class="translated-content" data-i18n-key="articles.conference_registration.none" data-i18n-needs-translation="0">(none)</span>
-</td>
-</tr>
-<tr>
-<th><span class="translated-content" data-i18n-key="articles.conference_registration.headings.other" data-i18n-needs-translation="0">Is there anything else you'd like to tell us?</span></th>
-<td></td>
-</tr>
-<tr>
-<th><span class="translated-content" data-i18n-key="articles.conference_registration.headings.payment" data-i18n-needs-translation="0">Fees paid</span></th>
-<td>$50.00</td>
-</tr>
-</tbody></table>
-<form action="/conferences/MyBikeBike/register/" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓">
-<div class="actions">
-<span class="translated-content" data-i18n-key="forms.actions.generic.edit_registration" data-i18n-needs-translation="0"><button name="button" type="submit" value="register">Edit my registration</button></span>
-</div>
+<div class="row"><div class="columns medium-12"><h2><span class="translated-content" data-i18n-key="articles.conference_registration.headings.Payment" data-i18n-needs-translation="0">Payment</span></h2>
+<p><span class="translated-content" data-i18n-key="articles.conference_registration.paragraphs.Payment" data-i18n-needs-translation="0">Thank you for completing your registration. We'll see you at Bike!Bike! Payment is by donation and can be done now or upon arrival but to help us fund the conference, we ask that you pay the registration donation as soon as you can.</span></p>
+</div><div class="columns large-9 push-1"><form class="payment" action="/conferences/MyBikeBike/register/" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓">
+<input type="hidden" name="button" id="button" value="payment">
+<div class="three-options">
+<button name="amount" type="submit" value="25.0">$25.00
+</button><button name="amount" type="submit" value="50.0">$50.00
+</button><button name="amount" type="submit" value="100.0">$100.00
+</button></div>
 </form>
 
-</div>
+<form class="payment" action="/conferences/MyBikeBike/register/" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓">
+<span class="currency">$</span>
+<input type="number" name="amount" id="amount" required="required" step="0.01" min="0.0">
+<span class="translated-content" data-i18n-key="forms.actions.generic.custom_amount" data-i18n-needs-translation="0"><button name="button" type="submit" value="payment">Custom amount</button></span>
+<p><span class="translated-content" data-i18n-key="articles.conference_registration.paragraphs.currency" data-i18n-needs-translation="0">(amounts are in $USD)</span></p>
+</form>
+
+</div><div class="columns large-2"></div>
+
 </div></article>
 </div>
 </main>

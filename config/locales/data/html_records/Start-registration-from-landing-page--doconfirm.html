@@ -1,142 +1,88 @@
-<!DOCTYPE html><html lang="en"><head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" name="viewport">
-<title>Bike!Bike!</title>
-<meta content="Bike!Bike! A conference for bike collectives, co-ops, non-profit DIY bike shops" name="description">
-
-<link href="/assets/application/safari-7.css" rel="stylesheet" media="all" type="text/css"><link href="/assets/web-fonts/safari-7.css" rel="stylesheet" media="all" type="text/css">
-<link href="/assets/favicon.ico" rel="shortcut icon" type="image/x-icon">
-<link href="/assets/favicon.ico" rel="icon" type="image/x-icon">
-<link href="/apple-touch-icon.png" rel="apple-touch-icon">
-<link href="/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
-<link href="/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
-<link href="/apple-touch-icon-144x144.png" rel="apple-touch-icon" sizes="144x144">
-
-</head>
-<body class="do_confirm">
-<nav>
-<div id="main-nav">
-<div class="inner-nav">
-<a class="logo" href="/"><img src="/assets/bb-icon-logo.png" class="sprite icons bb-icon-logo">
-<img src="/assets/bb-icon-logo-text.png" class="sprite icons bb-icon-logo-text">
-</a><div class="nav">
-<a href="/"><span>My Bike!Bike!</span></a>
-<a href="/about/"><span><span class="translated-content" data-i18n-key="page_titles.About_BikeBike" data-i18n-needs-translation="0">About Bike!Bike!</span></span></a>
-<a href="/policy/"><span><span class="translated-content" data-i18n-key="page_titles.Safe_Space_Policy" data-i18n-needs-translation="0">Safer Space Agreement</span></span></a>
-</div>
-<div class="actions">
-<a class="button register" href="/conferences/MyBikeBike/register/"><span class="translated-content" data-i18n-key="conference.actions.Register" data-i18n-needs-translation="0">Register</span>
-</a></div>
-</div>
-</div>
-</nav>
-
-<main id="main">
-<header id="banner">
-<div class="short" id="header-title">
-<svg>
-  <defs>
-    <filter id="saturate">
-      <feColorMatrix in="SourceGraphic" type="saturate" values=".25" result="A"></feColorMatrix>
-    </filter>
-    <image x="0" y="0" width="100%" height="100%" xlink:href="/assets/grafitti.jpg" id="banner-image" preserveAspectRatio="xMidYMid slice" filter="url(#saturate)"></image>
-  
-    <filter id="banner-img" x="0" y="0" width="1" height="1">
-      <feImage xlink:href="#banner-image" result="banner-image"></feImage>
-      <feBlend mode="multiply" in="banner-image" in2="SourceGraphic"></feBlend>
-    </filter>
-  </defs>
- 
-  <rect x="0" y="0" width="100%" height="100%" filter="url(#banner-img)"></rect>
-</svg>
-
-<h1><span class="translated-content" data-i18n-key="page_titles.403.Please_Check_Email" data-i18n-needs-translation="0">Please check your email</span></h1>
-</div>
-
-</header>
-<div id="content"><article>
-<article>
-<div class="row"><div class="columns medium-12"><h2><span class="translated-content" data-i18n-key="articles.conference_registration.headings.email_confirm" data-i18n-needs-translation="0">Confirm Email</span></h2>
-</div><div class="columns medium-12"><span class="translated-contentblock" data-i18n-key="articles.conference_registration.paragraphs.email_confirm" data-i18n-needs-translation="0"><p>Go to your inbox! You should see an email from Bike!Bike! in just a few moments. There will be a link in the email for you to click on. Check your spam box if you do not see it. If you encounter any problems, please email to <a href="mailto:admin@bikebike.org" target="_blank">admin@bikebike.org</a>.</p>
-</span>
-</div></div></article>
-
-</article>
-</div>
-</main>
-
-<div id="footer">
-<footer><div class="github">
-<img src="/assets/bb-icon-github.png" class="sprite icons bb-icon-github">
-<a href="https://github.com/bikebike/BikeBike/issues" target="_blank">
-<span class="translated-content" data-i18n-key="links.footer.text.File_an_Issue" data-i18n-needs-translation="0">File an issue</span>
-</a>
-|
-<a href="https://github.com/bikebike/BikeBike/contributing.md" target="_blank">
-<span class="translated-content" data-i18n-key="links.footer.text.Help_contribute" data-i18n-needs-translation="0">Help contribute</span>
-</a>
-</div>
-<div class="facebook">
-<span class="translated-contentblock" data-i18n-key="links.footer.help_text.facebook" data-i18n-needs-translation="0"><a href="https://www.facebook.com/groups/648758205249998/" target="_blank" title="Join our Facebook group">
-<img src="/assets/bb-icon-fb.png" class="sprite icons bb-icon-fb">
-</a>
-</span></div>
-<div class="locale">
-<span class="translated-contentblock" data-i18n-key="links.footer.help_text.select_language" data-i18n-needs-translation="0"><input id="select-language" type="checkbox">
-<label class="launch" for="select-language" title="Change your language">
-EN
-</label>
-<div class="selector">
-<ul>
-<li>
-<a href="/doconfirm/">
-EN
-</a>
-<span>English</span>
-</li>
-</ul>
-</div>
-</span></div>
-<div class="copy">
-<span class="translated-contentblock" data-i18n-key="links.footer.help_text.contributors" data-i18n-needs-translation="0"><a title="Contributors" href="/humans.txt">©2015 Bike!Bike!
-</a></span></div>
-</footer>
-</div>
-<script>
-  (function() {
-  	if (!String.prototype.trim) {
-  		(function() {
-  			var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
-  			String.prototype.trim = function() {
-  				return this.replace(rtrim, '');
-  			};
-  		})();
-  	}
-  
-  	function classExists(elem,className){var p = new RegExp('(^| )'+className+'( |$)');return (elem.className && elem.className.match(p));}
-  	function addClass(elem,className){if(classExists(elem,className)){return true;}elem.className += ' '+className;}
-  	function removeClass(elem,className){var c = elem.className;var p = new RegExp('(^| )'+className+'( |$)');c = c.replace(p,' ').replace(/  /g,' ');elem.className = c.trim();}
-  
-  	[].slice.call(document.querySelectorAll('.input-field input')).forEach(function(inputEl) {
-  		if (inputEl.value.trim() === '') {
-  			inputEl.parentNode.className = inputEl.parentNode.className + ' empty';
+<!DOCTYPE email>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<title>&lt;span class=&quot;translated-content&quot; data-i18n-key=&quot;email.subject.confirm_email&quot; data-i18n-needs-translation=&quot;0&quot;&gt;Confirmation Email&lt;/span&gt;</title>
+<style>
+  #outlook a {padding:0;}
+  body{width:100% !important; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; margin:0; padding:0;}
+  .ExternalClass {width:100%;}
+  .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {line-height: 100%;}
+  #backgroundTable {margin:0; padding:0; width:100% !important; line-height: 100% !important;}
+  img {outline:none; text-decoration:none; -ms-interpolation-mode: bicubic;}
+  a img {border:none;}
+  .image_fix {display:block;max-width:100%}
+  p {margin: 1em;color:#333 !important;}
+  h1, h2, h3, h4, h5, h6 {color:#333 !important;}
+  h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {color: #00ADEF !important;}
+  h1 a:active, h2 a:active,  h3 a:active, h4 a:active, h5 a:active, h6 a:active { color: #D89E59 !important; }
+  h1 a:visited, h2 a:visited,  h3 a:visited, h4 a:visited, h5 a:visited, h6 a:visited { color: #DD57EF !important; }
+  table td {border-collapse: collapse;}
+  table { border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; max-width:512px;min-width:280px;}
+  a {color: #00ADEF;}
+  a:link { color: #00ADEF; }
+  a:visited { color: #00ADEF; }
+  a:hover { color: #02CA9E; }
+  @media only screen and (max-device-width: 480px) {
+  a[href^="tel"], a[href^="sms"] {
+  			text-decoration: none;
+  			color: #333;
+  			pointer-events: none;
+  			cursor: default;
   		}
-  
-  		inputEl.addEventListener('focus', onInputFocus);
-  		inputEl.addEventListener('blur', onInputBlur);
-  	});
-  
-  	function onInputFocus(ev) {
-  		removeClass(ev.target.parentNode, 'empty')
-  	}
-  
-  	function onInputBlur(ev) {
-  		if (ev.target.value.trim() === '') {
-  			addClass(ev.target.parentNode, 'empty');
+  .mobile_link a[href^="tel"], .mobile_link a[href^="sms"] {
+  			text-decoration: default;
+  			color: #00ADEF !important;
+  			pointer-events: auto;
+  			cursor: default;
   		}
-  	}
-  })();
-</script>
-
-
-</body></html>
+  }
+  @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  a[href^="tel"], a[href^="sms"] {
+  			text-decoration: none;
+  			color: #00ADEF;
+  			pointer-events: none;
+  			cursor: default;
+  		}
+  .mobile_link a[href^="tel"], .mobile_link a[href^="sms"] {
+  			text-decoration: default;
+  			color: #00ADEF !important;
+  			pointer-events: auto;
+  			cursor: default;
+  		}
+  }
+</style>
+<meta name="email-from" content='noreply@bikebike.org'/><meta name="email-to" content='myemail@bikebike.org'/></head>
+<body>
+<table border='0' cellpadding='0' cellspacing='0' id='backgroundTable'>
+<tr>
+<td>
+<table align='center' border='0' cellpadding='0' cellspacing='0'>
+<tr>
+<td colspan='2' valign='top'><p><span class="translated-content" data-i18n-key="email.confirmation.paragraph.please_confirm" data-i18n-needs-translation="0">Hello! To gain access to registration and other features of Bike!Bike!, please confirm your email address.</span></p>
+<p>
+<a href='/confirm/fd7d47dd39709422f62f24ec153d09320547e66a4c6c07d0a5248a0dc931ae94'><span class="translated-content" data-i18n-key="email.confirmation.link.please_confirm" data-i18n-needs-translation="0">Confirm now</span></a>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan='2' style='height: 16px'>&nbsp;</td>
+</tr>
+<tr>
+<td style='width: 50%; text-align: left'>
+<img class='image_fix' src='/assets/bblogo-paypal'>
+</td>
+<td style='width: 50%; text-align: left'>
+<a href='http://127.0.0.1:53385'>&copy; Bike!Bike! 2015</a>
+</td>
+</tr>
+<tr>
+<td colspan='2' style='height: 16px'>&nbsp;</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>

@@ -291,9 +291,18 @@ $browser_capabilities: (
 	"css-unset-value": n,
 	"insertadjacenthtml": y,
 	"let": n,
+	"arrow-functions": n,
 	"link-rel-prerender": n,
+	"rest-parameters": n,
+	"css-cross-fade": n,
 	"css-writing-mode": n,
-	"addeventlistener": y
+	"customevent": n,
+	"textcontent": y,
+	"addeventlistener": y,
+	"documenthead": y,
+	"innertext": y,
+	"netinfo": a,
+	"setimmediate": n
 );
 
 @import "bumbleberry-settings";

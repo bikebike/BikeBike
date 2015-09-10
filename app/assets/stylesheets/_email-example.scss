@@ -2,3 +2,105 @@
 @import "settings";
 
 @include translation-pointer;
+
+#email-folders {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	float: left;
+	width: 15em;
+	padding: 1em;
+
+	li {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		padding: 0.25em;
+		@include font-family(secondary);
+
+		&.selected {
+			background-color: $colour-1;
+			color: $white;
+		}
+	}
+}
+
+#email-header {
+	background-color: $colour-1;
+	margin: 0;
+
+	h1 {
+		margin: 0;
+		padding: 0.25em;
+		color: $white !important;
+	}
+}
+
+button {
+	@include button;
+	@include font-family(secondary);
+	font-size: 1em;
+	margin: 0 0 1em;
+}
+
+#email-inner {
+	background-color: $white;
+	overflow: auto;
+}
+
+#email-inner-content {
+	margin: 1em;
+}
+
+.lingua-franca-title {
+	margin: 0.25em;
+	padding: 0.5em;
+	font-size: 1.5em;
+	color: #555 !important;
+	border-bottom: 1px solid #CCC;
+}
+
+#email-from, #email-to {
+	margin: 0 1em;
+	font-size: 1.25em;
+}
+
+#email-to {
+	color: #888;
+	font-size: 1em;
+	margin: 0 1.25em;
+}
+
+$letter: $white;
+$bg: $colour-1;
+
+.letter-icon {
+	font-size: 2.75em;
+	float: left;
+  margin: 0.25em 0.5em;
+  background-color: $letter;
+  position: relative;
+  height: 0.7em;
+  width: 1em;
+  overflow: hidden;
+  &:before, &:after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    height: 0.6em;
+    width: 0.6em;
+    transform: rotate(45deg) skew(-5deg,-5deg);
+    margin-left: -0.5em;
+    height: 1em;
+    width: 1em;
+    background-color: $letter;
+  }
+  &:before {
+    bottom: -100%;
+    box-shadow: -0.05em -0.05em 0 0 $bg;
+  }
+  &:after {
+    top: -95%;
+    box-shadow: 0.05em 0.05em 0 0 $bg;
+  }
+}
