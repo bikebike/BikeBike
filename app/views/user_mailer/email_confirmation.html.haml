@@ -1,4 +1,6 @@
 %p=_'email.confirmation.paragraph.please_confirm','Hello! To gain access to registration and other features of Bike!Bike!, please confirm your email address by clicking on following link:'
 - link = "#{@host}/confirm/#{@confirmation.token}"
 %p
-	%a{href: link}=_'email.confirmation.link.please_confirm'
+	%h3
+		%b
+			%a{href: link}=_'email.confirmation.link.please_confirm'
