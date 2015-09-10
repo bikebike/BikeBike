@@ -16,5 +16,9 @@
 		= number_field_tag :amount, nil, :required => true, :step => 0.01, :min => 0.00
 		= button_tag :custom_amount, :value => :payment
 		%p=_'articles.conference_registration.paragraphs.currency','(amounts are in $USD)'
+	= form_tag register_path(@this_conference.slug), :class => :payment do
+		= hidden_field_tag :button, :payment
+		.actions.skip
+			= button_tag :skip, :name => :amount, :value => '0.0'
 
 = columns(large: 2)

@@ -1407,6 +1407,12 @@ $header-tilt: 8deg;
 	}
 }
 
+#main .skip {
+	button {
+		background-color: #CCC;
+	}
+}
+
 #main form.payment {
 	text-align: center;
 
@@ -1678,6 +1684,7 @@ $header-tilt: 8deg;
 		display: block;
 		max-height: 10em;
 		overflow: hidden;
+		margin: 0.5em 0;
 		@include default-box-shadow(top, 2);
 		@include _(transition, transform 150ms ease-in-out);
 

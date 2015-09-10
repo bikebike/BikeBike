@@ -22,16 +22,16 @@
 			%td=date(@registration.departure)
 		%tr
 			%th=_'articles.conference_registration.headings.languages'
-			%td=_!((JSON.parse(@registration.languages).map { |x| _"languages.#{x}" }).join(', ').to_s).html_safe
+			%td=_!((JSON.parse(@registration.languages || '[]').map { |x| _"languages.#{x}" }).join(', ').to_s).html_safe
 		%tr
 			%th=_'articles.conference_registration.headings.housing'
-			%td=_"articles.conference_registration.questions.housing.#{@registration.housing}"
+			%td=_"articles.conference_registration.questions.housing.#{@registration.housing || 'none'}"
 		%tr
 			%th=_'articles.conference_registration.headings.bike'
-			%td=_"articles.conference_registration.questions.bike.#{@registration.bike}"
+			%td=_"articles.conference_registration.questions.bike.#{@registration.bike || 'none'}"
 		%tr
 			%th=_'articles.conference_registration.headings.food'
-			%td=_"articles.conference_registration.questions.food.#{@registration.food}"
+			%td=_"articles.conference_registration.questions.food.#{@registration.food || 'meat'}"
 		%tr
 			%th=_'articles.conference_registration.headings.allergies'
 			%td

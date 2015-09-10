@@ -39,10 +39,10 @@
     <filter id="saturate">
       <feColorMatrix in="SourceGraphic" type="saturate" values=".25" result="A"></feColorMatrix>
     </filter>
-    <image x="0" y="0" width="100%" height="100%" href="/assets/grafitti.jpg" id="banner-image" preserveAspectRatio="xMidYMid slice" filter="url(#saturate)"></image>
+    <image x="0" y="0" width="100%" height="100%" xlink:href="/assets/grafitti.jpg" id="banner-image" preserveAspectRatio="xMidYMid slice" filter="url(#saturate)"></image>
   
     <filter id="banner-img" x="0" y="0" width="1" height="1">
-      <feImage href="#banner-image" result="banner-image"></feImage>
+      <feImage xlink:href="#banner-image" result="banner-image"></feImage>
       <feBlend mode="multiply" in="banner-image" in2="SourceGraphic"></feBlend>
     </filter>
   </defs>
