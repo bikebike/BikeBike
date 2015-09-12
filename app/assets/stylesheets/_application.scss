@@ -1841,3 +1841,19 @@ html[data-lingua-franca-example="html"] {
 
 	@include translation-pointer;
 }
+
+.workshop-list {
+	list-style: none;
+
+	.workshop-description {
+		font-size: 0.75em;
+	}
+
+	li {
+		border-bottom: 1px dashed #CCC;
+
+		&:last-child {
+			border-bottom: 0;
+		}
+	}
+}

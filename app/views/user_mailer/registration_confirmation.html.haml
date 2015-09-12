@@ -1,0 +1,4 @@
+%p=_'email.general.paragraph.thank_you', "Thank you #{@user.firstname},", :vars => {:name => @user.firstname}
+%p=_'email.registration.paragraph.confirmed', "You have successfully registered for #{@conference.title}. You can modify your registration details, pay, or add workshops at any time by restarting the registration process. If you have yet to pay or add your workshops and plan to do so, we ask that you take care of it as soon as possible to help us prepare in advance of your arrival.", :vars => {:conference_title => @conference.title}
+
+%p=_'email.general.paragraph.see_you', "See you in #{@conference.location.city}!", :vars => {:conference_location => @conference.location.city}

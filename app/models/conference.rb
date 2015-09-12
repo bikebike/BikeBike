@@ -35,5 +35,8 @@ class Conference < ActiveRecord::Base
 		action = action.to_sym
 		'/conferences/' + conference_type.slug + '/' + slug + (action == :show ? '' : '/' + action.to_s)
 	end
+	def location
+		organizations.first.location
+	end
 
 end

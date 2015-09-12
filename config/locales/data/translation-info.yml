@@ -77,6 +77,41 @@ date.date_span:
   - Create-workshop---1
   - Broadcast-message--
   - Broadcast-message---1
+acticles.conferences.headings.Proposed_Workshops:
+  pages:
+  - "/"
+  examples:
+  - See-a-more-info-link--
+  - See-a-more-info-link---1
+  - See-a-register-link--
+  - See-a-register-link---1
+  - Start-registration-from-landing-page--
+  - Start-registration-from-landing-page---1
+  - View-stats--
+  - View-stats---1
+  - Create-workshop--
+  - Create-workshop---1
+  - Broadcast-message--
+  - Broadcast-message---1
+acticles.conferences.paragraphs.Proposed_Workshops:
+  pages:
+  - "/"
+  context: Would you like to facilitate your own workshop? Simply register and visit
+    the workshops page. If you have already registered you can access the page by
+    restarting the registration process.
+  examples:
+  - See-a-more-info-link--
+  - See-a-more-info-link---1
+  - See-a-register-link--
+  - See-a-register-link---1
+  - Start-registration-from-landing-page--
+  - Start-registration-from-landing-page---1
+  - View-stats--
+  - View-stats---1
+  - Create-workshop--
+  - Create-workshop---1
+  - Broadcast-message--
+  - Broadcast-message---1
 page_descriptions.home:
   pages:
   - "/"
@@ -1152,6 +1187,45 @@ forms.labels.generic.other:
   - "/conferences/:slug/register"
   examples:
   - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
+email.subject.registration_confirmed:
+  pages:
+  - "/conferences/:slug/register"
+  context: Thank you for registering for My Bike!Bike!
+  vars:
+  - :conference_title
+  examples:
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-4
+email.general.paragraph.thank_you:
+  pages:
+  - "/conferences/:slug/register"
+  context: Thank you John Doe,
+  vars:
+  - :name
+  examples:
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-4
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-4
+email.registration.paragraph.confirmed:
+  pages:
+  - "/conferences/:slug/register"
+  context: You have successfully registered for My Bike!Bike!. You can modify your
+    registration details, pay, or add workshops at any time by restarting the registration
+    process. If you have yet to pay or add your workshops and plan to do so, we ask
+    that you take care of it as soon as possible to help us prepare in advance of
+    your arrival.
+  vars:
+  - :conference_title
+  examples:
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-4
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-4
+email.general.paragraph.see_you:
+  pages:
+  - "/conferences/:slug/register"
+  context: See you in Halifax!
+  vars:
+  - :conference_location
+  examples:
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-4
+  - Start-registration-from-landing-page--conferences.MyBikeBike.register-4
 articles.conference_registration.headings.Payment:
   pages:
   - "/conferences/:slug/register"

@@ -64,11 +64,21 @@ class UserMailer < ActionMailer::Base
 	end
 
 	def email_confirmation(confirmation)
-		#puts " == #{instance_methods.to_json.to_s} == "
 		@confirmation = confirmation
 		@host = UserMailer.default_url_options[:host]
 		mail to: confirmation.user.email,
 			 subject: (_'email.subject.confirm_email','Please confirm your email address')
+	end
+
+	def registration_confirmation(registration)
+		@host = UserMailer.default_url_options[:host]
+		@registration = registration
+		@conference = Conference.find(@registration.conference_id)
+		@user = User.find(@registration.user_id)
+		mail to: @user.email,
+			 subject: _('email.subject.registration_confirmed',
+			 		"Thank you for registering for #{@conference.title}",
+			 		:vars => {:conference_title => @conference.title})
 	end
 
 	def broadcast(host, subject, content, user, conference)

@@ -487,7 +487,9 @@ class ConferencesController < ApplicationController
 			@register_template = :questions if is_post
 		when :save
 			if is_post
-				@registration ||= ConferenceRegistration.new
+				if (new_registration = (!@registration))
+					@registration = ConferenceRegistration.new
+				end
 
 				@registration.conference_id = @this_conference.id
 				@registration.user_id = current_user.id
@@ -507,6 +509,10 @@ class ConferencesController < ApplicationController
 				current_user.firstname = params[:name].squish
 				current_user.lastname = nil
 				current_user.save
+
+				if new_registration
+					UserMailer.registration_confirmation(@registration).deliver_now
+				end
 
 				@register_template = @registration.registration_fees_paid ? :done : :payment
 			end
