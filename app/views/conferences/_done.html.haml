@@ -10,16 +10,16 @@
 	%table
 		%tr
 			%th=_'articles.conference_registration.headings.name'
-			%td=_!current_user.firstname
+			%td=_!(current_user.firstname || '')
 		%tr
 			%th=_'articles.conference_registration.headings.location'
-			%td=_!@registration.city
+			%td=_!(@registration.city || '')
 		%tr
 			%th=_'articles.conference_registration.headings.arrival'
-			%td=date(@registration.arrival)
+			%td=date(@registration.arrival || @this_conference.start_date)
 		%tr
 			%th=_'articles.conference_registration.headings.departure'
-			%td=date(@registration.departure)
+			%td=date(@registration.departure || @this_conference.end_date)
 		%tr
 			%th=_'articles.conference_registration.headings.languages'
 			%td=_!((JSON.parse(@registration.languages || '[]').map { |x| _"languages.#{x}" }).join(', ').to_s).html_safe
@@ -41,10 +41,10 @@
 					=_!@registration.allergies
 		%tr
 			%th=_'articles.conference_registration.headings.other'
-			%td=_!@registration.other
+			%td=_!(@registration.other || '')
 		%tr
 			%th=_'articles.conference_registration.headings.payment'
-			%td=_!('$' + @amount)
+			%td=_!('$' + (@amount || 0))
 	= form_tag register_path(@this_conference.slug) do
 		.actions
 			= button_tag :edit_registration, :value => :register
