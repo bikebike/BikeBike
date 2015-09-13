@@ -32,15 +32,15 @@ en:
     - Friday
     - Saturday
     formats:
-      default: "%Y-%m-%d"
-      long: "%B %d, %Y"
-      short: "%b %d"
-      span_same_month_date_1: "%B %e"
-      span_same_month_date_2: "%e, %Y"
-      span_same_year_date_1: "%B %e"
-      span_same_year_date_2: "%B %e, %Y"
-      span_different_year_date_1: "%B %e, %Y"
-      span_different_year_date_2: "%B %e, %Y"
+      default: '%Y-%m-%d'
+      long: '%B %d, %Y'
+      short: '%b %d'
+      span_same_month_date_1: '%B %e'
+      span_same_month_date_2: '%e, %Y'
+      span_same_year_date_1: '%B %e'
+      span_same_year_date_2: '%B %e, %Y'
+      span_different_year_date_1: '%B %e, %Y'
+      span_different_year_date_2: '%B %e, %Y'
     month_names:
     - 
     - January
@@ -59,7 +59,7 @@ en:
     - year
     - month
     - day
-    date_span: "%{date_1} – %{date_2}"
+    date_span: '%{date_1} – %{date_2}'
   datetime:
     distance_in_words:
       about_x_hours:
@@ -86,16 +86,16 @@ en:
         other: over %{count} years
       x_days:
         one: 1 day
-        other: "%{count} days"
+        other: '%{count} days'
       x_minutes:
         one: 1 minute
-        other: "%{count} minutes"
+        other: '%{count} minutes'
       x_months:
         one: 1 month
-        other: "%{count} months"
+        other: '%{count} months'
       x_seconds:
         one: 1 second
-        other: "%{count} seconds"
+        other: '%{count} seconds'
     prompts:
       day: Day
       hour: Hour
@@ -104,7 +104,7 @@ en:
       second: Seconds
       year: Year
   errors:
-    format: "%{attribute} %{message}"
+    format: '%{attribute} %{message}'
     messages:
       accepted: must be accepted
       blank: can't be blank
@@ -155,7 +155,7 @@ en:
       body: 'There were problems with the following fields:'
       header:
         one: 1 error prohibited this %{model} from being saved
-        other: "%{count} errors prohibited this %{model} from being saved"
+        other: '%{count} errors prohibited this %{model} from being saved'
   helpers:
     select:
       prompt: Please select
@@ -166,22 +166,22 @@ en:
   number:
     currency:
       format:
-        delimiter: ","
-        format: "%u%n"
+        delimiter: ','
+        format: '%u%n'
         precision: 2
-        separator: "."
+        separator: .
         significant: false
         strip_insignificant_zeros: false
-        unit: "$"
+        unit: $
     format:
-      delimiter: ","
+      delimiter: ','
       precision: 3
-      separator: "."
+      separator: .
       significant: false
       strip_insignificant_zeros: false
     human:
       decimal_units:
-        format: "%n %u"
+        format: '%n %u'
         units:
           billion: Billion
           million: Million
@@ -195,7 +195,7 @@ en:
         significant: true
         strip_insignificant_zeros: true
       storage_units:
-        format: "%n %u"
+        format: '%n %u'
         units:
           byte:
             one: Byte
@@ -207,21 +207,21 @@ en:
     percentage:
       format:
         delimiter: ''
-        format: "%n%"
+        format: '%n%'
     precision:
       format:
         delimiter: ''
   support:
     array:
-      last_word_connector: ", and "
-      two_words_connector: " and "
-      words_connector: ", "
+      last_word_connector: ', and '
+      two_words_connector: ' and '
+      words_connector: ', '
   time:
     am: am
     formats:
-      default: "%a, %d %b %Y %H:%M:%S %z"
-      long: "%l%P, %B %e, %Y"
-      short: "%d %b %H:%M"
+      default: '%a, %d %b %Y %H:%M:%S %z'
+      long: '%l%P, %B %e, %Y'
+      short: '%d %b %H:%M'
     pm: pm
   languages:
     af: Afrikaans
@@ -304,7 +304,7 @@ en:
       AT: Austria
       AU: Australia
       AW: Aruba
-      AX: "Åland"
+      AX: Åland
       AZ: Azerbaijan
       BA: Bosnia and Herzegovina
       BB: Barbados
@@ -996,9 +996,9 @@ en:
       - Zambia
       - Zimbabwe
       street_address:
-      - "#####"
-      - "####"
-      - "###"
+      - '#####'
+      - '####'
+      - '###'
       street_suffix:
       - Alley
       - Avenue
@@ -1229,8 +1229,8 @@ en:
       - 'Apt. ###'
       - 'Suite ###'
       postcode:
-      - "#####"
-      - "#####-####"
+      - '#####'
+      - '#####-####'
       state:
       - Alabama
       - Alaska
@@ -5133,37 +5133,37 @@ en:
         - :last_name
     phone_number:
       formats:
-      - "###-###-####"
-      - "(###)###-####"
+      - '###-###-####'
+      - (###)###-####
       - 1-###-###-####
-      - "###.###.####"
-      - "###-###-####"
-      - "(###)###-####"
+      - '###.###.####'
+      - '###-###-####'
+      - (###)###-####
       - 1-###-###-####
-      - "###.###.####"
-      - "###-###-#### x###"
-      - "(###)###-#### x###"
+      - '###.###.####'
+      - '###-###-#### x###'
+      - (###)###-#### x###
       - 1-###-###-#### x###
-      - "###.###.#### x###"
-      - "###-###-#### x####"
-      - "(###)###-#### x####"
+      - '###.###.#### x###'
+      - '###-###-#### x####'
+      - (###)###-#### x####
       - 1-###-###-#### x####
-      - "###.###.#### x####"
-      - "###-###-#### x#####"
-      - "(###)###-#### x#####"
+      - '###.###.#### x####'
+      - '###-###-#### x#####'
+      - (###)###-#### x#####
       - 1-###-###-#### x#####
-      - "###.###.#### x#####"
+      - '###.###.#### x#####'
   translate:
     pages:
-      Locale_Translations: "%{language} Translations"
+      Locale_Translations: '%{language} Translations'
       Enabled_Locales: Enabled Locales
       Incomplete_Locales: Incomplete Locales
       Other_Locales: Other Locales
       pages: 'Pages:'
       context_title: 'Context:'
       context:
-        one: "%{context}"
-        other: "%{context} (× %{count})"
+        one: '%{context}'
+        other: '%{context} (× %{count})'
       contexts:
         character: character
         sentence: sentence
@@ -5192,7 +5192,7 @@ en:
       explain_zero_fallback: This translation will use the plural version for the
         number 0
       History: History
-      Locale_Translation: "%%{language} Translation"
+      Locale_Translation: '%%{language} Translation'
       Save: Save
     content:
       needs_translations: This page contains untranslated content
@@ -5209,20 +5209,20 @@ en:
       become_a_volunteer: Become a volunteer translator
       volunteer: Can you help us translate it?
     site:
-      locale_is_available: "%{site_name} is available in %{language}."
+      locale_is_available: '%{site_name} is available in %{language}.'
       go_to_locale: See the %{language} site now
       locale_not_available: Sorry, %{site_name} is not currently available in %{language}.
       locale_needs_help: Can you help us translate the site into %{language}?
     translation_pages:
-      Locale_Translations: "%{language} Translations"
+      Locale_Translations: '%{language} Translations'
       Enabled_Locales: Enabled Locales
       Incomplete_Locales: Incomplete Locales
       Other_Locales: Other Locales
       pages: 'Pages:'
       context_title: 'Context:'
       context:
-        one: "%{context}"
-        other: "%{context} (× %{count})"
+        one: '%{context}'
+        other: '%{context} (× %{count})'
       contexts:
         character: character
         sentence: sentence
@@ -5324,7 +5324,7 @@ en:
           Payment is by donation and can be done now or upon arrival but to help us
           fund the conference, we ask that you pay the registration donation as soon
           as you can.
-        currency: "(amounts are in $USD)"
+        currency: (amounts are in $USD)
         email_confirm: Go to your inbox! You should see an email from Bike!Bike! in
           just a few moments. There will be a link in the email for you to click on.
           Check your spam box if you do not see it. If you encounter any problems,
@@ -5366,7 +5366,7 @@ en:
           tent: Tent Space
         bikes:
           medium: Medium
-      none: "(none)"
+      none: (none)
       actions:
         View_Workshops: View Workshops
       notes:
@@ -5594,3 +5594,7 @@ en:
         please_confirm: Confirm now
     subject:
       confirm_email: Confirmation Email
+  acticles:
+    conferences:
+      headings:
+        Proposed_Workshops: Proposed Workshops
