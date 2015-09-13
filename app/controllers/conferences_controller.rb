@@ -511,7 +511,11 @@ class ConferencesController < ApplicationController
 				current_user.save
 
 				if new_registration
-					UserMailer.registration_confirmation(@registration).deliver_now
+					UserMailer.send_mail :registration_confirmation do
+						{
+							:args => @registration
+						}
+					end
 				end
 
 				@register_template = @registration.registration_fees_paid ? :done : :payment

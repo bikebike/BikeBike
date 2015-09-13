@@ -1194,7 +1194,7 @@ email.subject.registration_confirmed:
   vars:
   - :conference_title
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-4
+  - Start-registration-from-landing-page--registration_confirmation
 email.general.paragraph.thank_you:
   pages:
   - "/conferences/:slug/register"
@@ -1202,8 +1202,8 @@ email.general.paragraph.thank_you:
   vars:
   - :name
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-4
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-4
+  - Start-registration-from-landing-page--registration_confirmation
+  - Start-registration-from-landing-page--registration_confirmation
 email.registration.paragraph.confirmed:
   pages:
   - "/conferences/:slug/register"
@@ -1215,8 +1215,8 @@ email.registration.paragraph.confirmed:
   vars:
   - :conference_title
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-4
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-4
+  - Start-registration-from-landing-page--registration_confirmation
+  - Start-registration-from-landing-page--registration_confirmation
 email.general.paragraph.see_you:
   pages:
   - "/conferences/:slug/register"
@@ -1224,8 +1224,8 @@ email.general.paragraph.see_you:
   vars:
   - :conference_location
   examples:
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-4
-  - Start-registration-from-landing-page--conferences.MyBikeBike.register-4
+  - Start-registration-from-landing-page--registration_confirmation
+  - Start-registration-from-landing-page--registration_confirmation
 articles.conference_registration.headings.Payment:
   pages:
   - "/conferences/:slug/register"
