@@ -7,7 +7,7 @@
       <rect x="<%= (100/5)*3 %>%" y="0" width="<%= (100/5) %>%" height="100%" class="colour-3"/>
       <rect x="<%= (100/5)*4 %>%" y="0" width="<%= (100/5) %>%" height="100%" class="colour-1"/>
     </g>
-    <image x="0" y="0" width="100%" height="100%" xlink:href="<%= @conference.cover_url %>" id="banner-image" preserveAspectRatio="xMidYMid slice"/>
+    <image x="0" y="0" width="100%" height="100%" xlink:href="<%= @conference.cover_url || image_path('default_poster.jpg') %>" id="banner-image" preserveAspectRatio="xMidYMid slice"/>
   
     <filter id="f1" x="0" y="0" width="1" height="1">
       <feImage xlink:href="#rainbow" result="rainbow"/>

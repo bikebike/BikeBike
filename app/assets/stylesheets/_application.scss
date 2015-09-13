@@ -761,6 +761,17 @@ $header-tilt: 8deg;
 		.colour-5 { fill: $colour-5; }
 	}
 
+	.cover {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: $zindex-base;
+		background-size: inherit;
+		background-position: inherit;
+	}
+
 	@if capable_of(css-mixblendmode) {
 		position: relative;
 
@@ -778,14 +789,6 @@ $header-tilt: 8deg;
 		}
 
 		.cover {
-			position: absolute;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			left: 0;
-			z-index: $zindex-base;
-			background-size: inherit;
-			background-position: inherit;
 			-webkit-filter: saturate(25%);
 			filter: saturate(25%);
 			@include _(mix-blend-mode, multiply);
@@ -1052,6 +1055,7 @@ $header-tilt: 8deg;
 
 	#banner {
 		figure {
+			min-height: 40em;
 			margin: rems(-20) auto rems(2);
 		}
 	}
