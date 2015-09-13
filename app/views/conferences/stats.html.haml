@@ -4,6 +4,7 @@
 		= columns(medium: 12) do
 			%h2=_'articles.conference_registration.headings.Stats'
 			%p=_'articles.conference_registration.paragraphs.Stats', :p
+			= link_to (_'links.download.Excel','Download Data in Excel Format'), stats_path(@this_conference.slug, :format => :xls), {:class => :button}
 		= columns(medium: 6) do
 			%ul.stats
 				%li

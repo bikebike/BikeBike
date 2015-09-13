@@ -64,6 +64,7 @@ Feature: Registration Page
 		And I am on the stats page
 
 		Then I should see Total Registrations
+		And I click the Excel link
 		
 	Scenario: Create workshop
 		Given There is an upcoming conference in San Marcos TX

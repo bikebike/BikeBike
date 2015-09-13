@@ -414,6 +414,7 @@ class ConferencesController < ApplicationController
 		raise ActiveRecord::PremissionDenied unless (current_user && @this_conference.host?(current_user))
 
 		@registrations = ConferenceRegistration.where(:conference_id => @this_conference.id)
+
 		@total_registrations = 0
 		@donation_count = 0
 		@total_donations = 0
@@ -425,6 +426,15 @@ class ConferencesController < ApplicationController
 		@allergies = []
 		@other = []
 
+		if request.format.xls?
+			#I18n.backend.init_page(request, params)
+			@excel_data = {
+				:columns => [:name, :email, :city, :date, :languages, :arrival, :departure, :housing, :bike, :food, :allergies, :other, :fees_paid],
+				:key => 'articles.conference_registration.headings',
+				:data => []
+			}
+		end
+
 		@registrations.each do |r|
 			if r.is_attending
 				@total_registrations += 1
@@ -432,15 +442,21 @@ class ConferencesController < ApplicationController
 				@donation_count += 1 if r.registration_fees_paid
 				@total_donations += r.registration_fees_paid unless r.registration_fees_paid.blank?
 
-				@housing[r.housing.to_sym] ||= 0
-				@housing[r.housing.to_sym] += 1
-				
-				@bikes[r.bike.to_sym] ||= 0
-				@bikes[r.bike.to_sym] += 1
-				@bike_count += 1 unless r.bike.to_sym == :none
+				unless r.housing.blank?
+					@housing[r.housing.to_sym] ||= 0
+					@housing[r.housing.to_sym] += 1
+				end
 
-				@food[r.food.to_sym] ||= 0
-				@food[r.food.to_sym] += 1
+				unless r.bike.blank?
+					@bikes[r.bike.to_sym] ||= 0
+					@bikes[r.bike.to_sym] += 1
+					@bike_count += 1 unless r.bike.to_sym == :none
+				end
+
+				unless r.food.blank?
+					@food[r.food.to_sym] ||= 0
+					@food[r.food.to_sym] += 1
+				end
 
 				@allergies << r.allergies unless r.allergies.blank?
 				@other << r.other unless r.other.blank?
@@ -448,9 +464,43 @@ class ConferencesController < ApplicationController
 				JSON.parse(r.languages).each do |l|
 					@languages[l.to_sym] ||= 0
 					@languages[l.to_sym] += 1
+				end unless r.languages.blank?
+
+				if @excel_data
+					user = User.find(r.user_id)
+					@excel_data[:data] << {
+						:name => user.firstname,
+						:email => user.email,
+						:date => r.created_at.strftime("%F %T"),
+						:city => r.city,
+						:languages => ((JSON.parse(r.languages || '[]').map { |x| I18n.t"languages.#{x}" }).join(', ').to_s),
+						:arrival => r.arrival.strftime("%F %T"),
+						:departure => r.departure.strftime("%F %T"),
+						:housing => (I18n.t"articles.conference_registration.questions.housing.#{r.housing || 'none'}"),
+						:bike => (I18n.t"articles.conference_registration.questions.bike.#{r.bike || 'none'}"),
+						:food => (I18n.t"articles.conference_registration.questions.food.#{r.food || 'meat'}"),
+						:fees_paid => (r.registration_fees_paid || 0.0),
+						:allergies => r.allergies || '',
+						:other => r.other || ''
+					}
 				end
 			end
 		end
+
+		if ENV["RAILS_ENV"] == 'test' && request.format.xls?
+			request.format = :html
+			respond_to do |format|
+				format.html { render :file => 'application/excel.xls.haml', :formats => [:xls] }
+			end
+			return
+		end
+
+		respond_to do |format|
+			format.html
+			format.text { render :text => content }
+			format.xls { render 'application/excel' }
+		end
+
 	end
 
 	def register
@@ -620,6 +670,7 @@ class ConferencesController < ApplicationController
 		when :done
 			@amount = ((@registration.registration_fees_paid || 0) * 100).to_i.to_s.gsub(/^(.*)(\d\d)$/, '\1.\2')
 		end
+
 	end
 
 	def registrations

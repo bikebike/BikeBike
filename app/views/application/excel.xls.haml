@@ -1,0 +1,18 @@
+- key = @excel_data[:key] || 'excel.columns'
+%html
+  %head
+    = inject_css! if ENV["RAILS_ENV"] == 'test'
+    %title
+      =_!'Excel Spreadsheet'
+  %body
+    %table
+      %thead
+        %tr
+          - @excel_data[:columns].each do |column|
+            %th=_"#{key}.#{column.to_s}"
+      %tbody
+        - @excel_data[:data].each do |row|
+          %tr
+            - @excel_data[:columns].each do |column|
+              %td=_!row[column]
+  

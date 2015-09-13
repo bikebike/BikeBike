@@ -517,6 +517,7 @@ languages.en:
   - View-stats--conferences.MyBikeBike.stats
   - View-stats--conferences.MyBikeBike.stats
   - View-stats--conferences.MyBikeBike.stats
+  - View-stats--conferences.MyBikeBike.stats.xls
   - Create-workshop--confirm.test
   - Create-workshop--confirm.test
   - Create-workshop--
@@ -911,10 +912,12 @@ articles.conference_registration.paragraphs.Registration_Info:
 articles.conference_registration.headings.name:
   pages:
   - "/conferences/:slug/register"
+  - "/conferences/:slug/stats"
   context: What is your name?
   examples:
   - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
   - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
+  - View-stats--conferences.MyBikeBike.stats.xls
 forms.labels.generic.name:
   pages:
   - "/conferences/:slug/register"
@@ -951,10 +954,12 @@ forms.labels.generic.departure:
 articles.conference_registration.headings.languages:
   pages:
   - "/conferences/:slug/register"
+  - "/conferences/:slug/stats"
   context: Which languages do you speak?
   examples:
   - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
   - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
+  - View-stats--conferences.MyBikeBike.stats.xls
 languages.es:
   pages:
   - "/conferences/:slug/register"
@@ -976,10 +981,12 @@ languages.fr:
 articles.conference_registration.headings.housing:
   pages:
   - "/conferences/:slug/register"
+  - "/conferences/:slug/stats"
   context: Do you need a place to stay?
   examples:
   - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
   - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
+  - View-stats--conferences.MyBikeBike.stats.xls
 articles.conference_registration.questions.housing.none:
   pages:
   - "/conferences/:slug/register"
@@ -998,13 +1005,16 @@ articles.conference_registration.questions.housing.house:
   examples:
   - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
   - View-stats--conferences.MyBikeBike.stats
+  - View-stats--conferences.MyBikeBike.stats.xls
 articles.conference_registration.headings.bike:
   pages:
   - "/conferences/:slug/register"
+  - "/conferences/:slug/stats"
   context: Do you need a bike?
   examples:
   - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
   - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
+  - View-stats--conferences.MyBikeBike.stats.xls
 articles.conference_registration.questions.bike.none:
   pages:
   - "/conferences/:slug/register"
@@ -1023,6 +1033,7 @@ articles.conference_registration.questions.bike.medium:
   examples:
   - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
   - View-stats--conferences.MyBikeBike.stats
+  - View-stats--conferences.MyBikeBike.stats.xls
 articles.conference_registration.questions.bike.large:
   pages:
   - "/conferences/:slug/register"
@@ -1031,10 +1042,12 @@ articles.conference_registration.questions.bike.large:
 articles.conference_registration.headings.food:
   pages:
   - "/conferences/:slug/register"
+  - "/conferences/:slug/stats"
   context: What are your eating habits?
   examples:
   - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
   - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
+  - View-stats--conferences.MyBikeBike.stats.xls
 articles.conference_registration.questions.food.meat:
   pages:
   - "/conferences/:slug/register"
@@ -1042,6 +1055,7 @@ articles.conference_registration.questions.food.meat:
   examples:
   - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
   - View-stats--conferences.MyBikeBike.stats
+  - View-stats--conferences.MyBikeBike.stats.xls
 articles.conference_registration.questions.food.vegetarian:
   pages:
   - "/conferences/:slug/register"
@@ -1056,10 +1070,12 @@ articles.conference_registration.questions.food.vegan:
 articles.conference_registration.headings.allergies:
   pages:
   - "/conferences/:slug/register"
+  - "/conferences/:slug/stats"
   context: Do you have any allergies?
   examples:
   - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
   - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
+  - View-stats--conferences.MyBikeBike.stats.xls
 forms.labels.generic.allergies:
   pages:
   - "/conferences/:slug/register"
@@ -1074,6 +1090,7 @@ articles.conference_registration.headings.other:
   - Start-registration-from-landing-page--conferences.MyBikeBike.register-3
   - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
   - View-stats--conferences.MyBikeBike.stats
+  - View-stats--conferences.MyBikeBike.stats.xls
 forms.labels.generic.other:
   pages:
   - "/conferences/:slug/register"
@@ -1268,8 +1285,10 @@ articles.conference_registration.headings.Your_Registration:
 articles.conference_registration.headings.arrival:
   pages:
   - "/conferences/:slug/register"
+  - "/conferences/:slug/stats"
   examples:
   - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
+  - View-stats--conferences.MyBikeBike.stats.xls
 time.formats.long:
   pages:
   - "/conferences/:slug/register"
@@ -1285,8 +1304,10 @@ time.am:
 articles.conference_registration.headings.departure:
   pages:
   - "/conferences/:slug/register"
+  - "/conferences/:slug/stats"
   examples:
   - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
+  - View-stats--conferences.MyBikeBike.stats.xls
 articles.conference_registration.none:
   pages:
   - "/conferences/:slug/register"
@@ -1343,6 +1364,12 @@ articles.conference_registration.paragraphs.Stats:
   pages:
   - "/conferences/:slug/stats"
   context: p
+  examples:
+  - View-stats--conferences.MyBikeBike.stats
+links.download.Excel:
+  pages:
+  - "/conferences/:slug/stats"
+  context: Download Data in Excel Format
   examples:
   - View-stats--conferences.MyBikeBike.stats
 articles.conference_registration.terms.Total_Registrations:
@@ -1415,6 +1442,26 @@ menu.submenu.registration.Broadcast:
   - Broadcast-message--conferences.MyBikeBike.broadcast-1
   - Broadcast-message--conferences.MyBikeBike.broadcast-2
   - Broadcast-message--conferences.MyBikeBike.broadcast-3
+articles.conference_registration.headings.email:
+  pages:
+  - "/conferences/:slug/stats"
+  examples:
+  - View-stats--conferences.MyBikeBike.stats.xls
+articles.conference_registration.headings.city:
+  pages:
+  - "/conferences/:slug/stats"
+  examples:
+  - View-stats--conferences.MyBikeBike.stats.xls
+articles.conference_registration.headings.date:
+  pages:
+  - "/conferences/:slug/stats"
+  examples:
+  - View-stats--conferences.MyBikeBike.stats.xls
+articles.conference_registration.headings.fees_paid:
+  pages:
+  - "/conferences/:slug/stats"
+  examples:
+  - View-stats--conferences.MyBikeBike.stats.xls
 geography.subregions.US.TX:
   pages:
   - "/"
