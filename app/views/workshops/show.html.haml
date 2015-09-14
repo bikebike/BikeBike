@@ -3,6 +3,14 @@
 	= row do
 		= columns(medium: 12) do
 			%h2=_!@workshop.title
+			.workshop-interest
+				- if @workshop.interested?(current_user)
+					=_'articles.workshops.info.you_are_interested_count', "You and #{@workshop.interested_count - 1} others are interested in this workshop", :vars => {:count => (@workshop.interested_count - 1)}
+				- else
+					=_'articles.workshops.info.interested_count', "#{@workshop.interested_count} people are interested in this workshop", :vars => {:count => @workshop.interested_count}
+				- if @workshop.can_show_interest?(current_user)
+					= form_tag toggle_workshop_interest_path(@this_conference.slug, @workshop.id) do
+						= button_tag (@workshop.interested?(current_user) ? :remove_interest : :show_interest), :value => :toggle_interest, :class => (@workshop.interested?(current_user) ? 'delete' : 'add')
 			=markdown _!(@workshop.info) || ''
 		= columns(medium: 6) do
 			%h3=_'articles.workshops.headings.facilitators'

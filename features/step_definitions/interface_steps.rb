@@ -1,3 +1,5 @@
+require 'forgery'
+
 Given(/^(I )?(am on |visit )the (.+) page$/) do |a, b, page_name|
 	visit path_to(page_name)
 end
@@ -93,6 +95,21 @@ Given(/^an organization( named .+)? exists( in .+)?$/) do |name, location|
 		}
 	else
 		create_org(name ? name.gsub(/^\s*named\s+(.*?)\s*$/, '\1') : nil, location ? location.gsub(/^\s*in\s+(.*?)\s*$/, '\1') : nil)
+	end
+end
+
+Given(/^a workshop( titled .+)? exists?$/) do |title|
+	workshop = Workshop.new
+	workshop.conference_id = @last_conference.id
+	workshop.title = title ? title.gsub(/^\s*titled\s*(.*?)\s*$/, '\1') : Forgery::LoremIpsum.sentence({:random => true}).gsub(/\.$/, '').titlecase
+	workshop.info = Forgery::LoremIpsum.paragraph({:random => true})
+	workshop.save
+	@last_workshop = workshop
+end
+
+Given(/^(\d+) (person is|people are) interested in the workshop$/) do |interested,a|
+	(1..interested.to_i).each do |i|
+		WorkshopInterest.create(workshop_id: @last_workshop.id, user_id: (@my_account ? @my_account.id + 1 : 1000) + i)
 	end
 end
 

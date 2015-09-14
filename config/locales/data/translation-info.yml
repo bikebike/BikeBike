@@ -14,6 +14,8 @@ date.formats.span_same_month_date_1:
   - Start-registration-from-landing-page--
   - View-stats--
   - Create-workshop--
+  - Be-the-first-to-like-a-workshop--
+  - Like-a-workshop--
   - Broadcast-message--
 date.month_names:
   pages:
@@ -27,6 +29,8 @@ date.month_names:
   - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
   - View-stats--
   - Create-workshop--
+  - Be-the-first-to-like-a-workshop--
+  - Like-a-workshop--
   - Broadcast-message--
 date.formats.span_same_month_date_2:
   pages:
@@ -37,6 +41,8 @@ date.formats.span_same_month_date_2:
   - Start-registration-from-landing-page--
   - View-stats--
   - Create-workshop--
+  - Be-the-first-to-like-a-workshop--
+  - Like-a-workshop--
   - Broadcast-message--
 date.date_span:
   pages:
@@ -50,8 +56,10 @@ date.date_span:
   - Start-registration-from-landing-page--
   - View-stats--
   - Create-workshop--
+  - Be-the-first-to-like-a-workshop--
+  - Like-a-workshop--
   - Broadcast-message--
-acticles.conferences.headings.Proposed_Workshops:
+articles.workshops.headings.Proposed_Workshops:
   pages:
   - "/"
   examples:
@@ -60,8 +68,10 @@ acticles.conferences.headings.Proposed_Workshops:
   - Start-registration-from-landing-page--
   - View-stats--
   - Create-workshop--
+  - Be-the-first-to-like-a-workshop--
+  - Like-a-workshop--
   - Broadcast-message--
-acticles.conferences.paragraphs.Proposed_Workshops:
+articles.workshops.paragraphs.Proposed_Workshops:
   pages:
   - "/"
   context: Would you like to facilitate your own workshop? Simply register and visit
@@ -73,6 +83,8 @@ acticles.conferences.paragraphs.Proposed_Workshops:
   - Start-registration-from-landing-page--
   - View-stats--
   - Create-workshop--
+  - Be-the-first-to-like-a-workshop--
+  - Like-a-workshop--
   - Broadcast-message--
 page_descriptions.home:
   pages:
@@ -119,6 +131,16 @@ page_descriptions.home:
   - Create-workshop--conferences.MyBikeBike.workshops.1-3
   - Create-workshop--conferences.MyBikeBike.workshops.1.delete
   - Create-workshop--conferences.MyBikeBike.workshops-1
+  - Be-the-first-to-like-a-workshop--confirm.test
+  - Be-the-first-to-like-a-workshop--
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-1
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-2
+  - Like-a-workshop--confirm.test
+  - Like-a-workshop--
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1-1
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1-2
   - Broadcast-message--confirm.test
   - Broadcast-message--
   - Broadcast-message--conferences.MyBikeBike.broadcast
@@ -173,6 +195,16 @@ page_titles.About_BikeBike:
   - Create-workshop--conferences.MyBikeBike.workshops.1-3
   - Create-workshop--conferences.MyBikeBike.workshops.1.delete
   - Create-workshop--conferences.MyBikeBike.workshops-1
+  - Be-the-first-to-like-a-workshop--confirm.test
+  - Be-the-first-to-like-a-workshop--
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-1
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-2
+  - Like-a-workshop--confirm.test
+  - Like-a-workshop--
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1-1
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1-2
   - Broadcast-message--confirm.test
   - Broadcast-message--
   - Broadcast-message--conferences.MyBikeBike.broadcast
@@ -227,6 +259,16 @@ page_titles.Safe_Space_Policy:
   - Create-workshop--conferences.MyBikeBike.workshops.1-3
   - Create-workshop--conferences.MyBikeBike.workshops.1.delete
   - Create-workshop--conferences.MyBikeBike.workshops-1
+  - Be-the-first-to-like-a-workshop--confirm.test
+  - Be-the-first-to-like-a-workshop--
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-1
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-2
+  - Like-a-workshop--confirm.test
+  - Like-a-workshop--
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1-1
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1-2
   - Broadcast-message--confirm.test
   - Broadcast-message--
   - Broadcast-message--conferences.MyBikeBike.broadcast
@@ -293,6 +335,16 @@ links.footer.text.File_an_Issue:
   - Create-workshop--conferences.MyBikeBike.workshops.1-3
   - Create-workshop--conferences.MyBikeBike.workshops.1.delete
   - Create-workshop--conferences.MyBikeBike.workshops-1
+  - Be-the-first-to-like-a-workshop--confirm.test
+  - Be-the-first-to-like-a-workshop--
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-1
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-2
+  - Like-a-workshop--confirm.test
+  - Like-a-workshop--
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1-1
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1-2
   - Broadcast-message--confirm.test
   - Broadcast-message--
   - Broadcast-message--conferences.MyBikeBike.broadcast
@@ -347,6 +399,16 @@ links.footer.text.Help_contribute:
   - Create-workshop--conferences.MyBikeBike.workshops.1-3
   - Create-workshop--conferences.MyBikeBike.workshops.1.delete
   - Create-workshop--conferences.MyBikeBike.workshops-1
+  - Be-the-first-to-like-a-workshop--confirm.test
+  - Be-the-first-to-like-a-workshop--
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-1
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-2
+  - Like-a-workshop--confirm.test
+  - Like-a-workshop--
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1-1
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1-2
   - Broadcast-message--confirm.test
   - Broadcast-message--
   - Broadcast-message--conferences.MyBikeBike.broadcast
@@ -402,6 +464,16 @@ links.footer.help_text.facebook:
   - Create-workshop--conferences.MyBikeBike.workshops.1-3
   - Create-workshop--conferences.MyBikeBike.workshops.1.delete
   - Create-workshop--conferences.MyBikeBike.workshops-1
+  - Be-the-first-to-like-a-workshop--confirm.test
+  - Be-the-first-to-like-a-workshop--
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-1
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-2
+  - Like-a-workshop--confirm.test
+  - Like-a-workshop--
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1-1
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1-2
   - Broadcast-message--confirm.test
   - Broadcast-message--
   - Broadcast-message--conferences.MyBikeBike.broadcast
@@ -457,6 +529,16 @@ links.footer.help_text.select_language:
   - Create-workshop--conferences.MyBikeBike.workshops.1-3
   - Create-workshop--conferences.MyBikeBike.workshops.1.delete
   - Create-workshop--conferences.MyBikeBike.workshops-1
+  - Be-the-first-to-like-a-workshop--confirm.test
+  - Be-the-first-to-like-a-workshop--
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-1
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-2
+  - Like-a-workshop--confirm.test
+  - Like-a-workshop--
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1-1
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1-2
   - Broadcast-message--confirm.test
   - Broadcast-message--
   - Broadcast-message--conferences.MyBikeBike.broadcast
@@ -544,6 +626,26 @@ languages.en:
   - Create-workshop--conferences.MyBikeBike.workshops.1.delete
   - Create-workshop--conferences.MyBikeBike.workshops-1
   - Create-workshop--conferences.MyBikeBike.workshops-1
+  - Be-the-first-to-like-a-workshop--confirm.test
+  - Be-the-first-to-like-a-workshop--confirm.test
+  - Be-the-first-to-like-a-workshop--
+  - Be-the-first-to-like-a-workshop--
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-1
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-1
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-2
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-2
+  - Like-a-workshop--confirm.test
+  - Like-a-workshop--confirm.test
+  - Like-a-workshop--
+  - Like-a-workshop--
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1-1
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1-1
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1-2
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1-2
   - Broadcast-message--confirm.test
   - Broadcast-message--confirm.test
   - Broadcast-message--
@@ -609,6 +711,16 @@ links.footer.help_text.contributors:
   - Create-workshop--conferences.MyBikeBike.workshops.1-3
   - Create-workshop--conferences.MyBikeBike.workshops.1.delete
   - Create-workshop--conferences.MyBikeBike.workshops-1
+  - Be-the-first-to-like-a-workshop--confirm.test
+  - Be-the-first-to-like-a-workshop--
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-1
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-2
+  - Like-a-workshop--confirm.test
+  - Like-a-workshop--
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1-1
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1-2
   - Broadcast-message--confirm.test
   - Broadcast-message--
   - Broadcast-message--conferences.MyBikeBike.broadcast
@@ -636,6 +748,10 @@ conference.actions.Register:
   - View-stats--
   - Create-workshop--confirm.test
   - Create-workshop--
+  - Be-the-first-to-like-a-workshop--confirm.test
+  - Be-the-first-to-like-a-workshop--
+  - Like-a-workshop--confirm.test
+  - Like-a-workshop--
   - Broadcast-message--confirm.test
   - Broadcast-message--
 page_titles.conferences.Conference_Registration:
@@ -675,6 +791,8 @@ forms.labels.generic.email:
   - Start-registration-from-landing-page--conferences.MyBikeBike.register-1
   - View-stats--confirm.test
   - Create-workshop--confirm.test
+  - Be-the-first-to-like-a-workshop--confirm.test
+  - Like-a-workshop--confirm.test
   - Broadcast-message--confirm.test
 forms.actions.generic.register:
   pages:
@@ -892,6 +1010,14 @@ forms.actions.generic.Log_out:
   - Create-workshop--conferences.MyBikeBike.workshops.1-3
   - Create-workshop--conferences.MyBikeBike.workshops.1.delete
   - Create-workshop--conferences.MyBikeBike.workshops-1
+  - Be-the-first-to-like-a-workshop--
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-1
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-2
+  - Like-a-workshop--
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1-1
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1-2
   - Broadcast-message--
   - Broadcast-message--conferences.MyBikeBike.broadcast
   - Broadcast-message--conferences.MyBikeBike.broadcast-1
@@ -1200,6 +1326,12 @@ menu.submenu.registration.Registration:
   - Create-workshop--conferences.MyBikeBike.workshops.1-3
   - Create-workshop--conferences.MyBikeBike.workshops.1.delete
   - Create-workshop--conferences.MyBikeBike.workshops-1
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-1
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-2
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1-1
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1-2
   - Broadcast-message--conferences.MyBikeBike.broadcast
   - Broadcast-message--conferences.MyBikeBike.broadcast-1
   - Broadcast-message--conferences.MyBikeBike.broadcast-2
@@ -1230,6 +1362,12 @@ menu.submenu.registration.Workshops:
   - Create-workshop--conferences.MyBikeBike.workshops.1-3
   - Create-workshop--conferences.MyBikeBike.workshops.1.delete
   - Create-workshop--conferences.MyBikeBike.workshops-1
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-1
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-2
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1-1
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1-2
   - Broadcast-message--conferences.MyBikeBike.broadcast
   - Broadcast-message--conferences.MyBikeBike.broadcast-1
   - Broadcast-message--conferences.MyBikeBike.broadcast-2
@@ -1329,6 +1467,8 @@ page_titles.403.Please_Confirm_Email:
   examples:
   - View-stats--confirm.test
   - Create-workshop--confirm.test
+  - Be-the-first-to-like-a-workshop--confirm.test
+  - Like-a-workshop--confirm.test
   - Broadcast-message--confirm.test
 articles.permission_denied.headings.confirm_email:
   pages:
@@ -1337,6 +1477,8 @@ articles.permission_denied.headings.confirm_email:
   examples:
   - View-stats--confirm.test
   - Create-workshop--confirm.test
+  - Be-the-first-to-like-a-workshop--confirm.test
+  - Like-a-workshop--confirm.test
   - Broadcast-message--confirm.test
 forms.actions.generic.login:
   pages:
@@ -1344,6 +1486,8 @@ forms.actions.generic.login:
   examples:
   - View-stats--confirm.test
   - Create-workshop--confirm.test
+  - Be-the-first-to-like-a-workshop--confirm.test
+  - Like-a-workshop--confirm.test
   - Broadcast-message--confirm.test
 geography.subregions.US.AK:
   pages:
@@ -1714,6 +1858,27 @@ page_titles.conferences.View_Workshop:
   - Create-workshop--conferences.MyBikeBike.workshops.1-1
   - Create-workshop--conferences.MyBikeBike.workshops.1-2
   - Create-workshop--conferences.MyBikeBike.workshops.1-3
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-1
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-2
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1-1
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1-2
+articles.workshops.info.interested_count:
+  pages:
+  - "/conferences/:slug/workshops/:workshop_id"
+  context: 0 people are interested in this workshop
+  vars:
+  - :count
+  examples:
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-2
+  - Create-workshop--conferences.MyBikeBike.workshops.1-3
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-2
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1-2
 articles.workshops.headings.facilitators:
   pages:
   - "/conferences/:slug/workshops/:workshop_id"
@@ -1722,6 +1887,12 @@ articles.workshops.headings.facilitators:
   - Create-workshop--conferences.MyBikeBike.workshops.1-1
   - Create-workshop--conferences.MyBikeBike.workshops.1-2
   - Create-workshop--conferences.MyBikeBike.workshops.1-3
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-1
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-2
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1-1
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1-2
 roles.workshops.facilitator.creator:
   pages:
   - "/conferences/:slug/workshops/:workshop_id"
@@ -1774,6 +1945,41 @@ forms.actions.generic.cancel:
   - "/conferences/:slug/workshops/:workshop_id/delete"
   examples:
   - Create-workshop--conferences.MyBikeBike.workshops.1.delete
+geography.subregions.MX.Jal.:
+  pages:
+  - "/"
+  examples:
+  - Be-the-first-to-like-a-workshop--
+  - Like-a-workshop--
+geography.countries.MX:
+  pages:
+  - "/"
+  examples:
+  - Be-the-first-to-like-a-workshop--
+  - Like-a-workshop--
+forms.actions.generic.show_interest:
+  pages:
+  - "/conferences/:slug/workshops/:workshop_id"
+  examples:
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-2
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1-2
+articles.workshops.info.you_are_interested_count:
+  pages:
+  - "/conferences/:slug/workshops/:workshop_id"
+  context: You and 0 others are interested in this workshop
+  vars:
+  - :count
+  examples:
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-1
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1-1
+forms.actions.generic.remove_interest:
+  pages:
+  - "/conferences/:slug/workshops/:workshop_id"
+  examples:
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-1
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1-1
 page_titles.conferences.Email_Participants:
   pages:
   - "/conferences/:slug/broadcast"

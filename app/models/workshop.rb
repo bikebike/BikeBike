@@ -35,6 +35,19 @@ class Workshop < ActiveRecord::Base
         creator?(user)
     end
 
+    def can_show_interest?(user)
+        !facilitator?(user)
+    end
+
+    def interested?(user)
+        user.present? && !!WorkshopInterest.find_by(workshop_id: id, user_id: user.id)
+    end
+
+    def interested_count
+        workshops = WorkshopInterest.where(:workshop_id => id)
+        workshops ? workshops.size : 0
+    end
+
     private
         def make_slug
             if !self.slug

@@ -5,6 +5,7 @@ Feature: Registration Page
 	Scenario: Start registration from landing page
 		Given There is an upcoming conference in Halifax NS
 		And Registration is open
+		And a workshop titled My Awesome Workshop exists
 		And I am on the landing page
 		
 		Then I see the Bike!Bike! logo
@@ -109,6 +110,39 @@ Feature: Registration Page
 		Then I should see Your Workshops
 		And I should not see My Workshop Title
 		And I should not see Super Awesome Workshop
+
+	Scenario: Be the first to like a workshop
+		Given There is an upcoming conference in Guadalajara Mexico
+		And Registration is open
+		And I am logged in as somebody@bikebike.org
+		And My name is John Doe
+		And I am registered for the conference
+		And a workshop exists
+		And I view the workshop
+		
+		Then I should see No one is interested
+		Then click on toggle_interest button
+		Then I should see You are interested
+
+		Then I click on toggle_interest button
+		Then I should see No one is interested
+
+	Scenario: Like a workshop
+		Given There is an upcoming conference in Guadalajara Mexico
+		And Registration is open
+		And I am logged in as somebody@bikebike.org
+		And My name is John Doe
+		And I am registered for the conference
+		And a workshop exists
+		And 4 people are interested in the workshop
+		And I view the workshop
+		
+		Then I should see 4 people are interested
+		Then click on toggle_interest button
+		Then I should see You and 4 others are interested
+
+		Then I click on toggle_interest button
+		Then I should see 4 people are interested
 
 	Scenario: Broadcast message
 		Given There is an upcoming conference in San Marcos TX

@@ -10,6 +10,7 @@ BikeBike::Application.routes.draw do
     match '/conferences/:slug/workshops/create' => 'conferences#create_workshop', :as => :create_workshop, via: [:get, :post]
     post '/conferences/:slug/workshops/save' => 'conferences#save_workshop', :as => :save_workshop
     get '/conferences/:slug/workshops/:workshop_id' => 'conferences#view_workshop', :as => :view_workshop
+    post '/conferences/:slug/workshops/:workshop_id/toggle-interest' => 'conferences#toggle_workshop_interest', :as => :toggle_workshop_interest
     match '/conferences/:slug/workshops/:workshop_id/edit' => 'conferences#edit_workshop', :as => :edit_workshop, via: [:get, :post]
     match '/conferences/:slug/workshops/:workshop_id/delete' => 'conferences#delete_workshop', :as => :delete_workshop, via: [:get, :post]
     get '/conferences/:slug/edit' => 'conferences#edit', :as => :edit_conference

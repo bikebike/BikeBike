@@ -1848,6 +1848,7 @@ html[data-lingua-franca-example="html"] {
 
 .workshop-list {
 	list-style: none;
+	padding: 0 2em;
 
 	.workshop-description {
 		font-size: 0.75em;
@@ -1859,5 +1860,32 @@ html[data-lingua-franca-example="html"] {
 		&:last-child {
 			border-bottom: 0;
 		}
+	}
+}
+
+#main .workshop-interest {
+	text-align: right;
+
+	form {
+		display: inline;
+	}
+
+	button {
+		font-size: 0.9em;
+		margin: 1em;
+		background-color: $colour-5;
+
+		&.delete {
+			background-color: $colour-4;			
+		}
+	}
+
+	body.home & {
+		text-align: left;
+		font-style: italic;
+		color: #888;
+		margin-top: -0.5em;
+		margin-bottom: -0.5em;
+		margin-left: 1em;
 	}
 }

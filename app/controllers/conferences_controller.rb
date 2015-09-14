@@ -888,6 +888,24 @@ class ConferencesController < ApplicationController
 		redirect_to view_workshop_url(@this_conference.slug, workshop.id)
 	end
 
+	def toggle_workshop_interest
+		set_conference
+		set_conference_registration
+		workshop = Workshop.find_by_id_and_conference_id(params[:workshop_id], @this_conference.id)
+		do_404 unless workshop
+
+		# save the current state
+		interested = workshop.interested? current_user
+		# remove all associated fields
+		WorkshopInterest.delete_all(:workshop_id => workshop.id, :user_id => current_user.id)
+
+		# creat the new interest row if we weren't interested before
+		WorkshopInterest.create(:workshop_id => workshop.id, :user_id => current_user.id) unless interested
+
+		# go back to the workshop
+		redirect_to view_workshop_url(@this_conference.slug, workshop.id)
+	end
+
 	# DELETE /conferences/1
 	#def destroy
 	#	@conference.destroy

@@ -13,7 +13,7 @@
 <link href="/apple-touch-icon-144x144.png" rel="apple-touch-icon" sizes="144x144">
 
 </head>
-<body class="conferences conferences-view_workshop">
+<body class="confirm">
 <nav>
 <div id="main-nav">
 <div class="inner-nav">
@@ -25,56 +25,48 @@
 <a href="/policy/"><span><span class="translated-content" data-i18n-key="page_titles.Safe_Space_Policy" data-i18n-needs-translation="0">Safer Space Agreement</span></span></a>
 </div>
 <div class="actions">
-<form class="logout" action="/logout/" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓">
-<input type="hidden" name="url" id="url" value="/conferences/MyBikeBike/workshops/1">
-<span class="translated-content" data-i18n-key="forms.actions.generic.Log_out" data-i18n-needs-translation="0"><button name="button" type="submit">Sign out</button></span>
-</form>
-
-</div>
+<a class="button register" href="/conferences/MyBikeBike/register/"><span class="translated-content" data-i18n-key="conference.actions.Register" data-i18n-needs-translation="0">Register</span>
+</a></div>
 </div>
 </div>
 </nav>
 
 <main id="main">
 <header id="banner">
-<div class="short" id="header-title" style="background-image: url(/assets/empty-racks.jpg)">
+<div class="short" id="header-title">
+<svg>
+  <defs>
+    <filter id="saturate">
+      <feColorMatrix in="SourceGraphic" type="saturate" values=".25" result="A"></feColorMatrix>
+    </filter>
+    <image x="0" y="0" width="100%" height="100%" xlink:href="/assets/grafitti.jpg" id="banner-image" preserveAspectRatio="xMidYMid slice" filter="url(#saturate)"></image>
+  
+    <filter id="banner-img" x="0" y="0" width="1" height="1">
+      <feImage xlink:href="#banner-image" result="banner-image"></feImage>
+      <feBlend mode="multiply" in="banner-image" in2="SourceGraphic"></feBlend>
+    </filter>
+  </defs>
+ 
+  <rect x="0" y="0" width="100%" height="100%" filter="url(#banner-img)"></rect>
+</svg>
 
-
-<h1><span class="translated-content" data-i18n-key="page_titles.conferences.View_Workshop" data-i18n-needs-translation="0">View Workshop</span></h1>
+<h1><span class="translated-content" data-i18n-key="page_titles.403.Please_Confirm_Email" data-i18n-needs-translation="0">Please confirm your email</span></h1>
 </div>
 
 </header>
-<div class="row"><div class="columns medium-12"><nav class="sub-menu">
-<a href="/conferences/MyBikeBike/register/"><span class="translated-content" data-i18n-key="menu.submenu.registration.Registration" data-i18n-needs-translation="0">Registration</span></a>
-<a class="current" href="/conferences/MyBikeBike/workshops/"><span class="translated-content" data-i18n-key="menu.submenu.registration.Workshops" data-i18n-needs-translation="0">Workshops</span></a>
-</nav>
-</div></div><div id="content">
+<div id="content"><article>
+<div class="row"><div class="columns medium-12"><h2><span class="translated-content" data-i18n-key="articles.permission_denied.headings.confirm_email" data-i18n-needs-translation="0">Please confirm your email address</span></h2>
+</div><div class="columns medium-6 large-5"><form action="/doconfirm/" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓">
+<div class="email-field input-field">
+<input type="email" name="email" id="email" required="required">
+<label for="email"><span class="translated-content" data-i18n-key="forms.labels.generic.email" data-i18n-needs-translation="0">Email address</span></label>
+</div>
+<input type="hidden" name="token" id="token" value="test">
+<span class="translated-content" data-i18n-key="forms.actions.generic.login" data-i18n-needs-translation="0"><button name="button" type="submit">Sign In</button></span>
+</form>
 
-<article>
-<div class="row"><div class="columns medium-12"><h2>Super Awesome Workshop</h2>
-<div class="workshop-interest">
-<span class="translated-content" data-i18n-key="articles.workshops.info.interested_count" data-i18n-needs-translation="0">No one is interested in this workshop yet</span>
-</div>
-<p>Lorem Ipsum</p>
-
-</div><div class="columns medium-6"><h3><span class="translated-content" data-i18n-key="articles.workshops.headings.facilitators" data-i18n-needs-translation="0">Facilitators</span></h3>
-<div class="facilitators">
-<div class="facilitator">
-<div class="name">John Doe</div>
-<div class="role"><span class="translated-content" data-i18n-key="roles.workshops.facilitator.creator" data-i18n-needs-translation="0">creator</span></div>
-</div>
-</div>
-</div><div class="columns medium-6"><h3><span class="translated-content" data-i18n-key="articles.workshops.headings.languages" data-i18n-needs-translation="0">Languages</span></h3>
-<p></p>
-</div><div class="columns medium-6"><h3><span class="translated-content" data-i18n-key="articles.workshops.headings.needs" data-i18n-needs-translation="0">Needs</span></h3>
-<p></p>
-</div><div class="columns medium-12"><h3><span class="translated-content" data-i18n-key="articles.workshops.headings.notes" data-i18n-needs-translation="0">Notes</span></h3>
-
-</div><div class="columns medium-12"><div class="actions">
-<a class="button modify" href="/conferences/MyBikeBike/workshops/1/edit/"><span class="translated-content" data-i18n-key="actions.workshops.Edit" data-i18n-needs-translation="0">Edit</span></a>
-<a class="button delete" href="/conferences/MyBikeBike/workshops/1/delete/"><span class="translated-content" data-i18n-key="actions.workshops.Delete" data-i18n-needs-translation="0">Delete Workshop</span></a>
-</div>
-</div></div></article>
+</div></div>
+</article>
 </div>
 </main>
 
@@ -102,7 +94,7 @@ EN
 <div class="selector">
 <ul>
 <li>
-<a href="/conferences/MyBikeBike/workshops/1">
+<a href="/confirm/test">
 EN
 </a>
 <span>English</span>
