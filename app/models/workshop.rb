@@ -28,11 +28,11 @@ class Workshop < ActiveRecord::Base
     end
 
     def can_edit?(user)
-        creator?(user)
+        creator?(user) || conference.host?(user)
     end
 
     def can_delete?(user)
-        creator?(user)
+        creator?(user) || conference.host?(user)
     end
 
     def can_show_interest?(user)
