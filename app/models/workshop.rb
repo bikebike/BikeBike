@@ -1,4 +1,6 @@
 class Workshop < ActiveRecord::Base
+    translates :info, :title
+
     belongs_to :conference
 
     has_many :workshop_facilitators, :dependent => :destroy
@@ -46,6 +48,10 @@ class Workshop < ActiveRecord::Base
     def interested_count
         workshops = WorkshopInterest.where(:workshop_id => id)
         workshops ? workshops.size : 0
+    end
+
+    def can_translate?(user)
+        user.can_translate? || can_edit?(user)
     end
 
     private

@@ -78,23 +78,23 @@ Given(/^There is an upcoming conference( in .+)?$/) do |location|
 	end
 end
 
-Given(/^an organization( named .+)? exists( in .+)?$/) do |name, location|
+Given(/^an organization( named .+)? exists in (.+)?$/) do |name, location|
 	if location =~ /every country/i
 		Carmen::World.instance.subregions.each { |country|
 			if country.subregions?
 				country.subregions.each { |region|
-					org = Organization.new(name: rand(36**16).to_s(36), slug: rand(36**16).to_s(36))#create_org#(Forgery::LoremIpsum.sentence)
+					org = Organization.new(name: rand(36**16).to_s(36), slug: rand(36**16).to_s(36))
 					org.locations << Location.new(city: 'City', country: country.code, territory: region.code)
 					org.save!
 				}
 			else
-				org = Organization.new(name: rand(36**16).to_s(36), slug: rand(36**16).to_s(36))#create_org#(Forgery::LoremIpsum.sentence)
+				org = Organization.new(name: rand(36**16).to_s(36), slug: rand(36**16).to_s(36))
 				org.locations << Location.new(city: 'City', country: country.code)
 				org.save!
 			end
 		}
 	else
-		create_org(name ? name.gsub(/^\s*named\s+(.*?)\s*$/, '\1') : nil, location ? location.gsub(/^\s*in\s+(.*?)\s*$/, '\1') : nil)
+		create_org(name ? name.gsub(/^\s*named\s+(.*?)\s*$/, '\1') : nil, location)
 	end
 end
 
@@ -103,6 +103,7 @@ Given(/^a workshop( titled .+)? exists?$/) do |title|
 	workshop.conference_id = @last_conference.id
 	workshop.title = title ? title.gsub(/^\s*titled\s*(.*?)\s*$/, '\1') : Forgery::LoremIpsum.sentence({:random => true}).gsub(/\.$/, '').titlecase
 	workshop.info = Forgery::LoremIpsum.paragraph({:random => true})
+	workshop.locale = :en
 	workshop.save
 	@last_workshop = workshop
 end

@@ -5456,7 +5456,9 @@ en:
         Workshops: Workshops
         Your_Workshops: Your Workshops
       paragraphs:
-        Proposed_Workshops: Would you like to facilitate your own workshop? Simply register and visit the workshops page. If you have already registered you can access the page by restarting the registration process.
+        Proposed_Workshops: Would you like to facilitate your own workshop? Simply
+          register and visit the workshops page. If you have already registered you
+          can access the page by restarting the registration process.
         info: Please accurately describe your workshop in detail. This will help hosts
           decide if they wish to add it to the schedule and when it should best be
           scheduled. Enter normal text but if you want to get fancy you can use [Markdown](http://daringfireball.net/projects/markdown/basics)
@@ -5545,6 +5547,7 @@ en:
       Workshops: Workshops
       Delete_Workshop: Create Workshop
       Edit_Workshop: Edit Workshop
+      Edit: Edit Conference
     policy:
       Safer_Spaces_Policy: Safer Space Agreement
     '404':
@@ -5578,6 +5581,9 @@ en:
       create: New Workshop
       Delete: Delete Workshop
       Edit: Edit
+      Translate: Translate into %{language}
+    conference:
+      Translate: Edit %{language} version
   error:
     '404':
       description: Sorry, we couldn't find the page you were looking for. If you really

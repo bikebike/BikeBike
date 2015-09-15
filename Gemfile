@@ -63,7 +63,7 @@ group :test do
 	gem 'gherkin3', '>= 3.1.0'
 	gem 'cucumber', :git => "git://github.com/cucumber/cucumber-ruby.git", branch: "integrate-gherkin3-parser"
 	gem 'cucumber-core', :git => "git://github.com/cucumber/cucumber-ruby-core.git", branch: "integrate-gherkin3-parser"
-	gem 'cucumber-rails', :git => "git://github.com/cucumber/cucumber-rails.git"
+	gem 'cucumber-rails', :git => "git://github.com/cucumber/cucumber-rails.git", require: false
 
 	#gem 'capybara'
     gem 'poltergeist'

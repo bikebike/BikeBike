@@ -168,3 +168,13 @@ Feature: Registration Page
 		Then I should see email has been sent
 		And I should see Preview
 		And I should see My Subject
+
+	Scenario: Edit a conference
+		Given There is an upcoming conference in Portland OR
+		And Registration is open
+		And I am logged in as somebody@bikebike.org
+		And My name is John Doe
+		And I am a conference host
+		And I am registered for the conference
+		And I am on the edit conference page
+		Then I should see Edit Spanish

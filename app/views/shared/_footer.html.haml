@@ -18,7 +18,7 @@
 			%ul
 				-I18n.backend.enabled_locales.each do |locale|
 					%li
-						%a{href: request.original_url.gsub(/^(https?:\/\/)(preview\-)?(..\.)?(.*)$/, '\1\2' + locale + '.\4')}
+						%a{href: home_url(url_params(locale))}
 							=_! locale.upcase
 						%span=I18n.t("languages.#{locale}", locale: locale, context: I18n.t("languages.#{locale}"))
 .copy

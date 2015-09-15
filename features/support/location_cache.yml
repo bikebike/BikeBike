@@ -1,0 +1,300 @@
+---
+" in Halifax NS": !ruby/object:Geocoder::Result::Google
+  data:
+    address_components:
+    - long_name: Halifax
+      short_name: Halifax
+      types:
+      - locality
+      - political
+    - long_name: Halifax
+      short_name: Halifax
+      types:
+      - administrative_area_level_3
+      - political
+    - long_name: Halifax Regional Municipality
+      short_name: Halifax Regional Municipality
+      types:
+      - administrative_area_level_2
+      - political
+    - long_name: Nova Scotia
+      short_name: NS
+      types:
+      - administrative_area_level_1
+      - political
+    - long_name: Canada
+      short_name: CA
+      types:
+      - country
+      - political
+    formatted_address: Halifax, NS, Canada
+    geometry:
+      bounds:
+        northeast:
+          lat: 44.7035313
+          lng: -63.5576784
+        southwest:
+          lat: 44.5949302
+          lng: -63.68627009999999
+      location:
+        lat: 44.6488625
+        lng: -63.5753196
+      location_type: APPROXIMATE
+      viewport:
+        northeast:
+          lat: 44.7035313
+          lng: -63.5576784
+        southwest:
+          lat: 44.5949302
+          lng: -63.68627009999999
+    partial_match: true
+    place_id: ChIJwfrbBxQhWksR3C2LQ6bja2Y
+    types:
+    - locality
+    - political
+  cache_hit: 
+" in Sackville NB": !ruby/object:Geocoder::Result::Google
+  data:
+    address_components:
+    - long_name: Sackville
+      short_name: Sackville
+      types:
+      - locality
+      - political
+    - long_name: Westmorland County
+      short_name: Westmorland County
+      types:
+      - administrative_area_level_2
+      - political
+    - long_name: New Brunswick
+      short_name: NB
+      types:
+      - administrative_area_level_1
+      - political
+    - long_name: Canada
+      short_name: CA
+      types:
+      - country
+      - political
+    formatted_address: Sackville, NB, Canada
+    geometry:
+      bounds:
+        northeast:
+          lat: 45.96934
+          lng: -64.31345000000002
+        southwest:
+          lat: 45.86707
+          lng: -64.4562439
+      location:
+        lat: 45.897903
+        lng: -64.3682803
+      location_type: APPROXIMATE
+      viewport:
+        northeast:
+          lat: 45.96934
+          lng: -64.31345000000002
+        southwest:
+          lat: 45.86707
+          lng: -64.4562439
+    partial_match: true
+    place_id: ChIJA-OnietQX0sR3kWeYPsw4gs
+    types:
+    - locality
+    - political
+  cache_hit: 
+" in Anchorage AK": !ruby/object:Geocoder::Result::Google
+  data:
+    address_components:
+    - long_name: Anchorage
+      short_name: Anchorage
+      types:
+      - locality
+      - political
+    - long_name: Anchorage
+      short_name: Anchorage
+      types:
+      - administrative_area_level_2
+      - political
+    - long_name: Alaska
+      short_name: AK
+      types:
+      - administrative_area_level_1
+      - political
+    - long_name: United States
+      short_name: US
+      types:
+      - country
+      - political
+    formatted_address: Anchorage, AK, USA
+    geometry:
+      bounds:
+        northeast:
+          lat: 61.4838912
+          lng: -148.460007
+        southwest:
+          lat: 60.733791
+          lng: -150.2862833
+      location:
+        lat: 61.2180556
+        lng: -149.9002778
+      location_type: APPROXIMATE
+      viewport:
+        northeast:
+          lat: 61.4838912
+          lng: -148.460007
+        southwest:
+          lat: 60.733791
+          lng: -150.2862833
+    partial_match: true
+    place_id: ChIJQT-zBHaRyFYR42iEp1q6fSU
+    types:
+    - locality
+    - political
+  cache_hit: 
+" in San Marcos TX": !ruby/object:Geocoder::Result::Google
+  data:
+    address_components:
+    - long_name: San Marcos
+      short_name: San Marcos
+      types:
+      - locality
+      - political
+    - long_name: Hays County
+      short_name: Hays County
+      types:
+      - administrative_area_level_2
+      - political
+    - long_name: Texas
+      short_name: TX
+      types:
+      - administrative_area_level_1
+      - political
+    - long_name: United States
+      short_name: US
+      types:
+      - country
+      - political
+    formatted_address: San Marcos, TX, USA
+    geometry:
+      bounds:
+        northeast:
+          lat: 29.9605819
+          lng: -97.8419149
+        southwest:
+          lat: 29.777154
+          lng: -98.012087
+      location:
+        lat: 29.8832749
+        lng: -97.9413941
+      location_type: APPROXIMATE
+      viewport:
+        northeast:
+          lat: 29.9605819
+          lng: -97.8419149
+        southwest:
+          lat: 29.777154
+          lng: -98.012087
+    partial_match: true
+    place_id: ChIJWUZBNCqnXIYRJzGOU2wzOi8
+    types:
+    - locality
+    - political
+  cache_hit: 
+" in Guadalajara Mexico": !ruby/object:Geocoder::Result::Google
+  data:
+    address_components:
+    - long_name: Guadalajara
+      short_name: Guadalajara
+      types:
+      - locality
+      - political
+    - long_name: Guadalajara
+      short_name: Guadalajara
+      types:
+      - administrative_area_level_2
+      - political
+    - long_name: Jalisco
+      short_name: Jal.
+      types:
+      - administrative_area_level_1
+      - political
+    - long_name: Mexico
+      short_name: MX
+      types:
+      - country
+      - political
+    formatted_address: Guadalajara, Jalisco, Mexico
+    geometry:
+      bounds:
+        northeast:
+          lat: 20.7438464
+          lng: -103.2637617
+        southwest:
+          lat: 20.6037373
+          lng: -103.4070646
+      location:
+        lat: 20.6596988
+        lng: -103.3496092
+      location_type: APPROXIMATE
+      viewport:
+        northeast:
+          lat: 20.7438464
+          lng: -103.2637617
+        southwest:
+          lat: 20.6037373
+          lng: -103.4070646
+    partial_match: true
+    place_id: ChIJm9MvtYyxKIQRUFeGvwKTPdY
+    types:
+    - locality
+    - political
+  cache_hit: 
+" in Portland OR": !ruby/object:Geocoder::Result::Google
+  data:
+    address_components:
+    - long_name: Portland
+      short_name: Portland
+      types:
+      - locality
+      - political
+    - long_name: Multnomah County
+      short_name: Multnomah County
+      types:
+      - administrative_area_level_2
+      - political
+    - long_name: Oregon
+      short_name: OR
+      types:
+      - administrative_area_level_1
+      - political
+    - long_name: United States
+      short_name: US
+      types:
+      - country
+      - political
+    formatted_address: Portland, OR, USA
+    geometry:
+      bounds:
+        northeast:
+          lat: 45.6524799
+          lng: -122.4718489
+        southwest:
+          lat: 45.432393
+          lng: -122.8369952
+      location:
+        lat: 45.5230622
+        lng: -122.6764816
+      location_type: APPROXIMATE
+      viewport:
+        northeast:
+          lat: 45.6524799
+          lng: -122.4718489
+        southwest:
+          lat: 45.432393
+          lng: -122.8369952
+    partial_match: true
+    place_id: ChIJJ3SpfQsLlVQRkYXR9ua5Nhw
+    types:
+    - locality
+    - political
+  cache_hit: 

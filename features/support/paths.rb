@@ -7,6 +7,8 @@ module NavigationHelpers
 				path = :home
 			when /^registration$/i
 				path = "/conferences/#{@last_conference.slug}/register/"
+			when /^edit conference$/i
+				path = "/conferences/#{@last_conference.slug}/edit/"
 			when /^(workshops|stats|broadcast)$/i
 				path = "/conferences/#{@last_conference.slug}/#{path}/"
 		end

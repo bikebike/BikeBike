@@ -109,8 +109,15 @@ end
 def create_org(name = nil, location = nil)
 	org = FactoryGirl.create(:org)
 	found_location = nil
-	if !location.nil?
-		l = Geocoder.search(location).first
+	if location.present?
+		cache_file = File.join(File.dirname(__FILE__), 'location_cache.yml')
+		cache = File.exists?(cache_file) ? YAML.load_file(cache_file) : {}
+		l = cache[location]
+		if l.nil?
+			l = Geocoder.search(location).first
+			cache[location] = l
+			File.open(cache_file, 'w') { |f| f.write cache.to_yaml }
+		end
 		begin
 			found_location = Location.new(city: l.city, territory: l.province_code, country: l.country_code, latitude: l.latitude, longitude: l.longitude)
 		rescue; end
@@ -120,11 +127,11 @@ def create_org(name = nil, location = nil)
 			return org
 		end
 	end
-	if !name.nil?
+	if name.present?
 		org.name = name
 		org.slug = org.generate_slug(name, found_location)
 	end
-	if !found_location.nil?
+	if found_location.present?
 		org.locations << found_location
 	end
 	org.save!

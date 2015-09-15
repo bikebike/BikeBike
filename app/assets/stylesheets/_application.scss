@@ -539,6 +539,10 @@ form {
 			font-weight: bold;
 			font-size: 1.25em;
 		}
+
+		.left {
+			float: left;
+		}
 	}
 }
 
@@ -1887,5 +1891,18 @@ html[data-lingua-franca-example="html"] {
 		margin-top: -0.5em;
 		margin-bottom: -0.5em;
 		margin-left: 1em;
+	}
+}
+
+.original-text {
+	margin: 0 0 1em 1em;
+	h4 {
+		margin: 0;
+	}
+	.value {
+		margin-left: 1em;
+	}
+	p {
+		font-size: 1.1em;
 	}
 }

@@ -823,7 +823,8 @@ class ConferencesController < ApplicationController
 		set_conference_registration
 		@workshop = Workshop.find_by_id_and_conference_id(params[:workshop_id], @this_conference.id)
 		do_404 unless @workshop
-		do_403 unless @workshop.can_edit?(current_user)
+		@can_edit = @workshop.can_edit?(current_user)
+		do_403 unless @can_edit || @workshop.can_translate?(current_user)
 		@title = @workshop.title
 		@info = @workshop.info
 		@needs = JSON.parse(@workshop.needs || '[]').map &:to_sym
@@ -869,20 +870,29 @@ class ConferencesController < ApplicationController
 	def save_workshop
 		set_conference
 		set_conference_registration
+
 		if params[:workshop_id]
 			workshop = Workshop.find(params[:workshop_id])
+			do_404 unless workshop
 		else
 			workshop = Workshop.new(:conference_id => @this_conference.id)
 			workshop.workshop_facilitators = [WorkshopFacilitator.new(:user_id => current_user.id, :role => :creator)]
 		end
 
+		can_edit = workshop.can_edit?(current_user)
+		do_403 unless can_edit || workshop.can_translate?(current_user)
+
 		workshop.title     = params[:title]
 		workshop.info      = params[:info]
-		workshop.languages = (params[:languages] || {}).keys.to_json
-		workshop.needs     = (params[:needs] || {}).keys.to_json
-		workshop.theme     = params[:theme] == 'other' ? params[:other_theme] : params[:theme]
-		workshop.space     = params[:space]
-		workshop.notes     = params[:notes]
+
+		if can_edit
+			# dont allow translators to edit these fields
+			workshop.languages = (params[:languages] || {}).keys.to_json
+			workshop.needs     = (params[:needs] || {}).keys.to_json
+			workshop.theme     = params[:theme] == 'other' ? params[:other_theme] : params[:theme]
+			workshop.space     = params[:space]
+			workshop.notes     = params[:notes]
+		end
 
 		workshop.save
 		redirect_to view_workshop_url(@this_conference.slug, workshop.id)
@@ -920,16 +930,16 @@ class ConferencesController < ApplicationController
 
 		def set_conference_registration
 			@registration = logged_in? ? ConferenceRegistration.find_by(:user_id => current_user.id, :conference_id => @this_conference.id) : nil
-			@is_host = @conference.host?(current_user)
+			@is_host = @this_conference.host?(current_user)
 			if @registration || @is_host
 				@submenu = {
-					register_path(@conference.slug) => 'registration.Registration',
-					workshops_path(@conference.slug) => 'registration.Workshops'
+					register_path(@this_conference.slug) => 'registration.Registration',
+					workshops_path(@this_conference.slug) => 'registration.Workshops'
 				}
 				if @is_host
-					@submenu[edit_conference_path(@conference.slug)] = 'registration.Edit'
-					@submenu[stats_path(@conference.slug)] = 'registration.Stats'
-					@submenu[broadcast_path(@conference.slug)] = 'registration.Broadcast'
+					@submenu[edit_conference_path(@this_conference.slug)] = 'registration.Edit'
+					@submenu[stats_path(@this_conference.slug)] = 'registration.Stats'
+					@submenu[broadcast_path(@this_conference.slug)] = 'registration.Broadcast'
 				end
 			end
 		end

@@ -7,6 +7,10 @@
 					= label_tag :info
 					= text_area_tag :info, @this_conference.info, :required => true
 				.actions.right
+					.left
+						- I18n.backend.enabled_locales.each do |locale|
+							= (link_to (_'actions.conference.Translate', "Edit #{language_name(locale)} version", :vars => {:language => language_name(locale)}), edit_conference_path(@this_conference.slug, url_params(locale)), :class => 'translate') if locale.to_sym != I18n.locale.to_sym
+
 					= button_tag :save, :value => :save
 
 :javascript

@@ -40,4 +40,7 @@
 		= columns(medium: 12) do
 			.actions
 				= (link_to (_'actions.workshops.Edit'), edit_workshop_path(@this_conference.slug, @workshop.id), :class => 'button modify') if @workshop.can_edit?(current_user)
+				- if @workshop.can_translate?(current_user)
+					- I18n.backend.enabled_locales.each do |locale|
+						= (link_to (_'actions.workshops.Translate', "Translate into #{language_name(locale)}", :vars => {:language => language_name(locale)}), edit_workshop_url(@this_conference.slug, @workshop.id, url_params(locale)), :class => 'button translate') if locale.to_sym != I18n.locale.to_sym
 				= (link_to (_'actions.workshops.Delete'), delete_workshop_path(@this_conference.slug, @workshop.id), :class => 'button delete') if @workshop.can_delete?(current_user)
