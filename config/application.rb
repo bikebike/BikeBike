@@ -38,12 +38,13 @@ module BikeBike
 			I18n.config.language_detection_method = I18n::Config::DETECT_LANGUAGE_FROM_SUBDOMAIN
 			if Rails.env == 'preview'
 				I18n.config.language_threshold = 1
+				I18n.config.subdomain_format = 'preview-%'
+				# if we are in our preview environment, set the locale regex to detect the preview- prefix
+				I18n.config.host_locale_regex = /^preview\-([a-z]{2})\.bikebike\.org$/
 			else
 				I18n.config.language_threshold = 90
 			end
 		end
-		# if we are in our preview environment, set the locale regex to detect the preview- prefix
-		I18n.config.host_locale_regex = /^preview\-([a-z]{2})\.bikebike\.org$/ if Rails.env == 'preview'
 
 		config.active_job.queue_adapter = :delayed_job
 	end
