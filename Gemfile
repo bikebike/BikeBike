@@ -23,7 +23,6 @@ else
 	gem 'bumbleberry', :git => 'git://github.com/bumbleberry/bumbleberry.git'
 end
 
-gem 'foundation-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'sorcery', '>= 0.8.1'
 gem 'oauth2', '~> 0.8.0'

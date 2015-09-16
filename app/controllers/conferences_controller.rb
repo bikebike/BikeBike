@@ -427,7 +427,7 @@ class ConferencesController < ApplicationController
 		@other = []
 
 		if request.format.xls?
-			#I18n.backend.init_page(request, params)
+			logger.info "Generating stats.xls"
 			@excel_data = {
 				:columns => [:name, :email, :city, :date, :languages, :arrival, :departure, :housing, :bike, :food, :allergies, :other, :fees_paid],
 				:key => 'articles.conference_registration.headings',
@@ -494,6 +494,8 @@ class ConferencesController < ApplicationController
 			end
 			return
 		end
+
+		logger.info "Rendering stats.xls" if request.format.xls?
 
 		respond_to do |format|
 			format.html
