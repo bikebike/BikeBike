@@ -436,53 +436,58 @@ class ConferencesController < ApplicationController
 		end
 
 		@registrations.each do |r|
-			if r.is_attending
-				@total_registrations += 1
-				
-				@donation_count += 1 if r.registration_fees_paid
-				@total_donations += r.registration_fees_paid unless r.registration_fees_paid.blank?
+			if r && r.is_attending
+				begin
+					@total_registrations += 1
+					
+					@donation_count += 1 if r.registration_fees_paid
+					@total_donations += r.registration_fees_paid unless r.registration_fees_paid.blank?
 
-				unless r.housing.blank?
-					@housing[r.housing.to_sym] ||= 0
-					@housing[r.housing.to_sym] += 1
-				end
+					unless r.housing.blank?
+						@housing[r.housing.to_sym] ||= 0
+						@housing[r.housing.to_sym] += 1
+					end
 
-				unless r.bike.blank?
-					@bikes[r.bike.to_sym] ||= 0
-					@bikes[r.bike.to_sym] += 1
-					@bike_count += 1 unless r.bike.to_sym == :none
-				end
+					unless r.bike.blank?
+						@bikes[r.bike.to_sym] ||= 0
+						@bikes[r.bike.to_sym] += 1
+						@bike_count += 1 unless r.bike.to_sym == :none
+					end
 
-				unless r.food.blank?
-					@food[r.food.to_sym] ||= 0
-					@food[r.food.to_sym] += 1
-				end
+					unless r.food.blank?
+						@food[r.food.to_sym] ||= 0
+						@food[r.food.to_sym] += 1
+					end
 
-				@allergies << r.allergies unless r.allergies.blank?
-				@other << r.other unless r.other.blank?
+					@allergies << r.allergies unless r.allergies.blank?
+					@other << r.other unless r.other.blank?
 
-				JSON.parse(r.languages).each do |l|
-					@languages[l.to_sym] ||= 0
-					@languages[l.to_sym] += 1
-				end unless r.languages.blank?
+					JSON.parse(r.languages).each do |l|
+						@languages[l.to_sym] ||= 0
+						@languages[l.to_sym] += 1
+					end unless r.languages.blank?
 
-				if @excel_data
-					user = User.find(r.user_id)
-					@excel_data[:data] << {
-						:name => (user ? user.firstname : nil) || '',
-						:email => (user ? user.email : nil) || '',
-						:date => r.created_at ? r.created_at.strftime("%F %T") : '',
-						:city => r.city || '',
-						:languages => ((JSON.parse(r.languages || '[]').map { |x| I18n.t"languages.#{x}" }).join(', ').to_s),
-						:arrival => r.arrival ? r.arrival.strftime("%F %T") : '',
-						:departure => r.departure ? r.departure.strftime("%F %T") : '',
-						:housing => (I18n.t"articles.conference_registration.questions.housing.#{r.housing || 'none'}"),
-						:bike => (I18n.t"articles.conference_registration.questions.bike.#{r.bike || 'none'}"),
-						:food => (I18n.t"articles.conference_registration.questions.food.#{r.food || 'meat'}"),
-						:fees_paid => (r.registration_fees_paid || 0.0),
-						:allergies => r.allergies || '',
-						:other => r.other || ''
-					}
+					if @excel_data
+						user = User.find(r.user_id)
+						@excel_data[:data] << {
+							:name => (user ? user.firstname : nil) || '',
+							:email => (user ? user.email : nil) || '',
+							:date => r.created_at ? r.created_at.strftime("%F %T") : '',
+							:city => r.city || '',
+							:languages => ((JSON.parse(r.languages || '[]').map { |x| I18n.t"languages.#{x}" }).join(', ').to_s),
+							:arrival => r.arrival ? r.arrival.strftime("%F %T") : '',
+							:departure => r.departure ? r.departure.strftime("%F %T") : '',
+							:housing => (I18n.t"articles.conference_registration.questions.housing.#{r.housing || 'none'}"),
+							:bike => (I18n.t"articles.conference_registration.questions.bike.#{r.bike || 'none'}"),
+							:food => (I18n.t"articles.conference_registration.questions.food.#{r.food || 'meat'}"),
+							:fees_paid => (r.registration_fees_paid || 0.0),
+							:allergies => r.allergies || '',
+							:other => r.other || ''
+						}
+					end
+				rescue
+					logger.info "Error adding row to stats.xls"
+					logger.info "\t#{r ? r.to_yaml.to_s : 'nil'}"
 				end
 			end
 		end
