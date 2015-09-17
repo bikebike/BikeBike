@@ -487,7 +487,7 @@ class ConferencesController < ApplicationController
 					end
 				rescue => error
 					logger.info "Error adding row to stats.xls: #{error.message}"
-					logger.info error.backtrace
+					logger.info error.backtrace.join("\n\t\t")
 				end
 			end
 		end
