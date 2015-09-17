@@ -468,7 +468,7 @@ class ConferencesController < ApplicationController
 					end unless r.languages.blank?
 
 					if @excel_data
-						user = User.find(r.user_id)
+						user = r.user_id ? User.find(r.user_id) : nil
 						@excel_data[:data] << {
 							:name => (user ? user.firstname : nil) || '',
 							:email => (user ? user.email : nil) || '',
@@ -487,7 +487,7 @@ class ConferencesController < ApplicationController
 					end
 				rescue => error
 					logger.info "Error adding row to stats.xls: #{error.message}"
-					logger.info error.backtrace.join("\n\t\t")
+					logger.info error.backtrace.join("\n\t")
 				end
 			end
 		end
