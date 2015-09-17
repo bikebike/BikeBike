@@ -485,9 +485,9 @@ class ConferencesController < ApplicationController
 							:other => r.other || ''
 						}
 					end
-				rescue
-					logger.info "Error adding row to stats.xls"
-					logger.info "\t#{r ? r.to_yaml.to_s : 'nil'}"
+				rescue => error
+					logger.info "Error adding row to stats.xls: #{error.message}"
+					logger.info error.backtrace
 				end
 			end
 		end
