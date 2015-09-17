@@ -469,13 +469,13 @@ class ConferencesController < ApplicationController
 				if @excel_data
 					user = User.find(r.user_id)
 					@excel_data[:data] << {
-						:name => user.firstname,
-						:email => user.email,
-						:date => r.created_at ? r.created_at.strftime("%F %T") : nil,
-						:city => r.city,
+						:name => (user ? user.firstname : nil) || '',
+						:email => (user ? user.email : nil) || '',
+						:date => r.created_at ? r.created_at.strftime("%F %T") : '',
+						:city => r.city || '',
 						:languages => ((JSON.parse(r.languages || '[]').map { |x| I18n.t"languages.#{x}" }).join(', ').to_s),
-						:arrival => (r.arrival || @this_conference.start_date).strftime("%F %T"),
-						:departure => (r.departure || @this_conference.end_date).strftime("%F %T"),
+						:arrival => r.arrival ? r.arrival.strftime("%F %T") : '',
+						:departure => r.departure ? r.departure.strftime("%F %T") : '',
 						:housing => (I18n.t"articles.conference_registration.questions.housing.#{r.housing || 'none'}"),
 						:bike => (I18n.t"articles.conference_registration.questions.bike.#{r.bike || 'none'}"),
 						:food => (I18n.t"articles.conference_registration.questions.food.#{r.food || 'meat'}"),
@@ -488,6 +488,7 @@ class ConferencesController < ApplicationController
 		end
 
 		if ENV["RAILS_ENV"] == 'test' && request.format.xls?
+			logger.info "Rendering stats.xls as HTML"
 			request.format = :html
 			respond_to do |format|
 				format.html { render :file => 'application/excel.xls.haml', :formats => [:xls] }
