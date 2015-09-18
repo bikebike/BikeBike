@@ -1,0 +1,7 @@
+%ul.workshop-previews
+	- workshops.each do |w|
+		- if w.title
+			%li
+				=link_to view_workshop_path(@this_conference.slug, w.id) do
+					%h4=_!(w.title)
+					%p=_!(w.info || '').gsub(/\n\#+(.*?)\r/s, "\n<strong>\\1</strong>\r").gsub(/[\t ]*\r\n[\t ]*/s, '<br>').html_safe
