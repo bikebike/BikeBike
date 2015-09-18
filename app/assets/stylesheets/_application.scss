@@ -1864,6 +1864,15 @@ html[data-lingua-franca-example="html"] {
 		&:last-child {
 			border-bottom: 0;
 		}
+
+		ul {
+			padding-left: 2.5em;
+			margin-bottom: 1.5em;
+		}
+
+		li {
+			border: 0;
+		}
 	}
 }
 
