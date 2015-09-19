@@ -5455,6 +5455,7 @@ en:
         notes: Notes
         Workshops: Workshops
         Your_Workshops: Your Workshops
+        facilitate: Request to Facilitate ‘%{workshop_title}’
       paragraphs:
         Proposed_Workshops: Would you like to facilitate your own workshop? Simply
           register and visit the workshops page. If you have already registered you
@@ -5480,6 +5481,14 @@ en:
           we want to hear about everyone’s experience within the many configurations
           of community shops we’re coming from.
         notes: Notes are only viewable by conference hosts and workshop facilitators
+        facilitate_request: Please tell the current workshop facilitators who you
+          are, why you want to help facilitate the workshop, and how you think you
+          will help make the workshop better. All of the current facilitators will
+          be emailed and they may ask more questions before approving or denying your
+          request. Please note that this will reveal your email address to the facilitators.
+        facilitate_request_sent: Your request has been sent. You will receive an email
+          once your request is approved or denied or if the current facilitators have
+          any questions.
       info:
         interested_count:
           one: One person is interested in this workshop
@@ -5510,6 +5519,7 @@ en:
         info: Info
         content: Content
         notes: Notes
+        message: 'Your Message:'
     actions:
       generic:
         login: Sign In
@@ -5529,6 +5539,7 @@ en:
         skip: Skip
         remove_interest: "-1"
         show_interest: "+1"
+        add: "+"
   page_titles:
     '403':
       Please_Confirm_Email: Please confirm your email
@@ -5548,6 +5559,7 @@ en:
       Delete_Workshop: Create Workshop
       Edit_Workshop: Edit Workshop
       Edit: Edit Conference
+      Facilitate_Workshop: Workshop Facilitation Request
     policy:
       Safer_Spaces_Policy: Safer Space Agreement
     '404':
@@ -5582,6 +5594,12 @@ en:
       Delete: Delete Workshop
       Edit: Edit
       Translate: Translate into %{language}
+      Approve: Approve
+      Deny: Deny
+      Facilitate: Make a facilitation request
+      Remove: Remove
+      View: View this workshop
+      View_All: View all workshops
     conference:
       Translate: Edit %{language} version
   error:
@@ -5594,6 +5612,9 @@ en:
     workshops:
       facilitator:
         creator: creator
+        collaborator: Collaborator
+        requested: Requested
+        unregistered: Unregistered
   workshop:
     options:
       needs:
@@ -5621,6 +5642,10 @@ en:
     subject:
       confirm_email: Confirmation Email
       registration_confirmed: Thank you for registering for %{conference_title}
+      workshop_facilitator_request: Request to facilitate %{workshop_title} from %{requester_name}
+      workshop_request_approved: You have been added as a facilitator of %{workshop_title}
+      workshop_request_denied: Your request to facilitate %{workshop_title} has been
+        denied
     general:
       paragraph:
         see_you: See you in %{conference_location}!
@@ -5632,3 +5657,14 @@ en:
           the registration process. If you have yet to pay or add your workshops and
           plan to do so, we ask that you take care of it as soon as possible to help
           us prepare in advance of your arrival.
+    workshop:
+      paragraph:
+        request_approved: You have been added as a facilitator of %{workshop_title}.
+        request_denied: Your request to become a facilitator of %{workshop_title}
+          has been denied. If you think this was in error, you may contact the current
+          facilitators by making another request to facilitate.
+        request_instructions: 'You can approve or deny this request on your workshop
+          page:'
+        request_message: "%{user_name} has requested to help facilitate %{workshop_title}:"
+        request_reply_instructions: You can also reply directly to this email to ask
+          follow-up questions.

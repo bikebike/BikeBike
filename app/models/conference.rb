@@ -35,8 +35,15 @@ class Conference < ActiveRecord::Base
 		action = action.to_sym
 		'/conferences/' + conference_type.slug + '/' + slug + (action == :show ? '' : '/' + action.to_s)
 	end
+
 	def location
 		organizations.first.location
+	end
+
+	def registered?(user)
+		registration = ConferenceRegistration.find_by(:user_id => user.id, :conference_id => id)
+		return false unless registration
+		return registration.is_attending
 	end
 
 end

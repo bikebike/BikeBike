@@ -7,19 +7,19 @@
 	Other Developers:See our Github
 	Website: https://github.com/bikebike/BikeBike
 
-	Primary ES Translator:Jim Mayerstein
-	Contact: jimbikefreak [at] gmail.com
-	From:Mexico City, Jalisco, Mexico
+	Primary ES Translators:Jim Mayerstein; Ollin Monroy
+	Contact: jimbikefreak [at] gmail.com; envoltorio [at] gmail.com
+	From:Mexico City, Jalisco; Mexico, Guadalajara, Jalisco, Mexico
 
-	Primary EN Copywriter:Sarah Schaan
-	Contact: sarah.schaan [at] gmail.com
-	From: Fargo, Noth Dakota, USA
+	Primary EN Copywriter:Momoko Saunders
+	Contact: analyst [at] bikefarm.org
+	From: Portland, Oregon, USA
 
 /* THANKS */
 	Thanks to everyone else who contributed translations, code, copy, photography, and general support!
 
 /* SITE */
-	Last update:2015/03/25
+	Last update:2015/09/15
 	Language: English
 	Doctype:HTML5
 	IDE: Sublime Text, Photoshop

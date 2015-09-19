@@ -1,23 +1,6 @@
 class UserMailer < ActionMailer::Base
 	add_template_helper(ApplicationHelper)
-	#add_template_helper(LinguaFrancaHelper)
 	include LinguaFrancaHelper
-
-	#def self.before(*names)
-	#	names.each do |name|
-	#		m = instance_method(name)
-	#		define_method(name) do |*args, &block|  
-	#			#yield
-	#			if ![:send_action].include?(name.to_sym)
-	#				puts " ====== #{name} ====== "
-	#				I18n.backend.set_page_name(name)
-	#				m.bind(self).(*args, &block)
-	#			else
-	#				puts " ------ #{name} ------ "
-	#			end
-	#		end
-	#	end
-	#end
 
 	default from: "Bike!Bike! <noreply@bikebike.org>"
 
@@ -82,7 +65,6 @@ class UserMailer < ActionMailer::Base
 	end
 
 	def broadcast(host, subject, content, user, conference)
-		#puts " == #{instance_methods.to_json.to_s} == "
 		@host = host
 		@content = content
 		@banner = (@host || 'http://localhost/') + (conference ? (conference.poster.preview.url || '') : image_url('logo.png'))
@@ -91,5 +73,43 @@ class UserMailer < ActionMailer::Base
 		end
 	end
 
-	#before(*instance_methods) { }
+	def workshop_facilitator_request(workshop, requester, message)
+		@host = UserMailer.default_url_options[:host]
+		@workshop = workshop
+		@requester = requester
+		addresses = []
+		@workshop.active_facilitators.each do |f|
+			addresses << f.email
+		end
+		@message = message
+		@conference = Conference.find(@workshop.conference_id)
+		mail to: addresses,
+		 	 from: @requester.email,
+			 subject: _('email.subject.workshop_facilitator_request',
+			 		"Request to facilitate #{@workshop.title} from #{@requester.firstname}",
+			 		:vars => {:workshop_title => @workshop.title, :requester_name => @requester.firstname})
+	end
+
+	def workshop_facilitator_request_approved(workshop, user)
+		@host = UserMailer.default_url_options[:host]
+		@workshop = workshop
+		@conference = Conference.find(@workshop.conference_id)
+		@user = user
+		mail to: user.email,
+			 subject: (_'email.subject.workshop_request_approved',
+			 			"You have been added as a facilitator of #{@workshop.title}",
+			 			:vars => {:workshop_title => @workshop.title})
+	end
+
+	def workshop_facilitator_request_denied(workshop, user)
+		@host = UserMailer.default_url_options[:host]
+		@workshop = workshop
+		@conference = Conference.find(@workshop.conference_id)
+		@user = user
+		mail to: user.email,
+			 subject: (_'email.subject.workshop_request_denied',
+			 			"Your request to facilitate #{@workshop.title} has been denied",
+			 			:vars => {:workshop_title => @workshop.title})
+	end
+
 end

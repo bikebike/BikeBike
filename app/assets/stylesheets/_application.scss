@@ -1915,3 +1915,28 @@ html[data-lingua-franca-example="html"] {
 		font-size: 1.1em;
 	}
 }
+
+.facilitator .button {
+	font-size: 0.9em;
+	vertical-align: -0.75em;
+}
+
+#main .facilitators .actions {
+	margin: 0;
+}
+
+#main form.add-facilitator {
+	text-align: left;
+	margin-top: 0;
+
+	button {
+		font-size: 0.9em;
+		float: right;
+	}
+
+	.email-field {
+		width: 82%;
+		font-size: 0.9em;
+		float: left;
+	}
+}

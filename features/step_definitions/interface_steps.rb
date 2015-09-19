@@ -28,9 +28,9 @@ end
 
 When(/^(I )?(finish|cancel) ((with )?(paypal|the payment))$/) do |a, action, b, c, d|
 	if action != 'cancel'
-		@last_registration = ConferenceRegistration.find(@last_registration.id)
-		@last_registration.payment_confirmation_token = 'token'
-		@last_registration.save!
+		@my_registration = ConferenceRegistration.find(@my_registration.id)
+		@my_registration.payment_confirmation_token = 'token'
+		@my_registration.save!
 		url = register_paypal_confirm_path(@last_conference.slug, :paypal_confirm, 'token')
 		visit url
 	end
@@ -45,8 +45,8 @@ Then(/^(I )?pay \$?([\d\.]+)$/) do | a, amount |
 	@last_conference.paypal_signature = paypal_info[:signature]
 	@last_conference.save!
 
-	@last_registration.payment_info = {:payer_id => '1234', :token => '5678', :amount => amount.to_f, :status => 'Completed'}.to_yaml
-	@last_registration.save!
+	@my_registration.payment_info = {:payer_id => '1234', :token => '5678', :amount => amount.to_f, :status => 'Completed'}.to_yaml
+	@my_registration.save!
 
 	control = page.all("[value^=\"#{amount}\"]")
 	
@@ -62,10 +62,10 @@ end
 
 Then(/^(I )?(don't )?have enough funds$/) do | a, status |
 	if status.blank?
-		info = YAML.load(@last_registration.payment_info)
+		info = YAML.load(@my_registration.payment_info)
 		info[:status] = 'Completed'
-		@last_registration.payment_info = info.to_yaml
-		@last_registration.save!
+		@my_registration.payment_info = info.to_yaml
+		@my_registration.save!
 	end
 end
 
@@ -105,6 +105,25 @@ Given(/^a workshop( titled .+)? exists?$/) do |title|
 	workshop.info = Forgery::LoremIpsum.paragraph({:random => true})
 	workshop.locale = :en
 	workshop.save
+	username = Forgery::LoremIpsum.word({:random => true})
+	user = User.create(firstname: username, email: "#{username}@bikebike.org")
+	WorkshopFacilitator.create(user_id: user.id, workshop_id: workshop.id, role: :creator)
+	@last_workshop = workshop
+end
+
+Given(/^(I )have created a workshop titled (.+)( with (\d+) facilitators)?$/) do |a, title, b, facilitator_count|
+	workshop = Workshop.new
+	workshop.conference_id = @last_conference.id
+	workshop.title = title ? title.gsub(/^\s*titled\s*(.*?)\s*$/, '\1') : Forgery::LoremIpsum.sentence({:random => true}).gsub(/\.$/, '').titlecase
+	workshop.info = Forgery::LoremIpsum.paragraph({:random => true})
+	workshop.locale = :en
+	workshop.save
+	WorkshopFacilitator.create(user_id: @my_account.id, workshop_id: workshop.id, role: :creator)
+	(1..(facilitator_count || '0').to_i).each do |i|
+		username = Forgery::LoremIpsum.word({:random => true})
+		user = User.create(firstname: username, email: "#{username}@bikebike.org")
+		WorkshopFacilitator.create(user_id: user.id, workshop_id: workshop.id, role: :collaborator)
+	end
 	@last_workshop = workshop
 end
 
@@ -112,6 +131,33 @@ Given(/^(\d+) (person is|people are) interested in the workshop$/) do |intereste
 	(1..interested.to_i).each do |i|
 		WorkshopInterest.create(workshop_id: @last_workshop.id, user_id: (@my_account ? @my_account.id + 1 : 1000) + i)
 	end
+end
+
+Given(/^(\d+) (person has|people have) requested to facilitate (the|my) workshop$/) do |request_count,a,b|
+	(1..(request_count || '0').to_i).each do |i|
+		username = Forgery::LoremIpsum.word({:random => true})
+		user = User.create(firstname: username, email: "#{username}@bikebike.org")
+		WorkshopFacilitator.create(user_id: user.id, workshop_id: @last_workshop.id, role: :requested)
+	end
+end
+
+Given(/^(.+) has requested to facilitate (the|my) workshop$/) do |username,a|
+	user = User.create(firstname: username, email: "#{username.gsub(/\s+/, '.').downcase}@bikebike.org")
+	WorkshopFacilitator.create(user_id: user.id, workshop_id: @last_workshop.id, role: :requested)
+end
+
+Given(/^(.+) is (also )?facilitating (the|my) workshop$/) do |username,a,b|
+	user = User.create(firstname: username, email: "#{username.gsub(/\s+/, '.')}@bikebike.org")
+	WorkshopFacilitator.create(user_id: user.id, workshop_id: @last_workshop.id, role: :collaborator)
+end
+
+Given(/^a user named (.+?)( with the email (.+))? exists$/) do |username,a,email|
+	user = User.create(firstname: username, email: email || "#{username.gsub(/\s+/, '.')}@bikebike.org")
+end
+
+Then(/^(I )(approve|deny) the facilitator request from (.+)$/) do |a,action,username|
+	user = User.find_by_firstname(username)
+	visit "/conferences/#{@last_conference.slug}/workshops/#{@last_workshop.id}/facilitate_request/#{user.id}/#{action}/"
 end
 
 Given(/^Registration is (open|closed)$/) do |status|
@@ -307,11 +353,11 @@ end
 
 Then (/^I should (not )?be registered for the conference$/) do |state|
 	@my_account = User.find_by(:email => @last_email_entered)
-	@last_registration = ConferenceRegistration.find_by(:user_id => @my_account.id, :conference_id => @last_conference.id)
+	@my_registration = ConferenceRegistration.find_by(:user_id => @my_account.id, :conference_id => @last_conference.id)
 	if state && state.strip == 'not'
-		@last_registration.should be_nil
+		@my_registration.should be_nil
 	else
-		@last_registration.should_not be_nil
+		@my_registration.should_not be_nil
 	end
 end
 
@@ -329,14 +375,15 @@ Given (/^My name is (.+)$/) do |name|
 	@my_account.save
 end
 
-Given (/^(I )?am registered for the conference$/) do |a|
-	@last_registration = ConferenceRegistration.create(
-		:user_id        => @my_account.id,
+Given (/^(I am|(.+) is) registered for the conference$/) do |a,username|
+	user = username ? User.find_by_firstname(username) : @my_account
+
+	registration = ConferenceRegistration.create(
+		:user_id        => user.id,
 		:conference_id  => @last_conference.id,
 		:is_attending   => true,
 		:is_confirmed   => true,
 		:is_participant => true,
-		:user_id        => @my_account.id,
 		:city           => 'Somewhere',
 		:arrival        => '2015-09-28 00:00:00',
 		:departure      => '2015-09-28 00:00:00',
@@ -347,11 +394,16 @@ Given (/^(I )?am registered for the conference$/) do |a|
 		:languages      => '["en"]',
 		:food           => 'meat'
 	)
+	if username
+		@last_registration = registration
+	else
+		@my_registration = registration
+	end
 end
 
 Given (/^(I )?have paid( \$?\d+|\$?\d+\.\d+)? for registration$/) do |a, amount|
-	@last_registration.registration_fees_paid = amount ? amount.to_f : 50.0
-	@last_registration.save
+	@my_registration.registration_fees_paid = amount ? amount.to_f : 50.0
+	@my_registration.save
 end
 
 Given (/^(I )?am a conference host$/) do |a|

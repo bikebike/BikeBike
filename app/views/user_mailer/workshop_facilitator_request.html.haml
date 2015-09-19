@@ -1,0 +1,10 @@
+%p=_'email.workshop.paragraph.request_message',"Below is a message from #{@requester.firstname}:", :vars => {:workshop_title => @workshop.title, :user_name => @requester.firstname}
+
+%blockquote=markdown @message
+
+%p
+	=_'email.workshop.paragraph.request_instructions',"You can approve or deny this request on your workshop page: "
+	- workshop_link = @host + view_workshop_url(@conference.slug, @workshop.id)
+	%a{href: workshop_link}=workshop_link
+
+%p=_'email.workshop.paragraph.request_reply_instructions',"You can also reply directly to this email to ask follow-up questions."

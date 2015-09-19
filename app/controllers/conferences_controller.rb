@@ -924,6 +924,115 @@ class ConferencesController < ApplicationController
 		redirect_to view_workshop_url(@this_conference.slug, workshop.id)
 	end
 
+	def facilitate_workshop
+		set_conference
+		set_conference_registration
+		@workshop = Workshop.find_by_id_and_conference_id(params[:workshop_id], @this_conference.id)
+		do_404 unless @workshop
+		do_403 if @workshop.facilitator?(current_user) || !current_user
+
+		render 'workshops/facilitate'
+	end
+
+	def facilitate_request
+		set_conference
+		set_conference_registration
+		workshop = Workshop.find_by_id_and_conference_id(params[:workshop_id], @this_conference.id)
+		do_404 unless workshop
+		do_403 if workshop.facilitator?(current_user) || !current_user
+
+		# create the request by making the user a facilitator but making their role 'requested'
+		WorkshopFacilitator.create(user_id: current_user.id, workshop_id: workshop.id, role: :requested)
+
+		UserMailer.send_mail :workshop_facilitator_request do
+			{
+				:args => [ workshop, current_user, params[:message] ]
+			}
+		end
+
+		redirect_to sent_facilitate_workshop_url(@this_conference.slug, workshop.id)
+	end
+
+	def sent_facilitate_request
+		set_conference
+		set_conference_registration
+		@workshop = Workshop.find_by_id_and_conference_id(params[:workshop_id], @this_conference.id)
+		do_404 unless @workshop
+		do_403 unless @workshop.requested_collaborator?(current_user)
+
+		render 'workshops/facilitate_request_sent'
+	end
+
+	def approve_facilitate_request
+		set_conference
+		set_conference_registration
+		workshop = Workshop.find_by_id_and_conference_id(params[:workshop_id], @this_conference.id)
+		do_404 unless workshop && current_user
+		
+		user_id = params[:user_id].to_i
+		action = params[:approve_or_deny].to_sym
+		user = User.find(user_id)
+		if action == :approve
+			if current_user && workshop.active_facilitator?(current_user) && workshop.requested_collaborator?(User.find(user_id))
+				f = WorkshopFacilitator.find_by_workshop_id_and_user_id(
+						workshop.id, user_id)
+				f.role = :collaborator
+				f.save
+				UserMailer.send_mail :workshop_facilitator_request_approved do
+					{
+						:args => [ workshop, user ]
+					}
+				end
+				return redirect_to view_workshop_url(@this_conference.slug, workshop.id)		
+			end
+		elsif action == :deny
+			if current_user && workshop.active_facilitator?(current_user) && workshop.requested_collaborator?(User.find(user_id))
+				WorkshopFacilitator.delete_all(
+					:workshop_id => workshop.id,
+					:user_id => user_id)
+				UserMailer.send_mail :workshop_facilitator_request_denied do
+					{
+						:args => [ workshop, user ]
+					}
+				end
+				return redirect_to view_workshop_url(@this_conference.slug, workshop.id)		
+			end
+		elsif action == :remove
+			if current_user && current_user.id == user_id
+				unless workshop.creator?(user)
+					WorkshopFacilitator.delete_all(
+						:workshop_id => workshop.id,
+						:user_id => user_id)
+				end
+				return redirect_to view_workshop_url(@this_conference.slug, workshop.id)
+			end
+		end
+
+		do_403
+	end
+
+	def add_workshop_facilitator
+		user = User.find_by_email(params[:email]) || User.create(email: params[:email])
+
+		set_conference
+		set_conference_registration
+		workshop = Workshop.find_by_id_and_conference_id(params[:workshop_id], @this_conference.id)
+
+		do_404 unless workshop && current_user
+
+		unless workshop.facilitator?(user)
+			WorkshopFacilitator.create(user_id: user.id, workshop_id: workshop.id, role: :collaborator)
+			
+			UserMailer.send_mail :workshop_facilitator_request_approved do
+				{
+					:args => [ workshop, user ]
+				}
+			end
+		end
+
+		return redirect_to view_workshop_url(@this_conference.slug, params[:workshop_id])
+	end
+
 	# DELETE /conferences/1
 	#def destroy
 	#	@conference.destroy

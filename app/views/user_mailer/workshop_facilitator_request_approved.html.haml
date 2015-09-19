@@ -1,0 +1,4 @@
+%p
+	- workshop_link = link_to (_!@workshop.title), @host + view_workshop_url(@conference.slug, @workshop.id).html_safe
+	=_'email.workshop.paragraph.request_approved',"You have been added as a facilitator of #{workshop_link}.", :vars => {:workshop_title => workshop_link}
+

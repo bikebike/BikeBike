@@ -13,13 +13,17 @@ BikeBike::Application.routes.draw do
     post '/conferences/:slug/workshops/:workshop_id/toggle-interest' => 'conferences#toggle_workshop_interest', :as => :toggle_workshop_interest
     match '/conferences/:slug/workshops/:workshop_id/edit' => 'conferences#edit_workshop', :as => :edit_workshop, via: [:get, :post]
     match '/conferences/:slug/workshops/:workshop_id/delete' => 'conferences#delete_workshop', :as => :delete_workshop, via: [:get, :post]
+    get '/conferences/:slug/workshops/:workshop_id/facilitate' => 'conferences#facilitate_workshop', :as => :facilitate_workshop
+    post '/conferences/:slug/workshops/:workshop_id/facilitate_request' => 'conferences#facilitate_request', :as => :facilitate_workshop_request
+    get '/conferences/:slug/workshops/:workshop_id/facilitate_request/:user_id/:approve_or_deny' => 'conferences#approve_facilitate_request', :as => :approve_facilitate_workshop_request
+    get '/conferences/:slug/workshops/:workshop_id/facilitate/sent' => 'conferences#sent_facilitate_request', :as => :sent_facilitate_workshop
+    post '/conferences/:slug/workshops/:workshop_id/add_facilitator' => 'conferences#add_workshop_facilitator', :as => :workshop_add_facilitator
     get '/conferences/:slug/edit' => 'conferences#edit', :as => :edit_conference
     post '/conferences/:slug/save' => 'conferences#save', :as => :save_conference
 
     get '/robots.txt' => 'application#robots', :as => :robots_txt
     get '/humans.txt' => 'application#humans', :as => :humans_txt
-    # get 'resources' => 'pages#resources'
-    # 
+
     get '/confirm/:token' => 'application#confirm', :as => :confirm
     match '/doconfirm' => 'application#do_confirm', :as => :do_confirm, via: [:get, :post]
     #post '/doconfirm' => 'application#do_confirm', :as => :do_confirm

@@ -15,8 +15,11 @@ class Workshop < ActiveRecord::Base
     end
 
     def role(user)
+        return nil unless user
         workshop_facilitators.each do |u|
-            return u.role.to_sym if u.user_id == user.id
+            if u.user_id == user.id
+                return conference.registered?(user) ? u.role.to_sym : :unregistered
+            end
         end
         return nil
     end
@@ -25,12 +28,38 @@ class Workshop < ActiveRecord::Base
         !!role(user)
     end
 
+    def active_facilitators
+        users = []
+        workshop_facilitators.each do |u|
+            users << User.find(u.user_id) if u.role.to_sym != :request
+        end
+        return users
+    end
+
+    def active_facilitator?(user)
+        facilitator?(user) && !requested_collaborator?(user)
+    end
+
+    def public_facilitator?(user)
+        return false if !active_facilitator?(user)
+        return true if creator?(user)
+        conference.registered?(user)
+    end
+
     def creator?(user)
         role(user) == :creator
     end
 
+    def collaborator?(user)
+        role(user) == :collaborator
+    end
+
+    def requested_collaborator?(user)
+        role(user) == :requested
+    end
+
     def can_edit?(user)
-        creator?(user) || conference.host?(user)
+        creator?(user) || collaborator?(user) || conference.host?(user)
     end
 
     def can_delete?(user)
@@ -38,16 +67,20 @@ class Workshop < ActiveRecord::Base
     end
 
     def can_show_interest?(user)
-        !facilitator?(user)
+        !active_facilitator?(user)
     end
 
     def interested?(user)
-        user.present? && !!WorkshopInterest.find_by(workshop_id: id, user_id: user.id)
+        user.present? && !active_facilitator?(user) && WorkshopInterest.find_by(workshop_id: id, user_id: user.id)
     end
 
     def interested_count
-        workshops = WorkshopInterest.where(:workshop_id => id)
-        workshops ? workshops.size : 0
+        collaborators = []
+        workshop_facilitators.each do |f|
+            collaborators << f.user_id unless f.role.to_sym == :requested
+        end
+        interested = WorkshopInterest.where("workshop_id=#{id} AND user_id NOT IN (#{collaborators.join ','})")
+        interested ? interested.size : 0
     end
 
     def can_translate?(user)
