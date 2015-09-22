@@ -32,11 +32,11 @@ es:
     - viernes
     - sábado
     formats:
-      default: "%d/%m/%Y"
-      long: "%d de %B de %Y"
-      short: "%d de %b"
-      span_same_month_date_2: "%e, %Y"
-      span_same_month_date_1: "%B %e"
+      default: '%d/%m/%Y'
+      long: '%d de %B de %Y'
+      short: '%d de %b'
+      span_same_month_date_2: '%e, %Y'
+      span_same_month_date_1: '%B %e'
     month_names:
     - 
     - enero
@@ -55,7 +55,7 @@ es:
     - :day
     - :month
     - :year
-    date_span: "%{date_1} – %{date_2}"
+    date_span: '%{date_1} – %{date_2}'
   datetime:
     distance_in_words:
       about_x_hours:
@@ -82,16 +82,16 @@ es:
         other: más de %{count} años
       x_days:
         one: 1 día
-        other: "%{count} días"
+        other: '%{count} días'
       x_minutes:
         one: 1 minuto
-        other: "%{count} minutos"
+        other: '%{count} minutos'
       x_months:
         one: 1 mes
-        other: "%{count} meses"
+        other: '%{count} meses'
       x_seconds:
         one: 1 segundo
-        other: "%{count} segundos"
+        other: '%{count} segundos'
     prompts:
       day: Día
       hour: Hora
@@ -100,7 +100,7 @@ es:
       second: Segundos
       year: Año
   errors:
-    format: "%{attribute} %{message}"
+    format: '%{attribute} %{message}'
     messages:
       accepted: debe ser aceptado
       blank: no puede estar en blanco
@@ -143,22 +143,22 @@ es:
   number:
     currency:
       format:
-        delimiter: "."
-        format: "%n %u"
+        delimiter: .
+        format: '%n %u'
         precision: 2
-        separator: ","
+        separator: ','
         significant: false
         strip_insignificant_zeros: false
-        unit: "€"
+        unit: €
     format:
-      delimiter: "."
+      delimiter: .
       precision: 3
-      separator: ","
+      separator: ','
       significant: false
       strip_insignificant_zeros: false
     human:
       decimal_units:
-        format: "%n %u"
+        format: '%n %u'
         units:
           billion: mil millones
           million: millón
@@ -172,7 +172,7 @@ es:
         significant: true
         strip_insignificant_zeros: true
       storage_units:
-        format: "%n %u"
+        format: '%n %u'
         units:
           byte:
             one: Byte
@@ -189,19 +189,19 @@ es:
         delimiter: ''
   support:
     array:
-      last_word_connector: ", y "
-      two_words_connector: " y "
-      words_connector: ", "
+      last_word_connector: ', y '
+      two_words_connector: ' y '
+      words_connector: ', '
   time:
     am: am
     formats:
-      default: "%A, %d de %B de %Y %H:%M:%S %z"
-      long: "%d de %B de %Y %H:%M"
-      short: "%d de %b %H:%M"
+      default: '%A, %d de %B de %Y %H:%M:%S %z'
+      long: '%d de %B de %Y %H:%M'
+      short: '%d de %b %H:%M'
     pm: pm
   languages:
     af: afrikáans
-    ar: "árabe"
+    ar: árabe
     az: azerí
     bg: búlgaro
     bn: bengalí
@@ -698,14 +698,14 @@ es:
     conference_registration:
       headings:
         Registration_Info: Registro
-        arrival_and_departure: "¿Que día llegas a Guadalajara?"
-        allergies: "¿Eres alergico a algo?"
-        languages: "¿Hablas?"
-        food: "¿Que comes?"
+        arrival_and_departure: ¿Que día llegas a Guadalajara?
+        allergies: ¿Eres alergico a algo?
+        languages: ¿Hablas?
+        food: ¿Que comes?
         Enter_Your_Email: Correo electrónico
         location: Ciudad y pais 
         name: Nombre
-        Allergies: "¿Eres alergico a algo?"
+        Allergies: ¿Eres alergico a algo?
         Workshops: Actividades
         Your_Workshops: Actividades
         Policy_Agreement: Acuerdo del Espacio Mas Seguro
@@ -713,13 +713,13 @@ es:
         Stats: Estadísticas
         Payment: Pago
         Your_Registration: Tu registro
-        Youre_Done: "¡Estás listx!"
+        Youre_Done: ¡Estás listx!
         arrival: Llegada
-        bike: "¿Necesitas una bici?"
+        bike: ¿Necesitas una bici?
         departure: Salida
         email_confirm: Confirmar correo electrónico
-        housing: "¿Necesitas hospedaje?"
-        other: "¿Hay algo más que quisieras decirnos?"
+        housing: ¿Necesitas hospedaje?
+        other: ¿Hay algo más que quisieras decirnos?
         payment: Cargos pagados
         payment_confirm: Por favor confirma tu pago
         city: Ciudad
@@ -748,12 +748,12 @@ es:
           al ser confirmada podrás completar el registro, agregar talleres y pagar
           el donativo de registro. Si ya te registraste puedes re-confirmar tu dirección
           de e-mail para modificar los detalles de tu registro.
-        currency: "(cantidades en dólares americanos $USD)"
-        done: "¡Gracias por registrarte para Bike!Bike!"
-        email_confirm: "¡Ve a tu bandeja de entrada! Deberías ver un e-mail por parte
+        currency: (cantidades en dólares americanos $USD)
+        done: ¡Gracias por registrarte para Bike!Bike!
+        email_confirm: ¡Ve a tu bandeja de entrada! Deberías ver un e-mail por parte
           de Bike!Bike! en unos momentos. Contendrá un enlace sobre el cual debes
           hacer click. Revisa tu bandeja de correo no deseado si no lo ves. Si tienes
-          algún problema, por favor envía un e-mail a admin@bikebike.org"
+          algún problema, por favor envía un e-mail a admin@bikebike.org
         participants_emailed: Tu correo ha sido enviado a todxs lxs participantes
           de %{conference_title}.
         payment_confirm: Estás por confirmar tu pago de %{amount} para el registro.
@@ -783,7 +783,7 @@ es:
         Total_Registrations: Registros totales
       actions:
         View_Workshops: Ver Talleres
-      none: "(ninguno)"
+      none: (ninguno)
       notes:
         Test_Email_Sent: Un email fue enviado a %{email_address}
     about_bikebike:
@@ -819,14 +819,14 @@ es:
           sobre cómo puedes obtener hospedaje por tu cuenta y otros lugares recomendados
           para visitar, también debe ser proveída por el anfitrión en la página de
           la conferencia o en un documento físico al llegar a la conferencia. '
-        Volunteer: "¡Sí, por favor! "
+        Volunteer: '¡Sí, por favor! '
       headings:
-        Amenities: "¿Dónde puedo dormir? ¿Qué puedo comer? ¿Cómo puedo moverme?"
-        Types_of_Workshops: "¿Qué tipo de talleres habrá?"
-        Volunteer: "¿Puedo ser voluntario?"
-        What_is_BikeBike: "¿Qué es Bike!Bike!?"
-        Who_is_Invited: "¿Quién es invitado?"
-        bicycle_project: "¿Qué es un proyecto ciclista comunitario?"
+        Amenities: ¿Dónde puedo dormir? ¿Qué puedo comer? ¿Cómo puedo moverme?
+        Types_of_Workshops: ¿Qué tipo de talleres habrá?
+        Volunteer: ¿Puedo ser voluntario?
+        What_is_BikeBike: ¿Qué es Bike!Bike!?
+        Who_is_Invited: ¿Quién es invitado?
+        bicycle_project: ¿Qué es un proyecto ciclista comunitario?
       term:
         education: Los talleres tienen un enfoque en la educación, en enseñar a otros
           cómo arreglar bicicletas
@@ -839,17 +839,17 @@ es:
         volunteer_run: Los talleres son operados por voluntarios
     workshops:
       paragraphs:
-        Proposed_Workshops: "¿Te gustaría facilitar tu propio taller? Simplemente
-          regístrate y visita la página de Talleres. Si ya te registraste puedes acceder
-          a la página reiniciando el proceso de registro."
+        Proposed_Workshops: ¿Te gustaría facilitar tu propio taller? Simplemente regístrate
+          y visita la página de Talleres. Si ya te registraste puedes acceder a la
+          página reiniciando el proceso de registro.
         info: 'Título de la actividad: Que necesitas? Tipo de espacio? Tema? Quién
           es responsable? Descripción? Tiempo?'
-        Workshops: "¿Tienes alguna habilidad emocionante que quieres compartir con
+        Workshops: ¿Tienes alguna habilidad emocionante que quieres compartir con
           nosotros? ¿Quieres charlar sobre crear espacios comunitarios seguros? ¿Quieres
           asegurarte de que hagamos un buen paseo el fin de semana? ¡Propón un taller!
           No te preocupes si no eres unx expertx, queremos escuchar acerca de las
           experiencias de todxs dentro de los diferentes talleres comunitarios de
-          los que venimos con sus diferentes configuraciones."
+          los que venimos con sus diferentes configuraciones.
         new_workshop: 'Anteriormente los talleres se han podido integrar en una serie
           de categorías amplias: organización/estructura (cómo iniciar un taller comunitario,
           cómo registrar una asociación sin fines de lucro, toma de decisiones mediante
@@ -861,10 +861,18 @@ es:
           ver!'
         notes: Las notas se comparten solo con lxs organizadorxs de la conferencia
           y con lxs facilitadorxs de los talleres.
-        space: "¿Qué tipo de espacio necesitas para tu taller?"
-        theme: "¿Cuáles de estos temas describen mejor tu taller? Esto ayudará a los
+        space: ¿Qué tipo de espacio necesitas para tu taller?
+        theme: ¿Cuáles de estos temas describen mejor tu taller? Esto ayudará a los
           anfitriones a evitar conflictos de horario. Seleciona 'otro' si ninguna
-          de las opciones se relaciona de ninguna forma."
+          de las opciones se relaciona de ninguna forma.
+        facilitate_request: Por favor dile a lxs facilitadorxs actuales quién eres,
+          porqué quieres ayudar en este taller y cómo crees que ayudarás a hacer un
+          mejor taller. Todxs lxs facilitadorxs actuales recibirán un email y pueden
+          hacerte más preguntas antes de aprovar o denegar tu petición. Por favor
+          sabe que este proceso revelará tu direción de email a lxs facilitadorxs.
+        facilitate_request_sent: Tu petición ha sido enviada. Recibirás un email cuando
+          tu solicutud sea aprobada o denegada o si lxs facilitadorxs tienen alguna
+          pregunta.
       headings:
         Proposed_Workshops: Talleres propuestos
         facilitators: facilitadores
@@ -876,10 +884,11 @@ es:
         notes: Notas
         space: Espacio
         theme: Tema
+        facilitate: Solicita ser facilitador(a) de %{workshop_title}
       info:
         interested_count:
           one: Una persona está interesadx en este taller.
-          other: "%{count} personas están interesadxs en este taller."
+          other: '%{count} personas están interesadxs en este taller.'
           zero: Nadie está interesadx en este taller todavía.
         you_are_interested_count:
           other: Tú y otras %{count} personas están interesadxs en este taller.
@@ -888,8 +897,8 @@ es:
     policy:
       headings:
         The_Agreement: Acuerdo de Espacios Más Seguros
-        How: "¿Cómo se hace cumplir esta política?"
-        Why: "¿Porqué tener un Acuerdo de Espacios Más Seguros?"
+        How: ¿Cómo se hace cumplir esta política?
+        Why: ¿Porqué tener un Acuerdo de Espacios Más Seguros?
       paragraphs:
         How: La ciudad anfitriona tiene la responsabilidad de mediar en cualquier
           situación concerniente a Espacios Más Seguros. Ellas decidirán qué amerita
@@ -937,6 +946,7 @@ es:
         notes: Notas
         other: Discapacidades, preferencias de hospedaje, etc.
         subject: Tema
+        message: 'Tu mensaje:'
     actions:
       generic:
         agree: Estoy en acuerdo.
@@ -954,9 +964,9 @@ es:
         send: Enviar
         test: Prueba
         skip: Omitir
-        remove_interest: "-1"
-        show_interest: "+1"
-        add: "+"
+        remove_interest: '-1'
+        show_interest: '+1'
+        add: +
   links:
     footer:
       help_text:
@@ -983,6 +993,7 @@ es:
       View_Workshop: Ver talleres
       Workshops: Talleres
       Edit: Editar conferencia
+      Facilitate_Workshop: Solicitud para ser facilitador(a) de taller.
     policy:
       Safer_Spaces_Policy: Acuerdo del Espacio Mas Seguro
     '403':
@@ -996,6 +1007,12 @@ es:
       Delete: Eliminar
       Edit: Editar
       Translate: Traducir al %{language}
+      Approve: Aprobar
+      Deny: Denegar
+      Facilitate: Solicita ser facilitador(a)
+      Remove: Eliminar
+      View: Ve este taller
+      View_All: Ve todos los talleres
     conference:
       Translate: Editar versión en %{language}
   error:
@@ -1005,7 +1022,7 @@ es:
   translate:
     content:
       translate_now: Translar ahora
-      can_you_help: "¿Se puede traducir del %%{language_a} al %%{language_b}?"
+      can_you_help: ¿Se puede traducir del %%{language_a} al %%{language_b}?
       outdated_translation: El contenido que ha sido superado
       translation_out_of_date: Contenido traducido en esta página puede no ser exacta
       un_translated: Contenido sin traducir
@@ -1029,10 +1046,10 @@ es:
         other: plural
         two: dos
       Incomplete_Locales: Incomplete Languages
-      Locale_Translations: "%{language} Traducciones"
+      Locale_Translations: '%{language} Traducciones'
       context:
-        other: "%{context} (× %{count})"
-        one: "%{context}"
+        other: '%{context} (× %{count})'
+        one: '%{context}'
       context_title: 'Contexto:'
       default_value: Predeterminado
       no_value: Indefinido
@@ -1052,12 +1069,12 @@ es:
       variables: Variables
     site:
       go_to_locale: Ver el sitio %%{language} ahora
-      locale_is_available: "%%{site_name} está disponible en %%{language}"
-      locale_needs_help: "¿Puedes ayudar a traducir el sitio al %%{language}?"
+      locale_is_available: '%%{site_name} está disponible en %%{language}'
+      locale_needs_help: ¿Puedes ayudar a traducir el sitio al %%{language}?
       locale_not_available: Lo sentimos, %%{site_name} no está disponible en %%{language}.
     volunteer:
       become_a_volunteer: Conviértete en un traductor voluntario
-      volunteer: "¿Puedes ayudar a traducir esto?"
+      volunteer: ¿Puedes ayudar a traducir esto?
   menu:
     submenu:
       registration:
@@ -1074,14 +1091,19 @@ es:
       link:
         please_confirm: Confirmar ahora
       paragraph:
-        please_confirm: "¡Hola! Para ingresar al registro y otras funciones de Bike!Bike!
-          confirma tu dirección de e-mail por favor."
+        please_confirm: ¡Hola! Para ingresar al registro y otras funciones de Bike!Bike!
+          confirma tu dirección de e-mail por favor.
     subject:
       confirm_email: E-mail de confirmación
-      registration_confirmed: "¡Gracias por registrarte para %%{conference_title}!"
+      registration_confirmed: ¡Gracias por registrarte para %%{conference_title}!
+      workshop_facilitator_request: Solicitud para facilitar %{workshop_title} por
+        parte de %{requester_name}
+      workshop_request_approved: Has sido agregadx como facilitador(a) a %{workshop_title}
+      workshop_request_denied: Tu petición para facilitar %{workshop_title} ha sido
+        denegada.
     general:
       paragraph:
-        see_you: "¡Nos vemos en %{conference_location}!"
+        see_you: ¡Nos vemos en %{conference_location}!
         thank_you: Gracias %{name},
     registration:
       paragraph:
@@ -1090,10 +1112,24 @@ es:
           momento reiniciando el proceso de registro. Si aún tienes que pagar o agregar
           tus talleres y quieres hacerlo te pedimos que lo hagas lo más pronto posible
           para ayudarnos a prepararnos para tu llegada.
+    workshop:
+      paragraph:
+        request_approved: Has sido agregado como facilitador(a) para %{workshop_title}
+        request_denied: Tu petición para ser facilitador(a) de %{workshop_title} ha
+          sido denegada. Si crees que esto es un error, puedes contactar a lxs facilitadorxs
+          actuales haciendo otra petición para ser facilitador(a).
+        request_instructions: Puedes aprobar o denegar esta petición en la página
+          de tu taller.
+        request_message: '%{user_name} ha solicitado ser facilitador(a) para %{workshop_title}'
+        request_reply_instructions: También puedes responder directamente a este email
+          para hacer preguntas adicionales.
   roles:
     workshops:
       facilitator:
         creator: Creador
+        collaborator: Colaborador
+        requested: Solicitó
+        unregistered: No registrado
   workshop:
     options:
       needs:
