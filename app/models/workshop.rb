@@ -83,8 +83,8 @@ class Workshop < ActiveRecord::Base
         interested ? interested.size : 0
     end
 
-    def can_translate?(user)
-        user.can_translate? || can_edit?(user)
+    def can_translate?(user, lang)
+        (user.can_translate? && lang.to_sym != locale.to_sym) || can_edit?(user)
     end
 
     private

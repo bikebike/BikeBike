@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150914230507) do
+ActiveRecord::Schema.define(version: 20150920233755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -157,6 +157,17 @@ ActiveRecord::Schema.define(version: 20150914230507) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "event_locations", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "conference_id"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "address"
+    t.string   "amenities"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
   create_table "event_types", force: :cascade do |t|
     t.string   "slug"
     t.text     "info"
@@ -175,6 +186,7 @@ ActiveRecord::Schema.define(version: 20150914230507) do
     t.datetime "end_time"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "event_location_id"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -387,6 +399,7 @@ ActiveRecord::Schema.define(version: 20150914230507) do
     t.text     "host_info"
     t.text     "notes"
     t.string   "locale"
+    t.integer  "event_location_id"
   end
 
 end

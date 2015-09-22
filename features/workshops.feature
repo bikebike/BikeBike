@@ -113,22 +113,22 @@ Feature: Workshop Page
 		And Ricardo is registered for the conference
 		And I view the workshop
 		
-		Then I should see Joey collaborator
-		And I should see Katie requested
-		And I should see Jim requested
+		Then I should see Joey Collaborator
+		And I should see Katie Requested
+		And I should see Jim Requested
 
 		Then I approve the facilitator request from Jim
-		And I should see Jim collaborator
-		And I should see Katie requested
+		And I should see Jim Collaborator
+		And I should see Katie Requested
 
 		Then I deny the facilitator request from Katie
-		And I should see Jim collaborator
+		And I should see Jim Collaborator
 		And I should not see Katie
 		
 		And I fill in email with ricky@bikebike.org
 		And I click the + button
-		Then I should see Ricardo collaborator
+		Then I should see Ricardo Collaborator
 
 		And I fill in email with nicky@bikebike.org
 		And I click the + button
-		Then I should see nicky@bikebike.org unregistered
+		Then I should see nicky@bikebike.org Unregistered

@@ -12,10 +12,10 @@
 					= form_tag toggle_workshop_interest_path(@this_conference.slug, @workshop.id) do
 						= button_tag (@workshop.interested?(current_user) ? :remove_interest : :show_interest), :value => :toggle_interest, :class => (@workshop.interested?(current_user) ? 'delete' : 'add')
 			=markdown _!(@workshop.info) || ''
-			- if @workshop.can_translate?(current_user)
+			- if current_user.can_translate?
 				.actions
 					- I18n.backend.enabled_locales.each do |locale|
-						= (link_to (_'actions.workshops.Translate', "Translate into #{language_name(locale)}", :vars => {:language => language_name(locale)}), edit_workshop_url(@this_conference.slug, @workshop.id, url_params(locale)), :class => 'button translate') if locale.to_sym != I18n.locale.to_sym
+						= (link_to (_'actions.workshops.Translate', "Translate into #{language_name(locale)}", :vars => {:language => language_name(locale)}), edit_workshop_url(@this_conference.slug, @workshop.id, url_params(locale)), :class => 'button translate') if @workshop.can_translate?(current_user, locale)
 		= columns(medium: 6) do
 			%h3=_'articles.workshops.headings.facilitators'
 			.facilitators

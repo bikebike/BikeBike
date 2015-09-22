@@ -832,7 +832,7 @@ class ConferencesController < ApplicationController
 		@workshop = Workshop.find_by_id_and_conference_id(params[:workshop_id], @this_conference.id)
 		do_404 unless @workshop
 		@can_edit = @workshop.can_edit?(current_user)
-		do_403 unless @can_edit || @workshop.can_translate?(current_user)
+		do_403 unless @can_edit || @workshop.can_translate?(current_user, I18n.locale)
 		@title = @workshop.title
 		@info = @workshop.info
 		@needs = JSON.parse(@workshop.needs || '[]').map &:to_sym
@@ -888,7 +888,7 @@ class ConferencesController < ApplicationController
 		end
 
 		can_edit = workshop.can_edit?(current_user)
-		do_403 unless can_edit || workshop.can_translate?(current_user)
+		do_403 unless can_edit || workshop.can_translate?(current_user, I18n.locale)
 
 		workshop.title     = params[:title]
 		workshop.info      = params[:info]
