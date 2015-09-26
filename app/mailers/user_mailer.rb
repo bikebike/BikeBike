@@ -67,7 +67,7 @@ class UserMailer < ActionMailer::Base
 	def broadcast(host, subject, content, user, conference)
 		@host = host
 		@content = content
-		@banner = (@host || 'http://localhost/') + (conference ? (conference.poster.preview.url || '') : image_url('logo.png'))
+		#@banner = (@host || 'http://localhost/') + (conference ? (conference.poster.preview.url || '') : image_url('logo.png'))
 		if user && user.email
 			mail to: user.email, subject: "[#{conference ? conference.title : 'Bike!Bike!'}] #{subject}"
 		end

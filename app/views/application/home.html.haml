@@ -8,7 +8,7 @@
 		%p=_'articles.workshops.paragraphs.Proposed_Workshops', "Would you like to facilitate your own workshop? Simply register and visit the workshops page. If you have already registered you can access the page by restarting the registration process."
 		- if @conference.workshops
 			%ul.workshop-list
-				- @conference.workshops.each do |w|
+				- @conference.workshops.sort_by{|w| w.title}.each do |w|
 					%li
 						%h4=w.title
 						.workshop-interest
