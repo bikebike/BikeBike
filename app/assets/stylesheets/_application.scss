@@ -2118,7 +2118,9 @@ html[data-lingua-franca-example="html"] {
 			}
 
 			&.not-interested {
-				opacity: 0.5;
+				.title {
+					opacity: 0.5;
+				}
 			}
 
 			.info {
