@@ -3,26 +3,27 @@
 	- if @this_conference.host?(current_user)
 		= row do
 			= columns(medium: 12) do
-				.actions.left
-					= link_to (_'actions.schedule.edit','Edit Schedule'), edit_schedule_path(@this_conference.slug), class: [:button]
+				- if @locations.present? && @events.present?
+					.actions.left
+						= link_to (_'actions.schedule.edit','Edit Schedule'), edit_schedule_path(@this_conference.slug), class: [:button]
 		= row do
 			= columns(medium: 6) do
 				%h2=_'articles.schedule.headings.Events'
 				- if @events
-					%ul
+					%ul.events
 						- @events.each do |event|
 							%li
 								%h3=_!event.title
 								= link_to (_'actions.events.edit','Edit'), edit_event_path(@this_conference.slug, event.id), class: [:button, :modify]
 				.actions.left
-					= link_to (_'actions.events.create','Add Event'), add_event_path(@this_conference.slug), class: [:button, :modify]
+					= link_to (_'actions.events.create','Add Event'), add_event_path(@this_conference.slug), class: [:button]
 			= columns(medium: 6) do
 				%h2=_'articles.schedule.headings.Locations'
 				- if @locations
-					%ul
+					%ul.locations
 						- @locations.each do |location|
 							%li
 								%h3=_!location.title
 								= link_to (_'actions.locations.edit','Edit'), edit_location_path(@this_conference.slug, location.id), class: [:button, :modify]
 				.actions.left
-					= link_to (_'actions.schedule.edit','Add Location'), add_location_path(@this_conference.slug), class: [:button, :modify]
+					= link_to (_'actions.schedule.edit','Add Location'), add_location_path(@this_conference.slug), class: [:button]

@@ -2060,6 +2060,32 @@ html[data-lingua-franca-example="html"] {
 	}
 }
 
+.conferences-schedule {
+	.actions {
+		margin: 2em;
+	}
+	
+	ul.events, ul.locations {
+		list-style: none;
+
+		.button {
+			float: left;
+			font-size: 1em;
+			margin-bottom: 0.5em;
+			margin-right: 0.5em;
+		}
+
+		h3 {
+			display: inline-block;
+			margin: 0.25em 0 0;
+		}
+
+		li {
+			clear: both;
+		}
+	}
+}
+
 .programme {
 
 	.schedule {
