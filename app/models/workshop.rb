@@ -87,6 +87,19 @@ class Workshop < ActiveRecord::Base
         (user.can_translate? && lang.to_sym != locale.to_sym) || can_edit?(user)
     end
 
+    def conference_day
+        return nil unless start_time.present? && end_time.present?
+
+        start_day = conference.start_date.change(hour: 0, minute: 0, second: 0)
+        w_start_day = start_time.change(hour: 0, minute: 0, second: 0)
+        return (((w_start_day - start_day) / 86400) + 1).to_i
+    end
+
+    def duration
+        return nil unless start_time.present? && end_time.present?
+        ((end_time - start_time) / 60).to_i
+    end
+
     private
         def make_slug
             if !self.slug

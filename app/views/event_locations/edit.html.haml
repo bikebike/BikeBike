@@ -1,0 +1,23 @@
+= render 'conferences/page_header', :page_key => (@location ? 'Edit_Location' : 'New_Location')
+%article
+	= form_tag save_location_path(@this_conference.slug), class: 'composition' do
+		= row do
+			= columns(medium: 12) do
+				= (hidden_field_tag :location_id, @location.id) if @location
+				.text-field.input-field.big
+					= label_tag :title
+					= text_field_tag :title, @location ? @location.title : nil, :required => true
+		= row do
+			= columns(medium: 6) do
+				.text-area-field.input-field
+					= label_tag :address
+					= text_area_tag :address, @location ? @location.address : nil, :required => true
+			= columns(medium: 6) do
+				%h3=_'articles.locations.headings.amenities'
+				- [:sound, :projector, :tools].each do |need|
+					.single-check-box-field.input-field
+						= label_tag "needs_#{need}" do
+							= check_box_tag "needs[#{need}]", 1, @location && @amenities.include?(need)
+							= _"workshop.options.needs.#{need}"
+				.actions
+					= button_tag :save, :value => :save

@@ -4,6 +4,8 @@ module ActiveRecord
 end
 
 class ApplicationController < LinguaFrancaApplicationController
+	include ScheduleHelper
+
 	# Prevent CSRF attacks by raising an exception.
 	# For APIs, you may want to use :null_session instead.
 	protect_from_forgery with: :exception, :except => [:do_confirm]
@@ -33,6 +35,21 @@ class ApplicationController < LinguaFrancaApplicationController
 
 		# call the base method to detect the language
 		super
+	end
+
+	def home
+		@workshops = Workshop.where(:conference_id => @conference.id)
+
+		if @conference.workshop_schedule_published
+			@events = Event.where(:conference_id => @conference.id)
+			schedule = get_schedule_data
+			@schedule = schedule[:schedule]
+			@locations = Hash.new
+			EventLocation.where(:conference_id => @conference.id).each do |l|
+				@locations[l.id.to_s] = l
+			end
+			@day_parts = @conference.day_parts ? JSON.parse(@conference.day_parts) : {:morning => 0, :afternoon => 13, :evening => 18}
+		end
 	end
 
 	def policy

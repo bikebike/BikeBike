@@ -15,6 +15,7 @@ date.formats.span_same_month_date_1:
   - View-stats--
   - Broadcast-message--
   - Edit-a-conference--
+  - View-published-schedule--
   - Create-workshop--
   - Be-the-first-to-like-a-workshop--
   - Like-a-workshop--
@@ -33,6 +34,7 @@ date.month_names:
   - View-stats--
   - Broadcast-message--
   - Edit-a-conference--
+  - View-published-schedule--
   - Create-workshop--
   - Be-the-first-to-like-a-workshop--
   - Like-a-workshop--
@@ -48,6 +50,7 @@ date.formats.span_same_month_date_2:
   - View-stats--
   - Broadcast-message--
   - Edit-a-conference--
+  - View-published-schedule--
   - Create-workshop--
   - Be-the-first-to-like-a-workshop--
   - Like-a-workshop--
@@ -66,6 +69,7 @@ date.date_span:
   - View-stats--
   - Broadcast-message--
   - Edit-a-conference--
+  - View-published-schedule--
   - Create-workshop--
   - Be-the-first-to-like-a-workshop--
   - Like-a-workshop--
@@ -149,6 +153,7 @@ page_descriptions.home:
   - Edit-a-conference--confirm.test
   - Edit-a-conference--
   - Edit-a-conference--conferences.MyBikeBike.edit
+  - View-published-schedule--
   - Read-the-about-page--about
   - Read-the-policy-page--policy
   - See-a-404-page--error_404
@@ -231,6 +236,7 @@ page_titles.About_BikeBike:
   - Edit-a-conference--confirm.test
   - Edit-a-conference--
   - Edit-a-conference--conferences.MyBikeBike.edit
+  - View-published-schedule--
   - Read-the-about-page--about
   - Read-the-policy-page--policy
   - See-a-404-page--error_404
@@ -313,6 +319,7 @@ page_titles.Safe_Space_Policy:
   - Edit-a-conference--confirm.test
   - Edit-a-conference--
   - Edit-a-conference--conferences.MyBikeBike.edit
+  - View-published-schedule--
   - Read-the-about-page--about
   - Read-the-policy-page--policy
   - See-a-404-page--error_404
@@ -407,6 +414,7 @@ links.footer.text.File_an_Issue:
   - Edit-a-conference--confirm.test
   - Edit-a-conference--
   - Edit-a-conference--conferences.MyBikeBike.edit
+  - View-published-schedule--
   - Read-the-about-page--about
   - Read-the-policy-page--policy
   - See-a-404-page--error_404
@@ -489,6 +497,7 @@ links.footer.text.Help_contribute:
   - Edit-a-conference--confirm.test
   - Edit-a-conference--
   - Edit-a-conference--conferences.MyBikeBike.edit
+  - View-published-schedule--
   - Read-the-about-page--about
   - Read-the-policy-page--policy
   - See-a-404-page--error_404
@@ -572,6 +581,7 @@ links.footer.help_text.facebook:
   - Edit-a-conference--confirm.test
   - Edit-a-conference--
   - Edit-a-conference--conferences.MyBikeBike.edit
+  - View-published-schedule--
   - Read-the-about-page--about
   - Read-the-policy-page--policy
   - See-a-404-page--error_404
@@ -655,6 +665,7 @@ links.footer.help_text.select_language:
   - Edit-a-conference--confirm.test
   - Edit-a-conference--
   - Edit-a-conference--conferences.MyBikeBike.edit
+  - View-published-schedule--
   - Read-the-about-page--about
   - Read-the-policy-page--policy
   - See-a-404-page--error_404
@@ -765,6 +776,8 @@ languages.en:
   - Edit-a-conference--
   - Edit-a-conference--conferences.MyBikeBike.edit
   - Edit-a-conference--conferences.MyBikeBike.edit
+  - View-published-schedule--
+  - View-published-schedule--
   - Read-the-about-page--about
   - Read-the-about-page--about
   - Read-the-policy-page--policy
@@ -914,6 +927,8 @@ languages.es:
   - Edit-a-conference--conferences.MyBikeBike.edit
   - Edit-a-conference--conferences.MyBikeBike.edit
   - Edit-a-conference--conferences.MyBikeBike.edit
+  - View-published-schedule--
+  - View-published-schedule--
   - Read-the-about-page--about
   - Read-the-about-page--about
   - Read-the-policy-page--policy
@@ -1063,6 +1078,8 @@ languages.fr:
   - Edit-a-conference--conferences.MyBikeBike.edit
   - Edit-a-conference--conferences.MyBikeBike.edit
   - Edit-a-conference--conferences.MyBikeBike.edit
+  - View-published-schedule--
+  - View-published-schedule--
   - Read-the-about-page--about
   - Read-the-about-page--about
   - Read-the-policy-page--policy
@@ -1186,6 +1203,7 @@ links.footer.help_text.contributors:
   - Edit-a-conference--confirm.test
   - Edit-a-conference--
   - Edit-a-conference--conferences.MyBikeBike.edit
+  - View-published-schedule--
   - Read-the-about-page--about
   - Read-the-policy-page--policy
   - See-a-404-page--error_404
@@ -1243,6 +1261,7 @@ conference.actions.Register:
   - Broadcast-message--
   - Edit-a-conference--confirm.test
   - Edit-a-conference--
+  - View-published-schedule--
   - Create-workshop--confirm.test
   - Create-workshop--
   - Be-the-first-to-like-a-workshop--confirm.test
@@ -1969,9 +1988,13 @@ time.formats.long:
 time.am:
   pages:
   - "/conferences/:slug/register"
+  - "/"
   examples:
   - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
   - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
+  - View-published-schedule--
+  - View-published-schedule--
+  - View-published-schedule--
 articles.conference_registration.headings.departure:
   pages:
   - "/conferences/:slug/register"
@@ -2098,6 +2121,18 @@ articles.conference_registration.headings.Allergies:
   - "/conferences/:slug/stats"
   examples:
   - View-stats--conferences.MyBikeBike.stats
+menu.submenu.registration.Schedule:
+  pages:
+  - "/conferences/:slug/stats"
+  - "/conferences/:slug/broadcast"
+  - "/conferences/:slug/edit"
+  examples:
+  - View-stats--conferences.MyBikeBike.stats
+  - Broadcast-message--conferences.MyBikeBike.broadcast
+  - Broadcast-message--conferences.MyBikeBike.broadcast-1
+  - Broadcast-message--conferences.MyBikeBike.broadcast-2
+  - Broadcast-message--conferences.MyBikeBike.broadcast-3
+  - Edit-a-conference--conferences.MyBikeBike.edit
 menu.submenu.registration.Edit:
   pages:
   - "/conferences/:slug/stats"
@@ -2275,6 +2310,108 @@ forms.actions.generic.save:
   - Edit-a-conference--conferences.MyBikeBike.edit
   - Create-workshop--conferences.MyBikeBike.workshops.create
   - Create-workshop--conferences.MyBikeBike.workshops.1.edit
+geography.subregions.US.ID:
+  pages:
+  - "/"
+  examples:
+  - View-published-schedule--
+articles.workshops.headings.Schedule:
+  pages:
+  - "/"
+  examples:
+  - View-published-schedule--
+date.day_names:
+  pages:
+  - "/"
+  examples:
+  - View-published-schedule--
+articles.headings.schedule.day_parts.morning:
+  pages:
+  - "/"
+  examples:
+  - View-published-schedule--
+time.formats.short:
+  pages:
+  - "/"
+  examples:
+  - View-published-schedule--
+  - View-published-schedule--
+  - View-published-schedule--
+  - View-published-schedule--
+  - View-published-schedule--
+  - View-published-schedule--
+  - View-published-schedule--
+  - View-published-schedule--
+  - View-published-schedule--
+articles.workshops.info.interested_count:
+  pages:
+  - "/"
+  - "/conferences/:slug/workshops/:workshop_id"
+  context: 0 people are interested in this workshop
+  vars:
+  - :count
+  examples:
+  - View-published-schedule--
+  - View-published-schedule--
+  - View-published-schedule--
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-2
+  - Create-workshop--conferences.MyBikeBike.workshops.1-3
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-2
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1-2
+  - Request-to-facilitate-a-workshop--conferences.MyBikeBike.workshops.1
+  - Request-to-facilitate-a-workshop--conferences.MyBikeBike.workshops.1-1
+  - Request-to-facilitate-a-workshop--conferences.MyBikeBike.workshops.1-2
+  - Request-to-facilitate-a-workshop--conferences.MyBikeBike.workshops.1-3
+  - Request-to-facilitate-a-workshop--conferences.MyBikeBike.workshops.1-4
+  - Request-to-facilitate-a-workshop--conferences.MyBikeBike.workshops.1-5
+articles.workshops.headings.facilitators:
+  pages:
+  - "/"
+  - "/conferences/:slug/workshops/:workshop_id"
+  examples:
+  - View-published-schedule--
+  - View-published-schedule--
+  - View-published-schedule--
+  - Create-workshop--conferences.MyBikeBike.workshops.1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-1
+  - Create-workshop--conferences.MyBikeBike.workshops.1-2
+  - Create-workshop--conferences.MyBikeBike.workshops.1-3
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-1
+  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-2
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1-1
+  - Like-a-workshop--conferences.MyBikeBike.workshops.1-2
+  - Request-to-facilitate-a-workshop--conferences.MyBikeBike.workshops.1
+  - Request-to-facilitate-a-workshop--conferences.MyBikeBike.workshops.1-1
+  - Request-to-facilitate-a-workshop--conferences.MyBikeBike.workshops.1-2
+  - Request-to-facilitate-a-workshop--conferences.MyBikeBike.workshops.1-3
+  - Request-to-facilitate-a-workshop--conferences.MyBikeBike.workshops.1-4
+  - Request-to-facilitate-a-workshop--conferences.MyBikeBike.workshops.1-5
+articles.headings.schedule.day_parts.afternoon:
+  pages:
+  - "/"
+  examples:
+  - View-published-schedule--
+time.pm:
+  pages:
+  - "/"
+  examples:
+  - View-published-schedule--
+  - View-published-schedule--
+  - View-published-schedule--
+  - View-published-schedule--
+  - View-published-schedule--
+  - View-published-schedule--
+articles.headings.schedule.day_parts.evening:
+  pages:
+  - "/"
+  examples:
+  - View-published-schedule--
 page_titles.about.About_BikeBike:
   pages:
   - "/about"
@@ -2660,47 +2797,6 @@ page_titles.conferences.View_Workshop:
   - Request-to-facilitate-a-workshop--conferences.MyBikeBike.workshops.1-3
   - Request-to-facilitate-a-workshop--conferences.MyBikeBike.workshops.1-4
   - Request-to-facilitate-a-workshop--conferences.MyBikeBike.workshops.1-5
-articles.workshops.info.interested_count:
-  pages:
-  - "/conferences/:slug/workshops/:workshop_id"
-  context: 0 people are interested in this workshop
-  vars:
-  - :count
-  examples:
-  - Create-workshop--conferences.MyBikeBike.workshops.1
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
-  - Create-workshop--conferences.MyBikeBike.workshops.1-2
-  - Create-workshop--conferences.MyBikeBike.workshops.1-3
-  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1
-  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-2
-  - Like-a-workshop--conferences.MyBikeBike.workshops.1
-  - Like-a-workshop--conferences.MyBikeBike.workshops.1-2
-  - Request-to-facilitate-a-workshop--conferences.MyBikeBike.workshops.1
-  - Request-to-facilitate-a-workshop--conferences.MyBikeBike.workshops.1-1
-  - Request-to-facilitate-a-workshop--conferences.MyBikeBike.workshops.1-2
-  - Request-to-facilitate-a-workshop--conferences.MyBikeBike.workshops.1-3
-  - Request-to-facilitate-a-workshop--conferences.MyBikeBike.workshops.1-4
-  - Request-to-facilitate-a-workshop--conferences.MyBikeBike.workshops.1-5
-articles.workshops.headings.facilitators:
-  pages:
-  - "/conferences/:slug/workshops/:workshop_id"
-  examples:
-  - Create-workshop--conferences.MyBikeBike.workshops.1
-  - Create-workshop--conferences.MyBikeBike.workshops.1-1
-  - Create-workshop--conferences.MyBikeBike.workshops.1-2
-  - Create-workshop--conferences.MyBikeBike.workshops.1-3
-  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1
-  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-1
-  - Be-the-first-to-like-a-workshop--conferences.MyBikeBike.workshops.1-2
-  - Like-a-workshop--conferences.MyBikeBike.workshops.1
-  - Like-a-workshop--conferences.MyBikeBike.workshops.1-1
-  - Like-a-workshop--conferences.MyBikeBike.workshops.1-2
-  - Request-to-facilitate-a-workshop--conferences.MyBikeBike.workshops.1
-  - Request-to-facilitate-a-workshop--conferences.MyBikeBike.workshops.1-1
-  - Request-to-facilitate-a-workshop--conferences.MyBikeBike.workshops.1-2
-  - Request-to-facilitate-a-workshop--conferences.MyBikeBike.workshops.1-3
-  - Request-to-facilitate-a-workshop--conferences.MyBikeBike.workshops.1-4
-  - Request-to-facilitate-a-workshop--conferences.MyBikeBike.workshops.1-5
 roles.workshops.facilitator.creator:
   pages:
   - "/conferences/:slug/workshops/:workshop_id"
@@ -2842,7 +2938,7 @@ page_titles.conferences.Facilitate_Workshop:
 articles.workshops.headings.facilitate:
   pages:
   - "/conferences/:slug/workshops/:workshop_id/facilitate"
-  context: Request to Facilitate ‘Suspendisse Potenti’
+  context: Request to Facilitate ‘In Eleifend Quam A Odio’
   vars:
   - :workshop_title
   examples:
@@ -2865,7 +2961,7 @@ forms.labels.generic.message:
 email.subject.workshop_facilitator_request:
   pages:
   - "/conferences/:slug/workshops/:workshop_id/facilitate_request"
-  context: Request to facilitate Suspendisse Potenti from John Doe
+  context: Request to facilitate In Eleifend Quam A Odio from John Doe
   vars:
   - :workshop_title
   - :requester_name
@@ -2963,7 +3059,7 @@ email.workshop.paragraph.request_approved:
   pages:
   - "/conferences/:slug/workshops/:workshop_id/facilitate_request/:user_id/:approve_or_deny"
   - "/conferences/:slug/workshops/:workshop_id/add_facilitator"
-  context: You have been added as a facilitator of <a href="http://127.0.0.1:55795http://127.0.0.1:55795/conferences/MyBikeBike/workshops/1">My
+  context: You have been added as a facilitator of <a href="http://127.0.0.1:57139http://127.0.0.1:57139/conferences/MyBikeBike/workshops/1">My
     Awesome Workshop</a>.
   vars:
   - :workshop_title
@@ -2985,7 +3081,7 @@ email.subject.workshop_request_denied:
 email.workshop.paragraph.request_denied:
   pages:
   - "/conferences/:slug/workshops/:workshop_id/facilitate_request/:user_id/:approve_or_deny"
-  context: Your request to become a facilitator of <a href="http://127.0.0.1:55795http://127.0.0.1:55795/conferences/MyBikeBike/workshops/1">My
+  context: Your request to become a facilitator of <a href="http://127.0.0.1:57139http://127.0.0.1:57139/conferences/MyBikeBike/workshops/1">My
     Awesome Workshop</a> has been denied. If you think this was in error, you may
     contact the current facilitators by making another request to facilitate.
   vars:

@@ -1,6 +1,8 @@
 require 'redcarpet'
 
 module ApplicationHelper
+	include ScheduleHelper
+
 	@@keyQueue = nil
 	@@translationsOnThisPage = nil
 	@@lastTranslation = nil

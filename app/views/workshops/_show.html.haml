@@ -1,0 +1,58 @@
+= row do
+	= columns(medium: 12) do
+		%h2=_!workshop.title
+		.workshop-interest
+			- if workshop.interested?(current_user)
+				=_'articles.workshops.info.you_are_interested_count', "You and #{workshop.interested_count - 1} others are interested in this workshop", :vars => {:count => (workshop.interested_count - 1)}
+			- else
+				=_'articles.workshops.info.interested_count', "#{workshop.interested_count} people are interested in this workshop", :vars => {:count => workshop.interested_count}
+			- if !preview && workshop.can_show_interest?(current_user)
+				= form_tag toggle_workshop_interest_path(workshop.conference.slug, workshop.id) do
+					= button_tag (workshop.interested?(current_user) ? :remove_interest : :show_interest), :value => :toggle_interest, :class => (workshop.interested?(current_user) ? 'delete' : 'add')
+		=markdown _!(workshop.info) || ''
+		- if !preview && logged_in? && current_user.can_translate?
+			.actions
+				- I18n.backend.enabled_locales.each do |locale|
+					= (link_to (_'actions.workshops.Translate', "Translate into #{language_name(locale)}", :vars => {:language => language_name(locale)}), edit_workshop_url(workshop.conference.slug, workshop.id, url_params(locale)), :class => 'button translate') if workshop.can_translate?(current_user, locale)
+	= columns(medium: 6) do
+		%h3=_'articles.workshops.headings.facilitators'
+		.facilitators
+			- workshop.workshop_facilitators.each do |f|
+				- u = User.find(f.user_id)
+				- if logged_in? && (workshop.public_facilitator?(u) || f.user_id == current_user.id || workshop.active_facilitator?(current_user))
+					.facilitator
+						.name=_!(u.firstname || u.username || u.email)
+						.role
+							=_"roles.workshops.facilitator.#{workshop.role(u).to_s}"
+							- if !preview && f.role.to_sym == :requested && workshop.active_facilitator?(current_user)
+								=(link_to (_'actions.workshops.Approve'), approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'approve'), :class => 'button modify')
+								=(link_to (_'actions.workshops.Deny'), approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'deny'), :class => 'button delete')
+							- elsif !preview && (f.user_id == current_user.id && f.role.to_sym != :creator) || (!workshop.conference.registered?(u) && workshop.active_facilitator?(current_user))
+								=(link_to (_'actions.workshops.Remove'), approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'remove'), :class => 'button delete')
+			- if !preview
+				.actions
+					=(link_to (_'actions.workshops.Facilitate'), facilitate_workshop_path(workshop.conference.slug, workshop.id), :class => 'button modify') if !workshop.facilitator?(current_user)
+					- if workshop.active_facilitator?(current_user)
+						= form_tag workshop_add_facilitator_path(workshop.conference.slug, workshop.id), :class => 'add-facilitator' do
+							%h4='Add a facilitator'
+							.email-field.input-field
+								= email_field_tag :email, nil, required: true
+								= label_tag :email
+							= button_tag :add
+	- if workshop.languages
+		= columns(medium: 6) do
+			%h3=_'articles.workshops.headings.languages','Workshop Language'
+			%p= _!((JSON.parse(workshop.languages || '[]').map { |x| _"languages.#{x}" }).join(', ').to_s.html_safe)
+	- if workshop.theme
+		= columns(medium: 6) do
+			%h3=_'articles.workshops.headings.theme','Theme'
+			%p= [:race_gender, :mechanics, :funding, :organization, :community].include?((workshop.theme || '').to_sym) ? (_"workshop.options.theme.#{workshop.theme}") : workshop.theme
+	- if workshop.active_facilitator?(current_user) || workshop.conference.host?(current_user)
+		- if workshop.needs
+			= columns(medium: 6) do
+				%h3=_'articles.workshops.headings.needs','What do you need?'
+				%p= _!((JSON.parse(workshop.needs || '[]').map { |x| _"workshop.options.needs.#{x}" }).join(', ').to_s.html_safe)
+		- if workshop.notes
+			= columns(medium: 12) do
+				%h3=_'articles.workshops.headings.notes','Notes'
+				=markdown _!(workshop.notes)

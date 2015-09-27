@@ -2,6 +2,8 @@ require 'geocoder/calculations'
 require 'rest_client'
 
 class ConferencesController < ApplicationController
+	include ScheduleHelper
+
 	before_action :set_conference, only: [:show, :edit, :update, :destroy, :registrations]
 	before_filter :authenticate, only: [:registrations]
 
@@ -890,8 +892,8 @@ class ConferencesController < ApplicationController
 		can_edit = workshop.can_edit?(current_user)
 		do_403 unless can_edit || workshop.can_translate?(current_user, I18n.locale)
 
-		workshop.title     = params[:title]
-		workshop.info      = params[:info]
+		workshop.title = params[:title]
+		workshop.info  = params[:info]
 
 		if can_edit
 			# dont allow translators to edit these fields
@@ -1033,6 +1035,269 @@ class ConferencesController < ApplicationController
 		return redirect_to view_workshop_url(@this_conference.slug, params[:workshop_id])
 	end
 
+	def schedule
+		set_conference
+		do_404 unless @this_conference.workshop_schedule_published || @this_conference.host?(current_user)
+		
+		@events = Event.where(:conference_id => @this_conference.id)
+		@locations = EventLocation.where(:conference_id => @this_conference.id)
+
+		render 'schedule/show'
+	end
+
+	def edit_schedule
+		set_conference
+		set_conference_registration
+		do_404 unless @this_conference.host?(current_user)
+		
+		@workshops = Workshop.where(:conference_id => @this_conference.id)
+		@events = Event.where(:conference_id => @this_conference.id)
+		if session[:workshops]
+			(0...@workshops.count).each do |i|
+				id = @workshops[i].id
+				w = session[:workshops][id.to_s]
+				if w
+					@workshops[i].start_time = w[:start_time]
+					@workshops[i].end_time = w[:end_time]
+					@workshops[i].event_location_id = w[:event_location_id]
+				end
+			end
+		end
+		if session[:events]
+			(0...@events.count).each do |i|
+				id = @events[i].id
+				w = session[:events][id.to_s]
+				if w
+					@events[i].start_time = w[:start_time]
+					@events[i].end_time = w[:end_time]
+					@events[i].event_location_id = w[:event_location_id]
+				end
+			end
+		end
+		@locations = EventLocation.where(:conference_id => @this_conference.id)
+		@location_hash = Hash.new
+		@locations.each do |l|
+			@location_hash[l.id.to_s] = l
+		end
+
+		@days = Array.new
+		start_day = @this_conference.start_date.strftime('%u').to_i
+		end_day = start_day + ((@this_conference.end_date - @this_conference.start_date) / 86400)
+
+		(start_day..end_day).each do |i|
+			@days << [(@this_conference.start_date + (i - start_day).days).strftime('%a'), ((i + 1) - start_day)]
+		end
+
+		@hours = Array.new
+		(0..48).each do |i|
+			hour = (Date.today + (i / 2.0).hours).strftime('%R')
+			@hours << hour
+		end
+
+		@event_durations = [['30 mins', 30], ['1 hour', 60], ['1.5 hours', 90], ['2 hours', 120], ['2.5 hours', 150]]
+		@workshop_durations = [['1 hour', 60], ['1.5 hours', 90], ['2 hours', 120]]
+
+		schedule_data = get_schedule_data
+		@schedule = schedule_data[:schedule]
+		@errors = schedule_data[:errors]
+		@warnings = schedule_data[:warnings]
+		@conflict_score = schedule_data[:conflict_score]
+		@error_count = schedule_data[:error_count]
+		if session[:day_parts]
+			@day_parts = JSON.parse(session[:day_parts])
+		elsif @this_conference.day_parts
+			@day_parts = JSON.parse(@this_conference.day_parts)
+		else
+			@day_parts = {:morning => 0, :afternoon => 13, :evening => 18}
+		end
+		@saved = session[:workshops].nil?
+
+		render 'schedule/edit'
+	end
+
+	def save_schedule
+		set_conference
+		do_404 unless @this_conference.host?(current_user)
+
+		@days = Array.new
+		start_day = @this_conference.start_date.strftime('%u').to_i
+		end_day = start_day + ((@this_conference.end_date - @this_conference.start_date) / 86400)
+
+		(start_day..end_day).each do |i|
+			@days << [(@this_conference.start_date + (i - start_day).days).strftime('%a'), i]
+		end
+
+		@workshops = Workshop.where(:conference_id => @this_conference.id)
+		@events = Event.where(:conference_id => @this_conference.id)
+		@locations = EventLocation.where(:conference_id => @this_conference.id)
+
+		do_save = (params[:button] == 'save' || params[:button] == 'publish')
+		session[:workshops] = do_save ? nil : Hash.new
+		session[:events] = do_save ? nil : Hash.new
+		session[:day_parts] = do_save ? nil : Hash.new
+
+		(0...@workshops.count).each do |i|
+			id = @workshops[i].id.to_s
+			if params[:workshop_day][id].present? && params[:workshop_hour][id].present? && params[:workshop_duration][id].present?
+				date = @this_conference.start_date + (params[:workshop_day][id].to_i - 1).days
+				h = params[:workshop_hour][id].split(':')
+				date = date.change({hour: h.first, minute: h.last})
+				@workshops[i].start_time = date
+				@workshops[i].end_time = date + (params[:workshop_duration][id].to_i).minutes
+			else
+				@workshops[i].start_time = nil
+				@workshops[i].end_time = nil
+			end
+			@workshops[i].event_location_id = params[:workshop_location][id]
+			if do_save
+				@workshops[i].save
+			else
+				session[:workshops][id] = {
+					:start_time => @workshops[i].start_time,
+					:end_time => @workshops[i].end_time,
+					:end_time => @workshops[i].end_time,
+					:event_location_id => @workshops[i].event_location_id
+				}
+			end
+		end
+
+		(0...@events.count).each do |i|
+			id = @events[i].id.to_s
+			if params[:event_day][id].present? && params[:event_hour][id].present? && params[:event_duration][id].present?
+				date = @this_conference.start_date + (params[:event_day][id].to_i - 1).days
+				h = params[:event_hour][id].split(':')
+				date = date.change({hour: h.first, minute: h.last})
+				@events[i].start_time = date
+				@events[i].end_time = date + (params[:event_duration][id].to_i).minutes
+			else
+				@events[i].start_time = nil
+				@events[i].end_time = nil
+			end
+			@events[i].event_location_id = params[:event_location][id]
+			if do_save
+				@events[i].save
+			else
+				session[:events][id] = {
+					:start_time => @events[i].start_time,
+					:end_time => @events[i].end_time,
+					:end_time => @events[i].end_time,
+					:event_location_id => @events[i].event_location_id
+				}
+			end
+		end
+
+		if params[:day_parts]
+			day_parts = {:morning => 0}
+			params[:day_parts].each do |part, h|
+				h = h.split(':')
+				day_parts[part.to_sym] = h[0].to_f + (h[1].to_i > 0 ? 0.5 : 0)
+			end
+			if do_save
+				@this_conference.day_parts = day_parts.to_json
+			else
+				session[:day_parts] = day_parts.to_json
+			end
+		end
+
+		save_conference = do_save
+
+		if params[:button] == 'publish'
+			@this_conference.workshop_schedule_published = true
+			save_conference = true
+		elsif params[:button] == 'unpublish'
+			@this_conference.workshop_schedule_published = false
+			save_conference = true
+		end
+
+		if save_conference
+			@this_conference.save
+		end
+
+		redirect_to edit_schedule_url(@this_conference.slug)
+	end
+
+	def add_event
+		set_conference
+		set_conference_registration
+		do_404 unless @this_conference.host?(current_user)
+		
+		render 'events/edit'
+	end
+
+	def edit_event
+		set_conference
+		set_conference_registration
+		do_404 unless @this_conference.host?(current_user)
+
+		@event = Event.find(params[:id])
+		do_403 unless @event.conference_id == @this_conference.id
+
+		render 'events/edit'
+	end
+
+	def save_event
+		set_conference
+		do_404 unless @this_conference.host?(current_user)
+
+
+		if params[:event_id]
+			event = Event.find(params[:event_id])
+			do_403 unless event.conference_id == @this_conference.id
+		else
+			event = Event.new(:conference_id => @this_conference.id)
+		end
+
+		event.title = params[:title]
+		event.info = params[:info]
+		event.event_type = params[:event_type]
+
+		event.save
+
+		return redirect_to schedule_url(@this_conference.slug)
+	end
+
+	def add_location
+		set_conference
+		set_conference_registration
+		do_404 unless @this_conference.host?(current_user)
+		
+		render 'event_locations/edit'
+	end
+
+	def edit_location
+		set_conference
+		set_conference_registration
+		do_404 unless @this_conference.host?(current_user)
+
+		@location = EventLocation.find(params[:id])
+		do_403 unless @location.conference_id == @this_conference.id
+
+		@amenities = JSON.parse(@location.amenities || '[]').map &:to_sym
+
+		render 'event_locations/edit'
+	end
+
+	def save_location
+		set_conference
+		do_404 unless @this_conference.host?(current_user)
+
+
+		if params[:location_id]
+			location = EventLocation.find(params[:location_id])
+			do_403 unless location.conference_id == @this_conference.id
+		else
+			location = EventLocation.new(:conference_id => @this_conference.id)
+		end
+
+		location.title = params[:title]
+		location.address = params[:address]
+		location.amenities = (params[:needs] || {}).keys.to_json
+
+		location.save
+
+		return redirect_to schedule_url(@this_conference.slug)
+	end
+
 	# DELETE /conferences/1
 	#def destroy
 	#	@conference.destroy
@@ -1053,6 +1318,7 @@ class ConferencesController < ApplicationController
 					register_path(@this_conference.slug) => 'registration.Registration',
 					workshops_path(@this_conference.slug) => 'registration.Workshops'
 				}
+				@submenu[schedule_path(@this_conference.slug)] = 'registration.Schedule' if @this_conference.workshop_schedule_published || @is_host
 				if @is_host
 					@submenu[edit_conference_path(@this_conference.slug)] = 'registration.Edit'
 					@submenu[stats_path(@this_conference.slug)] = 'registration.Stats'

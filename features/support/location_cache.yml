@@ -298,3 +298,52 @@
     - locality
     - political
   cache_hit: 
+" in Boise ID": !ruby/object:Geocoder::Result::Google
+  data:
+    address_components:
+    - long_name: Boise
+      short_name: Boise
+      types:
+      - locality
+      - political
+    - long_name: Ada County
+      short_name: Ada County
+      types:
+      - administrative_area_level_2
+      - political
+    - long_name: Idaho
+      short_name: ID
+      types:
+      - administrative_area_level_1
+      - political
+    - long_name: United States
+      short_name: US
+      types:
+      - country
+      - political
+    formatted_address: Boise, ID, USA
+    geometry:
+      bounds:
+        northeast:
+          lat: 43.6898951
+          lng: -116.101909
+        southwest:
+          lat: 43.511717
+          lng: -116.3658869
+      location:
+        lat: 43.6187102
+        lng: -116.2146068
+      location_type: APPROXIMATE
+      viewport:
+        northeast:
+          lat: 43.6898951
+          lng: -116.101909
+        southwest:
+          lat: 43.511717
+          lng: -116.3658869
+    partial_match: true
+    place_id: ChIJnbRH6XLxrlQRm51nNpuYW5o
+    types:
+    - locality
+    - political
+  cache_hit: 

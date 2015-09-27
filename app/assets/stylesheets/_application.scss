@@ -88,7 +88,6 @@ button,
 
 	&.register {
 		background-color: $colour-4;
-		//@include _(text-shadow, 0 0 0.15em rgba(0, 0, 0, 0.5));
 	}
 
 	form.logout & {
@@ -101,6 +100,10 @@ button,
 
 	#main &.delete {
 		background-color: $colour-4;
+	}
+
+	#main &.secondary {
+		background-color: $colour-1;
 	}
 }
 
@@ -505,11 +508,15 @@ input {
 		padding: 0 0.25em;
 		font-weight: normal;
 		@include font-family(secondary);
-		@include _(text-stroke, 0.5px #000)
+		@include _(text-stroke, 0.5px #000);
 	}
 
 	.date-labels {
 		float: left;
+	}
+
+	.date-field {
+		overflow: auto;
 	}
 }
 
@@ -528,6 +535,10 @@ form {
 	button, .button {
 		margin: 0 0.25em;
 	    vertical-align: middle;
+	}
+
+	&.left {
+		text-align: left;
 	}
 
 	&.right {
@@ -1939,4 +1950,235 @@ html[data-lingua-franca-example="html"] {
 		font-size: 0.9em;
 		float: left;
 	}
+}
+
+.conferences-edit_schedule {
+	#main {
+		.location {
+			padding-top: 0.25em;
+		}
+		.errors {
+			padding: 0.25em;
+			background-color: $colour-2;
+			color: $white;
+			@include _(text-stroke, 0.5px #000);
+		}
+		.conflict-score {
+			padding: 0.25em;
+			background-color: $colour-3;
+			color: #333;
+		}
+		.all-workshops, .all-events {
+			list-style: none;
+			padding: 0;
+
+			li {
+				margin: 0.5em;
+				padding: 0.5em;
+				border: 1px solid #CCC;
+				background-color: lighten($colour-1, 35);
+				@include default-box-shadow(top, 2);
+
+				&.error {
+					outline: 0.2em solid $colour-2;
+					outline-offset: -0.2em;
+				}
+			}
+
+			h3 {
+				margin: 0;
+			}
+
+			.workshop-interest {
+				color: #888;
+				text-align: left;
+				margin: 0.25em 0;
+			}
+
+			.error-description {
+				background-color: $colour-2;
+				color: $white;
+				padding: 0.5em;
+				margin-top: 0.5em;
+			}
+
+			.warnings {
+				background-color: $colour-3;
+				color: #333;
+				padding: 0.5em;
+				margin-top: 0.5em;
+				list-style: none;
+
+				li {
+					padding: 0;
+					margin: 0;
+					background-color: transparent;
+					@include _(box-shadow, none);
+				}
+			}
+		}
+		.day_parts {
+			list-style: none;
+
+			h4 {
+				display: inline-block;
+				min-width: 12.5em;
+				margin: 0.25em 0;
+			}
+
+			select, .select {
+				float: right;
+				min-width: 5em;
+			}
+
+			.select {
+				padding-left: 0.25em;
+			}
+		}
+		.actions {
+			margin: 2em;
+		}
+		.unsaved {
+			@include font-family(secondary);
+			background-color: lighten($colour-3, 25);
+			margin: 0 5em 2em;
+			padding: 0.5em;
+		}
+		.all-events {
+			li {
+				background-color: lighten($colour-5, 35);
+				
+				&.meal {
+					background-color: lighten($colour-3, 25);
+				}
+			}
+
+			h3 {
+				margin-bottom: 0.5em;
+			}
+		}
+	}
+}
+
+.programme {
+
+	.schedule {
+		width: auto;
+		margin: 0;
+		min-width: 100%;
+		@include _(box-shadow, none);
+		table-layout: fixed;
+		border-spacing: 0.25em;
+		border-collapse: separate;
+
+		td {
+			position: relative;
+			vertical-align: middle;
+
+			.title {
+				text-align: center;
+				@include font-family(secondary);
+				color: #666;
+			}
+			
+
+			&.previewable {
+				cursor: pointer;
+
+				&:hover {
+					@include default-box-shadow(top, 2);
+				}
+			}
+
+			&.workshop {
+				background-color: lighten($colour-1, 35);
+				border: 0.25em solid $colour-1;
+
+				.preview {
+					position: absolute;
+					top: 0;
+					right: 0;
+					bottom: 0;
+					left: 0;
+
+					@include after {
+						display: none;
+					}
+				}
+			}
+
+			&.event {
+				background-color: lighten($colour-5, 35);
+				border: 0.25em solid $colour-5;
+			}
+
+			&.meal {
+				background-color: lighten($colour-3, 25);
+				border: 0.25em solid $colour-3;
+			}
+
+			&.not-interested {
+				opacity: 0.5;
+			}
+
+			.info {
+				position: fixed;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				z-index: 1000;
+				background-color: $white;
+				text-align: left;
+				overflow-y: auto;
+				@include _(transition, transform 250ms ease-in-out);
+				@include _(transform-origin, center bottom);
+				@include _(transform, rotate(180deg) translate3d(0, 0, 0));
+
+				.close {
+					float: right;
+					font-size: 2em;
+
+					@include before {
+						content: '×';
+						padding: 0 0.5em;
+					}
+
+					@include after {
+						display: none;
+					}
+				}
+
+				h2 {
+					margin-bottom: 0.5em;
+				}
+			}
+
+			&:target .info {
+				@include _(transform, rotate(0) translate3d(0, 0, 0));
+			}
+		}
+	}
+
+	.programme-day {
+		margin-top: 2em;
+	}
+
+	.programme-day-part {
+		overflow-x: auto;
+	}
+}
+
+.select-field {
+	line-height: 1.75em;
+
+	select {
+		display: block;
+		width: 100%;
+		height: 2.1em;
+		font-family: inherit;
+		font-size: 1.5em;
+		padding: 0.25em;
+		@include default-box-shadow(top, 1.5, false);
+    }
 }

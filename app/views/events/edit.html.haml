@@ -1,7 +1,22 @@
-%h1 Editing event
-
-= render 'form'
-
-= link_to 'Show', @event
-\|
-= link_to 'Back', events_path
+= render 'conferences/page_header', :page_key => (@event ? 'Edit_Event' : 'New_Event')
+%article
+	= form_tag save_event_path(@this_conference.slug), class: 'composition' do
+		= row do
+			= columns(medium: 9) do
+				= (hidden_field_tag :event_id, @event.id) if @event
+				.text-field.input-field.big
+					= label_tag :title
+					= text_field_tag :title, @event ? @event.title : nil, :required => true
+			= columns(medium: 3) do
+				.select-field.input-field
+					= label_tag :event_type do
+						= select_tag :event_type, options_for_select([:event, :meal], @event ? @event.event_type : nil), :include_blank => true
+						=_'forms.labels.generic.event_type'
+		= row do
+			= columns(medium: 12) do
+				.text-area-field.input-field
+					= label_tag :info
+					= text_area_tag :info, @event ? @event.info : nil, :required => true
+			= columns(medium: 12) do
+				.actions.right
+					= button_tag :save, :value => :save

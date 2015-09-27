@@ -111,6 +111,30 @@ Given(/^a workshop( titled .+)? exists?$/) do |title|
 	@last_workshop = workshop
 end
 
+Given(/^the workshop is scheduled for day (\d+) at (\d\d?):(\d\d) at (.+)$/) do |day, hour, minute, location|
+	@last_workshop.start_time = @last_conference.start_date.change({hour: hour.to_i, min: minute.to_i}) + (day.to_i - 1).days
+	@last_workshop.end_time = @last_workshop.start_time + 1.5.hours
+	#puts " === [#{location}] === "
+	#puts EventLocation.all.to_yaml.to_s
+	@last_workshop.event_location_id = EventLocation.find_by_title(location).id
+	@last_workshop.save
+end
+
+Given(/^the workshop schedule is (not )?published$/) do |is_not_published|
+	@last_conference.workshop_schedule_published = is_not_published ? false : true
+	@last_conference.save
+end
+
+Given(/^a location( named .+)? exists?$/) do |title|
+	location = EventLocation.new
+	location.conference_id = @last_conference.id
+	location.title = title ? title.gsub(/^\s*named\s*(.*?)\s*$/, '\1') : Forgery::LoremIpsum.sentence({:random => true}).gsub(/\.$/, '').titlecase
+	#location.info = Forgery::LoremIpsum.paragraph({:random => true})
+	#location.locale = :en
+	location.save
+	@last_location = location
+end
+
 Given(/^(I )have created a workshop titled (.+)( with (\d+) facilitators)?$/) do |a, title, b, facilitator_count|
 	workshop = Workshop.new
 	workshop.conference_id = @last_conference.id

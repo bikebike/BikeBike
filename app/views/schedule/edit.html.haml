@@ -1,0 +1,77 @@
+= render 'conferences/page_header', :page_key => 'Edit_Schedule'
+%article
+	= form_tag save_schedule_path(@this_conference.slug), class: 'composition' do
+		= row do
+			= columns(medium: 12) do
+				= render 'schedule/programme', :schedule => @schedule, :conference => @this_conference, :workshops => @workshops, :events => @events, :locations => @location_hash, :show_interest => false, :day_parts => @day_parts, :show_previews => false
+		= row do
+			= columns(medium: 12) do
+				- if @error_count && @error_count > 0
+					%h3.errors
+						=_'errors.schedule.errors',"Errors:"
+						= @error_count
+				- if @conflict_score && @conflict_score > 0
+					%h3.conflict-score
+						=_'errors.schedule.conflict_score',"Interest Conflicts:"
+						= @conflict_score
+		= row do
+			= columns(medium: 12) do
+				= (hidden_field_tag :location_id, @location.id) if @location
+				.actions
+					- if @this_conference.workshop_schedule_published
+						= button_tag :Unpublish, :value => :unpublish, :class => 'delete'
+					- elsif @error_count < 1
+						= button_tag :Publish, :value => :publish
+					= button_tag :Preview, :value => :preview, :class => 'secondary'
+					- unless @this_conference.workshop_schedule_published && @error_count > 0
+						= button_tag :save, :value => :save
+				- unless @saved
+					.unsaved=_'errors.schedule.unsaved','Your changes will not be saved until you press Save or Publish'
+		= row do
+			= columns(medium: 6) do
+				%h2=_"articles.headings.schedule.day_parts.Workshops"
+				%ul.all-workshops
+					- @workshops.each do |i|
+						- error = @errors["w#{i.id}"]
+						- warnings = @warnings["w#{i.id}"]
+						%li{class: error.present? ? :error : nil}
+							%h3=i.title
+							.workshop-interest=_'articles.workshops.info.interested_count', "#{i.interested_count} people are interested in this workshop", :vars => {:count => i.interested_count}
+							.time
+								= select_tag "workshop_day[#{i.id}]", options_for_select(@days, i.conference_day), :include_blank => true
+								= select_tag "workshop_hour[#{i.id}]", options_for_select(@hours, i.start_time ? i.start_time.strftime('%R') : nil), :include_blank => true
+								= select_tag "workshop_duration[#{i.id}]", options_for_select(@workshop_durations, i.duration || 60)
+							.location
+								= select_tag "workshop_location[#{i.id}]", options_from_collection_for_select(@locations, :id, :title, i.event_location_id), :include_blank => true
+							- if warnings
+								%ul.warnings
+									- warnings.each do |warning|
+										%li=warning
+							- if error
+								.error-description=error
+			= columns(medium: 6) do
+				%h2=_"articles.headings.schedule.day_parts.Events"
+				%ul.all-events
+					- @events.each do |i|
+						- error = @errors["e#{i.id}"]
+						%li{:class => [i.event_type, error.present? ? :error : nil]}
+							%h3=i.title
+							.time
+								= select_tag "event_day[#{i.id}]", options_for_select(@days, i.conference_day)
+								= select_tag "event_hour[#{i.id}]", options_for_select(@hours, i.start_time ? i.start_time.strftime('%R') : '12:00')
+								= select_tag "event_duration[#{i.id}]", options_for_select(@event_durations, i.duration || 60)
+							.location
+								= select_tag "event_location[#{i.id}]", options_from_collection_for_select(@locations, :id, :title, i.event_location_id), :include_blank => true
+							- if error
+								.error-description=error
+				%h2=_"articles.headings.schedule.day_parts.Day_Parts"
+				%ul.day_parts
+					- [:morning, :afternoon, :evening].each do |day_part|
+						%li
+							%h4
+								=_"articles.headings.schedule.day_parts.#{day_part.to_s}"
+								- h = (Date.today + @day_parts[day_part.to_s].to_f.hours).strftime('%R')
+								- if day_part == :morning
+									.select=h
+								- else
+									= select_tag "day_parts[#{day_part.to_s}]", options_for_select(@hours, h)

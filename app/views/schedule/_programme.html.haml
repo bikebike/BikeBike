@@ -1,0 +1,36 @@
+.programme
+	- schedule.each do |day, day_schedule|
+		.programme-day
+			%h2=I18n.l(conference.start_date + (day - 1).days, :format => "%A")
+			- (0...day_parts.length).each do |day_part|
+				.programme-day-part
+					- times = schedule_start_and_end_times(day_part, day_parts, day_schedule)
+					- if times.present?
+						%h3=_"articles.headings.schedule.day_parts.#{day_parts.keys[day_part].to_s}" if day_parts.length > 1
+						%table.schedule
+							%tr
+								%th
+								- (times.first...times.last).step(0.5).each do |t|
+									- t = t.to_i if t == t.to_i
+									%th=I18n.l(Date.today + t.hours, :format => :short)
+							- day_schedule[:locations].each do |location, location_schedule|
+								%tr
+									%th=locations[location.to_s].title
+									- skip = 0
+									- (times.first...times.last).step(0.5).each do |t|
+										- t = t.to_i if t == t.to_i
+										- if location_schedule[t].present?
+											- workshop = location_schedule[t]
+											- w = get_workshop(workshop, workshops, events)
+											%td{:class => workshop_classes(w, show_interest) + [show_previews && workshop[:type] == :workshop ? 'previewable' : nil], :colspan => (workshop[:span] * 2), :id => "workshop-#{w.id}"}
+												.title= w.title
+												- if show_previews && workshop[:type] == :workshop
+													.info
+														%a.close{href: "#!"}
+														= render 'workshops/show', :workshop => w, :preview => true
+													%a{class: 'preview', href: "#workshop-#{w.id}"}
+											- skip = workshop[:span] - 0.5
+										- elsif skip > 0
+											- skip -= 0.5
+										- else
+											%td.empty

@@ -221,7 +221,7 @@ en:
     formats:
       default: "%a, %d %b %Y %H:%M:%S %z"
       long: "%l%P, %B %e, %Y"
-      short: "%d %b %H:%M"
+      short: "%l:%M%P"
     pm: pm
   languages:
     af: Afrikaans
