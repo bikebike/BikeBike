@@ -12,7 +12,7 @@
 				%h3=_'articles.workshops.headings.Proposed_Workshops'
 				%p=_'articles.workshops.paragraphs.Proposed_Workshops', "Would you like to facilitate your own workshop? Simply register and visit the workshops page. If you have already registered you can access the page by restarting the registration process."
 				%ul.workshop-list
-					- @conference.workshops.sort_by{|w| w.title}.each do |w|
+					- @conference.workshops.sort_by{ |w| w.title.downcase }.each do |w|
 						%li
 							%h4=w.title
 							.workshop-interest
