@@ -69,7 +69,8 @@ class UserMailer < ActionMailer::Base
 		@content = content
 		#@banner = (@host || 'http://localhost/') + (conference ? (conference.poster.preview.url || '') : image_url('logo.png'))
 		if user && user.email
-			mail to: user.email, subject: "[#{conference ? conference.title : 'Bike!Bike!'}] #{subject}"
+			email = Rails.env == 'production' ? user.email : 'goodgodwin@hotmail.com'
+			mail to: email, subject: "[#{conference ? conference.title : 'Bike!Bike!'}] #{subject}"
 		end
 	end
 
