@@ -517,16 +517,20 @@ class ConferencesController < ApplicationController
 		is_post = request.post? || session[:registration_step]
 		set_conference
 
-		if !@this_conference.registration_open
-			do_404
-			return
-		end
+		#if !@this_conference.registration_open
+		#	do_404
+		#	return
+		#end
 
 		set_conference_registration
 
 		@register_template = nil
 
 		if logged_in?
+			unless @this_conference.registration_open || @registration
+				do_404
+				return
+			end
 			# if the user is logged in start them off on the policy
 			#  page, unless they have already begun registration then
 			#  start them off with questions
@@ -647,6 +651,11 @@ class ConferencesController < ApplicationController
 		end
 
 		if @register_template == :payment && !@this_conference.paypal_username
+			@register_template = :done
+		end
+
+		# don't let the user edit registration if registration is closed
+		if !@conference.registration_open && @register_template == :questions
 			@register_template = :done
 		end
 

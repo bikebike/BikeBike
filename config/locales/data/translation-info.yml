@@ -5,7 +5,7 @@ geography.subregions.CA.NS:
   examples:
   - See-a-more-info-link--
   - Start-registration-from-landing-page--
-date.formats.span_same_month_date_1:
+date.formats.span_same_year_date_1:
   pages:
   - "/"
   examples:
@@ -27,20 +27,32 @@ date.month_names:
   - "/conferences/:slug/register"
   examples:
   - See-a-more-info-link--
+  - See-a-more-info-link--
   - See-a-register-link--
+  - See-a-register-link--
+  - Start-registration-from-landing-page--
   - Start-registration-from-landing-page--
   - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
   - Start-registration-from-landing-page--conferences.MyBikeBike.register-6
   - View-stats--
+  - View-stats--
+  - Broadcast-message--
   - Broadcast-message--
   - Edit-a-conference--
+  - Edit-a-conference--
+  - View-published-schedule--
   - View-published-schedule--
   - Create-workshop--
+  - Create-workshop--
+  - Be-the-first-to-like-a-workshop--
   - Be-the-first-to-like-a-workshop--
   - Like-a-workshop--
+  - Like-a-workshop--
+  - Request-to-facilitate-a-workshop--
   - Request-to-facilitate-a-workshop--
   - Request-to-facilitate-a-workshop---1
-date.formats.span_same_month_date_2:
+  - Request-to-facilitate-a-workshop---1
+date.formats.span_same_year_date_2:
   pages:
   - "/"
   examples:
@@ -2938,7 +2950,7 @@ page_titles.conferences.Facilitate_Workshop:
 articles.workshops.headings.facilitate:
   pages:
   - "/conferences/:slug/workshops/:workshop_id/facilitate"
-  context: Request to Facilitate ‘In Eleifend Quam A Odio’
+  context: Request to Facilitate ‘Vestibulum Sed Magna At Nunc Commodo Placerat’
   vars:
   - :workshop_title
   examples:
@@ -2961,7 +2973,8 @@ forms.labels.generic.message:
 email.subject.workshop_facilitator_request:
   pages:
   - "/conferences/:slug/workshops/:workshop_id/facilitate_request"
-  context: Request to facilitate In Eleifend Quam A Odio from John Doe
+  context: Request to facilitate Vestibulum Sed Magna At Nunc Commodo Placerat from
+    John Doe
   vars:
   - :workshop_title
   - :requester_name
@@ -3059,7 +3072,7 @@ email.workshop.paragraph.request_approved:
   pages:
   - "/conferences/:slug/workshops/:workshop_id/facilitate_request/:user_id/:approve_or_deny"
   - "/conferences/:slug/workshops/:workshop_id/add_facilitator"
-  context: You have been added as a facilitator of <a href="http://127.0.0.1:57139http://127.0.0.1:57139/conferences/MyBikeBike/workshops/1">My
+  context: You have been added as a facilitator of <a href="http://127.0.0.1:51906http://127.0.0.1:51906/conferences/MyBikeBike/workshops/1">My
     Awesome Workshop</a>.
   vars:
   - :workshop_title
@@ -3081,7 +3094,7 @@ email.subject.workshop_request_denied:
 email.workshop.paragraph.request_denied:
   pages:
   - "/conferences/:slug/workshops/:workshop_id/facilitate_request/:user_id/:approve_or_deny"
-  context: Your request to become a facilitator of <a href="http://127.0.0.1:57139http://127.0.0.1:57139/conferences/MyBikeBike/workshops/1">My
+  context: Your request to become a facilitator of <a href="http://127.0.0.1:51906http://127.0.0.1:51906/conferences/MyBikeBike/workshops/1">My
     Awesome Workshop</a> has been denied. If you think this was in error, you may
     contact the current facilitators by making another request to facilitate.
   vars:

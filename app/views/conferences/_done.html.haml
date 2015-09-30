@@ -45,6 +45,7 @@
 		%tr
 			%th=_'articles.conference_registration.headings.payment'
 			%td=_!('$' + (@amount || 0))
-	= form_tag register_path(@this_conference.slug) do
-		.actions
-			= button_tag :edit_registration, :value => :register
+	- if @conference.registration_open
+		= form_tag register_path(@this_conference.slug) do
+			.actions
+				= button_tag :edit_registration, :value => :register

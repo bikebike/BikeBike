@@ -8,6 +8,6 @@
 		= columns(medium: 6) do
 			%h3=_'articles.workshops.headings.Your_Workshops'
 			= render 'workshops/workshop_previews', :workshops => @my_workshops
-			= link_to (_'actions.workshops.create','New Workshop'), create_workshop_path(@this_conference.slug), class: [:button, :modify]
+			= link_to (_'actions.workshops.create','New Workshop'), create_workshop_path(@this_conference.slug), class: [:button, :modify] if @conference.registration_open
 	= row do
 		= render 'workshops/workshop_previews', :workshops => @workshops

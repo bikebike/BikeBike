@@ -1,6 +1,6 @@
 - # encoding: utf-8
 %ul.workshop-previews
-	- workshops.each do |w|
+	- workshops.sort_by{ |w| w.title.downcase }.each do |w|
 		- if w.title
 			%li
 				=link_to view_workshop_path(@this_conference.slug, w.id) do

@@ -58,7 +58,7 @@
 <div class="row"><div class="columns medium-12"><form class="composition" action="/conferences/MyBikeBike/save/" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓">
 <div class="text-editor input-field">
 <label for="info"><span class="translated-content" data-i18n-key="forms.labels.generic.info" data-i18n-needs-translation="0">Info</span></label>
-<div class="froala-box"><div class="froala-editor f-basic" style="z-index: 2000;"><div class="bttn-wrapper" id="bttn-wrapper-1"><div class="fr-bttn fr-dropdown "><button tabindex="-1" type="button" data-name="formatBlock" class="fr-trigger" title="Format Block"><i class="fa fa-paragraph"></i></button><ul class="fr-dropdown-menu"><li data-cmd="formatBlock" data-val="0"><a href="#" data-text="true" class="format-0" title="n">n</a></li><li data-cmd="formatBlock" data-val="1"><a href="#" data-text="true" class="format-1" title="p">p</a></li><li data-cmd="formatBlock" data-val="2"><a href="#" data-text="true" class="format-2" title="h2">h2</a></li><li data-cmd="formatBlock" data-val="3"><a href="#" data-text="true" class="format-3" title="blockquote">blockquote</a></li><li data-cmd="formatBlock" data-val="4"><a href="#" data-text="true" class="format-4" title="pre">pre</a></li></ul></div><button tabindex="-1" type="button" class="fr-bttn" title="Bold" data-cmd="bold"><i class="fa fa-bold"></i></button><button tabindex="-1" type="button" class="fr-bttn" title="Italic" data-cmd="italic"><i class="fa fa-italic"></i></button><button tabindex="-1" type="button" class="fr-bttn" title="Underline" data-cmd="underline"><i class="fa fa-underline"></i></button><span class="f-sep"></span><button tabindex="-1" type="button" class="fr-bttn" title="Insert Link" data-cmd="createLink"><i class="fa fa-link"></i></button><button tabindex="-1" type="button" class="fr-bttn" title="Show HTML" data-cmd="html"><i class="fa fa-code"></i></button><button tabindex="-1" type="button" class="fr-bttn" title="Undo" data-cmd="undo" disabled="disabled"><i class="fa fa-undo"></i></button><button tabindex="-1" type="button" class="fr-bttn" title="Redo" data-cmd="redo" disabled=""><i class="fa fa-repeat"></i></button></div></div><div class="froala-wrapper f-basic"><div contenteditable="true" class="froala-view froala-element not-msie f-basic" style="outline: 0px;" spellcheck="false" dir="auto"><p>Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.</p></div><span class="fr-placeholder" unselectable="on">Type something</span></div></div><textarea name="info" id="info" required="required" style="display: none;" placeholder="Type something">Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.</textarea>
+<textarea name="info" id="info" required="required">Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.</textarea>
 </div>
 <div class="actions right">
 <div class="left">
@@ -73,108 +73,4 @@
 </div></div></article>
 <script>
   window.jQuery || document.write('<script src="https://code.jquery.com/jquery-2.1.3.min.js"><\/script>')
-</script><script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-<script src="/assets/froala_editor.min.js"></script>
-<link rel="stylesheet" media="screen" href="/assets/froala_editor.min.css">
-<link rel="stylesheet" media="screen" href="/assets/font-awesome.min.css">
-<script>
-  $(function() {
-  	$('.text-editor textarea').editable({
-  		language: '<% I18n.locale.to_s %>',
-  		inlineMode: false,
-  		blockTags: ["n", "p", "h2", "blockquote", "pre"],
-  		buttons: ["formatBlock", "bold", "italic", "underline", "insertOrderedList", "insertUnorderedList", "sep", "createLink", "html", "undo", "redo"],
-  		colors: ['#00ADEF', '#DD57EF', '#E6C74B', 'REMOVE']
-  	});
-  });
-</script>
-</div>
-</main>
-
-<div id="footer">
-<footer><div class="github">
-<img src="/assets/bb-icon-github.png" class="sprite icons bb-icon-github">
-<a href="https://github.com/bikebike/BikeBike/issues" target="_blank">
-<span class="translated-content" data-i18n-key="links.footer.text.File_an_Issue" data-i18n-needs-translation="0">File an issue</span>
-</a>
-|
-<a href="https://github.com/bikebike/BikeBike/contributing.md" target="_blank">
-<span class="translated-content" data-i18n-key="links.footer.text.Help_contribute" data-i18n-needs-translation="0">Help contribute</span>
-</a>
-</div>
-<div class="facebook">
-<span class="translated-contentblock" data-i18n-key="links.footer.help_text.facebook" data-i18n-needs-translation="0"><a href="https://www.facebook.com/groups/648758205249998/" target="_blank" title="Join our Facebook group">
-<img src="/assets/bb-icon-fb.png" class="sprite icons bb-icon-fb">
-</a>
-</span></div>
-<div class="locale">
-<span class="translated-contentblock" data-i18n-key="links.footer.help_text.select_language" data-i18n-needs-translation="0"><input id="select-language" type="checkbox">
-<label class="launch" for="select-language" title="Change your language">
-EN
-</label>
-<div class="selector">
-<ul>
-<li>
-<a href="/?lang=en">
-EN
-</a>
-<span>English</span>
-</li>
-<li>
-<a href="/?lang=es">
-ES
-</a>
-<span>español</span>
-</li>
-<li>
-<a href="/?lang=fr">
-FR
-</a>
-<span>français</span>
-</li>
-</ul>
-</div>
-</span></div>
-<div class="copy">
-<span class="translated-contentblock" data-i18n-key="links.footer.help_text.contributors" data-i18n-needs-translation="0"><a title="Contributors" href="/humans.txt">©2015 Bike!Bike!
-</a></span></div>
-</footer>
-</div>
-<script>
-  (function() {
-  	if (!String.prototype.trim) {
-  		(function() {
-  			var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
-  			String.prototype.trim = function() {
-  				return this.replace(rtrim, '');
-  			};
-  		})();
-  	}
-  
-  	function classExists(elem,className){var p = new RegExp('(^| )'+className+'( |$)');return (elem.className && elem.className.match(p));}
-  	function addClass(elem,className){if(classExists(elem,className)){return true;}elem.className += ' '+className;}
-  	function removeClass(elem,className){var c = elem.className;var p = new RegExp('(^| )'+className+'( |$)');c = c.replace(p,' ').replace(/  /g,' ');elem.className = c.trim();}
-  
-  	[].slice.call(document.querySelectorAll('.input-field input')).forEach(function(inputEl) {
-  		if (inputEl.value.trim() === '') {
-  			inputEl.parentNode.className = inputEl.parentNode.className + ' empty';
-  		}
-  
-  		inputEl.addEventListener('focus', onInputFocus);
-  		inputEl.addEventListener('blur', onInputBlur);
-  	});
-  
-  	function onInputFocus(ev) {
-  		removeClass(ev.target.parentNode, 'empty')
-  	}
-  
-  	function onInputBlur(ev) {
-  		if (ev.target.value.trim() === '') {
-  			addClass(ev.target.parentNode, 'empty');
-  		}
-  	}
-  })();
-</script>
-
-
-<div class="froala-editor f-inline" style="display: none; z-index: 2001;"><div class="froala-popup froala-image-popup" style="display: none;"><h4><span data-text="true">Insert Image</span><span data-text="true">Uploading image</span><i title="Cancel" class="fa fa-times" id="f-image-close-1"></i></h4><div id="f-image-list-1"><div class="f-popup-line drop-upload"><div class="f-upload" id="f-upload-div-1"><strong data-text="true">Drop Image</strong><br>(<span data-text="true">or click</span>)<form target="frame-1" enctype="multipart/form-data" encoding="multipart/form-data" action="http://i.froala.com/upload" method="post" id="f-upload-form-1"><input id="f-file-upload-1" type="file" name="file" accept="image/*"></form></div></div><div class="f-popup-line"><label><span data-text="true">Enter URL</span>: </label><input id="f-image-url-1" type="text" placeholder="http://example.com"><button class="f-browse fr-p-bttn" id="f-browser-1"><i class="fa fa-search"></i></button><button data-text="true" class="f-ok fr-p-bttn f-submit" id="f-image-ok-1">OK</button></div></div><p class="f-progress" id="f-progress-1"><span></span></p></div><div class="froala-popup froala-image-editor-popup" style="display: none"><div class="f-popup-line f-popup-toolbar"><div class="fr-bttn fr-dropdown "><button tabindex="-1" type="button" data-name="display" class="fr-trigger" title="Text Wrap"><i class="fa fa-star"></i></button><ul class="fr-dropdown-menu"><li data-namespace="Image" data-cmd="display" data-val="fr-dii" data-param="undefined"><a href="#" data-text="true" class="fr-dii" title="Inline">Inline</a></li><li data-namespace="Image" data-cmd="display" data-val="fr-dib" data-param="undefined"><a href="#" data-text="true" class="fr-dib" title="Break Text">Break Text</a></li></ul></div><div class="fr-bttn fr-dropdown "><button tabindex="-1" type="button" data-name="align" class="fr-trigger" title="Alignment"><i class="fa fa-align-center"></i></button><ul class="fr-dropdown-menu f-align"><li data-cmd="align" data-namespace="Image" data-val="floatImageLeft" title="Align Left"><a href="#"><i class="fa fa-align-left"></i></a></li><li data-cmd="align" data-namespace="Image" data-val="floatImageNone" title="Align Center"><a href="#"><i class="fa fa-align-center"></i></a></li><li data-cmd="align" data-namespace="Image" data-val="floatImageRight" title="Align Right"><a href="#"><i class="fa fa-align-right"></i></a></li></ul></div><button class="fr-bttn" data-namespace="Image" data-cmd="linkImage" title="Insert Link"><i class="fa fa-link"></i></button><button class="fr-bttn" data-namespace="Image" data-cmd="replaceImage" title="Replace Image"><i class="fa fa-exchange"></i></button><button class="fr-bttn" data-namespace="Image" data-cmd="removeImage" title="Remove Image"><i class="fa fa-trash-o"></i></button></div><div class="f-popup-line f-image-alt"><label><span data-text="true">Title</span>: </label><input type="text"><button class="fr-p-bttn f-ok" data-text="true" data-callback="setImageAlt" data-cmd="setImageAlt" title="OK">OK</button></div></div><div class="froala-popup froala-link-popup" style="display: none;"><h4><span data-text="true">Insert Link</span><a target="_blank" title="Open Link" class="f-external-link" href="#"><i class="fa fa-external-link"></i></a><i title="Cancel" class="fa fa-times" id="f-link-close-1"></i></h4><div class="f-popup-line fr-hidden"><input type="text" placeholder="Text" class="f-lt" id="f-lt-1"></div><div class="f-popup-line"><input type="text" placeholder="http://www.example.com" class="f-lu " id="f-lu-1"></div><div class="f-popup-line"><input type="checkbox" class="f-target" id="f-target-1"> <label data-text="true" for="f-target-1">Open in new tab</label><button data-text="true" type="button" class="fr-p-bttn f-ok f-submit" id="f-ok-1">OK</button><button type="button" data-text="true" class="fr-p-bttn f-ok f-unlink" id="f-unlink-1">UNLINK</button></div></div></div></body></html>
+</script><script src="https://code.jquery.com/jquery-2.1.3.min.js"></script></div></main></body></html>
