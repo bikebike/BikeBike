@@ -37,8 +37,8 @@ module ScheduleHelper
 
 				if conflict.present?
 					w_conflict = get_workshop(conflict, @workshops, @events)
-					workshop_errors[(w_conflict.is_a?(Workshop) ? 'w' : 'e') + w_conflict.id.to_s] = "Time conflict with &ldquo;<strong>#{w_conflict.title}</strong>&rdquo;".html_safe
-					workshop_errors[(w.is_a?(Workshop) ? 'w' : 'e') + w.id.to_s] = "Time conflict with &ldquo;<strong>#{w.title}</strong>&rdquo;".html_safe
+					workshop_errors[(w_conflict.is_a?(Workshop) ? 'w' : 'e') + w_conflict.id.to_s] = "Time conflict with &ldquo;<strong>#{w.title}</strong>&rdquo;".html_safe
+					workshop_errors[(w.is_a?(Workshop) ? 'w' : 'e') + w.id.to_s] = "Time conflict with &ldquo;<strong>#{w_conflict.title}</strong>&rdquo;".html_safe
 					errors += 1 if workshop_errors[(w_conflict.is_a?(Workshop) ? 'w' : 'e') + w_conflict.id.to_s].nil?
 				else
 					schedule[day][:start_time] = hour if schedule[day][:start_time].nil? || hour < schedule[day][:start_time]
