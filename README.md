@@ -44,8 +44,31 @@ Here is a list of the gems we have created so far, if you are a collaborator on 
 [8]: http://www.google.com/+/learnmore/hangouts/
 
 ## Github Workflow ##
-Working on it...
+If you are a git wiz, feel free to adjust the steps below slightly, otherwise follow these steps until you are familiar enough to stray. What should remain constant is that we need to branch, code review, and merge with master.
 
+1. Before you start working on a new feature, start working on a new branch (alternatively you can fork): `git checkout -b myname_new_feature`
+2. Write your new feature
+3. Add tests and execute them using `bundle exec rake cucumber`
+4. Make any adjustments, make sure you have included comments and abided other coding conventions
+5. Check your git status to make sure you are on the correct branch and have any new files to add: `git status`
+6. Add any new files using: `git add [myfile]`
+7. Commit your changes: `git commit -am 'My commit message'`
+8. Switch back to the master branch and pull the latest: `git checkout master && git pull`
+9. Switch back to your branch: `git checkout myname_new_feature`
+10. If there were any changes, rebase (if in doubt, rebase). This merges in the new code with your new code: `git rebase -i origin/master`
+11. Push your changes: `git push origin myname_new_feature`
+12. Make a pull request and wait for your code to be reviewed
+13. If any changes are required, make them commit your changes, and rebase again. This time you need to make sure that you squash your commits (makes sure you only add one commit in the end). Where you see your commit message, change 'pick' to 'fixup' or 'f'.
+14. Push your code again and repeat 12 and 13 until your code gets merged with master
+
+## Deployment Process ##
+Please note, we currently don't have this process set up, we're working to get here.
+
+1. Write code and get it pulled into master
+2. Your changes will be automatically be deployed to our preview site
+3. Your changes will be tested there, if tests fail deployers will be notified
+4. Once that deployment process completes and tests pass, translators will be notified if there are new translations
+4. Once translators have completed translations, translations will be committed to master and your changes will be deployed to production
 
 ## Requirements Overview ##
 
