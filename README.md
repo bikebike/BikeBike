@@ -1,7 +1,7 @@
 Bike!Bike!
 ===========
 
-This is the development repository for Bike!Bike! Progress can currently be seen at [bikebike.herokuapp.com](http://bikebike.herokuapp.com/)
+This is the development repository for Bike!Bike! Progress can currently be seen at [preview.bikebike.org](https://preview-en.bikebike.org/) and in production at [bikebike.org](https://bikebike.org/)
 
 If you're about to get started contributing please contact Godwin: `goodgodwin``@``hotmail.com`. Also try to familiarize yourself with the [technologies](#technologies) we're using, our [collaboration tools](#collaboration-tools), [requirements](#requirements-overview), [coding conventions](#coding-conventions), [style guide](#style-guide), and [testing practices](#testing-practices).
 
@@ -11,32 +11,40 @@ If you're about to get started contributing please contact Godwin: `goodgodwin``
 * [Rails 4.0.0][2]
 * [PostgreSQL][3]
 * [HAML][4]
-* [Scss][7]
-* [Compass][8]
-* [Foundation][5]
-* [CoffeeScript 1.7.1][6]
-* [jQuery 1.11.0][9]
+* [SCSS][5]
 
 [1]: http://www.ruby-lang.org/en/
 [2]: http://rubyonrails.org/
 [3]: http://www.postgresql.org/
 [4]: http://haml.info/
-[5]: http://foundation.zurb.com/
-[6]: http://coffeescript.org/
-[7]: http://sass-lang.com/
-[8]: http://compass-style.org/
-[9]: http://jquery.com/
+[5]: http://sass-lang.com/
+
+
+## Internal Gems ##
+We will make a commitment to extract any functionality that makes sense to do so, into separate gems in order to share functionality with others, with our other projects (such as bikecollectives.org), and to enable easier collaboration amongst ourselves.
+
+Here is a list of the gems we have created so far, if you are a collaborator on this project you may need to become a collaborator on these gems as well. Don't hesitate to make a request, it won't be denied:
+
+### Lingua Franca ###
+
+[Lingua Franca](https://github.com/lingua-franca/lingua_franca) provides an easy way to include translatable content and provides a user interface for translators to provide translations. See [Translations](#translations) for best practices on the Bike!Bike! website.
+
+### Bumbleberry ###
+[Bumbleberry](https://github.com/bumbleberry/bumbleberry) provides cross-browser support with little effort and minimum file sizes. Basically it creates a different stylesheet for every known browser and only includes supported rules for each using information obtained from [caniuse.com](caniuse.com).
 
 
 ## Collaboration Tools ##
 
-* [Trello][10]
-* [GitHub][11]
-* [Google Hangouts][12]
+* [Trello][6]
+* [GitHub][7]
+* [Google Hangouts][8]
 
-[10]: https://trello.com/b/X4TGKQ1L/rails-tasks
-[11]: https://github.com/bikebike/BikeBike
-[12]: http://www.google.com/+/learnmore/hangouts/
+[6]: https://trello.com/b/X4TGKQ1L/rails-tasks
+[7]: https://github.com/bikebike/BikeBike
+[8]: http://www.google.com/+/learnmore/hangouts/
+
+## Github Workflow ##
+Working on it...
 
 
 ## Requirements Overview ##
@@ -86,7 +94,7 @@ Events are created and scheduled by conference coordinators.
 
 ### Translations ###
 
-Translating our site into mutiple languages is a key part of opening it up to the world. When coding, never include any English text as in a string or Haml. Instead, we shall always use the underscore helper method `_`. The method takes a translation key and some optional parameters.
+Translating our site into multiple languages is a key part of opening it up to the world. When coding, never include any English text as in a string or Haml. Instead, we shall always use the underscore helper method `_`. The method takes a translation key and some optional parameters.
 
 All translation is done in a collaborative, volunteer based system on the site itself, even the English text. If a user has sufficient permissions, the underscore method will produce highlighted text which can be edited directly by the user.
 
@@ -98,7 +106,7 @@ The method can be used as follows:
 
 	end
 
-If the key does not exist, the previos lines will produce the following respectively:
+If the key does not exist, the previous lines will produce the following respectively:
 
 	'my_key'
 	
