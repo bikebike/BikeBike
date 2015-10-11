@@ -11,6 +11,8 @@ module NavigationHelpers
 				path = "/conferences/#{@last_conference.slug}/edit/"
 			when /^(workshops|stats|broadcast)$/i
 				path = "/conferences/#{@last_conference.slug}/#{path}/"
+			when /^(stats.xls)$/i
+				path = "/conferences/#{@last_conference.slug}/stats.xls"
 		end
 
 		if path.is_a?(Symbol)

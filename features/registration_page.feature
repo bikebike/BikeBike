@@ -2,6 +2,26 @@ Feature: Registration Page
 	In order to register for Bike!Bike!
 	As a visitor
 
+	Scenario: View stats
+		Given There is an upcoming conference in Anchorage AK
+		And Registration is open
+		And I am logged in as someguy@bikebike.org
+		And My name is Jeff
+		And I am a conference host
+		And I am registered for the conference
+		And I am on the stats page
+
+		Then I should see Total Registrations
+
+	Scenario: View stats.xls
+		Given There is an upcoming conference in Anchorage AK
+		And Registration is open
+		And I am logged in as someguy@bikebike.org
+		And My name is Jeff
+		And I am a conference host
+		And I am registered for the conference
+		And I am on the stats.xls page
+
 	Scenario: Start registration from landing page
 		Given There is an upcoming conference in Halifax NS
 		And Registration is open
@@ -54,18 +74,6 @@ Feature: Registration Page
 		And I should see none
 		And I should see Vegan
 		And I should see 50.00
-
-	Scenario: View stats
-		Given There is an upcoming conference in Anchorage AK
-		And Registration is open
-		And I am logged in as someguy@bikebike.org
-		And My name is Jeff
-		And I am a conference host
-		And I am registered for the conference
-		And I am on the stats page
-
-		Then I should see Total Registrations
-		And I click the Excel link
 
 	Scenario: Broadcast message
 		Given There is an upcoming conference in San Marcos TX

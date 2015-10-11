@@ -16,7 +16,7 @@
 							- day_schedule[:locations].each do |location, location_schedule|
 								%tr
 									%th
-										%a{href: "https://maps.google.com/maps?q=#{URI.escape(locations[location.to_s].address.gsub(/\s+/, '+'))}", target: :_blank}
+										%a{href: "https://maps.google.com/maps?q=#{URI.escape((locations[location.to_s].address || '').gsub(/\s+/, '+'))}", target: :_blank}
 											=locations[location.to_s].title
 									- skip = 0
 									- (times.first...times.last).step(0.5).each do |t|
