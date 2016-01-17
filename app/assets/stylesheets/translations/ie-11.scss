@@ -1,12 +1,12 @@
 /*
  *	../translations
- *	Browser: IE 11 (approximately 6.17% of all users)
+ *	Browser: IE 11.0 (approximately 6.45% of all users)
  *
  */
 
 $browser: ie;
 $browser_prefix: ms;
-$browser_version: 11;
+$browser_version: 11.0;
 $browser_type: desktop;
 
 //	CSS Compatibility
@@ -83,7 +83,7 @@ $browser_capabilities: (
 	"xhtmlsmil": n,
 	"wai-aria": a,
 	"geolocation": y,
-	"flexbox": y,
+	"flexbox": a,
 	"webgl": y,
 	"fileapi": a,
 	"shadowdom": n,
@@ -138,12 +138,13 @@ $browser_capabilities: (
 	"audio-api": n,
 	"css-regions": ax,
 	"spellcheck-attribute": y,
-	"fullscreen": yx,
+	"fullscreen": ax,
 	"css-exclusions": yx,
 	"requestanimationframe": y,
 	"input-range": y,
 	"matchmedia": y,
 	"input-datetime": n,
+	"document-execcommand": y,
 	"input-color": n,
 	"input-number": a,
 	"getboundingclientrect": y,
@@ -167,6 +168,7 @@ $browser_capabilities: (
 	"download": n,
 	"pointer": y,
 	"user-select-none": yx,
+	"input-file-accept": y,
 	"webp": n,
 	"input-autocomplete-onoff": a,
 	"intrinsic-width": n,
@@ -222,6 +224,7 @@ $browser_capabilities: (
 	"input-file-multiple": y,
 	"atob-btoa": y,
 	"css-appearance": n,
+	"objectrtc": n,
 	"css-background-offsets": y,
 	"css-supports-api": n,
 	"css-touch-action": y,
@@ -285,6 +288,7 @@ $browser_capabilities: (
 	"ol-reversed": n,
 	"css-first-letter": y,
 	"wbr-element": n,
+	"const": y,
 	"css-all": n,
 	"css-initial-value": n,
 	"css-letter-spacing": y,
@@ -292,6 +296,9 @@ $browser_capabilities: (
 	"insertadjacenthtml": y,
 	"let": y,
 	"arrow-functions": n,
+	"asmjs": n,
+	"lazyload": y,
+	"link-rel-dns-prefetch": y,
 	"link-rel-prerender": y,
 	"rest-parameters": n,
 	"css-cross-fade": n,
@@ -299,10 +306,31 @@ $browser_capabilities: (
 	"customevent": a,
 	"textcontent": y,
 	"addeventlistener": y,
+	"dispatchevent": y,
 	"documenthead": y,
 	"innertext": y,
+	"client-hints-dpr-width-viewport": n,
+	"link-rel-preconnect": n,
 	"netinfo": n,
-	"setimmediate": y
+	"setimmediate": y,
+	"es6-number": n,
+	"maxlength": y,
+	"proxy": n,
+	"keyboardevent-which": y,
+	"keyboardevent-charcode": y,
+	"keyboardevent-code": n,
+	"keyboardevent-location": y,
+	"keyboardevent-getmodifierstate": y,
+	"keyboardevent-key": y,
+	"brotli": n,
+	"element-closest": n,
+	"input-event": y,
+	"input-search": y,
+	"css-motion-paths": n,
+	"css-scroll-behavior": n,
+	"subresource-integrity": n,
+	"push-api": n,
+	"background-position-x-y": y
 );
 
 @import "bumbleberry-settings";

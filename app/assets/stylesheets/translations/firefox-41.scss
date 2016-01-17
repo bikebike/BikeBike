@@ -1,12 +1,12 @@
 /*
  *	../translations
- *	Browser: Firefox 41 (approximately 0.13% of all users)
+ *	Browser: Firefox 41.0 (approximately 0.27% of all users)
  *
  */
 
 $browser: firefox;
 $browser_prefix: moz;
-$browser_version: 41;
+$browser_version: 41.0;
 $browser_type: desktop;
 
 //	CSS Compatibility
@@ -55,7 +55,7 @@ $browser_capabilities: (
 	"font-feature": y,
 	"css-animation": y,
 	"css-gradients": y,
-	"css-canvas": u,
+	"css-canvas": n,
 	"css-reflections": n,
 	"css-masks": a,
 	"console-basic": y,
@@ -106,12 +106,12 @@ $browser_capabilities: (
 	"mpeg4": y,
 	"ogv": y,
 	"wordwrap": a,
-	"pointerlock": yx,
+	"pointerlock": y,
 	"object-fit": y,
 	"xhr2": y,
 	"minmaxwh": y,
 	"details": p,
-	"text-stroke": u,
+	"text-stroke": n,
 	"inline-block": y,
 	"notifications": y,
 	"stream": yx,
@@ -144,6 +144,7 @@ $browser_capabilities: (
 	"input-range": y,
 	"matchmedia": y,
 	"input-datetime": n,
+	"document-execcommand": y,
 	"input-color": y,
 	"input-number": y,
 	"getboundingclientrect": y,
@@ -165,8 +166,9 @@ $browser_capabilities: (
 	"svg-fragment": y,
 	"outline": y,
 	"download": y,
-	"pointer": a,
+	"pointer": pd,
 	"user-select-none": yx,
+	"input-file-accept": y,
 	"webp": p,
 	"input-autocomplete-onoff": a,
 	"intrinsic-width": ax,
@@ -174,7 +176,7 @@ $browser_capabilities: (
 	"template": y,
 	"opus": y,
 	"jpegxr": n,
-	"channel-messaging": nd,
+	"channel-messaging": y,
 	"css3-tabsize": ax,
 	"mutationobserver": y,
 	"css-selection": yx,
@@ -210,7 +212,7 @@ $browser_capabilities: (
 	"domcontentloaded": y,
 	"proximity": y,
 	"kerning-pairs-ligatures": y,
-	"iframe-seamless": u,
+	"iframe-seamless": n,
 	"css-image-orientation": y,
 	"picture": y,
 	"woff2": y,
@@ -221,7 +223,8 @@ $browser_capabilities: (
 	"imports": pd,
 	"input-file-multiple": y,
 	"atob-btoa": y,
-	"css-appearance": yx,
+	"css-appearance": ax,
+	"objectrtc": n,
 	"css-background-offsets": y,
 	"css-supports-api": y,
 	"css-touch-action": nd,
@@ -285,6 +288,7 @@ $browser_capabilities: (
 	"ol-reversed": y,
 	"css-first-letter": y,
 	"wbr-element": y,
+	"const": y,
 	"css-all": y,
 	"css-initial-value": y,
 	"css-letter-spacing": y,
@@ -292,6 +296,9 @@ $browser_capabilities: (
 	"insertadjacenthtml": y,
 	"let": nd,
 	"arrow-functions": y,
+	"asmjs": y,
+	"lazyload": n,
+	"link-rel-dns-prefetch": y,
 	"link-rel-prerender": n,
 	"rest-parameters": y,
 	"css-cross-fade": n,
@@ -299,10 +306,31 @@ $browser_capabilities: (
 	"customevent": y,
 	"textcontent": y,
 	"addeventlistener": y,
+	"dispatchevent": y,
 	"documenthead": y,
 	"innertext": n,
+	"client-hints-dpr-width-viewport": n,
+	"link-rel-preconnect": y,
 	"netinfo": n,
-	"setimmediate": n
+	"setimmediate": n,
+	"es6-number": y,
+	"maxlength": y,
+	"proxy": y,
+	"keyboardevent-which": y,
+	"keyboardevent-charcode": y,
+	"keyboardevent-code": y,
+	"keyboardevent-location": y,
+	"keyboardevent-getmodifierstate": y,
+	"keyboardevent-key": y,
+	"brotli": n,
+	"element-closest": y,
+	"input-event": y,
+	"input-search": y,
+	"css-motion-paths": n,
+	"css-scroll-behavior": y,
+	"subresource-integrity": n,
+	"push-api": n,
+	"background-position-x-y": n
 );
 
 @import "bumbleberry-settings";

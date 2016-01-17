@@ -1,12 +1,12 @@
 /*
  *	../application
- *	Browser: Opera 10.0-10.1 (approximately 0.04% of all users)
+ *	Browser: Opera 10.0 (approximately 0.03% of all users)
  *
  */
 
 $browser: opera;
 $browser_prefix: o;
-$browser_version: 10.0-10.1;
+$browser_version: 10.0;
 $browser_type: desktop;
 
 //	CSS Compatibility
@@ -144,6 +144,7 @@ $browser_capabilities: (
 	"input-range": y,
 	"matchmedia": n,
 	"input-datetime": y,
+	"document-execcommand": y,
 	"input-color": n,
 	"input-number": y,
 	"getboundingclientrect": a,
@@ -167,6 +168,7 @@ $browser_capabilities: (
 	"download": n,
 	"pointer": n,
 	"user-select-none": n,
+	"input-file-accept": n,
 	"webp": n,
 	"input-autocomplete-onoff": y,
 	"intrinsic-width": n,
@@ -174,7 +176,7 @@ $browser_capabilities: (
 	"template": n,
 	"opus": n,
 	"jpegxr": n,
-	"channel-messaging": u,
+	"channel-messaging": n,
 	"css3-tabsize": n,
 	"mutationobserver": n,
 	"css-selection": y,
@@ -220,8 +222,9 @@ $browser_capabilities: (
 	"custom-elements": n,
 	"imports": n,
 	"input-file-multiple": n,
-	"atob-btoa": u,
+	"atob-btoa": n,
 	"css-appearance": n,
+	"objectrtc": n,
 	"css-background-offsets": n,
 	"css-supports-api": n,
 	"css-touch-action": n,
@@ -237,7 +240,7 @@ $browser_capabilities: (
 	"link-icon-png": y,
 	"link-icon-svg": n,
 	"css-media-resolution": ax,
-	"xml-serializer": u,
+	"xml-serializer": a,
 	"css-image-set": n,
 	"css-boxdecorationbreak": n,
 	"object-observe": n,
@@ -285,6 +288,7 @@ $browser_capabilities: (
 	"ol-reversed": n,
 	"css-first-letter": a,
 	"wbr-element": y,
+	"const": a,
 	"css-all": n,
 	"css-initial-value": n,
 	"css-letter-spacing": a,
@@ -292,6 +296,9 @@ $browser_capabilities: (
 	"insertadjacenthtml": y,
 	"let": n,
 	"arrow-functions": n,
+	"asmjs": n,
+	"lazyload": n,
+	"link-rel-dns-prefetch": n,
 	"link-rel-prerender": n,
 	"rest-parameters": n,
 	"css-cross-fade": n,
@@ -299,10 +306,31 @@ $browser_capabilities: (
 	"customevent": n,
 	"textcontent": y,
 	"addeventlistener": y,
+	"dispatchevent": y,
 	"documenthead": n,
 	"innertext": y,
+	"client-hints-dpr-width-viewport": n,
+	"link-rel-preconnect": n,
 	"netinfo": n,
-	"setimmediate": n
+	"setimmediate": n,
+	"es6-number": n,
+	"maxlength": a,
+	"proxy": n,
+	"keyboardevent-which": y,
+	"keyboardevent-charcode": n,
+	"keyboardevent-code": n,
+	"keyboardevent-location": n,
+	"keyboardevent-getmodifierstate": n,
+	"keyboardevent-key": n,
+	"brotli": n,
+	"element-closest": n,
+	"input-event": u,
+	"input-search": n,
+	"css-motion-paths": n,
+	"css-scroll-behavior": n,
+	"subresource-integrity": n,
+	"push-api": n,
+	"background-position-x-y": n
 );
 
 @import "bumbleberry-settings";

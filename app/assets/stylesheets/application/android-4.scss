@@ -1,12 +1,12 @@
 /*
  *	../application
- *	Browser: Android Browser 4 (approximately 0.34% of all users)
+ *	Browser: Android Browser 4.0 (approximately 0.1% of all users)
  *
  */
 
 $browser: android;
 $browser_prefix: webkit;
-$browser_version: 4;
+$browser_version: 4.0;
 $browser_type: mobile;
 
 //	CSS Compatibility
@@ -144,6 +144,7 @@ $browser_capabilities: (
 	"input-range": a,
 	"matchmedia": y,
 	"input-datetime": n,
+	"document-execcommand": n,
 	"input-color": n,
 	"input-number": a,
 	"getboundingclientrect": y,
@@ -167,6 +168,7 @@ $browser_capabilities: (
 	"download": n,
 	"pointer": p,
 	"user-select-none": yx,
+	"input-file-accept": a,
 	"webp": a,
 	"input-autocomplete-onoff": y,
 	"intrinsic-width": n,
@@ -221,7 +223,8 @@ $browser_capabilities: (
 	"imports": n,
 	"input-file-multiple": n,
 	"atob-btoa": y,
-	"css-appearance": yx,
+	"css-appearance": ax,
+	"objectrtc": n,
 	"css-background-offsets": n,
 	"css-supports-api": n,
 	"css-touch-action": n,
@@ -285,6 +288,7 @@ $browser_capabilities: (
 	"ol-reversed": n,
 	"css-first-letter": y,
 	"wbr-element": y,
+	"const": a,
 	"css-all": n,
 	"css-initial-value": y,
 	"css-letter-spacing": a,
@@ -292,6 +296,9 @@ $browser_capabilities: (
 	"insertadjacenthtml": y,
 	"let": n,
 	"arrow-functions": n,
+	"asmjs": n,
+	"lazyload": n,
+	"link-rel-dns-prefetch": u,
 	"link-rel-prerender": n,
 	"rest-parameters": n,
 	"css-cross-fade": n,
@@ -299,10 +306,31 @@ $browser_capabilities: (
 	"customevent": a,
 	"textcontent": y,
 	"addeventlistener": y,
+	"dispatchevent": y,
 	"documenthead": y,
 	"innertext": y,
+	"client-hints-dpr-width-viewport": n,
+	"link-rel-preconnect": n,
 	"netinfo": a,
-	"setimmediate": n
+	"setimmediate": n,
+	"es6-number": n,
+	"maxlength": y,
+	"proxy": n,
+	"keyboardevent-which": y,
+	"keyboardevent-charcode": y,
+	"keyboardevent-code": n,
+	"keyboardevent-location": a,
+	"keyboardevent-getmodifierstate": n,
+	"keyboardevent-key": n,
+	"brotli": n,
+	"element-closest": n,
+	"input-event": y,
+	"input-search": y,
+	"css-motion-paths": n,
+	"css-scroll-behavior": n,
+	"subresource-integrity": n,
+	"push-api": n,
+	"background-position-x-y": y
 );
 
 @import "bumbleberry-settings";

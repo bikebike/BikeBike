@@ -1,6 +1,6 @@
 /*
  *	web-fonts
- *	Browser: Firefox 3.6 (approximately 0.04% of all users)
+ *	Browser: Firefox 3.6 (approximately 0.03% of all users)
  *
  */
 
@@ -145,6 +145,7 @@ $browser_capabilities: (
 	"input-range": n,
 	"matchmedia": n,
 	"input-datetime": n,
+	"document-execcommand": n,
 	"input-color": n,
 	"input-number": n,
 	"getboundingclientrect": a,
@@ -168,6 +169,7 @@ $browser_capabilities: (
 	"download": n,
 	"pointer": n,
 	"user-select-none": yx,
+	"input-file-accept": n,
 	"webp": n,
 	"input-autocomplete-onoff": y,
 	"intrinsic-width": ax,
@@ -222,7 +224,8 @@ $browser_capabilities: (
 	"imports": n,
 	"input-file-multiple": y,
 	"atob-btoa": y,
-	"css-appearance": yx,
+	"css-appearance": ax,
+	"objectrtc": n,
 	"css-background-offsets": n,
 	"css-supports-api": n,
 	"css-touch-action": n,
@@ -286,6 +289,7 @@ $browser_capabilities: (
 	"ol-reversed": n,
 	"css-first-letter": y,
 	"wbr-element": y,
+	"const": a,
 	"css-all": n,
 	"css-initial-value": n,
 	"css-letter-spacing": y,
@@ -293,6 +297,9 @@ $browser_capabilities: (
 	"insertadjacenthtml": n,
 	"let": nd,
 	"arrow-functions": n,
+	"asmjs": n,
+	"lazyload": n,
+	"link-rel-dns-prefetch": y,
 	"link-rel-prerender": n,
 	"rest-parameters": n,
 	"css-cross-fade": n,
@@ -300,10 +307,31 @@ $browser_capabilities: (
 	"customevent": n,
 	"textcontent": y,
 	"addeventlistener": y,
+	"dispatchevent": y,
 	"documenthead": n,
 	"innertext": n,
+	"client-hints-dpr-width-viewport": n,
+	"link-rel-preconnect": n,
 	"netinfo": n,
-	"setimmediate": n
+	"setimmediate": n,
+	"es6-number": n,
+	"maxlength": a,
+	"proxy": n,
+	"keyboardevent-which": y,
+	"keyboardevent-charcode": y,
+	"keyboardevent-code": n,
+	"keyboardevent-location": n,
+	"keyboardevent-getmodifierstate": n,
+	"keyboardevent-key": n,
+	"brotli": n,
+	"element-closest": n,
+	"input-event": y,
+	"input-search": n,
+	"css-motion-paths": n,
+	"css-scroll-behavior": n,
+	"subresource-integrity": n,
+	"push-api": n,
+	"background-position-x-y": n
 );
 
 @import "bumbleberry-settings";
