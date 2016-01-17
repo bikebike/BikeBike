@@ -1,6 +1,10 @@
 /*
  *	../translations
+<<<<<<< HEAD
  *	Browser: Blackberry Browser 7.0 (approximately 0.09% of all users)
+=======
+ *	Browser: Blackberry Browser 7 (approximately 0.09% of all users)
+>>>>>>> 8687c10... Removed compiled files
  *
  */
 
@@ -328,9 +332,13 @@ $browser_capabilities: (
 	"input-search": y,
 	"css-motion-paths": n,
 	"css-scroll-behavior": n,
+<<<<<<< HEAD
 	"subresource-integrity": n,
 	"push-api": n,
 	"background-position-x-y": y
+=======
+	"subresource-integrity": n
+>>>>>>> 8687c10... Removed compiled files
 );
 
 @import "bumbleberry-settings";

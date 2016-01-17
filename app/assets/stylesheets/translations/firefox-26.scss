@@ -1,6 +1,10 @@
 /*
  *	../translations
+<<<<<<< HEAD
  *	Browser: Firefox 26.0 (approximately 0.02% of all users)
+=======
+ *	Browser: Firefox 26 (approximately 0.02% of all users)
+>>>>>>> 8687c10... Removed compiled files
  *
  */
 
@@ -328,9 +332,13 @@ $browser_capabilities: (
 	"input-search": y,
 	"css-motion-paths": n,
 	"css-scroll-behavior": n,
+<<<<<<< HEAD
 	"subresource-integrity": n,
 	"push-api": n,
 	"background-position-x-y": n
+=======
+	"subresource-integrity": n
+>>>>>>> 8687c10... Removed compiled files
 );
 
 @import "bumbleberry-settings";

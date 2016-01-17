@@ -1,6 +1,10 @@
 /*
  *	../translations
+<<<<<<< HEAD
  *	Browser: Chrome 33.0 (approximately 0.1% of all users)
+=======
+ *	Browser: Chrome 33 (approximately 0.11% of all users)
+>>>>>>> 8687c10... Removed compiled files
  *
  */
 
@@ -315,7 +319,11 @@ $browser_capabilities: (
 	"setimmediate": n,
 	"es6-number": a,
 	"maxlength": y,
+<<<<<<< HEAD
 	"proxy": nd,
+=======
+	"proxy": n,
+>>>>>>> 8687c10... Removed compiled files
 	"keyboardevent-which": y,
 	"keyboardevent-charcode": y,
 	"keyboardevent-code": n,
@@ -328,9 +336,13 @@ $browser_capabilities: (
 	"input-search": y,
 	"css-motion-paths": n,
 	"css-scroll-behavior": n,
+<<<<<<< HEAD
 	"subresource-integrity": n,
 	"push-api": n,
 	"background-position-x-y": y
+=======
+	"subresource-integrity": n
+>>>>>>> 8687c10... Removed compiled files
 );
 
 @import "bumbleberry-settings";
