@@ -1,12 +1,12 @@
 /*
  *	../application
- *	Browser: IE Mobile 10 (approximately 0.18% of all users)
+ *	Browser: IE Mobile 10.0 (approximately 0.16% of all users)
  *
  */
 
 $browser: ie_mob;
 $browser_prefix: ms;
-$browser_version: 10;
+$browser_version: 10.0;
 $browser_type: mobile;
 
 //	CSS Compatibility
@@ -144,6 +144,7 @@ $browser_capabilities: (
 	"input-range": y,
 	"matchmedia": y,
 	"input-datetime": n,
+	"document-execcommand": n,
 	"input-color": n,
 	"input-number": a,
 	"getboundingclientrect": y,
@@ -167,6 +168,7 @@ $browser_capabilities: (
 	"download": n,
 	"pointer": ax,
 	"user-select-none": yx,
+	"input-file-accept": n,
 	"webp": n,
 	"input-autocomplete-onoff": a,
 	"intrinsic-width": n,
@@ -222,6 +224,7 @@ $browser_capabilities: (
 	"input-file-multiple": n,
 	"atob-btoa": y,
 	"css-appearance": n,
+	"objectrtc": n,
 	"css-background-offsets": y,
 	"css-supports-api": n,
 	"css-touch-action": yx,
@@ -285,6 +288,7 @@ $browser_capabilities: (
 	"ol-reversed": n,
 	"css-first-letter": y,
 	"wbr-element": n,
+	"const": n,
 	"css-all": n,
 	"css-initial-value": n,
 	"css-letter-spacing": y,
@@ -292,6 +296,9 @@ $browser_capabilities: (
 	"insertadjacenthtml": y,
 	"let": n,
 	"arrow-functions": n,
+	"asmjs": n,
+	"lazyload": n,
+	"link-rel-dns-prefetch": n,
 	"link-rel-prerender": n,
 	"rest-parameters": n,
 	"css-cross-fade": n,
@@ -299,10 +306,31 @@ $browser_capabilities: (
 	"customevent": a,
 	"textcontent": y,
 	"addeventlistener": y,
+	"dispatchevent": y,
 	"documenthead": y,
 	"innertext": y,
+	"client-hints-dpr-width-viewport": n,
+	"link-rel-preconnect": n,
 	"netinfo": n,
-	"setimmediate": y
+	"setimmediate": y,
+	"es6-number": n,
+	"maxlength": y,
+	"proxy": n,
+	"keyboardevent-which": y,
+	"keyboardevent-charcode": n,
+	"keyboardevent-code": n,
+	"keyboardevent-location": y,
+	"keyboardevent-getmodifierstate": y,
+	"keyboardevent-key": y,
+	"brotli": n,
+	"element-closest": n,
+	"input-event": y,
+	"input-search": y,
+	"css-motion-paths": n,
+	"css-scroll-behavior": n,
+	"subresource-integrity": n,
+	"push-api": n,
+	"background-position-x-y": y
 );
 
 @import "bumbleberry-settings";

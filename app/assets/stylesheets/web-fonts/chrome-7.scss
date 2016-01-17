@@ -1,12 +1,12 @@
 /*
  *	web-fonts
- *	Browser: Chrome 7 (approximately 0.01% of all users)
+ *	Browser: Chrome 7.0 (approximately 0.01% of all users)
  *
  */
 
 $browser: chrome;
 $browser_prefix: webkit;
-$browser_version: 7;
+$browser_version: 7.0;
 $browser_type: desktop;
 
 //	CSS Compatibility
@@ -145,6 +145,7 @@ $browser_capabilities: (
 	"input-range": y,
 	"matchmedia": n,
 	"input-datetime": n,
+	"document-execcommand": y,
 	"input-color": n,
 	"input-number": y,
 	"getboundingclientrect": y,
@@ -168,6 +169,7 @@ $browser_capabilities: (
 	"download": n,
 	"pointer": n,
 	"user-select-none": yx,
+	"input-file-accept": u,
 	"webp": p,
 	"input-autocomplete-onoff": n,
 	"intrinsic-width": n,
@@ -222,7 +224,8 @@ $browser_capabilities: (
 	"imports": n,
 	"input-file-multiple": y,
 	"atob-btoa": y,
-	"css-appearance": yx,
+	"css-appearance": ax,
+	"objectrtc": n,
 	"css-background-offsets": n,
 	"css-supports-api": n,
 	"css-touch-action": n,
@@ -270,11 +273,11 @@ $browser_capabilities: (
 	"upgradeinsecurerequests": n,
 	"publickeypinning": n,
 	"input-email-tel-url": y,
-	"fieldset-disabled": u,
+	"fieldset-disabled": n,
 	"font-variant-alternates": n,
 	"form-attribute": n,
 	"es5": a,
-	"page-transition-events": u,
+	"page-transition-events": y,
 	"ogg-vorbis": y,
 	"meter": n,
 	"progress": n,
@@ -286,6 +289,7 @@ $browser_capabilities: (
 	"ol-reversed": n,
 	"css-first-letter": u,
 	"wbr-element": y,
+	"const": a,
 	"css-all": n,
 	"css-initial-value": y,
 	"css-letter-spacing": a,
@@ -293,6 +297,9 @@ $browser_capabilities: (
 	"insertadjacenthtml": y,
 	"let": n,
 	"arrow-functions": n,
+	"asmjs": n,
+	"lazyload": n,
+	"link-rel-dns-prefetch": y,
 	"link-rel-prerender": n,
 	"rest-parameters": n,
 	"css-cross-fade": n,
@@ -300,10 +307,31 @@ $browser_capabilities: (
 	"customevent": u,
 	"textcontent": y,
 	"addeventlistener": y,
+	"dispatchevent": y,
 	"documenthead": y,
 	"innertext": y,
+	"client-hints-dpr-width-viewport": n,
+	"link-rel-preconnect": n,
 	"netinfo": n,
-	"setimmediate": n
+	"setimmediate": n,
+	"es6-number": n,
+	"maxlength": y,
+	"proxy": n,
+	"keyboardevent-which": y,
+	"keyboardevent-charcode": y,
+	"keyboardevent-code": n,
+	"keyboardevent-location": a,
+	"keyboardevent-getmodifierstate": n,
+	"keyboardevent-key": n,
+	"brotli": n,
+	"element-closest": n,
+	"input-event": u,
+	"input-search": u,
+	"css-motion-paths": n,
+	"css-scroll-behavior": n,
+	"subresource-integrity": n,
+	"push-api": n,
+	"background-position-x-y": y
 );
 
 @import "bumbleberry-settings";

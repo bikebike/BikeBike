@@ -1,6 +1,6 @@
 /*
  *	web-fonts
- *	Browser: Android Browser 4.4 (approximately 0.02% of all users)
+ *	Browser: Android Browser 4.4 (approximately 2.03% of all users)
  *
  */
 
@@ -145,6 +145,7 @@ $browser_capabilities: (
 	"input-range": y,
 	"matchmedia": y,
 	"input-datetime": y,
+	"document-execcommand": y,
 	"input-color": y,
 	"input-number": a,
 	"getboundingclientrect": y,
@@ -168,6 +169,7 @@ $browser_capabilities: (
 	"download": y,
 	"pointer": p,
 	"user-select-none": yx,
+	"input-file-accept": n,
 	"webp": y,
 	"input-autocomplete-onoff": y,
 	"intrinsic-width": yx,
@@ -222,7 +224,8 @@ $browser_capabilities: (
 	"imports": n,
 	"input-file-multiple": n,
 	"atob-btoa": y,
-	"css-appearance": yx,
+	"css-appearance": ax,
+	"objectrtc": n,
 	"css-background-offsets": y,
 	"css-supports-api": y,
 	"css-touch-action": n,
@@ -286,6 +289,7 @@ $browser_capabilities: (
 	"ol-reversed": y,
 	"css-first-letter": y,
 	"wbr-element": y,
+	"const": a,
 	"css-all": n,
 	"css-initial-value": y,
 	"css-letter-spacing": y,
@@ -293,6 +297,9 @@ $browser_capabilities: (
 	"insertadjacenthtml": y,
 	"let": n,
 	"arrow-functions": n,
+	"asmjs": n,
+	"lazyload": n,
+	"link-rel-dns-prefetch": u,
 	"link-rel-prerender": n,
 	"rest-parameters": n,
 	"css-cross-fade": yx,
@@ -300,10 +307,31 @@ $browser_capabilities: (
 	"customevent": y,
 	"textcontent": y,
 	"addeventlistener": y,
+	"dispatchevent": y,
 	"documenthead": y,
 	"innertext": y,
+	"client-hints-dpr-width-viewport": n,
+	"link-rel-preconnect": n,
 	"netinfo": n,
-	"setimmediate": n
+	"setimmediate": n,
+	"es6-number": a,
+	"maxlength": y,
+	"proxy": n,
+	"keyboardevent-which": a,
+	"keyboardevent-charcode": y,
+	"keyboardevent-code": n,
+	"keyboardevent-location": y,
+	"keyboardevent-getmodifierstate": y,
+	"keyboardevent-key": n,
+	"brotli": n,
+	"element-closest": n,
+	"input-event": y,
+	"input-search": y,
+	"css-motion-paths": n,
+	"css-scroll-behavior": n,
+	"subresource-integrity": n,
+	"push-api": n,
+	"background-position-x-y": y
 );
 
 @import "bumbleberry-settings";

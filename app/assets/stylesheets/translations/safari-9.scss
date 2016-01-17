@@ -1,12 +1,12 @@
 /*
  *	../translations
- *	Browser: Safari 9 (approximately 0.02% of all users)
+ *	Browser: Safari 9.0 (approximately 1.54% of all users)
  *
  */
 
 $browser: safari;
 $browser_prefix: webkit;
-$browser_version: 9;
+$browser_version: 9.0;
 $browser_type: desktop;
 
 //	CSS Compatibility
@@ -43,7 +43,7 @@ $browser_capabilities: (
 	"css3-colors": y,
 	"css3-boxsizing": y,
 	"css-mediaqueries": y,
-	"multicolumn": y,
+	"multicolumn": a,
 	"border-radius": y,
 	"transforms2d": y,
 	"use-strict": y,
@@ -144,6 +144,7 @@ $browser_capabilities: (
 	"input-range": y,
 	"matchmedia": y,
 	"input-datetime": n,
+	"document-execcommand": y,
 	"input-color": n,
 	"input-number": y,
 	"getboundingclientrect": y,
@@ -156,7 +157,7 @@ $browser_capabilities: (
 	"css-filters": yx,
 	"getcomputedstyle": y,
 	"mp3": y,
-	"word-break": a,
+	"word-break": y,
 	"viewport-units": y,
 	"contentsecuritypolicy": y,
 	"pagevisibility": y,
@@ -167,6 +168,7 @@ $browser_capabilities: (
 	"download": n,
 	"pointer": p,
 	"user-select-none": yx,
+	"input-file-accept": a,
 	"webp": n,
 	"input-autocomplete-onoff": a,
 	"intrinsic-width": ax,
@@ -221,7 +223,8 @@ $browser_capabilities: (
 	"imports": p,
 	"input-file-multiple": y,
 	"atob-btoa": y,
-	"css-appearance": yx,
+	"css-appearance": ax,
+	"objectrtc": n,
 	"css-background-offsets": y,
 	"css-supports-api": y,
 	"css-touch-action": n,
@@ -254,16 +257,16 @@ $browser_capabilities: (
 	"currentcolor": y,
 	"input-pattern": a,
 	"registerprotocolhandler": n,
-	"css-snappoints": yx,
+	"css-snappoints": ax,
 	"input-minlength": n,
-	"css-media-interaction": u,
+	"css-media-interaction": y,
 	"ime": n,
 	"font-smooth": ax,
 	"audiotracks": y,
 	"videotracks": y,
 	"contentsecuritypolicy2": n,
 	"permissions-api": n,
-	"http2": y,
+	"http2": a,
 	"font-kerning": yx,
 	"jpeg2000": y,
 	"upgradeinsecurerequests": n,
@@ -281,10 +284,11 @@ $browser_capabilities: (
 	"css-element-function": n,
 	"u2f": n,
 	"aac": y,
-	"link-rel-prefetch": u,
+	"link-rel-prefetch": n,
 	"ol-reversed": y,
 	"css-first-letter": y,
 	"wbr-element": y,
+	"const": a,
 	"css-all": n,
 	"css-initial-value": y,
 	"css-letter-spacing": y,
@@ -292,6 +296,9 @@ $browser_capabilities: (
 	"insertadjacenthtml": y,
 	"let": n,
 	"arrow-functions": n,
+	"asmjs": n,
+	"lazyload": n,
+	"link-rel-dns-prefetch": y,
 	"link-rel-prerender": n,
 	"rest-parameters": n,
 	"css-cross-fade": yx,
@@ -299,10 +306,31 @@ $browser_capabilities: (
 	"customevent": y,
 	"textcontent": y,
 	"addeventlistener": y,
+	"dispatchevent": y,
 	"documenthead": y,
 	"innertext": y,
+	"client-hints-dpr-width-viewport": n,
+	"link-rel-preconnect": n,
 	"netinfo": n,
-	"setimmediate": n
+	"setimmediate": n,
+	"es6-number": y,
+	"maxlength": y,
+	"proxy": n,
+	"keyboardevent-which": y,
+	"keyboardevent-charcode": y,
+	"keyboardevent-code": n,
+	"keyboardevent-location": y,
+	"keyboardevent-getmodifierstate": n,
+	"keyboardevent-key": n,
+	"brotli": n,
+	"element-closest": y,
+	"input-event": y,
+	"input-search": y,
+	"css-motion-paths": n,
+	"css-scroll-behavior": n,
+	"subresource-integrity": n,
+	"push-api": n,
+	"background-position-x-y": y
 );
 
 @import "bumbleberry-settings";
