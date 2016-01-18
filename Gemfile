@@ -13,14 +13,8 @@ else
 	gem 'lingua_franca', :git => 'git://github.com/lingua-franca/lingua_franca.git'
 end
 
-#if Dir.exists?('../lingua_franca_commit_and_deploy')
-#	gem 'lingua_franca_commit_and_deploy', :path => '../lingua_franca_commit_and_deploy'
-#else
-#	gem 'lingua_franca_commit_and_deploy', :git => 'git://github.com/lingua-franca/lingua_franca_commit_and_deploy.git'
-#end
-
 gem 'tzinfo-data'
-gem 'sass'#, '~> 3.4.13'
+gem 'sass'
 gem 'sass-rails'
 
 if Dir.exists?('../bumbleberry')

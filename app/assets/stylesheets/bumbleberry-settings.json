@@ -47,11 +47,7 @@
     },
     "grid-push": [1, 2],
     "grid-pull": [1, 2],
-<<<<<<< HEAD
     "font-loading-method": "http2",
-=======
-    "font-loading-method": "all",
->>>>>>> 8687c10... Removed compiled files
     "fonts": {
         "primary": {
             "name": "SourceSansPro-Regular",

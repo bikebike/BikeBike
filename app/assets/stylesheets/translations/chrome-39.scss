@@ -1,10 +1,6 @@
 /*
  *	../translations
-<<<<<<< HEAD
  *	Browser: Chrome 39.0 (approximately 0.16% of all users)
-=======
- *	Browser: Chrome 39 (approximately 0.21% of all users)
->>>>>>> 8687c10... Removed compiled files
  *
  */
 
@@ -332,13 +328,9 @@ $browser_capabilities: (
 	"input-search": y,
 	"css-motion-paths": n,
 	"css-scroll-behavior": n,
-<<<<<<< HEAD
 	"subresource-integrity": n,
 	"push-api": n,
 	"background-position-x-y": y
-=======
-	"subresource-integrity": n
->>>>>>> 8687c10... Removed compiled files
 );
 
 @import "bumbleberry-settings";

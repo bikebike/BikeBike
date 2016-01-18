@@ -72,6 +72,7 @@ brakeman.html
 /app/assets/stylesheets/email-example/*
 /app/assets/stylesheets/translations/*
 /app/assets/stylesheets/web-fonts/*
+/app/assets/stylesheets/translations/*
 
 # Ignore test artifacts
 /config/locales/data/html_records/*
