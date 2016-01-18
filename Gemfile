@@ -14,7 +14,7 @@ else
 end
 
 gem 'tzinfo-data'
-gem 'sass'#, '~> 3.4.13'
+gem 'sass'
 gem 'sass-rails'
 
 if Dir.exists?('../bumbleberry')

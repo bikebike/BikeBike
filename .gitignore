@@ -51,8 +51,6 @@ pickle-email-*.html
 # We'll be testing in 'preview' to avoid clashes 
 Gemfile.lock
 
-
-
 # Ignore Redis' dataset snapshot
 dump.rdb
 
@@ -74,6 +72,10 @@ brakeman.html
 /app/assets/stylesheets/email-example/*
 /app/assets/stylesheets/translations/*
 /app/assets/stylesheets/web-fonts/*
+/app/assets/stylesheets/translations/*
+
+# Ignore test artifacts
+/config/locales/data/html_records/*
 
 # Ignore sensitive data
 /config/settings/local.rb
