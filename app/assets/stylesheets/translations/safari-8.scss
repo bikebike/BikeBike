@@ -1,6 +1,6 @@
 /*
  *	../translations
- *	Browser: Safari 8.0 (approximately 0.41% of all users)
+ *	Browser: Safari 8.0 (approximately 0.26% of all users)
  *
  */
 
@@ -23,6 +23,7 @@ $browser_capabilities: (
 	"getelementsbyclassname": y,
 	"forms": a,
 	"html5semantic": y,
+	"css-line-clamp": yx,
 	"offline-apps": y,
 	"webworkers": y,
 	"fontface": y,
@@ -163,7 +164,7 @@ $browser_capabilities: (
 	"pagevisibility": y,
 	"stricttransportsecurity": y,
 	"style-scoped": n,
-	"svg-fragment": y,
+	"svg-fragment": a,
 	"outline": y,
 	"download": n,
 	"pointer": p,
@@ -252,7 +253,7 @@ $browser_capabilities: (
 	"css-text-align-last": n,
 	"css-logical-props": ax,
 	"fetch": n,
-	"referrer-policy": y,
+	"referrer-policy": a,
 	"background-attachment": y,
 	"currentcolor": y,
 	"input-pattern": a,
@@ -329,8 +330,29 @@ $browser_capabilities: (
 	"css-motion-paths": n,
 	"css-scroll-behavior": n,
 	"subresource-integrity": n,
+	"css-in-out-of-range": a,
 	"push-api": n,
-	"background-position-x-y": y
+	"background-position-x-y": y,
+	"css-revert-value": n,
+	"css-widows-orphans": y,
+	"web-bluetooth": n,
+	"scrollintoview": a,
+	"css-nth-child-of": n,
+	"focusin-focusout-events": y,
+	"css-matches-pseudo": ax,
+	"rel-noopener": n,
+	"css-text-justify": n,
+	"css-scrollbar": yx,
+	"link-rel-preload": n,
+	"css-case-insensitive": n,
+	"css-default-pseudo": a,
+	"css-optional-pseudo": y,
+	"css-indeterminate-pseudo": a,
+	"webgl2": n,
+	"document-currentscript": y,
+	"css-descendant-gtgt": n,
+	"css-has": n,
+	"css-not-sel-list": n
 );
 
 @import "bumbleberry-settings";

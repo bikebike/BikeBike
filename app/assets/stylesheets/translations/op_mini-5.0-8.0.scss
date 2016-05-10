@@ -1,6 +1,6 @@
 /*
  *	../translations
- *	Browser: Opera Mini 5.0 (approximately 4.86% of all users)
+ *	Browser: Opera Mini 5.0 (approximately 5.04% of all users)
  *
  */
 
@@ -23,6 +23,7 @@ $browser_capabilities: (
 	"getelementsbyclassname": y,
 	"forms": n,
 	"html5semantic": a,
+	"css-line-clamp": n,
 	"offline-apps": n,
 	"webworkers": n,
 	"fontface": n,
@@ -329,8 +330,29 @@ $browser_capabilities: (
 	"css-motion-paths": n,
 	"css-scroll-behavior": n,
 	"subresource-integrity": n,
+	"css-in-out-of-range": a,
 	"push-api": n,
-	"background-position-x-y": n
+	"background-position-x-y": n,
+	"css-revert-value": n,
+	"css-widows-orphans": y,
+	"web-bluetooth": n,
+	"scrollintoview": n,
+	"css-nth-child-of": n,
+	"focusin-focusout-events": n,
+	"css-matches-pseudo": n,
+	"rel-noopener": n,
+	"css-text-justify": n,
+	"css-scrollbar": n,
+	"link-rel-preload": n,
+	"css-case-insensitive": n,
+	"css-default-pseudo": a,
+	"css-optional-pseudo": a,
+	"css-indeterminate-pseudo": a,
+	"webgl2": n,
+	"document-currentscript": n,
+	"css-descendant-gtgt": n,
+	"css-has": n,
+	"css-not-sel-list": n
 );
 
 @import "bumbleberry-settings";

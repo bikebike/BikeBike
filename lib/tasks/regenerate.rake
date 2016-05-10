@@ -18,9 +18,10 @@ namespace :regenerate do
 	end
 
 	task all: :environment do
-		Conference.all.each { |m| m.poster.recreate_versions! }
-		Organization.all.each {|m| m.avatar.recreate_versions!}
-		Conference.all.each {|m| m.cover.recreate_versions!}
-		Organization.all.each {|m| m.cover.recreate_versions!}
+		CarrierWave.clean_cached_files!
+		Conference.all.each { |m| m.poster.recreate_versions! } if Object.const_defined?(Conference)
+		Organization.all.each {|m| m.avatar.recreate_versions!} if Object.const_defined?(Organization)
+		Conference.all.each {|m| m.cover.recreate_versions!} if Object.const_defined?(Conference)
+		Organization.all.each {|m| m.cover.recreate_versions!} if Object.const_defined?(Organization)
 	end
 end

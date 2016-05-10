@@ -6,6 +6,7 @@ gem 'haml'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'coffee-rails', '~> 4.0.0'
+gem 'nokogiri', '~> 1.6.8.rc2'
 
 if Dir.exists?('../lingua_franca')
 	gem 'lingua_franca', :path => '../lingua_franca'
@@ -33,8 +34,8 @@ gem 'nested_form'
 gem 'acts_as_list'
 gem 'geocoder'
 gem 'paper_trail', '~> 3.0.5'
-gem 'font-awesome-rails'
-gem 'wysiwyg-rails'
+#gem 'font-awesome-rails'
+#gem 'wysiwyg-rails'
 gem 'sitemap_generator'
 gem 'activerecord-session_store'
 gem 'paypal-express', '0.7.1'
@@ -59,9 +60,9 @@ end
 
 group :test do
 	gem 'gherkin3', '>= 3.1.0'
-	gem 'cucumber', :git => "git://github.com/cucumber/cucumber-ruby.git", branch: "integrate-gherkin3-parser"
-	gem 'cucumber-core', :git => "git://github.com/cucumber/cucumber-ruby-core.git", branch: "integrate-gherkin3-parser"
-	gem 'cucumber-rails', :git => "git://github.com/cucumber/cucumber-rails.git", require: false
+	gem 'cucumber'#, :git => "git://github.com/cucumber/cucumber-ruby.git", branch: "integrate-gherkin3-parser"
+	gem 'cucumber-core'#, :git => "git://github.com/cucumber/cucumber-ruby-core.git", branch: "integrate-gherkin3-parser"
+	gem 'cucumber-rails'#, :git => "git://github.com/cucumber/cucumber-rails.git", require: false
 
 	#gem 'capybara'
     gem 'poltergeist'

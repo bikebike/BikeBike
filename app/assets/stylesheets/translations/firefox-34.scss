@@ -1,6 +1,6 @@
 /*
  *	../translations
- *	Browser: Firefox 34.0 (approximately 0.07% of all users)
+ *	Browser: Firefox 34.0 (approximately 0.05% of all users)
  *
  */
 
@@ -23,6 +23,7 @@ $browser_capabilities: (
 	"getelementsbyclassname": y,
 	"forms": a,
 	"html5semantic": y,
+	"css-line-clamp": n,
 	"offline-apps": y,
 	"webworkers": y,
 	"fontface": y,
@@ -262,7 +263,7 @@ $browser_capabilities: (
 	"css-media-interaction": n,
 	"ime": n,
 	"font-smooth": ax,
-	"audiotracks": n,
+	"audiotracks": nd,
 	"videotracks": n,
 	"contentsecuritypolicy2": a,
 	"permissions-api": n,
@@ -329,8 +330,29 @@ $browser_capabilities: (
 	"css-motion-paths": n,
 	"css-scroll-behavior": n,
 	"subresource-integrity": n,
+	"css-in-out-of-range": y,
 	"push-api": n,
-	"background-position-x-y": n
+	"background-position-x-y": n,
+	"css-revert-value": n,
+	"css-widows-orphans": n,
+	"web-bluetooth": n,
+	"scrollintoview": a,
+	"css-nth-child-of": n,
+	"focusin-focusout-events": n,
+	"css-matches-pseudo": ax,
+	"rel-noopener": n,
+	"css-text-justify": n,
+	"css-scrollbar": n,
+	"link-rel-preload": n,
+	"css-case-insensitive": n,
+	"css-default-pseudo": y,
+	"css-optional-pseudo": y,
+	"css-indeterminate-pseudo": a,
+	"webgl2": nd,
+	"document-currentscript": y,
+	"css-descendant-gtgt": n,
+	"css-has": n,
+	"css-not-sel-list": n
 );
 
 @import "bumbleberry-settings";

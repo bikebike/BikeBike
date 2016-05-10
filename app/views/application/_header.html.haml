@@ -12,4 +12,6 @@
 	#header-title.short{style: style}
 		= (render banner_image, {:image => image}) if banner_image
 		= cover.html_safe if cover
-		%h1=_(@page_title || "page_titles.#{page_group.to_s}.#{page_key.to_s}")
+		= row do
+			= columns do
+				%h1=_(@page_title || "page_titles.#{page_group.to_s}.#{page_key.to_s}")

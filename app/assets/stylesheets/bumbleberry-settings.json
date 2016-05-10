@@ -1,6 +1,6 @@
 {
     "stylesheets": ["application", "translations", "email-example"],
-    "background-color": "#E7E7E7",
+    "background-color": "#FFFEFE",
     "breakpoint-unit": "px",
     "unresponsive-width": 1000,
     "row-width": 1000,
