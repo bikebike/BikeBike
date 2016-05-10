@@ -638,8 +638,11 @@ module ApplicationHelper
 		l.join(_!', ')
 	end
 
-	def nav_link(link, title)
-		link_to "<span>#{title}</span>".html_safe, link, :class => (current_page?(link) ? 'current' : nil)
+	def nav_link(link, title, class_name = nil)
+		classes = []
+		classes << class_name if class_name.present?
+		classes << 'current' if current_page?(link.gsub(/(^.*)\/$/, '\1'))
+		link_to title.html_safe, link, :class => classes
 	end
 
 	def date(date, format = :long)

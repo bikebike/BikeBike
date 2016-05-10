@@ -1050,6 +1050,8 @@ es:
       context:
         other: '%{context} (× %{count})'
         one: '%{context}'
+      content:
+        change_locale: 'Leer en %{locale}'
       context_title: 'Contexto:'
       default_value: Predeterminado
       no_value: Indefinido

@@ -6,7 +6,7 @@ class Location < ActiveRecord::Base
 	geocoded_by :full_address
 
 	reverse_geocoded_by :latitude, :longitude, :address => :full_address
-	after_validation :geocode, if: ->(obj){ obj.country_changed? or obj.territory_changed? or obj.city_changed? or obj.street_changed? or obj.postal_code_changed? }
+	after_validation :geocode, if: ->(obj){ obj.country_changed? or obj.territory_changed? or obj.city_changed? or obj.street_changed? or obj.postal_code_changed? or obj.latitude.blank? or obj.longitude.blank? }
 
 	def full_address
 		addr = title
