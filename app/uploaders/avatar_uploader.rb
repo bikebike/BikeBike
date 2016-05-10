@@ -15,7 +15,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
 	storage :file
 	process :optimize
 
-	@@sizes = {:thumb => [120, 120], :icon => [48, 48], :preview => [360, 120]}
+	@@sizes = {:thumb => [120, 120], :icon => [48, 48], :preview => [360, 120], :normal => [512, 512]}
 	# storage :fog
 
 	# Override the directory where uploaded files will be stored.
@@ -50,6 +50,10 @@ class AvatarUploader < CarrierWave::Uploader::Base
 
 	version :preview do
 		process :resize_to_fit => @@sizes[:preview]
+	end
+
+	version :normal do
+		process :resize_to_fit => @@sizes[:normal]
 	end
 
 	# Add a white list of extensions which are allowed to be uploaded.

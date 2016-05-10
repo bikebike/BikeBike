@@ -1,26 +1,21 @@
+.facebook
+	=_'links.footer.help_text.facebook', 'Join our facebook group' do |title|
+		%a{href: 'https://www.facebook.com/groups/648758205249998/', target: :_blank, title: title}
+			=svg_sprite  'icons', 'bb-icon-fb', 'facebook logo'
 .github
 	=svg_sprite  'icons', 'bb-icon-github', 'github logo'
 	%a{href: 'https://github.com/bikebike/BikeBike/issues', target: :_blank}
 		=_'links.footer.text.File_an_Issue'
 	=_!'|'
-	%a{href: 'https://github.com/bikebike/BikeBike/contributing.md', target: :_blank}
+	%a{href: 'https://github.com/bikebike/BikeBike', target: :_blank}
 		=_'links.footer.text.Help_contribute'
-.facebook
-	=_'links.footer.help_text.facebook', 'Join our facebook group' do |title|
-		%a{href: 'https://www.facebook.com/groups/648758205249998/', target: :_blank, title: title}
-			=svg_sprite  'icons', 'bb-icon-fb', 'facebook logo'
-.locale
-	=_'links.footer.help_text.select_language', 'Select your language' do |title|
-		%input{type: :checkbox, id: 'select-language'}
-		%label.launch{title: title, for: 'select-language'}
-			=_!I18n.locale.upcase
-		.selector
-			%ul
-				-I18n.backend.enabled_locales.each do |locale|
-					%li
-						%a{href: home_url(url_params(locale))}
-							=_! locale.upcase
-						%span=I18n.t("languages.#{locale}", locale: locale, context: I18n.t("languages.#{locale}"))
+%ul.locales
+	-I18n.backend.enabled_locales.each do |locale|
+		- if locale.to_s != I18n.locale.to_s # don't show the current locale
+			%li
+				- locale_translation = I18n.t("languages.#{locale}", locale: locale, context: I18n.t("languages.#{locale}"))
+				%a{href: url_for(params.merge(url_params(locale)))}
+					=_'translate.content.change_locale', "Read in #{locale_translation}", vars: {locale: locale_translation}
 .copy
 	=_'links.footer.help_text.contributors', 'Who contributed to building this website' do |title|
 		=link_to :humans_txt, {title: title} do

@@ -23,6 +23,7 @@ $browser_capabilities: (
 	"getelementsbyclassname": p,
 	"forms": p,
 	"html5semantic": p,
+	"css-line-clamp": n,
 	"offline-apps": p,
 	"webworkers": p,
 	"fontface": a,
@@ -329,8 +330,29 @@ $browser_capabilities: (
 	"css-motion-paths": n,
 	"css-scroll-behavior": n,
 	"subresource-integrity": n,
+	"css-in-out-of-range": n,
 	"push-api": n,
-	"background-position-x-y": y
+	"background-position-x-y": y,
+	"css-revert-value": n,
+	"css-widows-orphans": n,
+	"web-bluetooth": n,
+	"scrollintoview": n,
+	"css-nth-child-of": n,
+	"focusin-focusout-events": y,
+	"css-matches-pseudo": n,
+	"rel-noopener": n,
+	"css-text-justify": u,
+	"css-scrollbar": a,
+	"link-rel-preload": n,
+	"css-case-insensitive": n,
+	"css-default-pseudo": n,
+	"css-optional-pseudo": n,
+	"css-indeterminate-pseudo": n,
+	"webgl2": n,
+	"document-currentscript": n,
+	"css-descendant-gtgt": n,
+	"css-has": n,
+	"css-not-sel-list": n
 );
 
 @import "bumbleberry-settings";

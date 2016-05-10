@@ -667,6 +667,7 @@ en:
         AZ: Arizona
         AR: Arkansas
         Calif: California
+        CA: California
         CO: Colorado
         CT: Connecticut
         DE: Delaware
@@ -5579,7 +5580,7 @@ en:
     home: Bike!Bike! A conference for bike collectives, co-ops, non-profit DIY bike
       shops
   donate:
-    button_label: Donate!
+    button_label: Donate
   menu:
     submenu:
       registration:

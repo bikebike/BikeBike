@@ -11,6 +11,7 @@ namespace :carrierwave do
     desc "Reprocess all images for a given class."
     args[:class].constantize.all.each do |object|
       begin
+        CarrierWave.clean_cached_files!
         object.update_attribute(args[:mount_uploader].to_sym, object.instance_eval(args[:mount_uploader]))
       rescue
         false

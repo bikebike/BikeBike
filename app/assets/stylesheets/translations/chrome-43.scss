@@ -1,6 +1,6 @@
 /*
  *	../translations
- *	Browser: Chrome 43.0 (approximately 0.46% of all users)
+ *	Browser: Chrome 43.0 (approximately 0.35% of all users)
  *
  */
 
@@ -23,6 +23,7 @@ $browser_capabilities: (
 	"getelementsbyclassname": y,
 	"forms": a,
 	"html5semantic": y,
+	"css-line-clamp": yx,
 	"offline-apps": y,
 	"webworkers": y,
 	"fontface": y,
@@ -119,7 +120,7 @@ $browser_capabilities: (
 	"datalist": a,
 	"dataset": y,
 	"css-grid": pd,
-	"menu": n,
+	"menu": nd,
 	"css-zoom": y,
 	"rem": y,
 	"ttf": y,
@@ -163,7 +164,7 @@ $browser_capabilities: (
 	"pagevisibility": y,
 	"stricttransportsecurity": y,
 	"style-scoped": n,
-	"svg-fragment": y,
+	"svg-fragment": a,
 	"outline": y,
 	"download": y,
 	"pointer": p,
@@ -329,8 +330,29 @@ $browser_capabilities: (
 	"css-motion-paths": nd,
 	"css-scroll-behavior": nd,
 	"subresource-integrity": n,
+	"css-in-out-of-range": a,
 	"push-api": n,
-	"background-position-x-y": y
+	"background-position-x-y": y,
+	"css-revert-value": n,
+	"css-widows-orphans": y,
+	"web-bluetooth": n,
+	"scrollintoview": a,
+	"css-nth-child-of": n,
+	"focusin-focusout-events": y,
+	"css-matches-pseudo": ax,
+	"rel-noopener": n,
+	"css-text-justify": nd,
+	"css-scrollbar": yx,
+	"link-rel-preload": n,
+	"css-case-insensitive": n,
+	"css-default-pseudo": a,
+	"css-optional-pseudo": y,
+	"css-indeterminate-pseudo": y,
+	"webgl2": nd,
+	"document-currentscript": y,
+	"css-descendant-gtgt": n,
+	"css-has": n,
+	"css-not-sel-list": n
 );
 
 @import "bumbleberry-settings";
