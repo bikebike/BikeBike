@@ -29,6 +29,7 @@ module BikeBike
 		config.i18n.enforce_available_locales = false
 		self.paths['config/database'] = Rails.root.join('config', 'database.yml')
 		config.active_record.raise_in_transactional_callbacks = true
+		config.exceptions_app = self.routes
 
 		if Rails.env == 'development' || Rails.env == 'test'
 			I18n.config.language_detection_method = I18n::Config::DETECT_LANGUAGE_FROM_URL_PARAM

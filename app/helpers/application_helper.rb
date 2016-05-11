@@ -122,8 +122,7 @@ module ApplicationHelper
 		@@body_class << (c.is_a?(Array) ? c.join(' ') : c)
 	end
 
-	def page_style#(style)
-		#classes = ['page-style-' + style.to_s]
+	def page_style
 		classes = Array.new
 
 		classes << 'has-translations' if ThereAreTranslationsOnThisPage?
