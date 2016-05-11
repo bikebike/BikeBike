@@ -78,6 +78,7 @@ class ApplicationController < LinguaFrancaApplicationController
 	end
 
 	def do_404
+		params[:action] = 'error-403'
 		render 'application/404', status: 404
 	end
 
@@ -87,6 +88,7 @@ class ApplicationController < LinguaFrancaApplicationController
 
 	def do_403(template = nil)
 		@template = template
+		params[:action] = 'error-403'
 		render 'application/permission_denied', status: 403
 	end
 

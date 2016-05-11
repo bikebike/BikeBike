@@ -46,9 +46,10 @@ BikeBike::Application.routes.draw do
     post  '/logout' => 'application#user_logout', :as => :logout
     post  '/translator-request' => 'application#translator_request', :as => :translator_request
 
-	get   '/error_404' => 'application#error_404'
-	get   '/about' => 'application#about', :as => :about
-	get   '/policy' => 'application#policy', :as => :policy
-	root  'application#home', :as => :home
+    get   '/error_404' => 'application#error_404'
+    get   '/404' => 'application#error_404'
+    get   '/about' => 'application#about', :as => :about
+    get   '/policy' => 'application#policy', :as => :policy
+    root  'application#home', :as => :home
 
 end
