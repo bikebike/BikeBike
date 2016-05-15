@@ -13,9 +13,9 @@
 	-I18n.backend.enabled_locales.each do |locale|
 		- if locale.to_s != I18n.locale.to_s # don't show the current locale
 			%li
-				- locale_translation = I18n.t("languages.#{locale}", locale: locale, context: I18n.t("languages.#{locale}"))
+				- locale_translation = _("languages.#{locale}", locale: locale)
 				%a{href: url_for(params.merge(url_params(locale)))}
-					=_'translate.content.change_locale', "Read in #{locale_translation}", vars: {locale: locale_translation}
+					=_'translate.content.change_locale', "Read in #{locale_translation}", vars: {language: locale_translation}, locale: locale
 .copy
 	=_'links.footer.help_text.contributors', 'Who contributed to building this website' do |title|
 		=link_to :humans_txt, {title: title} do

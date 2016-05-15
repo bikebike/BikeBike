@@ -630,11 +630,14 @@ module ApplicationHelper
 			region = location.data['region_code']
 			city = location.data['city']
 		end
-		l = Array.new
-		l << (_!city)
-		l << I18n.t("geography.subregions.#{country}.#{region}") if region.present?
-		l << I18n.t("geography.countries.#{country}") if !(country =~ /^(US|CA)$/)
-		l.join(_!', ')
+
+		hash = Hash.new
+		hash[:city] = _!(city) unless city.blank?
+		hash[:region] = _("geography.subregions.#{country}.#{region}") unless region.blank? || country.blank?
+		hash[:country] = _("geography.countries.#{country}") unless country.blank?
+
+		# return the formatted location or the first value if we only have one value
+		return hash.length > 1 ? _("geography.formats.#{hash.keys.join('_')}", vars: hash) : hash.values.first
 	end
 
 	def nav_link(link, title, class_name = nil)
@@ -657,7 +660,7 @@ module ApplicationHelper
 		end
 		d1 = I18n.l(date1.to_date, format: "span_#{key}_date_1".to_sym)
 		d2 = I18n.l(date2.to_date, format: "span_#{key}_date_2".to_sym)
-		I18n.t('date.date_span', {:date_1 => d1, :date_2 => d2})
+		_('date.date_span', vars: {:date_1 => d1, :date_2 => d2})
 	end
 
 	def generate_confirmation(user, url, expiry = nil)

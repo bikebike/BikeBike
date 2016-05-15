@@ -2,10 +2,13 @@ source 'http://rubygems.org'
 
 gem 'rails', '4.2.0'
 gem 'pg'
+
+gem 'rack-mini-profiler'
+
 gem 'haml'
-gem 'jquery-rails'
-gem 'jquery-ui-rails'
-gem 'coffee-rails', '~> 4.0.0'
+# gem 'jquery-rails'
+# gem 'jquery-ui-rails'
+# gem 'coffee-rails', '~> 4.0.0'
 gem 'nokogiri', '~> 1.6.8.rc2'
 
 if Dir.exists?('../lingua_franca')
@@ -30,8 +33,8 @@ gem 'oauth2', '~> 0.8.0'
 gem 'carrierwave'
 gem 'carrierwave-imageoptimizer'
 gem 'mini_magick'
-gem 'nested_form'
-gem 'acts_as_list'
+# gem 'nested_form'
+# gem 'acts_as_list'
 gem 'geocoder'
 gem 'paper_trail', '~> 3.0.5'
 gem 'sitemap_generator'
@@ -43,24 +46,21 @@ gem 'redcarpet'
 
 gem 'copydb'
 
-group :development, :test do
+group :test do
 	gem 'rspec'
 	gem 'rspec-rails'
 end
 
 group :development do
-	gem 'better_errors'
-	gem 'binding_of_caller'
-	gem 'meta_request'
-	gem 'haml-rails'
-	gem 'awesome_print'
+ 	gem 'better_errors'
+ 	gem 'binding_of_caller'
+ 	gem 'meta_request'
+# 	gem 'haml-rails'
+# 	gem 'awesome_print'
 end
 
 group :test do
 	gem 'gherkin3', '>= 3.1.0'
-	gem 'cucumber'
-	gem 'cucumber-core'
-	gem 'cucumber-rails'
 	gem 'cucumber'
 	gem 'cucumber-core'
 	gem 'cucumber-rails'

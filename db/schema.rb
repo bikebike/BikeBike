@@ -188,7 +188,7 @@ ActiveRecord::Schema.define(version: 20160304021005) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "event_location_id"
-    t.string   "event_type"
+    t.string   "type"
   end
 
   create_table "locations", force: :cascade do |t|

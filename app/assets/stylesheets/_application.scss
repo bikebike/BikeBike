@@ -10,7 +10,7 @@ html, body {
 }
 
 body {
-	padding-bottom: 15vw;
+	padding-bottom: 20vw;
 }
 
 h1, h2, h3, h4, h5, label, button, .button, dt, th, nav.sub-menu {
@@ -846,18 +846,30 @@ $header-tilt: 8deg;
 
 #footer {
 	padding: 1em;
+	
+	footer {
+		display: flex;
+		flex-flow: row wrap;
+	}
 
+	.github,
+	ul.locales {
+		flex: 1;
+		flex-basis: 50%;
+	}
+	
 	.copy {
 		@include clearfix;
+		text-align: right;
+		white-space: nowrap;
 
 		a {
-			float: right;
 			color: #666;
 		}
 	}
 
-	.facebook{
-		float: left;
+	.facebook {
+		flex: 0;
 		margin: 0.5em;
 
 		a {
@@ -893,7 +905,6 @@ $header-tilt: 8deg;
 		text-align: center;
 		z-index: $zindex-base + 2;
 		margin-bottom: 1em;
-		margin-left: 3em;
 
 		a {
 			margin: 0 0.5em;
@@ -915,7 +926,6 @@ $header-tilt: 8deg;
 	}
 
 	ul.locales {
-		float: left;
 		margin: 0;
 		padding: 0;
 		list-style: none;
@@ -1130,14 +1140,20 @@ $header-tilt: 8deg;
 
 	#footer {
 		.github {
+			flex: none;
+			flex-basis: auto;
 			bottom: 0.5em;
-			//left: 4em;
 			float: left;
 			margin-right: 1em;
 			margin-left: 0;
 		}
 		.facebook {
 			margin: 0 1em 0 0;
+		}
+		ul.locales {
+			flex: none;
+			flex-basis: auto;
+			flex-grow: 1;
 		}
 	}
 }

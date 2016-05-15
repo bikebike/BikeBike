@@ -1,0 +1,48 @@
+---
+geography.subregions.CA.NS:
+  pages:
+  - "/"
+  examples:
+  - See-a-more-info-link--
+geography.countries.CA:
+  pages:
+  - "/"
+  examples:
+  - See-a-more-info-link--
+geography.formats.city_region_country:
+  pages:
+  - "/"
+  vars:
+  - :city
+  - :region
+  - :country
+  examples:
+  - See-a-more-info-link--
+date.formats.span_same_month_date_1:
+  pages:
+  - "/"
+  examples:
+  - See-a-more-info-link--
+date.month_names:
+  pages:
+  - "/"
+  examples:
+  - See-a-more-info-link--
+date.formats.span_same_month_date_2:
+  pages:
+  - "/"
+  examples:
+  - See-a-more-info-link--
+date.date_span:
+  pages:
+  - "/"
+  vars:
+  - :date_1
+  - :date_2
+  examples:
+  - See-a-more-info-link--
+page_descriptions.home:
+  pages:
+  - "/"
+  examples:
+  - See-a-more-info-link--
