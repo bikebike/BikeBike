@@ -48,6 +48,7 @@ Before('@javascript') do
 end
 
 Before do
+	# user_agent = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.94 Safari/537.36"
 	user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A"
 	#request.stub!(:user_agent).and_return()
 	#controller.request.stub!(:user_agent).and_return(user_agent)
@@ -111,7 +112,14 @@ def create_org(name = nil, location = nil)
 	found_location = nil
 	if location.present?
 		cache_file = File.join(File.dirname(__FILE__), 'location_cache.yml')
-		cache = File.exists?(cache_file) ? YAML.load_file(cache_file) : {}
+		cache = {}
+		if File.exists?(cache_file)
+			begin
+				cache = YAML.load_file(cache_file)
+			rescue
+				# get rid of the cache if there's an error
+			end
+		end
 		l = cache[location]
 		if l.nil?
 			l = Geocoder.search(location).first

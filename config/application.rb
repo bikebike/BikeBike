@@ -30,20 +30,17 @@ module BikeBike
 		self.paths['config/database'] = Rails.root.join('config', 'database.yml')
 		config.active_record.raise_in_transactional_callbacks = true
 		config.exceptions_app = self.routes
+		I18n.config.language_threshold = 0
 
 		if Rails.env == 'development' || Rails.env == 'test'
 			I18n.config.language_detection_method = I18n::Config::DETECT_LANGUAGE_FROM_URL_PARAM
-			I18n.config.language_threshold = 1
 		else
 			# detect the language using the subdimain
 			I18n.config.language_detection_method = I18n::Config::DETECT_LANGUAGE_FROM_SUBDOMAIN
 			if Rails.env == 'preview'
-				I18n.config.language_threshold = 1
 				I18n.config.subdomain_format = 'preview-%'
 				# if we are in our preview environment, set the locale regex to detect the preview- prefix
 				I18n.config.host_locale_regex = /^preview\-([a-z]{2})\.bikebike\.org$/
-			else
-				I18n.config.language_threshold = 90
 			end
 		end
 

@@ -37,6 +37,10 @@ es:
       short: '%d de %b'
       span_same_month_date_2: '%e, %Y'
       span_same_month_date_1: '%B %e'
+      span_same_year_date_1: "%B %e"
+      span_same_year_date_2: "%B %e, %Y"
+      span_different_year_date_1: "%B %e, %Y"
+      span_different_year_date_2: "%B %e, %Y"
     month_names:
     - 
     - enero
@@ -689,6 +693,11 @@ es:
         WV: Virginia Occidental
         WI: Wisconsin
         WY: Wyoming
+    formats:
+        city_region_country: '%{city}, %{region}, %{country}'
+        city_country: '%{city}, %{country}'
+        city_region: '%{city}, %{region}'
+        region_country: '%{region}, %{country}'
   conference:
     actions:
       Register: Registrate
@@ -1001,6 +1010,8 @@ es:
       Please_Confirm_Email: Página no encontrada
     '404':
       Page_Not_Found: Crear un taller
+    Policy: 'Policy'
+    About: 'About'
   actions:
     workshops:
       create: Crear
@@ -1029,6 +1040,7 @@ es:
       not_translation: No es una traducción
       translation_last_modified: El texto en el idioma original fue modificada por
         última vez el %%{date}
+      change_locale: "Leer en %{language}"
     pages:
       contexts:
         geography: geografia

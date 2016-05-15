@@ -9,6 +9,7 @@
 		= inject_css!
 		- (@stylesheets || []).each do |css|
 			= inject_css! css
+		= stylesheet_link_tag 'i18n-debug' if request.params['i18nDebug']
 		%link{ href: asset_path('favicon.ico'), rel: 'shortcut icon', type: 'image/x-icon' }
 		%link{ href: asset_path('favicon.ico'), rel: 'icon', type: 'image/x-icon' }
 		%link{ href: asset_path('apple-touch-icon.png'), rel: 'apple-touch-icon' }
@@ -36,7 +37,6 @@
 				#content=yield
 			- else
 				= yield
-		= yield :garbage
 		#footer
 			%footer= render 'shared/footer'
 		- if content_for?(:footer_scripts)
