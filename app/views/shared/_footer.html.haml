@@ -14,7 +14,7 @@
 		- if locale.to_s != I18n.locale.to_s # don't show the current locale
 			%li
 				- locale_translation = _("languages.#{locale}", locale: locale)
-				%a{href: url_for(params.merge(url_params(locale)))}
+				%a{href: url_for_locale(locale)}
 					=_'translate.content.change_locale', "Read in #{locale_translation}", vars: {language: locale_translation}, locale: locale
 .copy
 	=_'links.footer.help_text.contributors', 'Who contributed to building this website' do |title|
