@@ -6,9 +6,6 @@ gem 'pg'
 gem 'rack-mini-profiler'
 
 gem 'haml'
-# gem 'jquery-rails'
-# gem 'jquery-ui-rails'
-# gem 'coffee-rails', '~> 4.0.0'
 gem 'nokogiri', '~> 1.6.8.rc2'
 
 if Dir.exists?('../lingua_franca')
@@ -33,8 +30,6 @@ gem 'oauth2', '~> 0.8.0'
 gem 'carrierwave'
 gem 'carrierwave-imageoptimizer'
 gem 'mini_magick'
-# gem 'nested_form'
-# gem 'acts_as_list'
 gem 'geocoder'
 gem 'paper_trail', '~> 3.0.5'
 gem 'sitemap_generator'
@@ -55,8 +50,10 @@ group :development do
  	gem 'better_errors'
  	gem 'binding_of_caller'
  	gem 'meta_request'
-# 	gem 'haml-rails'
-# 	gem 'awesome_print'
+	
+	gem 'capistrano', '~> 3.1'
+	gem 'capistrano-rails', '~> 1.1'
+	gem 'capistrano-faster-assets', '~> 1.0'
 end
 
 group :test do
