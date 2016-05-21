@@ -151,84 +151,6 @@ module ApplicationHelper
 		content_for?(section) ? content_for(section) : default
 	end
 
-#	def _(key, behavior = nil, behavior_size = nil, locale: nil, vars: {}, html: nil, blockData: {}, &block)
-#		options = vars
-#		options[:fallback] = true
-#		if behavior
-#			options[:behavior] = behavior
-#			options[:behavior_size] = behavior_size
-#		end
-#		if locale
-#			options[:locale] = locale.to_sym
-#		end
-#		#if vars
-#		#	puts "\nVARS:\t#{vars}\n"
-#		#end
-#		I18n.translate(key, options)
-#
-#		#queued_keys = nil
-#		#result = nil
-#
-#		#if key.kind_of?(Hash)
-#		#	blockData.merge!(key)
-#		#	key = key.keys
-#		#end
-#
-#		#if block_given?
-#		#	@@keyQueue ||= Array.new
-#
-#		#	if key.kind_of?(Array)
-#		#		@@keyQueue += key
-#		#	else
-#		#		@@keyQueue << key
-#		#	end
-#		#end
-#
-#		#if key.kind_of?(Array)
-#		#	new_key = key.shift
-#		#	if key.count > 0
-#		#		queued_keys = key.dup
-#		#	end
-#		#	key = new_key
-#		#end
-#
-#		#if blockData[key]
-#		#	behavior = blockData[key][:behavior] || nil
-#		#	behavior_size = blockData[key][:behavior_size] || nil
-#		#	vars = blockData[key][:vars] || {}
-#		#end
-#
-#		#@@lastTranslation = nil
-#		#generate_control = _can_translate?
-#
-#		#puts "\nLLOOCCAALLEE:\t#{locale.to_s}"
-#		#translation = _do_translate(key, vars, behavior, behavior_size, locale)
-#
-#		#if block_given?
-#		#	html = capture(&block)
-#		#end
-#
-#		#if html
-#		#	translation['html'] = html.gsub('%' + key + '%', translation['untranslated'])
-#		#end
-#
-#		#if generate_control
-#		#	@@lastTranslation = translation
-#		#	@@allTranslations ||= Hash.new
-#		#	@@allTranslations[key] = key
-#
-#		#	result = _translate_me(translation)
-#		#end
-#
-#		#result ||= translation['html'] || (behavior.to_s == 'strict' ? nil : translation['untranslated'])
-#
-#		#if queued_keys
-#		#	return _ queued_keys, behavior, behavior_size, vars: vars, html: result, blockData: blockData
-#		#end
-#
-		#return result
-#	end
-
 	def _translate_me(translation)
 		@@translationsOnThisPage = true
 		datakeys = ''
@@ -263,17 +185,20 @@ module ApplicationHelper
 		false
 	end
 
-	#def _!()
-	#	if @@keyQueue
-	#		return '%' + @@keyQueue.shift + '%'
-	#	end
-	#end
+	def url_for_locale(locale)
+		url_for(params
+				.merge({action: (params[:_original_action] || params[:action])}
+				.merge(url_params(locale)))
+				.delete(:_original_action)
+			)
+	end
 
-	#def _?()
-	#	if @@keyQueue
-	#		return '%' + @@keyQueue[0] + '%'
-	#	end
-	#end
+	def registration_steps(conference = @conference)
+		{
+			pre: [:policy, :basic_info, :workshops],
+			open: [:policy, :basic_info, :questions, :payment, :workshops]
+		}[@this_conference.registration_status]
+	end
 
 	def sortable(objects, id = 'id', url: nil, &block)
 		result = '<ul class="sortable sortable-' + objects[0].class.name.underscore.gsub('_', '-') + (url ? ('" data-url="' + url) : '') + '" data-id="' + id + '">'
@@ -640,7 +565,15 @@ module ApplicationHelper
 		return hash.length > 1 ? _("geography.formats.#{hash.keys.join('_')}", vars: hash) : hash.values.first
 	end
 
-	def nav_link(link, title, class_name = nil)
+	def nav_link(link, title = nil, class_name = nil)
+		if title.nil? && link.is_a?(Symbol)
+			title = link
+			link = send("#{link.to_s}_path")
+		end
+		if class_name.nil? && title.is_a?(Symbol)
+			class_name = title
+			title = _"page_titles.#{title.to_s.titlecase}"
+		end
 		classes = []
 		classes << class_name if class_name.present?
 		classes << 'current' if current_page?(link.gsub(/(^.*)\/$/, '\1'))
