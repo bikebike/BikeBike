@@ -1,5 +1,14 @@
 {
     "stylesheets": ["application", "translations", "email-example"],
+    "precompile": {
+        "test": {
+            "chrome": ["50"]
+        },
+        "development": {
+            "chrome": ["50"],
+            "ios_saf": ["8", "9"]
+        }
+    },
     "background-color": "#FFFEFE",
     "breakpoint-unit": "px",
     "unresponsive-width": 1000,
@@ -21,7 +30,7 @@
             "reset-order": "n"
         },
         "medium": {
-            "range": [564],
+            "range": [680],
             "grid": "y",
             "offset": "n",
             "reset-order": "n"

@@ -1010,8 +1010,8 @@ es:
       Please_Confirm_Email: Página no encontrada
     '404':
       Page_Not_Found: Crear un taller
-    Policy: 'Policy'
-    About: 'About'
+    Policy: 'Política'
+    About: 'Acerca de'
   actions:
     workshops:
       create: Crear

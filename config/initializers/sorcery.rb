@@ -203,19 +203,16 @@ Rails.application.config.sorcery.configure do |config|
     # use an external encryption class.
     # Default: `nil`
     #
-    user.custom_encryption_provider = Sorcery::CryptoProviders::DrupalPassword
 
 
     # encryption algorithm name. See 'encryption_algorithm=' for available options.
     # Default: `:bcrypt`
     #
-    user.encryption_algorithm = :custom#:sha512
 
 
     # make this configuration inheritable for subclasses. Useful for ActiveRecord's STI.
     # Default: `false`
     #
-    user.subclasses_inherit_config = true
 
 
     # -- remember_me --
