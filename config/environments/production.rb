@@ -88,7 +88,6 @@ BikeBike::Application.configure do
 
 	config.action_mailer.delivery_method = :smtp
 	config.action_mailer.smtp_settings = {
-		:enable_starttls_auto => true,
 		:address => 'mail.bikebike.org',
 		:domain => 'preview.bikebike.org',
 		:port => 587,

@@ -5,13 +5,14 @@
 	- figure = nil
 	- if capable_of(:css_mixblendmode)
 		- cover = "<div class=\"cover\" style=\"background-image: url(#{image})\"></div>"
-	- elsif capable_of(:svg) && Rails.env != 'test'
-		- banner_image = 'application/banner_image.svg'
 	- else
 		- style = "background-image: url(#{image})"
 	#header-title.short{style: style}
-		= (render banner_image, {:image => image}) if banner_image
+		= (render banner_image, {:image => image}) if defined?(banner_image) == "local-variable"
 		= cover.html_safe if cover
-		= row do
-			= columns do
-				%h1=_(@page_title || "page_titles.#{page_group.to_s}.#{page_key.to_s}")
+		- if @page_title.present? || defined?(page_group)
+			- content_for :title do
+				=@page_title.present? ? I18n.t(@page_title, @page_title_vars) : I18n.t("page_titles.#{page_group.to_s}.#{page_key.to_s}")
+			= row do
+				= columns do
+					%h1=(_"page_titles.#{page_group.to_s}.#{page_key.to_s}")

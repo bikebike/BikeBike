@@ -30,10 +30,11 @@ BikeBike::Application.configure do
 	# This option may cause significant delays in view rendering with a large
 	# number of complex assets.
 	config.assets.debug = false
+	config.assets.digest = false
+	config.assets.compile = true
 
 	config.action_mailer.delivery_method = :smtp
 	config.action_mailer.smtp_settings = {
-		:enable_starttls_auto => true,
 		:address => 'mail.bikebike.org',
 		:domain => 'preview.bikebike.org',
 		:port => 587,
@@ -45,15 +46,10 @@ BikeBike::Application.configure do
 	}
 	config.action_mailer.raise_delivery_errors = true
 	config.action_mailer.perform_deliveries = true
-	#config.force_ssl = true
-	#config.action_mailer.default_charset = 'utf-8'
 
-	#Carmen.i18n_backend.locale_paths = ''
-	#puts "CARMEN\t" + Carmen.i18n_backend.locale_paths
 
-	#PerfTools::CpuProfiler.start('/tmp/dev_prof')
 	config.serve_static_files = true
-	#config.assets.precompile = false
+	# config.action_controller.perform_caching = true
+
 	Paypal.sandbox!
-	#Paypal.sandbox = false
 end

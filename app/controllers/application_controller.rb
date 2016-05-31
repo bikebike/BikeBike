@@ -18,6 +18,7 @@ class ApplicationController < LinguaFrancaApplicationController
 	def capture_page_info
 		# set the translator to the current user if we're logged in
 		I18n.config.translator = current_user
+		I18n.config.callback = self
 
 		# get the current confernece and set it globally
 		@conference = Conference.order("start_date DESC").first
@@ -78,7 +79,8 @@ class ApplicationController < LinguaFrancaApplicationController
 	end
 
 	def do_404
-		params[:action] = 'error-403'
+		params[:_original_action] = params[:action]
+		params[:action] = 'error-404'
 		render 'application/404', status: 404
 	end
 
@@ -88,6 +90,7 @@ class ApplicationController < LinguaFrancaApplicationController
 
 	def do_403(template = nil)
 		@template = template
+		params[:_original_action] = params[:action]
 		params[:action] = 'error-403'
 		render 'application/permission_denied', status: 403
 	end
@@ -143,13 +146,12 @@ class ApplicationController < LinguaFrancaApplicationController
 			end
 			user = User.find_by_email(params[:email])
 
-			if !user
+			unless user
 				# not really a good UX so we should fix this later
 				#do_404
 				#return
 				user = User.new(:email => params[:email])
 				user.save!
-				user = User.find_by_email(params[:email])
 			end
 
 			# genereate the confirmation, send the email and show the 403
@@ -218,4 +220,28 @@ class ApplicationController < LinguaFrancaApplicationController
 		auto_login(u)
 	end
 
+    def on_translation_change(object, data, locale, translator_id)
+		translator = User.find(translator_id)
+		mailer = "#{object.class.table_name.singularize}_translated"
+
+		object.get_translators(data, locale).each do |id, user|
+			if user.id != current_user.id && user.id != translator_id
+				UserMailer.send_mail mailer do
+					{ :args => [object, data, locale, user, translator] }
+				end
+			end
+		end
+	end
+
+	def on_translatable_content_change(object, data)
+		mailer = "#{object.class.table_name.singularize}_original_content_changed"
+		
+		object.get_translators(data).each do |id, user|
+			if user.id != current_user.id
+				UserMailer.send_mail mailer do
+					{ :args => [object, data, user, current_user] }
+				end
+			end
+		end
+	end
 end

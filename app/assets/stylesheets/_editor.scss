@@ -1,0 +1,212 @@
+$bumbleberry-no-markup: true;
+
+@import "bumbleberry";
+@import "settings";
+
+$white: #FFF !default;
+$black: #333 !default;
+
+.pen-icon {
+	font-size: 16px;
+	line-height: 40px;
+	min-width: 20px;
+	font-style: normal;
+	display: block;
+	float: left;
+	padding: 0 10px;
+	height: 2.2em;
+	overflow: hidden;
+	color: $white;
+	text-align: center;
+	cursor: pointer;
+	@include _(user-select, none);
+}
+
+.pen {
+	position: relative;
+
+	&:focus {
+		outline: none;
+	}
+}
+
+.pen-menu, .pen-input {
+	font-size: 14px;
+	line-height:1;
+}
+
+.pen-input {
+	display :none;
+	position: absolute;
+	width: 100%;
+	left: 0;
+	top: 0;
+	height: 2.6em;
+	line-height: 20px;
+	background-color: $black;
+	color: $white;
+	border: none;
+	text-align: center;
+	
+	&:focus {
+		outline: none;
+	}
+}
+
+.pen-textarea {
+	display: block;
+	background: $white;
+	padding: 20px;
+}
+.pen textarea {
+	font-size: 14px;
+	border: none;
+	background: none;
+	width: 100%;
+	_height: 200px;
+	min-height: 200px;
+	resize: none;
+}
+
+.pen-menu-below {
+	@include after {
+		top: -11px;
+		display: block;
+		@include _(transform, rotate(180deg));
+	}
+}
+
+.pen-menu {
+	white-space: nowrap;
+	box-shadow:1px 2px 3px -2px #222;
+	background: #333;
+	background-image: linear-gradient(to bottom, #222, #333);
+	opacity: 0.9;
+	position: fixed;
+	height: 5.2em;
+	border: 1px solid #333;
+	border-radius: 0.5em;
+	display:none;
+	z-index: 1000;
+	
+	@include after {
+		content: " ";
+		top: 100%;
+		border: solid transparent;
+		height: 0;
+		width: 0;
+		position: absolute;
+		pointer-events: none;
+		border-color: rgba(51, 51, 51, 0);
+		border-top-color: #333;
+		border-width: 6px;
+		left: 50%;
+		margin-left: -6px;
+	}
+
+	[class^="icon-"], [class*=" icon-"] {
+		@include before {
+			speak: none;
+			display: inline-block;
+			width: 1em;
+			margin-right: .2em;
+			text-align: center;
+			font-variant: normal;
+			text-transform: none;
+			line-height: 1em;
+			margin-left: .2em;
+			vertical-align: text-top;
+		}
+	}
+
+	.pen-icon {
+		&:hover {
+			background:#000;
+		}
+		&.active {
+			background: #000;
+			@include _(box-shadow, #{inset 2px 2px 4px #000, 0 0 0.25em #000});
+		}
+	}
+
+	.icon-h1,
+	.icon-h2,
+	.icon-h3,
+	.icon-h4,
+	.icon-h5,
+	.icon-h6 {
+		@include before { @include font-family(secondary); }
+	}
+	.icon-h1 {
+		@include before { content: 'H1'; }
+	}
+	.icon-h2 {
+		@include before { content: 'H2'; }
+	}
+	.icon-h3 {
+		@include before { content: 'H1'; }
+	}
+	.icon-h4 {
+		@include before { content: 'H2'; }
+	}
+	.icon-h5 {
+		@include before { content: 'H5'; }
+	}
+	.icon-h6 {
+		@include before { content: 'H6'; }
+	}
+	.icon-bold {
+		border-bottom-left-radius: 0.5em;
+		clear: left;
+		@include before { content: 'B'; font-weight: bold; }
+	}
+	.icon-italic {
+		@include before { content: 'I'; font-style: italic;; }
+	}
+	.icon-underline {
+		@include before { content: 'U'; text-decoration: underline; }
+	}
+	.icon-p {
+		@include font-family(secondary);
+		@include before { content: '¶'; }
+	}
+	.icon-blockquote {
+		@include before {
+			background-image: inline-svg-image('quote.svg');
+		}
+	}
+	.icon-insertorderedlist {
+		border-top-right-radius: 0.5em;
+    	
+    	@include before {
+			background-image: inline-svg-image('ol.svg');
+		}
+	}
+	.icon-insertunorderedlist { @include before {
+		background-image: inline-svg-image('ul.svg');
+	} }
+
+	.icon-strikethrough { @include before { content: 'S'; text-decoration: line-through; } }
+	
+	.icon-insertunorderedlist,
+	.icon-insertorderedlist,
+	.icon-blockquote,
+	.icon-insertimage,
+	.icon-createlink {
+		@include before {
+			content: '';
+			background-size: contain;
+			height: 1em;
+		}
+	}
+	.icon-createlink {
+		@include before {
+			background-image: inline-svg-image('link.svg');
+		}
+	}
+	.icon-insertimage {
+		@include before {
+			background-image: inline-svg-image('img.svg');
+		}
+	}
+}

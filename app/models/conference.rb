@@ -42,8 +42,23 @@ class Conference < ActiveRecord::Base
 
 	def registered?(user)
 		registration = ConferenceRegistration.find_by(:user_id => user.id, :conference_id => id)
-		return false unless registration
-		return registration.is_attending
+		return registration ? registration.is_attending : false
+	end
+
+	def registration_exists?(user)
+		ConferenceRegistration.find_by(:user_id => user.id, :conference_id => id).present?
+	end
+
+	def registration_open
+		registration_status == :open
+	end
+
+	def registration_status
+		read_attribute(:registration_status).to_sym
+	end
+
+	def registration_status=(new_registration_status)
+		write_attribute :registration_status, new_registration_status.to_s
 	end
 
 end

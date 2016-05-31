@@ -1,0 +1,183 @@
+@import "settings";
+
+body {
+	width: 100% !important;
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.ExternalClass {
+	width: 100%;
+	line-height: 100%;
+
+	p, span, font, td, div {
+		line-height: 100%;
+	}
+}
+
+#backgroundTable {
+	margin: 0;
+	padding: 0;
+	width: 100% !important;
+	line-height: 100% !important;
+}
+
+img {
+	outline: none;
+	text-decoration: none;
+	-ms-interpolation-mode: bicubic;
+
+	a & {
+		border: none;
+	}
+}
+
+.image_fix {
+	display: block;
+	max-width: 100%;
+}
+
+a {
+	color: $colour-1;
+	
+	#outlook & {
+		padding: 0;
+	}
+
+	&:link { color: $colour-1; }
+	&:visited { color: $colour-1; }
+	&:hover { color: $colour-5; }
+	
+	@media only screen and (max-device-width: 480px) {
+		&[href^="tel"], &[href^="sms"] {
+			text-decoration: none;
+			color: $black;
+			pointer-events: none;
+			cursor: default;
+		}
+
+		.mobile_link &[href^="tel"], .mobile_link &[href^="sms"] {
+			text-decoration: default;
+			color: $colour-1 !important;
+			pointer-events: auto;
+			cursor: default;
+		}
+	}
+}
+
+p {
+	margin: 1em;
+	color: $black !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: $black !important;
+	
+	a {
+		color: $colour-1 !important;
+		
+		&:active {
+			color: $colour-4 !important;
+		}
+		
+		&:visited {
+			color: $colour-2 !important;
+		}
+	}
+
+}
+
+table {
+	border-collapse: collapse;
+	max-width: 512px;
+	min-width: 280px;
+	mso-table-lspace: 0pt;
+	mso-table-rspace: 0pt;
+	
+	td {
+		border-collapse: collapse;
+	}
+}
+
+table#bb_full_width,
+table#ecxbb_full_width {
+
+	&, table {
+		max-width: none;
+		width: 100%;
+	}
+}
+
+.diff, .ecxdiff {
+	margin: 1em 0 5em 1em;
+	overflow: auto;
+
+	ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		position: relative;
+	}
+
+	li {
+		width: 40%;
+		display: inline-block;
+		padding: 0.5em;
+		margin: 0;
+		background-color: lighten($colour-3, 33%);
+		border: 2px solid #DDD;
+		white-space: nowrap;
+
+		&:nth-child(odd) {
+			margin-right: -3px;
+			float: left;
+		}
+
+		&:nth-child(even) {
+			background-color: lighten($colour-5	, 33%);
+		}
+	}
+}
+
+// Buttons
+h3 {
+	b {
+		padding: 10px 20px;
+		line-height: 50px;
+		
+		a, a:visited {
+			color: #FFF !important;
+			background-color: $colour-5;
+			text-decoration: none !important;
+			border-radius: 4px;
+			padding: 10px 15px;
+			margin-left: 20px;
+			border-bottom: 3px solid darken($colour-5, 10%);
+			-webkit-box-shadow: 0 0.5em 1.5em -0.75em #000;
+			box-shadow: 0 0.5em 1.5em -0.75em #000;
+			cursor: pointer !important;
+		}
+
+		a:hover {
+			background-color: darken($colour-5, 10%);
+		}
+	}
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+	a[href^="tel"], a[href^="sms"] {
+		text-decoration: none;
+		color: $colour-1;
+		pointer-events: none;
+		cursor: default;
+
+		.mobile_link & {
+			text-decoration: default;
+			color: $colour-1 !important;
+			pointer-events: auto;
+			cursor: default;
+		}
+	}
+}

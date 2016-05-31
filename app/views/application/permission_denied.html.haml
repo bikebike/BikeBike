@@ -1,7 +1,9 @@
 = render :partial => 'application/header', :locals => {:image_file => @banner_image || '403.jpg'}
 %article
-	- if @template
+	- if @template.present?
 		=render @template
 	- else
-		%h2=_'articles.permission_denied.headings.main','Sorry, you currently don\'t have access to this page'
-		%p=_'articles.permission_denied.paragraphs.main', :p
+		= row do
+			= columns do
+				%h2=_'articles.permission_denied.headings.main','Sorry, you currently don\'t have access to this page'
+				%p=_'articles.permission_denied.paragraphs.main', :p

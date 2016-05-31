@@ -5212,6 +5212,7 @@ en:
       un_translated: Untranslated content
       outdated_translation: Outdated content
       not_translation: Not a translation
+      Translation_of: Translation of
     volunteer:
       become_a_volunteer: Become a volunteer translator
       volunteer: Can you help us translate it?
@@ -5294,6 +5295,7 @@ en:
     conference_registration:
       headings:
         Policy_Agreement: Safer Space Agreement
+        policy: Policy
         arrival_and_departure: For what days will you need housing? (If you don't
           need housing, just tell us how long you plan to hang out with Bike!Bike!)
         other: Is there anything else you'd like to tell us?
@@ -5316,6 +5318,7 @@ en:
         Allergies: Allergies
         Stats: Stats
         Workshops: Workshops
+        workshops: Workshops
         Your_Workshops: Your Workshops
         payment_confirm: Please confirm your payment
         Preview: Preview
@@ -5323,8 +5326,13 @@ en:
         date: Date
         email: Email
         fees_paid: Fees Paid
+        Contact_Info: Contact Info
+        contact_info: Contact Info
+        Add_Workshop: Propose a Workshop
+        Workshops_Looking_For_Facilitators: Workshops Looking for Facilitators
+        All_Workshops: All Workshops
       paragraphs:
-        Policy_Agreement: Safer Space Agreement
+        Policy_Agreement: Ensuring that all attendees feel welcome, safe, and respected at all times is especially important to us all. Please ensure that you have fully read and understand our safer spaces policy below, if you have any questions or concerns you can reach out to the organizers at any time.
         Confirm_Agreement: By clicking the "I Agree" button, you are pledging to do
           your best to uphold Bike!Bike!'s safer space agreement. Thank you!
         Registration_Info: Please fill in this registration form to help us prepare
@@ -5361,6 +5369,10 @@ en:
         participants_emailed: Your email has been sent to all participants of %%{conference_title}.
         workshops: You can now take a look at proposed workshops and even propose
           one yourself if you like.
+        Contact_Info: Please let us know a little bit about you.
+        Create_Workshop: At Bike!Bike! anyone can lead a workshop or just propose and idea that someone else can volunteer to lead. If, where, and when the workshop will be scheduled will ultimately be decided by the conference organizers.
+        Workshops_Looking_For_Facilitators: Would you like to lend a hand facilitating a workshop proposed by someone else? Below is a list of workshops that are actively looking for volunteers, if you are interested in helping out you can make a facilitation request.
+        Your_Workshops: The following is a list of all the workshops that you have created or have requested to facilitate.
       questions:
         bike:
           large: Large
@@ -5462,13 +5474,13 @@ en:
         Workshops: Workshops
         Your_Workshops: Your Workshops
         facilitate: Request to Facilitate ‘%{workshop_title}’
+        add_facilitator: Add a facilitator
+        needs_facilitators: Looking for help?
       paragraphs:
         Proposed_Workshops: Would you like to facilitate your own workshop? Simply
           register and visit the workshops page. If you have already registered you
           can access the page by restarting the registration process.
-        info: Please accurately describe your workshop in detail. This will help hosts
-          decide if they wish to add it to the schedule and when it should best be
-          scheduled. Enter normal text but if you want to get fancy you can use [Markdown](http://daringfireball.net/projects/markdown/basics)
+        info: Describe your workshop in detail; highlighting text will reveal formatting controls.
         space: What kind of space do you need for your workshop?
         theme: Which of the themes below best match your workshop? This will help
           hosts to avoid scheduling conflicts. Select other if none of the options
@@ -5495,6 +5507,9 @@ en:
         facilitate_request_sent: Your request has been sent. You will receive an email
           once your request is approved or denied or if the current facilitators have
           any questions.
+        languages: What language will the workshop be presented in? Will there be translations or translators available?
+        needs: If you need any of the following the conference organizers will do their best to make sure you have them. If you have any other requests, you can include them in the notes section.
+        needs_facilitators: Are you actively looking for help running this workshop? Anyone who is registered for the conference can request to facilitate at any time but checking this box will improve your chances of finding collaborators.
       info:
         interested_count:
           one: One person is interested in this workshop
@@ -5522,7 +5537,7 @@ en:
         name: Name
         subject: Subject
         title: Title
-        info: Info
+        info: Description
         content: Content
         notes: Notes
         message: 'Your Message:'
@@ -5546,6 +5561,8 @@ en:
         remove_interest: "-1"
         show_interest: "+1"
         add: "+"
+        previous: Previous
+        next: Next
   page_titles:
     '403':
       Please_Confirm_Email: Please confirm your email
@@ -5562,8 +5579,9 @@ en:
       Registration_Stats: Registration Stats
       View_Workshop: View Workshop
       Workshops: Workshops
-      Delete_Workshop: Create Workshop
+      Delete_Workshop: Delete Workshop
       Edit_Workshop: Edit Workshop
+      Translate_Workshop: Edit %{language} Workshop Translation
       Edit: Edit Conference
       Facilitate_Workshop: Workshop Facilitation Request
     policy:
@@ -5572,6 +5590,8 @@ en:
       Page_Not_Found: Page Not Found
     Policy: 'Policy'
     About: 'About'
+    Register: 'Register'
+    Pre_Register: 'Pre-Register'
   links:
     footer:
       help_text:
@@ -5640,6 +5660,7 @@ en:
         organization: Organizational Concerns
         other: Other
         race_gender: Race, Gender, or Class Politics
+      needs_facilitators: Needs Additional Facilitators
   email:
     confirmation:
       paragraph:
@@ -5650,10 +5671,13 @@ en:
     subject:
       confirm_email: Confirmation Email
       registration_confirmed: Thank you for registering for %{conference_title}
+      pre_registration_confirmed: Thank you for pre-registering for %{conference_title}
       workshop_facilitator_request: Request to facilitate %{workshop_title} from %{requester_name}
       workshop_request_approved: You have been added as a facilitator of %{workshop_title}
       workshop_request_denied: Your request to facilitate %{workshop_title} has been
         denied
+      workshop_translated: The %{language} translation for %{workshop_title} has been modified
+      workshop_original_content_changed: Original content for %{workshop_title} has been modified
     general:
       paragraph:
         see_you: See you in %{conference_location}!
@@ -5665,7 +5689,14 @@ en:
           the registration process. If you have yet to pay or add your workshops and
           plan to do so, we ask that you take care of it as soon as possible to help
           us prepare in advance of your arrival.
-    workshop:
+    translations:
+      headings:
+        new_value: 'New Value: '
+        old_value: 'Old Value: '
+        diff: 'Difference: '
+      paragraph:
+        workshop_translated: '%{user_name} has modified the %{language} translation for %{workshop_title}.'
+        workshop_original_content_changed: '%{user_name} has modified the original content for %{workshop_title}. Translations may need to be updated.'
       paragraph:
         request_approved: You have been added as a facilitator of %{workshop_title}.
         request_denied: Your request to become a facilitator of %{workshop_title}

@@ -1,0 +1,15 @@
+%p=_('email.translations.paragraph.workshop_translated', "#{@translator.name} has modified the #{@locale_name} translation for #{@workshop.title}.", vars: {user_name: @translator.firstname, language: @locale_name, workshop_title: @workshop.title})
+
+- @data.each do |field, values|
+	%h2=_"forms.labels.generic.#{field.to_s}"
+	%b=_'email.translations.headings.new_value'
+	%blockquote=_!values[:new].html_safe
+	%b=_'email.translations.headings.old_value'
+	%blockquote=_!values[:old].html_safe
+	%b=_'email.translations.headings.diff'
+	=_!(values[:diff][:html].html_safe)
+
+%p
+	=_'email.workshop.paragraph.view_workshop',"You can view the workshop here: "
+	- workshop_link = view_workshop_url(@workshop.conference.slug, @workshop.id)
+	%a{href: workshop_link}=workshop_link

@@ -4,7 +4,7 @@
 $zindex-base: 0;
 
 html, body {
-	color: #333;
+	color: $black;
 	position: relative;
 	z-index: $zindex-base;
 }
@@ -29,7 +29,7 @@ p {
 
 a {
 	text-decoration: none;
-	color: $colour-1;
+	color: $link-colour;
 	border-bottom: 0 solid;
 	outline: 0;
 	position: relative;
@@ -55,6 +55,14 @@ a {
 			transform: translateY(0);
 		}
 	}
+}
+
+.screen-reader-text { 
+	clip: rect(1px, 1px, 1px, 1px); 
+	height: 1px; 
+	width: 1px; 
+	overflow: hidden; 
+	position: absolute !important;
 }
 
 table {
@@ -108,6 +116,18 @@ button,
 
 	#main &.secondary {
 		background-color: $colour-1;
+	}
+
+	#main &.subdued {
+		background-color: #888;
+	}
+
+	#main &.accented {
+		background-color: $colour-2;
+	}
+
+	&.facebook {
+		background-color: #3A5795;
 	}
 }
 
@@ -175,33 +195,36 @@ nav.sub-menu {
 	}
 }
 
-textarea {
-	$line-height: 2em;
+textarea, .textarea {
 	display: block;
 	width: 100%;
-	min-height: $line-height * 4;
-	font-size: 1.25em;
+	min-height: 15em;
+	font-size: 1em;
 	margin: 1em 0;
-	padding: 0 0.5em;
-	line-height: $line-height;
+	padding: 0.75em;
 	border: 0.1rem solid #E8E8E8;
 	outline: 0;
-	background: linear-gradient(
-		to bottom,
-		transparent,
-		transparent ($line-height - 0.05em),
-		rgba($colour-1, 0.33) 0.05em,
-		rgba($colour-1, 0.33)
-	);
-	background-size: 100% $line-height;
-	border-radius: 0 0 1em 0;
-	color: #000;
-	font-weight: bold;
-	@include default-box-shadow(top, 2);
-	@include _(transition, box-shadow 100ms ease-in-out);
+	@include _(border-radius, 0.25rem);
+	color: inherit;
+	background-image: repeating-linear-gradient(135deg, rgba(#000, 0.025), rgba(#000, 0.025) 0.1em, transparent 0.1em, transparent 0.4em);
+	@include _(box-shadow, 0 0 0 0 rgba(0,0,0,0.05));
+	@include _(transition, box-shadow 200ms ease-in-out);
+	will-change: box-shadow;
 
 	&:hover, &:focus, &:active {
-		@include default-box-shadow(top, 1);
+		@include _(box-shadow, 0 0 0 0.3em rgba(0,0,0,0.05));
+	}
+}
+
+.textarea {
+	> :first-child {
+		margin-top: 0;
+	}
+	> :last-child {
+		margin-bottom: 0;
+	}
+	p {
+		font-size: 1.125em;
 	}
 }
 
@@ -223,17 +246,19 @@ input {
 .text-field {
 	position: relative;
 	margin-bottom: 2em;
-	background-color: #F8F8F8;
-	@include default-box-shadow(top, 1.5, false, 0 0.05em 0 0 #666);
-	@include _(transition, background-image 100ms ease-in-out);
-	$fn: '';
-	$capability: get_capability(map-get($compatibility-map, css-gradients));
-	@if $capability == yx or $capability == ax or $capability == y or $capability == a {
-		$fn: '-#{$browser_prefix}-';
-	}
-	@include _(background-size, 8px 8px);
+	color: inherit;
 
-	label {
+	&.empty {
+		label {
+			z-index: $zindex-base + 3;
+			@include _(transform, translateY(-100%) scale(1));
+			background-color: transparent;
+			color: #666;
+		}
+	}
+
+	label,
+	&.focused label {
 		position: absolute;
 		z-index: $zindex-base + 3;
 		font-size: 1em;
@@ -241,27 +266,14 @@ input {
 		width: auto;
 		@include _(transition, 'transform 250ms ease-in-out, color 250ms ease-in-out, background-color 250ms ease-in-out');
 		top: 100%;
+		left: 0;
 		@include _(transform, translateY(0) scale(0.75));
 		@include _(transform-origin, 0 0);
 		line-height: 1.5em;
 		background-color: transparent;
-		color: #333;
-	}
-
-	&.empty {
-		background-color: $white;//#E8E8E8;
-		background-image:
-			#{$fn}repeating-linear-gradient(
-				-45deg, #DDD,
-				#DDD 1px, transparent 1px,
-				transparent 6px
-			);
-		label {
-			z-index: $zindex-base + 1;
-			@include _(transform, translateY(-100%) scale(1));
-			background-color: transparent;
-			color: #888;
-		}
+		color: $black;
+		cursor: text;
+		will-change: transform, color, background-color;
 	}
 
 	input {
@@ -269,22 +281,68 @@ input {
 		position: relative;
 		z-index: $zindex-base + 2;
 		padding: 0.15em 0.5em;
-		background-color: transparent;
-		border: 0;
+		background-color: #F8F8F8;
+		@include _(border-radius, 0.25rem);
+		@include _(box-shadow, 0 0 0 0 rgba(0,0,0,0.05));
+		@include _(transition, box-shadow 200ms ease-in-out);
+		background-image: repeating-linear-gradient(135deg, rgba(0, 0, 0, 0.025), rgba(0, 0, 0, 0.025) 0.1rem, transparent 0.1rem, transparent 0.4rem);
+		border: 0.1rem solid #E8E8E8;
+		will-change: box-shadow;
 	}
 
 	&.big input {
 		font-size: 2em;
+		@include font-family(secondary);
+
+		.composition & {
+			margin-top: 1em;
+		}
 	}
 
-	&:focus, &:active {
+	&:focus, &:active, &:focus {
+
 		label {
-			color: #333;
+			color: $black;
 		}
 	}
 	input {
-		&:focus, &:active {
-			@include _(box-shadow, inset 0 0 1em 1em #E8E8E8);
+		&:focus, &:active, &:hover {
+			@include _(box-shadow, 0 0 0 0.3em rgba(0,0,0,0.05));
+		}
+	}
+}
+
+@include keyframes(bend) {
+	to {
+		@include _(transform, skewX(-5deg));
+	}
+}
+
+.input-field {
+	.field-error {
+		display: block;
+		float: right;
+		background-color: rgba($colour-2, 0.333);
+		@include font-family(secondary);
+		padding: 0.5em 1em;
+		margin: 0 0.2em;
+		text-align: center;
+		@include _(transform, skewX(-15deg));
+		@include _(transform-origin, 0 100%);
+		@include default-box-shadow(top, 2);
+		@include _(animation, bend ease-in-out 500ms infinite alternate both);
+	}
+
+	&.check-box-field {
+		&.has-error {
+			margin-top: 3em;
+		}
+
+		.field-error {
+			position: absolute;
+			bottom: 100%;
+			right: 0;
+			margin-right: 0;
 		}
 	}
 }
@@ -297,7 +355,6 @@ input {
 
 		&:checked {
 			+ div input {
-				//display: block;
 				z-index: $zindex-base + 2;
 				@include _(opacity, 1);
 			}
@@ -341,116 +398,133 @@ input {
 }
 
 .check-box-field,
+.check-box-field.vertical,
 .radio-button-field {
 	@include clearfix;
-	margin-bottom: 1em;
+	margin-bottom: 3em;
 	position: relative;
+	@include default-box-shadow(top);
 	
 	label {
-		float: left;
-		@include default-box-shadow(top);
-		background-color: $colour-2;
+		display: block;
+		background-color: #FFF;
+		height: 2.333em;
+		font-weight: normal;
+		font-size: 1.25em;
+		@include font-family(secondary);
 		text-align: center;
 		position: relative;
-		margin: 0 1em 3em;
-		padding: 0.5em;
+		padding: 0.5em 0.5em 0.5em 3em;
 		cursor: pointer;
+		border: 0.1em solid;
+		border-top: 0;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
 		@include _(transition, #{'transform, background-color 100ms, 100ms ease-in-out, ease-in-out'});
 
-		&:hover {
-			@include _(transform, scale(1.1));
-		}
-
 		@include before-and-after {
-			content: '';
-			position: absolute;
-			visibility: hidden;
-			@include _(transition, transform 200ms ease-in-out);
-			@include _(transition, transform 200ms cubic-bezier(0, 0.38, 0.9, 2));
-		}
+		 	content: '';
+		 	position: absolute;
+		 	@include _(transition, transform 200ms ease-in-out);
+		 }
 
 		@include before {
-			background-color: $colour-5;
-			bottom: -0.3em;
-			right: -0.5em;
-			width: 2em;
-			height: 2em;
-			border-radius: 50%;
-			@include _(transform, scale(0));
-			@include default-box-shadow(top);
-		}
-
-		@include after {
-			border: 0.5em solid $white;
-			border-left: none;
-			border-top: none;
-			width: 1em;
-			height: 2em;
-			font-size: 0.6em;
-			bottom: 0.3em;
-			right: 0.3em;
-			@include _(transform, scale(0) rotate(45deg));
-		}
-	}
-
-	svg {
-		width: 100%;
-		height: 100%;
-		margin-bottom: 0.75em;
-		fill: $white;
-		stroke: rgba(0, 0, 0, 0.667);
-		stroke-width: 0.05em;
-
-		+ svg {
+			content: '';
 			position: absolute;
 			top: 0;
 			left: 0;
-			right: 0;
-			@include _(opacity, 0.75);
-		}
-	}
-
-	input {
-		position: absolute;
-		opacity: 0;
-    	left: 1em;
-    	bottom: 0.5em;
-
-		&:checked + label {
-			background-color: $colour-1;
-			@include _(transform, scale(1.25));
-
-			@include before {
-				visibility: visible;
-				@include _(transform, scale(1));
-			}
-
-			@include after {
-				visibility: visible;
-				@include _(transform, scale(1) rotate(45deg));
-			}
-		}
-	}
-}
-
-.check-box-field {
-	label {
-		color: $white;
-		font-weight: normal;
-		@include font-family(secondary);
-		@include _(text-stroke, 0.5px #000);
-
-		@include before {
-			font-size: 0.6em;
-			bottom: -0.8em;
+			width: 2.333em;
+			height: 100%;
+			border-right: inherit;
 		}
 
 		@include after {
-			font-size: 0.3em;
-			bottom: -0.5em;
+			content: '';
+			position: absolute;
+			visibility: hidden;
+			left: 0.75em;
+			top: 0.25em;
+			border: 0.2em solid #FFF;
+			width: 0.75em;
+			height: 1.5em;
+			border-width: 0 .2em 0.2em 0;
+			@include _(transform, rotate(45deg) scale(0));
+		 	@include _(transition, transform 200ms cubic-bezier(0, 0.38, 0.9, 2));
+		}
+	}
+
+	input:first-child + label {
+		border: 0.1em solid;
+	}
+
+	input {
+		position: fixed;
+		opacity: 0 !important;
+    	left: -100000px;
+    	z-index: -10;
+
+		&:checked + label {
+			@include before {
+				background-color: $colour-5;
+			}
+			@include after {
+				visibility: visible;
+				@include _(transform, rotate(45deg) scale(1));
+			}
+		}
+
+		&:hover + label {
+			@include before {
+				background-color: $colour-3;
+			}
+		}
+	}
+
+	.other {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 2.333em;
+
+		input {
+			z-index: 1;
+			opacity: 1!important;
+			position: static;
+			margin: 0;
+			font: inherit;
+			height: 100%;
+			text-align: inherit;
+			cursor: inherit;
 		}
 	}
 }
+
+.check-box-field.vertical {
+	display: block;
+	margin: 0 2em 5em;
+	font-size: 0.75em;
+}
+
+// .check-box-field {
+// 	label {
+// 		color: $white;
+// 		font-weight: normal;
+// 		@include font-family(secondary);
+// 		@include _(text-stroke, 0.5px #000);
+
+// 		@include before {
+// 			font-size: 0.6em;
+// 			bottom: -0.8em;
+// 		}
+
+// 		@include after {
+// 			font-size: 0.3em;
+// 			bottom: -0.5em;
+// 		}
+// 	}
+// }
 
 .radio-button-field {
 	label {
@@ -504,6 +578,13 @@ form {
 	}
 }
 
+.flex-form, .flex-column {
+	button, .button {
+		width: 100%;
+		text-align: center;
+	}
+}
+
 .actions {
 	text-align: center;
 	margin: 0 1em;
@@ -531,6 +612,59 @@ form {
 			float: left;
 		}
 	}
+
+	.conferences-view_workshop & {
+	    margin-bottom: 5em;
+	}
+
+	&.next-prev {
+		display: flex;
+		flex-direction: row-reverse;
+		margin: 0;
+	}
+}
+
+ul.warnings {
+	list-style: none;
+	padding: 0;
+}
+
+ul.warnings li,
+.warning-info {
+ 	position: relative;
+ 	min-height: 4em;
+	border: 0.2em solid rgba(0, 0, 0, 0.1);
+	background-color: rgba($colour-3, 0.333);
+	padding: 1em 1em 1em 4em;
+	@include font-family(secondary);
+	text-align: left;
+	margin: 1em;
+	width: auto;
+	@include default-box-shadow(top, 2);
+
+	@include before {
+		content: '!';
+		display: block;
+		position: absolute;
+		top: 0.5em;
+		left: 0.5em;
+		width: 1.5em;
+		height: 1.5em;
+		background-color: $black;
+		color: $white;
+		text-align: center;
+		line-height: 1.5em;
+		font-size: 1.5em;
+		background-color: $colour-3;
+		@include _(border-radius, 50%);
+		@include default-box-shadow(top, 2);
+	}
+}
+
+.warning-info {
+	display: inline-block;
+	margin: 0;
+	vertical-align: bottom;
 }
 
 ::-webkit-resizer {
@@ -569,7 +703,7 @@ form {
 			@include _(order, 1);
 		}
 
-		form {
+		form, .register {
 			background-color: $colour-2;
 		}
 
@@ -596,6 +730,10 @@ form {
 			@include after {
 				display: none;
 			}
+
+			.title {
+				font-size: 0.8em;
+			}
 		}
 
 		button {
@@ -613,10 +751,129 @@ form {
 		form {
 			display: inline;
 		}
+
+		.strlen-12, .strlen-13 {
+			.title {
+				font-size: 0.7em;
+			}
+		}
+
+		.strlen-14, .strlen-15 {
+			.title {
+				font-size: 0.6333em;
+			}
+		}
 	}
 
 	.logo {
 		font-size: 5em;
+	}
+
+	.user-nav-bar {
+		position: absolute;
+		right: 0;
+		width: auto;
+		text-align: right;
+		top: 1em;
+		font-size: 0.9em;
+		width: 100%;
+		padding-left: 13em;
+
+		a {
+			display: block;
+			padding: 0.5em 0;
+			color: $black;
+			z-index: 1;
+
+			&:after {
+				display: none;
+			}
+		}
+
+		.my-account {
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+	}
+}
+
+#registration-steps {
+	ul {
+		display: block;
+		position: relative;
+		list-style: none;
+		padding: 0;
+		margin-top: -1em;
+		overflow: hidden;
+		text-align: center;
+		@include default-box-shadow(top, 2);
+		@include _(border-radius, 0.15em);
+		@include clearfix;
+	}
+
+	li {
+		position: relative;
+		display: block;
+		@include font-family(secondary);
+		color: $white;
+		background-color: #BBB;
+		border: 0;
+		padding: 1em 1.5em;
+		font-size: 1.25em;
+		outline: 0;
+		cursor: default;
+		@include _(text-stroke, 1px rgba(0, 0, 0, 0.25));
+		
+		@include after {
+			content: '';
+			position: absolute;
+			z-index: 1;
+			top: 2.25em;
+			left: 0;
+			right: 0;
+			width: 1.25em;
+			height: 1.25em;
+			margin: auto;
+			border: 0 solid;
+			border-width: 0.1em 0.1em 0 0;
+			background-color: inherit;
+			@include _(transform, rotate(135deg));
+			@include _(transition, 'transform 200ms ease-in-out, background-color 200ms ease-in-out');
+			@include _(box-shadow, 0.2em -0.1em 0.8em -0.4em #000);
+		}
+
+		&.enabled {
+			background-color: $colour-5;
+		}
+
+		&.current {
+			background-color: lighten(desaturate($colour-5, 33%), 15%);
+		}
+
+		&:last-child {
+			padding-right: 1.5em;
+
+			@include after {
+				display: none;
+			}
+		}
+	}
+
+	a {
+		color: inherit;
+
+		@include before {
+			content: '';
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+		}
+
+		@include after {
+			display: none;
+		}
 	}
 }
 
@@ -632,7 +889,7 @@ form {
 		&.supplementary {
 			margin: rems(1) 7.5%;
 			overflow: hidden;
-			border-radius: 0.33em;
+			@include _(border-radius, 0.33em);
 			border: 0.1rem solid #DDD;
 			background-color: #F7F7F7;
 			@include default-box-shadow(top, 2);
@@ -690,7 +947,7 @@ a.logo {
 		fill: $colour-1;
 	}
 	svg.bb-icon-logo-text {
-		fill: #333;
+		fill: $black;
 	}
 
 	.logo:hover svg.bb-icon-logo {
@@ -730,8 +987,12 @@ a.logo {
 		font-size: 5vw;
 		margin: 1em auto 2em;
 
-		h1, h3 {
+		h1, h2 {
 			margin: 0;
+		}
+
+		h2 {
+			font-size: 1.15em;
 		}
 	}
 }
@@ -850,6 +1111,7 @@ $header-tilt: 8deg;
 	footer {
 		display: flex;
 		flex-flow: row wrap;
+		font-size: 4.1vw;
 	}
 
 	.github,
@@ -869,7 +1131,7 @@ $header-tilt: 8deg;
 	}
 
 	.facebook {
-		flex: 0;
+		flex: none;
 		margin: 0.5em;
 
 		a {
@@ -891,7 +1153,7 @@ $header-tilt: 8deg;
 		.icons {
 			width: 1.5em;
 			height: 1.5em;
-			fill: #333;
+			fill: $black;
 			vertical-align: middle;
 		}
 	}
@@ -899,7 +1161,7 @@ $header-tilt: 8deg;
 	.github {
 		position: relative;
 		background-color: $white;
-		border-radius: 0.25em;
+		@include _(border-radius, 0.25em);
 		border: 0.1em solid #DDD;
 		padding: 0.5em 0.5em 0.5em 2em;
 		text-align: center;
@@ -942,7 +1204,44 @@ $header-tilt: 8deg;
 	}
 
 	p {
-		font-size: 1.4em;
+		font-size: 1.333em;
+	}
+
+	form {
+		&.flex-form {
+			display: flex;
+			align-items: flex-start;
+
+			.input-field {
+				flex: 1;
+			}
+
+			button, .button {
+				margin-left: 1em;
+				height: 2.6em;
+			}
+		}
+	}
+
+	.flex-column {
+		display: flex;
+		align-items: flex-start;
+		margin-top: 1em;
+
+		p:first-child {
+			margin-top: 0;
+		}
+
+		.stretch-item {
+			flex: 1;
+			margin-right: 1em;
+		}
+	}
+
+	.flex-form, .flex-column {
+		button, .button {
+			width: auto;
+		}
 	}
 
 	#main-nav {
@@ -966,11 +1265,12 @@ $header-tilt: 8deg;
 
 		.nav a, .nav button {
 			width: auto;
+			min-width: 3.5em;
 			overflow: visible;
-			margin-left: 0.75em;
+			margin-left: 0.725em;
 			line-height: 3em;
 			padding: 0 0 1em;
-			color: #333;
+			color: $black;
 			@include _(box-shadow, none);
 			@include _(text-shadow, none);
 
@@ -1020,17 +1320,17 @@ $header-tilt: 8deg;
 		}
 
 		.nav a {
-			&.policy {
+			&[class] {
 				background-color: transparent;
+			}
 
+			&.policy {
 				@include before-and-after {
 					background-color: $colour-5;
 				}
 			}
 
 			&.about {
-				background-color: transparent;
-
 				@include before-and-after {
 					background-color: $colour-3;
 				}
@@ -1043,6 +1343,42 @@ $header-tilt: 8deg;
 			}
 			&:focus, &:active {
 				@include _(transform, none);
+			}
+		}
+
+		.user-nav-bar {
+			top: 0;
+			left: 0;
+			right: auto;
+			width: auto;
+			float: none;
+			text-align: left;
+			background-color: #EEE;
+			@include _(border-radius, 0 0 0.5em 0);
+			font-size: 0.8em;
+			padding: 0 1em 0 0.5em;
+			@include default-box-shadow(top, 2);
+
+			a {
+				display: inline-block;
+				padding: 0.25em 0;
+
+				&:hover {
+					color: lighten($black, 25%);
+				}
+			}
+
+			.my-account {
+				max-width: none;
+				overflow: visible;
+
+				@include after {
+					content: '|';
+					display: inline;
+					@include _(opacity, 0.25);
+					position: static;
+					margin: 0 0.5em;
+				}
 			}
 		}
 	}
@@ -1065,6 +1401,45 @@ $header-tilt: 8deg;
 		}
 	}
 	
+	#registration-steps {
+		ul {
+			display: inline-block;
+			text-align: left;
+			margin-top: -4em;
+		}
+
+		li {
+			display: inline-block;
+			float: left;
+
+			@include after {
+				content: '';
+				top: 1.125em;
+				left: auto;
+				right: -0.25em;
+				@include _(transform, rotate(45deg));
+			}
+
+			&.enabled:hover,
+			&.enabled:hover ~ li {
+				@include after {
+					@include _(transform, rotate(-135deg));
+					background-color: transparent;
+				}
+			}
+		}
+	}
+
+	ul.warnings {
+		li {
+			margin: 1em 4em;
+		}
+	}
+
+	.warning-info {
+		margin-left: 1em;
+	}
+
 	#main {
 		clear: right;
 
@@ -1139,16 +1514,20 @@ $header-tilt: 8deg;
 	}
 
 	#footer {
+		footer {
+			font-size: 1em;
+		}
+
 		.github {
 			flex: none;
 			flex-basis: auto;
 			bottom: 0.5em;
 			float: left;
 			margin-right: 1em;
-			margin-left: 0;
+			margin-left: 1em;
 		}
 		.facebook {
-			margin: 0 1em 0 0;
+			margin: 0;
 		}
 		ul.locales {
 			flex: none;
@@ -1156,14 +1535,41 @@ $header-tilt: 8deg;
 			flex-grow: 1;
 		}
 	}
+
+	.check-box-field,
+	.radio-button-field {
+		display: flex;
+
+		label {
+			flex: 1;
+			border: 0.1em solid;
+			border-left: 0;
+			text-align: left;
+		}
+
+		input:first-child + label {
+			border: 0.1em solid;
+		}
+	}
 }
 
 @include keyframes(fade-out) {
-	to { @include _(opacity, 0.25); }
+	to {
+		@include _(opacity, 0.25);
+	}
 }
 
-:focus {
+body :focus,
+input[type="submit"]:focus,
+.check-box-field input:focus + label,
+.radio-button-field input:focus + label {
 	@include _(animation, fade-out ease-in-out 500ms infinite alternate both);
+}
+
+input:focus,
+textarea:focus,
+.textarea {
+	@include _(animation, none);
 }
 
 @include breakpoint(large) {
@@ -1171,6 +1577,12 @@ $header-tilt: 8deg;
 		.nav {
 			font-size: 1.9em;
 			margin-top: 0;
+		}
+
+		.user-nav-bar {
+			@include _(border-radius, 0 0 0.5em 0.5em);
+			padding: 0 1em;
+			font-size: 1em;
 		}
 	}
 
@@ -1295,7 +1707,7 @@ $header-tilt: 8deg;
 		height: 1.9em;
 		border: 0;
 		@include default-box-shadow(top);
-		background-color: #333;
+		background-color: $black;
 		color: $colour-3;
 		vertical-align: bottom;
 	}
@@ -1406,7 +1818,7 @@ $header-tilt: 8deg;
 	.info {
 		position: fixed;
 		background-color: $white;
-		color: #333;
+		color: $black;
 		left: auto;
 		right: auto;
 		top: auto;
@@ -1431,8 +1843,10 @@ $header-tilt: 8deg;
 
 .conferences-register .policy-agreement {
 	padding: 0.25em 1em;
-	background-color: #F8F8F8;
-	@include default-box-shadow(top, 2, true);
+	margin: 0 0 3em;
+	border: 0.1em solid #DDD;
+    @include _(border-radius, 0.25em);
+	@include default-box-shadow(top, 2);
 }
 
 body.policy .policy-agreement ul {
@@ -1462,7 +1876,7 @@ body.policy .policy-agreement ul {
 			height: 2em;
 			line-height: 2em;
 			text-align: center;
-			border-radius: 50%;
+			@include _(border-radius, 50%);
 		}
 	}
 
@@ -1513,12 +1927,34 @@ body.policy .policy-agreement ul {
 .facilitators {
 	display: inline-block;
 
+	.facilitator {
+		margin: 0 0 0.5em 1.25em;
+	}
+
+	.name {
+		position: relative;
+		font-weight: bold;
+
+		@include before {
+			content: '';
+			position: absolute;
+			width: 0.3em;
+			height: 0.3em;
+			background-color: #333;
+			border-radius: 50%;
+			left: -0.75em;
+			top: 0.5em;
+			@include _(opacity, 0.5);
+		}
+	}
+
 	.name, .role {
 		display: inline;
 	}
 
 	.role {
 		color: #666;
+		white-space: nowrap;
 
 		@include before {
 			content: '(';
@@ -1544,7 +1980,7 @@ body.policy .policy-agreement ul {
 	p {
 		padding: 0 1rem 0.5rem;
 		font-size: 1em;
-		color: #333;
+		color: $black;
 	}
 
 	h4 {
@@ -1619,7 +2055,7 @@ html[data-lingua-franca-example="html"] {
 			float: left;
 			padding: 0.25em 2em 0 1em;
 			margin: 0.25em 1em;
-			border-radius: 0.5em 0.5em 0 0;
+			@include _(border-radius, 0.5em 0.5em 0 0);
 			color: #444;
 			@include font-family(secondary);
 
@@ -1722,14 +2158,23 @@ html[data-lingua-franca-example="html"] {
 	padding: 0 2em;
 
 	.workshop-description {
-		font-size: 0.75em;
+		max-height: 10em;
+		padding: 1em;
+		overflow: hidden;
 	}
 
-	li {
-		border-bottom: 1px dashed #CCC;
+	> li {
+		margin-bottom: 1em;
+		border: 0.2em solid;
+		@include _(border-radius, 0.25em);
 
-		&:last-child {
-			border-bottom: 0;
+		> a {
+			display: block;
+			color: inherit;
+
+			@include after {
+				display: none;
+			}
 		}
 
 		ul {
@@ -1740,6 +2185,41 @@ html[data-lingua-franca-example="html"] {
 		li {
 			border: 0;
 		}
+
+		&:hover {
+			@include default-box-shadow;
+		}
+
+		&.interested {
+			.workshop-interest {
+				background-color: rgba($colour-5, 0.5);
+			}
+		}
+
+		&.mine {
+			.workshop-interest {
+				background-color: lighten($colour-1, 25%);
+				background-color: rgba($colour-1, 0.5);
+			}
+		}
+	}
+
+	.title {
+		margin: 0;
+		background-color: $black;
+		color: #FFF;
+		padding: 0.25em 0.5em 0.5em;
+	}
+
+	p {
+		margin-top: 0;
+		font-size: 1em;
+	}
+
+	.workshop-interest {
+		padding: 0.5em 1em;
+		font-weight: bold;
+		background-color: #EEE;
 	}
 }
 
@@ -1753,7 +2233,7 @@ html[data-lingua-franca-example="html"] {
 	button {
 		font-size: 0.9em;
 		margin: 1em;
-		background-color: $colour-5;
+		background-color: $colour-1;
 
 		&.delete {
 			background-color: $colour-4;			
@@ -1793,18 +2273,9 @@ html[data-lingua-franca-example="html"] {
 }
 
 #main form.add-facilitator {
-	text-align: left;
-	margin-top: 0;
-
 	button {
+		height: 2.4em;
 		font-size: 0.9em;
-		float: right;
-	}
-
-	.email-field {
-		width: 80%;
-		font-size: 0.9em;
-		float: left;
 	}
 }
 
@@ -1822,7 +2293,7 @@ html[data-lingua-franca-example="html"] {
 		.conflict-score {
 			padding: 0.25em;
 			background-color: $colour-3;
-			color: #333;
+			color: $black;
 		}
 		.all-workshops, .all-events {
 			list-style: none;
@@ -1860,7 +2331,7 @@ html[data-lingua-franca-example="html"] {
 
 			.warnings {
 				background-color: $colour-3;
-				color: #333;
+				color: $black;
 				padding: 0.5em;
 				margin-top: 0.5em;
 				list-style: none;

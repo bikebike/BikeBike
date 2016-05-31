@@ -6,6 +6,7 @@ BikeBike::Application.routes.draw do
     post  '/conferences/:slug/save' => 'conferences#save', :as => :save_conference
 
     match '/conferences/:slug/register' => 'conferences#register', :as => :register, via: [:get, :post]
+    get   '/conferences/:slug/register/:step' => 'conferences#register', :as => :register_step
     match '/conferences/:slug/broadcast' => 'conferences#broadcast', :as => :broadcast, via: [:get, :post]
     get   '/conferences/:slug/stats' => 'conferences#stats', :as => :stats
     get   '/conferences/:slug/register/:button/:confirmation_token' => 'conferences#register', :as => :register_paypal_confirm
@@ -24,12 +25,13 @@ BikeBike::Application.routes.draw do
     get   '/conferences/:slug/schedule/event/:id' => 'conferences#view_event', :as => :view_event
     get   '/conferences/:slug/schedule/event/:id/edit' => 'conferences#edit_event', :as => :edit_event
 
-    get   '/conferences/:slug/workshops' => 'conferences#workshops', :as => :workshops
+    # get   '/conferences/:slug/workshops' => 'conferences#workshops', :as => :workshops
     match '/conferences/:slug/workshops/create' => 'conferences#create_workshop', :as => :create_workshop, via: [:get, :post]
     post  '/conferences/:slug/workshops/save' => 'conferences#save_workshop', :as => :save_workshop
     get   '/conferences/:slug/workshops/:workshop_id' => 'conferences#view_workshop', :as => :view_workshop
     post  '/conferences/:slug/workshops/:workshop_id/toggle-interest' => 'conferences#toggle_workshop_interest', :as => :toggle_workshop_interest
     match '/conferences/:slug/workshops/:workshop_id/edit' => 'conferences#edit_workshop', :as => :edit_workshop, via: [:get, :post]
+    match '/conferences/:slug/workshops/:workshop_id/translate/:locale' => 'conferences#translate_workshop', :as => :translate_workshop, via: [:get, :post]
     match '/conferences/:slug/workshops/:workshop_id/delete' => 'conferences#delete_workshop', :as => :delete_workshop, via: [:get, :post]
     get   '/conferences/:slug/workshops/:workshop_id/facilitate' => 'conferences#facilitate_workshop', :as => :facilitate_workshop
     post  '/conferences/:slug/workshops/:workshop_id/facilitate_request' => 'conferences#facilitate_request', :as => :facilitate_workshop_request
@@ -43,7 +45,9 @@ BikeBike::Application.routes.draw do
     get   '/confirm/:token' => 'application#confirm', :as => :confirm
     match '/doconfirm' => 'application#do_confirm', :as => :do_confirm, via: [:get, :post]
     #post '/doconfirm' => 'application#do_confirm', :as => :do_confirm
-    post  '/logout' => 'application#user_logout', :as => :logout
+    match '/logout' => 'application#user_logout', :as => :logout, :via => [:get, :post]
+    match '/oauth/callback' => 'oauths#callback', :via => [:get, :post]
+    get   '/oauth/:provider' => 'oauths#oauth', :as => :auth_at_provider
     post  '/translator-request' => 'application#translator_request', :as => :translator_request
 
     get   '/error_404' => 'application#error_404'

@@ -98,6 +98,35 @@ module ApplicationHelper
 		content_for(:banner) { ('<div class="row"><h1>' + banner_title.to_s + '</h1></div>').html_safe }
 	end
 
+	def add_stylesheet(sheet)
+		@stylesheets ||= []
+		@stylesheets << sheet
+	end
+
+	def stylesheets
+		html = ''
+		Rack::MiniProfiler.step('inject_css') do
+			html += inject_css!
+		end
+		(@stylesheets || []).each do |css|
+			Rack::MiniProfiler.step("inject_css #{css}") do
+				html += inject_css! css.to_s
+			end
+		end
+		html += stylesheet_link_tag 'i18n-debug' if request.params['i18nDebug']
+		return html.html_safe
+	end
+
+	def add_inline_script(script)
+		@_inline_scripts ||= []
+		@_inline_scripts << Rails.application.assets.find_asset("#{script.to_s}.js").to_s
+	end
+
+	def inline_scripts
+		return '' unless @_inline_scripts.present?
+		"<script>#{@_inline_scripts.join("\n")}</script>".html_safe
+	end
+
 	def banner_attribution
 		if @@banner_image && @@banner_attribution_details
 			src = @@banner_attribution_details[:src]
@@ -185,12 +214,17 @@ module ApplicationHelper
 		false
 	end
 
+	def off_screen(text)
+		"<span class=\"screen-reader-text\">#{text}</span>".html_safe
+	end
+
 	def url_for_locale(locale)
-		url_for(params
-				.merge({action: (params[:_original_action] || params[:action])}
-				.merge(url_params(locale)))
-				.delete(:_original_action)
-			)
+		new_params = params.merge({action: (params[:_original_action] || params[:action])})
+		new_params.delete(:_original_action)
+		
+		return url_for(new_params.merge({lang: locale.to_s})) if Rails.env.development? || Rails.env.test?
+		return "https://preview-#{locale.to_s}.bikebike.org#{url_for(new_params)}" if Rails.env.preview?
+		"https://#{locale.to_s}.bikebike.org#{url_for(new_params)}"
 	end
 
 	def registration_steps(conference = @conference)
@@ -550,6 +584,18 @@ module ApplicationHelper
 			country = location.country
 			region = location.territory
 			city = location.city
+		elsif location.data.present? && location.data['address_components'].present?
+			component_map = {
+				'locality' => :city,
+				'administrative_area_level_1' => :region,
+				'country' => :country
+			}
+			location.data['address_components'].each do | component |
+				types = component['types']
+				country = component['short_name'] if types.include? 'country'
+				region = component['short_name'] if types.include? 'administrative_area_level_1'
+				city = component['long_name'] if types.include? 'locality'
+			end
 		else
 			country = location.data['country_code']
 			region = location.data['region_code']
@@ -565,6 +611,14 @@ module ApplicationHelper
 		return hash.length > 1 ? _("geography.formats.#{hash.keys.join('_')}", vars: hash) : hash.values.first
 	end
 
+	def show_errors(field)
+		return '' unless @errors && @errors[field].present?
+
+		error_txt = _"errors.messages.fields.#{field.to_s}.#{@errors[field]}", :s
+		
+		"<div class=\"field-error\">#{error_txt}</div>".html_safe
+	end
+
 	def nav_link(link, title = nil, class_name = nil)
 		if title.nil? && link.is_a?(Symbol)
 			title = link
@@ -572,12 +626,13 @@ module ApplicationHelper
 		end
 		if class_name.nil? && title.is_a?(Symbol)
 			class_name = title
-			title = _"page_titles.#{title.to_s.titlecase}"
 		end
+		title = _"page_titles.#{title.to_s.titlecase.gsub(/\s/, '_')}"
 		classes = []
 		classes << class_name if class_name.present?
-		classes << 'current' if current_page?(link.gsub(/(^.*)\/$/, '\1'))
-		link_to title.html_safe, link, :class => classes
+		classes << "strlen-#{strip_tags(title).length}"
+		classes << 'current' if request.fullpath.start_with?(link.gsub(/^(.*?)\/$/, '\1'))
+		link_to "<span class=\"title\">#{title}</span>".html_safe, link, :class => classes
 	end
 
 	def date(date, format = :long)

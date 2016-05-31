@@ -3,7 +3,19 @@
 # Available submodules are: :user_activation, :http_basic_auth, :remember_me,
 # :reset_password, :session_timeout, :brute_force_protection, :activity_logging, :external
 # Rails.application.config.sorcery.submodules = [:remember_me, :reset_password, :user_activation, :brute_force_protection, :external]
-Rails.application.config.sorcery.submodules = [:remember_me, :reset_password, :brute_force_protection, :external]
+require 'sorcery'
+require 'openssl'
+
+OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE if Rails.env.development?
+
+ENV['bb_host'] = {
+  test:        'localhost:3000',
+  development: 'development.bikebike.org:3000',
+  preview:     'preview.bikebike.org',
+  production:  'bikebike.org',
+}[Rails.env]
+
+Rails.application.config.sorcery.submodules = [:external]
 
 # Here you can configure each submodule's features.
 Rails.application.config.sorcery.configure do |config|
@@ -112,11 +124,13 @@ Rails.application.config.sorcery.configure do |config|
   
   config.facebook.key = "257350517701074"
   config.facebook.secret = "2f6ab1fd7eeff9aee73140991fc68314"
-  config.facebook.callback_url = "http://dev.bikebike.org/oauth/callback?provider=facebook"
-  config.facebook.user_info_mapping = {:email => "email", :username => "username", :avatar => "picture/data/url"}
+  config.facebook.callback_url = "#{ENV['bb_host']}/oauth/callback?provider=facebook"
+  config.facebook.user_info_mapping = {:email => "email", :username => "username"}
   config.facebook.scope = "email"
   config.facebook.display = "popup"
-  
+  config.facebook.api_version = "v2.5"
+  config.facebook.user_info_path = "me?fields=email,name"
+ 
   # config.github.key = ""
   # config.github.secret = ""
   # config.github.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=github"
@@ -306,7 +320,7 @@ Rails.application.config.sorcery.configure do |config|
     # mailer class. Needed.
     # Default: `nil`
     #
-    user.reset_password_mailer = UserMailer
+    # user.reset_password_mailer = UserMailer
 
 
     # reset password email method on your mailer class.
@@ -378,7 +392,7 @@ Rails.application.config.sorcery.configure do |config|
     # Unlock token mailer class
     # Default: `nil`
     #
-    user.unlock_token_mailer = UserMailer
+    # user.unlock_token_mailer = UserMailer
 
     # -- activity logging --
     # Last login attribute name.
