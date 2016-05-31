@@ -13,6 +13,9 @@ $colour-4: #D89E59; // orange
 $colour-5: #02CA9E; // green
 
 $white: #FFFEFE;
+$black: #333;
+
+$link-colour: darken($colour-1, 13%);
 
 @mixin default-box-shadow($direction: top, $distance: 1, $inset: false, $additional-shadow: false) {
 	@if capable_of(box-shadow) {

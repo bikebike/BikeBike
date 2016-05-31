@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160304021005) do
+ActiveRecord::Schema.define(version: 20160530175805) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,8 @@ ActiveRecord::Schema.define(version: 20160304021005) do
     t.string   "allergies"
     t.string   "languages"
     t.string   "food"
+    t.string   "highest_step"
+    t.json     "steps_completed"
   end
 
   create_table "conference_types", force: :cascade do |t|
@@ -121,6 +123,7 @@ ActiveRecord::Schema.define(version: 20160304021005) do
     t.string   "paypal_password"
     t.string   "paypal_signature"
     t.string   "day_parts"
+    t.string   "registration_status"
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -140,13 +143,13 @@ ActiveRecord::Schema.define(version: 20160304021005) do
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "dynamic_translation_records", force: :cascade do |t|
-    t.string  "locale"
-    t.integer "translator_id"
-    t.string  "model_type"
-    t.integer "model_id"
-    t.string  "column"
-    t.text    "value"
-    t.date    "created_at"
+    t.string   "locale"
+    t.integer  "translator_id"
+    t.string   "model_type"
+    t.integer  "model_id"
+    t.string   "column"
+    t.text     "value"
+    t.datetime "created_at"
   end
 
   create_table "email_confirmations", force: :cascade do |t|
@@ -188,7 +191,7 @@ ActiveRecord::Schema.define(version: 20160304021005) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "event_location_id"
-    t.string   "type"
+    t.string   "event_type"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -317,6 +320,7 @@ ActiveRecord::Schema.define(version: 20160304021005) do
     t.string   "firstname"
     t.string   "lastname"
     t.boolean  "is_translator"
+    t.json     "languages"
   end
 
   add_index "users", ["activation_token"], name: "index_users_on_activation_token", using: :btree
@@ -403,6 +407,7 @@ ActiveRecord::Schema.define(version: 20160304021005) do
     t.text     "notes"
     t.string   "locale"
     t.integer  "event_location_id"
+    t.boolean  "needs_facilitators"
   end
 
 end

@@ -3,19 +3,17 @@
 	%head
 		%meta{ charset: 'utf-8' }
 		%meta{ name: 'viewport', content: 'width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0' }
-		%title= (yield :title) + (content_for?(:title) ? (_!' | ') : '') + (_!'Bike!Bike!')
+		-#%title= (yield :title) + (content_for?(:title) ? (_!' | ') : '') + (_!'Bike!Bike!')
+		%title=_!('Bike!Bike!' + (content_for?(:title) ? " - #{yield :title}" : ''))
 		%meta{ name: 'description', content: (yield_or_default :description, I18n.t('page_descriptions.home')) }
 		= csrf_meta_tags
-		= inject_css!
-		- (@stylesheets || []).each do |css|
-			= inject_css! css
-		= stylesheet_link_tag 'i18n-debug' if request.params['i18nDebug']
+		= stylesheets
 		%link{ href: asset_path('favicon.ico'), rel: 'shortcut icon', type: 'image/x-icon' }
 		%link{ href: asset_path('favicon.ico'), rel: 'icon', type: 'image/x-icon' }
-		%link{ href: asset_path('apple-touch-icon.png'), rel: 'apple-touch-icon' }
-		%link{ href: asset_path('apple-touch-icon-72x72.png'), rel: 'apple-touch-icon', sizes: '72x72' }
-		%link{ href: asset_path('apple-touch-icon-114x114.png'), rel: 'apple-touch-icon', sizes: '114x114' }
-		%link{ href: asset_path('apple-touch-icon-144x144.png'), rel: 'apple-touch-icon', sizes: '144x144' }
+		-#%link{ href: asset_path('apple-touch-icon.png'), rel: 'apple-touch-icon' }
+		-#%link{ href: asset_path('apple-touch-icon-72x72.png'), rel: 'apple-touch-icon', sizes: '72x72' }
+		-#%link{ href: asset_path('apple-touch-icon-114x114.png'), rel: 'apple-touch-icon', sizes: '114x114' }
+		-#%link{ href: asset_path('apple-touch-icon-144x144.png'), rel: 'apple-touch-icon', sizes: '144x144' }
 		= yield :head
 
 	%body{ class: page_style }
@@ -24,8 +22,8 @@
 			- if content_for?(:side_bar)
 				%nav#side-bar
 					= yield :side_bar
-			- flash.each do |key, msg|
-				= content_tag :div, msg, :id => key
+			-# - flash.each do |key, msg|
+			-# 	= content_tag :div, msg, :id => key
 			%header#banner=yield :banner
 			- if @submenu
 				=row do
@@ -39,5 +37,7 @@
 				= yield
 		#footer
 			%footer= render 'shared/footer'
-		- if content_for?(:footer_scripts)
-			= yield :footer_scripts
+		
+		= yield :footer_scripts if content_for?(:footer_scripts)
+		- add_inline_script :main
+		= inline_scripts

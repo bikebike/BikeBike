@@ -702,7 +702,7 @@ es:
     actions:
       Register: Registrate
   donate:
-    button_label: donar
+    button_label: Donar
   articles:
     conference_registration:
       headings:
@@ -744,7 +744,6 @@ es:
           en: bikebike@gdlenbici.org
         Workshops: 'Título de la actividad: Que necesitas? Tipo de espacio? Tema?
           Quién es responsable? Descripción? Tiempo?'
-        Policy_Agreement: Acuerdo de Espacios Más Seguros
         Confirm_Agreement: Al hacer click en el botón "Acepto", estás comprometiéndote
           a cumplir el Acuerdo de Espacios Más Seguros de Bike!Bike!. ¡Gracias!
         Email_Participants: Esta página se usa para contactar a todxs lxs participantes.
@@ -851,8 +850,6 @@ es:
         Proposed_Workshops: ¿Te gustaría facilitar tu propio taller? Simplemente regístrate
           y visita la página de Talleres. Si ya te registraste puedes acceder a la
           página reiniciando el proceso de registro.
-        info: 'Título de la actividad: Que necesitas? Tipo de espacio? Tema? Quién
-          es responsable? Descripción? Tiempo?'
         Workshops: ¿Tienes alguna habilidad emocionante que quieres compartir con
           nosotros? ¿Quieres charlar sobre crear espacios comunitarios seguros? ¿Quieres
           asegurarte de que hagamos un buen paseo el fin de semana? ¡Propón un taller!
@@ -1012,6 +1009,8 @@ es:
       Page_Not_Found: Crear un taller
     Policy: 'Política'
     About: 'Acerca de'
+    Register: 'Registrate'
+    Pre_Register: 'Pre-Registrate'
   actions:
     workshops:
       create: Crear

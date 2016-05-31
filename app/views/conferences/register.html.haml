@@ -1,4 +1,20 @@
 = render :partial => 'page_header', :locals => {:page_key => 'Conference_Registration'}
+- if (steps = current_registration_steps)
+	= row id: 'registration-steps', class: 'flow-steps' do
+		= columns do
+			%ul
+				- current_registration_steps.each do | step |
+					- text = _"articles.conference_registration.headings.#{step[:name].to_s}"
+					%li{class: [step[:enabled] ? :enabled : nil, @register_template == step[:name] ? :current : nil]}
+						- if step[:enabled]
+							.step= link_to text, register_step_path(@this_conference.slug, step[:name])
+						- else
+							.step= text
+- if @warnings.present?
+	= row class: 'warnings', tag: :ul do
+		- @warnings.each do | warning |
+			= columns tag: :li do
+				= warning
 %article
 	= row do
-		= render (@register_template || :register).to_s
+		= render @register_template.to_s

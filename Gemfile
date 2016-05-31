@@ -54,6 +54,9 @@ group :development do
 	gem 'capistrano', '~> 3.1'
 	gem 'capistrano-rails', '~> 1.1'
 	gem 'capistrano-faster-assets', '~> 1.0'
+
+	gem 'eventmachine', :github => 'krzcho/eventmachine', :branch => 'master'
+	gem 'thin', :github => 'krzcho/thin', :branch => 'master'
 end
 
 group :test do

@@ -1,0 +1,26 @@
+= columns(medium: 12) do
+	%h2=_(@page_title)
+	%p=_'articles.conference_registration.paragraphs.Contact_Info', :s, 2
+= columns(medium: 12) do
+	= form_tag register_path(@this_conference.slug) do
+		%h3=_'articles.conference_registration.headings.name','What is your name?'
+		.text-field.input-field{class: @errors[:name].present? ? 'has-error' : nil}
+			= show_errors :name
+			= label_tag :name
+			= text_field_tag :name, @name, required: true
+		%h3=_'articles.conference_registration.headings.location','Where are you coming from?'
+		.text-field.input-field{class: @errors[:location].present? ? 'has-error' : nil}
+			= show_errors :location
+			= label_tag :location
+			= text_field_tag :location, @registration.city || location(lookup_ip_location), required: true
+		%h3=_'articles.conference_registration.headings.languages','Which languages do you speak?'
+		- puts @errors.to_json.to_s
+		.check-box-field.input-field{class: @errors[:languages].present? ? 'has-error' : nil}
+			- [:en, :es, :fr].each do |language|
+				= check_box_tag "languages[#{language}]", 1, (@registration.languages || [I18n.locale.to_s]).include?(language.to_s)
+				= label_tag "languages_#{language}" do
+					= _"languages.#{language}"
+			= show_errors :languages
+		.actions.next-prev
+			= button_tag (params[:step] == :save ? :save : :next), value: :contact_info
+			= button_tag :previous, value: :prev_contact_info, class: :subdued, formnovalidate: true

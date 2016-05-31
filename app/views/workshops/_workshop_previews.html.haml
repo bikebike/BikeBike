@@ -1,8 +1,12 @@
-- # encoding: utf-8
-%ul.workshop-previews
+%ul.workshop-list
 	- workshops.sort_by{ |w| w.title.downcase }.each do |w|
-		- if w.title
-			%li
-				=link_to view_workshop_path(@this_conference.slug, w.id) do
-					%h4=_!(w.title)
-					%p=_!(w.info || '').gsub(/\n\#+(.*?)\r/, "\n<strong>\\1</strong>\r").gsub(/[\t ]*\r\n[\t ]*/, '<br>').html_safe
+		- is_interested = w.interested?(current_user)
+		%li{class: [is_interested ? :interested : nil]}
+			= link_to view_workshop_path(w.conference.slug, w.id) do
+				%h4.title=w.title
+				.workshop-interest
+					- if is_interested
+						=_'articles.workshops.info.you_are_interested_count', "You and #{w.interested_count - 1} others are interested in this workshop", :vars => {:count => (w.interested_count - 1)}
+					- elsif w.interested_count > 0
+						=_'articles.workshops.info.interested_count', "#{w.interested_count} people are interested in this workshop", :vars => {:count => w.interested_count}
+				.workshop-description=w.info.html_safe

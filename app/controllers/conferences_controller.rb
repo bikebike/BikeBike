@@ -514,150 +514,219 @@ class ConferencesController < ApplicationController
 	end
 
 	def register
-		is_post = request.post? || session[:registration_step]
+		# is_post = request.post? || session[:registration_step]
 		set_conference
-
-		#if !@this_conference.registration_open
-		#	do_404
-		#	return
-		#end
-
-		set_conference_registration
 
 		@register_template = nil
 
 		if logged_in?
-			unless @this_conference.registration_open || @registration
-				do_404
-				return
-			end
-			# if the user is logged in start them off on the policy
-			#  page, unless they have already begun registration then
-			#  start them off with questions
-			@register_template = @registration ? (@registration.registration_fees_paid ? :done : :payment) : :policy
+			set_or_create_conference_registration
 
 			@name = current_user.firstname
 			# we should phase out last names
 			@name += " #{current_user.lastname}" if current_user.lastname
 
+			@name ||= current_user.username
+
 			@is_host = @this_conference.host? current_user
+
+			steps = registration_steps
+			return do_404 unless steps.present?
+		else
+			@register_template = :confirm_email
 		end
+
+		@errors = {}
+		@warnings = []
+		form_step = params[:button] ? params[:button].to_sym : nil
+
+		if form_step
+			if form_step.to_s =~ /^prev_(.+)$/
+				@register_template = steps[steps.find_index($1.to_sym) - 1]
+			else
+
+				case form_step
+				when :confirm_email
+					return do_confirm
+				when :contact_info
+					if params[:name].present? && params[:name].gsub(/[\s\W]/, '').present?
+						current_user.firstname = params[:name].squish
+						current_user.lastname = nil
+					else
+						@errors[:name] = :empty
+					end
+
+					if params[:location].present? && params[:location].gsub(/[\s\W]/, '').present? && (l = Geocoder.search(params[:location])).present?
+						corrected = view_context.location(l.first)
+
+						if corrected.present?
+							@registration.city = corrected
+							if params[:location].gsub(/[\s,]/, '').downcase != @registration.city.gsub(/[\s,]/, '').downcase
+								@warnings << view_context._('warnings.messages.location_corrected',"Your location was corrected from \"#{params[:location]}\" to \"#{corrected}\". If this doesn't reflect your intended location, you can change this again in the contact info step.", vars: {original: params[:location], corrected: corrected})
+							end
+						else
+							@errors[:location] = :unknown
+						end
+					else
+						@errors[:location] = :empty
+					end
+
+					if params[:languages].present?
+						current_user.languages = params[:languages].keys
+					else
+						@errors[:languages] = :empty
+					end
+
+					current_user.save! unless @errors.present?
+				end
+
+				if @errors.present?
+					@register_template = form_step
+				else
+					unless @registration.nil?
+						@register_template = steps[steps.find_index(form_step) + 1]
+
+						# have we reached a new level?
+						unless @registration.steps_completed.include? form_step.to_s
+							@registration.steps_completed ||= []
+							@registration.steps_completed << form_step
+
+							# workshops is the last step
+							if @register_template == :workshops
+								UserMailer.send_mail :registration_confirmation do
+									{
+										:args => @registration
+									}
+								end
+							end
+						end
+
+						@registration.save!
+					end
+				end
+			end
+		end
+
+		@register_template ||= (params[:step] || current_step).to_sym
+
+		return redirect_to register_path(@this_conference.slug) if
+			logged_in? && @register_template != current_step &&
+			!@registration.steps_completed.include?(@register_template.to_s)
 
 		# process data from the last view
-		case (params[:button] || '').to_sym
-		when :confirm_email
-			@register_template = :email_sent if is_post
-		when :policy
-			@register_template = :questions if is_post
-		when :save
-			if is_post
-				if (new_registration = (!@registration))
-					@registration = ConferenceRegistration.new
-				end
+		# case (params[:button] || '').to_sym
+		# when :confirm_email
+		# 	@register_template = :email_sent if is_post
+		# when :policy
+		# 	@register_template = :questions if is_post
+		# when :save
+		# 	if is_post
+		# 		new_registration = !@registration
+		# 		@registration = ConferenceRegistration.new if new_registration
 
-				@registration.conference_id = @this_conference.id
-				@registration.user_id = current_user.id
-				@registration.is_attending = 'yes'
-				@registration.is_confirmed = true
-				@registration.city = params[:location]
-				@registration.arrival = params[:arrival]
-				@registration.languages = params[:languages].keys.to_json
-				@registration.departure = params[:departure]
-				@registration.housing = params[:housing]
-				@registration.bike = params[:bike]
-				@registration.food = params[:food]
-				@registration.allergies = params[:allergies]
-				@registration.other = params[:other]
-				@registration.save
+		# 		@registration.conference_id = @this_conference.id
+		# 		@registration.user_id = current_user.id
+		# 		@registration.is_attending = 'yes'
+		# 		@registration.is_confirmed = true
+		# 		@registration.city = params[:location]
+		# 		@registration.arrival = params[:arrival]
+		# 		@registration.languages = params[:languages].keys.to_json
+		# 		@registration.departure = params[:departure]
+		# 		@registration.housing = params[:housing]
+		# 		@registration.bike = params[:bike]
+		# 		@registration.food = params[:food]
+		# 		@registration.allergies = params[:allergies]
+		# 		@registration.other = params[:other]
+		# 		@registration.save
 
-				current_user.firstname = params[:name].squish
-				current_user.lastname = nil
-				current_user.save
+		# 		current_user.firstname = params[:name].squish
+		# 		current_user.lastname = nil
+		# 		current_user.save
 
-				if new_registration
-					UserMailer.send_mail :registration_confirmation do
-						{
-							:args => @registration
-						}
-					end
-				end
+		# 		if new_registration
+		# 			UserMailer.send_mail :registration_confirmation do
+		# 				{
+		# 					:args => @registration
+		# 				}
+		# 			end
+		# 		end
 
-				@register_template = @registration.registration_fees_paid ? :done : :payment
-			end
-		when :payment
-			if is_post && @registration
-				amount = params[:amount].to_f
+		# 		@register_template = @registration.registration_fees_paid ? :done : :payment
+		# 	end
+		# when :payment
+		# 	if is_post && @registration
+		# 		amount = params[:amount].to_f
 
-				if amount > 0
-					@registration.payment_confirmation_token = ENV['RAILS_ENV'] == 'test' ? 'token' : Digest::SHA256.hexdigest(rand(Time.now.to_f * 1000000).to_i.to_s)
-					@registration.save
+		# 		if amount > 0
+		# 			@registration.payment_confirmation_token = ENV['RAILS_ENV'] == 'test' ? 'token' : Digest::SHA256.hexdigest(rand(Time.now.to_f * 1000000).to_i.to_s)
+		# 			@registration.save
 					
-					host = "#{request.protocol}#{request.host_with_port}"
-					response = PayPal!.setup(
-						PayPalRequest(amount),
-						register_paypal_confirm_url(@this_conference.slug, :paypal_confirm, @registration.payment_confirmation_token),
-						register_paypal_confirm_url(@this_conference.slug, :paypal_cancel, @registration.payment_confirmation_token)
-					)
-					if ENV['RAILS_ENV'] != 'test'
-						redirect_to response.redirect_uri
-					end
-					return
-				end
-				@register_template = :done
-			end
-		when :paypal_confirm
-			if @registration && @registration.payment_confirmation_token == params[:confirmation_token]
+		# 			host = "#{request.protocol}#{request.host_with_port}"
+		# 			response = PayPal!.setup(
+		# 				PayPalRequest(amount),
+		# 				register_paypal_confirm_url(@this_conference.slug, :paypal_confirm, @registration.payment_confirmation_token),
+		# 				register_paypal_confirm_url(@this_conference.slug, :paypal_cancel, @registration.payment_confirmation_token)
+		# 			)
+		# 			if ENV['RAILS_ENV'] != 'test'
+		# 				redirect_to response.redirect_uri
+		# 			end
+		# 			return
+		# 		end
+		# 		@register_template = :done
+		# 	end
+		# when :paypal_confirm
+		# 	if @registration && @registration.payment_confirmation_token == params[:confirmation_token]
 
-				if ENV['RAILS_ENV'] == 'test'
-					@amount = YAML.load(@registration.payment_info)[:amount]
-				else
-					@amount = PayPal!.details(params[:token]).amount.total
-					# testing this does't work in test but it works in devo and prod
-					@registration.payment_info = {:payer_id => params[:PayerID], :token => params[:token], :amount => @amount}.to_yaml
-				end
+		# 		if ENV['RAILS_ENV'] == 'test'
+		# 			@amount = YAML.load(@registration.payment_info)[:amount]
+		# 		else
+		# 			@amount = PayPal!.details(params[:token]).amount.total
+		# 			# testing this does't work in test but it works in devo and prod
+		# 			@registration.payment_info = {:payer_id => params[:PayerID], :token => params[:token], :amount => @amount}.to_yaml
+		# 		end
 
-				@amount = (@amount * 100).to_i.to_s.gsub(/^(.*)(\d\d)$/, '\1.\2')
+		# 		@amount = (@amount * 100).to_i.to_s.gsub(/^(.*)(\d\d)$/, '\1.\2')
 
-				@registration.save!
-				@register_template = :paypal_confirm
-			end
-		when :paypal_confirmed
-			info = YAML.load(@registration.payment_info)
-			@amount = nil
-			status = nil
-			if ENV['RAILS_ENV'] == 'test'
-				status = info[:status]
-				@amount = info[:amount]
-			else
-				paypal = PayPal!.checkout!(info[:token], info[:payer_id], PayPalRequest(info[:amount]))
-				status = paypal.payment_info.first.payment_status
-				@amount = paypal.payment_info.first.amount.total
-			end
-			if status == 'Completed'
-				@registration.registration_fees_paid = @amount
-				@registration.save!
-				@register_template = :done
-			else
-				@register_template = :payment
-			end
-		when :paypal_cancel
-			if @registration
-				@registration.payment_confirmation_token = nil
-				@registration.save
-				@register_template = :payment
-			end
-		when :register
-			@register_template = :questions
-		end
+		# 		@registration.save!
+		# 		@register_template = :paypal_confirm
+		# 	end
+		# when :paypal_confirmed
+		# 	info = YAML.load(@registration.payment_info)
+		# 	@amount = nil
+		# 	status = nil
+		# 	if ENV['RAILS_ENV'] == 'test'
+		# 		status = info[:status]
+		# 		@amount = info[:amount]
+		# 	else
+		# 		paypal = PayPal!.checkout!(info[:token], info[:payer_id], PayPalRequest(info[:amount]))
+		# 		status = paypal.payment_info.first.payment_status
+		# 		@amount = paypal.payment_info.first.amount.total
+		# 	end
+		# 	if status == 'Completed'
+		# 		@registration.registration_fees_paid = @amount
+		# 		@registration.save!
+		# 		@register_template = :done
+		# 	else
+		# 		@register_template = :payment
+		# 	end
+		# when :paypal_cancel
+		# 	if @registration
+		# 		@registration.payment_confirmation_token = nil
+		# 		@registration.save
+		# 		@register_template = :payment
+		# 	end
+		# when :register
+		# 	@register_template = :questions
+		# end
 
-		if @register_template == :payment && !@this_conference.paypal_username
-			@register_template = :done
-		end
+		# if @register_template == :payment && !@this_conference.paypal_username
+		# 	@register_template = :done
+		# end
 
-		# don't let the user edit registration if registration is closed
-		if !@conference.registration_open && @register_template == :questions
-			@register_template = :done
-		end
+		# # don't let the user edit registration if registration is closed
+		# if !@conference.registration_open && @register_template == :questions
+		# 	@register_template = :done
+		# end
 
 		# prepare data for the next view
 		case @register_template
@@ -680,12 +749,17 @@ class ConferencesController < ApplicationController
 				@languages = JSON.parse(@registration.languages).map &:to_sym
 			end
 		when :workshops
-			@my_workshops = [1,2,3,4].map { |i|
-				{
-					:title => (Forgery::LoremIpsum.sentence({:random => true}).gsub(/\.$/, '').titlecase),
-					:info => (Forgery::LoremIpsum.sentences(rand(1...5), {:random => true}))
-				}
-			}
+			@page_title = 'articles.conference_registration.headings.Workshops'
+			@workshops = Workshop.where(conference_id: @this_conference.id)
+			@my_workshops = Workshop.joins(:workshop_facilitators).where(
+					workshop_facilitators: { user_id: current_user.id },
+					conference_id: @this_conference.id
+				)
+			@workshops_in_need = Workshop.where(conference_id: @this_conference.id, needs_facilitators: true)
+		when :contact_info
+			@page_title = 'articles.conference_registration.headings.Contact_Info'
+		when :policy
+			@page_title = 'articles.conference_registration.headings.Policy_Agreement'
 		when :done
 			@amount = ((@registration.registration_fees_paid || 0) * 100).to_i.to_s.gsub(/^(.*)(\d\d)$/, '\1.\2')
 		end
@@ -709,7 +783,7 @@ class ConferencesController < ApplicationController
 			session[:registration_step] = 'confirm'
 			redirect_to action: 'register'
 		else
-			do_404
+			return do_404
 		end
 	end
 
@@ -734,7 +808,7 @@ class ConferencesController < ApplicationController
 				redirect_to action: 'register'
 			end
 		else
-			do_404
+			return do_404
 		end
 	end
 
@@ -754,7 +828,7 @@ class ConferencesController < ApplicationController
 	# 		session[:registration_step] = 'paypal-confirmed'
 	# 		redirect_to action: 'register'
 	# 	else
-	# 		do_404
+	# 		return do_404
 	# 	end
 	# end
 
@@ -825,32 +899,67 @@ class ConferencesController < ApplicationController
 		set_conference
 		set_conference_registration
 		@workshop = Workshop.find_by_id_and_conference_id(params[:workshop_id], @this_conference.id)
-		do_404 unless @workshop
+		return do_404 unless @workshop
+
+		@translations_available_for_editing = []
+		I18n.backend.enabled_locales.each do |locale|
+			@translations_available_for_editing << locale if @workshop.can_translate?(current_user, locale)
+		end
+		@page_title = 'page_titles.conferences.View_Workshop'
+
 		render 'workshops/show'
 	end
 
 	def create_workshop
 		set_conference
 		set_conference_registration
-		@languages = []
+		@workshop = Workshop.new
+		@languages = [I18n.locale.to_sym]
 		@needs = []
+		@page_title = 'page_titles.conferences.Create_Workshop'
 		render 'workshops/new'
+	end
+
+	def translate_workshop
+		@is_translating = true
+		@translation = params[:locale]
+		@page_title = 'page_titles.conferences.Translate_Workshop'
+		@page_title_vars = { language: view_context.language_name(@translation) }
+
+		edit_workshop
 	end
 
 	def edit_workshop
 		set_conference
 		set_conference_registration
 		@workshop = Workshop.find_by_id_and_conference_id(params[:workshop_id], @this_conference.id)
-		do_404 unless @workshop
+		
+		return do_404 unless @workshop.present?
+
+		@page_title ||= 'page_titles.conferences.Edit_Workshop'
+
 		@can_edit = @workshop.can_edit?(current_user)
-		do_403 unless @can_edit || @workshop.can_translate?(current_user, I18n.locale)
-		@title = @workshop.title
-		@info = @workshop.info
+
+		@is_translating ||= false
+		if @is_translating
+			return do_404 if @translation.to_s == @workshop.locale.to_s || !I18n.backend.enabled_locales.include?(@translation.to_s)
+			return do_403 unless @workshop.can_translate?(current_user, @translation)
+
+			@title = @workshop._title(@translation)
+			@info = @workshop._info(@translation)
+		else
+			return do_403 unless @can_edit
+
+			@title = @workshop.title
+			@info = @workshop.info
+		end
+
 		@needs = JSON.parse(@workshop.needs || '[]').map &:to_sym
 		@languages = JSON.parse(@workshop.languages || '[]').map &:to_sym
 		@space = @workshop.space.to_sym if @workshop.space
 		@theme = @workshop.theme.to_sym if @workshop.theme
 		@notes = @workshop.notes
+
 		render 'workshops/new'
 	end
 
@@ -859,15 +968,8 @@ class ConferencesController < ApplicationController
 		set_conference_registration
 		@workshop = Workshop.find_by_id_and_conference_id(params[:workshop_id], @this_conference.id)
 
-		if !@workshop
-			do_404
-			return
-		end
-
-		if !@workshop.can_delete?(current_user)
-			do_403
-			return
-		end
+		return do_404 unless @workshop.present?
+		return do_403 unless @workshop.can_delete?(current_user)
 
 		if request.post?
 			if params[:button] == 'confirm'
@@ -876,11 +978,9 @@ class ConferencesController < ApplicationController
 					@workshop.destroy
 				end
 
-				redirect_to workshops_url
-				return
+				return redirect_to workshops_url
 			end
-			redirect_to edit_workshop_url(@this_conference.slug, @workshop.id)
-			return
+			return redirect_to edit_workshop_url(@this_conference.slug, @workshop.id)
 		end
 
 		render 'workshops/delete'
@@ -890,30 +990,57 @@ class ConferencesController < ApplicationController
 		set_conference
 		set_conference_registration
 
-		if params[:workshop_id]
+		if params[:button].to_sym != :save
+			if params[:workshop_id].present?
+				return redirect_to view_workshop_url(@this_conference.slug, params[:workshop_id])
+			end
+			return redirect_to register_step_path(@this_conference.slug, 'workshops')
+		end
+
+		if params[:workshop_id].present?
 			workshop = Workshop.find(params[:workshop_id])
-			do_404 unless workshop
+			return do_404 unless workshop.present?
+			can_edit = workshop.can_edit?(current_user)
 		else
 			workshop = Workshop.new(:conference_id => @this_conference.id)
 			workshop.workshop_facilitators = [WorkshopFacilitator.new(:user_id => current_user.id, :role => :creator)]
+			can_edit = true
 		end
 
-		can_edit = workshop.can_edit?(current_user)
-		do_403 unless can_edit || workshop.can_translate?(current_user, I18n.locale)
+		title = params[:title]
+		info  = params[:info].gsub(/^\s*(.*?)\s*$/, '\1')
 
-		workshop.title = params[:title]
-		workshop.info  = params[:info]
+		if params[:translation].present? && workshop.can_translate?(current_user, params[:translation])
+			old_title = workshop._title(params[:translation])
+			old_info = workshop._info(params[:translation])
 
-		if can_edit
-			# dont allow translators to edit these fields
-			workshop.languages = (params[:languages] || {}).keys.to_json
-			workshop.needs     = (params[:needs] || {}).keys.to_json
-			workshop.theme     = params[:theme] == 'other' ? params[:other_theme] : params[:theme]
-			workshop.space     = params[:space]
-			workshop.notes     = params[:notes]
+			do_save = false
+
+			unless title == old_title
+				workshop.set_column_for_locale(:title, params[:translation], title, current_user.id)
+				do_save = true
+			end
+			unless info == old_info
+				workshop.set_column_for_locale(:info, params[:translation], info, current_user.id)
+				do_save = true
+			end
+			
+			# only save if the text has changed, if we want to make sure only to update the translator id if necessary
+			workshop.save_translations if do_save
+		elsif can_edit
+			workshop.title              = title
+			workshop.info               = info
+			workshop.languages          = (params[:languages] || {}).keys.to_json
+			workshop.needs              = (params[:needs] || {}).keys.to_json
+			workshop.theme              = params[:theme] == 'other' ? params[:other_theme] : params[:theme]
+			workshop.space              = params[:space]
+			workshop.notes              = params[:notes]
+			workshop.needs_facilitators = params[:needs_facilitators].present?
+			workshop.save
+		else
+			return do_403
 		end
 
-		workshop.save
 		redirect_to view_workshop_url(@this_conference.slug, workshop.id)
 	end
 
@@ -921,7 +1048,7 @@ class ConferencesController < ApplicationController
 		set_conference
 		set_conference_registration
 		workshop = Workshop.find_by_id_and_conference_id(params[:workshop_id], @this_conference.id)
-		do_404 unless workshop
+		return do_404 unless workshop
 
 		# save the current state
 		interested = workshop.interested? current_user
@@ -939,8 +1066,8 @@ class ConferencesController < ApplicationController
 		set_conference
 		set_conference_registration
 		@workshop = Workshop.find_by_id_and_conference_id(params[:workshop_id], @this_conference.id)
-		do_404 unless @workshop
-		do_403 if @workshop.facilitator?(current_user) || !current_user
+		return do_404 unless @workshop
+		return do_403 if @workshop.facilitator?(current_user) || !current_user
 
 		render 'workshops/facilitate'
 	end
@@ -949,8 +1076,8 @@ class ConferencesController < ApplicationController
 		set_conference
 		set_conference_registration
 		workshop = Workshop.find_by_id_and_conference_id(params[:workshop_id], @this_conference.id)
-		do_404 unless workshop
-		do_403 if workshop.facilitator?(current_user) || !current_user
+		return do_404 unless workshop
+		return do_403 if workshop.facilitator?(current_user) || !current_user
 
 		# create the request by making the user a facilitator but making their role 'requested'
 		WorkshopFacilitator.create(user_id: current_user.id, workshop_id: workshop.id, role: :requested)
@@ -968,8 +1095,8 @@ class ConferencesController < ApplicationController
 		set_conference
 		set_conference_registration
 		@workshop = Workshop.find_by_id_and_conference_id(params[:workshop_id], @this_conference.id)
-		do_404 unless @workshop
-		do_403 unless @workshop.requested_collaborator?(current_user)
+		return do_404 unless @workshop
+		return do_403 unless @workshop.requested_collaborator?(current_user)
 
 		render 'workshops/facilitate_request_sent'
 	end
@@ -978,7 +1105,7 @@ class ConferencesController < ApplicationController
 		set_conference
 		set_conference_registration
 		workshop = Workshop.find_by_id_and_conference_id(params[:workshop_id], @this_conference.id)
-		do_404 unless workshop && current_user
+		return do_404 unless workshop && current_user
 		
 		user_id = params[:user_id].to_i
 		action = params[:approve_or_deny].to_sym
@@ -1019,7 +1146,7 @@ class ConferencesController < ApplicationController
 			end
 		end
 
-		do_403
+		return do_403
 	end
 
 	def add_workshop_facilitator
@@ -1029,7 +1156,7 @@ class ConferencesController < ApplicationController
 		set_conference_registration
 		workshop = Workshop.find_by_id_and_conference_id(params[:workshop_id], @this_conference.id)
 
-		do_404 unless workshop && current_user
+		return do_404 unless workshop && current_user
 
 		unless workshop.facilitator?(user)
 			WorkshopFacilitator.create(user_id: user.id, workshop_id: workshop.id, role: :collaborator)
@@ -1046,7 +1173,7 @@ class ConferencesController < ApplicationController
 
 	def schedule
 		set_conference
-		do_404 unless @this_conference.workshop_schedule_published || @this_conference.host?(current_user)
+		return do_404 unless @this_conference.workshop_schedule_published || @this_conference.host?(current_user)
 		
 		@events = Event.where(:conference_id => @this_conference.id)
 		@locations = EventLocation.where(:conference_id => @this_conference.id)
@@ -1057,7 +1184,7 @@ class ConferencesController < ApplicationController
 	def edit_schedule
 		set_conference
 		set_conference_registration
-		do_404 unless @this_conference.host?(current_user)
+		return do_404 unless @this_conference.host?(current_user)
 		
 		@workshops = Workshop.where(:conference_id => @this_conference.id)
 		@events = Event.where(:conference_id => @this_conference.id)
@@ -1126,7 +1253,7 @@ class ConferencesController < ApplicationController
 
 	def save_schedule
 		set_conference
-		do_404 unless @this_conference.host?(current_user)
+		return do_404 unless @this_conference.host?(current_user)
 
 		@days = Array.new
 		start_day = @this_conference.start_date.strftime('%u').to_i
@@ -1164,7 +1291,6 @@ class ConferencesController < ApplicationController
 				session[:workshops][id] = {
 					:start_time => @workshops[i].start_time,
 					:end_time => @workshops[i].end_time,
-					:end_time => @workshops[i].end_time,
 					:event_location_id => @workshops[i].event_location_id
 				}
 			end
@@ -1188,7 +1314,6 @@ class ConferencesController < ApplicationController
 			else
 				session[:events][id] = {
 					:start_time => @events[i].start_time,
-					:end_time => @events[i].end_time,
 					:end_time => @events[i].end_time,
 					:event_location_id => @events[i].event_location_id
 				}
@@ -1228,7 +1353,7 @@ class ConferencesController < ApplicationController
 	def add_event
 		set_conference
 		set_conference_registration
-		do_404 unless @this_conference.host?(current_user)
+		return do_404 unless @this_conference.host?(current_user)
 		
 		render 'events/edit'
 	end
@@ -1236,22 +1361,22 @@ class ConferencesController < ApplicationController
 	def edit_event
 		set_conference
 		set_conference_registration
-		do_404 unless @this_conference.host?(current_user)
+		return do_404 unless @this_conference.host?(current_user)
 
 		@event = Event.find(params[:id])
-		do_403 unless @event.conference_id == @this_conference.id
+		return do_403 unless @event.conference_id == @this_conference.id
 
 		render 'events/edit'
 	end
 
 	def save_event
 		set_conference
-		do_404 unless @this_conference.host?(current_user)
+		return do_404 unless @this_conference.host?(current_user)
 
 
 		if params[:event_id]
 			event = Event.find(params[:event_id])
-			do_403 unless event.conference_id == @this_conference.id
+			return do_403 unless event.conference_id == @this_conference.id
 		else
 			event = Event.new(:conference_id => @this_conference.id)
 		end
@@ -1268,7 +1393,7 @@ class ConferencesController < ApplicationController
 	def add_location
 		set_conference
 		set_conference_registration
-		do_404 unless @this_conference.host?(current_user)
+		return do_404 unless @this_conference.host?(current_user)
 		
 		render 'event_locations/edit'
 	end
@@ -1276,10 +1401,10 @@ class ConferencesController < ApplicationController
 	def edit_location
 		set_conference
 		set_conference_registration
-		do_404 unless @this_conference.host?(current_user)
+		return do_404 unless @this_conference.host?(current_user)
 
 		@location = EventLocation.find(params[:id])
-		do_403 unless @location.conference_id == @this_conference.id
+		return do_403 unless @location.conference_id == @this_conference.id
 
 		@amenities = JSON.parse(@location.amenities || '[]').map &:to_sym
 
@@ -1288,12 +1413,12 @@ class ConferencesController < ApplicationController
 
 	def save_location
 		set_conference
-		do_404 unless @this_conference.host?(current_user)
+		return do_404 unless @this_conference.host?(current_user)
 
 
 		if params[:location_id]
 			location = EventLocation.find(params[:location_id])
-			do_403 unless location.conference_id == @this_conference.id
+			return do_403 unless location.conference_id == @this_conference.id
 		else
 			location = EventLocation.new(:conference_id => @this_conference.id)
 		end
@@ -1313,6 +1438,61 @@ class ConferencesController < ApplicationController
 	#	redirect_to conferences_url, notice: 'Conference was successfully destroyed.'
 	#end
 
+	helper_method :registration_steps
+	helper_method :current_registration_steps
+	helper_method :registration_complete?
+
+	def registration_steps(conference = nil)
+		conference ||= @this_conference || @conference
+		{
+			pre: [:policy, :contact_info, :workshops],
+			open: [:policy, :contact_info, :questions, :payment, :workshops]
+		}[conference.registration_status]
+	end
+
+	def required_steps(conference = nil)
+		# return the intersection of current steps and reuired steps
+		registration_steps(conference || @this_conference || @conference) & # current steps
+			[:policy, :contact_info, :questions] # all required steps
+	end
+
+	def registration_complete?(registration = @registration)
+		completed_steps = registration.steps_completed || []
+		required_steps(registration.conference).each do | step |
+			return false unless completed_steps.include?(step.to_s)
+		end
+		return true
+	end
+
+	def current_registration_steps(registration = @registration)
+		return nil unless registration.present?
+
+		steps = registration_steps(registration.conference)
+		current_steps = []
+		disable_steps = false
+		completed_steps = registration.steps_completed || []
+		steps.each do | step |
+			# disable the step if we've already found an incomplete step
+			enabled = !disable_steps
+			# record whether or not we've found an incomplete step
+			disable_steps ||= !completed_steps.include?(step.to_s)
+
+			current_steps << {
+				name:    step,
+				enabled: enabled
+			}
+		end
+		return current_steps
+	end
+
+	def current_step(registration = @registration)
+		completed_steps = registration.steps_completed || []
+		(registration_steps(registration.conference) || []).each do | step |
+			return step unless completed_steps.include?(step.to_s)
+		end
+		return registration_steps(registration.conference).last
+	end
+
 	private
 		# Use callbacks to share common setup or constraints between actions.
 		def set_conference
@@ -1321,24 +1501,20 @@ class ConferencesController < ApplicationController
 
 		def set_conference_registration
 			@registration = logged_in? ? ConferenceRegistration.find_by(:user_id => current_user.id, :conference_id => @this_conference.id) : nil
-			@is_host = @this_conference.host?(current_user)
-			if @registration || @is_host
-				@submenu = {
-					register_path(@this_conference.slug) => 'registration.Registration',
-					workshops_path(@this_conference.slug) => 'registration.Workshops'
-				}
-				@submenu[schedule_path(@this_conference.slug)] = 'registration.Schedule' if @this_conference.workshop_schedule_published || @is_host
-				if @is_host
-					@submenu[edit_conference_path(@this_conference.slug)] = 'registration.Edit'
-					@submenu[stats_path(@this_conference.slug)] = 'registration.Stats'
-					@submenu[broadcast_path(@this_conference.slug)] = 'registration.Broadcast'
-				end
-			end
+		end
+
+		def set_or_create_conference_registration
+			set_conference_registration
+			@registration ||= ConferenceRegistration.new(
+					conference:      @this_conference,
+					user_id:         current_user.id,
+					steps_completed: []
+				)
 		end
 
 		# Only allow a trusted parameter "white list" through.
 		def conference_params
-			params.require(:conference).permit(:title, :slug, :start_date, :end_date, :info, :poster, :cover, :workshop_schedule_published, :registration_open, :meals_provided, :meal_info, :travel_info, :conference_type_id, conference_types: [:id])
+			params.require(:conference).permit(:title, :slug, :start_date, :end_date, :info, :poster, :cover, :workshop_schedule_published, :registration_status, :meals_provided, :meal_info, :travel_info, :conference_type_id, conference_types: [:id])
 		end
 
 		def update_field_position(field_id, position)

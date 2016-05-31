@@ -18,7 +18,7 @@ class Workshop < ActiveRecord::Base
         return nil unless user
         workshop_facilitators.each do |u|
             if u.user_id == user.id
-                return conference.registered?(user) ? u.role.to_sym : :unregistered
+                return conference.registration_exists?(user) ? u.role.to_sym : :unregistered
             end
         end
         return nil
@@ -31,7 +31,7 @@ class Workshop < ActiveRecord::Base
     def active_facilitators
         users = []
         workshop_facilitators.each do |u|
-            users << User.find(u.user_id) if u.role.to_sym != :request
+            users << User.find(u.user_id) unless u.role.to_sym == :requested
         end
         return users
     end
@@ -75,16 +75,18 @@ class Workshop < ActiveRecord::Base
     end
 
     def interested_count
+        return 0 unless id
         collaborators = []
         workshop_facilitators.each do |f|
             collaborators << f.user_id unless f.role.to_sym == :requested
         end
-        interested = WorkshopInterest.where("workshop_id=#{id} AND user_id NOT IN (#{collaborators.join ','})")
+        return 10 unless collaborators.present?
+        interested = WorkshopInterest.where("workshop_id=#{id} AND user_id NOT IN (#{collaborators.join ','})") || []
         interested ? interested.size : 0
     end
 
     def can_translate?(user, lang)
-        (user.can_translate? && lang.to_sym != locale.to_sym) || can_edit?(user)
+        user.can_translate?(lang, locale) || (can_edit?(user) && lang.to_s != locale.to_s)
     end
 
     def conference_day
@@ -100,6 +102,28 @@ class Workshop < ActiveRecord::Base
         ((end_time - start_time) / 60).to_i
     end
 
+    def self.all_themes
+        [:race_gender, :mechanics, :funding, :organization, :community]
+    end
+
+    def get_translators(data, loc = nil)
+        notify_list = {}
+        active_facilitators.each do |facilitator|
+            notify_list[facilitator.id] = facilitator
+        end
+        
+        data.each do | column, value |
+            (
+                loc.present? ? 
+                get_translators_for_column_and_locale(column, loc) : 
+                get_translators_for_column(column)
+            ).each do |id|
+                notify_list[id] = User.find(id)
+            end
+        end
+        return notify_list
+    end
+    
     private
         def make_slug
             if !self.slug

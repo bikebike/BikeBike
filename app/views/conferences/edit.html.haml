@@ -13,18 +13,18 @@
 
 					= button_tag :save, :value => :save
 
-:javascript
-	window.jQuery || document.write('<script src="https://code.jquery.com/jquery-2.1.3.min.js"><\/script>')
-= javascript_include_tag "froala_editor.min.js"
-= stylesheet_link_tag "froala_editor.min.css"
-= stylesheet_link_tag "font-awesome.min.css"
-:javascript
-	$(function() {
-		$('.text-editor textarea').editable({
-			language: '<% I18n.locale.to_s %>',
-			inlineMode: false,
-			blockTags: ["n", "p", "h2", "blockquote", "pre"],
-			buttons: ["formatBlock", "bold", "italic", "underline", "insertOrderedList", "insertUnorderedList", "sep", "createLink", "html", "undo", "redo"],
-			colors: ['#00ADEF', '#DD57EF', '#E6C74B', 'REMOVE']
-		});
-	});
+/ :javascript
+/ 	window.jQuery || document.write('<script src="https://code.jquery.com/jquery-2.1.3.min.js"><\/script>')
+-#= javascript_include_tag "froala_editor.min.js"
+-#= stylesheet_link_tag "froala_editor.min.css"
+-#= stylesheet_link_tag "font-awesome.min.css"
+/ :javascript
+/ 	$(function() {
+/ 		$('.text-editor textarea').editable({
+/ 			language: '<% I18n.locale.to_s %>',
+/ 			inlineMode: false,
+/ 			blockTags: ["n", "p", "h2", "blockquote", "pre"],
+/ 			buttons: ["formatBlock", "bold", "italic", "underline", "insertOrderedList", "insertUnorderedList", "sep", "createLink", "html", "undo", "redo"],
+/ 			colors: ['#00ADEF', '#DD57EF', '#E6C74B', 'REMOVE']
+/ 		});
+/ 	});

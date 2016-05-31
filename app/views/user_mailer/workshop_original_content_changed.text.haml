@@ -1,0 +1,25 @@
+=_('email.translations.paragraph.workshop_translated', "#{@translator.name} has modified the #{@locale_name} translation for #{@workshop.title}.", vars: {user_name: @translator.firstname, language: @locale_name, workshop_title: @workshop.title})
+
+
+- @data.each do |field, values|
+	=(_!'** ') + (_"forms.labels.generic.#{field.to_s}")
+	=(_!' - ') + (_'email.translations.headings.new_value')
+	=(_!' ------------------------------ ')
+	=_!values[:new]
+	=(_!' ------------------------------ ')
+
+
+	=(_!' - ') + (_'email.translations.headings.old_value')
+	=(_!' ------------------------------ ')
+	=_!values[:old]
+	=(_!' ------------------------------ ')
+
+
+	=(_!' - ') + (_'email.translations.headings.diff')
+	=(_!' ------------------------------ ')
+	=(_!values[:diff][:text])
+	=(_!' ------------------------------ ')
+
+
+=_'email.workshop.paragraph.view_workshop',"You can view the workshop here: "
+= view_workshop_url(@workshop.conference.slug, @workshop.id)

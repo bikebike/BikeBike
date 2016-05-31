@@ -1,69 +1,91 @@
-= render 'conferences/page_header', :page_key => (@workshop ? 'Edit_Workshop' : 'Create_Workshop')
+- add_stylesheet :editor
+- add_inline_script :pen
+- add_inline_script :markdown
+- add_inline_script :editor
+
+-#= render 'conferences/page_header', :page_key => (@workshop.id.present? ? 'Edit_Workshop' : 'Create_Workshop')
+= render 'conferences/page_header', :page_key => 'Conference_Registration'
+
 %article
 	= row do
 		= form_tag save_workshop_path(@this_conference.slug), class: 'composition' do
-			= (hidden_field_tag :workshop_id, @workshop.id) if @workshop
 			= columns(medium: 12) do
-				=m('articles.workshops.paragraphs.new_workshop','Please accurately describe your workshop in detail. This will help hosts decide if they wish to add it to the schedule and when it should best be scheduled. Enter normal text but if you want to get fancy you can use [Markdown](http://daringfireball.net/projects/markdown/basics).')
+				- if @workshop.id.present?
+					= hidden_field_tag :workshop_id, @workshop.id
+					- if @is_translating
+						%h2=_(@page_title, vars: @page_title_vars)
+						= hidden_field_tag :translation, @translation
+					- else
+						%h2=_@page_title, :t
+				- else
+					%h2=_@page_title, :t
 				.text-field.input-field.big
 					= label_tag :title
-					= text_field_tag :title, @title, :required => true
-				- if @workshop && I18n.locale.to_s != @workshop.locale.to_s
+					= text_field_tag :title, @title, required: true, lang: @translation
+				- if @is_translating
 					.original-text
 						%h4=_'translate.content.Translation_of'
 						.value=@workshop.title!
 				.text-area-field.input-field
 					= label_tag :info
-					= text_area_tag :info, @info, :required => true
-				- if @workshop && I18n.locale.to_s != @workshop.locale.to_s
+					.input-field-help=_'articles.workshops.paragraphs.info', :s, 2
+					.textarea#info{lang: @translation, data: {name: :info}}=(@info || '').html_safe
+				- if @is_translating
 					.original-text
 						%h4=_'translate.content.Translation_of'
-						.value=markdown @workshop.info!
-			- if !@workshop || @can_edit
+						.value=(@workshop.info! || '').html_safe
+			- if !@is_translating && (@workshop.id.blank? || @can_edit)
 				= columns(medium: 6) do
 					%h3=_'articles.workshops.headings.languages','Workshop Language'
-					- [:en, :es, :fr].each do |language|
-						.single-check-box-field.input-field
+					.input-field-help=_'articles.workshops.paragraphs.languages', :s, 2
+					.check-box-field.vertical.input-field
+						- [:en, :es, :fr].each do |language|
+							= check_box_tag "languages[#{language}]", 1, @languages && @languages.include?(language)
 							= label_tag "languages_#{language}" do
-								= check_box_tag "languages[#{language}]", 1, @languages && @languages.include?(language)
 								= _"languages.#{language}"
 					%h3=_'articles.workshops.headings.theme','Theme'
-					.input-field-help=_'articles.workshops.paragraphs.theme', :p
+					.input-field-help=_'articles.workshops.paragraphs.theme', :s, 2
 					- theme_found = false
-					- [:race_gender, :mechanics, :funding, :organization, :community].each do |theme|
-						.single-radio-button-field.input-field
+					.check-box-field.vertical.input-field
+						- Workshop.all_themes.each do |theme|
+							- is_selected = (@workshop.theme.to_s == theme.to_s)
+							- theme_found ||= is_selected
+							= radio_button_tag :theme, theme, is_selected
 							= label_tag "theme_#{theme}" do
-								- is_selected = (@theme == theme)
-								- theme_found ||= is_selected
-								= radio_button_tag :theme, theme, is_selected
 								= _"workshop.options.theme.#{theme}"
-					.single-radio-button-field.other-field.input-field
+						- is_other = (@workshop.theme.present? && !theme_found)
+						= radio_button_tag :theme, :other, is_other
 						= label_tag "theme_other" do
-							= radio_button_tag :theme, :other, (@theme && !theme_found)
-							%div
-								= _"workshop.options.theme.other"
-								= text_field_tag :other_theme, (@theme && !theme_found ? @theme : nil)
+							.other
+								= text_field_tag :other_theme, (is_other ? @workshop.theme : nil), placeholder: (_"workshop.options.theme.other"), required: is_other
 				= columns(medium: 6) do
 					%h3=_'articles.workshops.headings.needs','What do you need?'
-					- [:sound, :projector, :tools].each do |need|
-						.single-check-box-field.input-field
+					.input-field-help=_'articles.workshops.paragraphs.needs', :s, 2
+					.check-box-field.vertical.input-field
+						- [:sound, :projector, :tools].each do |need|
+							= check_box_tag "needs[#{need.to_s}]", 1, JSON.parse(@workshop.needs || '[]').include?(need.to_s)
 							= label_tag "needs_#{need}" do
-								= check_box_tag "needs[#{need}]", 1, @needs.include?(need)
-								= _"workshop.options.needs.#{need}"
+								= _"workshop.options.needs.#{need.to_s}"
 					%h3=_'articles.workshops.headings.space','Type of space'
-					.input-field-help=_'articles.workshops.paragraphs.space', :p
-					- [:meeting_room, :workshop, :outdoor_meeting].each do |space|
-						.single-radio-button-field.input-field
+					.input-field-help=_'articles.workshops.paragraphs.space', :s, 2
+					.check-box-field.vertical.input-field
+						- [:meeting_room, :workshop, :outdoor_meeting].each do |space|
+							= radio_button_tag :space, space, @workshop.space == space
 							= label_tag "space_#{space}" do
-								= radio_button_tag :space, space, @space == space
 								= _"workshop.options.space.#{space}"
+					%h3=_'articles.workshops.headings.needs_facilitators','Looking for help?'
+					.input-field-help=_'articles.workshops.paragraphs.needs_facilitators', :s, 2
+					.check-box-field.vertical.input-field
+						= check_box_tag :needs_facilitators, 1, @workshop.needs_facilitators
+						= label_tag :needs_facilitators do
+							= _'workshop.options.needs_facilitators', 'Needs Additional Facilitators'
 				= columns(medium: 12) do
-					%h3=_'articles.workshops.headings.notes','Notes for Conference Organizers and Workshop Facilitators'
-					%p=_'articles.workshops.paragraphs.notes','Notes are only viewable by conference hosts and workshop facilitators'
 					.text-area-field.input-field
 						= label_tag :notes
-						= text_area_tag :notes, @notes
+						.warning-info=_'articles.workshops.paragraphs.notes','Notes are only viewable by conference hosts and workshop facilitators'
+						.textarea#notes{data: {name: :notes}}=(@workshop.notes || '').html_safe
 			= columns(medium: 12) do
-				.actions.right
-					= button_tag :save, :value => :save
+				.actions.next-prev
+					= button_tag :save, value: :save
+					= button_tag :cancel, value: :cancel, class: :subdued, formnovalidate: true
 

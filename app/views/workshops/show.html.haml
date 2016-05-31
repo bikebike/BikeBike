@@ -1,8 +1,20 @@
-= render 'conferences/page_header', :page_key => 'View_Workshop'
+= render 'conferences/page_header', :page_key => 'Conference_Registration'
+
+= row id: 'registration-steps', class: 'flow-steps' do
+	= columns do
+		%ul
+			- current_registration_steps.each do | step |
+				- text = _"articles.conference_registration.headings.#{step[:name].to_s}"
+				%li{class: [step[:enabled] ? :enabled : nil, :workshops == step[:name] ? :current : nil]}
+					- if step[:enabled]
+						.step= link_to text, register_step_path(@this_conference.slug, step[:name])
+					- else
+						.step= text
+
 %article
-	= render 'workshops/show', :workshop => @workshop, :preview => false
+	= render 'workshops/show', :workshop => @workshop, :translations_available_for_editing => @translations_available_for_editing, :preview => false
 	= row do
 		= columns(medium: 12) do
 			.actions.right
-				= (link_to (_'actions.workshops.Edit'), edit_workshop_path(@this_conference.slug, @workshop.id), :class => 'button modify') if @workshop.can_edit?(current_user)
+				= (link_to (_'actions.workshops.Edit'), edit_workshop_path(@this_conference.slug, @workshop.id), :class => [:button, :modify]) if @workshop.can_edit?(current_user)
 				= (link_to (_'actions.workshops.Delete'), delete_workshop_path(@this_conference.slug, @workshop.id), :class => 'button delete') if @workshop.can_delete?(current_user)

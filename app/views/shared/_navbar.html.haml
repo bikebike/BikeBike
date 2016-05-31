@@ -1,14 +1,23 @@
 %nav
 	#main-nav
 		= row(class: 'inner-nav') do
+			- if logged_in?
+				= columns(medium: 12, class: 'user-nav') do
+					.user-nav-bar
+						=link_to (_!current_user.name), register_step_path(@conference.slug, :contact_info), class: 'my-account'
+						=link_to (_'forms.actions.generic.Log_out'), logout_path
 			= columns(medium: 4, class: 'inner-nav') do
-				= link_to '/', :class => 'logo' do
+				= link_to home_path, :class => 'logo' do
 					= svg_sprite('icons', "bb-icon-logo", "Logo")
 					= svg_sprite('icons', "bb-icon-logo-text", "Logo Text")
+					= off_screen _!'Bike Bike'
 			= columns(medium: 8, class: 'nav') do
-				= nav_link about_path, (_'page_titles.About'), 'about'
-				= nav_link policy_path, (_'page_titles.Policy'), 'policy'
-				- if @conference && @conference.registration_open
-					= nav_link register_path(@conference.slug), (_'page_titles.Register')
+				= nav_link :about
+				= nav_link :policy
+				- case (@conference ? @conference.registration_status.to_sym : :closed)
+				- when :pre
+					= nav_link register_path(@conference.slug), :pre_register, :register
+				- when :open
+					= nav_link register_path(@conference.slug), :register
 				- else
-					= render 'shared/donate_button', :email_address => (@conference.paypal_email_address || @conference.email_address)
+					= render 'shared/donate_button', :email_address => (@conference.paypal_email_address || @conference.email_address || @conference.organizations.first.email_address)

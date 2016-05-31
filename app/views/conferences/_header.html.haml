@@ -2,7 +2,7 @@
 	.title
 		%h1=_!@conference.title
 		.details
-			%h3.primary=location(@conference.organizations.first.locations.first)
+			%h2.primary=location(@conference.organizations.first.locations.first)
 			.secondary
 				= date_span(@conference.start_date.to_date, @conference.end_date.to_date)
-	%img{src: @conference.poster.full.url || image_path('default_poster.jpg')}
+	%img{src: @conference.poster.full.url || image_path('default_poster.jpg'), role: :presentation, alt: ''}

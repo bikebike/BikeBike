@@ -1,11 +1,15 @@
 {
-    "stylesheets": ["application", "translations", "email-example"],
+    "stylesheets": ["application", "editor"],
     "precompile": {
         "test": {
             "chrome": ["50"]
         },
         "development": {
+            "and_chr": ["50"],
             "chrome": ["50"],
+            "edge": ["13"],
+            "firefox": ["44"],
+            "ie": ["11"],
             "ios_saf": ["8", "9"]
         }
     },
