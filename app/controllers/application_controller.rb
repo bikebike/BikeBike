@@ -79,17 +79,20 @@ class ApplicationController < LinguaFrancaApplicationController
 	end
 
 	def do_404
-		params[:_original_action] = params[:action]
-		params[:action] = 'error-404'
-		render 'application/404', status: 404
+		error_404(status: 404)
 	end
 
-	def error_404
-		render 'application/404'
+	def error_404(args = {})
+		params[:_original_action] = params[:action]
+		params[:action] = 'error-404'
+		@page_title = 'page_titles.404.Page_Not_Found'
+		@main_title = 'error.404.title'
+		render 'application/404', args
 	end
 
 	def do_403(template = nil)
 		@template = template
+		@main_title ||= @page_title
 		params[:_original_action] = params[:action]
 		params[:action] = 'error-403'
 		render 'application/permission_denied', status: 403

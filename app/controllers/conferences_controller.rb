@@ -529,12 +529,12 @@ class ConferencesController < ApplicationController
 			@name ||= current_user.username
 
 			@is_host = @this_conference.host? current_user
-
-			steps = registration_steps
-			return do_404 unless steps.present?
 		else
 			@register_template = :confirm_email
 		end
+
+		steps = registration_steps
+		return do_404 unless steps.present?
 
 		@errors = {}
 		@warnings = []

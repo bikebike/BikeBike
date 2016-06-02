@@ -54,7 +54,8 @@ class Conference < ActiveRecord::Base
 	end
 
 	def registration_status
-		read_attribute(:registration_status).to_sym
+		s = read_attribute(:registration_status)
+		s.present? ? s.to_sym : nil
 	end
 
 	def registration_status=(new_registration_status)

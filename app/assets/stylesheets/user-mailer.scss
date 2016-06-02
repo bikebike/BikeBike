@@ -21,6 +21,7 @@ body {
 	margin: 0;
 	padding: 0;
 	width: 100% !important;
+	max-width: 100% !important;
 	line-height: 100% !important;
 }
 
@@ -70,6 +71,8 @@ a {
 p {
 	margin: 1em;
 	color: $black !important;
+	font-size: 1.5em;
+	line-height: 1.3333em;
 }
 
 h1, h2, h3, h4, h5, h6 {

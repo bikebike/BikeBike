@@ -1,8 +1,4 @@
-- @page_title = 'page_titles.404.Page_Not_Found' unless @page_title.present?
-
 = render :partial => 'application/header', :locals => {:image_file => nil}
 = row do
 	= columns(medium: 12) do
-		%h1
-			=_'error.404.title','This page does not exist!'
-		=paragraph(_'error.404.description', :p)
+		= paragraph(_'error.404.description', :p)

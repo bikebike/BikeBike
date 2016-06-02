@@ -5331,6 +5331,8 @@ en:
         Add_Workshop: Propose a Workshop
         Workshops_Looking_For_Facilitators: Workshops Looking for Facilitators
         All_Workshops: All Workshops
+        Pre_Registration_Details: Pre-Registration is now open!
+        Verify_Account: Verify your account
       paragraphs:
         Policy_Agreement: Ensuring that all attendees feel welcome, safe, and respected at all times is especially important to us all. Please ensure that you have fully read and understand our safer spaces policy below, if you have any questions or concerns you can reach out to the organizers at any time.
         Confirm_Agreement: By clicking the "I Agree" button, you are pledging to do
@@ -5373,6 +5375,9 @@ en:
         Create_Workshop: At Bike!Bike! anyone can lead a workshop or just propose and idea that someone else can volunteer to lead. If, where, and when the workshop will be scheduled will ultimately be decided by the conference organizers.
         Workshops_Looking_For_Facilitators: Would you like to lend a hand facilitating a workshop proposed by someone else? Below is a list of workshops that are actively looking for volunteers, if you are interested in helping out you can make a facilitation request.
         Your_Workshops: The following is a list of all the workshops that you have created or have requested to facilitate.
+        Pre_Registration_Details: By completing the pre-registration process you are letting us know that you are interested in coming, it allows us to contact you when we have news, and lets us better plan by knowing who might be coming. Once registration is fully open, we will need to ask a few more questions and you can confirm whether or not you will actually be coming.
+        Verify_Account: In order to confirm that you are a real person and that we will be able to contact you later, please verify your email address. Before continuing with pre-registration, we will send you an email that will allow you to continue with the process.
+        facebook_sign_in: Alternatively you can sign in using your Facebook account and skip waiting for us to send you an email.
       questions:
         bike:
           large: Large
@@ -5563,6 +5568,8 @@ en:
         add: "+"
         previous: Previous
         next: Next
+        continue: Continue
+        facebook_sign_in: Facebook Sign In
   page_titles:
     '403':
       Please_Confirm_Email: Please confirm your email
