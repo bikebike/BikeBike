@@ -665,6 +665,42 @@ module ApplicationHelper
 		_!((p * 10000).to_i.to_s.gsub(/^(.*)(\d\d)$/, '\1.\2%'))
 	end
 
+	def richtext(text, reduce_headings = 2)
+		return '' unless text.present?
+		return _!(text).
+			gsub(/<(\/?)h4>/, '<\1h' + (reduce_headings + 4).to_s + '>').
+			gsub(/<(\/?)h3>/, '<\1h' + (reduce_headings + 3).to_s + '>').
+			gsub(/<(\/?)h2>/, '<\1h' + (reduce_headings + 2).to_s + '>').
+			gsub(/<(\/?)h1>/, '<\1h' + (reduce_headings + 1).to_s + '>').
+			html_safe
+	end
+
+	def textarea(name, value, options = {})
+		label_id = "#{name.to_s}-label"
+		description_id = nil
+		html = label_tag(name, nil, id: label_id)
+
+		if options[:warning].present?
+			description_id = "#{name.to_s}-label" unless options[:help].present?
+			html += content_tag(:div, _(options[:warning], :s, 2), id: description_id, class: 'warning-info')
+		end
+
+		if options[:help].present?
+			description_id = "#{name.to_s}-label"
+			html += content_tag(:div, _(options[:help], :s, 2), id: description_id, class: 'input-field-help')
+		end
+
+		html += content_tag(:div, value.present? ? value.html_safe : '',
+				id: name,
+				class: 'textarea',
+				data: { name: name },
+				lang: options[:lang],
+				aria: { labeledby: label_id, describedby: description_id }
+			)
+	
+		return content_tag(:div, html, class: ['text-area-field', 'input-field']).html_safe
+	end
+
 	private
 		def _form_field(type, name, value, options)
 			if type == 'check_box'

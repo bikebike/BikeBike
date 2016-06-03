@@ -216,15 +216,25 @@ textarea, .textarea {
 	}
 }
 
-.textarea {
+.textarea, .workshop-description {
 	> :first-child {
 		margin-top: 0;
 	}
+
 	> :last-child {
 		margin-bottom: 0;
 	}
+
 	p {
 		font-size: 1.125em;
+	}
+
+	h1 {
+		font-size: 1.667em;
+	}
+
+	h2 {
+		font-size: 1.25em;
 	}
 }
 
@@ -254,6 +264,14 @@ input {
 			@include _(transform, translateY(-100%) scale(1));
 			background-color: transparent;
 			color: #666;
+		}
+	}
+
+	&.big input {
+		@include font-family(secondary);
+
+		.composition & {
+			margin-top: 1em;
 		}
 	}
 
@@ -288,15 +306,6 @@ input {
 		background-image: repeating-linear-gradient(135deg, rgba(0, 0, 0, 0.025), rgba(0, 0, 0, 0.025) 0.1rem, transparent 0.1rem, transparent 0.4rem);
 		border: 0.1rem solid #E8E8E8;
 		will-change: box-shadow;
-	}
-
-	&.big input {
-		font-size: 2em;
-		@include font-family(secondary);
-
-		.composition & {
-			margin-top: 1em;
-		}
 	}
 
 	&:focus, &:active, &:focus {
@@ -772,12 +781,12 @@ ul.warnings li,
 	.user-nav-bar {
 		position: absolute;
 		right: 0;
-		width: auto;
 		text-align: right;
 		top: 1em;
 		font-size: 0.9em;
 		width: 100%;
 		padding-left: 13em;
+		padding-right: 1em;
 
 		a {
 			display: block;
@@ -839,7 +848,7 @@ ul.warnings li,
 			background-color: inherit;
 			@include _(transform, rotate(135deg));
 			@include _(transition, 'transform 200ms ease-in-out, background-color 200ms ease-in-out');
-			@include _(box-shadow, 0.2em -0.1em 0.8em -0.4em #000);
+			@include _(box-shadow, 0.2em -0.4em 0.8em -0.4em #000);
 		}
 
 		&.enabled {
@@ -879,7 +888,6 @@ ul.warnings li,
 
 #main {
 	position: relative;
-	max-width: (rems(68) - $sidebar-width) * 2;
 	background-color: $white;
 	padding-bottom: rems(2);
 
@@ -1220,6 +1228,14 @@ $header-tilt: 8deg;
 				margin-left: 1em;
 				height: 2.6em;
 			}
+		}
+	}
+
+	.number-field,
+	.email-field,
+	.text-field {
+		&.big input {
+			font-size: 2em;
 		}
 	}
 
@@ -1566,10 +1582,12 @@ input[type="submit"]:focus,
 	@include _(animation, fade-out ease-in-out 500ms infinite alternate both);
 }
 
-input:focus,
-textarea:focus,
-.textarea {
-	@include _(animation, none);
+body {
+	input:focus,
+	textarea:focus,
+	.textarea {
+		@include _(animation, none);
+	}
 }
 
 @include breakpoint(large) {
@@ -2153,12 +2171,19 @@ html[data-lingua-franca-example="html"] {
 	@include translation-pointer;
 }
 
+.workshop-notes {
+	p {
+		font-size: 1em;
+	}
+}
+
 .workshop-list {
 	list-style: none;
 	padding: 0 2em;
 
 	.workshop-description {
-		max-height: 10em;
+		font-size: 0.8em;
+		max-height: 20em;
 		padding: 1em;
 		overflow: hidden;
 	}

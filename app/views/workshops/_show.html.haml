@@ -9,7 +9,7 @@
 			- if preview.blank? && workshop.can_show_interest?(current_user)
 				= form_tag toggle_workshop_interest_path(workshop.conference.slug, workshop.id) do
 					= button_tag (workshop.interested?(current_user) ? :remove_interest : :show_interest), :value => :toggle_interest, :class => (workshop.interested?(current_user) ? :delete : :add)
-		=_!(workshop.info).html_safe if workshop.info.present?
+		= richtext workshop.info
 		- if preview.blank? && translations_available_for_editing
 			.actions
 				- translations_available_for_editing.each do |locale|
@@ -55,6 +55,6 @@
 				%h3=_'articles.workshops.headings.needs','What do you need?'
 				%p= _!((needs.map { |x| _"workshop.options.needs.#{x}" }).join(', ').to_s.html_safe)
 		- if workshop.notes.present?
-			= columns(medium: 12) do
+			= columns(medium: 12, class: 'workshop-notes') do
 				%h3=_'articles.workshops.headings.notes','Notes'
-				=_!(workshop.notes).html_safe
+				= richtext workshop.notes, 3

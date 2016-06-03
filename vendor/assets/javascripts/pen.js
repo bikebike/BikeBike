@@ -85,7 +85,7 @@
       stayMsg: 'Are you going to leave here?',
       textarea: '<textarea name="content"></textarea>',
       list: [
-        'blockquote', 'h2', 'h3', 'p', 'code', 'insertorderedlist', 'insertunorderedlist', 'inserthorizontalrule',
+        'blockquote', 'h1', 'h2', 'p', 'code', 'insertorderedlist', 'insertunorderedlist', 'inserthorizontalrule',
         'indent', 'outdent', 'bold', 'italic', 'underline', 'createlink', 'insertimage'
       ],
       titles: {},

@@ -26,10 +26,7 @@
 					.original-text
 						%h4=_'translate.content.Translation_of'
 						.value=@workshop.title!
-				.text-area-field.input-field
-					= label_tag :info
-					.input-field-help=_'articles.workshops.paragraphs.info', :s, 2
-					.textarea#info{lang: @translation, data: {name: :info}}=(@info || '').html_safe
+				= textarea :info, @info, help: 'articles.workshops.paragraphs.info', lang: @translation
 				- if @is_translating
 					.original-text
 						%h4=_'translate.content.Translation_of'
@@ -80,10 +77,7 @@
 						= label_tag :needs_facilitators do
 							= _'workshop.options.needs_facilitators', 'Needs Additional Facilitators'
 				= columns(medium: 12) do
-					.text-area-field.input-field
-						= label_tag :notes
-						.warning-info=_'articles.workshops.paragraphs.notes','Notes are only viewable by conference hosts and workshop facilitators'
-						.textarea#notes{data: {name: :notes}}=(@workshop.notes || '').html_safe
+					= textarea :notes, @workshop.notes, warning: 'articles.workshops.paragraphs.notes'
 			= columns(medium: 12) do
 				.actions.next-prev
 					= button_tag :save, value: :save
