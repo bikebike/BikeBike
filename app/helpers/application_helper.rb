@@ -680,14 +680,14 @@ module ApplicationHelper
 		description_id = nil
 		html = label_tag(name, nil, id: label_id)
 
-		if options[:warning].present?
-			description_id = "#{name.to_s}-label" unless options[:help].present?
-			html += content_tag(:div, _(options[:warning], :s, 2), id: description_id, class: 'warning-info')
+		if options[:help].present?
+			description_id ||= "#{name.to_s}-desc"
+			html += content_tag(:div, _(options[:help], :s, 2), id: description_id, class: 'input-field-help')
 		end
 
-		if options[:help].present?
-			description_id = "#{name.to_s}-label"
-			html += content_tag(:div, _(options[:help], :s, 2), id: description_id, class: 'input-field-help')
+		if options[:warning].present?
+			description_id ||= "#{name.to_s}-desc"
+			html += content_tag(:div, _(options[:warning], :s, 2), id: description_id, class: 'warning-info')
 		end
 
 		html += content_tag(:div, value.present? ? value.html_safe : '',
@@ -698,10 +698,50 @@ module ApplicationHelper
 				aria: { labeledby: label_id, describedby: description_id }
 			)
 	
-		return content_tag(:div, html, class: ['text-area-field', 'input-field']).html_safe
+		html = content_tag(:div, html, class: ['text-area-field', 'input-field']).html_safe
+		html += _original_content(options[:original_value], options[:original_lang]) if options[:original_value].present?
+
+		return html.html_safe
+	end
+
+	def textfield(name, value, options = {})
+		html = ''
+		description_id = nil
+		
+		if options[:heading].present?
+			description_id ||= "#{name.to_s}-desc"
+			html += content_tag(:h3, _(options[:heading]), id: description_id)
+		end
+
+		html += show_errors name
+		html += label_tag name
+		html += text_field_tag(name, value,
+				required: options[:required],
+				lang: options[:lang],
+				aria: { describedby: description_id }
+			)
+
+		html = content_tag(:div, html.html_safe,
+				class: [
+					'text-field',
+					'input-field',
+					options[:big] ? 'big' : nil,
+					(@errors || {})[name].present? ? 'has-error' : nil
+			])
+
+		html += _original_content(options[:original_value], options[:original_lang]) if options[:original_value].present?
+
+		return html.html_safe
 	end
 
 	private
+		def _original_content(value, lang)
+			content_tag(:div, (
+					content_tag(:h4, _('translate.content.Translation_of')) +
+					content_tag(:div, value, class: 'value', lang: lang)
+				).html_safe, class: 'original-text')
+		end
+
 		def _form_field(type, name, value, options)
 			if type == 'check_box'
 				self.send(type + '_tag', name, "1", value, options)

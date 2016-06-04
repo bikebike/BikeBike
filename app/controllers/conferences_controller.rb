@@ -1037,6 +1037,9 @@ class ConferencesController < ApplicationController
 			workshop.notes              = params[:notes]
 			workshop.needs_facilitators = params[:needs_facilitators].present?
 			workshop.save
+
+			# Rouge nil facilitators have been know to be created, just destroy them here now
+			WorkshopFacilitator.where(:user_id => nil).destroy_all
 		else
 			return do_403
 		end

@@ -3,16 +3,8 @@
 	%p=_'articles.conference_registration.paragraphs.Contact_Info', :s, 2
 = columns(medium: 12) do
 	= form_tag register_path(@this_conference.slug) do
-		%h3=_'articles.conference_registration.headings.name','What is your name?'
-		.text-field.input-field{class: @errors[:name].present? ? 'has-error' : nil}
-			= show_errors :name
-			= label_tag :name
-			= text_field_tag :name, @name, required: true
-		%h3=_'articles.conference_registration.headings.location','Where are you coming from?'
-		.text-field.input-field{class: @errors[:location].present? ? 'has-error' : nil}
-			= show_errors :location
-			= label_tag :location
-			= text_field_tag :location, @registration.city || location(lookup_ip_location), required: true
+		= textfield :name, @name, required: true, heading: 'articles.conference_registration.headings.name'
+		= textfield :location, (@registration.city || location(lookup_ip_location)), required: true, heading: 'articles.conference_registration.headings.location'
 		%h3=_'articles.conference_registration.headings.languages','Which languages do you speak?'
 		- puts @errors.to_json.to_s
 		.check-box-field.input-field{class: @errors[:languages].present? ? 'has-error' : nil}

@@ -31,7 +31,7 @@ class Workshop < ActiveRecord::Base
     def active_facilitators
         users = []
         workshop_facilitators.each do |u|
-            users << User.find(u.user_id) unless u.role.to_sym == :requested
+            users << User.find(u.user_id) unless u.role.to_sym == :requested || u.user.nil?
         end
         return users
     end
@@ -78,7 +78,7 @@ class Workshop < ActiveRecord::Base
         return 0 unless id
         collaborators = []
         workshop_facilitators.each do |f|
-            collaborators << f.user_id unless f.role.to_sym == :requested
+            collaborators << f.user_id unless f.role.to_sym == :requested || f.user_id.nil?
         end
         return 10 unless collaborators.present?
         interested = WorkshopInterest.where("workshop_id=#{id} AND user_id NOT IN (#{collaborators.join ','})") || []
