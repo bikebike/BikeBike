@@ -1,4 +1,4 @@
-= row do
+= row class: 'view-object' do
 	= columns(medium: 12) do
 		%h2=_!workshop.title
 		.workshop-interest
@@ -30,15 +30,14 @@
 							- elsif preview.blank? && (f.user_id == current_user.id && f.role.to_sym != :creator) || (!workshop.conference.registered?(u) && workshop.active_facilitator?(current_user))
 								=(link_to (_'actions.workshops.Remove'), approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'remove'), :class => [:button, :delete])
 			- unless preview.present?
-				.actions
-					=(link_to (_'actions.workshops.Facilitate'), facilitate_workshop_path(workshop.conference.slug, workshop.id), :class => [:button, workshop.needs_facilitators ? :accented : :subdued]) unless workshop.facilitator?(current_user)
-					- if workshop.active_facilitator?(current_user)
-						%h4=_'articles.workshops.headings.add_facilitator','Add a facilitator'
-						= form_tag workshop_add_facilitator_path(workshop.conference.slug, workshop.id), :class => 'add-facilitator flex-form' do
-							.email-field.input-field
-								= email_field_tag :email, nil, required: true
-								= label_tag :email
-							= button_tag :add
+				=(link_to (_'actions.workshops.Facilitate'), facilitate_workshop_path(workshop.conference.slug, workshop.id), :class => [:button, workshop.needs_facilitators ? :accented : :subdued]) unless workshop.facilitator?(current_user)
+				- if workshop.active_facilitator?(current_user)
+					%h4=_'articles.workshops.headings.add_facilitator','Add a facilitator'
+					= form_tag workshop_add_facilitator_path(workshop.conference.slug, workshop.id), :class => 'add-facilitator mini-flex-form' do
+						.email-field.input-field
+							= email_field_tag :email, nil, required: true
+							= label_tag :email
+						= button_tag :add
 	- languages = JSON.parse(workshop.languages || '[]')
 	- if languages.present?
 		= columns(medium: 6) do

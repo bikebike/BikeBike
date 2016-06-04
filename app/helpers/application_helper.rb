@@ -734,6 +734,73 @@ module ApplicationHelper
 		return html.html_safe
 	end
 
+	def radiobuttons(name, boxes, value, label_key, options = {})
+		checkboxes(name, boxes, [value], label_key, options.merge({radiobuttons: true}))
+	end
+
+	def checkboxes(name, boxes, values, label_key, options = {})
+		html = ''
+
+		label_id = nil
+		description_id = nil
+
+		if options[:heading].present?
+			label_id ||= "#{name.to_s}-label"
+			html += content_tag(:h3, _(options[:heading]), id: label_id)
+		end
+
+		if options[:help].present?
+			description_id ||= "#{name.to_s}-desc"
+			html += content_tag(:div, _(options[:help], :s, 2), class: 'input-field-help', id: description_id)
+		end
+
+		boxes_html = ''
+
+		values = values.present? ? values.map(&:to_s) : []
+		boxes = boxes.map(&:to_s)
+		boxes.each do | box |
+			checked = values.include?(box)
+			values -= [box] if checked
+			id = nil
+			if options[:radiobuttons].present?
+				id = "#{name.to_s}_#{box}"
+				boxes_html += radio_button_tag(name, box, checked)
+			else
+				id = "#{name.to_s}[#{box}]"
+				boxes_html += check_box_tag(id, 1, checked)
+			end
+			boxes_html += label_tag(id, _("#{label_key.to_s}.#{box}"))
+		end
+
+		if options[:other].present?
+			id = nil
+			if options[:radiobuttons].present?
+				id = "#{name.to_s}_other"
+				boxes_html += radio_button_tag(name, :other, values.present?)
+			else
+				id = "#{name.to_s}[other]"
+				boxes_html += check_box_tag(id, 1, values.present?)
+			end
+			boxes_html += label_tag id,
+				content_tag(:div,
+					text_field_tag("other_#{name.to_s}", values.first, placeholder: (_"#{label_key}.other"), required: values.present?),
+					class: 'other')
+		end
+
+		html += content_tag(:fieldset, boxes_html.html_safe,
+				aria: {
+					labeledby: label_id,
+					describedby: description_id
+				},
+				class: [
+					'check-box-field',
+					'input-field',
+					options[:vertical] ? 'vertical' : nil
+			])
+
+		return html.html_safe
+	end
+
 	private
 		def _original_content(value, lang)
 			content_tag(:div, (

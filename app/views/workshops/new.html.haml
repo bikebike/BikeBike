@@ -23,43 +23,12 @@
 				= textarea :info, @info, help: 'articles.workshops.paragraphs.info', lang: @translation, original_value: @is_translating ? richtext(@workshop.info!, 4).html_safe : nil, original_lang: @workshop.locale
 			- if !@is_translating && (@workshop.id.blank? || @can_edit)
 				= columns(medium: 6) do
-					%h3=_'articles.workshops.headings.languages','Workshop Language'
-					.input-field-help=_'articles.workshops.paragraphs.languages', :s, 2
-					.check-box-field.vertical.input-field
-						- [:en, :es, :fr].each do |language|
-							= check_box_tag "languages[#{language}]", 1, @languages && @languages.include?(language)
-							= label_tag "languages_#{language}" do
-								= _"languages.#{language}"
-					%h3=_'articles.workshops.headings.theme','Theme'
-					.input-field-help=_'articles.workshops.paragraphs.theme', :s, 2
-					- theme_found = false
-					.check-box-field.vertical.input-field
-						- Workshop.all_themes.each do |theme|
-							- is_selected = (@workshop.theme.to_s == theme.to_s)
-							- theme_found ||= is_selected
-							= radio_button_tag :theme, theme, is_selected
-							= label_tag "theme_#{theme}" do
-								= _"workshop.options.theme.#{theme}"
-						- is_other = (@workshop.theme.present? && !theme_found)
-						= radio_button_tag :theme, :other, is_other
-						= label_tag "theme_other" do
-							.other
-								= text_field_tag :other_theme, (is_other ? @workshop.theme : nil), placeholder: (_"workshop.options.theme.other"), required: is_other
+					= checkboxes :languages, [:en, :es, :fr], @languages, 'languages', vertical: true, heading: 'articles.workshops.headings.languages', help: 'articles.workshops.paragraphs.languages'
+					= radiobuttons :theme, Workshop.all_themes, @workshop.theme, 'workshop.options.theme', vertical: true, heading: 'articles.workshops.headings.theme', help: 'articles.workshops.paragraphs.theme', other: true
 				= columns(medium: 6) do
-					%h3=_'articles.workshops.headings.needs','What do you need?'
-					.input-field-help=_'articles.workshops.paragraphs.needs', :s, 2
-					.check-box-field.vertical.input-field
-						- [:sound, :projector, :tools].each do |need|
-							= check_box_tag "needs[#{need.to_s}]", 1, JSON.parse(@workshop.needs || '[]').include?(need.to_s)
-							= label_tag "needs_#{need}" do
-								= _"workshop.options.needs.#{need.to_s}"
-					%h3=_'articles.workshops.headings.space','Type of space'
-					.input-field-help=_'articles.workshops.paragraphs.space', :s, 2
-					.check-box-field.vertical.input-field
-						- [:meeting_room, :workshop, :outdoor_meeting].each do |space|
-							= radio_button_tag :space, space, @workshop.space == space
-							= label_tag "space_#{space}" do
-								= _"workshop.options.space.#{space}"
+					= checkboxes :needs, [:sound, :projector, :tools], JSON.parse(@workshop.needs || '[]'), 'workshop.options.needs', vertical: true, heading: 'articles.workshops.headings.needs', help: 'articles.workshops.paragraphs.needs'
+					= radiobuttons :space, [:meeting_room, :workshop, :outdoor_meeting], @workshop.space, 'workshop.options.space', vertical: true, heading: 'articles.workshops.headings.space', help: 'articles.workshops.paragraphs.space'
+					
 					%h3=_'articles.workshops.headings.needs_facilitators','Looking for help?'
 					.input-field-help=_'articles.workshops.paragraphs.needs_facilitators', :s, 2
 					.check-box-field.vertical.input-field

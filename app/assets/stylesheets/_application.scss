@@ -488,6 +488,20 @@ input {
 				background-color: $colour-3;
 			}
 		}
+
+		&[type="radio"] + label {
+			@include after {
+				content: '+';
+				border: 0;
+				font-size: 2.5em;
+				top: -0.125em;
+				left: 0.05em;
+				line-height: 1em;
+				color: #FFF;
+				height: 1em;
+				width: 1em;
+			}
+		}
 	}
 
 	.other {
@@ -515,25 +529,6 @@ input {
 	margin: 0 2em 5em;
 	font-size: 0.75em;
 }
-
-// .check-box-field {
-// 	label {
-// 		color: $white;
-// 		font-weight: normal;
-// 		@include font-family(secondary);
-// 		@include _(text-stroke, 0.5px #000);
-
-// 		@include before {
-// 			font-size: 0.6em;
-// 			bottom: -0.8em;
-// 		}
-
-// 		@include after {
-// 			font-size: 0.3em;
-// 			bottom: -0.5em;
-// 		}
-// 	}
-// }
 
 .radio-button-field {
 	label {
@@ -585,6 +580,29 @@ form {
 			height: 16em;
 		}
 	}
+
+	&.mini-flex-form {
+		display: flex;
+		align-items: flex-start;
+
+		.input-field {
+			flex: 1;
+		}
+
+		button, .button {
+			margin-left: 1em;
+			height: 2.6em;
+		}
+	}
+}
+
+fieldset {
+	padding: 0;
+	border: 0;
+}
+
+.view-object {
+	margin-bottom: 3em;
 }
 
 .flex-form, .flex-column {
@@ -628,8 +646,13 @@ form {
 
 	&.next-prev {
 		display: flex;
+		flex-wrap: wrap;
 		flex-direction: row-reverse;
 		margin: 0;
+
+		button, .button {
+			margin-bottom: 1em;
+		}
 	}
 }
 
@@ -1219,11 +1242,23 @@ $header-tilt: 8deg;
 	}
 }
 
+@include keyframes(colour-out) {
+	to {
+		background-color: transparent;
+	}
+}
+
 body :focus,
-input[type="submit"]:focus,
+input[type="submit"]:focus {
+	@include _(animation, fade-out ease-in-out 500ms infinite alternate both);
+}
+
 .check-box-field input:focus + label,
 .radio-button-field input:focus + label {
-	@include _(animation, fade-out ease-in-out 500ms infinite alternate both);
+	@include before {
+		background-color: $colour-2;
+		@include _(animation, colour-out ease-in-out 500ms infinite alternate both);
+	}
 }
 
 body {
