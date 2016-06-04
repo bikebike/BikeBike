@@ -28,10 +28,10 @@
 				= columns(medium: 6) do
 					= checkboxes :needs, [:sound, :projector, :tools], JSON.parse(@workshop.needs || '[]'), 'workshop.options.needs', vertical: true, heading: 'articles.workshops.headings.needs', help: 'articles.workshops.paragraphs.needs'
 					= radiobuttons :space, [:meeting_room, :workshop, :outdoor_meeting], @workshop.space, 'workshop.options.space', vertical: true, heading: 'articles.workshops.headings.space', help: 'articles.workshops.paragraphs.space'
-					
-					%h3=_'articles.workshops.headings.needs_facilitators','Looking for help?'
-					.input-field-help=_'articles.workshops.paragraphs.needs_facilitators', :s, 2
-					.check-box-field.vertical.input-field
+
+					%h3#needs_facilitators-label=_'articles.workshops.headings.needs_facilitators','Looking for help?'
+					.input-field-help#needs_facilitators-desc=_'articles.workshops.paragraphs.needs_facilitators', :s, 2
+					%fieldset.check-box-field.vertical.input-field{aria: labeledby: 'needs_facilitators-label', describedby: 'needs_facilitators-desc'}
 						= check_box_tag :needs_facilitators, 1, @workshop.needs_facilitators
 						= label_tag :needs_facilitators do
 							= _'workshop.options.needs_facilitators', 'Needs Additional Facilitators'
