@@ -31,7 +31,7 @@
 
 					%h3#needs_facilitators-label=_'articles.workshops.headings.needs_facilitators','Looking for help?'
 					.input-field-help#needs_facilitators-desc=_'articles.workshops.paragraphs.needs_facilitators', :s, 2
-					%fieldset.check-box-field.vertical.input-field{aria: labeledby: 'needs_facilitators-label', describedby: 'needs_facilitators-desc'}
+					%fieldset.check-box-field.vertical.input-field{aria: {labeledby: 'needs_facilitators-label', describedby: 'needs_facilitators-desc'}}
 						= check_box_tag :needs_facilitators, 1, @workshop.needs_facilitators
 						= label_tag :needs_facilitators do
 							= _'workshop.options.needs_facilitators', 'Needs Additional Facilitators'
