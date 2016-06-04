@@ -1,24 +1,25 @@
 - this_is_the_front_page
 - if @conference
 	= render 'conferences/header'
-	= row do
-		= columns(tag: :article) do
-			%h2=_!@conference.title
-			= @conference.info.html_safe
-			- if @conference.workshops
-				- if @schedule
-					%h3=_'articles.workshops.headings.Schedule'
-					= render 'schedule/programme', :schedule => @schedule, :conference => @conference, :workshops => @workshops, :events => @events, :locations => @locations, :show_interest => true, :day_parts => @day_parts, :show_previews => true
-			- if @conference.registration_status == :open
-				%h3=_'articles.workshops.headings.Proposed_Workshops'
-				%p=_'articles.workshops.paragraphs.Proposed_Workshops', "Would you like to facilitate your own workshop? Simply register and visit the workshops page. If you have already registered you can access the page by restarting the registration process."
-				%ul.workshop-list
-					- @conference.workshops.sort_by{ |w| w.title.downcase }.each do |w|
-						%li
-							%h4=w.title
-							.workshop-interest
-								- if w.interested?(current_user)
-									=_'articles.workshops.info.you_are_interested_count', "You and #{w.interested_count - 1} others are interested in this workshop", :vars => {:count => (w.interested_count - 1)}
-								- elsif w.interested_count > 0
-									=_'articles.workshops.info.interested_count', "#{w.interested_count} people are interested in this workshop", :vars => {:count => w.interested_count}
-							.workshop-description=markdown w.info
+	%article
+		= row do
+			= columns(medium: 10, push: {medium: 1}) do
+				%h2=_!@conference.title
+				= @conference.info.html_safe
+				- if @conference.workshops
+					- if @schedule
+						%h3=_'articles.workshops.headings.Schedule'
+						= render 'schedule/programme', :schedule => @schedule, :conference => @conference, :workshops => @workshops, :events => @events, :locations => @locations, :show_interest => true, :day_parts => @day_parts, :show_previews => true
+				- if @conference.registration_status == :open
+					%h3=_'articles.workshops.headings.Proposed_Workshops'
+					%p=_'articles.workshops.paragraphs.Proposed_Workshops', "Would you like to facilitate your own workshop? Simply register and visit the workshops page. If you have already registered you can access the page by restarting the registration process."
+					%ul.workshop-list
+						- @conference.workshops.sort_by{ |w| w.title.downcase }.each do |w|
+							%li
+								%h4=w.title
+								.workshop-interest
+									- if w.interested?(current_user)
+										=_'articles.workshops.info.you_are_interested_count', "You and #{w.interested_count - 1} others are interested in this workshop", :vars => {:count => (w.interested_count - 1)}
+									- elsif w.interested_count > 0
+										=_'articles.workshops.info.interested_count', "#{w.interested_count} people are interested in this workshop", :vars => {:count => w.interested_count}
+								.workshop-description=markdown w.info
