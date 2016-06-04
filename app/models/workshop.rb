@@ -31,7 +31,7 @@ class Workshop < ActiveRecord::Base
     def active_facilitators
         users = []
         workshop_facilitators.each do |u|
-            users << User.find(u.user_id) unless u.role.to_sym == :requested || u.user.nil?
+            users << User.find(u.user_id) unless u.role.to_sym == :requested || u.user_id.nil?
         end
         return users
     end
