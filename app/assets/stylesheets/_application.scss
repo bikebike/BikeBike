@@ -1748,19 +1748,30 @@ html[data-lingua-franca-example="html"] {
 		overflow: hidden;
 	}
 
+	.workshop-link {
+		position: static;
+
+		@include before {
+			content: '';
+			display: block;
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0
+		}
+		@include after {
+			display: none;
+		}
+	}
+
 	> li {
+		position: relative;
 		margin-bottom: 1em;
 		border: 0.2em solid;
 		@include _(border-radius, 0.25em);
-
-		> a {
-			display: block;
-			color: inherit;
-
-			@include after {
-				display: none;
-			}
-		}
+		@include _(transition, box-shadow 250ms ease-in-out);
+		will-change: box-shadow;
 
 		ul {
 			padding-left: 2.5em;
