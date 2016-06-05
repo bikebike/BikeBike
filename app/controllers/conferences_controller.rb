@@ -1482,7 +1482,7 @@ class ConferencesController < ApplicationController
 	def required_steps(conference = nil)
 		# return the intersection of current steps and reuired steps
 		registration_steps(conference || @this_conference || @conference) & # current steps
-			[:policy, :contact_info, :questions] # all required steps
+			[:policy, :contact_info, :hosting, :questions] # all required steps
 	end
 
 	def registration_complete?(registration = @registration)
