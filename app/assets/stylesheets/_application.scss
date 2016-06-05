@@ -649,7 +649,7 @@ fieldset {
 	margin: 0 1em;
 
 	button, .button {
-		margin: 0 0.25em;
+		margin: 0 0.25em 1em;
 	    vertical-align: middle;
 	}
 
@@ -1583,24 +1583,27 @@ body.policy .policy-agreement ul {
 	display: inline-block;
 
 	.facilitator {
-		margin: 0 0 0.5em 1.25em;
+		margin: 0 0 0.5em 0.5em;
+		padding: 1.5em 0.5em 0.5em;
+		border-top: 0.1em solid #CCC;
+
+		&:first-child {
+			border: 0;
+			padding-top: 0;
+		}
 	}
 
 	.name {
 		position: relative;
 		font-weight: bold;
+	}
 
-		@include before {
-			content: '';
-			position: absolute;
-			width: 0.3em;
-			height: 0.3em;
-			background-color: #333;
-			border-radius: 50%;
-			left: -0.75em;
-			top: 0.5em;
-			@include _(opacity, 0.5);
-		}
+	.details {
+		margin-top: 0.5em;
+	}
+
+	.email {
+		margin-bottom: 0.5em;
 	}
 
 	.name, .role {
@@ -1616,7 +1619,7 @@ body.policy .policy-agreement ul {
 		}
 
 		@include after {
-			content: '), ';
+			content: ')';
 		}
 
 		&:last-child {

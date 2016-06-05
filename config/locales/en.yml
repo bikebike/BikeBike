@@ -5398,6 +5398,7 @@ en:
           vegan: Vegan or vegetarian only
           smoking: Smoking is permitted
           quiet: Quiet household
+          pets: House has dogs or cats
       can_provide_housing: I can provide housing
       questions:
         bike:
@@ -5674,10 +5675,11 @@ en:
   roles:
     workshops:
       facilitator:
-        creator: creator
+        creator: Owner
         collaborator: Collaborator
         requested: Requested
         unregistered: Unregistered
+        facilitator: Facilitator
   workshop:
     options:
       needs:

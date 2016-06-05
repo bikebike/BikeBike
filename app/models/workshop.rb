@@ -62,6 +62,14 @@ class Workshop < ActiveRecord::Base
         creator?(user) || collaborator?(user) || conference.host?(user)
     end
 
+    def can_remove?(owner, facilitator)
+        # creators cannot be removed
+        return false if creator?(facilitator)
+
+        # creator can remove anyone, facilitators can remove themselves
+        return creator?(owner) || owner.id == facilitator.id
+    end
+
     def can_delete?(user)
         creator?(user) || conference.host?(user)
     end

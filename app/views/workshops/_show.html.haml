@@ -1,3 +1,4 @@
+- is_facilitator = workshop.active_facilitator?(current_user)
 = row class: 'view-object' do
 	= columns(medium: 12) do
 		%h2=_!workshop.title
@@ -19,19 +20,26 @@
 		.facilitators
 			- workshop.workshop_facilitators.each do |f|
 				- u = User.find(f.user_id)
-				- if logged_in? && (workshop.public_facilitator?(u) || f.user_id == current_user.id || workshop.active_facilitator?(current_user))
+				- if logged_in? && (workshop.public_facilitator?(u) || f.user_id == current_user.id || is_facilitator)
 					.facilitator
 						.name=_!u.name
 						.role
 							=_"roles.workshops.facilitator.#{workshop.role(u).to_s}"
-							- if preview.blank? && f.role.to_sym == :requested && workshop.active_facilitator?(current_user)
+						- if is_facilitator && preview.blank?
+							.details
+								.email=u.email
+							- if f.role.to_sym == :requested
 								=(link_to (_'actions.workshops.Approve'), approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'approve'), :class => [:button, :modify])
 								=(link_to (_'actions.workshops.Deny'), approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'deny'), :class => [:button, :delete])
-							- elsif preview.blank? && (f.user_id == current_user.id && f.role.to_sym != :creator) || (!workshop.conference.registered?(u) && workshop.active_facilitator?(current_user))
+							- elsif workshop.can_remove?(current_user, u)
+								=(link_to (_'actions.workshops.Make_Owner'), approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'switch_ownership'), :class => [:button, :modify]) unless f.role.to_sym == :creator || !workshop.creator?(current_user)
+								=(link_to (_'actions.workshops.Remove'), approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'remove'), :class => [:button, :delete])
+						- if f.user_id == current_user.id && workshop.requested_collaborator?(current_user)
+							.details
 								=(link_to (_'actions.workshops.Remove'), approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'remove'), :class => [:button, :delete])
 			- unless preview.present?
 				=(link_to (_'actions.workshops.Facilitate'), facilitate_workshop_path(workshop.conference.slug, workshop.id), :class => [:button, workshop.needs_facilitators ? :accented : :subdued]) unless workshop.facilitator?(current_user)
-				- if workshop.active_facilitator?(current_user)
+				- if is_facilitator
 					%h4=_'articles.workshops.headings.add_facilitator','Add a facilitator'
 					= form_tag workshop_add_facilitator_path(workshop.conference.slug, workshop.id), :class => 'add-facilitator mini-flex-form' do
 						.email-field.input-field
@@ -47,7 +55,7 @@
 		= columns(medium: 6) do
 			%h3=_'articles.workshops.headings.theme','Theme'
 			%p= Workshop.all_themes.include?((workshop.theme || '').to_sym) ? (_"workshop.options.theme.#{workshop.theme}") : workshop.theme
-	- if workshop.active_facilitator?(current_user) || workshop.conference.host?(current_user)
+	- if is_facilitator || workshop.conference.host?(current_user)
 		- needs = JSON.parse(workshop.needs || '[]')
 		- if needs.present?
 			= columns(medium: 6) do

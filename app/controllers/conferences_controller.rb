@@ -1083,8 +1083,11 @@ class ConferencesController < ApplicationController
 		# creat the new interest row if we weren't interested before
 		WorkshopInterest.create(:workshop_id => workshop.id, :user_id => current_user.id) unless interested
 
-		# go back to the workshop
-		redirect_to view_workshop_url(@this_conference.slug, workshop.id)
+		if request.xhr?
+		else
+			# go back to the workshop
+			redirect_to view_workshop_url(@this_conference.slug, workshop.id)
+		end
 	end
 
 	def facilitate_workshop
@@ -1127,16 +1130,18 @@ class ConferencesController < ApplicationController
 	end
 
 	def approve_facilitate_request
+		return do_403 unless logged_in?
 		set_conference
 		set_conference_registration
 		workshop = Workshop.find_by_id_and_conference_id(params[:workshop_id], @this_conference.id)
-		return do_404 unless workshop && current_user
+		return do_404 unless workshop.present?
 		
 		user_id = params[:user_id].to_i
 		action = params[:approve_or_deny].to_sym
 		user = User.find(user_id)
-		if action == :approve
-			if current_user && workshop.active_facilitator?(current_user) && workshop.requested_collaborator?(User.find(user_id))
+		case action
+		when :approve
+			if workshop.active_facilitator?(current_user) && workshop.requested_collaborator?(User.find(user_id))
 				f = WorkshopFacilitator.find_by_workshop_id_and_user_id(
 						workshop.id, user_id)
 				f.role = :collaborator
@@ -1148,8 +1153,8 @@ class ConferencesController < ApplicationController
 				end
 				return redirect_to view_workshop_url(@this_conference.slug, workshop.id)		
 			end
-		elsif action == :deny
-			if current_user && workshop.active_facilitator?(current_user) && workshop.requested_collaborator?(User.find(user_id))
+		when :deny
+			if workshop.active_facilitator?(current_user) && workshop.requested_collaborator?(User.find(user_id))
 				WorkshopFacilitator.delete_all(
 					:workshop_id => workshop.id,
 					:user_id => user_id)
@@ -1160,13 +1165,23 @@ class ConferencesController < ApplicationController
 				end
 				return redirect_to view_workshop_url(@this_conference.slug, workshop.id)		
 			end
-		elsif action == :remove
-			if current_user && current_user.id == user_id
-				unless workshop.creator?(user)
-					WorkshopFacilitator.delete_all(
-						:workshop_id => workshop.id,
-						:user_id => user_id)
-				end
+		when :remove
+			if workshop.can_remove?(current_user, user)
+				WorkshopFacilitator.delete_all(
+					:workshop_id => workshop.id,
+					:user_id => user_id)
+				return redirect_to view_workshop_url(@this_conference.slug, workshop.id)
+			end
+		when :switch_ownership
+			if workshop.creator?(current_user)
+				f = WorkshopFacilitator.find_by_workshop_id_and_user_id(
+						workshop.id, current_user.id)
+				f.role = :collaborator
+				f.save
+				f = WorkshopFacilitator.find_by_workshop_id_and_user_id(
+						workshop.id, user_id)
+				f.role = :creator
+				f.save
 				return redirect_to view_workshop_url(@this_conference.slug, workshop.id)
 			end
 		end
