@@ -3,16 +3,9 @@
 	%p=_'articles.conference_registration.paragraphs.Contact_Info', :s, 2
 = columns(medium: 12) do
 	= form_tag register_path(@this_conference.slug) do
-		= textfield :name, @name, required: true, heading: 'articles.conference_registration.headings.name'
+		= textfield :name, @name, required: true, heading: 'articles.conference_registration.headings.name', big: true
 		= textfield :location, (@registration.city || location(lookup_ip_location)), required: true, heading: 'articles.conference_registration.headings.location'
-		%h3=_'articles.conference_registration.headings.languages','Which languages do you speak?'
-		- puts @errors.to_json.to_s
-		.check-box-field.input-field{class: @errors[:languages].present? ? 'has-error' : nil}
-			- [:en, :es, :fr].each do |language|
-				= check_box_tag "languages[#{language}]", 1, (@registration.languages || [I18n.locale.to_s]).include?(language.to_s)
-				= label_tag "languages_#{language}" do
-					= _"languages.#{language}"
-			= show_errors :languages
+		= checkboxes :languages, [:en, :es, :fr], current_user.languages, 'languages', heading: 'articles.conference_registration.headings.languages'
 		.actions.next-prev
 			= button_tag (params[:step] == :save ? :save : :next), value: :contact_info
 			= button_tag :previous, value: :prev_contact_info, class: :subdued, formnovalidate: true

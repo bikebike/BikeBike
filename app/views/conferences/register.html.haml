@@ -1,5 +1,5 @@
 = render :partial => 'page_header', :locals => {:page_key => 'Conference_Registration'}
-- if (steps = current_registration_steps)
+- if (steps = current_registration_steps(@registration))
 	= row id: 'registration-steps', class: 'flow-steps' do
 		= columns do
 			%ul

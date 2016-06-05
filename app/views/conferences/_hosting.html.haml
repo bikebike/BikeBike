@@ -1,0 +1,24 @@
+- add_stylesheet :editor
+- add_inline_script :pen
+- add_inline_script :markdown
+- add_inline_script :editor
+
+= columns(medium: 12) do
+	%h2=_(@page_title)
+= columns(medium: 12) do
+	= form_tag register_path(@this_conference.slug) do
+		= checkbox :can_provide_housing, @registration.can_provide_housing, 'articles.conference_registration.can_provide_housing', heading: 'articles.conference_registration.headings.can_provide_housing', help: 'articles.conference_registration.paragraphs.can_provide_housing', inline: true, toggles: 'hosting-options', centered: true
+		#hosting-options
+			= textfield :address, @hosting_data['address'], required: true, heading: 'articles.conference_registration.headings.host.address', help: 'articles.conference_registration.paragraphs.host.address'
+			= telephonefield :phone, @hosting_data['phone'], required: true
+			= fieldset :space, heading: 'articles.conference_registration.headings.host.space', help: 'articles.conference_registration.paragraphs.host.space' do
+				- [:bed_space, :floor_space, :tent_space].each do | space |
+					= numberfield space, @hosting_data['space'][space.to_s] || 0, min: 0, required: true
+			= fieldset :hosting_dates, heading: 'articles.conference_registration.headings.host.availability', help: 'articles.conference_registration.paragraphs.host.availability' do
+				= selectfield :first_day, @hosting_data['availability'][0] || @this_conference.start_date, conference_housing_options_list(:before)
+				= selectfield :last_day, @hosting_data['availability'][1] || @this_conference.start_date, conference_housing_options_list(:after)
+			= checkboxes :considerations, [:vegan, :smoking, :quiet], @hosting_data['considerations'], 'articles.conference_registration.host.considerations', heading: 'articles.conference_registration.headings.host.considerations', help: 'articles.conference_registration.paragraphs.host.considerations', vertical: true
+			= textarea :notes, @hosting_data['notes'], heading: 'articles.conference_registration.headings.host.notes', help: 'articles.conference_registration.paragraphs.host.notes'
+		.actions.next-prev
+			= button_tag (params[:step] == :save ? :save : :next), value: :hosting
+			= button_tag :previous, value: :prev_contact_info, class: :subdued, formnovalidate: true

@@ -239,7 +239,7 @@ textarea, .textarea {
 }
 
 input {
-	&[type="text"], &[type="password"], &[type="telephone"], &[type="search"], &[type="email"], &[type="url"] {
+	&[type="text"], &[type="password"], &[type="tel"], &[type="search"], &[type="email"], &[type="url"], &[type="number"] {
 		display: block;
 		font-size: 1.25em;
 		outline: 0;
@@ -249,10 +249,15 @@ input {
 		padding: 0.25em 0.5em;
 		border-bottom: 0.15em solid transparent;
 	}
+
+	&[type="number"], &[type="tel"] {
+		@include font-family(secondary);
+	}
 }
 
 .number-field,
 .email-field,
+.telephone-field,
 .text-field {
 	position: relative;
 	margin-bottom: 2em;
@@ -319,6 +324,10 @@ input {
 			@include _(box-shadow, 0 0 0 0.3em rgba(0,0,0,0.05));
 		}
 	}
+}
+
+.telephone-field {
+	max-width: 15em;
 }
 
 @include keyframes(bend) {
@@ -530,6 +539,10 @@ input {
 	font-size: 0.75em;
 }
 
+.check-box-field.inline {
+	display: inline-block;
+}
+
 .radio-button-field {
 	label {
 		width: 7em;
@@ -582,11 +595,11 @@ form {
 	}
 
 	&.mini-flex-form {
-		display: flex;
-		align-items: flex-start;
+		@include _-(display, flex);
+		@include _(align-items, flex-start);
 
 		.input-field {
-			flex: 1;
+			@include _(flex, 1);
 		}
 
 		button, .button {
@@ -597,8 +610,27 @@ form {
 }
 
 fieldset {
+	margin: 0;
 	padding: 0;
 	border: 0;
+
+	&.centered {
+		margin-top: 3em;
+		text-align: center;
+	}
+}
+
+.fieldgroup {
+	@include _-(display, flex);
+	@include _-(display, inline-flex);
+	@include _(align-items, flex-end);
+	@include _(flex-wrap, wrap);
+	margin: 0 0 3em 1em;
+
+	> .input-field {
+		margin-right: 1em;
+		@include _(flex, 1);
+	}
 }
 
 .view-object {
@@ -645,9 +677,9 @@ fieldset {
 	}
 
 	&.next-prev {
-		display: flex;
-		flex-wrap: wrap;
-		flex-direction: row-reverse;
+		@include _-(display, flex);
+		@include _(flex-wrap, wrap);
+		@include _(flex-direction, row-reverse);
 		margin: 0;
 
 		button, .button {
@@ -893,6 +925,7 @@ ul.warnings li,
 
 	a {
 		color: inherit;
+		position: static;
 
 		@include before {
 			content: '';
@@ -1152,15 +1185,15 @@ $header-tilt: 8deg;
 	padding: 1em;
 	
 	footer {
-		display: flex;
-		flex-flow: row wrap;
+		@include _-(display, flex);
+		@include _(flex-flow, row wrap);
 		font-size: 4.1vw;
 	}
 
 	.github,
 	ul.locales {
-		flex: 1;
-		flex-basis: 50%;
+		@include _(flex, 1);
+		@include _(flex-basis, 50%);
 	}
 	
 	.copy {
@@ -1174,7 +1207,7 @@ $header-tilt: 8deg;
 	}
 
 	.facebook {
-		flex: none;
+		@include _(flex, none);
 		margin: 0.5em;
 
 		a {
@@ -1255,16 +1288,17 @@ input[type="submit"]:focus {
 }
 
 .check-box-field input:focus + label,
-.radio-button-field input:focus + label {
-	@include before {
-		background-color: $colour-2;
-		@include _(animation, colour-out ease-in-out 500ms infinite alternate both);
-	}
+.radio-button-field input:focus + label,
+.select-field select:focus {
+	outline: 0.25rem solid $colour-2;
+	outline-offset: 0.2rem;
+	z-index: 1;
 }
 
 body {
 	input:focus,
 	textarea:focus,
+	select:focus,
 	.textarea {
 		@include _(animation, none);
 	}
@@ -2177,12 +2211,28 @@ html[data-lingua-franca-example="html"] {
 
 	select {
 		display: block;
-		width: 100%;
-		height: 2.1em;
+		height: 1.75em;
 		font-family: inherit;
 		font-size: 1.5em;
-		padding: 0.25em;
+		padding: 0 0.5em;
+		border: 0.1em solid #333;
+		cursor: pointer;
 		@include default-box-shadow(top, 1.5, false);
+	}
+}
+
+.toggleable {
+	@include _(transition, 'transform 250ms ease-in-out, max-height 250ms ease-in-out, visibility 0s linear 250ms');
+	@include _(transform, scaleY(0));
+	@include _(transform-origin, 0 0);
+	max-height: 0;
+	visibility: hidden;
+
+	&.open {
+	@include _(transition, 'transform 250ms ease-in-out, max-height 250ms ease-in-out');
+		max-height: 100em;
+		visibility: visible;
+		@include _(transform, scaleX(1));
 	}
 }
 
@@ -2201,11 +2251,11 @@ html[data-lingua-franca-example="html"] {
 
 	form {
 		&.flex-form {
-			display: flex;
-			align-items: flex-start;
+			@include _-(display, flex);
+			@include _(align-items, flex-start);
 
 			.input-field {
-				flex: 1;
+				@include _(flex, 1);
 			}
 
 			button, .button {
@@ -2217,6 +2267,7 @@ html[data-lingua-franca-example="html"] {
 
 	.number-field,
 	.email-field,
+	.telephone-field,
 	.text-field {
 		&.big input {
 			font-size: 2em;
@@ -2224,8 +2275,8 @@ html[data-lingua-franca-example="html"] {
 	}
 
 	.flex-column {
-		display: flex;
-		align-items: flex-start;
+		@include _-(display, flex);
+		@include _(align-items, flex-start);
 		margin-top: 1em;
 
 		p:first-child {
@@ -2233,7 +2284,7 @@ html[data-lingua-franca-example="html"] {
 		}
 
 		.stretch-item {
-			flex: 1;
+			@include _(flex, 1);
 			margin-right: 1em;
 		}
 	}
@@ -2537,8 +2588,8 @@ html[data-lingua-franca-example="html"] {
 		}
 
 		.github {
-			flex: none;
-			flex-basis: auto;
+			@include _(flex, none);
+			@include _(flex-basis, auto);
 			bottom: 0.5em;
 			float: left;
 			margin-right: 1em;
@@ -2548,18 +2599,18 @@ html[data-lingua-franca-example="html"] {
 			margin: 0;
 		}
 		ul.locales {
-			flex: none;
-			flex-basis: auto;
-			flex-grow: 1;
+			@include _(flex, none);
+			@include _(flex-basis, auto);
+			@include _(flex-grow, 1);
 		}
 	}
 
 	.check-box-field,
 	.radio-button-field {
-		display: flex;
+		@include _-(display, flex);
 
 		label {
-			flex: 1;
+			@include _(flex, 1);
 			border: 0.1em solid;
 			border-left: 0;
 			text-align: left;

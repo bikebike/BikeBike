@@ -578,6 +578,20 @@ class ConferencesController < ApplicationController
 					end
 
 					current_user.save! unless @errors.present?
+				when :hosting
+					@registration.can_provide_housing = params[:can_provide_housing].present?
+					@registration.housing_data = {
+						address: params[:address],
+						phone: params[:phone],
+						space: {
+							bed_space: params[:bed_space],
+							floor_space: params[:floor_space],
+							tent_space: params[:tent_space],
+						},
+						considerations: params[:considerations].keys,
+						availability: [ params[:first_day], params[:last_day] ],
+						notes: params[:notes]
+					}
 				end
 
 				if @errors.present?
@@ -743,11 +757,13 @@ class ConferencesController < ApplicationController
 					:bike => nil,
 					:other => ''
 				);
-			@languages = [I18n.locale.to_sym]
+			@languages = current_user.languages
 
-			if @registration.languages
-				@languages = JSON.parse(@registration.languages).map &:to_sym
+			if @languages.blank? && @registration.languages.present?
+				@languages = (@registration.languages.is_a?(String) ? JSON.parse(@registration.languages) : @registration.languages).map &:to_sym
 			end
+
+			@languages ||= [I18n.locale.to_sym]
 		when :workshops
 			@page_title = 'articles.conference_registration.headings.Workshops'
 			@workshops = Workshop.where(conference_id: @this_conference.id)
@@ -758,6 +774,12 @@ class ConferencesController < ApplicationController
 			@workshops_in_need = Workshop.where(conference_id: @this_conference.id, needs_facilitators: true)
 		when :contact_info
 			@page_title = 'articles.conference_registration.headings.Contact_Info'
+		when :hosting
+			@page_title = 'articles.conference_registration.headings.Hosting'
+			@hosting_data = @registration.housing_data || {}
+			@hosting_data['space'] ||= Hash.new
+			@hosting_data['availability'] ||= Array.new
+			@hosting_data['considerations'] ||= Array.new
 		when :policy
 			@page_title = 'articles.conference_registration.headings.Policy_Agreement'
 		when :done
@@ -1447,10 +1469,14 @@ class ConferencesController < ApplicationController
 
 	def registration_steps(conference = nil)
 		conference ||= @this_conference || @conference
-		{
-			pre: [:policy, :contact_info, :workshops],
-			open: [:policy, :contact_info, :questions, :payment, :workshops]
-		}[conference.registration_status]
+		status = conference.registration_status
+		return [] unless status == :pre || status == :open
+
+		steps = [:policy, :contact_info, :questions, :hosting, :payment, :workshops]
+		steps -= [:questions, :payment] unless status == :open
+		steps -= [:hosting] unless @registration.present? && view_context.same_city?(@registration.city, @conference.location)
+
+		return steps
 	end
 
 	def required_steps(conference = nil)
@@ -1508,11 +1534,23 @@ class ConferencesController < ApplicationController
 
 		def set_or_create_conference_registration
 			set_conference_registration
+			return @registration if @registration.present?
+
 			@registration ||= ConferenceRegistration.new(
 					conference:      @this_conference,
 					user_id:         current_user.id,
 					steps_completed: []
 				)
+			last_registration_data = ConferenceRegistration.where(user_id: current_user.id).order(created_at: :desc).limit(1).first
+
+			if last_registration_data.present?
+				if last_registration_data['languages'].present? && current_user.languages.blank?
+					current_user.languages = JSON.parse(last_registration_data['languages'])
+					current_user.save!
+				end
+				
+				@registration.city = last_registration_data.city if last_registration_data.city.present?
+			end
 		end
 
 		# Only allow a trusted parameter "white list" through.

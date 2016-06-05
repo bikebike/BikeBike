@@ -611,6 +611,13 @@ module ApplicationHelper
 		return hash.length > 1 ? _("geography.formats.#{hash.keys.join('_')}", vars: hash) : hash.values.first
 	end
 
+	def same_city?(location1, location2)
+		location1 = location(location1) unless location1.is_a?(String)
+		location2 = location(location2) unless location2.is_a?(String)
+
+		location1.eql? location2
+	end
+
 	def show_errors(field)
 		return '' unless @errors && @errors[field].present?
 
@@ -665,6 +672,38 @@ module ApplicationHelper
 		_!((p * 10000).to_i.to_s.gsub(/^(.*)(\d\d)$/, '\1.\2%'))
 	end
 
+	def conference_housing_options(conference = nil)
+		conference ||= @this_conference || @conference
+		return [] unless conference
+
+		dates = []
+		day = conference.start_date - 7.days
+		last_day = conference.end_date + 7.days
+
+		while day <= last_day
+			dates << day
+			day += 1.day
+		end
+
+		return dates
+	end
+
+	def conference_housing_options_list(period, conference = nil)
+		conference ||= @this_conference || @conference
+		return [] unless conference
+
+		days = []
+
+		conference_housing_options(conference).each do |day|
+			belongs_to_periods = []
+			belongs_to_periods << :before if day <= conference.start_date
+			belongs_to_periods << :after if day >= conference.end_date
+			belongs_to_periods << :during if day >= conference.start_date && day <= conference.end_date
+			days << [date(day.to_date, :span_same_year_date_1), day] if belongs_to_periods.include?(period)
+		end
+		return days
+	end
+
 	def richtext(text, reduce_headings = 2)
 		return '' unless text.present?
 		return _!(text).
@@ -704,26 +743,75 @@ module ApplicationHelper
 		return html.html_safe
 	end
 
+	def fieldset(name, options = {}, &block)
+		html = ''
+		label_id = nil
+		description_id = nil
+
+		if options[:heading].present?
+			label_id ||= "#{name.to_s}-label"
+			html += content_tag(:h3, _(options[:heading], :t), id: label_id)
+		end
+
+		if options[:help].present?
+			description_id ||= "#{name.to_s}-desc"
+			html += content_tag(:div, _(options[:help], :s, 2), class: 'input-field-help', id: description_id)
+		end
+
+		(html + content_tag(:fieldset, content_tag(:div, class: :fieldgroup, &block).html_safe,
+				aria: {
+					labeledby: label_id,
+					describedby: description_id
+				}
+			)
+		).html_safe
+	end
+
+	def selectfield(name, value, select_options, options = {})
+		textfield(name, value, options.merge({type: :select, options: select_options}))
+	end
+
+	def telephonefield(name, value, options = {})
+		textfield(name, value, options.merge({type: :telephone}))
+	end
+
+	def numberfield(name, value, options = {})
+		textfield(name, value, options.merge({type: :number}))
+	end
+
 	def textfield(name, value, options = {})
 		html = ''
 		description_id = nil
 		
 		if options[:heading].present?
 			description_id ||= "#{name.to_s}-desc"
-			html += content_tag(:h3, _(options[:heading]), id: description_id)
+			html += content_tag(:h3, _(options[:heading], :t), id: description_id)
+		end
+
+		if options[:help].present?
+			description_id ||= "#{name.to_s}-desc"
+			html += content_tag(:div, _(options[:help], :s, 2), class: 'input-field-help', id: description_id)
 		end
 
 		html += show_errors name
 		html += label_tag name
-		html += text_field_tag(name, value,
+		input_options = {
 				required: options[:required],
 				lang: options[:lang],
+				min: options[:min],
+				max: options[:max],
 				aria: { describedby: description_id }
-			)
+			}
+		case options[:type]
+		when :select
+			html += select_tag(name, options_for_select(options[:options], value), input_options)
+		else
+			html += send("#{(options[:type] || :text).to_s}_field_tag", name, value, input_options)
+		end
 
 		html = content_tag(:div, html.html_safe,
 				class: [
-					'text-field',
+					"#{(options[:type] || :text).to_s}-field",
 					'input-field',
 					options[:big] ? 'big' : nil,
 					(@errors || {})[name].present? ? 'has-error' : nil
@@ -738,6 +826,10 @@ module ApplicationHelper
 		checkboxes(name, boxes, [value], label_key, options.merge({radiobuttons: true}))
 	end
 
+	def checkbox(name, value, label_key, options = {})
+		checkboxes(name, [true], value, label_key, options)
+	end
+
 	def checkboxes(name, boxes, values, label_key, options = {})
 		html = ''
 
@@ -746,7 +838,7 @@ module ApplicationHelper
 
 		if options[:heading].present?
 			label_id ||= "#{name.to_s}-label"
-			html += content_tag(:h3, _(options[:heading]), id: label_id)
+			html += content_tag(:h3, _(options[:heading], :t), id: label_id)
 		end
 
 		if options[:help].present?
@@ -756,23 +848,24 @@ module ApplicationHelper
 
 		boxes_html = ''
 
-		values = values.present? ? values.map(&:to_s) : []
+		is_single = !values.is_a?(Array)
+		values = values.present? ? values.map(&:to_s) : [] unless is_single
 		boxes = boxes.map(&:to_s)
 		boxes.each do | box |
-			checked = values.include?(box)
-			values -= [box] if checked
+			checked = (is_single ? values.present? : values.include?(box))
+			values -= [box] if checked && !is_single
 			id = nil
 			if options[:radiobuttons].present?
 				id = "#{name.to_s}_#{box}"
 				boxes_html += radio_button_tag(name, box, checked)
 			else
-				id = "#{name.to_s}[#{box}]"
-				boxes_html += check_box_tag(id, 1, checked)
+				id = (is_single ? name : "#{name.to_s}[#{box}]")
+				boxes_html += check_box_tag(id, 1, checked, data: { toggles: options[:toggles] }.compact)
 			end
-			boxes_html += label_tag(id, _("#{label_key.to_s}.#{box}"))
+			boxes_html += label_tag(id, _(is_single ? label_key.to_s : "#{label_key.to_s}.#{box}"))
 		end
 
-		if options[:other].present?
+		if options[:other].present? && !is_single
 			id = nil
 			if options[:radiobuttons].present?
 				id = "#{name.to_s}_other"
@@ -787,16 +880,19 @@ module ApplicationHelper
 					class: 'other')
 		end
 
-		html += content_tag(:fieldset, boxes_html.html_safe,
+		html += content_tag(:fieldset, content_tag(:div, boxes_html.html_safe,
+				class: [
+					'check-box-field',
+					'input-field',
+					options[:vertical] ? 'vertical' : nil,
+					options[:inline] ? 'inline' : nil
+				]).html_safe,
 				aria: {
 					labeledby: label_id,
 					describedby: description_id
 				},
-				class: [
-					'check-box-field',
-					'input-field',
-					options[:vertical] ? 'vertical' : nil
-			])
+				class: options[:centered] ? 'centered' : nil
+			)
 
 		return html.html_safe
 	end

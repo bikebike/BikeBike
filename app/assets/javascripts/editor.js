@@ -76,4 +76,25 @@
 			_input.addEventListener('change', function(event) { setRequired(); });
 		});
 	});
+
+	Array.prototype.forEach.call(document.querySelectorAll('[data-toggles]'), function(checkbox) {
+		var toggles = document.getElementById(checkbox.dataset.toggles);
+		toggles.classList.add('toggleable');
+		var form = checkbox.parentNode;
+		while (form && form.nodeName != 'FORM') {
+			form = form.parentNode;
+		}
+		var toggle = function() {
+			toggles.classList[checkbox.checked ? 'add' : 'remove']('open');
+			if (form) {
+				if (checkbox.checked) {
+					form.removeAttribute('novalidate');
+				} else {
+					form.setAttribute('novalidate', 'novalidate');
+				}
+			}
+		};
+		toggle();
+		checkbox.addEventListener('change', function(event) { toggle(); });
+	});
 })();

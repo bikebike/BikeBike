@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160530175805) do
+ActiveRecord::Schema.define(version: 20160604221432) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,6 +83,8 @@ ActiveRecord::Schema.define(version: 20160530175805) do
     t.string   "food"
     t.string   "highest_step"
     t.json     "steps_completed"
+    t.boolean  "can_provide_housing"
+    t.json     "housing_data"
   end
 
   create_table "conference_types", force: :cascade do |t|
@@ -321,6 +323,7 @@ ActiveRecord::Schema.define(version: 20160530175805) do
     t.string   "lastname"
     t.boolean  "is_translator"
     t.json     "languages"
+    t.string   "locale"
   end
 
   add_index "users", ["activation_token"], name: "index_users_on_activation_token", using: :btree
