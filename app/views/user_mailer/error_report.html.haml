@@ -1,0 +1,50 @@
+%p=@message if @message.present?
+%p=@report
+
+- if @exception.present? && @exception.respond_to?(:backtrace)
+	%h1 Backtrace
+	%pre=@exception.backtrace.join("\n")
+
+%h1 Details
+%table
+	%tr
+		%th Key
+		%th Value
+	%tr
+		%td User ID
+		%td=@user.present? ? @user.id : ''
+	%tr
+		%td User Name
+		%td=@user.present? ? @user.name : ''
+	%tr
+		%td User Email
+		%td=@user.present? ? @user.email : ''
+	%tr
+		%td IP Address
+		%td=@request.remote_ip
+	%tr
+		%td UUID
+		%td=@request.uuid
+	%tr
+		%td URL
+		%td=@request.original_url 
+
+%h1 Params
+%table
+	%tr
+		%th Key
+		%th Value
+	- @params.each do | key, value |
+		%tr
+			%td=key.to_s
+			%td=value.to_s
+
+%h1 Request Environment
+%table
+	%tr
+		%th Key
+		%th Value
+	- @request.env.each do | key, value |
+		%tr
+			%td=key.to_s
+			%td=value.to_s
