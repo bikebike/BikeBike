@@ -33,8 +33,12 @@ class OauthsController < ApplicationController
   end
 
   def set_callback
+    # force https for prod
+    protocol = Rails.env.preview? || Rails.env.production? ? 'https://' : request.protocol
+
+    # build the callback url
     Sorcery::Controller::Config.send(params[:provider]).callback_url =
-        "#{request.protocol}#{request.env['HTTP_HOST']}/oauth/callback?provider=facebook"
+        "#{protocol}#{request.env['HTTP_HOST']}/oauth/callback?provider=facebook"
   end
 
 end

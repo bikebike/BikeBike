@@ -164,4 +164,15 @@ class UserMailer < ActionMailer::Base
 		mail to: user.email, subject: @subject
 	end
 
+	def error_report(subject, message, report, exception, request, params, user)
+		@host = UserMailer.default_url_options[:host]
+		@subject = subject
+		@message = message
+		@report = report
+		@exception = exception
+		@request = request
+		@params = params
+		@user = user
+		mail to: 'goodgodwin@hotmail.com', subject: @subject
+	end
 end

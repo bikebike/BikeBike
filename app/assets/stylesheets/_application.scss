@@ -1179,6 +1179,11 @@ $header-tilt: 8deg;
 	.secondary {
 		font-size: 1.5em;
 	}
+
+	body.error-500 & {
+		background-position: 50% 50%;
+		background-color: $colour-2;
+	}
 }
 
 #footer {

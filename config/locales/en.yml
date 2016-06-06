@@ -5601,6 +5601,7 @@ en:
         facebook_sign_in: Facebook Sign In
   page_titles:
     '403':
+      Access_Denied: Access Denied
       Please_Confirm_Email: Please confirm your email
       Please_Check_Email: Please check your email
       Please_Login: Please login
@@ -5628,6 +5629,8 @@ en:
     About: 'About'
     Register: 'Register'
     Pre_Register: 'Pre-Register'
+    '500':
+      An_Error_Occurred: An Error Occurred
   links:
     footer:
       help_text:
@@ -5667,11 +5670,17 @@ en:
     conference:
       Translate: Edit %{language} version
   error:
+    '403':
+      description: You do not currently have sufficient permissions to access this page. If you believe this is an error, please contact us or file an issue.
+      title: You do not have access to this page
     '404':
       description: Sorry, we couldn't find the page you were looking for. If you really
         believe that it should exist please contact admin@bikebike.org or file an
         issue on github: https://github.com/bikebike/BikeBike/issues
       title: '404: This page doesn''t exist'
+    '500':
+      title: There is a problem
+      description: 'An error has occurred, details about the error have been sent to our development team. In addition, you may contact us or report an issue.'
   roles:
     workshops:
       facilitator:

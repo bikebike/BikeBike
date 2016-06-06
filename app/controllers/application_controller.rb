@@ -92,10 +92,20 @@ class ApplicationController < LinguaFrancaApplicationController
 
 	def do_403(template = nil)
 		@template = template
+		@page_title ||= 'page_titles.403.Access_Denied'
 		@main_title ||= @page_title
 		params[:_original_action] = params[:action]
 		params[:action] = 'error-403'
 		render 'application/permission_denied', status: 403
+	end
+
+	def error_500(exception)
+
+		@page_title = 'page_titles.500.An_Error_Occurred'
+		@main_title = 'error.500.title'
+		params[:_original_action] = params[:action]
+		params[:action] = 'error-500'
+		render 'application/500', status: 500
 	end
 
 	rescue_from ActiveRecord::RecordNotFound do |exception|
@@ -119,6 +129,22 @@ class ApplicationController < LinguaFrancaApplicationController
 		end
 	end
 
+	rescue_from StandardError do |exception|
+		# send and email if this is production
+		UserMailer.error_report(
+				"An error has occurred in #{Rails.env}",
+				nil,
+				exception.to_s,
+				exception,
+				request,
+				params,
+				current_user,
+			).deliver_now if Rails.env.preview? || Rails.env.production?
+		
+		# show the error page
+		error_500 exception
+	end
+
 	def generate_confirmation(user, url, expiry = nil)
 		if user.is_a? String
 			user = User.find_by_email(user)
@@ -128,8 +154,6 @@ class ApplicationController < LinguaFrancaApplicationController
 		end
 		expiry ||= (Time.now + 12.hours)
 		session[:confirm_uid] = user.id
-		#confirmation = EmailConfirmation.create(user_id: user.id, expiry: expiry, url: url)
-		#UserMailer.email_confirmation(confirmation).deliver_now
 		UserMailer.send_mail :email_confirmation do
 			{
 				:args => EmailConfirmation.create(user_id: user.id, expiry: expiry, url: url)
@@ -246,5 +270,18 @@ class ApplicationController < LinguaFrancaApplicationController
 				end
 			end
 		end
+	end
+
+	def i18n_exception(str, exception, locale, key)
+		# send and email if this is production
+		UserMailer.error_report(
+				"A missing translation found in #{Rails.env}",
+				"A translation for #{key} in #{locale.to_s} was found. The text that was rendered to the user was \"#{str || 'nil'}\".",
+				exception.to_s,
+				exception,
+				request,
+				params,
+				current_user,
+			).deliver_now if Rails.env.preview? || Rails.env.production?
 	end
 end
