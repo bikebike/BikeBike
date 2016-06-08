@@ -5665,6 +5665,7 @@ en:
       Deny: Deny
       Facilitate: Make a facilitation request
       Remove: Remove
+      Make_Owner: Transfer Ownership
       View: View this workshop
       View_All: View all workshops
     conference:

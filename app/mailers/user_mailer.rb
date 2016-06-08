@@ -4,6 +4,8 @@ class UserMailer < ActionMailer::Base
 	add_template_helper(ApplicationHelper)
 	include LinguaFrancaHelper
 
+	before_filter :set_host
+
 	default from: "Bike!Bike! <noreply@bikebike.org>"
 
 	# Subject can be set in your I18n file at config/locales/en.yml
@@ -46,13 +48,11 @@ class UserMailer < ActionMailer::Base
 
 	def email_confirmation(confirmation)
 		@confirmation = confirmation
-		@host = UserMailer.default_url_options[:host]
 		@subject = _'email.subject.confirm_email','Please confirm your email address'
 		mail to: confirmation.user.email, subject: @subject
 	end
 
 	def registration_confirmation(registration)
-		@host = UserMailer.default_url_options[:host]
 		@registration = registration
 		@conference = Conference.find(@registration.conference_id)
 		@user = User.find(@registration.user_id)
@@ -81,7 +81,6 @@ class UserMailer < ActionMailer::Base
 	end
 
 	def workshop_facilitator_request(workshop, requester, message)
-		@host = UserMailer.default_url_options[:host]
 		@workshop = workshop
 		@requester = requester
 		addresses = []
@@ -97,7 +96,6 @@ class UserMailer < ActionMailer::Base
 	end
 
 	def workshop_facilitator_request_approved(workshop, user)
-		@host = UserMailer.default_url_options[:host]
 		@workshop = workshop
 		@conference = Conference.find(@workshop.conference_id)
 		@user = user
@@ -108,7 +106,6 @@ class UserMailer < ActionMailer::Base
 	end
 
 	def workshop_facilitator_request_denied(workshop, user)
-		@host = UserMailer.default_url_options[:host]
 		@workshop = workshop
 		@conference = Conference.find(@workshop.conference_id)
 		@user = user
@@ -119,7 +116,6 @@ class UserMailer < ActionMailer::Base
 	end
 
 	def workshop_translated(workshop, data, locale, user, translator)
-		@host = UserMailer.default_url_options[:host]
 		@workshop = workshop
 		@data = data
 		@locale = locale
@@ -143,7 +139,6 @@ class UserMailer < ActionMailer::Base
 	end
 
 	def workshop_original_content_changed(workshop, data, user, translator)
-		@host = UserMailer.default_url_options[:host]
 		@workshop = workshop
 		@data = data
 		@user = user
@@ -165,7 +160,6 @@ class UserMailer < ActionMailer::Base
 	end
 
 	def error_report(subject, message, report, exception, request, params, user)
-		@host = UserMailer.default_url_options[:host]
 		@subject = subject
 		@message = message
 		@report = report
@@ -174,5 +168,16 @@ class UserMailer < ActionMailer::Base
 		@params = params
 		@user = user
 		mail to: 'goodgodwin@hotmail.com', subject: @subject
+	end
+
+	private
+	def set_host
+		if Rails.env.production?
+			@host = "https://#{I18n.location.to_s}.bikebike.org"
+		elsif Rails.env.preview?
+			@host = "https://preview-#{I18n.location.to_s}.bikebike.org"
+		else
+			@host = UserMailer.default_url_options[:host]
+		end
 	end
 end

@@ -1,3 +1,3 @@
 %p
-	- workshop_link = link_to (_!@workshop.title), @host + view_workshop_url(@conference.slug, @workshop.id).html_safe
+	- workshop_link = link_to (_!@workshop.title), @host + view_workshop_path(@conference.slug, @workshop.id).html_safe
 	=_'email.workshop.paragraph.request_denied',"Your request to become a facilitator of #{workshop_link} has been denied. If you think this was in error, you may contact the current facilitators by making another request to facilitate.", :vars => {:workshop_title => workshop_link}

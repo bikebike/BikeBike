@@ -43,7 +43,8 @@ a {
 		left: 0;
 		opacity: 0;
 		@include _(transition, all 150ms ease-in-out);
-		@include _(transform, translateY(-1em));
+		@include _(transform-origin, 25% 50%);
+		@include _(transform, scaleX(0));
 	}
 
 	&:hover,
@@ -52,7 +53,7 @@ a {
 		@include after {
 			border-bottom: 0.1em solid;
 			opacity: 1;
-			transform: translateY(0);
+			@include _(transform, scaleX(1));
 		}
 	}
 }
@@ -1184,6 +1185,10 @@ $header-tilt: 8deg;
 		background-position: 50% 50%;
 		background-color: $colour-2;
 	}
+
+	body.error-403 & {
+		background-position: 50% 33%;
+	}
 }
 
 #footer {
@@ -1287,25 +1292,34 @@ $header-tilt: 8deg;
 	}
 }
 
-body :focus,
-input[type="submit"]:focus {
-	@include _(animation, fade-out ease-in-out 500ms infinite alternate both);
+html :focus {
+	outline: 0;
 }
 
-.check-box-field input:focus + label,
-.radio-button-field input:focus + label,
-.select-field select:focus {
-	outline: 0.25rem solid $colour-2;
-	outline-offset: 0.2rem;
-	z-index: 1;
-}
+html[data-input="kb"] {
+	:focus,
+	input[type="submit"]:focus,
+	.check-box-field input:focus + label,
+	.radio-button-field input:focus + label,
+	.select-field select:focus,
+	.workshop-link:focus .title,
+	#main-nav .nav a:focus .title {
+		outline: 0.25rem solid rgba($colour-2, 0.5);
+		outline-offset: 0.2rem;
+		z-index: 1;
+	}
 
-body {
-	input:focus,
+	#main-nav .logo:focus {
+		outline-offset: -0.2em;
+	}
+
+	/*input:focus,
 	textarea:focus,
 	select:focus,
-	.textarea {
-		@include _(animation, none);
+	.textarea {*/
+	.workshop-link:focus,
+	#main-nav .nav a:focus {
+		outline: none;
 	}
 }
 

@@ -602,6 +602,9 @@ module ApplicationHelper
 			city = location.data['city']
 		end
 
+		# we need cities for our logic, don't let this continue if we don't have one
+		return nil unless city.present?
+
 		hash = Hash.new
 		hash[:city] = _!(city) unless city.blank?
 		hash[:region] = _("geography.subregions.#{country}.#{region}") unless region.blank? || country.blank?
@@ -612,6 +615,8 @@ module ApplicationHelper
 	end
 
 	def same_city?(location1, location2)
+		return false unless location1.present? && location2.present?
+
 		location1 = location(location1) unless location1.is_a?(String)
 		location2 = location(location2) unless location2.is_a?(String)
 

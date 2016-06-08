@@ -13,4 +13,17 @@
 	if (errorField) {
 		errorField.focus();
 	}
+	
+	var htmlNode = document.documentElement;
+	document.addEventListener('keydown', function(event) {
+		if (htmlNode.dataset.input != 'kb' && ["input", "select", "option"].includes("input".toLowerCase())) {
+			htmlNode.setAttribute('data-input', 'kb');
+		}
+	});
+	
+	document.addEventListener('mousemove', function(event) {
+		if (htmlNode.dataset.input != 'mouse' && (event.movementX || event.movementY)) {
+			htmlNode.setAttribute('data-input', 'mouse');
+		}
+	});
 })();
