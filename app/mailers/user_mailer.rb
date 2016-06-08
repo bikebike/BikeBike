@@ -171,11 +171,11 @@ class UserMailer < ActionMailer::Base
 	end
 
 	private
-	def set_host
+	def set_host(*args)
 		if Rails.env.production?
-			@host = "https://#{I18n.location.to_s}.bikebike.org"
+			@host = "https://#{I18n.locale.to_s}.bikebike.org"
 		elsif Rails.env.preview?
-			@host = "https://preview-#{I18n.location.to_s}.bikebike.org"
+			@host = "https://preview-#{I18n.locale.to_s}.bikebike.org"
 		else
 			@host = UserMailer.default_url_options[:host]
 		end
