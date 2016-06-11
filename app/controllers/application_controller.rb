@@ -8,7 +8,7 @@ class ApplicationController < LinguaFrancaApplicationController
 
 	# Prevent CSRF attacks by raising an exception.
 	# For APIs, you may want to use :null_session instead.
-	protect_from_forgery with: :exception, :except => [:do_confirm]
+	protect_from_forgery with: :exception, :except => [:do_confirm, :js_error]
 
 	before_filter :capture_page_info
 
@@ -100,12 +100,31 @@ class ApplicationController < LinguaFrancaApplicationController
 	end
 
 	def error_500(exception)
-
 		@page_title = 'page_titles.500.An_Error_Occurred'
 		@main_title = 'error.500.title'
 		params[:_original_action] = params[:action]
 		params[:action] = 'error-500'
 		render 'application/500', status: 500
+	end
+
+	def js_error
+		# send and email if this is production
+		report = "A JavaScript error has occurred on <code>#{params[:location]}</code>"
+		if params[:location] == params[:url]
+			report += " on line <code>#{params[:lineNumber]}</code>"
+		else
+			report += " in <code>#{params[:url]}:#{params[:lineNumber]}</code>"
+		end
+		UserMailer.error_report(
+				"A JavaScript error has occurred",
+				report,
+				params[:message],
+				nil,
+				request,
+				params,
+				current_user,
+			).deliver_now if Rails.env.preview? || Rails.env.production?
+		render json: {}
 	end
 
 	rescue_from ActiveRecord::RecordNotFound do |exception|
@@ -143,6 +162,7 @@ class ApplicationController < LinguaFrancaApplicationController
 		
 		# show the error page
 		error_500 exception
+		raise exception
 	end
 
 	def generate_confirmation(user, url, expiry = nil)
@@ -276,7 +296,7 @@ class ApplicationController < LinguaFrancaApplicationController
 		# send and email if this is production
 		UserMailer.error_report(
 				"A missing translation found in #{Rails.env}",
-				"A translation for #{key} in #{locale.to_s} was found. The text that was rendered to the user was \"#{str || 'nil'}\".",
+				"<p>A translation for <code>#{key}</code> in <code>#{locale.to_s}</code> was found. The text that was rendered to the user was:</p><blockquote>#{str || 'nil'}</blockquote>",
 				exception.to_s,
 				exception,
 				request,

@@ -1002,7 +1002,7 @@ class ConferencesController < ApplicationController
 
 				return redirect_to workshops_url
 			end
-			return redirect_to edit_workshop_url(@this_conference.slug, @workshop.id)
+			return redirect_to view_workshop_url(@this_conference.slug, @workshop.id)
 		end
 
 		render 'workshops/delete'

@@ -161,15 +161,12 @@ module ApplicationHelper
 		classes << 'fixed-banner' if is_header_fixed?
 
 		if params[:controller]
-			if params[:controller] == 'application'
-				if params[:action]
-					classes << params[:action]
-				end
-			else
+			classes << params[:action]
+			unless params[:controller] == 'application'
 				classes << params[:controller] 
 
 				if params[:action]
-					classes << params[:controller] + '-' + params[:action]
+					classes << "#{params[:controller]}-#{params[:action]}"
 				end
 			end
 		end

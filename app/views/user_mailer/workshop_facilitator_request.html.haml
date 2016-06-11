@@ -1,6 +1,6 @@
-%p=_'email.workshop.paragraph.request_message',"Below is a message from #{@requester.firstname}:", :vars => {:workshop_title => @workshop.title, :user_name => @requester.firstname}
+%p=_'email.workshop.paragraph.request_message',"Below is a message from #{@requester.firstname}:", :vars => {:workshop_title => @workshop.title, :user_name => @requester.name}
 
-%blockquote=markdown @message
+%blockquote=CGI::escapeHTML(@message || '').gsub(/\n/, '<br>').html_safe
 
 %p
 	=_'email.workshop.paragraph.request_instructions',"You can approve or deny this request on your workshop page: "

@@ -36,6 +36,7 @@ gem 'sitemap_generator'
 gem 'activerecord-session_store'
 gem 'paypal-express', '0.7.1'
 gem 'sass-json-vars'
+gem 'premailer-rails'
 gem 'delayed_job_active_record'
 gem 'redcarpet'
 

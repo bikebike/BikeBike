@@ -4,7 +4,7 @@
 		%meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
 		%meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
 		%title=@subject
-		%style{type: 'text/css'}=Rails.application.assets.find_asset("user-mailer.css").to_s
+		= stylesheet_link_tag 'user-mailer'
 	%body
 		%table{:border => "0", :cellpadding => "0", :cellspacing => "0", id: @wrapper_id.present? ? "bb_#{@wrapper_id.to_s}" : 'backgroundTable'}
 			%tr
@@ -20,7 +20,7 @@
 							%td{colspan: 2, style: 'height: 16px'}='&nbsp;'.html_safe
 						%tr
 							%td{style: 'width: 50%; text-align: left'}
-								%img.image_fix{:src => (@host + image_url('bblogo-paypal'))}
+								%img.image_fix{:src => ((Rails.env.development? || Rails.env.test? ? 'https://preview-en.bikebike.org/' : @host) + image_url('bblogo-paypal'))}
 							%td{style: 'width: 50%; text-align: left'}
 								%a{href: @host}="&copy; Bike!Bike! #{Date.today.year}".html_safe
 						%tr

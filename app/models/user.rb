@@ -35,4 +35,10 @@ class User < ActiveRecord::Base
 		firstname || username || email
 	end
 
+	def named_email
+		name = firstname || username
+		return email unless name
+		return "#{name} <#{email}>"
+	end
+
 end

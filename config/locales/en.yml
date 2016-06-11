@@ -5259,6 +5259,15 @@ en:
   conference:
     actions:
       Register: Register
+  modals:
+    confirm: Please Confirm
+    yes_button: 'Yes' 
+    no_button: 'No'
+    workshops:
+      facilitators:
+        confirm_remove: Are you sure you would like to remove %{user_name} as a facilitator of this workshop?
+        confirm_remove_self: Are you sure you would like to remove yourself as a facilitator of this workshop?
+        confirm_transfer_ownership: By transferring ownership, you will lose administrative capabilities such as deletion and approving new facilitators. Are you sure you want to transfer ownership to %{user_name}?
   articles:
     policy:
       headings:
@@ -5512,6 +5521,7 @@ en:
         theme: Which of the themes below best match your workshop? This will help
           hosts to avoid scheduling conflicts. Select other if none of the options
           match in any way.
+        Delete_Workshop: Deleting a workshop cannot be undone, are you sure that you want to proceed?
         new_workshop: 'Workshops in the past have tended to fit into a few broad categories:
           structural/organizational (how to start a shop, how to register a non-profit,
           consensus decision making, etc,) mechanical (how to weld two tandems to
@@ -5744,6 +5754,7 @@ en:
       paragraph:
         workshop_translated: '%{user_name} has modified the %{language} translation for %{workshop_title}.'
         workshop_original_content_changed: '%{user_name} has modified the original content for %{workshop_title}. Translations may need to be updated.'
+    workshop:
       paragraph:
         request_approved: You have been added as a facilitator of %{workshop_title}.
         request_denied: Your request to become a facilitator of %{workshop_title}

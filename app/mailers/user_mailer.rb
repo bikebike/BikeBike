@@ -49,7 +49,7 @@ class UserMailer < ActionMailer::Base
 	def email_confirmation(confirmation)
 		@confirmation = confirmation
 		@subject = _'email.subject.confirm_email','Please confirm your email address'
-		mail to: confirmation.user.email, subject: @subject
+		mail to: confirmation.user.named_email, subject: @subject
 	end
 
 	def registration_confirmation(registration)
@@ -66,7 +66,7 @@ class UserMailer < ActionMailer::Base
 				"Thank you for registering for #{@conference.title}",
 				:vars => {:conference_title => @conference.title}
 			)
-		mail to: @user.email, subject: @subject
+		mail to: @user.named_email, subject: @subject
 	end
 
 	def broadcast(host, subject, content, user, conference)
@@ -74,8 +74,8 @@ class UserMailer < ActionMailer::Base
 		@content = content
 		@banner = nil#(@host || 'http://localhost/') + (conference ? (conference.poster.preview.url || '') : image_url('logo.png'))
 		@subject = "[#{conference ? conference.title : 'Bike!Bike!'}] #{subject}"
-		if user && user.email
-			email = user.email
+		if user && user.named_email
+			email = user.named_email
 			mail to: email, subject: @subject
 		end
 	end
@@ -85,14 +85,15 @@ class UserMailer < ActionMailer::Base
 		@requester = requester
 		addresses = []
 		@workshop.active_facilitators.each do |f|
-			addresses << f.email
+			addresses << f.named_email
 		end
+		addresses << 'michael.allen.godwin@gmail.com'
 		@message = message
 		@conference = Conference.find(@workshop.conference_id)
 		@subject = _('email.subject.workshop_facilitator_request',
 			 		"Request to facilitate #{@workshop.title} from #{@requester.name}",
 			 		:vars => {:workshop_title => @workshop.title, :requester_name => @requester.firstname})
-		mail to: addresses, from: @requester.email, subject: @subject
+		mail to: addresses, reply_to: addresses + [@requester.named_email], subject: @subject
 	end
 
 	def workshop_facilitator_request_approved(workshop, user)
@@ -102,7 +103,7 @@ class UserMailer < ActionMailer::Base
 		@subject = (_'email.subject.workshop_request_approved',
 					"You have been added as a facilitator of #{@workshop.title}",
 					:vars => {:workshop_title => @workshop.title})
-		mail to: user.email, subject: @subject
+		mail to: user.named_email, subject: @subject
 	end
 
 	def workshop_facilitator_request_denied(workshop, user)
@@ -112,7 +113,7 @@ class UserMailer < ActionMailer::Base
 		@subject = (_'email.subject.workshop_request_denied',
 					"Your request to facilitate #{@workshop.title} has been denied",
 					:vars => {:workshop_title => @workshop.title})
-		mail to: user.email, subject: @subject
+		mail to: user.named_email, subject: @subject
 	end
 
 	def workshop_translated(workshop, data, locale, user, translator)
@@ -135,7 +136,7 @@ class UserMailer < ActionMailer::Base
 
 		@wrapper_id = :full_width
 
-		mail to: user.email, subject: @subject
+		mail to: user.named_email, subject: @subject
 	end
 
 	def workshop_original_content_changed(workshop, data, user, translator)
@@ -156,7 +157,7 @@ class UserMailer < ActionMailer::Base
 
 		@wrapper_id = :full_width
 
-		mail to: user.email, subject: @subject
+		mail to: user.named_email, subject: @subject
 	end
 
 	def error_report(subject, message, report, exception, request, params, user)

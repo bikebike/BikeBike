@@ -1,12 +1,12 @@
-%p=@message if @message.present?
-%p=@report
+%p=@message.html_safe if @message.present?
+%pre=@report
 
 - if @exception.present? && @exception.respond_to?(:backtrace)
 	%h1 Backtrace
 	%pre=@exception.backtrace.join("\n")
 
 %h1 Details
-%table
+%table.error-report
 	%tr
 		%th Key
 		%th Value
@@ -30,7 +30,7 @@
 		%td=@request.original_url 
 
 %h1 Params
-%table
+%table.error-report
 	%tr
 		%th Key
 		%th Value
@@ -40,7 +40,7 @@
 			%td=value.to_s
 
 %h1 Request Environment
-%table
+%table.error-report
 	%tr
 		%th Key
 		%th Value

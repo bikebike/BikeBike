@@ -4,7 +4,7 @@ body {
 	width: 100% !important;
 	-webkit-text-size-adjust: 100%;
 	-ms-text-size-adjust: 100%;
-	margin: 0;
+	margin: 1em;
 	padding: 0;
 }
 
@@ -69,10 +69,23 @@ a {
 }
 
 p {
-	margin: 1em;
 	color: $black !important;
+}
+
+p, blockquote {
+	margin: 1em;
 	font-size: 1.5em;
 	line-height: 1.3333em;
+}
+
+blockquote {
+	font-style: italic;
+	margin-bottom: 2em;
+	color: #666 !important;
+	border: 0.1em solid #CCC;
+	padding: 1em;
+	border-style: none none solid solid;
+	background-color: #F8F8F8;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -115,6 +128,48 @@ table#ecxbb_full_width {
 		max-width: none;
 		width: 100%;
 	}
+}
+
+.error-report {
+	width: 100%;
+	max-width: 100%;
+	border: 0.15em solid #CCC;
+	background-color: #EEE;
+	font-size: 1.25em;
+	margin-bottom: 2em;
+
+	th {
+		background-color: #CCC;
+	}
+
+	td, th {
+		padding: 0.25em 0.5em;
+		
+		&:last-child {
+			border-left: 0.15em solid #CCC;
+			min-width: 40em;
+		}
+	}
+
+	td:last-child {
+		font-family: monospace;
+		word-break: break-word;
+		background-color: #FFF;
+		font-size: 0.75em;
+	}
+}
+
+code {
+	color: #C33;
+	font-size: 0.9em;
+}
+
+pre {
+	font-size: 1.5em;
+	padding: 1em;
+	background-color: #333;
+	color: antiquewhite;
+	word-break: break-word;
 }
 
 .diff, .ecxdiff {

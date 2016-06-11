@@ -17,26 +17,36 @@
 		= yield :head
 
 	%body{ class: page_style }
-		= render 'shared/navbar'
-		%main#main
-			- if content_for?(:side_bar)
-				%nav#side-bar
-					= yield :side_bar
-			-# - flash.each do |key, msg|
-			-# 	= content_tag :div, msg, :id => key
-			%header#banner=yield :banner
-			- if @submenu
-				=row do
-					= columns(medium: 12) do
-						%nav.sub-menu
-							- @submenu.each do |href,key|
-								%a{href: href, class: request.fullpath.start_with?(href) ? 'current' : nil}=_"menu.submenu.#{key}"
-			- if has_content?
-				#content=yield
-			- else
-				= yield
-		#footer
-			%footer= render 'shared/footer'
+		#primary-content
+			= render 'shared/navbar'
+			%main#main
+				- if content_for?(:side_bar)
+					%nav#side-bar
+						= yield :side_bar
+				-# - flash.each do |key, msg|
+				-# 	= content_tag :div, msg, :id => key
+				%header#banner=yield :banner
+				- if @submenu
+					=row do
+						= columns(medium: 12) do
+							%nav.sub-menu
+								- @submenu.each do |href,key|
+									%a{href: href, class: request.fullpath.start_with?(href) ? 'current' : nil}=_"menu.submenu.#{key}"
+				- if has_content?
+					#content=yield
+				- else
+					= yield
+			#footer
+				%footer= render 'shared/footer'
+		#content-overlay
+			#overlay
+			.dlg#confirmation-dlg
+				.dlg-content
+					%h2.title=_'modals.confirm'
+					.dlg-inner
+						%p.message=''
+						%a.button.confirm=_'modals.yes_button'
+						%button.delete=_'modals.no_button'
 		
 		= yield :footer_scripts if content_for?(:footer_scripts)
 		- add_inline_script :main

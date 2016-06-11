@@ -90,6 +90,7 @@ table {
 button,
 .button {
 	@include button;
+    vertical-align: top;
 
 	#main &[type="submit"] {
 		background-color: $colour-5;
@@ -111,6 +112,7 @@ button,
 		background-color: $colour-5;
 	}
 
+	&.delete,
 	#main &.delete {
 		background-color: $colour-4;
 	}
@@ -1280,6 +1282,97 @@ $header-tilt: 8deg;
 	}
 }
 
+body {
+	#primary-content {
+		@include _(transition, 'filter 250ms ease-in-out, -webkit-filter 250ms ease-in-out');
+	}
+
+	&.has-overlay {
+		overflow: hidden;
+
+		#primary-content {
+			-webkit-filter: blur(5px);
+			@include _(filter, blur(5px));
+		}
+
+		#overlay {
+			position: fixed;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			cursor: pointer;
+			z-index: 1000;
+		}
+	}
+}
+
+#content-overlay {
+	display: none;
+
+	body.has-overlay & {
+		display: block;
+	}
+
+	.dlg {
+		@include before {
+			content: '';
+			position: fixed;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			background-color: rgba($black, 0);
+			@include _(transition, background-color 250ms ease-in-out);
+		}
+		
+		&.open {
+			@include before {
+				background-color: rgba($black, 0.5);
+			}
+
+			.dlg-content {
+				@include _(transform, rotateZ(0deg));
+			}
+		}
+	}
+
+	.dlg-content {
+		position: fixed;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		max-width: 50rem;
+		margin: auto;
+		z-index: 1001;
+		background-color: $white;
+		text-align: center;
+		@include _(transition, transform 500ms ease-in-out);
+		@include _(transform, rotateX(-90deg));
+		@include _(transform-origin, center 250%);
+	}
+
+	.title {
+		padding: 0.5em;
+		background-color: $colour-5;
+		color: $white;
+		@include _(text-stroke, 1px rgba(0, 0, 0, 0.25));
+	}
+
+	.dlg-inner {
+		padding: 0 2em 2em;
+	}
+
+	button, .button {
+		margin: 0 0.25em;
+	}
+
+	.message {
+		font-size: 1.5em;
+		margin-bottom: 2em;
+	}
+}
+
 @include keyframes(fade-out) {
 	to {
 		@include _(opacity, 0.25);
@@ -1294,33 +1387,6 @@ $header-tilt: 8deg;
 
 html :focus {
 	outline: 0;
-}
-
-html[data-input="kb"] {
-	:focus,
-	input[type="submit"]:focus,
-	.check-box-field input:focus + label,
-	.radio-button-field input:focus + label,
-	.select-field select:focus,
-	.workshop-link:focus .title,
-	#main-nav .nav a:focus .title {
-		outline: 0.25rem solid rgba($colour-2, 0.5);
-		outline-offset: 0.2rem;
-		z-index: 1;
-	}
-
-	#main-nav .logo:focus {
-		outline-offset: -0.2em;
-	}
-
-	/*input:focus,
-	textarea:focus,
-	select:focus,
-	.textarea {*/
-	.workshop-link:focus,
-	#main-nav .nav a:focus {
-		outline: none;
-	}
 }
 
 @mixin header-colour($page, $colour) {
@@ -2259,6 +2325,29 @@ html[data-lingua-franca-example="html"] {
 }
 
 @include breakpoint(medium) {
+	html[data-input="kb"] {
+		:focus,
+		input[type="submit"]:focus,
+		.check-box-field input:focus + label,
+		.radio-button-field input:focus + label,
+		.select-field select:focus,
+		.workshop-link:focus .title,
+		#main-nav .nav a:focus .title {
+			outline: 0.25rem solid rgba($colour-2, 0.5);
+			outline-offset: 0.2rem;
+			z-index: 1;
+		}
+
+		#main-nav .logo:focus {
+			outline-offset: -0.2em;
+		}
+
+		.workshop-link:focus,
+		#main-nav .nav a:focus {
+			outline: none;
+		}
+	}
+
 	body {
 		padding-bottom: 0;
 	}

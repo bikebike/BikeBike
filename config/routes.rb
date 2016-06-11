@@ -50,6 +50,7 @@ BikeBike::Application.routes.draw do
     get   '/oauth/:provider' => 'oauths#oauth', :as => :auth_at_provider
     post  '/translator-request' => 'application#translator_request', :as => :translator_request
 
+    post  '/js_error' => 'application#js_error'
     get   '/error_403' => 'application#do_403'
     get   '/error_404' => 'application#error_404'
     get   '/error_500' => 'application#error_500'
