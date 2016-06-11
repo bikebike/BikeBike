@@ -1084,6 +1084,12 @@ class ConferencesController < ApplicationController
 		WorkshopInterest.create(:workshop_id => workshop.id, :user_id => current_user.id) unless interested
 
 		if request.xhr?
+			interest = workshop.interested?(current_user) ? :remove_interest : :show_interest
+			css_class = workshop.interested?(current_user) ? :delete : :add
+			render json: [ {
+					selector: 'button[value="toggle_interest"]',
+					html: view_context.button_tag(interest, :value => :toggle_interest, :class => css_class)
+				} ]
 		else
 			# go back to the workshop
 			redirect_to view_workshop_url(@this_conference.slug, workshop.id)

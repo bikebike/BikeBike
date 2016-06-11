@@ -91,4 +91,28 @@
 			htmlNode.setAttribute('data-input', 'mouse');
 		}
 	});
+	Array.prototype.forEach.call(document.querySelectorAll('form.js-xhr'), function(form) {
+		if (form.addEventListener) {
+			form.addEventListener('submit', function(event) {
+				event.preventDefault();
+				form.classList.add('requesting');
+				var data = new FormData(form);
+				var request = new XMLHttpRequest();
+				request.onreadystatechange = function() {
+					if (request.readyState == 4) {
+						form.classList.remove('requesting');
+						if (request.status == 200) {
+							var response = JSON.parse(request.responseText);
+							for (var i = 0; i < response.length; i++) {
+								form.querySelector(response[i].selector).outerHTML = response[i].html;
+							}
+						}
+					}
+				}
+				request.open('POST', form.getAttribute('action'), true);
+				request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+				request.send(data);
+			}, false);
+		}
+	});
 })();

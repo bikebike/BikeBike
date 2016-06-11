@@ -94,6 +94,7 @@ class Workshop < ActiveRecord::Base
     end
 
     def can_translate?(user, lang)
+        return false unless user.present?
         user.can_translate?(lang, locale) || (can_edit?(user) && lang.to_s != locale.to_s)
     end
 

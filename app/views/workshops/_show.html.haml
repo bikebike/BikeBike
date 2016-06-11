@@ -8,7 +8,7 @@
 			- else
 				=_'articles.workshops.info.interested_count', "#{workshop.interested_count} people are interested in this workshop", :vars => {:count => workshop.interested_count}
 			- if preview.blank? && workshop.can_show_interest?(current_user)
-				= form_tag toggle_workshop_interest_path(workshop.conference.slug, workshop.id) do
+				= form_tag toggle_workshop_interest_path(workshop.conference.slug, workshop.id), class: 'js-xhr' do
 					= button_tag (workshop.interested?(current_user) ? :remove_interest : :show_interest), :value => :toggle_interest, :class => (workshop.interested?(current_user) ? :delete : :add)
 		= richtext workshop.info
 		- if preview.blank? && translations_available_for_editing

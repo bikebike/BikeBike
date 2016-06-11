@@ -591,6 +591,13 @@ input {
 }
 
 form {
+	@include _(transition, 'opacity 250ms ease-in-out, filter 250ms ease-in-out, -webkit-filter 250ms ease-in-out');
+
+	&.requesting {
+		opacity: 0.5;
+		-webkit-filter: blur(5px);
+	}
+	
 	&.composition {
 		textarea {
 			height: 16em;
