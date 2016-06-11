@@ -87,7 +87,6 @@ class UserMailer < ActionMailer::Base
 		@workshop.active_facilitators.each do |f|
 			addresses << f.named_email
 		end
-		addresses << 'michael.allen.godwin@gmail.com'
 		@message = message
 		@conference = Conference.find(@workshop.conference_id)
 		@subject = _('email.subject.workshop_facilitator_request',
