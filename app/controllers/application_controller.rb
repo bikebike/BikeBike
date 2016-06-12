@@ -303,5 +303,6 @@ class ApplicationController < LinguaFrancaApplicationController
 				params,
 				current_user,
 			).deliver_now if Rails.env.preview? || Rails.env.production?
+		logger.info "Missing translation found for: #{key}"
 	end
 end

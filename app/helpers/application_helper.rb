@@ -211,8 +211,8 @@ module ApplicationHelper
 		false
 	end
 
-	def off_screen(text)
-		"<span class=\"screen-reader-text\">#{text}</span>".html_safe
+	def off_screen(text, id = nil)
+		content_tag(:span, text.html_safe, id: id, class: 'screen-reader-text')
 	end
 
 	def url_for_locale(locale)
@@ -620,10 +620,10 @@ module ApplicationHelper
 		location1.eql? location2
 	end
 
-	def show_errors(field)
+	def show_errors(field, value)
 		return '' unless @errors && @errors[field].present?
 
-		error_txt = _"errors.messages.fields.#{field.to_s}.#{@errors[field]}", :s
+		error_txt = _"errors.messages.fields.#{field.to_s}.#{@errors[field]}", :s, vars: { value: value }
 		
 		"<div class=\"field-error\">#{error_txt}</div>".html_safe
 	end
@@ -704,6 +704,13 @@ module ApplicationHelper
 			days << [date(day.to_date, :span_same_year_date_1), day] if belongs_to_periods.include?(period)
 		end
 		return days
+	end
+
+	def interest_button(workshop)
+		interested = workshop.interested?(current_user) ? :remove_interest : :show_interest
+		id = "#{interested.to_s.gsub('_', '-')}-#{workshop.id}"
+		return (off_screen (_"form.actions.aria.#{interested.to_s}"), id) + 
+			(button_tag interested, :value => :toggle_interest, :class => (workshop.interested?(current_user) ? :delete : :add), aria: { labelledby: id })
 	end
 
 	def richtext(text, reduce_headings = 2)
@@ -795,7 +802,7 @@ module ApplicationHelper
 			html += content_tag(:div, _(options[:help], :s, 2), class: 'input-field-help', id: description_id)
 		end
 
-		html += show_errors name
+		html += show_errors name, value
 		html += label_tag name
 		input_options = {
 				required: options[:required],

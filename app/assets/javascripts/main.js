@@ -104,7 +104,7 @@
 						if (request.status == 200) {
 							var response = JSON.parse(request.responseText);
 							for (var i = 0; i < response.length; i++) {
-								form.querySelector(response[i].selector).outerHTML = response[i].html;
+								form.querySelector(response[i].selector).innerHTML = response[i].html;
 							}
 						}
 					}

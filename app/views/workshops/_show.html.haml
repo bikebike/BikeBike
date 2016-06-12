@@ -9,7 +9,7 @@
 				=_'articles.workshops.info.interested_count', "#{workshop.interested_count} people are interested in this workshop", :vars => {:count => workshop.interested_count}
 			- if preview.blank? && workshop.can_show_interest?(current_user)
 				= form_tag toggle_workshop_interest_path(workshop.conference.slug, workshop.id), class: 'js-xhr' do
-					= button_tag (workshop.interested?(current_user) ? :remove_interest : :show_interest), :value => :toggle_interest, :class => (workshop.interested?(current_user) ? :delete : :add)
+					%span.interest-button=interest_button(workshop)
 		= richtext workshop.info
 		- if preview.blank? && translations_available_for_editing
 			.actions
@@ -20,7 +20,8 @@
 		.facilitators
 			- workshop.workshop_facilitators.each do |f|
 				- u = User.find(f.user_id)
-				- if logged_in? && (workshop.public_facilitator?(u) || f.user_id == current_user.id || is_facilitator)
+				- is_this_user = (f.user_id == current_user.id)
+				- if logged_in? && (workshop.public_facilitator?(u) || is_this_user || is_facilitator)
 					.facilitator
 						.name=_!u.name
 						.role
@@ -33,10 +34,10 @@
 								=(link_to (_'actions.workshops.Deny'), approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'deny'), :class => [:button, :delete])
 							- elsif workshop.can_remove?(current_user, u)
 								=(link_to (_'actions.workshops.Make_Owner'), approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'switch_ownership'), :class => [:button, :modify], data: {confirmation: CGI::escapeHTML(_'modals.workshops.facilitators.confirm_transfer_ownership', vars: { user_name: u.name})}) unless f.role.to_sym == :creator || !workshop.creator?(current_user)
-								=(link_to (_'actions.workshops.Remove'), approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'remove'), :class => [:button, :delete], data: {confirmation: CGI::escapeHTML(_'modals.workshops.facilitators.confirm_remove', vars: { user_name: u.name})})
-						- if f.user_id == current_user.id && workshop.requested_collaborator?(current_user)
+								=(link_to (_"actions.workshops.#{is_this_user ? 'Leave' : 'Remove'}"), approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'remove'), :class => [:button, :delete], data: {confirmation: CGI::escapeHTML(_"modals.workshops.facilitators.confirm_remove#{is_this_user ? '_self' : ''}", vars: { user_name: u.name})})
+						- if is_this_user && workshop.requested_collaborator?(current_user)
 							.details
-								=(link_to (_'actions.workshops.Remove'), approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'remove'), :class => [:button, :delete], data: {confirmation: CGI::escapeHTML(_'modals.workshops.facilitators.confirm_remove_self')})
+								=(link_to (_'actions.workshops.Cancel_Request'), approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'remove'), :class => [:button, :delete], data: {confirmation: CGI::escapeHTML(_'modals.workshops.facilitators.confirm_cancel_request')})
 			- unless preview.present?
 				=(link_to (_'actions.workshops.Facilitate'), facilitate_workshop_path(workshop.conference.slug, workshop.id), :class => [:button, workshop.needs_facilitators ? :accented : :subdued]) unless workshop.facilitator?(current_user)
 				- if is_facilitator
@@ -45,7 +46,8 @@
 						.email-field.input-field
 							= email_field_tag :email, nil, required: true
 							= label_tag :email
-						= button_tag :add
+						= off_screen (_'form.actions.aria.add'), 'add-new-desc'
+						= button_tag :add, aria: { labelledby: 'add-new-desc' }
 	- languages = JSON.parse(workshop.languages || '[]')
 	- if languages.present?
 		= columns(medium: 6) do

@@ -151,6 +151,12 @@ en:
         not valid content-type? Original Error: %{e}'
       mini_magick_processing_error: 'Failed to manipulate with MiniMagick, maybe it
         is not an image? Original Error: %{e}'
+      fields:
+        location:
+          empty: 'Please enter your location'
+          unknown: 'Please include your city or town, we could not find a locality from "%{value}"'
+        name:
+          empty: 'Please enter a valid name'
     template:
       body: 'There were problems with the following fields:'
       header:
@@ -5267,6 +5273,7 @@ en:
       facilitators:
         confirm_remove: Are you sure you would like to remove %{user_name} as a facilitator of this workshop?
         confirm_remove_self: Are you sure you would like to remove yourself as a facilitator of this workshop?
+        confirm_cancel_request: Are you sure you would like to cancel your request to become a facilitator of this workshop?
         confirm_transfer_ownership: By transferring ownership, you will lose administrative capabilities such as deletion and approving new facilitators. Are you sure you want to transfer ownership to %{user_name}?
   articles:
     policy:
@@ -5609,6 +5616,10 @@ en:
         next: Next
         continue: Continue
         facebook_sign_in: Facebook Sign In
+      aria:
+        remove_interest: Click if you are no longer interested in this workshop
+        show_interest: Click if you are interested in this workshop
+        add: Add new
   page_titles:
     '403':
       Access_Denied: Access Denied
@@ -5675,6 +5686,8 @@ en:
       Deny: Deny
       Facilitate: Make a facilitation request
       Remove: Remove
+      Leave: Leave
+      Cancel_Request: Cancel Request
       Make_Owner: Transfer Ownership
       View: View this workshop
       View_All: View all workshops
