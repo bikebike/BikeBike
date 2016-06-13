@@ -46,7 +46,7 @@
 						.email-field.input-field
 							= email_field_tag :email, nil, required: true
 							= label_tag :email
-						= off_screen (_'form.actions.aria.add'), 'add-new-desc'
+						= off_screen (_'forms.actions.aria.add'), 'add-new-desc'
 						= button_tag :add, aria: { labelledby: 'add-new-desc' }
 	- languages = JSON.parse(workshop.languages || '[]')
 	- if languages.present?
