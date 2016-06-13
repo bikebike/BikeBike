@@ -5616,10 +5616,11 @@ en:
         next: Next
         continue: Continue
         facebook_sign_in: Facebook Sign In
-      aria:
+    aria:
+      generic:
         remove_interest: Click if you are no longer interested in this workshop
         show_interest: Click if you are interested in this workshop
-        'add': 'Add new'
+        add: Add new
   page_titles:
     '403':
       Access_Denied: Access Denied

@@ -709,7 +709,7 @@ module ApplicationHelper
 	def interest_button(workshop)
 		interested = workshop.interested?(current_user) ? :remove_interest : :show_interest
 		id = "#{interested.to_s.gsub('_', '-')}-#{workshop.id}"
-		return (off_screen (_"form.actions.aria.#{interested.to_s}"), id) + 
+		return (off_screen (_"form.actions.aria.generic.#{interested.to_s}"), id) + 
 			(button_tag interested, :value => :toggle_interest, :class => (workshop.interested?(current_user) ? :delete : :add), aria: { labelledby: id })
 	end
 
