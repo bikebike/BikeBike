@@ -2333,19 +2333,26 @@ html[data-lingua-franca-example="html"] {
 }
 
 @include breakpoint(medium) {
-	html[data-input="kb"] {
-		:focus,
-		input[type="submit"]:focus,
-		.check-box-field input:focus + label,
-		.radio-button-field input:focus + label,
-		.select-field select:focus,
-		.workshop-link:focus .title,
-		#main-nav .nav a:focus .title {
-			outline: 0.25rem solid rgba($colour-2, 0.5);
+	:focus,
+	input[type="submit"]:focus,
+	.check-box-field input:focus + label,
+	.radio-button-field input:focus + label,
+	.select-field select:focus,
+	.workshop-link:focus .title,
+	#main-nav .nav a:focus .title {
+		html & {
+			outline: 0.25rem solid rgba($colour-2, 0);
 			outline-offset: 0.2rem;
-			z-index: 1;
+			@include _(transition, outline 150ms ease-in-out);
 		}
 
+		html[data-input="kb"] & {
+			outline: 0.25rem solid rgba($colour-2, 0.5);
+			z-index: 1;
+		}
+	}
+
+	html[data-input="kb"] {
 		#main-nav .logo:focus {
 			outline-offset: -0.2em;
 		}

@@ -18,19 +18,25 @@
 			field.classList[input.value ? 'remove' : 'add']('empty');
 		}
 		positionLabel(input);
-		input.addEventListener('keyup', function(event) { positionLabel(event.target); });
-		input.addEventListener('blur', function(event) { field.classList.remove('focused'); });
-		input.addEventListener('focus', function(event) { field.classList.add('focused'); });
+		input.addEventListener('keyup', function(event) {
+			positionLabel(event.target);
+		});
+		input.addEventListener('blur', function(event) {
+			positionLabel(event.target);
+			field.classList.remove('focused');
+		});
+		input.addEventListener('focus', function(event) {
+			field.classList.add('focused');
+		});
 	});
 	var body = document.querySelector('body');
 	var primaryContent = document.getElementById('primary-content');
 	var overlay = document.getElementById('content-overlay');
 	primaryContent.addEventListener('keydown', function(event) {
-		event.stopPropagation();
-		return false;
-		//if (body.classList.contains('has-overlay')) {
-		//	return false;
-		//}
+		if (body.classList.contains('has-overlay')) {
+			event.stopPropagation();
+			return false;
+		}
 	});
 	document.addEventListener('focus', function(event) {
 		if (overlay.querySelector('.dlg.open') && !overlay.querySelector('.dlg.open :focus')) {
