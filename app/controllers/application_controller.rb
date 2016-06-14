@@ -159,10 +159,16 @@ class ApplicationController < LinguaFrancaApplicationController
 				params,
 				current_user,
 			).deliver_now if Rails.env.preview? || Rails.env.production?
-		
+
+		# log the error		
+		logger.info exception.to_s
+		logger.info exception.backtrace.join("\n")
+
 		# show the error page
 		error_500 exception
-		raise exception
+
+		# raise the error if we are in development so that we can debug it
+		raise exception if Rails.env.development?
 	end
 
 	def generate_confirmation(user, url, expiry = nil)

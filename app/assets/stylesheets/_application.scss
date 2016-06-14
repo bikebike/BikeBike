@@ -2340,14 +2340,9 @@ html[data-lingua-franca-example="html"] {
 	.select-field select:focus,
 	.workshop-link:focus .title,
 	#main-nav .nav a:focus .title {
-		html & {
-			outline: 0.25rem solid rgba($colour-2, 0);
-			outline-offset: 0.2rem;
-			@include _(transition, outline 150ms ease-in-out);
-		}
-
 		html[data-input="kb"] & {
 			outline: 0.25rem solid rgba($colour-2, 0.5);
+			outline-offset: 0.2rem;
 			z-index: 1;
 		}
 	}
