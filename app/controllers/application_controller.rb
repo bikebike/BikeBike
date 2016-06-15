@@ -115,15 +115,22 @@ class ApplicationController < LinguaFrancaApplicationController
 		else
 			report += " in <code>#{params[:url]}:#{params[:lineNumber]}</code>"
 		end
-		UserMailer.error_report(
-				"A JavaScript error has occurred",
-				report,
-				params[:message],
-				nil,
-				request,
-				params,
-				current_user,
-			).deliver_now if Rails.env.preview? || Rails.env.production?
+
+		suppress(Exception) do
+			# log the error
+			logger.info exception.to_s
+			logger.info exception.backtrace.join("\n")
+
+			UserMailer.error_report(
+					"A JavaScript error has occurred",
+					report,
+					params[:message],
+					nil,
+					request,
+					params,
+					current_user,
+				).deliver_now if Rails.env.preview? || Rails.env.production?
+		end
 		render json: {}
 	end
 
@@ -149,26 +156,28 @@ class ApplicationController < LinguaFrancaApplicationController
 	end
 
 	rescue_from StandardError do |exception|
-		# send and email if this is production
-		UserMailer.error_report(
-				"An error has occurred in #{Rails.env}",
-				nil,
-				exception.to_s,
-				exception,
-				request,
-				params,
-				current_user,
-			).deliver_now if Rails.env.preview? || Rails.env.production?
-
-		# log the error		
+		# log the error
 		logger.info exception.to_s
 		logger.info exception.backtrace.join("\n")
 
-		# show the error page
-		error_500 exception
+		# send and email if this is production
+		suppress(Exception) do
+			UserMailer.error_report(
+					"An error has occurred in #{Rails.env}",
+					nil,
+					exception.to_s,
+					exception,
+					request,
+					params,
+					current_user,
+				).deliver_now if Rails.env.preview? || Rails.env.production?
+		end
 
 		# raise the error if we are in development so that we can debug it
 		raise exception if Rails.env.development?
+
+		# show the error page
+		error_500 exception
 	end
 
 	def generate_confirmation(user, url, expiry = nil)
@@ -207,7 +216,7 @@ class ApplicationController < LinguaFrancaApplicationController
 				user.save!
 			end
 
-			# genereate the confirmation, send the email and show the 403
+			# generate the confirmation, send the email and show the 403
 			referrer = request.referer.gsub(/^.*?\/\/.*?\//, '/')
 			generate_confirmation(params[:email], referrer)
 			template = 'login_confirmation_sent'
@@ -300,15 +309,17 @@ class ApplicationController < LinguaFrancaApplicationController
 
 	def i18n_exception(str, exception, locale, key)
 		# send and email if this is production
-		UserMailer.error_report(
-				"A missing translation found in #{Rails.env}",
-				"<p>A translation for <code>#{key}</code> in <code>#{locale.to_s}</code> was found. The text that was rendered to the user was:</p><blockquote>#{str || 'nil'}</blockquote>",
-				exception.to_s,
-				exception,
-				request,
-				params,
-				current_user,
-			).deliver_now if Rails.env.preview? || Rails.env.production?
-		logger.info "Missing translation found for: #{key}"
+		suppress(Exception) do
+			UserMailer.error_report(
+					"A missing translation found in #{Rails.env}",
+					"<p>A translation for <code>#{key}</code> in <code>#{locale.to_s}</code> was found. The text that was rendered to the user was:</p><blockquote>#{str || 'nil'}</blockquote>",
+					exception.to_s,
+					exception,
+					request,
+					params,
+					current_user,
+				).deliver_now if Rails.env.preview? || Rails.env.production?
+			logger.info "Missing translation found for: #{key}"
+		end
 	end
 end
