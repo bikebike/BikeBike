@@ -2,6 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '4.2.0'
 gem 'pg'
+gem 'rake', '11.1.2'
 
 gem 'rack-mini-profiler'
 
