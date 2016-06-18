@@ -33,11 +33,11 @@
 								=(link_to (_'actions.workshops.Approve'), approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'approve'), :class => [:button, :modify])
 								=(link_to (_'actions.workshops.Deny'), approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'deny'), :class => [:button, :delete])
 							- elsif workshop.can_remove?(current_user, u)
-								=(link_to (_'actions.workshops.Make_Owner'), approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'switch_ownership'), :class => [:button, :modify], data: {confirmation: CGI::escapeHTML(_'modals.workshops.facilitators.confirm_transfer_ownership', vars: { user_name: u.name})}) unless f.role.to_sym == :creator || !workshop.creator?(current_user)
-								=(link_to (_"actions.workshops.#{is_this_user ? 'Leave' : 'Remove'}"), approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'remove'), :class => [:button, :delete], data: {confirmation: CGI::escapeHTML(_"modals.workshops.facilitators.confirm_remove#{is_this_user ? '_self' : ''}", vars: { user_name: u.name})})
+								=(link_with_confirmation (_'actions.workshops.Make_Owner'), (_'modals.workshops.facilitators.confirm_transfer_ownership', vars: { user_name: u.name}),approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'switch_ownership'), :class => [:button, :modify]) unless f.role.to_sym == :creator || !workshop.creator?(current_user)
+								=(link_with_confirmation (_"actions.workshops.#{is_this_user ? 'Leave' : 'Remove'}"), (_"modals.workshops.facilitators.confirm_remove#{is_this_user ? '_self' : ''}", vars: { user_name: u.name}), approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'remove'), :class => [:button, :delete])
 						- if is_this_user && workshop.requested_collaborator?(current_user)
 							.details
-								=(link_to (_'actions.workshops.Cancel_Request'), approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'remove'), :class => [:button, :delete], data: {confirmation: CGI::escapeHTML(_'modals.workshops.facilitators.confirm_cancel_request')})
+								=(link_with_confirmation (_'actions.workshops.Cancel_Request'), (_'modals.workshops.facilitators.confirm_cancel_request'), approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'remove'), :class => [:button, :delete])
 			- unless preview.present?
 				=(link_to (_'actions.workshops.Facilitate'), facilitate_workshop_path(workshop.conference.slug, workshop.id), :class => [:button, workshop.needs_facilitators ? :accented : :subdued]) unless workshop.facilitator?(current_user)
 				- if is_facilitator

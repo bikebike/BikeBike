@@ -10,6 +10,8 @@
 		= stylesheets
 		%link{ href: asset_path('favicon.ico'), rel: 'shortcut icon', type: 'image/x-icon' }
 		%link{ href: asset_path('favicon.ico'), rel: 'icon', type: 'image/x-icon' }
+		- @alt_lang_urls.each do |locale, url|
+			%link{ rel: :alternate, hreflang: locale, href: url }
 		-#%link{ href: asset_path('apple-touch-icon.png'), rel: 'apple-touch-icon' }
 		-#%link{ href: asset_path('apple-touch-icon-72x72.png'), rel: 'apple-touch-icon', sizes: '72x72' }
 		-#%link{ href: asset_path('apple-touch-icon-114x114.png'), rel: 'apple-touch-icon', sizes: '114x114' }
@@ -38,15 +40,16 @@
 					= yield
 			#footer
 				%footer= render 'shared/footer'
-		#content-overlay
-			#overlay
-			.dlg#confirmation-dlg
-				.dlg-content
-					%h2.title=_'modals.confirm'
-					.dlg-inner
-						%p.message=''
-						%a.button.confirm=_'modals.yes_button'
-						%button.delete=_'modals.no_button'
+		- if @confirmation_dlg.present?	
+			#content-overlay
+				#overlay
+				.dlg#confirmation-dlg
+					.dlg-content
+						%h2.title=_'modals.confirm'
+						.dlg-inner
+							%p.message=''
+							%a.button.confirm=_'modals.yes_button'
+							%button.delete=_'modals.no_button'
 		
 		= yield :footer_scripts if content_for?(:footer_scripts)
 		- add_inline_script :main

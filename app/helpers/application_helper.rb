@@ -713,6 +713,13 @@ module ApplicationHelper
 			(button_tag interested, :value => :toggle_interest, :class => (workshop.interested?(current_user) ? :delete : :add), aria: { labelledby: id })
 	end
 
+	def link_with_confirmation(link_text, confirmation_text, path, args = {})
+		@confirmation_dlg ||= true
+		args[:data] ||= {}
+		args[:data][:confirmation] = CGI::escapeHTML(confirmation_text)
+		link_to link_text, path, args
+	end
+
 	def richtext(text, reduce_headings = 2)
 		return '' unless text.present?
 		return _!(text).

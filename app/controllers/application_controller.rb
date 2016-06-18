@@ -34,6 +34,12 @@ class ApplicationController < LinguaFrancaApplicationController
 			halt_redirection!
 		end
 
+		@alt_lang_urls = {}
+		I18n.backend.enabled_locales.each do |locale|
+			locale = locale.to_s
+			@alt_lang_urls[locale] = view_context.url_for_locale(locale) # don't show the current locale
+		end
+
 		# call the base method to detect the language
 		super
 	end

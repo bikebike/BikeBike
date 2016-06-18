@@ -2,11 +2,11 @@
     "stylesheets": ["application", "editor"],
     "precompile": {
         "test": {
-            "chrome": ["50"]
+            "chrome": ["51"]
         },
         "development": {
             "and_chr": ["50"],
-            "chrome": ["50"],
+            "chrome": ["51"],
             "edge": ["13"],
             "firefox": ["44"],
             "ie": ["11"],
