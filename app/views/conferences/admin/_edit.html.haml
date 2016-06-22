@@ -1,0 +1,7 @@
+= form_tag administration_update_path(@this_conference.slug, :edit) do
+	= textarea :info, @this_conference.info!, heading: 'articles.conference_registration.headings.admin.edit.info', help: 'articles.conference_registration.paragraphs.admin.edit.info', lang: @this_conference.locale, edit_on: :focus
+	- I18n.backend.enabled_locales.each do | locale |
+		- if locale.to_s != @this_conference.locale.to_s
+			= textarea "info_translations[#{locale.to_s}]", @this_conference._info(locale), label: 'translate.pages.Locale_Translation', vars: { language: _("languages.#{locale}") }, lang: locale, edit_on: :focus
+	.actions.right
+		= button_tag :save, value: :save

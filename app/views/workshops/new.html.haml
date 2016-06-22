@@ -1,9 +1,3 @@
-- add_stylesheet :editor
-- add_inline_script :pen
-- add_inline_script :markdown
-- add_inline_script :editor
-
--#= render 'conferences/page_header', :page_key => (@workshop.id.present? ? 'Edit_Workshop' : 'Create_Workshop')
 = render 'conferences/page_header', :page_key => 'Conference_Registration'
 
 %article
@@ -19,15 +13,15 @@
 						%h2=_@page_title, :t
 				- else
 					%h2=_@page_title, :t
-				= textfield :title, @title, required: true, lang: @translation, big: true,  original_value: @is_translating ? @workshop.title! : nil, original_lang: @workshop.locale
+				= textfield :title, @title, required: true, lang: @translation, big: true, original_value: @is_translating ? @workshop.title! : nil, original_lang: @workshop.locale
 				= textarea :info, @info, help: 'articles.workshops.paragraphs.info', lang: @translation, original_value: @is_translating ? richtext(@workshop.info!, 4).html_safe : nil, original_lang: @workshop.locale
 			- if !@is_translating && (@workshop.id.blank? || @can_edit)
 				= columns(medium: 6) do
 					= checkboxes :languages, [:en, :es, :fr], @languages, 'languages', vertical: true, heading: 'articles.workshops.headings.languages', help: 'articles.workshops.paragraphs.languages'
 					= radiobuttons :theme, Workshop.all_themes, @workshop.theme, 'workshop.options.theme', vertical: true, heading: 'articles.workshops.headings.theme', help: 'articles.workshops.paragraphs.theme', other: true
 				= columns(medium: 6) do
-					= checkboxes :needs, [:sound, :projector, :tools], JSON.parse(@workshop.needs || '[]'), 'workshop.options.needs', vertical: true, heading: 'articles.workshops.headings.needs', help: 'articles.workshops.paragraphs.needs'
-					= radiobuttons :space, [:meeting_room, :workshop, :outdoor_meeting], @workshop.space, 'workshop.options.space', vertical: true, heading: 'articles.workshops.headings.space', help: 'articles.workshops.paragraphs.space'
+					= checkboxes :needs, Workshop.all_needs, JSON.parse(@workshop.needs || '[]'), 'workshop.options.needs', vertical: true, heading: 'articles.workshops.headings.needs', help: 'articles.workshops.paragraphs.needs'
+					= radiobuttons :space, Workshop.all_spaces, @workshop.space, 'workshop.options.space', vertical: true, heading: 'articles.workshops.headings.space', help: 'articles.workshops.paragraphs.space'
 
 					%h3#needs_facilitators-label=_'articles.workshops.headings.needs_facilitators','Looking for help?'
 					.input-field-help#needs_facilitators-desc=_'articles.workshops.paragraphs.needs_facilitators', :s, 2

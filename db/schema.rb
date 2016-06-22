@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160604221432) do
+ActiveRecord::Schema.define(version: 20160622011811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -126,6 +126,7 @@ ActiveRecord::Schema.define(version: 20160604221432) do
     t.string   "paypal_signature"
     t.string   "day_parts"
     t.string   "registration_status"
+    t.json     "meals"
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -172,6 +173,7 @@ ActiveRecord::Schema.define(version: 20160604221432) do
     t.string   "amenities"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.string   "space"
   end
 
   create_table "event_types", force: :cascade do |t|
@@ -194,6 +196,7 @@ ActiveRecord::Schema.define(version: 20160604221432) do
     t.datetime "updated_at"
     t.integer  "event_location_id"
     t.string   "event_type"
+    t.string   "locale"
   end
 
   create_table "locations", force: :cascade do |t|

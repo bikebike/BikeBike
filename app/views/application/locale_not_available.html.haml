@@ -1,0 +1,4 @@
+= render :partial => 'application/header', :locals => {:image_file => 'runes.jpg'}
+= row do
+	= columns(medium: 12) do
+		= paragraph(_'error.locale_not_available.description', :p, @main_title_vars)

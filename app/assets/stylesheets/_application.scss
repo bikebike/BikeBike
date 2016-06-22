@@ -23,6 +23,10 @@ h2 {
 	font-size: 6vw;
 }
 
+h3.subtitle {
+	font-size: 1.5em;
+}
+
 p {
 	font-size: 4vw;
 }
@@ -69,13 +73,14 @@ a {
 table {
     margin-bottom: 2em;
 	margin-left: 1em;
-	background-color: #F8F8F8;
-	width: 100%;
-	@include default-box-shadow(top, 2, true);
+	// background-color: #F8F8F8;
+	// width: 100%;
+	// @include default-box-shadow(top, 2, true);
 
 	th, td {
 		text-align: left;
 		padding: 0.25em 0.5em;
+		border: 0.1em solid #EEE;
 
 		&:first-child {
 			padding-left: 1em;
@@ -84,6 +89,10 @@ table {
 		&:last-child {
 			padding-right: 1em;
 		}
+	}
+
+	th {
+		background-color: #F8F8F8;
 	}
 }
 
@@ -131,6 +140,10 @@ button,
 
 	&.facebook {
 		background-color: #3A5795;
+	}
+
+	&.small {
+		font-size: 0.9em;
 	}
 }
 
@@ -213,6 +226,11 @@ textarea, .textarea {
 	@include _(box-shadow, 0 0 0 0 rgba(0,0,0,0.05));
 	@include _(transition, box-shadow 200ms ease-in-out);
 	will-change: box-shadow;
+
+	&[data-edit-on="click"],
+	&[data-edit-on="focus"] {
+		cursor: text;
+	}
 
 	&:hover, &:focus, &:active {
 		@include _(box-shadow, 0 0 0 0.3em rgba(0,0,0,0.05));
@@ -366,6 +384,12 @@ input {
 			margin-right: 0;
 		}
 	}
+
+	&.small select,
+	&.small input {
+		font-size: 1em;
+		@include font-family(secondary)
+	}
 }
 
 .input-field.other-field label {
@@ -416,6 +440,8 @@ input {
 .input-field-help {
 	margin-bottom: 1em;
 	margin-left: 1em;
+	line-height: 1.3333em;
+	font-size: 1.25em;
 }
 
 .check-box-field,
@@ -590,13 +616,13 @@ input {
 	}
 }
 
+.requesting {
+	opacity: 0.5;
+	-webkit-filter: blur(5px);
+}
+
 form {
 	@include _(transition, 'opacity 250ms ease-in-out, filter 250ms ease-in-out, -webkit-filter 250ms ease-in-out');
-
-	&.requesting {
-		opacity: 0.5;
-		-webkit-filter: blur(5px);
-	}
 	
 	&.composition {
 		textarea {
@@ -616,6 +642,28 @@ form {
 			margin-left: 1em;
 			height: 2.6em;
 		}
+	}
+}
+
+#main .columns th form {
+	display: inline;
+	vertical-align: super;
+	margin: 0 0 0 0.5em;
+
+	button {
+		float: right;
+	}
+}
+
+#main .columns th.form {
+	display: none;
+}
+
+#main .columns td.form {
+	border: 0;
+	
+	form {
+		margin: 0;
 	}
 }
 
@@ -654,6 +702,27 @@ fieldset {
 	}
 }
 
+.flex-inputs {
+	@include _-(display, flex);
+	@include _(align-items, flex-end);
+	@include _(flex-wrap, wrap);
+	@include _(justify-content, flex-end);
+	margin-bottom: 2em;
+
+	.input-field {
+		margin: 0 0.5em;
+	}
+
+	.stretch-item {
+		@include _(flex, 1);
+		@include _(flex-basis, 100%);
+
+		select {
+			width: 100%;
+		}
+	}
+}
+
 .actions {
 	text-align: center;
 	margin: 0 1em;
@@ -682,6 +751,16 @@ fieldset {
 		}
 	}
 
+	&.fill {
+		@include _-(display, flex);
+		@include _(flex-wrap, wrap);
+
+		> button, > .button {
+			flex: 1;
+			margin-bottom: 0;
+		}		
+	}
+
 	.conferences-view_workshop & {
 	    margin-bottom: 5em;
 	}
@@ -691,10 +770,32 @@ fieldset {
 		@include _(flex-wrap, wrap);
 		@include _(flex-direction, row-reverse);
 		margin: 0;
+		clear: both;
 
 		button, .button {
 			margin-bottom: 1em;
 		}
+	}
+}
+
+.test-preview {
+	padding: 0 1em;
+	border: 0.1em solid #CCC;
+	background-color: #F8F8F8;
+
+	h4 {
+		border-bottom: 0.1rem solid #CCC;
+		padding: 1em 0 0.75em;
+		font-size: 1.5em;
+		margin: 0 0 1em 0;
+	}
+
+	h5 {
+		font-size: 1.25em;
+	}
+
+	h6, p {
+		font-size: 1.125em;
 	}
 }
 
@@ -871,17 +972,16 @@ ul.warnings li,
 	}
 }
 
-#registration-steps {
+.flow-steps {
 	ul {
 		display: block;
 		position: relative;
 		list-style: none;
 		padding: 0;
 		margin-top: -1em;
-		overflow: hidden;
+		//overflow: hidden;
 		text-align: center;
 		@include default-box-shadow(top, 2);
-		@include _(border-radius, 0.15em);
 		@include clearfix;
 	}
 
@@ -897,38 +997,16 @@ ul.warnings li,
 		outline: 0;
 		cursor: default;
 		@include _(text-stroke, 1px rgba(0, 0, 0, 0.25));
-		
-		@include after {
-			content: '';
-			position: absolute;
-			z-index: 1;
-			top: 2.25em;
-			left: 0;
-			right: 0;
-			width: 1.25em;
-			height: 1.25em;
-			margin: auto;
-			border: 0 solid;
-			border-width: 0.1em 0.1em 0 0;
-			background-color: inherit;
-			@include _(transform, rotate(135deg));
-			@include _(transition, 'transform 200ms ease-in-out, background-color 200ms ease-in-out');
-			@include _(box-shadow, 0.2em -0.4em 0.8em -0.4em #000);
+
+		&:last-child {
+			@include _(border-radius, 0 0 0.15em 0.15em);
 		}
 
 		&.enabled {
-			background-color: $colour-5;
-		}
+			background-color: $colour-1;
 
-		&.current {
-			background-color: lighten(desaturate($colour-5, 33%), 15%);
-		}
-
-		&:last-child {
-			padding-right: 1.5em;
-
-			@include after {
-				display: none;
+			&.current {
+				background-color: lighten(desaturate($colour-1, 33%), 15%);
 			}
 		}
 	}
@@ -947,7 +1025,283 @@ ul.warnings li,
 		}
 
 		@include after {
+			border-bottom: 0 solid rgba(0,0,0,0.25);
+		}
+
+		@include after {
+			border-bottom: 0.2em solid rgba(0,0,0,0.25);
+		}
+	}
+
+	#registration-steps {
+
+		li {
+			&:first-child {
+				@include _(border-radius, 0.15em 0.15em 0 0);
+			}
+
+			&:last-child {
+				@include _(border-radius, 0);
+			}
+
+			&.enabled {
+				background-color: $colour-5;
+
+				&.current {
+					background-color: lighten(desaturate($colour-5, 33%), 15%);
+					//text-decoration: underline;
+				}
+			}
+
+			@include after {
+				content: '';
+				position: absolute;
+				z-index: 1;
+				top: 2.25em;
+				left: 0;
+				right: 0;
+				width: 1.25em;
+				height: 1.25em;
+				margin: auto;
+				border: 0 solid;
+				border-width: 0.1em 0.1em 0 0;
+				background-color: inherit;
+				@include _(transform, rotate(135deg));
+				@include _(transition, 'transform 200ms ease-in-out, background-color 200ms ease-in-out');
+				@include _(box-shadow, 0.2em -0.4em 0.8em -0.4em #000);
+			}
+		}
+	}
+}
+
+#main article #registration-admin-menu {
+	margin: 1em 0 0;
+	padding: 0;
+	list-style: none;
+	border: 0.1em solid #EEE;
+	background-color: #F8F8F8;
+
+	a {
+		display: block;
+		padding: 0.5em 0.75em;
+		@include font-family(secondary);
+		border-bottom: 0.1em solid #CCC;
+
+		@include after {
 			display: none;
+		}
+
+		&:hover {
+			background-color: #EEE;
+		}
+	}
+	li {
+		margin: 0;
+
+		&:last-child a {
+			border: 0;
+		}
+
+		&.current {
+			a {
+				color: $white;
+				background-color: $colour-5;
+			}
+		}
+	}
+}
+
+.admin-blocks {
+	@include _-(display, inline-flex);
+	@include _(flex-wrap, wrap);
+	@include _(align-items, flex-start);
+	@include _(justify-content, flex-start);
+	list-style: none;
+	padding: 0;
+
+	> li {
+		max-width: 25em;
+		border: 0.1rem solid #EEE;
+		padding: 1em;
+		margin: 0.25em;
+		@include _(flex, 1);
+		background-color: #F8F8F8;
+		@include default-box-shadow(top, 2);
+	}
+
+	.actions {
+		margin: 0 auto;
+	}
+
+	.title {
+		margin: 0 0 1em;
+		padding: 0 0 0.5em;
+		border-bottom: 0.1rem solid #EEE;
+	}
+
+	.details {
+		display: table;
+		width: 100%;
+	}
+
+	.data-set {
+		display: table-row;
+	}
+
+	.data-set-key, .data-set-value {
+		display: table-cell;
+		padding: 0.25em 0.5em;
+		vertical-align: top;
+	    border-bottom: 0.1rem solid #EEE;
+	}
+	
+	.data-set:last-child {
+		.data-set-key, .data-set-value {
+			border: 0;
+		}
+	}
+
+	.space, .address {
+		.data-set-key, .data-set-value {
+			white-space: nowrap;
+		}
+	}
+
+	.amenities {
+		list-style: none;
+		padding: 0;
+
+		> li {
+			font-weight: bold;
+			white-space: nowrap;
+			display: inline-block;
+			padding: 0 0.5em;
+			line-height: 1.5em;
+			font-size: 0.8em;
+			border: 0.1rem solid #CCC;
+			background-color: #EEE;
+			@include _(border-radius, 0.125rem);
+		}
+	}
+}
+
+#admin-housing {
+	#hosts {
+		background-color: $white;
+
+		ul {
+			list-style: none;
+			padding: 0;
+		}
+
+		.host {
+			padding: 0.5em;
+			border: 0.1em solid #EEE;
+			background-color: #F8F8F8;
+
+			&.status-good {
+				background-color: rgba($colour-5, 0.1);
+			}
+
+			&.status-warning {
+				background-color: rgba($colour-3, 0.1);
+			}
+
+			&.status-error {
+				background-color: rgba($colour-2, 0.1);
+			}
+		}
+
+		h4 {
+			margin: 0 0.5em 0 0;
+			float: left;
+		}
+
+		h5 {
+			margin: 1em 0 0;
+		}
+
+		.email {
+			color: #888;
+
+			@include before {
+				content: '(';
+			}
+
+			@include after {
+				content: ')';
+			}
+		}
+
+		.guests {
+			clear: left;
+			@include _-(display, flex);
+		}
+
+		.space {
+			@include _(flex, 1);
+		}
+
+		.place-guest {
+			background-color: $colour-5;
+			
+			&.booked {
+				background-color: $colour-4;
+			}
+			
+			&.unwanted {
+				background-color: #888;
+			}
+			
+			&.overbooked {
+				background-color: $colour-2;
+			}
+		}
+
+		.warning, .error {
+			display: inline-block;
+			font-style: italic;
+			padding: 0 0.5em;
+			margin-left: 0.5em;
+			border: 0.1em solid rgba($black, 0.25);
+			@include _(border-radius, 0.125em);
+			@include _(transform, skewX(-15deg));
+			@include _(transform-origin, 0 100%);
+			@include _(animation, bend ease-in-out 500ms infinite alternate both);
+		}
+
+		.warning {
+			background-color: lighten($colour-3, 25%);
+		}
+
+		.error {
+			background-color: lighten($colour-2, 25%);
+		}
+	}
+
+	#guests {
+		.guests {
+			@include _-(display, flex);
+			@include _(align-items, flex-start);
+			@include _(flex-wrap, wrap);
+			list-style: none;
+			padding: 0;
+		}
+
+		.guest {
+			flex: 1;
+			margin: 0.5em;
+			border: 0.1rem solid #EEE;
+			background-color: #F8F8F8;
+			padding: 0.5em;
+		}
+		
+		h4 {
+			margin: 0 0 0.5em;
+		}
+
+		.set-host {
+			width: 100%;
 		}
 	}
 }
@@ -1188,6 +1542,10 @@ $header-tilt: 8deg;
 
 	.secondary {
 		font-size: 1.5em;
+	}
+
+	body.error-locale-not-available & {
+		background-color: $colour-5;
 	}
 
 	body.error-500 & {
@@ -2311,7 +2669,7 @@ html[data-lingua-franca-example="html"] {
 		font-family: inherit;
 		font-size: 1.5em;
 		padding: 0 0.5em;
-		border: 0.1em solid #333;
+		border: 0.1rem solid #CCC;
 		cursor: pointer;
 		@include default-box-shadow(top, 1.5, false);
 	}
@@ -2329,6 +2687,61 @@ html[data-lingua-franca-example="html"] {
 		max-height: 100em;
 		visibility: visible;
 		@include _(transform, scaleX(1));
+	}
+}
+
+.on-top-only, .on-top-controls {
+	display: none !important;
+}
+
+html[data-ontop] {
+	body {
+		overflow: hidden;
+	}
+
+	.on-top-target {
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		padding: 1em;
+		margin: 0 !important;
+		z-index: 100;
+		overflow: auto;
+	}
+
+	.on-top-control {
+		position: fixed;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 101;
+		margin: 0 !important;
+		padding: 1em;
+		background-color: #F8F8F8;
+		@include default-box-shadow(bottom, 2);
+	}
+
+	.on-top-controls {
+		overflow: auto;
+
+		.on-top-close {
+			float: right;
+			background-color: $colour-4;
+		}
+	}
+
+	.on-top-only, .on-top-controls {
+		display: inherit !important;
+
+		&.space {
+			display: block !important;
+		}
+	}
+
+	.not-on-top {
+		display: none !important;
 	}
 }
 
@@ -2386,10 +2799,8 @@ html[data-lingua-franca-example="html"] {
 		}
 	}
 
-	.number-field,
-	.email-field,
-	.telephone-field,
-	.text-field {
+	.input-field {
+		&.big select,
 		&.big input {
 			font-size: 2em;
 		}
@@ -2413,6 +2824,13 @@ html[data-lingua-franca-example="html"] {
 	.flex-form, .flex-column {
 		button, .button {
 			width: auto;
+		}
+	}
+
+	.flex-inputs {
+		.stretch-item {
+			@include _(flex, 1);
+			@include _(flex-basis, auto);
 		}
 	}
 
@@ -2573,32 +2991,68 @@ html[data-lingua-franca-example="html"] {
 		}
 	}
 	
-	#registration-steps {
+	.flow-steps {
+		#registration-steps {
+			li {
+				display: inline-block;
+				text-align: center;
+				float: left;
+
+				@include after {
+					content: '';
+					top: 1.125em;
+					left: auto;
+					right: -0.25em;
+					@include _(transform, rotate(45deg));
+				}
+
+				/*&.enabled:hover,
+				&.enabled:hover ~ li {
+					@include after {
+						@include _(transform, rotate(-135deg));
+						background-color: transparent;
+					}
+				}*/
+
+				&:first-child {
+					@include _(border-radius, 0.15em 0 0 0.15em);
+				}
+
+				&:last-child {
+					@include _(border-radius, 0);
+				}
+			}
+		}
+
+		#post-registration-steps {
+			margin-bottom: -2em;
+
+			li {
+				&:first-child {
+					@include _(border-radius, 0 0.15em 0 0);
+				}
+
+				&:last-child {
+					@include _(border-radius, 0 0 0.15em 0.15em);
+				}
+			}
+		}
+
 		ul {
 			display: inline-block;
 			text-align: left;
 			margin-top: -4em;
+			vertical-align: top;
 		}
 
 		li {
-			display: inline-block;
-			float: left;
+			text-align: center;
+		}
+	}
 
-			@include after {
-				content: '';
-				top: 1.125em;
-				left: auto;
-				right: -0.25em;
-				@include _(transform, rotate(45deg));
-			}
-
-			&.enabled:hover,
-			&.enabled:hover ~ li {
-				@include after {
-					@include _(transform, rotate(-135deg));
-					background-color: transparent;
-				}
-			}
+	#registration-admin-menu {
+		a {
+			margin: 0;
 		}
 	}
 
@@ -2739,6 +3193,13 @@ html[data-lingua-franca-example="html"] {
 
 		input:first-child + label {
 			border: 0.1em solid;
+		}
+	}
+
+	.admin-blocks {
+		> li {
+			@include _(flex, none);
+			min-width: 12em;
 		}
 	}
 }

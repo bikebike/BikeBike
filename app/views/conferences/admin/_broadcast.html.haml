@@ -1,0 +1,19 @@
+= form_tag administration_update_path(@this_conference.slug, :broadcast) do
+	- if @broadcast_step == :preview || @broadcast_step == :test
+		= hidden_field_tag :subject, @subject
+		= hidden_field_tag :body, @body
+		.test-preview
+			%h4=@subject
+			= richtext @body, 4
+		.actions.right
+			= button_tag :test, value: :test, class: :secondary if @broadcast_step == :preview
+			= button_with_confirmation :send, (_'modals.admin.broadcast.confirm', vars: { number: @subscriber_count || 0 }), value: :send, class: :delete if @broadcast_step == :test
+			= button_tag :edit, value: :edit
+	- else
+		= textfield :subject, @subject, required: true, big: true
+		= textarea :body, @body, heading: 'articles.conference_registration.headings.admin.edit.info', help: 'articles.conference_registration.paragraphs.admin.edit.info', lang: @this_conference.locale, edit_on: :focus
+		.actions.right
+			= button_tag :preview, value: :preview
+	-# I18n.backend.enabled_locales.each do | locale |
+		-# if locale.to_s != @this_conference.locale.to_s
+			-#= textarea "info_translations[#{locale.to_s}]", (richtext @this_conference._info(locale)), label: 'translate.pages.Locale_Translation', vars: { language: _("languages.#{locale}") }, lang: locale

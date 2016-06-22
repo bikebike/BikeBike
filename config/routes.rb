@@ -7,6 +7,8 @@ BikeBike::Application.routes.draw do
 
     match '/conferences/:slug/register' => 'conferences#register', :as => :register, via: [:get, :post]
     get   '/conferences/:slug/register/:step' => 'conferences#register', :as => :register_step
+    get   '/conferences/:slug/register/administration/:admin_step' => 'conferences#register', :as => :administration_step
+    post  '/conferences/:slug/register/administration/update/:admin_step' => 'conferences#admin_update', :as => :administration_update
     match '/conferences/:slug/broadcast' => 'conferences#broadcast', :as => :broadcast, via: [:get, :post]
     get   '/conferences/:slug/stats' => 'conferences#stats', :as => :stats
     get   '/conferences/:slug/register/:button/:confirmation_token' => 'conferences#register', :as => :register_paypal_confirm

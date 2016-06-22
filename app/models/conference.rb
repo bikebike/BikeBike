@@ -8,6 +8,7 @@ class Conference < ActiveRecord::Base
 
 	has_many :conference_host_organizations, :dependent => :destroy
 	has_many :organizations, :through => :conference_host_organizations
+	has_many :event_locations
 	
 	#has_many :conference_registration_form_fields, :order => 'position ASC', :dependent => :destroy#, :class_name => '::ConferenceRegistrationFormField'
 	#has_many :registration_form_fields, :through => :conference_registration_form_fields
@@ -21,6 +22,7 @@ class Conference < ActiveRecord::Base
 	end
 
 	def host?(user)
+		return false unless user.present?
 		organizations.each do |o|
 			return true if o.host?(user)
 		end

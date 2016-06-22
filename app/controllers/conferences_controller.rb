@@ -535,6 +535,8 @@ class ConferencesController < ApplicationController
 
 		steps = registration_steps
 		return do_404 unless steps.present?
+		
+		@register_template = :administration if params[:admin_step].present?
 
 		@errors = {}
 		@warnings = []
@@ -588,7 +590,7 @@ class ConferencesController < ApplicationController
 							floor_space: params[:floor_space],
 							tent_space: params[:tent_space],
 						},
-						considerations: params[:considerations].keys,
+						considerations: (params[:considerations] || {}).keys,
 						availability: [ params[:first_day], params[:last_day] ],
 						notes: params[:notes]
 					}
@@ -623,9 +625,17 @@ class ConferencesController < ApplicationController
 
 		@register_template ||= (params[:step] || current_step).to_sym
 
-		return redirect_to register_path(@this_conference.slug) if
-			logged_in? && @register_template != current_step &&
-			!@registration.steps_completed.include?(@register_template.to_s)
+		if logged_in?
+			# if we're logged in
+			if !steps.include?(@register_template)
+				# and we are not viewing a valid step
+				return redirect_to register_path(@this_conference.slug)
+			elsif @register_template != current_step && !registration_complete? && !@registration.steps_completed.include?(@register_template.to_s)
+				# or the step hasn't been reached, registration is not yet complete, and we're not viewing the latest incomplete step
+				return redirect_to register_path(@this_conference.slug)
+			end
+			# then we'll redirect to the current registration step
+		end
 
 		# process data from the last view
 		# case (params[:button] || '').to_sym
@@ -782,10 +792,279 @@ class ConferencesController < ApplicationController
 			@hosting_data['considerations'] ||= Array.new
 		when :policy
 			@page_title = 'articles.conference_registration.headings.Policy_Agreement'
+		when :administration
+			@admin_step = params[:admin_step] || 'edit'
+			return do_404 unless view_context.valid_admin_steps.include?(@admin_step.to_sym)
+			@page_title = 'articles.conference_registration.headings.Administration'
+
+			case @admin_step.to_sym
+			when :housing
+				# do a full analysis
+				analyze_housing
+			when :locations
+				@locations = EventLocation.where(:conference_id => @this_conference.id)
+			when :events
+				@event = Event.new(locale: I18n.locale)
+				@events = Event.where(:conference_id => @this_conference.id)
+				@day = nil
+				@time = nil
+				@length = 1.5
+			end
 		when :done
 			@amount = ((@registration.registration_fees_paid || 0) * 100).to_i.to_s.gsub(/^(.*)(\d\d)$/, '\1.\2')
 		end
 
+	end
+
+	def get_housing_data
+		@hosts = {}
+		@guests = {}
+		ConferenceRegistration.where(:conference_id => @this_conference.id).each do | registration |
+			if registration.can_provide_housing
+				@hosts[registration.id] = registration
+			else
+				@guests[registration.id] = registration
+			end
+		end
+	end
+
+	def analyze_housing
+		get_housing_data unless @hosts.present? && @guests.present?
+
+		@housing_data = {}
+		@hosts_affected_by_guests = {}
+		@hosts.each do | id, host |
+			@hosts[id].housing_data ||= {}
+			@housing_data[id] = { guests: {}, space: {} }
+			@hosts[id].housing_data['space'] ||= {}
+			@hosts[id].housing_data['space'].each do | s, size |
+				size = (size || 0).to_i
+				@housing_data[id][:guests][s.to_sym] = {}
+				@housing_data[id][:space][s.to_sym] = size
+			end
+		end
+		@guests.each do | guest_id, guest |
+			data = guest.housing_data || {}
+			@hosts_affected_by_guests[guest_id] ||= []
+
+			if data['host']
+				host_id = (data['host'].present? ? data['host'].to_i : nil)
+				host = host_id.present? ? @hosts[host_id] : nil
+
+				# make sure the host was found and that they are still accepting guests
+				if host.present? && host.can_provide_housing
+					@hosts_affected_by_guests[guest_id] << host_id
+
+					space = (data['space'] || :bed).to_sym
+
+					@housing_data[host_id] ||= {}
+					host_data = host.housing_data
+					unless @housing_data[host_id][:guests][space].present?
+						@housing_data[host_id][:guests][space] ||= {}
+						@housing_data[host_id][:space][space] ||= 0
+					end
+
+					@housing_data[host_id][:guests][space][guest_id] = { guest: guest }
+
+					# make sure the host isn't overbooked
+					space_available = ((host_data['space'] || {})[space.to_s] || 0).to_i
+					if @housing_data[host_id][:guests][space].size > space_available
+						@housing_data[host_id][:warnings] ||= {}
+						@housing_data[host_id][:warnings][:space] ||= {}
+						@housing_data[host_id][:warnings][:space][space] ||= []
+						@housing_data[host_id][:warnings][:space][space] << :overbooked
+					end
+
+					companions = data['companions'] || []
+					companions.each do | companion |
+						user = User.find_by_email(companion)
+						if user.present?
+							reg = ConferenceRegistration.find_by(
+									:user_id => user.id,
+									:conference_id => @this_conference.id
+								)
+							housing_data = reg.housing_data || {}
+							companion_host = housing_data['host'].present? ? housing_data['host'].to_i : nil
+							if companion_host.blank?
+								@hosts_affected_by_guests[guest_id] << companion_host
+								if companion_host != host_id
+									# set this as an error if the guest has selected only one other to stay with, but if they have requested to stay with more, make this only a warning
+									status = companions.size > 1 ? :warnings : :errors
+									@housing_data[host_id][:guests][guest][status] ||= {}
+									@housing_data[host_id][:guests][guest][status][:companions] ||= []
+									@housing_data[host_id][:guests][guest][status][:companions] << reg.id
+								end
+							end
+						end
+					end
+				else
+					# make sure the housing data is empty if the host wasn't found, just in case something happened to the host
+					@guests[guest_id].housing_data ||= {}
+					@guests[guest_id].housing_data['host'] = nil
+					@guests[guest_id].housing_data['space'] = nil
+				end
+			end
+		end
+		return @hosts_affected_by_guests
+	end
+
+	def admin_update
+		set_conference
+		set_conference_registration
+		return do_403 unless @this_conference.host? current_user
+
+		# set the page title in case we render instead of redirecting
+		@page_title = 'articles.conference_registration.headings.Administration'
+		@register_template = :administration
+		@admin_step = params[:admin_step]
+
+		case params[:admin_step]
+		when 'edit'
+			@this_conference.info = LinguaFranca::ActiveRecord::UntranslatedValue.new(params[:info]) unless @this_conference.info! == params[:info]
+
+			params[:info_translations].each do | locale, value |
+				@this_conference.set_column_for_locale(:info, locale, value, current_user.id) unless value = @this_conference._info(locale)
+			end
+			@this_conference.save
+			return redirect_to register_step_path(@this_conference.slug, :administration)
+		when 'housing'
+			space = params[:button].split(':')[0]
+			host_id = params[:button].split(':')[1].to_i
+			guest_id = params[:guest_id].to_i
+			
+			get_housing_data
+
+			# modify the guest data
+			@guests[guest_id].housing_data ||= {}
+			@guests[guest_id].housing_data['space'] = space
+			@guests[guest_id].housing_data['host'] = host_id
+			@guests[guest_id].save!
+
+			if request.xhr?
+				analyze_housing
+
+				# get the hosts that need updating
+				affected_hosts = {}
+				affected_hosts[host_id] = @hosts[host_id]
+				if params['affected-hosts'].present?
+					params['affected-hosts'].split(',').each do | id |
+						affected_hosts[id.to_i] = @hosts[id.to_i]
+					end
+				end
+				@hosts_affected_by_guests[guest_id].each do | id |
+					affected_hosts[id] ||= @hosts[id]
+				end
+
+				json = { hosts: {}, affected_hosts: @hosts_affected_by_guests }
+				puts @hosts_affected_by_guests[guest_id].to_json.to_s
+				affected_hosts.each do | id, host |
+					json[:hosts][id] = view_context.host_guests_widget(host)
+				end
+				return render json: json
+			end
+			return redirect_to administration_step_path(@this_conference.slug, :housing)
+		when 'broadcast'
+			@subject = params[:subject]
+			@body = params[:body]
+			@register_template = :administration
+			if params[:button] == 'send'
+				return redirect_to administration_step_path(@this_conference.slug, :broadcast_sent)
+			elsif params[:button] == 'preview'
+				@broadcast_step = :preview
+			elsif params[:button] == 'test'
+				@broadcast_step = :test
+				UserMailer.broadcast(
+					"#{request.protocol}#{request.host_with_port}",
+					@subject,
+					@body,
+					current_user,
+					@this_conference).deliver_now
+			end
+			return render 'conferences/register'
+		when 'locations'
+			case params[:button]
+			when 'edit'
+				@location = EventLocation.find_by! id: params[:id].to_i, conference_id: @this_conference.id
+				return render 'conferences/register'
+			when 'save'
+				location = EventLocation.find_by! id: params[:id].to_i, conference_id: @this_conference.id
+				location.title = params[:title]
+				location.address = params[:address]
+				location.amenities = (params[:needs] || {}).keys.to_json
+				location.space = params[:space]
+				location.save!
+				return redirect_to administration_step_path(@this_conference.slug, :locations)
+			when 'cancel'
+				return redirect_to administration_step_path(@this_conference.slug, :locations)
+			when 'delete'
+				location = EventLocation.find_by! id: params[:id].to_i, conference_id: @this_conference.id
+				location.destroy
+				return redirect_to administration_step_path(@this_conference.slug, :locations)
+			when 'create'
+				EventLocation.create(
+						conference_id: @this_conference.id,
+						title: params[:title],
+						address: params[:address],
+						amenities: (params[:needs] || {}).keys.to_json,
+						space: params[:space]
+					)
+				return redirect_to administration_step_path(@this_conference.slug, :locations)
+			end
+		when 'meals'
+			case params[:button]
+			when 'add_meal'
+				@this_conference.meals ||= {}
+				@this_conference.meals[(Date.parse(params[:day]) + params[:time].to_f.hours).to_time.to_i] = {
+					title: params[:title],
+					info: params[:info],
+					location: params[:event_location],
+					day: params[:day],
+					time: params[:time]
+				}
+				@this_conference.save!
+				return redirect_to administration_step_path(@this_conference.slug, :meals)
+			when 'delete'
+				@this_conference.meals ||= {}
+				@this_conference.meals.delete params[:meal]
+				@this_conference.save!
+				return redirect_to administration_step_path(@this_conference.slug, :meals)
+			end
+		when 'events'
+			case params[:button]
+			when 'edit'
+				@event = Event.find_by!(conference_id: @this_conference.id, id: params[:id])
+				@day = @event.start_time.midnight
+				@time = view_context.hour_span(@day, @event.start_time)
+				@length = view_context.hour_span(@event.start_time, @event.end_time)
+				return render 'conferences/register'
+			when 'save'
+				if params[:id].present?
+					event = Event.find_by!(conference_id: @this_conference.id, id: params[:id])
+				else
+					event = Event.new(conference_id: @this_conference.id, locale: I18n.locale)
+				end
+
+				# save title and info
+				event.title = LinguaFranca::ActiveRecord::UntranslatedValue.new(params[:title]) unless event.title! == params[:title]
+				event.info = LinguaFranca::ActiveRecord::UntranslatedValue.new(params[:info]) unless event.info! == params[:info]
+				
+				# save schedule data
+				event.event_location_id = params[:event_location]
+				event.start_time = Date.parse(params[:day]) + params[:time].to_f.hours
+				event.end_time = event.start_time + params[:time_span].to_f.hours
+
+				# save translations
+				(params[:info_translations] || {}).each do | locale, value |
+					event.set_column_for_locale(:title, locale, value, current_user.id) unless value = event._title(locale)
+					event.set_column_for_locale(:info, locale, value, current_user.id) unless value = event._info(locale)
+				end
+
+				event.save
+
+				return redirect_to administration_step_path(@this_conference.slug, :events)
+			end
+		end
+		do_404
 	end
 
 	def registrations
@@ -1219,7 +1498,7 @@ class ConferencesController < ApplicationController
 		set_conference
 		return do_404 unless @this_conference.workshop_schedule_published || @this_conference.host?(current_user)
 		
-		@events = Event.where(:conference_id => @this_conference.id)
+		@events = Event.where(:conference_id => @this_conference.id).order(start_time: :asc)
 		@locations = EventLocation.where(:conference_id => @this_conference.id)
 
 		render 'schedule/show'
@@ -1491,9 +1770,20 @@ class ConferencesController < ApplicationController
 		status = conference.registration_status
 		return [] unless status == :pre || status == :open
 
-		steps = [:policy, :contact_info, :questions, :hosting, :payment, :workshops]
+		steps = [
+				:policy,
+				:contact_info,
+				:questions,
+				:hosting,
+				:payment,
+				:workshops,
+				:administration
+			]
+		
 		steps -= [:questions, :payment] unless status == :open
 		steps -= [:hosting] unless @registration.present? && view_context.same_city?(@registration.city, @conference.location)
+
+		steps -= [:administration] unless @registration.present? && @conference.host?(current_user)
 
 		return steps
 	end
@@ -1507,6 +1797,7 @@ class ConferencesController < ApplicationController
 	def registration_complete?(registration = @registration)
 		completed_steps = registration.steps_completed || []
 		required_steps(registration.conference).each do | step |
+			return true if step == :workshops
 			return false unless completed_steps.include?(step.to_s)
 		end
 		return true
@@ -1519,9 +1810,10 @@ class ConferencesController < ApplicationController
 		current_steps = []
 		disable_steps = false
 		completed_steps = registration.steps_completed || []
+		registration_complete = registration_complete?(registration)
 		steps.each do | step |
 			# disable the step if we've already found an incomplete step
-			enabled = !disable_steps
+			enabled = !disable_steps || registration_complete
 			# record whether or not we've found an incomplete step
 			disable_steps ||= !completed_steps.include?(step.to_s)
 

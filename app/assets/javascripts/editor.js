@@ -2,7 +2,19 @@
 	var pens = {};
 
 	Array.prototype.forEach.call(document.querySelectorAll('.textarea'), function(editor) {
-		startEditing(editor);
+		var event= editor.dataset.editOn;
+		if (event == 'load') {
+			startEditing(editor);
+		} else {
+			editor.addEventListener(event, function() {
+				if (editor.getAttribute('contenteditable') !== 'true') {
+					startEditing(editor);
+					// for content editable, we need to refocus to show the caret
+					editor.blur(); 
+					editor.focus();
+				}
+			});
+		}
 	});
 
 	function startEditing(editor) {
@@ -27,6 +39,7 @@
 				'insertimage': 'Image'
 			}
 		});
+		return pens[name];
 	}
 
 	Array.prototype.forEach.call(document.querySelectorAll('form'), function(form) {
@@ -45,7 +58,9 @@
 					form.appendChild(textarea);
 				}
 				textarea.value = editor.innerHTML;
-				pens[name].destroy();
+				if (pens[name]) {
+					pens[name].destroy();
+				}
 			});
 		}, false);
 		Array.prototype.forEach.call(form.querySelectorAll('button'), function(button) {

@@ -1,5 +1,8 @@
 class Event < ActiveRecord::Base
+    translates :info, :title
+
     belongs_to :conference
+    belongs_to :event_location
 
     def conference_day
         return nil unless start_time.present? && end_time.present?

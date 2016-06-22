@@ -15,4 +15,4 @@
 				=@page_title.present? ? I18n.t(@page_title, @page_title_vars) : I18n.t("page_titles.#{page_group.to_s}.#{page_key.to_s}")
 			= row do
 				= columns do
-					%h1=_(@main_title || "page_titles.#{page_group.to_s}.#{page_key.to_s}")
+					%h1=_(@main_title || "page_titles.#{page_group.to_s}.#{page_key.to_s}", :t, @main_title_vars)

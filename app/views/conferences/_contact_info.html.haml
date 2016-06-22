@@ -5,7 +5,7 @@
 	= form_tag register_path(@this_conference.slug) do
 		= textfield :name, @name, required: true, heading: 'articles.conference_registration.headings.name', big: true
 		= textfield :location, (params[:location] || @registration.city || location(lookup_ip_location)), required: true, heading: 'articles.conference_registration.headings.location'
-		= checkboxes :languages, [:en, :es, :fr], current_user.languages, 'languages', heading: 'articles.conference_registration.headings.languages'
+		= checkboxes :languages, [:en, :es, :fr], current_user.languages || [I18n.locale], 'languages', heading: 'articles.conference_registration.headings.languages'
 		.actions.next-prev
 			= button_tag (params[:step] == :save ? :save : :next), value: :contact_info
 			= button_tag :previous, value: :prev_contact_info, class: :subdued, formnovalidate: true

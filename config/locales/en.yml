@@ -35,6 +35,7 @@ en:
       default: "%Y-%m-%d"
       long: "%B %d, %Y"
       short: "%b %d"
+      weekday: "%A"
       span_same_month_date_1: "%B %e"
       span_same_month_date_2: "%e, %Y"
       span_same_year_date_1: "%B %e"
@@ -87,6 +88,9 @@ en:
       x_days:
         one: 1 day
         other: "%{count} days"
+      x_hours:
+        one: 1 hour
+        other: "%{count} hours"
       x_minutes:
         one: 1 minute
         other: "%{count} minutes"
@@ -96,6 +100,7 @@ en:
       x_seconds:
         one: 1 second
         other: "%{count} seconds"
+      x_and_y: "%{x} %{y}"
     prompts:
       day: Day
       hour: Hour
@@ -162,6 +167,10 @@ en:
       header:
         one: 1 error prohibited this %{model} from being saved
         other: "%{count} errors prohibited this %{model} from being saved"
+  warnings:
+      housing:
+          space:
+            overbooked: Overbooked
   helpers:
     select:
       prompt: Please select
@@ -5205,7 +5214,7 @@ en:
       explain_zero_fallback: This translation will use the plural version for the
         number 0
       History: History
-      Locale_Translation: "%%{language} Translation"
+      Locale_Translation: "%{language} Translation"
       Save: Save
     content:
       needs_translations: This page contains untranslated content
@@ -5275,7 +5284,24 @@ en:
         confirm_remove_self: Are you sure you would like to remove yourself as a facilitator of this workshop?
         confirm_cancel_request: Are you sure you would like to cancel your request to become a facilitator of this workshop?
         confirm_transfer_ownership: By transferring ownership, you will lose administrative capabilities such as deletion and approving new facilitators. Are you sure you want to transfer ownership to %{user_name}?
+    admin: 
+      broadcast: 
+        confirm: You are about to send this email to %{number} people. Are you sure you want to continue?
+      generic: 
+        delete: 
+          confirm: You are about to delete ‘%{title}’. Are you sure you want to continue?
   articles:
+    admin:
+      housing:
+        headings:
+          guests: Guests
+      locations:
+        headings:
+          add_event: Add Event
+          add_location: Add Location
+          amenities: Amenities
+          edit_event: Edit Event
+          edit_location: Edit Location
     policy:
       headings:
         The_Agreement: The Agreement
@@ -5310,6 +5336,8 @@ en:
         peaceful: We are peaceful and honest.
     conference_registration:
       headings:
+        Administration: Administration
+        administration: Administration
         Policy_Agreement: Safer Space Agreement
         policy: Policy
         arrival_and_departure: For what days will you need housing? (If you don't
@@ -5409,6 +5437,9 @@ en:
           availability: The most common arrival and departure dates for attendees are the first and last day of the conference but people often arrive earlier or later. When will your space be available?
           considerations: Organizers will do their best to match up hosts and guests, what considerations should organizers keep in mind when selecting guests to stay in your home?
           notes: Leave a message for organizers should take into consideration when selecting guests for your household.
+        admin:
+          edit:
+            info: This is the copy that is displayed on the front page of the site.
       host:
         considerations:
           vegan: Vegan or vegetarian only
@@ -5587,11 +5618,16 @@ en:
         message: 'Your Message:'
         address: Street Address
         phone: Phone number
-        bed_space: Bed/Couch Spaec
+        bed_space: Bed/Couch Space
         floor_space: Floor Space
         tent_space: Tent Space
         first_day: From
         last_day: To
+        body: Body
+        day: Day
+        event_location: Location
+        time: Time
+        time_span: Length
     actions:
       generic:
         login: Sign In
@@ -5616,6 +5652,11 @@ en:
         next: Next
         continue: Continue
         facebook_sign_in: Facebook Sign In
+        add_meal: Add
+        create: Create
+        delete: Delete
+        place_guest: Place Guest
+        set_host: Set Host
       aria:
         remove_interest: Click if you are no longer interested in this workshop
         show_interest: Click if you are interested in this workshop
@@ -5646,6 +5687,7 @@ en:
       Safer_Spaces_Policy: Safer Space Agreement
     '404':
       Page_Not_Found: Page Not Found
+      Locale_Not_Available: Locale Not Available
     Policy: 'Policy'
     About: 'About'
     Register: 'Register'
@@ -5676,6 +5718,15 @@ en:
         Stats: Stats
         Broadcast: Broadcast
         Edit: Edit Conference
+      admin:
+        Edit: Edit
+        Stats: Stats
+        Broadcast: Broadcast
+        Housing: Housing
+        Locations: Locations
+        Meals: Meals
+        Events: Events
+        Schedule: Schedule
   actions:
     workshops:
       create: New Workshop
@@ -5702,6 +5753,9 @@ en:
         believe that it should exist please contact admin@bikebike.org or file an
         issue on github: https://github.com/bikebike/BikeBike/issues
       title: '404: This page doesn''t exist'
+    locale_not_available:
+      description: This site has yet to be translated into %{language}. We are actively looking for volunteers who can translate existing copy and new copy as we add new features. If you think you can help, please contact us!
+      title: '404: %{language} Translations Missing'
     '500':
       title: There is a problem
       description: 'An error has occurred, details about the error have been sent to our development team. In addition, you may contact us or report an issue.'
@@ -5723,6 +5777,7 @@ en:
         meeting_room: Meeting Room
         outdoor_meeting: Outdoor Space
         workshop: Repair Space
+        event_space: Event Space
       theme:
         community: Community Outreach
         funding: Funding

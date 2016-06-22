@@ -100,7 +100,7 @@ module ApplicationHelper
 
 	def add_stylesheet(sheet)
 		@stylesheets ||= []
-		@stylesheets << sheet
+		@stylesheets << sheet unless @stylesheets.include?(sheet)
 	end
 
 	def stylesheets
@@ -119,7 +119,8 @@ module ApplicationHelper
 
 	def add_inline_script(script)
 		@_inline_scripts ||= []
-		@_inline_scripts << Rails.application.assets.find_asset("#{script.to_s}.js").to_s
+		script = Rails.application.assets.find_asset("#{script.to_s}.js").to_s
+		@_inline_scripts << script unless @_inline_scripts.include?(script)
 	end
 
 	def inline_scripts
@@ -644,8 +645,22 @@ module ApplicationHelper
 		link_to "<span class=\"title\">#{title}</span>".html_safe, link, :class => classes
 	end
 
+	def language(locale, original_language = false)
+		_("languages.#{locale}", locale: original_language ? locale : nil)
+	end
+
 	def date(date, format = :long)
-		I18n.l(date, :format => format) # default, long, short
+		I18n.l(date.is_a?(String) ? Date.parse(date) : date, :format => format)
+	end
+
+	def time(time, format = :short)
+		if time.is_a?(String)
+			time = Date.parse(time)
+		elsif time.is_a?(Float) || time.is_a?(Integer)
+			time = DateTime.now.midnight + time.hours
+		end
+				
+		I18n.l(time, :format => format)
 	end
 
 	def date_span(date1, date2)
@@ -658,6 +673,22 @@ module ApplicationHelper
 		d1 = I18n.l(date1.to_date, format: "span_#{key}_date_1".to_sym)
 		d2 = I18n.l(date2.to_date, format: "span_#{key}_date_2".to_sym)
 		_('date.date_span', vars: {:date_1 => d1, :date_2 => d2})
+	end
+
+	def time_length(length)
+		hours = length.to_i
+		minutes = ((length - hours) * 60).to_i
+		hours = hours > 0 ? (I18n.t 'datetime.distance_in_words.x_hours', count: hours) : nil
+		minutes = minutes > 0 ? (I18n.t 'datetime.distance_in_words.x_minutes', count: minutes) : nil
+		return hours.present? ? (minutes.present? ? (I18n.t 'datetime.distance_in_words.x_and_y', x: hours, y: minutes) : hours) : minutes
+	end
+
+	def hour_span(time1, time2)
+		(time2 - time1) / 3600
+	end
+
+	def hours(time1, time2)
+		time_length hour_span(time1, time2)
 	end
 
 	def generate_confirmation(user, url, expiry = nil)
@@ -674,7 +705,18 @@ module ApplicationHelper
 		_!((p * 10000).to_i.to_s.gsub(/^(.*)(\d\d)$/, '\1.\2%'))
 	end
 
-	def conference_housing_options(conference = nil)
+	def data_set(header_type, header_key, attributes = {}, &block)
+		attributes[:class] = attributes[:class].split(' ') if attributes[:class].is_a?(String)
+		attributes[:class] = [attributes[:class].to_s] if attributes[:class].is_a?(Symbol)
+		attributes[:class] ||= []
+		attributes[:class] << 'data-set'
+		content_tag(:div, attributes) do
+			content_tag(header_type, _(header_key), class: 'data-set-key') +
+			content_tag(:div, class: 'data-set-value', &block)
+		end
+	end
+
+	def conference_days_options(conference = nil)
 		conference ||= @this_conference || @conference
 		return [] unless conference
 
@@ -690,20 +732,133 @@ module ApplicationHelper
 		return dates
 	end
 
-	def conference_housing_options_list(period, conference = nil)
+	def conference_days_options_list(period, conference = nil, format = nil)
 		conference ||= @this_conference || @conference
 		return [] unless conference
 
 		days = []
 
-		conference_housing_options(conference).each do |day|
+		conference_days_options(conference).each do |day|
 			belongs_to_periods = []
 			belongs_to_periods << :before if day <= conference.start_date
 			belongs_to_periods << :after if day >= conference.end_date
 			belongs_to_periods << :during if day >= conference.start_date && day <= conference.end_date
-			days << [date(day.to_date, :span_same_year_date_1), day] if belongs_to_periods.include?(period)
+			days << [date(day.to_date, format || :span_same_year_date_1), day] if belongs_to_periods.include?(period)
 		end
 		return days
+	end
+
+	def day_select(value = nil, args = {})
+		selectfield :day, value, conference_days_options_list(:during, nil, args[:format]), args
+	end
+
+	def time_select(value = nil, args = {}, start_time = 8, end_time = 23.5, step = 0.5)
+		time = start_time
+		times = []
+		while time <= end_time
+			times << [time(DateTime.now.midnight + time.hours), time]
+			time += step
+		end
+		selectfield :time, value, times, args
+	end
+
+	def length_select(value = nil, args = {}, min_length = 0.5, max_length = 6, step = 0.5)
+		length = min_length
+		lengths = []
+		while length <= max_length
+			lengths << [time_length(length), length]
+			length += step
+		end
+		selectfield :time_span, value, lengths, args
+	end
+
+	def location_select(value = nil, args = {})
+		locations = []
+		if @this_conference.event_locations.present?
+			@this_conference.event_locations.each do | location |
+				locations << [ location.title, location.id ]
+			end
+		end
+		selectfield :event_location, value, locations, args
+	end
+
+	def location_name(id)
+		location = EventLocation.find(id)
+		return '' unless location.present?
+		return location.title
+	end
+
+	def host_options_list(hosts)
+		options = [[nil, nil]]
+		hosts.each do | id, registration |
+			options << [registration.user.name, id]
+		end
+		return options
+	end
+
+	def registration_step_menu
+		steps = current_registration_steps(@registration)
+		return '' unless steps.present?
+
+		pre_registration_steps = ''
+		post_registration_steps = ''
+		post_registration = false
+
+		steps.each do | step |
+			text = _"articles.conference_registration.headings.#{step[:name].to_s}"
+			h = content_tag :li, class: [step[:enabled] ? :enabled : nil, @register_template == step[:name] ? :current : nil] do
+				if step[:enabled]
+					content_tag :div, (link_to text, register_step_path(@this_conference.slug, step[:name])).html_safe, class: :step
+				else
+					content_tag :div, text, class: :step
+				end
+			end
+
+			if step[:name] == :workshops
+				post_registration = true
+			end
+
+			if post_registration
+				post_registration_steps += h.html_safe
+			else
+				pre_registration_steps += h.html_safe
+			end
+		end
+
+		html = (
+			row class: 'flow-steps' do
+				columns do
+					(content_tag :ul, id: 'registration-steps' do
+						pre_registration_steps.html_safe
+					end).html_safe + 
+					(content_tag :ul, id: 'post-registration-steps' do
+						post_registration_steps.html_safe
+					end).html_safe
+				end
+			end
+		)
+
+		return html.html_safe
+	end
+
+	def admin_steps
+		[:edit, :stats, :broadcast, :housing, :locations, :meals, :events, :schedule]
+	end
+
+	def valid_admin_steps
+		admin_steps + [:broadcast_sent]
+	end
+
+	def admin_menu
+		steps = ''
+		admin_steps.each do | step |
+			steps += content_tag(:li, class: (step.to_s == @admin_step ? :current : nil)) do
+				link_to _("menu.submenu.admin.#{step.to_s.titlecase}"), step == :edit ?
+					register_step_path(@this_conference.slug, :administration) :
+					administration_step_path(@this_conference.slug, step.to_s)
+			end
+		end
+		content_tag :ul, steps.html_safe, id: 'registration-admin-menu'
 	end
 
 	def interest_button(workshop)
@@ -713,11 +868,48 @@ module ApplicationHelper
 			(button_tag interested, :value => :toggle_interest, :class => (workshop.interested?(current_user) ? :delete : :add), aria: { labelledby: id })
 	end
 
+	def host_guests_widget(registration)
+		html = ''
+		classes = ['host']
+
+		id = registration.id
+		@housing_data[id][:guests].each do | area, guests |
+			max_space = @housing_data[id][:space][area] || 0
+			area_name = (_"forms.labels.generic.#{area}")
+			status_html = ''
+			if @housing_data[id][:warnings].present? && @housing_data[id][:warnings][:space].present? && @housing_data[id][:warnings][:space][area].present?
+				@housing_data[id][:warnings][:space][area].each do | w |
+					status_html += content_tag(:div, _("warnings.housing.space.#{w.to_s}"), class: 'warning')
+				end
+			end
+			space_html = content_tag(:h5, area_name + _!(" (#{guests.size.to_s}/#{max_space.to_s})") + status_html.html_safe)
+			guest_items = ''
+			guests.each do | guest_id, guest |
+				guest_items += content_tag(:li, guest[:guest].user.name, id: "hosted-guest-#{guest_id}")
+			end
+			space_html += content_tag(:ul, guest_items.html_safe)
+			space_html += button_tag :place_guest, type: :button, value: "#{area}:#{id}", class: [:small, 'place-guest', 'on-top-only', guests.size >= max_space ? (guests.size > max_space ? :overbooked : :booked) : nil, max_space > 0 ? nil : :unwanted] 
+			html += content_tag(:div, space_html, class: [:space, area, max_space > 0 || guests.size > 0 ? nil : 'on-top-only'])
+		end
+
+		classes << 'status-warning' if @housing_data[id][:warnings].present?
+		classes << 'status-error' if @housing_data[id][:errors].present?
+		
+		return { html: html.html_safe, class: classes.join(' ') }
+	end
+
 	def link_with_confirmation(link_text, confirmation_text, path, args = {})
 		@confirmation_dlg ||= true
 		args[:data] ||= {}
 		args[:data][:confirmation] = CGI::escapeHTML(confirmation_text)
 		link_to link_text, path, args
+	end
+
+	def button_with_confirmation(button_name, confirmation_text, args = {})
+		@confirmation_dlg ||= true
+		args[:data] ||= {}
+		args[:data][:confirmation] = CGI::escapeHTML(confirmation_text)
+		button_tag button_name, args
 	end
 
 	def richtext(text, reduce_headings = 2)
@@ -731,30 +923,44 @@ module ApplicationHelper
 	end
 
 	def textarea(name, value, options = {})
-		label_id = "#{name.to_s}-label"
+		id = name.to_s.gsub('[', '_').gsub(']', '')
+		label_id = "#{id}-label"
 		description_id = nil
-		html = label_tag(name, nil, id: label_id)
+
+		if options[:label].present?
+			html = label_tag(id, nil, id: label_id) do
+				_(options[:label], :t, vars: options[:vars] || {})
+			end
+		else
+			html = label_tag(id, nil, id: label_id)
+		end
 
 		if options[:help].present?
-			description_id ||= "#{name.to_s}-desc"
+			description_id ||= "#{id}-desc"
 			html += content_tag(:div, _(options[:help], :s, 2), id: description_id, class: 'input-field-help')
 		end
 
 		if options[:warning].present?
-			description_id ||= "#{name.to_s}-desc"
+			description_id ||= "#{id}-desc"
 			html += content_tag(:div, _(options[:warning], :s, 2), id: description_id, class: 'warning-info')
 		end
 
 		html += content_tag(:div, value.present? ? value.html_safe : '',
-				id: name,
+				id: id,
 				class: 'textarea',
-				data: { name: name },
+				data: { name: name, 'edit-on': options[:edit_on] || :load },
 				lang: options[:lang],
-				aria: { labeledby: label_id, describedby: description_id }
+				aria: { labeledby: label_id, describedby: description_id },
+				tabindex: 0
 			)
 	
 		html = content_tag(:div, html, class: ['text-area-field', 'input-field']).html_safe
 		html += _original_content(options[:original_value], options[:original_lang]) if options[:original_value].present?
+
+		add_stylesheet :editor
+		add_inline_script :pen
+		add_inline_script :markdown
+		add_inline_script :editor
 
 		return html.html_safe
 	end
@@ -766,7 +972,7 @@ module ApplicationHelper
 
 		if options[:heading].present?
 			label_id ||= "#{name.to_s}-label"
-			html += content_tag(:h3, _(options[:heading], :t), id: label_id)
+			html += content_tag(:h3, _(options[:heading], :t, vars: options[:vars] || {}), id: label_id)
 		end
 
 		if options[:help].present?
@@ -797,27 +1003,50 @@ module ApplicationHelper
 
 	def textfield(name, value, options = {})
 		html = ''
+		id = name.to_s.gsub('[', '_').gsub(']', '')
 		description_id = nil
 		
 		if options[:heading].present?
-			description_id ||= "#{name.to_s}-desc"
-			html += content_tag(:h3, _(options[:heading], :t), id: description_id)
+			description_id ||= "#{id.to_s}-desc"
+			html += content_tag(:h3, _(options[:heading], :t, vars: options[:vars] || {}), id: description_id)
 		end
 
 		if options[:help].present?
-			description_id ||= "#{name.to_s}-desc"
-			html += content_tag(:div, _(options[:help], :s, 2), class: 'input-field-help', id: description_id)
+			description_id ||= "#{id.to_s}-desc"
+			html += content_tag(:div, _(options[:help], :s, 2, vars: options[:vars] || {}), class: 'input-field-help', id: description_id)
 		end
 
 		html += show_errors name, value
-		html += label_tag name
+
+		if options[:label].present?
+			html += label_tag(id) do
+				_(options[:label], :t, vars: options[:vars] || {})
+			end
+		elsif options[:label] != false
+			html += label_tag id
+		end
 		input_options = {
+				id: id,
 				required: options[:required],
 				lang: options[:lang],
 				min: options[:min],
 				max: options[:max],
-				aria: { describedby: description_id }
+				aria: description_id ? { describedby: description_id } : nil
 			}
+
+		case name
+		when :address
+			input_options[:autocomplete] = 'address-line1'
+		when :name
+			input_options[:autocomplete] = 'name'
+		when :location
+			input_options[:autocomplete] = 'address-level2'
+		when :email
+			input_options[:autocomplete] = 'email'
+		when :phone
+			input_options[:autocomplete] = 'tel'
+		end
+
 		case options[:type]
 		when :select
 			html += select_tag(name, options_for_select(options[:options], value), input_options)
@@ -830,6 +1059,8 @@ module ApplicationHelper
 					"#{(options[:type] || :text).to_s}-field",
 					'input-field',
 					options[:big] ? 'big' : nil,
+					options[:small] ? 'small' : nil,
+					options[:stretch] ? 'stretch-item' : nil,
 					(@errors || {})[name].present? ? 'has-error' : nil
 			])
 

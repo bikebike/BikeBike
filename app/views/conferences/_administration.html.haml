@@ -1,0 +1,7 @@
+= columns(medium: 12) do
+	%h2=_(@page_title)
+= columns(medium: 3, large: 2) do
+	= admin_menu
+= columns(medium: 9, large: 10) do
+	%h3.subtitle=_("menu.submenu.admin.#{@admin_step.titlecase}")
+	%div{id: "admin-#{@admin_step}"}= render "conferences/admin/#{@admin_step}"

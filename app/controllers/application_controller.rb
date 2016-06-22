@@ -28,6 +28,9 @@ class ApplicationController < LinguaFrancaApplicationController
 		# add the translations stylesheet if translating
 		@stylesheets << params[:controller] if params[:controller] == 'translations'
 
+		@_inline_scripts ||= []
+		@_inline_scripts << Rails.application.assets.find_asset('main.js').to_s
+
 		ActionMailer::Base.default_url_options = {:host => "#{request.protocol}#{request.host_with_port}"}
 
 		if request.post? && params[:action] == 'do_confirm'
@@ -161,6 +164,20 @@ class ApplicationController < LinguaFrancaApplicationController
 		end
 	end
 
+	def locale_not_enabled!(locale = nil)
+		locale_not_available!(locale)
+	end
+	
+	def locale_not_available!(locale = nil)
+		# set_default_locale
+		params[:_original_action] = params[:action]
+		params[:action] = 'error-locale-not-available'
+		@page_title = 'page_titles.404.Locale_Not_Available'
+		@main_title_vars = { vars: { language: view_context.language(locale) } }
+		@main_title = 'error.locale_not_available.title'
+		render 'application/locale_not_available', status: 404
+	end
+
 	rescue_from StandardError do |exception|
 		# log the error
 		logger.info exception.to_s
@@ -191,7 +208,7 @@ class ApplicationController < LinguaFrancaApplicationController
 			user = User.find_by_email(user)
 
 			# if the user doesn't exist, just show them a 403
-			do_403 unless user
+			do_403 unless user.present?
 		end
 		expiry ||= (Time.now + 12.hours)
 		session[:confirm_uid] = user.id
@@ -292,10 +309,12 @@ class ApplicationController < LinguaFrancaApplicationController
 		translator = User.find(translator_id)
 		mailer = "#{object.class.table_name.singularize}_translated"
 
-		object.get_translators(data, locale).each do |id, user|
-			if user.id != current_user.id && user.id != translator_id
-				UserMailer.send_mail mailer do
-					{ :args => [object, data, locale, user, translator] }
+		if object.respond_to?(:get_translators)
+			object.get_translators(data, locale).each do |id, user|
+				if user.id != current_user.id && user.id != translator_id
+					UserMailer.send_mail mailer do
+						{ :args => [object, data, locale, user, translator] }
+					end
 				end
 			end
 		end
@@ -304,10 +323,12 @@ class ApplicationController < LinguaFrancaApplicationController
 	def on_translatable_content_change(object, data)
 		mailer = "#{object.class.table_name.singularize}_original_content_changed"
 		
-		object.get_translators(data).each do |id, user|
-			if user.id != current_user.id
-				UserMailer.send_mail mailer do
-					{ :args => [object, data, user, current_user] }
+		if object.respond_to?(:get_translators)
+			object.get_translators(data).each do |id, user|
+				if user.id != current_user.id
+					UserMailer.send_mail mailer do
+						{ :args => [object, data, user, current_user] }
+					end
 				end
 			end
 		end

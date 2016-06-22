@@ -1,0 +1,26 @@
+- add_inline_script :housing
+= form_tag administration_update_path(@this_conference.slug, :housing), id: :hosts, class: 'on-top-target' do
+	= hidden_field_tag :guest_id
+	.on-top-controls
+		= button_tag :close, type: :button, class: ['on-top-close']
+	%ul
+		- @hosts.each do | id, registration |
+			- if registration.user.present?
+				- widget_data = host_guests_widget(registration)
+				%li{id: "host-#{id}", class: widget_data[:class]}
+					%h4=registration.user.name
+					.email=registration.user.email
+					.address=registration.housing_data['address']
+					.guests=widget_data[:html]
+#guests
+	%h4=_'articles.admin.housing.headings.guests', :t
+	%ul.guests
+		- @guests.each do | id, registration |
+			- if registration.user.present?
+				%li.guest{id: "guest-#{id}", data: { id: id, 'affected-hosts': @hosts_affected_by_guests[id].join(',') }}
+					%h4= registration.user.name
+					.city.on-top-only=registration.city
+					.email.on-top-only=registration.user.email
+					= button_tag :set_host, type: :button, class: [:small, 'set-host', 'not-on-top']
+
+

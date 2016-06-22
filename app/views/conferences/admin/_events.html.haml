@@ -1,0 +1,36 @@
+- if @events.present?
+	%ul.events.admin-blocks
+		- @events.each do | event |
+			%li
+				%h4.title=event.title
+				.details
+					= data_set(:h5, 'forms.labels.generic.event_location', class: :location) do
+						=event.event_location.present? ? event.event_location.title : ''
+					= data_set(:h5, 'forms.labels.generic.day', class: :day) do
+						= date(event.start_time.to_date, :weekday)
+					= data_set(:h5, 'forms.labels.generic.time', class: :time) do
+						= time(event.start_time, :short)
+					= data_set(:h5, 'forms.labels.generic.time_span', class: 'time-span') do
+						= hours(event.start_time, event.end_time)
+				= form_tag administration_update_path(@this_conference.slug, :events), class: [:actions, :fill] do
+					= hidden_field_tag :id, event.id
+					= button_with_confirmation :delete, (_'modals.admin.generic.delete.confirm', :p, vars: { title: event.title }), value: :delete, class: [:delete, :small]
+					= button_tag :edit, value: :edit, class: [:small]
+				
+%h4=_"articles.admin.locations.headings.#{@event.id.present? ? 'edit' : 'add'}_event", :t
+= form_tag administration_update_path(@this_conference.slug, :events) do
+	= hidden_field_tag :id, @event.id if @event.id.present?
+	= textfield :title, @event.title!, required: true, big: true, lang: @event.locale
+	= textarea :info, @event.info!, heading: 'articles.conference_registration.headings.admin.edit.info', help: 'articles.conference_registration.paragraphs.admin.edit.info', lang: @event.locale, edit_on: :focus
+	.flex-inputs
+		= location_select @event.event_location_id, small: true, stretch: true
+		= day_select @day, small: true, format: :weekday
+		= time_select @time, small: true
+		= length_select @length, small: true
+	- I18n.backend.enabled_locales.each do | locale |
+		- if locale.to_s != @event.locale.to_s
+			= textfield "title_translations[#{locale.to_s}]", @event._title(locale), big: true, heading: 'translate.pages.Locale_Translation', vars: { language: _("languages.#{locale}") }, label: 'forms.labels.generic.title', lang: locale
+			= textarea "info_translations[#{locale.to_s}]", @event._info(locale), lang: locale, label: 'forms.labels.generic.info', edit_on: :focus
+	.actions.next-prev
+		= button_tag :save, value: :save
+		= button_tag :cancel, value: :cancel, class: :subdued, formnovalidate: true if @event.id.present?

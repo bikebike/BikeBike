@@ -115,6 +115,14 @@ class Workshop < ActiveRecord::Base
         [:race_gender, :mechanics, :funding, :organization, :community]
     end
 
+    def self.all_spaces
+        [:meeting_room, :workshop, :outdoor_meeting]
+    end
+
+    def self.all_needs
+        [:sound, :projector, :tools]
+    end
+
     def get_translators(data, loc = nil)
         notify_list = {}
         active_facilitators.each do |facilitator|
