@@ -51,5 +51,12 @@ BikeBike::Application.configure do
 	config.serve_static_files = true
 	# config.action_controller.perform_caching = true
 
+	I18n.config.language_detection_method = I18n::Config::DETECT_LANGUAGE_FROM_URL_PARAM
+
+	# to be appraised of mailing errors
+	config.action_mailer.raise_delivery_errors = true
+	# to deliver to the browser instead of email
+	config.action_mailer.delivery_method = :letter_opener
+
 	Paypal.sandbox!
 end

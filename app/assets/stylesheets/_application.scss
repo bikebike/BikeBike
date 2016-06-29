@@ -3033,7 +3033,7 @@ html[data-ontop] {
 				}
 
 				&:last-child {
-					@include _(border-radius, 0 0 0.15em 0.15em);
+					@include _(border-radius, 0 0.15em 0.15em 0);
 				}
 			}
 		}

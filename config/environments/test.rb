@@ -35,5 +35,8 @@ BikeBike::Application.configure do
 
 	# Print deprecation notices to the stderr.
 	config.active_support.deprecation = :stderr
+
+	I18n.config.language_detection_method = I18n::Config::DETECT_LANGUAGE_FROM_URL_PARAM
+
 	Paypal.sandbox!
 end

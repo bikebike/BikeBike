@@ -38,10 +38,10 @@ gem 'activerecord-session_store'
 gem 'paypal-express', '0.7.1'
 gem 'sass-json-vars'
 gem 'premailer-rails'
-gem 'delayed_job_active_record'
 gem 'redcarpet'
-
-gem 'copydb'
+gem 'sidekiq'
+gem 'letter_opener'
+gem 'launchy'
 
 group :test do
 	gem 'rspec'
@@ -71,7 +71,6 @@ group :test do
 	gem 'guard-rspec'
 	gem 'factory_girl_rails'
 	gem 'coveralls', require: false
-	gem 'launchy'
 	gem 'selenium-webdriver'
 	gem 'simplecov', require: false
 	gem 'webmock', require: false
