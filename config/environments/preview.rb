@@ -101,4 +101,5 @@ BikeBike::Application.configure do
 
 	I18n.config.language_detection_method = I18n::Config::DETECT_LANGUAGE_FROM_SUBDOMAIN
 	I18n.config.subdomain_format = 'preview-%'
+	I18n.config.host_locale_regex = /^preview\-([a-z]{2})\.[^\.]+\..*$/
 end
