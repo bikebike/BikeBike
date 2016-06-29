@@ -100,5 +100,4 @@ BikeBike::Application.configure do
 	config.action_mailer.raise_delivery_errors = true
 	config.action_mailer.perform_deliveries = true
 	I18n.config.language_detection_method = I18n::Config::DETECT_LANGUAGE_FROM_SUBDOMAIN
-	I18n.config.host_locale_regex = /^preview\-([a-z]{2})\.bikebike\.org$/
 end

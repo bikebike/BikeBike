@@ -43,6 +43,8 @@ class ApplicationController < LinguaFrancaApplicationController
 			@alt_lang_urls[locale] = view_context.url_for_locale(locale) # don't show the current locale
 		end
 
+		xxx
+
 		# call the base method to detect the language
 		super
 	end
