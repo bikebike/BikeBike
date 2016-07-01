@@ -809,11 +809,39 @@ class ConferencesController < ApplicationController
 				@day = nil
 				@time = nil
 				@length = 1.5
+			when :meals
+				@meals = Hash[@this_conference.meals.map{ |k, v| [k.to_i, v] }].sort.to_h
+			when :schedule
+				get_scheule_data
 			end
 		when :done
 			@amount = ((@registration.registration_fees_paid || 0) * 100).to_i.to_s.gsub(/^(.*)(\d\d)$/, '\1.\2')
 		end
 
+	end
+
+	def get_scheule_data
+		@meals = Hash[@this_conference.meals.map{ |k, v| [k.to_i, v] }].sort.to_h
+		@events = Event.where(:conference_id => @this_conference.id).order(start_time: :asc)
+		@workshops = Workshop.where(:conference_id => @this_conference.id).order(start_time: :asc)
+		@locations = {}
+		@workshop_blocks = @this_conference.workshop_blocks || []
+		@workshop_blocks << {
+			'time' => nil,
+			'length' => 1.0,
+			'days' => []
+		}
+		@workshops.each do |workshop|
+			if workshop.location_id
+				@locations[workshop.location_id] ||= workshop.location
+			end
+		end
+		@block_days = []
+		day = @this_conference.start_date
+		while day <= @this_conference.end_date
+			@block_days << day.wday
+			day += 1.day
+		end
 	end
 
 	def get_housing_data
@@ -1062,6 +1090,18 @@ class ConferencesController < ApplicationController
 				event.save
 
 				return redirect_to administration_step_path(@this_conference.slug, :events)
+			end
+		when 'schedule'
+			case params[:button]
+			when 'save_block'
+				@this_conference.workshop_blocks ||= []
+				@this_conference.workshop_blocks[params[:workshop_block].to_i] = {
+					'time' => params[:time],
+					'length' => params[:time_span],
+					'days' => params[:days].keys
+				}
+				@this_conference.save
+				return redirect_to administration_step_path(@this_conference.slug, :schedule)
 			end
 		end
 		do_404

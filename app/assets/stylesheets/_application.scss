@@ -13,7 +13,7 @@ body {
 	padding-bottom: 20vw;
 }
 
-h1, h2, h3, h4, h5, label, button, .button, dt, th, nav.sub-menu {
+h1, h2, h3, h4, h5, label, button, .button, dt, th, .table-th, nav.sub-menu {
 	@include font-family(secondary);
 	font-weight: normal;
 }
@@ -21,6 +21,10 @@ h1, h2, h3, h4, h5, label, button, .button, dt, th, nav.sub-menu {
 h2 {
 	margin: 0;
 	font-size: 6vw;
+}
+
+h3 {
+	font-size: 4.5vw;
 }
 
 h3.subtitle {
@@ -70,30 +74,51 @@ a {
 	position: absolute !important;
 }
 
-table {
+table, .table {
     margin-bottom: 2em;
 	margin-left: 1em;
 	// background-color: #F8F8F8;
 	// width: 100%;
 	// @include default-box-shadow(top, 2, true);
 
-	th, td {
+	th, td, .table-th, .table-td {
 		text-align: left;
 		padding: 0.25em 0.5em;
-		border: 0.1em solid #EEE;
+		border: 0.1rem solid #EEE;
 
-		&:first-child {
+		&.center {
+			text-align: center;
+		}
+
+		&.big {
+			font-size: 1.5em;
+		}
+
+		/*&:first-child {
 			padding-left: 1em;
 		}
 
 		&:last-child {
 			padding-right: 1em;
-		}
+		}*/
 	}
 
-	th {
+	th, .table-th {
 		background-color: #F8F8F8;
 	}
+}
+
+.table {
+	display: table;
+	border-collapse: collapse;
+}
+
+.table-tr {
+	display: table-row;
+}
+
+.table-th, .table-td {
+	display: table-cell;
 }
 
 button,
@@ -451,6 +476,12 @@ input {
 	margin-bottom: 3em;
 	position: relative;
 	@include default-box-shadow(top);
+
+	td &,
+	.table-td & {
+		@include _(box-shadow, none);
+		margin: 0;
+	}
 	
 	label {
 		display: block;
@@ -572,6 +603,14 @@ input {
 	display: inline-block;
 }
 
+.check-box-field.small {
+	font-size: 0.75em;
+
+	&.small label {
+		font-size: 1.125em;
+	}
+}
+
 .radio-button-field {
 	label {
 		width: 7em;
@@ -655,15 +694,26 @@ form {
 	}
 }
 
-#main .columns th.form {
+#main .columns th.form,
+#main .columns .table-th.form {
 	display: none;
 }
 
-#main .columns td.form {
+#main .columns td.form,
+#main .columns .table-td.form {
 	border: 0;
 	
 	form {
 		margin: 0;
+	}
+
+	button {
+		display: block;
+		width: 100%;
+
+		+ button {
+			margin-top: 0.5em;
+		}
 	}
 }
 
@@ -1302,6 +1352,14 @@ ul.warnings li,
 
 		.set-host {
 			width: 100%;
+		}
+	}
+}
+
+#admin-schedule {
+	.workshop-blocks {
+		td, th {
+			vertical-align: top;
 		}
 	}
 }
@@ -2672,6 +2730,11 @@ html[data-lingua-franca-example="html"] {
 		border: 0.1rem solid #CCC;
 		cursor: pointer;
 		@include default-box-shadow(top, 1.5, false);
+
+		td &,
+		.table-td & {
+			@include _(box-shadow, none);
+		}
 	}
 }
 
@@ -2779,8 +2842,12 @@ html[data-ontop] {
 		font-size: 2.25em;
 	}
 
+	h3 {
+		font-size: 1.4em;
+	}
+
 	p {
-		font-size: 1.333em;
+		font-size: 1.25em;
 	}
 
 	form {
@@ -3089,7 +3156,7 @@ html[data-ontop] {
 			figure {
 				float: left;
 				width: 33%;
-				margin: 0 1.5em 1.5em -1.5em;
+				margin: 0 1.5em 1em -1.5em;
 			}
 		}
 	}

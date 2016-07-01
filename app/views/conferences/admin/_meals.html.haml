@@ -7,7 +7,7 @@
 			%th=_'forms.labels.generic.day'
 			%th=_'forms.labels.generic.time'
 			%th.form
-		- Hash[@this_conference.meals.map{ |k, v| [k.to_i, v] }].sort.to_h.each do | time, meal |
+		- @meals.each do | time, meal |
 			%tr
 				%th
 					=_!(meal['title'] || '')

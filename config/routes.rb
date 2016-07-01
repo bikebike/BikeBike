@@ -52,6 +52,7 @@ BikeBike::Application.routes.draw do
     get   '/oauth/:provider' => 'oauths#oauth', :as => :auth_at_provider
     post  '/translator-request' => 'application#translator_request', :as => :translator_request
 
+    # patch '/capture_view' => 'application#capture_view'
     post  '/js_error' => 'application#js_error'
     get   '/error_403' => 'application#do_403'
     get   '/error_404' => 'application#error_404'

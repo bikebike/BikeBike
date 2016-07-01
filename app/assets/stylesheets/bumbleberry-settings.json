@@ -63,10 +63,10 @@
     "font-loading-method": "http2",
     "fonts": {
         "primary": {
-            "name": "SourceSansPro-Regular",
-            "location": "SourceSansPro-Regular",
-            "svg_id": "source_sans_proregular",
-            "ttf_type": "otf",
+            "name": "queulat",
+            "location": "queulat",
+            "svg_id": "queulat",
+            "ttf_type": "ttf",
             "fallback": ["Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", "sans-serif"]
         },
         "secondary": {

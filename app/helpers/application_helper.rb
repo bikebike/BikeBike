@@ -1077,6 +1077,26 @@ module ApplicationHelper
 		checkboxes(name, [true], value, label_key, options)
 	end
 
+	def unique_id(id)
+		id = id.to_s.gsub('[', '_').gsub(']', '')
+
+		@_ids ||= {}
+		@_ids[id] ||= 0
+
+		new_id = id
+		
+		if @_ids[id] > 0
+			#puts " ====== #{id} - #{@_ids[id]} : #{@_ids[id] + 1} ====== "
+			new_id += "--#{@_ids[id]}"
+		end
+
+		puts " ====== #{id} = #{@_ids[id]} ====== "
+		@_ids[id] += 1
+		puts " ====== #{id} = #{@_ids[id]} ====== "
+
+		return new_id
+	end
+
 	def checkboxes(name, boxes, values, label_key, options = {})
 		html = ''
 
@@ -1084,42 +1104,54 @@ module ApplicationHelper
 		description_id = nil
 
 		if options[:heading].present?
-			label_id ||= "#{name.to_s}-label"
+			label_id ||= unique_id("#{name.to_s}-label")
 			html += content_tag(:h3, _(options[:heading], :t), id: label_id)
 		end
 
 		if options[:help].present?
-			description_id ||= "#{name.to_s}-desc"
+			description_id ||= unique_id("#{name.to_s}-desc")
 			html += content_tag(:div, _(options[:help], :s, 2), class: 'input-field-help', id: description_id)
 		end
 
 		boxes_html = ''
 
 		is_single = !values.is_a?(Array)
-		values = values.present? ? values.map(&:to_s) : [] unless is_single
-		boxes = boxes.map(&:to_s)
+		unless boxes.length > 0 && boxes.first.is_a?(Integer)
+			values = values.present? ? values.map(&:to_s) : [] unless is_single
+			boxes = boxes.map(&:to_s)
+		end
 		boxes.each do | box |
 			checked = (is_single ? values.present? : values.include?(box))
 			values -= [box] if checked && !is_single
 			id = nil
 			if options[:radiobuttons].present?
-				id = "#{name.to_s}_#{box}"
-				boxes_html += radio_button_tag(name, box, checked)
+				id = unique_id("#{name.to_s}_#{box}")
+				boxes_html += radio_button_tag(name, box, checked, id: id)
 			else
-				id = (is_single ? name : "#{name.to_s}[#{box}]")
-				boxes_html += check_box_tag(id, 1, checked, data: { toggles: options[:toggles] }.compact)
+				_name = (is_single ? name : "#{name.to_s}[#{box}]")
+				id = unique_id(_name)
+				boxes_html += check_box_tag(_name, 1, checked, data: { toggles: options[:toggles] }.compact, id: id)
 			end
-			boxes_html += label_tag(id, _(is_single ? label_key.to_s : "#{label_key.to_s}.#{box}"))
+			if is_single
+				label = _(label_key.to_s)
+			elsif box.is_a?(Integer)
+				label = I18n.t(label_key.to_s)[box]
+			else
+				label = _("#{label_key.to_s}.#{box}")
+			end
+					
+			boxes_html += label_tag(id, label)
 		end
 
 		if options[:other].present? && !is_single
 			id = nil
 			if options[:radiobuttons].present?
-				id = "#{name.to_s}_other"
-				boxes_html += radio_button_tag(name, :other, values.present?)
+				id = unique_id("#{name.to_s}_other")
+				boxes_html += radio_button_tag(name, :other, values.present?, id: id)
 			else
-				id = "#{name.to_s}[other]"
-				boxes_html += check_box_tag(id, 1, values.present?)
+				_name = "#{name.to_s}[other]"
+				id = unique_id(_name)
+				boxes_html += check_box_tag(_name, 1, values.present?, id: id)
 			end
 			boxes_html += label_tag id,
 				content_tag(:div,
@@ -1132,7 +1164,8 @@ module ApplicationHelper
 					'check-box-field',
 					'input-field',
 					options[:vertical] ? 'vertical' : nil,
-					options[:inline] ? 'inline' : nil
+					options[:inline] ? 'inline' : nil,
+					options[:small] ? 'small' : nil
 				]).html_safe,
 				aria: {
 					labeledby: label_id,

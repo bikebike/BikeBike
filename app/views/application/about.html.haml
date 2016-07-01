@@ -5,8 +5,9 @@
 			%h2=_'articles.about_bikebike.headings.What_is_BikeBike', :t
 			%p=_'articles.about_bikebike.paragraphs.What_is_BikeBike', :p
 
-		= columns(medium: 12) do
+		= columns(medium: 12, class: 'featured-image-container') do
 			%h3=_'articles.about_bikebike.headings.bicycle_project', :t
+			%figure{style: "background-image: url(#{image_path('columbus_people.jpg')})"}
 			%p=_'articles.about_bikebike.paragraphs.bicycle_project_paragraph', :p
 			%ul
 				- [:non_profit, :no_money, :education, :volunteer_run, :export_bikes, :low_cost, :recycle_parts].each do |term|
@@ -14,9 +15,8 @@
 		= columns(medium: 12) do
 			%h3=_'articles.about_bikebike.headings.Who_is_Invited', :t
 			%p=_'articles.about_bikebike.paragraphs.Who_is_Invited', :p
-		= columns(medium: 12, class: 'featured-image-container') do
+		= columns(medium: 12) do
 			%h3=_'articles.about_bikebike.headings.Types_of_Workshops', :t
-			%figure{style: "background-image: url(#{image_path('columbus_people.jpg')})"}
 			%p=_'articles.about_bikebike.paragraphs.Types_of_Workshops', :p
 		= columns(medium: 12) do
 			%h3=_'articles.about_bikebike.headings.Amenities', :t
