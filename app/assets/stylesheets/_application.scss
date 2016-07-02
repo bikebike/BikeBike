@@ -1136,14 +1136,16 @@ ul.warnings li,
 	margin: 1em 0 0;
 	padding: 0;
 	list-style: none;
-	border: 0.1em solid #EEE;
-	background-color: #F8F8F8;
+	// border: 0.1em solid #EEE;
+	// background-color: #F8F8F8;
 
 	a {
 		display: block;
 		padding: 0.5em 0.75em;
-		@include font-family(secondary);
-		border-bottom: 0.1em solid #CCC;
+		//@include font-family(secondary);
+		border: 0.1rem solid #EEE;
+		border-top: 0;
+		border-right: 0;
 
 		@include after {
 			display: none;
@@ -1368,6 +1370,18 @@ ul.warnings li,
 	.workshop-blocks {
 		td, th {
 			vertical-align: top;
+		}
+	}
+
+	.table-tr.new {
+		.table-th {
+			background-color: transparent;
+			border: 0;
+		}
+
+		.table-td {
+			background-color: transparent;
+			border: 0;
 		}
 	}
 }

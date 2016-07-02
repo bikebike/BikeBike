@@ -387,12 +387,12 @@ class ConferencesController < ApplicationController
 				@email_sent = :edit
 			elsif params[:button] == 'test'
 				@email_sent = :test
-				UserMailer.broadcast(
+				UserMailer.delay.broadcast(
 					"#{request.protocol}#{request.host_with_port}",
 					@subject,
 					@content,
 					current_user,
-					@this_conference).deliver_now!
+					@this_conference)
 			elsif params[:button] == 'preview'
 				@email_sent = :preview
 			elsif params[:button] == 'send'
@@ -1001,12 +1001,12 @@ class ConferencesController < ApplicationController
 				@broadcast_step = :preview
 			elsif params[:button] == 'test'
 				@broadcast_step = :test
-				UserMailer.broadcast(
+				UserMailer.delay.broadcast(
 					"#{request.protocol}#{request.host_with_port}",
 					@subject,
 					@body,
 					current_user,
-					@this_conference).deliver_now!
+					@this_conference)
 			end
 			return render 'conferences/register'
 		when 'locations'
