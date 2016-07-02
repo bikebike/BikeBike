@@ -6,3 +6,5 @@
 			.secondary
 				= date_span(@conference.start_date.to_date, @conference.end_date.to_date)
 	%img{src: @conference.poster.full.url || image_path('default_poster.jpg'), role: :presentation, alt: ''}
+- content_for :og_image do
+	= @conference.poster.full.url || image_path('default_poster.jpg')

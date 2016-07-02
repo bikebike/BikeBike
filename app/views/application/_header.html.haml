@@ -16,3 +16,5 @@
 			= row do
 				= columns do
 					%h1=_(@main_title || "page_titles.#{page_group.to_s}.#{page_key.to_s}", :t, @main_title_vars)
+	- content_for :og_image do
+		= image

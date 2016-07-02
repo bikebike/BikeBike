@@ -988,6 +988,10 @@ ul.warnings li,
 				font-size: 0.6333em;
 			}
 		}
+
+		body.error-locale-not-available & {
+			display: none;
+		}
 	}
 
 	.logo {
@@ -1018,6 +1022,10 @@ ul.warnings li,
 		.my-account {
 			overflow: hidden;
 			text-overflow: ellipsis;
+		}
+
+		body.error-locale-not-available & {
+			display: none;
 		}
 	}
 }
@@ -1368,6 +1376,7 @@ ul.warnings li,
 	position: relative;
 	background-color: $white;
 	padding-bottom: rems(2);
+	flex: 1;
 
 	article {
 		padding: rems(2.5) 0;
@@ -1492,6 +1501,11 @@ a.logo {
 		h2 {
 			font-size: 1.15em;
 		}
+	}
+
+	.secondary {
+		font-size: 0.85em;
+		line-height: 2em;
 	}
 }
 
@@ -1703,11 +1717,21 @@ $header-tilt: 8deg;
 		padding: 0;
 		list-style: none;
 	}
+
+	body.error-locale-not-available & {
+		.github, .facebook, .locales {
+			visibility: hidden;
+		}
+	}
 }
 
 body {
 	#primary-content {
 		@include _(transition, 'filter 250ms ease-in-out, -webkit-filter 250ms ease-in-out');
+		display: flex;
+		flex-direction: column;
+		min-height: 100vh;
+		overflow: hidden;
 	}
 
 	&.has-overlay {
@@ -3301,7 +3325,7 @@ html[data-ontop] {
 	
 	#main {
 		padding-left: $sidebar-width;
-	    min-height: 100vh;
+	    //min-height: 100vh;
 	}
 
 	#header-title {
