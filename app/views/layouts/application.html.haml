@@ -4,7 +4,8 @@
 		%meta{ charset: 'utf-8' }
 		%meta{ name: 'viewport', content: 'width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0' }
 		-#%title= (yield :title) + (content_for?(:title) ? (_!' | ') : '') + (_!'Bike!Bike!')
-		%title=_!('Bike!Bike!' + (content_for?(:title) ? " - #{yield :title}" : ''))
+		- title = yield :title
+		%title=_!('Bike!Bike!' + (content_for?(:title) ? " - #{title}" : ''))
 		%meta{ name: 'description', content: (yield_or_default :description, I18n.t('page_descriptions.home')) }
 		= csrf_meta_tags
 		= stylesheets
@@ -13,6 +14,8 @@
 		- @alt_lang_urls.each do |locale, url|
 			%link{ rel: :alternate, hreflang: locale, href: url }
 		- if content_for?(:og_image)
+			%meta{property: 'og:title', content: title}
+			%meta{property: 'og:type', content: "website"}
 			%meta{property: 'og:image', content: (yield :og_image)}
 		-#%link{ href: asset_path('apple-touch-icon.png'), rel: 'apple-touch-icon' }
 		-#%link{ href: asset_path('apple-touch-icon-72x72.png'), rel: 'apple-touch-icon', sizes: '72x72' }
