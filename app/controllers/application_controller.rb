@@ -138,7 +138,7 @@ class ApplicationController < LinguaFrancaApplicationController
 					request,
 					params,
 					current_user,
-				).deliver_now if Rails.env.preview? || Rails.env.production?
+				).deliver_now! if Rails.env.preview? || Rails.env.production?
 		end
 		render json: {}
 	end
@@ -193,7 +193,7 @@ class ApplicationController < LinguaFrancaApplicationController
 					request,
 					params,
 					current_user,
-				).deliver_now if Rails.env.preview? || Rails.env.production?
+				).deliver_now! if Rails.env.preview? || Rails.env.production?
 		end
 
 		# raise the error if we are in development so that we can debug it
@@ -343,7 +343,7 @@ class ApplicationController < LinguaFrancaApplicationController
 					request,
 					params,
 					current_user,
-				).deliver_now if Rails.env.preview? || Rails.env.production?
+				).deliver_now! if Rails.env.preview? || Rails.env.production?
 			logger.info "Missing translation found for: #{key}"
 		end
 	end

@@ -392,7 +392,7 @@ class ConferencesController < ApplicationController
 					@subject,
 					@content,
 					current_user,
-					@this_conference).deliver_now
+					@this_conference).deliver_now!
 			elsif params[:button] == 'preview'
 				@email_sent = :preview
 			elsif params[:button] == 'send'
@@ -1006,7 +1006,7 @@ class ConferencesController < ApplicationController
 					@subject,
 					@body,
 					current_user,
-					@this_conference).deliver_now
+					@this_conference).deliver_now!
 			end
 			return render 'conferences/register'
 		when 'locations'
