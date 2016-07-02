@@ -130,7 +130,8 @@ class ApplicationController < LinguaFrancaApplicationController
 			logger.info exception.to_s
 			logger.info exception.backtrace.join("\n")
 
-			UserMailer.delay.error_report(
+			UserMailer.send_mail(:error_report) do 
+				[
 					"A JavaScript error has occurred",
 					report,
 					params[:message],
@@ -138,7 +139,8 @@ class ApplicationController < LinguaFrancaApplicationController
 					request,
 					params,
 					current_user,
-				) if Rails.env.preview? || Rails.env.production?
+				]
+			end if Rails.env.preview? || Rails.env.production?
 		end
 		render json: {}
 	end
@@ -185,7 +187,8 @@ class ApplicationController < LinguaFrancaApplicationController
 
 		# send and email if this is production
 		suppress(Exception) do
-			UserMailer.delay.error_report(
+			UserMailer.send_mail(:error_report) do 
+				[
 					"An error has occurred in #{Rails.env}",
 					nil,
 					exception.to_s,
@@ -193,7 +196,8 @@ class ApplicationController < LinguaFrancaApplicationController
 					request,
 					params,
 					current_user,
-				) if Rails.env.preview? || Rails.env.production?
+				]
+			end if Rails.env.preview? || Rails.env.production?
 		end
 
 		# raise the error if we are in development so that we can debug it
@@ -335,7 +339,8 @@ class ApplicationController < LinguaFrancaApplicationController
 	def i18n_exception(str, exception, locale, key)
 		# send and email if this is production
 		suppress(Exception) do
-			UserMailer.delay.error_report(
+			UserMailer.send_mail(:error_report) do 
+				[
 					"A missing translation found in #{Rails.env}",
 					"<p>A translation for <code>#{key}</code> in <code>#{locale.to_s}</code> was found. The text that was rendered to the user was:</p><blockquote>#{str || 'nil'}</blockquote>",
 					exception.to_s,
@@ -343,7 +348,8 @@ class ApplicationController < LinguaFrancaApplicationController
 					request,
 					params,
 					current_user,
-				) if Rails.env.preview? || Rails.env.production?
+				]
+			end if Rails.env.preview? || Rails.env.production?
 			logger.info "Missing translation found for: #{key}"
 		end
 	end
