@@ -646,7 +646,9 @@ module ApplicationHelper
 	end
 
 	def language(locale, original_language = false)
-		_("languages.#{locale}", locale: original_language ? locale : nil)
+		args = {}
+		args[:locale] = locale if original_language
+		_("languages.#{locale}", args)
 	end
 
 	def date(date, format = :long)
@@ -1086,13 +1088,10 @@ module ApplicationHelper
 		new_id = id
 		
 		if @_ids[id] > 0
-			#puts " ====== #{id} - #{@_ids[id]} : #{@_ids[id] + 1} ====== "
 			new_id += "--#{@_ids[id]}"
 		end
 
-		puts " ====== #{id} = #{@_ids[id]} ====== "
 		@_ids[id] += 1
-		puts " ====== #{id} = #{@_ids[id]} ====== "
 
 		return new_id
 	end

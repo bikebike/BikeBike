@@ -1725,6 +1725,18 @@ $header-tilt: 8deg;
 	}
 }
 
+body.error-locale-not-available {
+	.locales {
+		list-style: none;
+		padding: 0;
+		text-align: center;
+
+		li {
+			margin-bottom: 1em;
+		}
+	}
+}
+
 body {
 	#primary-content {
 		@include _(transition, 'filter 250ms ease-in-out, -webkit-filter 250ms ease-in-out');
