@@ -1,0 +1,5 @@
+.details
+	= data_set(:h4, 'articles.admin.stats.headings.registrations') do
+		= @registrations.size
+.actions
+	= link_to (_'links.download.Excel'), administration_step_path(@this_conference.slug, :stats, :format => :xlsx), class: [:button, :download]

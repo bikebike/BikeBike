@@ -19,7 +19,7 @@
 			- if registration.user.present?
 				%li.guest{id: "guest-#{id}", data: { id: id, 'affected-hosts': @hosts_affected_by_guests[id].join(',') }}
 					%h4= registration.user.name
-					.city.on-top-only=registration.city
+					.city=registration.city
 					.email.on-top-only=registration.user.email
 					= button_tag :set_host, type: :button, class: [:small, 'set-host', 'not-on-top']
 

@@ -15,24 +15,6 @@
 	window.forEach = function(a, f) { Array.prototype.forEach.call(a, f) };
 	window.forEachElement = function(s, f, p) { forEach((p || document).querySelectorAll(s), f) };
 	
-	forEachElement('.number-field,.email-field,.text-field', function(field) {
-		var input = field.querySelector('input');
-		var positionLabel = function(input) { 
-			field.classList[input.value ? 'remove' : 'add']('empty');
-		}
-		positionLabel(input);
-		input.addEventListener('keyup', function(event) {
-			positionLabel(event.target);
-		});
-		input.addEventListener('blur', function(event) {
-			positionLabel(event.target);
-			field.classList.remove('focused');
-		});
-		input.addEventListener('focus', function(event) {
-			field.classList.add('focused');
-		});
-	});
-	
 	var overlay = document.getElementById('content-overlay');
 	if (overlay) {
 		var body = document.querySelector('body');
@@ -50,29 +32,35 @@
 		}, true);
 		function openDlg(dlg, link) {
 			body.setAttribute('style', 'width: ' + body.clientWidth + 'px');
-			dlg.querySelector('.message').innerHTML = decodeURI(link.dataset.confirmation);
-			dlg.querySelector('.confirm').addEventListener('click', function(event) {
-				event.preventDefault();
-				if (link.tagName == 'BUTTON') {
-					var form = link.parentElement
-					while (form && form.tagName != 'FORM') {
-						var form = form.parentElement
+			dlg.querySelector('.message').innerHTML = link.querySelector('.message').innerHTML
+			if (link.dataset.infoTitle) {
+				dlg.querySelector('.title').innerHTML = decodeURI(link.dataset.infoTitle);
+			}
+			confirmBtn = dlg.querySelector('.confirm');
+			if (confirmBtn) {
+				confirmBtn.addEventListener('click', function(event) {
+					event.preventDefault();
+					if (link.tagName == 'BUTTON') {
+						var form = link.parentElement
+						while (form && form.tagName != 'FORM') {
+							var form = form.parentElement
+						}
+						if (form) {
+							var input = document.createElement('input');
+							input.type = 'hidden';
+							input.name = 'button';
+							input.value = link.value;
+							form.appendChild(input);
+							form.submit();
+						}
+					} else {
+						window.location.href = link.getAttribute('href');
 					}
-					if (form) {
-						var input = document.createElement('input');
-						input.type = 'hidden';
-						input.name = 'button';
-						input.value = link.value;
-						form.appendChild(input);
-						form.submit();
-					}
-				} else {
-					window.location.href = link.getAttribute('href');
-				}
-			});
+				});
+			}
 			primaryContent.setAttribute('aria-hidden', 'true');
 			document.getElementById('overlay').onclick =
-				dlg.querySelector('.delete').onclick = function() { closeDlg(dlg); };
+				dlg.querySelector('.close').onclick = function() { closeDlg(dlg); };
 			body.classList.add('has-overlay');
 			dlg.removeAttribute('aria-hidden');
 			dlg.setAttribute('role', 'alertdialog');
@@ -99,11 +87,14 @@
 				return false;
 			});
 		});
-	}
-
-	var errorField = document.querySelector('.input-field.has-error input, .input-field.has-error textarea');
-	if (errorField) {
-		errorField.focus();
+		var infoDlg = document.getElementById('info-dlg');
+		forEachElement('[data-info-text]', function(link) {
+			link.addEventListener('click', function(event) {
+				event.preventDefault();
+				openDlg(infoDlg, link);
+				return false;
+			});
+		});
 	}
 	
 	var htmlNode = document.documentElement;
@@ -120,28 +111,73 @@
 			htmlNode.setAttribute('data-input', 'mouse');
 		}
 	});
-	forEachElement('form.js-xhr', function(form) {
-		if (form.addEventListener) {
-			form.addEventListener('submit', function(event) {
-				event.preventDefault();
-				form.classList.add('requesting');
-				var data = new FormData(form);
-				var request = new XMLHttpRequest();
-				request.onreadystatechange = function() {
-					if (request.readyState == 4) {
-						form.classList.remove('requesting');
-						if (request.status == 200) {
-							var response = JSON.parse(request.responseText);
-							for (var i = 0; i < response.length; i++) {
-								form.querySelector(response[i].selector).innerHTML = response[i].html;
+
+	var errorField = document.querySelector('.input-field.has-error input, .input-field.has-error textarea');
+	if (errorField) {
+		errorField.focus();
+	}
+	
+	window.initNodeFunctions = [ function(node) {
+		forEachElement('.number-field,.email-field,.text-field', function(field) {
+			var input = field.querySelector('input');
+			var positionLabel = function(input) { 
+				field.classList[input.value ? 'remove' : 'add']('empty');
+			}
+			positionLabel(input);
+			input.addEventListener('keyup', function(event) {
+				positionLabel(event.target);
+			});
+			input.addEventListener('blur', function(event) {
+				positionLabel(event.target);
+				field.classList.remove('focused');
+			});
+			input.addEventListener('focus', function(event) {
+				field.classList.add('focused');
+			});
+		}, node || document);
+		forEachElement('form.js-xhr', function(form) {
+			if (form.addEventListener) {
+				form.addEventListener('submit', function(event) {
+					event.preventDefault();
+					form.classList.add('requesting');
+					var data = new FormData(form);
+					var request = new XMLHttpRequest();
+					request.onreadystatechange = function() {
+						if (request.readyState == 4) {
+							form.classList.remove('requesting');
+							if (request.status == 200) {
+								var response = JSON.parse(request.responseText);
+								for (var i = 0; i < response.length; i++) {
+									var element;
+									if (response[i].selector) {
+										element = form.querySelector(response[i].selector);
+									}
+									if (response[i].globalSelector) {
+										element = document.querySelector(response[i].globalSelector);
+									}
+
+									if (response[i].html) {
+										element.innerHTML = response[i].html;
+										window.initNode(element);
+									}
+									if (response[i].className) {
+										element.className = response[i].className;
+									}
+								}
 							}
 						}
 					}
-				}
-				request.open('POST', form.getAttribute('action'), true);
-				request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-				request.send(data);
-			}, false);
-		}
-	});
+					request.open('POST', form.getAttribute('action'), true);
+					request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+					request.send(data);
+				}, false);
+			}
+		}, node || document);
+	} ];
+	window.initNode = function(node) {
+		forEach(initNodeFunctions, function(fn) {
+			fn(node);
+		});
+	};
+	initNode();
 })();

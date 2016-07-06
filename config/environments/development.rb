@@ -58,5 +58,5 @@ BikeBike::Application.configure do
 	# to deliver to the browser instead of email
 	config.action_mailer.delivery_method = :letter_opener
 
-	Paypal.sandbox!
+	# Paypal.sandbox!
 end

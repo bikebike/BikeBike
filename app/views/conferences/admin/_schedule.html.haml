@@ -1,18 +1,98 @@
-.table.workshop-blocks
-	.table-tr.header
-		.table-th=_'forms.labels.generic.block_number'
-		.table-th=_'forms.labels.generic.time'
-		.table-th=_'forms.labels.generic.length'
-		.table-th=_'forms.labels.generic.days'
-		.table-th.form
-	- @workshop_blocks.each_with_index do | info, block |
-		- is_new = info['time'].blank?
-		= form_tag administration_update_path(@this_conference.slug, :schedule), class: ['table-tr', is_new ? 'new' : 'saved'] do
-			.table-th.center.big= is_new ? '' : (block + 1)
-			.table-td=time_select info['time'], small: true, label: false
-			.table-td=length_select info['length'], {small: true, label: false}, 0.5, 2
-			.table-td=checkboxes :days, @block_days, info['days'].map(&:to_i), 'date.day_names', vertical: true, small: true
-			.table-td.form
-				= hidden_field_tag :workshop_block, block
-				= button_tag :delete_block, value: :delete_block, class: [:small, :delete] if block == @workshop_blocks.length - 2
-				= button_tag (is_new ? :add_block : :update_block), value: :save_block, class: [:small, :add]
+#schedule-preview
+	- @schedule.each do | day, data |
+		%h4=date(day, :weekday)
+		%table.schedule{class: data[:locations].present? ? 'has-locations' : 'no-locations'}
+			- if data[:locations].present?
+				%thead
+					%tr
+						%th.corner
+						- data[:locations].each do | id, location |
+							%th=location.title
+						%th.status
+			%tbody
+				- data[:times].each do | time, time_data |
+					%tr
+						- rowspan = (time_data[:length] * 2).to_i
+						%th=time(time)
+						- if time_data[:type] == :workshop
+							- if time_data[:item][:workshops].present?
+								- data[:locations].each do | id, location |
+									- if time_data[:item][:workshops][id].present?
+										- workshop = time_data[:item][:workshops][id][:workshop]
+										- status = time_data[:item][:workshops][id][:status]
+									- else
+										- workshop = status = nil
+									%td{class: [time_data[:type], workshop.present? ? :filled : nil], rowspan: rowspan}
+										- if workshop.present?
+											= form_tag administration_update_path(@this_conference.slug, :schedule), class: 'js-xhr' do
+												.title=workshop.title
+												.status
+													.conflict-score
+														%span.title Conflict Score: 
+														%span.value="#{status[:conflict_score] * 100.0}%"
+													- if status[:errors].present?
+														.errors
+															- status[:errors].each do | error |
+																.error=_"errors.messages.schedule.#{error[:name].to_s}", vars: error[:i18nVars]
+												= hidden_field_tag :id, workshop.id
+												= button_tag :deschedule, value: :deschedule_workshop, class: [:delete, :small]
+										- else
+											.title="Block #{time_data[:item][:block] + 1}"
+							- else
+								%td{class: time_data[:type], rowspan: rowspan, colspan: data[:locations].present? ? data[:locations].size : 1}
+									.title="Block #{time_data[:item][:block] + 1}"
+							%td.status{rowspan: rowspan}
+								- if time_data[:status].present? && time_data[:status][:errors].present?
+									%ul.errors
+										- time_data[:status][:errors].each do | error |
+											%li=error.to_json.to_s
+						- elsif time_data[:type] != :nil
+							%td{class: time_data[:type], rowspan: rowspan, colspan: data[:locations].present? ? data[:locations].size : 1}
+								- case time_data[:type]
+									- when :meal
+										.title= time_data[:item]['title']
+										.location= EventLocation.find(time_data[:item]['location'].to_i).title
+									- when :event
+										.title= time_data[:item].title
+										.location= time_data[:item].event_location.title
+							%td.status{rowspan: rowspan}
+- unless request.xhr?
+	%ul.workshop-list
+		- @workshops.each do | workshop |
+			%li{id: "workshop-#{workshop.id}", class: workshop.block.present? ? 'booked' : 'not-booked'}
+				%h4.title= workshop.title
+				= form_tag administration_update_path(@this_conference.slug, :schedule), class: 'js-xhr' do
+					.already-booked
+						.field-error='This block is already booked'
+					.workshop-description
+						.details
+							= data_set(:h5, 'articles.workshops.headings.interested_count') do
+								= workshop.interested_count
+							= data_set(:h5, 'articles.workshops.headings.facilitators') do
+								- facilitators = []
+								- workshop.active_facilitators.each do | facilitator |
+									- facilitators << facilitator.name
+								= facilitators.join ', '
+							= data_set(:h5, 'articles.workshops.headings.needs') do
+								- needs = []
+								- JSON.parse(workshop.needs || '[]').each do | need |
+									- needs << (_"workshop.options.needs.#{need}")
+								= _!(needs.join ', ')
+							= data_set(:h5, 'articles.workshops.headings.theme') do
+								= workshop.theme.present? ? (_"workshop.options.theme.#{workshop.theme}") : ''
+							= data_set(:h5, 'articles.workshops.headings.space') do
+								= workshop.space.present? ? (_"workshop.options.space.#{workshop.space}") : ''
+							= data_set(:h5, 'forms.labels.generic.info') do
+								= link_info_dlg truncate(workshop.info), (richtext workshop.info.html_safe), workshop.title
+							- if workshop.notes.present? && strip_tags(workshop.notes).length > 0
+								= data_set(:h5, 'forms.labels.generic.notes') do
+									= link_info_dlg truncate(workshop.notes), (richtext workshop.notes.html_safe), workshop.title
+
+						= hidden_field_tag :id, workshop.id
+						.flex-inputs
+							= location_select workshop.event_location_id, small: true, stretch: true
+							= block_select workshop.block.present? ? "#{workshop.block['day']}:#{workshop.block['block']}" : nil, small: true
+						.actions.next-prev
+							= button_tag :deschedule, value: :deschedule_workshop, class: [:delete, 'booked-only']
+							= button_tag :reschedule, value: :schedule_workshop, class: [:secondary, 'booked-only']
+							= button_tag :schedule_workshop, value: :schedule_workshop, class: 'not-booked-only'

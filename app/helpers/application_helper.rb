@@ -708,12 +708,16 @@ module ApplicationHelper
 	end
 
 	def data_set(header_type, header_key, attributes = {}, &block)
+		raw_data_set(header_type, _(header_key), attributes, &block)
+	end
+
+	def raw_data_set(header_type, header, attributes = {}, &block)
 		attributes[:class] = attributes[:class].split(' ') if attributes[:class].is_a?(String)
 		attributes[:class] = [attributes[:class].to_s] if attributes[:class].is_a?(Symbol)
 		attributes[:class] ||= []
 		attributes[:class] << 'data-set'
 		content_tag(:div, attributes) do
-			content_tag(header_type, _(header_key), class: 'data-set-key') +
+			content_tag(header_type, header, class: 'data-set-key') +
 			content_tag(:div, class: 'data-set-value', &block)
 		end
 	end
@@ -772,6 +776,16 @@ module ApplicationHelper
 			length += step
 		end
 		selectfield :time_span, value, lengths, args
+	end
+
+	def block_select(value = nil, args = {})
+		blocks = {}
+		@workshop_blocks.each_with_index do | info, block |
+			info['days'].each do | day |
+				blocks[(day.to_i * 10) + block] = [ "#{(I18n.t 'date.day_names')[day.to_i]} Block #{block + 1}", "#{day}:#{block}" ]
+			end
+		end
+		selectfield :workshop_block, value, blocks.sort.to_h.values, args
 	end
 
 	def location_select(value = nil, args = {})
@@ -844,7 +858,7 @@ module ApplicationHelper
 	end
 
 	def admin_steps
-		[:edit, :stats, :broadcast, :housing, :locations, :meals, :events, :schedule]
+		[:edit, :stats, :broadcast, :housing, :locations, :meals, :events, :workshop_times, :schedule]
 	end
 
 	def valid_admin_steps
@@ -903,15 +917,29 @@ module ApplicationHelper
 	def link_with_confirmation(link_text, confirmation_text, path, args = {})
 		@confirmation_dlg ||= true
 		args[:data] ||= {}
-		args[:data][:confirmation] = CGI::escapeHTML(confirmation_text)
-		link_to link_text, path, args
+		args[:data][:confirmation] = true
+		link_to path, args do
+			(link_text.to_s + content_tag(:template, confirmation_text, class: 'message')).html_safe
+		end
+	end
+
+	def link_info_dlg(link_text, info_text, info_title, args = {})
+		@info_dlg ||= true
+		args[:data] ||= {}
+		args[:data]['info-title'] = info_title
+		args[:data]['info-text'] = true
+		content_tag(:a, args) do
+			(link_text.to_s + content_tag(:template, info_text, class: 'message')).html_safe
+		end
 	end
 
 	def button_with_confirmation(button_name, confirmation_text, args = {})
 		@confirmation_dlg ||= true
 		args[:data] ||= {}
-		args[:data][:confirmation] = CGI::escapeHTML(confirmation_text)
-		button_tag button_name, args
+		args[:data][:confirmation] = true
+		button_tag args do
+			(button_name.to_s + content_tag(:template, confirmation_text, class: 'message')).html_safe
+		end
 	end
 
 	def richtext(text, reduce_headings = 2)
@@ -922,6 +950,10 @@ module ApplicationHelper
 			gsub(/<(\/?)h2>/, '<\1h' + (reduce_headings + 2).to_s + '>').
 			gsub(/<(\/?)h1>/, '<\1h' + (reduce_headings + 1).to_s + '>').
 			html_safe
+	end
+
+	def truncate(text)
+		strip_tags(text.gsub('>', '> ')).gsub(/^(.{40,60})\s.*$/m, '\1&hellip;').html_safe
 	end
 
 	def textarea(name, value, options = {})
@@ -1001,6 +1033,10 @@ module ApplicationHelper
 
 	def numberfield(name, value, options = {})
 		textfield(name, value, options.merge({type: :number}))
+	end
+
+	def emailfield(name, value, options = {})
+		textfield(name, value, options.merge({type: :email}))
 	end
 
 	def textfield(name, value, options = {})

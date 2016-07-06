@@ -2,6 +2,7 @@ class Workshop < ActiveRecord::Base
     translates :info, :title
 
     belongs_to :conference
+    belongs_to :event_location
 
     has_many :workshop_facilitators, :dependent => :destroy
     has_many :users, :through => :workshop_facilitators
@@ -83,14 +84,19 @@ class Workshop < ActiveRecord::Base
     end
 
     def interested_count
-        return 0 unless id
+        interested.size
+    end
+
+    def interested
+        return [] unless id
+        return @interested if @interested.present?
+
         collaborators = []
         workshop_facilitators.each do |f|
             collaborators << f.user_id unless f.role.to_sym == :requested || f.user_id.nil?
         end
         return 10 unless collaborators.present?
-        interested = WorkshopInterest.where("workshop_id=#{id} AND user_id NOT IN (#{collaborators.join ','})") || []
-        interested ? interested.size : 0
+        @interested = WorkshopInterest.where("workshop_id=#{id} AND user_id NOT IN (#{collaborators.join ','})") || []
     end
 
     def can_translate?(user, lang)

@@ -2,8 +2,7 @@
 %html{ lang: I18n.locale.to_s }
 	%head
 		%meta{ charset: 'utf-8' }
-		%meta{ name: 'viewport', content: 'width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0' }
-		-#%title= (yield :title) + (content_for?(:title) ? (_!' | ') : '') + (_!'Bike!Bike!')
+		%meta{ name: 'viewport', content: 'width=device-width, initial-scale=1.0' }
 		- title = yield :title
 		%title=_!('Bike!Bike!' + (content_for?(:title) ? " - #{title}" : ''))
 		%meta{ name: 'description', content: (yield_or_default :description, I18n.t('page_descriptions.home')) }
@@ -14,13 +13,11 @@
 		- @alt_lang_urls.each do |locale, url|
 			%link{ rel: :alternate, hreflang: locale, href: url }
 		- if content_for?(:og_image)
+			- og_image = yield :og_image
+			- og_image = request.base_url + og_image
 			%meta{property: 'og:title', content: title}
-			%meta{property: 'og:type', content: "website"}
-			%meta{property: 'og:image', content: (yield :og_image)}
-		-#%link{ href: asset_path('apple-touch-icon.png'), rel: 'apple-touch-icon' }
-		-#%link{ href: asset_path('apple-touch-icon-72x72.png'), rel: 'apple-touch-icon', sizes: '72x72' }
-		-#%link{ href: asset_path('apple-touch-icon-114x114.png'), rel: 'apple-touch-icon', sizes: '114x114' }
-		-#%link{ href: asset_path('apple-touch-icon-144x144.png'), rel: 'apple-touch-icon', sizes: '144x144' }
+			%meta{property: 'og:type', content: 'website'}
+			%meta{property: 'og:image', content: og_image}
 		= yield :head
 
 	%body{ class: page_style }
@@ -45,16 +42,24 @@
 					= yield
 			#footer
 				%footer= render 'shared/footer'
-		- if @confirmation_dlg.present?	
+		- if @confirmation_dlg.present?	|| @info_dlg.present?
 			#content-overlay
 				#overlay
-				.dlg#confirmation-dlg
-					.dlg-content
-						%h2.title=_'modals.confirm'
-						.dlg-inner
-							%p.message=''
-							%a.button.confirm=_'modals.yes_button'
-							%button.delete=_'modals.no_button'
+				- if @confirmation_dlg.present?
+					.dlg#confirmation-dlg
+						.dlg-content
+							%h2.title=_'modals.confirm'
+							.dlg-inner
+								%p.message=''
+								%a.button.confirm=_'modals.yes_button'
+								%button.delete.close=_'modals.no_button'
+				- if @info_dlg.present?
+					.dlg#info-dlg
+						.dlg-content
+							%h2.title=_'modals.info'
+							.dlg-inner
+								%p.message=''
+								%button.close=_'modals.done_button'
 		
 		= yield :footer_scripts if content_for?(:footer_scripts)
 		= inline_scripts

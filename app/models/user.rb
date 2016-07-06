@@ -36,4 +36,18 @@ class User < ActiveRecord::Base
 		return "#{name} <#{email}>"
 	end
 
+	def self.get(email)
+		user = where(email: email).first
+
+		unless user
+			# not really a good UX so we should fix this later
+			#do_404
+			#return
+			user = new(email: email)
+			user.save!
+		end
+
+		return user
+	end
+
 end

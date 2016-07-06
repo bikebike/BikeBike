@@ -5533,6 +5533,7 @@ en:
         needs: Needs
         space: Space
         theme: Theme
+        interested_count: Interested
         Delete_Workshop: Delete Workshop
         notes: Notes
         Workshops: Workshops

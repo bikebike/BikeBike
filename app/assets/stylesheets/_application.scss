@@ -13,7 +13,7 @@ body {
 	padding-bottom: 20vw;
 }
 
-h1, h2, h3, h4, h5, label, button, .button, dt, th, .table-th, nav.sub-menu {
+h1, h2, h3, h4, h5, h6, label, button, .button, dt, th, .table-th, nav.sub-menu {
 	@include font-family(secondary);
 	font-weight: normal;
 }
@@ -31,6 +31,18 @@ h3.subtitle {
 	font-size: 1.5em;
 }
 
+h4 {
+	font-size: 1.25em;
+}
+
+h5 {
+	font-size: 1.125em;
+}
+
+h6 {
+	font-size: 1em;
+}
+
 p {
 	font-size: 4vw;
 }
@@ -41,6 +53,7 @@ a {
 	border-bottom: 0 solid;
 	outline: 0;
 	position: relative;
+	cursor: pointer;
 
 	@include after {
 		content: '';
@@ -101,10 +114,25 @@ table, .table {
 		&:last-child {
 			padding-right: 1em;
 		}*/
+
+		&.status {
+			width: 0.1rem;
+			background-color: transparent;
+			border: 0;
+		}
 	}
 
 	th, .table-th {
 		background-color: #F8F8F8;
+
+		&.corner {
+			background-color: transparent;
+			border: 0;
+		}
+	}
+
+	tbody th {
+		width: 0.1rem;
 	}
 }
 
@@ -382,18 +410,25 @@ input {
 	}
 }
 
+.hidden {
+	display: none !important;
+}
+
+.field-error {
+	display: block;
+	background-color: rgba($colour-2, 0.333);
+	@include font-family(secondary);
+	padding: 0.5em 1em;
+	margin: 0 0.2em;
+	text-align: center;
+	@include default-box-shadow(top, 2);
+}
+
 .input-field {
 	.field-error {
-		display: block;
 		float: right;
-		background-color: rgba($colour-2, 0.333);
-		@include font-family(secondary);
-		padding: 0.5em 1em;
-		margin: 0 0.2em;
-		text-align: center;
 		@include _(transform, skewX(-15deg));
 		@include _(transform-origin, 0 100%);
-		@include default-box-shadow(top, 2);
 		@include _(animation, bend ease-in-out 500ms infinite alternate both);
 	}
 
@@ -463,10 +498,9 @@ input {
 }
 
 .input-field-help {
-	margin-bottom: 1em;
-	margin-left: 1em;
+	margin: 0.5em 1em 0;
 	line-height: 1.3333em;
-	font-size: 1.25em;
+	font-size: 1.125em;
 }
 
 .check-box-field,
@@ -1136,13 +1170,10 @@ ul.warnings li,
 	margin: 1em 0 0;
 	padding: 0;
 	list-style: none;
-	// border: 0.1em solid #EEE;
-	// background-color: #F8F8F8;
 
 	a {
 		display: block;
 		padding: 0.5em 0.75em;
-		//@include font-family(secondary);
 		border: 0.1rem solid #EEE;
 		border-top: 0;
 		border-right: 0;
@@ -1158,16 +1189,50 @@ ul.warnings li,
 	li {
 		margin: 0;
 
-		&:last-child a {
-			border: 0;
-		}
-
 		&.current {
 			a {
 				color: $white;
 				background-color: $colour-5;
 			}
 		}
+	}
+}
+
+.data-set {
+	display: table-row;
+}
+
+.data-set-key, .data-set-value {
+	display: table-cell;
+	padding: 0.25em 0.5em;
+	vertical-align: top;
+	border-bottom: 0.1rem solid #EEE;
+}
+
+.data-set-key {
+	font-size: 1em;
+	width: 1rem;
+	white-space: nowrap;
+}
+
+.data-set:last-child {
+	.data-set-key, .data-set-value {
+		border: 0;
+	}
+}
+
+.details {
+	display: table;
+	width: 100%;
+
+	&.inline {
+		width: auto;
+	}
+}
+
+.space, .address {
+	.data-set-key, .data-set-value {
+		white-space: nowrap;
 	}
 }
 
@@ -1197,34 +1262,6 @@ ul.warnings li,
 		margin: 0 0 1em;
 		padding: 0 0 0.5em;
 		border-bottom: 0.1rem solid #EEE;
-	}
-
-	.details {
-		display: table;
-		width: 100%;
-	}
-
-	.data-set {
-		display: table-row;
-	}
-
-	.data-set-key, .data-set-value {
-		display: table-cell;
-		padding: 0.25em 0.5em;
-		vertical-align: top;
-	    border-bottom: 0.1rem solid #EEE;
-	}
-	
-	.data-set:last-child {
-		.data-set-key, .data-set-value {
-			border: 0;
-		}
-	}
-
-	.space, .address {
-		.data-set-key, .data-set-value {
-			white-space: nowrap;
-		}
 	}
 
 	.amenities {
@@ -1342,7 +1379,7 @@ ul.warnings li,
 	#guests {
 		.guests {
 			@include _-(display, flex);
-			@include _(align-items, flex-start);
+			//@include _(align-items, flex-start);
 			@include _(flex-wrap, wrap);
 			list-style: none;
 			padding: 0;
@@ -1366,7 +1403,7 @@ ul.warnings li,
 	}
 }
 
-#admin-schedule {
+#admin-workshop_times {
 	.workshop-blocks {
 		td, th {
 			vertical-align: top;
@@ -1386,11 +1423,177 @@ ul.warnings li,
 	}
 }
 
+.details.org-members {
+	padding: 1em;
+	border: 0.1rem solid #EEE;
+	border-bottom: 0;
+}
+
+table.schedule {
+	width: 100%;
+	margin: 0 0 1em;
+
+	td {
+		text-align: center;
+
+		&.empty {
+			border-top: 0;
+			border-bottom: 0;
+			background-color: #F8F8F8;
+		}
+
+		&.workshop {
+			background-color: lighten($colour-1, 40%);
+
+			&.filled {
+				background-color: lighten($colour-1, 25%);
+			}
+		}
+
+		&.event {
+			background-color: lighten($colour-2, 25%);
+		}
+
+		&.meal {
+			background-color: lighten($colour-3, 25%);
+		}
+
+		.title {
+			@include font-family(secondary);
+		}
+
+		.status {
+			display: inline-block;
+			text-align: left;
+			float: right;
+			font-size: 0.9em;
+			margin-top: 0.5em;
+		}
+
+		.conflict-score {
+			text-align: right;
+
+			.title {
+				@include font-family(secondary);
+			}
+		}
+
+		.errors {
+			position: relative;
+			border-top: 0.1rem solid #666;
+			margin-top: 0.5em;
+			padding-top: 0.25em;
+
+			@include before {
+				content: '!';
+				display: inline-block;
+				position: absolute;
+				z-index: 1;
+				top: 0;
+				left: -1.2em;
+				width: 1em;
+				color: $white;
+				@include font-family(secondary);
+			}
+
+			@include after {
+				content: '';
+				position: absolute;
+				top: 0.1em;
+				left: -1.333em;
+				width: 0;
+				height: 0;
+				font-size: 1.25em;
+				border: 0.5em solid;
+				border-left-color: transparent;
+				border-right-color: transparent;
+				border-width: 0 0.5em 0.75em;
+				color: darken($colour-2, 25%);
+			}
+		}
+
+		#main .columns & form {
+			margin-top: 0;
+			
+			button {
+				margin-top: 0.5em;
+				float: left;
+			}
+		}
+	}
+}
+
+#admin-schedule {
+	.workshop-list {
+		@include _-(display, flex);
+		@include _(flex-wrap, wrap);
+		padding: 0;
+
+		li {
+			@include _(flex, 1);
+			@include _(flex-basis, 48%);
+			margin: 1%;
+			@include _(transition, background-color 250ms ease-in-out);
+
+			.title {
+				@include _(transition, background-color 250ms ease-in-out);
+			}
+
+			&.booked {
+				background-color: lighten($colour-1, 40%);
+
+				.not-booked-only {
+					display: none;
+				}
+
+				.data-set-key, .data-set-value {
+					border-bottom-color: #888;
+				}
+			}
+
+			&.not-booked {
+
+				.booked-only {
+					display: none;
+				}
+			}
+
+			.field-error {
+				background-color: lighten($colour-2, 22.5%);
+				margin: 0;
+			}
+
+			.already-booked {
+				overflow: hidden;
+				max-height: 0;
+
+				&.is-true {
+					max-height: 3em;
+					@include _(transition, max-height 150ms ease-in-out);
+				}
+			}
+
+			.workshop-description {
+				max-height: none;
+			}
+
+			.details {
+				margin: 0 5% 1em;
+				width: 90%;
+			}
+		}
+
+		#main .columns & form {
+			margin: 0;
+		}
+	}
+}
+
 #main {
 	position: relative;
 	background-color: $white;
 	padding-bottom: rems(2);
-	flex: 1;
+	@include _(flex, 1);
 
 	article {
 		padding: rems(2.5) 0;
@@ -1816,6 +2019,8 @@ body {
 		bottom: 0;
 		left: 0;
 		max-width: 50rem;
+		max-height: 100%;
+		overflow-y: auto;
 		margin: auto;
 		z-index: 1001;
 		background-color: $white;
@@ -1841,8 +2046,33 @@ body {
 	}
 
 	.message {
-		font-size: 1.5em;
 		margin-bottom: 2em;
+	}
+
+	#info-dlg .title {
+		background-color: $colour-1;
+		font-size: 1.5em;
+		text-align: left;
+	}
+
+	#info-dlg .message {
+		text-align: left;
+
+		p, h4 {
+			font-size: 0.8em;
+		}
+
+		h3 {
+			font-size: 1em;
+		}
+
+		h5 {
+			font-size: 0.667em;
+		}
+
+		h6 {
+			font-size: 0.8em;
+		}
 	}
 }
 
@@ -3150,7 +3380,7 @@ html[data-ontop] {
 				}
 
 				&:last-child {
-					@include _(border-radius, 0 0.15em 0.15em 0);
+					@include _(border-radius, 0 0 0.15em 0.15em);
 				}
 			}
 		}

@@ -798,6 +798,39 @@ class ConferencesController < ApplicationController
 			@page_title = 'articles.conference_registration.headings.Administration'
 
 			case @admin_step.to_sym
+			when :stats
+				@registrations = ConferenceRegistration.where(:conference_id => @this_conference.id)
+				if request.format.xlsx?
+					logger.info "Generating stats.xls"
+					@excel_data = {
+						columns: [:name, :email, :city, :date, :languages],
+						column_types: {date: :date},
+						keys: {
+								name: 'forms.labels.generic.name',
+								email: 'forms.labels.generic.email',
+								city: 'forms.labels.generic.location',
+								date: 'articles.conference_registration.terms.Date',
+								languages: 'articles.conference_registration.terms.Languages'
+							},
+						data: [],
+					}
+					@registrations.each do | r |
+						user = r.user_id ? User.where(id: r.user_id).first : nil
+						if user.present?
+							@excel_data[:data] << {
+								name: user.firstname || '',
+								email: user.email || '',
+								date: r.created_at ? r.created_at.strftime("%F %T") : '',
+								city: r.city || '',
+								languages: ((r.languages || []).map { |x| view_context.language x }).join(', ').to_s
+							}
+						end
+					end
+					return respond_to do | format |
+						# format.html
+						format.xlsx { render xlsx: :stats, filename: "stats-#{DateTime.now.strftime('%Y-%m-%d')}" }
+					end
+				end
 			when :housing
 				# do a full analysis
 				analyze_housing
@@ -811,6 +844,13 @@ class ConferencesController < ApplicationController
 				@length = 1.5
 			when :meals
 				@meals = Hash[@this_conference.meals.map{ |k, v| [k.to_i, v] }].sort.to_h
+			when :workshop_times
+				get_block_data
+				@workshop_blocks << {
+					'time' => nil,
+					'length' => 1.0,
+					'days' => []
+				}
 			when :schedule
 				get_scheule_data
 			end
@@ -820,27 +860,175 @@ class ConferencesController < ApplicationController
 
 	end
 
-	def get_scheule_data
-		@meals = Hash[@this_conference.meals.map{ |k, v| [k.to_i, v] }].sort.to_h
-		@events = Event.where(:conference_id => @this_conference.id).order(start_time: :asc)
-		@workshops = Workshop.where(:conference_id => @this_conference.id).order(start_time: :asc)
-		@locations = {}
+	def get_block_data
 		@workshop_blocks = @this_conference.workshop_blocks || []
-		@workshop_blocks << {
-			'time' => nil,
-			'length' => 1.0,
-			'days' => []
-		}
-		@workshops.each do |workshop|
-			if workshop.location_id
-				@locations[workshop.location_id] ||= workshop.location
-			end
-		end
 		@block_days = []
 		day = @this_conference.start_date
 		while day <= @this_conference.end_date
 			@block_days << day.wday
 			day += 1.day
+		end
+	end
+
+	def get_scheule_data
+		@meals = Hash[@this_conference.meals.map{ |k, v| [k.to_i, v] }].sort.to_h
+		@events = Event.where(:conference_id => @this_conference.id).order(start_time: :asc)
+		@workshops = Workshop.where(:conference_id => @this_conference.id).order(start_time: :asc)
+		@locations = {}
+
+		get_block_data
+
+		@schedule = {}
+		day_1 = @this_conference.start_date.wday
+
+		@workshop_blocks.each_with_index do | info, block |
+			info['days'].each do | block_day |
+				day_diff = block_day.to_i - day_1
+				day_diff += 7 if day_diff < 0
+				day = (@this_conference.start_date + day_diff.days).to_date
+				time = info['time'].to_f
+				@schedule[day] ||= { times: {}, locations: {} }
+				@schedule[day][:times][time] ||= {}
+				@schedule[day][:times][time][:type] = :workshop
+				@schedule[day][:times][time][:length] = info['length'].to_f
+				@schedule[day][:times][time][:item] = { block: block, workshops: {} }
+			end
+		end
+
+		@workshops.each do | workshop |
+			if workshop.block.present?
+				block = @workshop_blocks[workshop.block['block'].to_i]
+				day_diff = workshop.block['day'].to_i - day_1
+				day_diff += 7 if day_diff < 0
+				day = (@this_conference.start_date + day_diff.days).to_date
+
+				if @schedule[day].present? && @schedule[day][:times].present? && @schedule[day][:times][block['time'].to_f].present?
+					@schedule[day][:times][block['time'].to_f][:item][:workshops][workshop.event_location_id] = { workshop: workshop, status: { errors: [], warnings: [], conflict_score: nil } }
+					@schedule[day][:locations][workshop.event_location_id] ||= workshop.event_location
+				end
+			end
+		end
+
+		@meals.each do | time, meal |
+			day = meal['day'].to_date
+			time = meal['time'].to_f
+			@schedule[day] ||= {}
+			@schedule[day][:times] ||= {}
+			@schedule[day][:times][time] ||= {}
+			@schedule[day][:times][time][:type] = :meal
+			@schedule[day][:times][time][:length] = (meal['length'] || 1.0).to_f
+			@schedule[day][:times][time][:item] = meal
+		end
+
+		@events.each do | event |
+			day = event.start_time.midnight.to_date
+			time = event.start_time.hour.to_f + (event.start_time.min / 60.0)
+			@schedule[day] ||= {}
+			@schedule[day][:times] ||= {}
+			@schedule[day][:times][time] ||= {}
+			@schedule[day][:times][time][:type] = :event
+			@schedule[day][:times][time][:length] = (event.end_time - event.start_time) / 3600.0
+			@schedule[day][:times][time][:item] = event
+		end
+
+		@schedule = @schedule.sort.to_h
+		@schedule.each do | day, data |
+			@schedule[day][:times] = data[:times].sort.to_h
+		end
+
+		@schedule.each do | day, data |
+			last_event = nil
+			data[:times].each do | time, time_data |
+				if last_event.present?
+					@schedule[day][:times][last_event][:next_event] = time
+				end
+				last_event = time
+			end
+		end
+
+		@schedule.deep_dup.each do | day, data |
+			data[:times].each do | time, time_data |
+				if time_data[:next_event].present? || time_data[:length] > 0.5
+					span = 0.5
+					length = time_data[:next_event].present? ? time_data[:next_event] - time : time_data[:length]
+					while span < length
+						@schedule[day][:times][time + span] ||= {
+							type: (span >= time_data[:length] ? :empty : :nil),
+							length: 0.5
+						}
+						span += 0.5
+					end
+				end
+			end
+		end
+
+		@schedule = @schedule.sort.to_h
+		@schedule.each do | day, data |
+			@schedule[day][:times] = data[:times].sort.to_h
+
+			data[:times].each do | time, time_data |
+				if time_data[:type] == :workshop && time_data[:item].present? && time_data[:item][:workshops].present?
+					ids = time_data[:item][:workshops].keys
+					(0..ids.length).each do | i |
+						if time_data[:item][:workshops][ids[i]].present?
+							workshop_i = time_data[:item][:workshops][ids[i]][:workshop]
+							conflicts = {}
+							
+							(i+1..ids.length).each do | j |
+								workshop_j = time_data[:item][:workshops][ids[j]].present? ? time_data[:item][:workshops][ids[j]][:workshop] : nil
+								if workshop_i.present? && workshop_j.present?
+									workshop_i.active_facilitators.each do | facilitator_i |
+										workshop_j.active_facilitators.each do | facilitator_j |
+											if facilitator_i.id == facilitator_j.id
+												@schedule[day][:times][time][:status] ||= {}
+												@schedule[day][:times][time][:item][:workshops][ids[j]][:status][:errors] << {
+														name: :common_facilitator,
+														facilitator: facilitator_i,
+														workshop: workshop_i,
+														i18nVars: {
+															facilitator_name: facilitator_i.name,
+															workshop_title: workshop_i.title
+														}
+													}
+											end
+										end
+									end
+								end
+							end
+
+							(0..ids.length).each do | j |
+								workshop_j = time_data[:item][:workshops][ids[j]].present? ? time_data[:item][:workshops][ids[j]][:workshop] : nil
+								if workshop_i.present? && workshop_j.present? && workshop_i.id != workshop_j.id
+									workshop_i.interested.each do | interested_i |
+										workshop_j.interested.each do | interested_j |
+											conflicts[interested_i.id] ||= true
+										end
+									end
+								end
+							end
+
+							needs = JSON.parse(workshop_i.needs || '[]').map &:to_sym
+							amenities = JSON.parse(workshop_i.event_location.amenities || '[]').map &:to_sym
+
+							needs.each do | need |
+								@schedule[day][:times][time][:item][:workshops][ids[i]][:status][:errors] << {
+										name: :need_not_available,
+										need: need,
+										location: workshop_i.event_location,
+										workshop: workshop_i,
+										i18nVars: {
+											need: need.to_s,
+											location: workshop_i.event_location.title,
+											workshop_title: workshop_i.title
+										}
+									} unless amenities.include? need
+							end
+
+							@schedule[day][:times][time][:item][:workshops][ids[i]][:status][:conflict_score] = workshop_i.interested.present? ? (conflicts.length / workshop_i.interested.size) : 0
+						end
+					end
+				end
+			end
 		end
 	end
 
@@ -948,13 +1136,24 @@ class ConferencesController < ApplicationController
 
 		case params[:admin_step]
 		when 'edit'
-			@this_conference.info = LinguaFranca::ActiveRecord::UntranslatedValue.new(params[:info]) unless @this_conference.info! == params[:info]
+			case params[:button]
+			when 'save'
+				@this_conference.info = LinguaFranca::ActiveRecord::UntranslatedValue.new(params[:info]) unless @this_conference.info! == params[:info]
 
-			params[:info_translations].each do | locale, value |
-				@this_conference.set_column_for_locale(:info, locale, value, current_user.id) unless value = @this_conference._info(locale)
+				params[:info_translations].each do | locale, value |
+					@this_conference.set_column_for_locale(:info, locale, value, current_user.id) unless value = @this_conference._info(locale)
+				end
+				@this_conference.save
+				return redirect_to register_step_path(@this_conference.slug, :administration)
+			when 'add_member'
+				org = nil
+				@this_conference.organizations.each do | organization |
+					org = organization if organization.id == params[:org_id].to_i
+				end
+				org.users << (User.get params[:email])
+				org.save
+				return redirect_to administration_step_path(@this_conference.slug, :edit)
 			end
-			@this_conference.save
-			return redirect_to register_step_path(@this_conference.slug, :administration)
 		when 'housing'
 			space = params[:button].split(':')[0]
 			host_id = params[:button].split(':')[1].to_i
@@ -1091,7 +1290,7 @@ class ConferencesController < ApplicationController
 
 				return redirect_to administration_step_path(@this_conference.slug, :events)
 			end
-		when 'schedule'
+		when 'workshop_times'
 			case params[:button]
 			when 'save_block'
 				@this_conference.workshop_blocks ||= []
@@ -1101,7 +1300,67 @@ class ConferencesController < ApplicationController
 					'days' => params[:days].keys
 				}
 				@this_conference.save
-				return redirect_to administration_step_path(@this_conference.slug, :schedule)
+				return redirect_to administration_step_path(@this_conference.slug, :workshop_times)
+			end
+		when 'schedule'
+			success = false
+			
+			case params[:button]
+			when 'schedule_workshop'
+				workshop = Workshop.find_by!(conference_id: @this_conference.id, id: params[:id])
+				booked = false
+				workshop.event_location_id = params[:event_location]
+				block_data = params[:workshop_block].split(':')
+				workshop.block = {
+					day: block_data[0].to_i,
+					block: block_data[1].to_i
+				}
+
+				# make sure this spot isn't already taken
+				Workshop.where(:conference_id => @this_conference.id).each do | w |
+					if request.xhr?
+						if w.block.present? &&
+								w.id != workshop.id &&
+								w.block['day'] == workshop.block['day'] &&
+								w.block['block'] == workshop.block['block'] &&
+								w.event_location_id == workshop.event_location_id
+							return render json: [ {
+									selector: '.already-booked',
+									className: 'already-booked is-true'
+								} ]
+						end
+					else
+						return redirect_to administration_step_path(@this_conference.slug, :schedule)
+					end
+				end
+				
+				workshop.save!
+				success = true
+			when 'deschedule_workshop'
+				workshop = Workshop.find_by!(conference_id: @this_conference.id, id: params[:id])
+				workshop.event_location_id = nil
+				workshop.block = nil
+				workshop.save!
+				success = true
+			end
+
+			if success
+				if request.xhr?
+					get_scheule_data
+					schedule = render_to_string partial: 'conferences/admin/schedule'
+					return render json: [ {
+							globalSelector: '#schedule-preview',
+							html: schedule
+						}, {
+							globalSelector: "#workshop-#{workshop.id}",
+							className: workshop.block.present? ? 'booked' : 'not-booked'
+						}, {
+							globalSelector: "#workshop-#{workshop.id} .already-booked",
+							className: 'already-booked'
+						} ]
+				else
+					return redirect_to administration_step_path(@this_conference.slug, :schedule)
+				end
 			end
 		end
 		do_404
