@@ -1,0 +1,23 @@
+= render :partial => 'application/header', :locals => {:image_file => @banner_image || 'grafitti.jpg'}
+%article
+	= row do
+		= columns do
+			- if logged_in?
+				%h2=_'articles.user_settings.headings.Your_Account'
+				- if @conference.present? && (@conference.registration_status == :pre || @conference.registration_status == :open)
+					%p=_'articles.user_settings.paragraphs.conference_registration', :t
+					= link_to (_'actions.conference.edit_registration'), register_path(@conference.slug), class: :button
+
+				= form_tag update_settings_path do
+					= textfield :name, current_user.name, required: true, heading: 'articles.conference_registration.headings.name', big: true
+					= checkboxes :languages, [:en, :es, :fr], current_user.languages || [I18n.locale], 'languages', heading: 'articles.conference_registration.headings.languages'
+					= radiobuttons :preferred_language, [:en, :es, :fr], current_user.locale || I18n.locale, 'languages', heading: 'articles.conference_registration.headings.preferred_language'
+					= checkbox :email_subscribe, current_user.is_subscribed != false, 'articles.user_settings.email_subscribe', heading: 'articles.user_settings.headings.email_subscribe', help: 'articles.user_settings.paragraphs.email_subscribe', inline: true, right_help: true
+					.actions
+						= button_tag :save, value: :save
+			- else
+				%h2=_'forms.actions.generic.login'
+				= form_tag do_confirm_path, class: 'flex-form' do
+					= emailfield :email, nil, big: true
+					= button_tag :continue, :value => :confirm_email
+					= link_to (_'forms.actions.generic.facebook_sign_in','Facebook Sign In'), auth_at_provider_path(provider: :facebook), class: [:button, :facebook]

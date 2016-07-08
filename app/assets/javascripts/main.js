@@ -32,7 +32,10 @@
 		}, true);
 		function openDlg(dlg, link) {
 			body.setAttribute('style', 'width: ' + body.clientWidth + 'px');
-			dlg.querySelector('.message').innerHTML = link.querySelector('.message').innerHTML
+			var msg = link.querySelector('.message');
+			if (msg) {
+				dlg.querySelector('.message').innerHTML = msg.innerHTML
+			}
 			if (link.dataset.infoTitle) {
 				dlg.querySelector('.title').innerHTML = decodeURI(link.dataset.infoTitle);
 			}
@@ -92,6 +95,14 @@
 			link.addEventListener('click', function(event) {
 				event.preventDefault();
 				openDlg(infoDlg, link);
+				return false;
+			});
+		});
+		var loginDlg = document.getElementById('login-dlg');
+		forEachElement('[data-sign-in]', function(link) {
+			link.addEventListener('click', function(event) {
+				event.preventDefault();
+				openDlg(loginDlg, link);
 				return false;
 			});
 		});

@@ -857,6 +857,17 @@ module ApplicationHelper
 		return html.html_safe
 	end
 
+	def broadcast_methods
+		[
+			:registered,
+			:confirmed_registrations,
+			:unconfirmed_registrations,
+			:unconfirmed_registrations,
+			:workshop_facilitators,
+			:everyone,
+		]
+	end
+
 	def admin_steps
 		[:edit, :stats, :broadcast, :housing, :locations, :meals, :events, :workshop_times, :schedule]
 	end
@@ -912,6 +923,11 @@ module ApplicationHelper
 		classes << 'status-error' if @housing_data[id][:errors].present?
 		
 		return { html: html.html_safe, class: classes.join(' ') }
+	end
+
+	def signin_link
+		@login_dlg ||= true
+		link_to (_'forms.actions.generic.login'), settings_path, data: { 'sign-in': true }
 	end
 
 	def link_with_confirmation(link_text, confirmation_text, path, args = {})
@@ -1143,10 +1159,14 @@ module ApplicationHelper
 			html += content_tag(:h3, _(options[:heading], :t), id: label_id)
 		end
 
+		help = nil
+
 		if options[:help].present?
 			description_id ||= unique_id("#{name.to_s}-desc")
-			html += content_tag(:div, _(options[:help], :s, 2), class: 'input-field-help', id: description_id)
+			help = content_tag(:div, _(options[:help], :s, 2), class: 'input-field-help', id: description_id)
 		end
+
+		html += help if help.present? && !options[:right_help]
 
 		boxes_html = ''
 
@@ -1201,13 +1221,18 @@ module ApplicationHelper
 					options[:vertical] ? 'vertical' : nil,
 					options[:inline] ? 'inline' : nil,
 					options[:small] ? 'small' : nil
-				]).html_safe,
+				].compact).html_safe,
 				aria: {
 					labeledby: label_id,
 					describedby: description_id
 				},
-				class: options[:centered] ? 'centered' : nil
+				class: [
+					options[:centered] ? 'centered' : nil,
+					options[:right_help] ? 'right-help' : nil
+				].compact
 			)
+
+		html += help if help.present? && options[:right_help]
 
 		return html.html_safe
 	end

@@ -5,7 +5,7 @@ class OauthsController < ApplicationController
   # and after authorizing there back to the callback url.
   def oauth
     set_callback
-    session[:oauth_last_url] = request.referer
+    session[:oauth_last_url] = params[:dest] || request.referer
     login_at(auth_params[:provider])
   end
 

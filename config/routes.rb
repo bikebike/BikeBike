@@ -47,10 +47,12 @@ BikeBike::Application.routes.draw do
     get   '/confirm/:token' => 'application#confirm', :as => :confirm
     match '/doconfirm' => 'application#do_confirm', :as => :do_confirm, via: [:get, :post]
     #post '/doconfirm' => 'application#do_confirm', :as => :do_confirm
-    match '/logout' => 'application#user_logout', :as => :logout, :via => [:get, :post]
+    match '/user/logout' => 'application#user_logout', :as => :logout, :via => [:get, :post]
+    get   '/user' => 'application#user_settings', :as => :settings
+    post  '/user/update' => 'application#update_user_settings', :as => :update_settings
     match '/oauth/callback' => 'oauths#callback', :via => [:get, :post]
     get   '/oauth/:provider' => 'oauths#oauth', :as => :auth_at_provider
-    post  '/translator-request' => 'application#translator_request', :as => :translator_request
+    # post  '/translator-request' => 'application#translator_request', :as => :translator_request
 
     # patch '/capture_view' => 'application#capture_view'
     post  '/js_error' => 'application#js_error'

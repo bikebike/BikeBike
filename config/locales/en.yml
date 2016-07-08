@@ -5355,6 +5355,7 @@ en:
         food: What are your eating habits?
         housing: Do you need a place to stay?
         languages: Which languages do you speak?
+        preferred_language: What is your preferred language?
         location: Where are you coming from?
         name: What is your name?
         Payment: Payment
@@ -5585,6 +5586,14 @@ en:
           one: You and one other are interested in this workshop
           other: You and %{count} others are interested in this workshop
           zero: You are interested in this workshop
+    user_settings:
+      headings:
+        Your_Account: Account Settings
+        email_subscribe: Notifications
+      paragraphs:
+        conference_registration: Looking to register or modify your current registration?
+        email_subscribe: Would you like to be notified about upcoming conferences? If you have registered for a conference we will always send you notifications and announcements until the conference.
+      email_subscribe: Subscribe to email announcements
   section_content:
     bikebike:
       about_bikebike: Bike!Bike! is an international annual gathering organized by
@@ -5685,6 +5694,8 @@ en:
     Pre_Register: 'Pre-Register'
     '500':
       An_Error_Occurred: An Error Occurred
+    user_settings:
+      Your_Account: Your Account
   links:
     footer:
       help_text:
@@ -5734,6 +5745,7 @@ en:
       View: View this workshop
       View_All: View all workshops
     conference:
+      edit_registration: My registration
       Translate: Edit %{language} version
   error:
     '403':

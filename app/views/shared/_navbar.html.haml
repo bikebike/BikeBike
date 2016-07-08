@@ -2,11 +2,6 @@
 	#main-nav
 		- begin
 			= row(class: 'inner-nav') do
-				- if logged_in?
-					= columns(medium: 12, class: 'user-nav') do
-						.user-nav-bar
-							=link_to (_!current_user.name), register_step_path(@conference.slug, :contact_info), class: 'my-account'
-							=link_to (_'forms.actions.generic.Log_out'), logout_path
 				= columns(medium: 4, class: 'inner-nav') do
 					= link_to home_path, :class => 'logo' do
 						= svg_sprite('icons', "bb-icon-logo", "Logo")

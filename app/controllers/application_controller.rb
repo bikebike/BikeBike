@@ -221,6 +221,20 @@ class ApplicationController < LinguaFrancaApplicationController
 		end
 	end
 
+	def user_settings
+		@main_title = @page_title = 'page_titles.user_settings.Your_Account'
+	end
+
+	def update_user_settings
+		return do_403 unless logged_in?
+		current_user.firstname = params[:name]
+		current_user.lastname = nil
+		current_user.languages = params[:languages].keys
+		current_user.is_subscribed = params[:email_subscribe].present?
+		current_user.save
+		redirect_to settings_path
+	end
+
 	def do_confirm(settings = nil)
 		settings ||= {:template => 'login_confirmation_sent'}
 		if params[:email]
@@ -242,7 +256,7 @@ class ApplicationController < LinguaFrancaApplicationController
 			end
 
 			# generate the confirmation, send the email and show the 403
-			referrer = request.referer.gsub(/^.*?\/\/.*?\//, '/')
+			referrer = params[:dest] || request.referer.gsub(/^.*?\/\/.*?\//, '/')
 			generate_confirmation(params[:email], referrer)
 			template = 'login_confirmation_sent'
 			@page_title ||= 'page_titles.403.Please_Check_Email'

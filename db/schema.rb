@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160703044620) do
+ActiveRecord::Schema.define(version: 20160707034050) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -328,6 +328,7 @@ ActiveRecord::Schema.define(version: 20160703044620) do
     t.boolean  "is_translator"
     t.json     "languages"
     t.string   "locale"
+    t.boolean  "is_subscribed"
   end
 
   add_index "users", ["activation_token"], name: "index_users_on_activation_token", using: :btree

@@ -15,7 +15,15 @@
 			- locale_translation = language(locale, true)
 			%a{href: url, lang: locale}
 				=_'translate.content.change_locale', "Read in #{locale_translation}", vars: {language: locale_translation}, locale: locale if locale != I18n.locale.to_s
-.copy
-	=_'links.footer.help_text.contributors', 'Who contributed to building this website' do |title|
-		=link_to :humans_txt, {title: title} do
-			=((_!"&copy;#{Date.today.strftime("%Y")} Bike!Bike!") || '').html_safe
+.site-info
+	.user-controls
+		- if logged_in?
+			= link_to (_!current_user.name), settings_path, class: 'my-account'
+			= _!' | '
+			= link_to (_'forms.actions.generic.Log_out'), logout_path
+		- else
+			= signin_link
+	.copy
+		=_'links.footer.help_text.contributors', 'Who contributed to building this website' do |title|
+			=link_to :humans_txt, {title: title} do
+				=((_!"&copy;#{Date.today.strftime("%Y")} Bike!Bike!") || '').html_safe

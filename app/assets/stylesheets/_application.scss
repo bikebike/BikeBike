@@ -183,7 +183,7 @@ button,
 		background-color: $colour-1;
 	}
 
-	#main &.subdued {
+	&.subdued, #main &.subdued {
 		background-color: #888;
 	}
 
@@ -597,8 +597,10 @@ input {
 				content: '+';
 				border: 0;
 				font-size: 2.5em;
-				top: -0.125em;
-				left: 0.05em;
+				top: 0;//-0.25em;
+				left: 0.175em;
+				// top: -0.125em;
+				// left: 0.05em;
 				line-height: 1em;
 				color: #FFF;
 				height: 1em;
@@ -759,6 +761,19 @@ fieldset {
 	&.centered {
 		margin-top: 3em;
 		text-align: center;
+	}
+
+	&.right-help {
+		text-align: center;
+
+		.input-field {
+			margin: 0;
+		}
+
+		+ .input-field-help {
+			overflow: auto;
+			margin-bottom: 2em;
+		}
 	}
 }
 
@@ -1030,37 +1045,6 @@ ul.warnings li,
 
 	.logo {
 		font-size: 5em;
-	}
-
-	.user-nav-bar {
-		position: absolute;
-		right: 0;
-		text-align: right;
-		top: 1em;
-		font-size: 0.9em;
-		width: 100%;
-		padding-left: 13em;
-		padding-right: 1em;
-
-		a {
-			display: block;
-			padding: 0.5em 0;
-			color: $black;
-			z-index: 1;
-
-			&:after {
-				display: none;
-			}
-		}
-
-		.my-account {
-			overflow: hidden;
-			text-overflow: ellipsis;
-		}
-
-		body.error-locale-not-available & {
-			display: none;
-		}
 	}
 }
 
@@ -1853,23 +1837,29 @@ $header-tilt: 8deg;
 	footer {
 		@include _-(display, flex);
 		@include _(flex-flow, row wrap);
+		@include _(align-items, flex-end);
 		font-size: 4.1vw;
 	}
 
-	.github,
-	ul.locales {
+	.github {
 		@include _(flex, 1);
 		@include _(flex-basis, 50%);
 	}
 	
-	.copy {
+	.site-info {
 		@include clearfix;
-		text-align: right;
-		white-space: nowrap;
+		text-align: center;
+		width: 100%;
 
 		a {
+			text-align: right;
+			white-space: nowrap;
 			color: #666;
 		}
+	}
+
+	.user-controls {
+		line-height: 2.5em;
 	}
 
 	.facebook {
@@ -1908,7 +1898,6 @@ $header-tilt: 8deg;
 		padding: 0.5em 0.5em 0.5em 2em;
 		text-align: center;
 		z-index: $zindex-base + 2;
-		margin-bottom: 1em;
 
 		a {
 			margin: 0 0.5em;
@@ -1930,9 +1919,12 @@ $header-tilt: 8deg;
 	}
 
 	ul.locales {
-		margin: 0;
+		@include _(flex, 1);
+		@include _(flex-basis, 100%);
 		padding: 0;
+		margin: 1em 0;
 		list-style: none;
+		text-align: center;
 	}
 
 	body.error-locale-not-available & {
@@ -2073,6 +2065,11 @@ body {
 		h6 {
 			font-size: 0.8em;
 		}
+	}
+
+	#login-dlg .title {
+		font-size: 2em;
+		margin-bottom: 1em;
 	}
 }
 
@@ -3130,6 +3127,14 @@ html[data-ontop] {
 		font-size: 1.25em;
 	}
 
+	fieldset {
+		&.right-help {
+			float: left;
+			text-align: left;
+			margin-right: 1.5em;
+		}
+	}
+
 	form {
 		&.flex-form {
 			@include _-(display, flex);
@@ -3282,42 +3287,6 @@ html[data-ontop] {
 				@include _(transform, none);
 			}
 		}
-
-		.user-nav-bar {
-			top: 0;
-			left: 0;
-			right: auto;
-			width: auto;
-			float: none;
-			text-align: left;
-			background-color: #EEE;
-			@include _(border-radius, 0 0 0.5em 0);
-			font-size: 0.8em;
-			padding: 0 1em 0 0.5em;
-			@include default-box-shadow(top, 2);
-
-			a {
-				display: inline-block;
-				padding: 0.25em 0;
-
-				&:hover {
-					color: lighten($black, 25%);
-				}
-			}
-
-			.my-account {
-				max-width: none;
-				overflow: visible;
-
-				@include after {
-					content: '|';
-					display: inline;
-					@include _(opacity, 0.25);
-					position: static;
-					margin: 0 0.5em;
-				}
-			}
-		}
 	}
 
 	#banner {
@@ -3375,12 +3344,14 @@ html[data-ontop] {
 			margin-bottom: -2em;
 
 			li {
-				&:first-child {
-					@include _(border-radius, 0 0.15em 0 0);
+				&:last-child {
+					@include _(border-bottom-right-radius, 0.15em);
+					@include _(border-bottom-left-radius, 0.15em);
 				}
 
-				&:last-child {
-					@include _(border-radius, 0 0 0.15em 0.15em);
+				&:first-child {
+					@include _(border-top-right-radius, 0.15em);
+					@include _(border-bottom-left-radius, 0);
 				}
 			}
 		}
@@ -3512,18 +3483,26 @@ html[data-ontop] {
 		.github {
 			@include _(flex, none);
 			@include _(flex-basis, auto);
-			bottom: 0.5em;
+			//bottom: 0.5em;
 			float: left;
 			margin-right: 1em;
 			margin-left: 1em;
+			margin-bottom: -0.3333em;
 		}
 		.facebook {
 			margin: 0;
 		}
+
+		.site-info {
+			width: auto;
+			text-align: right;
+		}
+
 		ul.locales {
 			@include _(flex, none);
 			@include _(flex-basis, auto);
 			@include _(flex-grow, 1);
+			margin: 0;
 		}
 	}
 
@@ -3556,12 +3535,6 @@ html[data-ontop] {
 		.nav {
 			font-size: 1.9em;
 			margin-top: 0;
-		}
-
-		.user-nav-bar {
-			@include _(border-radius, 0 0 0.5em 0.5em);
-			padding: 0 1em;
-			font-size: 1em;
 		}
 	}
 
@@ -3618,7 +3591,7 @@ html[data-ontop] {
 		overflow: visible;
 		padding: 0;
 		width: 100%;
-		height: 3em;
+		height: 4.5em;
 
 		footer {
 			max-width: $row-width;
