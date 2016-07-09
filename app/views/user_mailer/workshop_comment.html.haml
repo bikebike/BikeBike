@@ -1,0 +1,15 @@
+%p=_('email.workshop_comment.paragraph.user_said', vars: {user_name: @comment.user.name})
+%blockquote
+	=_!@comment.comment
+
+	- if @comment.reply?
+		- original_comment = @comment.comment_object
+		%p=_('email.workshop_comment.paragraph.user_said', vars: {user_name: original_comment.user.name})
+		%blockquote
+			=_!original_comment.comment
+
+
+%p
+	=_'email.workshop.paragraph.view_workshop'
+	- workshop_link = @host + view_workshop_path(@workshop.conference.slug, @workshop.id)
+	%a{href: workshop_link}=workshop_link

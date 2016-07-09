@@ -234,7 +234,7 @@ en:
   time:
     am: am
     formats:
-      default: "%a, %d %b %Y %H:%M:%S %z"
+      default: "%a, %d %b %Y %H:%M"
       long: "%l%P, %B %e, %Y"
       short: "%l:%M%P"
     pm: pm
@@ -5542,6 +5542,7 @@ en:
         facilitate: Request to Facilitate ‘%{workshop_title}’
         add_facilitator: Add a facilitator
         needs_facilitators: Looking for help?
+        Comments: Comments
       paragraphs:
         Proposed_Workshops: Would you like to facilitate your own workshop? Simply
           register and visit the workshops page. If you have already registered you
@@ -5657,6 +5658,8 @@ en:
         delete: Delete
         place_guest: Place Guest
         set_host: Set Host
+        add_comment: Add Comment
+        reply: Reply
       aria:
         remove_interest: Click if you are no longer interested in this workshop
         show_interest: Click if you are interested in this workshop
@@ -5806,6 +5809,9 @@ en:
         denied
       workshop_translated: The %{language} translation for %{workshop_title} has been modified
       workshop_original_content_changed: Original content for %{workshop_title} has been modified
+      workshop_comment:
+        comment: '%{user_name} commented on %{workshop_title}'
+        reply: '%{user_name} replied to your comment'
     general:
       paragraph:
         see_you: See you in %{conference_location}!
@@ -5825,6 +5831,9 @@ en:
       paragraph:
         workshop_translated: '%{user_name} has modified the %{language} translation for %{workshop_title}.'
         workshop_original_content_changed: '%{user_name} has modified the original content for %{workshop_title}. Translations may need to be updated.'
+    workshop_comment:
+      paragraph:
+        user_said: '%{user_name} said: '
     workshop:
       paragraph:
         request_approved: You have been added as a facilitator of %{workshop_title}.
@@ -5836,3 +5845,4 @@ en:
         request_message: "%{user_name} has requested to help facilitate %{workshop_title}:"
         request_reply_instructions: You can also reply directly to this email to ask
           follow-up questions.
+        view_workshop: 'View the workshop here: '

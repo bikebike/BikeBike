@@ -1793,6 +1793,35 @@ class ConferencesController < ApplicationController
 		return redirect_to view_workshop_url(@this_conference.slug, params[:workshop_id])
 	end
 
+	def add_comment
+		set_conference
+		set_conference_registration
+		workshop = Workshop.find_by_id_and_conference_id(params[:workshop_id], @this_conference.id)
+		
+		return do_404 unless workshop && current_user
+
+		if params[:button] == 'reply'
+			comment = Comment.find_by!(id: params[:comment_id].to_i, model_type: :workshops, model_id: workshop.id)
+			new_comment = comment.add_comment(current_user, params[:reply])
+
+			UserMailer.send_mail :workshop_comment do
+				[ workshop, new_comment, comment.user ]
+			end
+		elsif params[:button] = 'add_comment'
+			new_comment = workshop.add_comment(current_user, params[:comment])
+
+			workshop.active_facilitators.each do | u |
+				UserMailer.send_mail :workshop_comment do
+					[ workshop, new_comment, u ]
+				end
+			end
+		else
+			return do_404
+		end
+
+		return redirect_to view_workshop_url(@this_conference.slug, workshop.id, anchor: "comment-#{new_comment.id}")
+	end
+
 	def schedule
 		set_conference
 		return do_404 unless @this_conference.workshop_schedule_published || @this_conference.host?(current_user)

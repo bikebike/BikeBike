@@ -67,3 +67,24 @@
 			= columns(medium: 12, class: 'workshop-notes') do
 				%h3=_'articles.workshops.headings.notes','Notes'
 				= richtext workshop.notes, 3
+	= columns(medium: 12, id: :comments) do
+		%h3=_'articles.workshops.headings.Comments'
+		%ul.comments
+			- workshop.comments.each do | comment |
+				%li.comment{id: "comment-#{comment.id}"}
+					= comment(comment)
+					- sub_comments = comment.comments
+					- if sub_comments.present?
+						%ul.sub-comments.comments
+							- sub_comments.each do | sub_comment |
+								%li.sub-comment.comment{id: "comment-#{sub_comment.id}"}
+									= comment(sub_comment)
+					= form_tag workshop_comment_path(workshop.conference.slug, workshop.id) do
+						= hidden_field_tag :comment_id, comment.id
+						= textarea :reply, nil, plain: true, required: true, label: false, labelledby: "replyto-#{comment.id}"
+						.actions.right
+							= button_tag :reply, value: :reply, data: {opens: "#comment-#{comment.id} form", focus: :textarea}, class: :small, id: "replyto-#{comment.id}"
+		= form_tag workshop_comment_path(workshop.conference.slug, workshop.id) do
+			= textarea :comment, nil, plain: true, required: true, label: false, labelledby: :add_comment
+			.actions.right
+				= button_tag :add_comment, value: :add_comment, id: :add_comment

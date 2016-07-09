@@ -199,7 +199,7 @@ es:
   time:
     am: am
     formats:
-      default: '%A, %d de %B de %Y %H:%M:%S %z'
+      default: '%A, %d de %B de %Y %H:%M'
       long: '%d de %B de %Y %H:%M'
       short: '%H:%M'
     pm: pm
@@ -838,7 +838,7 @@ es:
       term:
         education: Los talleres tienen un enfoque en la educación, en enseñar a otros
           cómo arreglar bicicletas
-        export_bikes: ''
+        export_bikes: Organizaciones que se incluyen bicicletas para las comunidades de otros países.
         low_cost: Hay organizaciones que envían bicicletas donadas a comunidades en
           otros países
         no_money: Hay organizaciones que reciclan bicicletas y algunas de sus partes
@@ -1068,8 +1068,6 @@ es:
       no_value: Indefinido
       pages: 'Páginas:'
       pluraliztion_same_as_other: Igual que el otro
-      test:
-        one: ''
       Enabled_Locales: Idiomas habilitados
       History: Historia
       Locale_Translation: Traducción en %%{language}

@@ -184,6 +184,22 @@
 				}, false);
 			}
 		}, node || document);
+		forEachElement('[data-opens]', function(control) {
+			control.addEventListener('click', function(event) {
+				var opens = document.querySelector(control.getAttribute('data-opens'));
+				if (!opens.classList.contains('open')){
+					event.preventDefault();
+					opens.className += ' open';
+					if (control.getAttribute('data-focus')) {
+						var input = opens.querySelector(control.getAttribute('data-focus'));
+						if (input) {
+							input.focus();
+						}
+					}
+					return false;
+				}
+			});
+		});
 	} ];
 	window.initNode = function(node) {
 		forEach(initNodeFunctions, function(fn) {

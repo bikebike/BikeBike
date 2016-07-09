@@ -35,6 +35,7 @@ BikeBike::Application.routes.draw do
     match '/conferences/:slug/workshops/:workshop_id/edit' => 'conferences#edit_workshop', :as => :edit_workshop, via: [:get, :post]
     match '/conferences/:slug/workshops/:workshop_id/translate/:locale' => 'conferences#translate_workshop', :as => :translate_workshop, via: [:get, :post]
     match '/conferences/:slug/workshops/:workshop_id/delete' => 'conferences#delete_workshop', :as => :delete_workshop, via: [:get, :post]
+    post  '/conferences/:slug/workshops/:workshop_id/comment' => 'conferences#add_comment', :as => :workshop_comment
     get   '/conferences/:slug/workshops/:workshop_id/facilitate' => 'conferences#facilitate_workshop', :as => :facilitate_workshop
     post  '/conferences/:slug/workshops/:workshop_id/facilitate_request' => 'conferences#facilitate_request', :as => :facilitate_workshop_request
     get   '/conferences/:slug/workshops/:workshop_id/facilitate_request/:user_id/:approve_or_deny' => 'conferences#approve_facilitate_request', :as => :approve_facilitate_workshop_request

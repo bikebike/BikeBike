@@ -146,6 +146,14 @@ class Workshop < ActiveRecord::Base
         end
         return notify_list
     end
+
+    def comments
+        Comment.for(self)
+    end
+
+    def add_comment(user, comment)
+        Comment.create_for(self, user, comment)
+    end
     
     private
         def make_slug

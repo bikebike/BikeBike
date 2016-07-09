@@ -972,17 +972,20 @@ module ApplicationHelper
 		strip_tags(text.gsub('>', '> ')).gsub(/^(.{40,60})\s.*$/m, '\1&hellip;').html_safe
 	end
 
-	def textarea(name, value, options = {})
+	def textarea(name, value = nil, options = {})
 		id = name.to_s.gsub('[', '_').gsub(']', '')
 		label_id = "#{id}-label"
 		description_id = nil
+		html = ''
 
-		if options[:label].present?
-			html = label_tag(id, nil, id: label_id) do
+		if options[:label] == false
+			label_id = options[:labelledby]
+		elsif options[:label].present?
+			html += label_tag(id, nil, id: label_id) do
 				_(options[:label], :t, vars: options[:vars] || {})
 			end
 		else
-			html = label_tag(id, nil, id: label_id)
+			html += label_tag(id, nil, id: label_id)
 		end
 
 		if options[:help].present?
@@ -995,22 +998,32 @@ module ApplicationHelper
 			html += content_tag(:div, _(options[:warning], :s, 2), id: description_id, class: 'warning-info')
 		end
 
-		html += content_tag(:div, value.present? ? value.html_safe : '',
+		aria = {}
+		aria[:labeledby] = label_id if label_id.present?
+		aria[:describedby] = description_id if description_id.present?
+		if options[:plain]
+			html += (text_area_tag name, value,
 				id: id,
-				class: 'textarea',
-				data: { name: name, 'edit-on': options[:edit_on] || :load },
 				lang: options[:lang],
-				aria: { labeledby: label_id, describedby: description_id },
-				tabindex: 0
-			)
-	
-		html = content_tag(:div, html, class: ['text-area-field', 'input-field']).html_safe
-		html += _original_content(options[:original_value], options[:original_lang]) if options[:original_value].present?
+				aria: aria)
+		else
+			html += content_tag(:div, value.present? ? value.html_safe : '',
+					id: id,
+					class: 'textarea',
+					data: { name: name, 'edit-on': options[:edit_on] || :load },
+					lang: options[:lang],
+					aria: aria,
+					tabindex: 0
+				)
 
-		add_stylesheet :editor
-		add_inline_script :pen
-		add_inline_script :markdown
-		add_inline_script :editor
+			add_stylesheet :editor
+			add_inline_script :pen
+			add_inline_script :markdown
+			add_inline_script :editor
+		end
+
+		html = content_tag(:div, html.html_safe, class: ['text-area-field', 'input-field']).html_safe
+		html += _original_content(options[:original_value], options[:original_lang]) if options[:original_value].present?
 
 		return html.html_safe
 	end
@@ -1235,6 +1248,16 @@ module ApplicationHelper
 		html += help if help.present? && options[:right_help]
 
 		return html.html_safe
+	end
+
+	def comment(comment)
+		content_tag(:div, class: 'comment-body') do
+			content_tag(:h4, comment.user.name, class: 'comment-title') +
+			content_tag(:time, time(comment.created_at, :default), datetime: comment.created_at.to_s) +
+			content_tag(:div, class: 'comment-text') do
+				markdown comment.comment
+			end
+		end
 	end
 
 	private

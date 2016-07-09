@@ -159,6 +159,20 @@ class UserMailer < ActionMailer::Base
 		mail to: user.named_email, subject: @subject
 	end
 
+	def workshop_comment(workshop, comment, user)
+		@workshop = workshop
+		@comment = comment
+		@user = user
+
+		if comment.reply?
+			@subject = (_'email.subject.workshop_comment.reply', vars: { user_name: comment.user.name })
+		else
+			@subject = (_'email.subject.workshop_comment.comment', vars: { user_name: comment.user.name, workshop_title: workshop.title })
+		end
+
+		mail to: user.named_email, subject: @subject
+	end
+
 	def error_report(subject, message, report, exception, request, params, user)
 		@subject = subject
 		@message = message

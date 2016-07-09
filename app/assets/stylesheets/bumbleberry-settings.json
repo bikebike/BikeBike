@@ -63,9 +63,9 @@
     "font-loading-method": "http2",
     "fonts": {
         "primary": {
-            "name": "queulat",
-            "location": "queulat",
-            "svg_id": "queulat",
+            "name": "Sanchez Light",
+            "location": "Sanchez",
+            "svg_id": "wf",
             "ttf_type": "ttf",
             "fallback": ["Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", "sans-serif"]
         },

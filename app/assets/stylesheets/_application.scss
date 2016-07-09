@@ -794,6 +794,93 @@ fieldset {
 	margin-bottom: 3em;
 }
 
+.comments {
+	list-style: none;
+
+	.comment {
+		position: relative;
+		border: 0.1rem solid #EEE;
+		border-radius: 0.25rem;
+		padding: 1em;
+		margin-top: 2em;
+	}
+
+	.comment-body {
+		font-size: 0.9em;
+	}
+
+	.comment-title {
+		position: absolute;
+		top: -0.75em;
+		left: 0.5em;
+		margin: 0;
+		padding: 0 0.5em;
+		background-color: #FFF;
+	}
+
+	time {
+		position: absolute;
+		top: -0.75em;
+		right: 0.75em;
+		background-color: #FFF;
+		padding: 0 0.5em;
+	}
+
+	.sub-comment {
+		font-size: 0.8em;
+
+		.comment-title, time {
+			top: -1em;
+		}
+	}
+
+	.text-area-field {
+		overflow: hidden;
+		max-height: 0;
+		padding: 0.3em;
+		@include _(transition, max-height 150ms ease-in-out);
+	}
+
+	#main .columns & form {
+		margin-top: 0;
+		button {
+			@include _(transition, background-color 150ms ease-in-out);
+			background-color: #888;
+		}
+
+		&.open {
+			@include _(opacity, 1);
+
+			.text-area-field {
+				max-height: 12em;  
+			}
+
+			button {
+				background-color: $colour-5;
+			}
+		}
+	}
+
+	button {
+		margin: 0;
+	}
+}
+
+#comments {
+	textarea {
+		font-size: 1.25em;
+		min-height: 7.5em;
+	}
+
+	.actions {
+		margin: 0;
+
+		button {
+			margin: 0;
+		}
+	}
+}
+
 .flex-form, .flex-column {
 	button, .button {
 		width: 100%;
@@ -3502,7 +3589,8 @@ html[data-ontop] {
 			@include _(flex, none);
 			@include _(flex-basis, auto);
 			@include _(flex-grow, 1);
-			margin: 0;
+			margin: 0 0 0.25em 1em;
+			text-align: left;
 		}
 	}
 
