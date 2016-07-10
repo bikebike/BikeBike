@@ -268,7 +268,8 @@ textarea, .textarea {
 	display: block;
 	width: 100%;
 	min-height: 15em;
-	font-size: 1em;
+	font-size: 1.25em;
+	line-height: 1.5em;
 	margin: 1em 0;
 	padding: 0.75em;
 	border: 0.1rem solid #E8E8E8;
@@ -637,6 +638,17 @@ input {
 
 .check-box-field.inline {
 	display: inline-block;
+
+	label {
+		float: left;
+		min-width: 7.5em;
+	}
+
+	&.vertical {
+		label {
+			float: none;
+		}
+	}
 }
 
 .check-box-field.small {
@@ -645,6 +657,10 @@ input {
 	&.small label {
 		font-size: 1.125em;
 	}
+}
+
+.check-box-field.big {
+	font-size: 1em;
 }
 
 .radio-button-field {
@@ -1928,15 +1944,14 @@ $header-tilt: 8deg;
 		font-size: 4.1vw;
 	}
 
-	.github {
-		@include _(flex, 1);
-		@include _(flex-basis, 50%);
-	}
-	
-	.site-info {
-		@include clearfix;
-		text-align: center;
+	// .github {
+	// 	@include _(flex, 1);
+	// 	@include _(flex-basis, 50%);
+	// }
+
+	.site-info, .user-controls, .external {
 		width: 100%;
+		text-align: center;
 
 		a {
 			text-align: right;
@@ -1945,21 +1960,24 @@ $header-tilt: 8deg;
 		}
 	}
 
-	.user-controls {
+	.external {
+		margin-bottom: 1em;
+	}
+
+	.my-account {
+		margin-right: 0.5em;
+	}
+
+	.logout {
+		margin-left: 0.5em;
+	}
+
+	.contact-us {
 		line-height: 2.5em;
 	}
 
 	.facebook {
-		@include _(flex, none);
-		margin: 0.5em;
-
 		a {
-			@include after {
-				display: none;
-			}
-			svg {
-				@include _(transition, fill 250ms ease-in-out);
-			}
 			&:hover, &:active, &:focus {
 				svg {
 					fill: #3B579D;
@@ -1969,6 +1987,18 @@ $header-tilt: 8deg;
 	}
 
 	.github, .facebook {
+		display: inline-block;
+		margin: 0.5em;
+
+		a {
+			@include after {
+				display: none;
+			}
+			svg {
+				@include _(transition, fill 250ms ease-in-out);
+			}
+		}
+
 		.icons {
 			width: 1.5em;
 			height: 1.5em;
@@ -1978,26 +2008,31 @@ $header-tilt: 8deg;
 	}
 
 	.github {
-		position: relative;
-		background-color: $white;
-		@include _(border-radius, 0.25em);
-		border: 0.1em solid #DDD;
-		padding: 0.5em 0.5em 0.5em 2em;
-		text-align: center;
-		z-index: $zindex-base + 2;
+		//position: relative;
+		//background-color: $white;
+		//@include _(border-radius, 0.25em);
+		//border: 0.1em solid #DDD;
+		//padding: 0.5em 0.5em 0.5em 2em;
+		//text-align: center;
+		//z-index: $zindex-base + 2;
 
+		//a {
+		//	margin: 0 0.5em;
+		//	font-size: 0.8em;
+		//	font-weight: bold;
+		//	color: inherit;
+		//}
+
+		//.icons {
+		//	position: absolute;
+		//	left: 0.5em;
+		//	top: 0.45em;
+		//	@include _(transition, 150ms fill ease-in-out);
+		//}
 		a {
-			margin: 0 0.5em;
-			font-size: 0.8em;
-			font-weight: bold;
-			color: inherit;
-		}
-
-		.icons {
-			position: absolute;
-			left: 0.5em;
-			top: 0.45em;
-			@include _(transition, 150ms fill ease-in-out);
+			@include after {
+				display: none;
+			}
 		}
 
 		&:hover .icons {
@@ -3100,6 +3135,11 @@ html[data-lingua-franca-example="html"] {
 			@include _(box-shadow, none);
 		}
 	}
+
+	&.full select {
+		width: 100%;
+		margin-bottom: 2em;
+	}
 }
 
 .toggleable {
@@ -3570,13 +3610,14 @@ html[data-ontop] {
 		.github {
 			@include _(flex, none);
 			@include _(flex-basis, auto);
+			margin: 0 1em;
 			//bottom: 0.5em;
-			float: left;
-			margin-right: 1em;
-			margin-left: 1em;
-			margin-bottom: -0.3333em;
+			//float: left;
+			//margin-right: 1em;
+			//margin-left: 1em;
+			//margin-bottom: -0.3333em;
 		}
-		.facebook {
+		.facebook, .external {
 			margin: 0;
 		}
 
@@ -3585,11 +3626,15 @@ html[data-ontop] {
 			text-align: right;
 		}
 
+		.site-info, .user-controls, .external {
+			width: auto;
+		}
+
 		ul.locales {
 			@include _(flex, none);
 			@include _(flex-basis, auto);
 			@include _(flex-grow, 1);
-			margin: 0 0 0.25em 1em;
+			margin: 0 0 0 2em;
 			text-align: left;
 		}
 	}
@@ -3679,7 +3724,8 @@ html[data-ontop] {
 		overflow: visible;
 		padding: 0;
 		width: 100%;
-		height: 4.5em;
+		margin-bottom: 1em;
+		//height: 4.5em;
 
 		footer {
 			max-width: $row-width;

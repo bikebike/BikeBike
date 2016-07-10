@@ -778,6 +778,15 @@ module ApplicationHelper
 		selectfield :time_span, value, lengths, args
 	end
 
+	def contact_reason_select
+		reasons = []
+		[:website, :conference].each do | reason |
+			reasons << [ _("forms.labels.generic.reasons.#{reason.to_s}"), reason ]
+		end
+		[['Something about the website', :website]]
+		selectfield :reason, nil, reasons, required: true, heading: 'articles.contact.headings.reason', label: false, full: true
+	end
+
 	def block_select(value = nil, args = {})
 		blocks = {}
 		@workshop_blocks.each_with_index do | info, block |
@@ -978,6 +987,11 @@ module ApplicationHelper
 		description_id = nil
 		html = ''
 
+		if options[:heading].present?
+			label_id = "#{name.to_s}-label" unless options[:label]
+			html += content_tag(:h3, _(options[:heading], :t, vars: options[:vars] || {}), id: label_id)
+		end
+
 		if options[:label] == false
 			label_id = options[:labelledby]
 		elsif options[:label].present?
@@ -1128,6 +1142,7 @@ module ApplicationHelper
 					options[:big] ? 'big' : nil,
 					options[:small] ? 'small' : nil,
 					options[:stretch] ? 'stretch-item' : nil,
+					options[:full] ? 'full' : nil,
 					(@errors || {})[name].present? ? 'has-error' : nil
 			])
 
@@ -1233,7 +1248,8 @@ module ApplicationHelper
 					'input-field',
 					options[:vertical] ? 'vertical' : nil,
 					options[:inline] ? 'inline' : nil,
-					options[:small] ? 'small' : nil
+					options[:small] ? 'small' : nil,
+					options[:big] ? 'big' : nil
 				].compact).html_safe,
 				aria: {
 					labeledby: label_id,

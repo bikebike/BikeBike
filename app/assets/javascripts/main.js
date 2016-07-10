@@ -63,7 +63,7 @@
 			}
 			primaryContent.setAttribute('aria-hidden', 'true');
 			document.getElementById('overlay').onclick =
-				dlg.querySelector('.close').onclick = function() { closeDlg(dlg); };
+				dlg.querySelector('.close').onclick = function() { console.log('overlay'); closeDlg(dlg); };
 			body.classList.add('has-overlay');
 			dlg.removeAttribute('aria-hidden');
 			dlg.setAttribute('role', 'alertdialog');
@@ -105,6 +105,13 @@
 				openDlg(loginDlg, link);
 				return false;
 			});
+		});
+		var contactDlg = document.getElementById('contact-dlg');
+		var contactLink = document.getElementById('contact-link');
+		contactLink.addEventListener('click', function(event) {
+			event.preventDefault();
+			openDlg(contactDlg, contactLink);
+			return false;
 		});
 	}
 	

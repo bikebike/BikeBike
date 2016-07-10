@@ -49,6 +49,9 @@ BikeBike::Application.routes.draw do
     match '/doconfirm' => 'application#do_confirm', :as => :do_confirm, via: [:get, :post]
     #post '/doconfirm' => 'application#do_confirm', :as => :do_confirm
     match '/user/logout' => 'application#user_logout', :as => :logout, :via => [:get, :post]
+    get   '/contact' => 'application#contact', :as => :contact
+    post  '/contact/send' => 'application#contact_send', :as => :contact_send
+    get   '/contact/sent' => 'application#contact_sent', :as => :contact_sent
     get   '/user' => 'application#user_settings', :as => :settings
     post  '/user/update' => 'application#update_user_settings', :as => :update_settings
     match '/oauth/callback' => 'oauths#callback', :via => [:get, :post]

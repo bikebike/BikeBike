@@ -1,0 +1,46 @@
+%h1 From
+%table.error-report
+	%tr
+		%th Key
+		%th Value
+	%tr
+		%td User ID
+		%td=@from.is_a?(User) ? @from.id : ''
+	%tr
+		%td User Name
+		%td=@from.is_a?(User) ? @from.name : ''
+	%tr
+		%td User Email
+		%td=@from.is_a?(User) ? @from.email : @from
+	%tr
+		%td IP Address
+		%td=@request.remote_ip
+	%tr
+		%td UUID
+		%td=@request.uuid
+	%tr
+		%td URL
+		%td=@request.original_url 
+
+%h1 Message
+%blockquote=markdown(@message)
+
+%h1 Params
+%table.error-report
+	%tr
+		%th Key
+		%th Value
+	- @params.each do | key, value |
+		%tr
+			%td=key.to_s
+			%td=value.to_s
+
+%h1 Request Environment
+%table.error-report
+	%tr
+		%th Key
+		%th Value
+	- @request.env.each do | key, value |
+		%tr
+			%td=key.to_s
+			%td=value.to_s

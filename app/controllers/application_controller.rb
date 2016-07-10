@@ -225,6 +225,50 @@ class ApplicationController < LinguaFrancaApplicationController
 		@main_title = @page_title = 'page_titles.user_settings.Your_Account'
 	end
 
+	def contact
+		@main_title = @page_title = 'page_titles.contact.Contact_Us'
+	end
+
+	def contact_send
+		email_list = ['Godwin <goodgodwin@hotmail.com>']
+		
+		if params[:reason] == 'conference'
+
+			@conference.organizations.each do | org |
+				org.users.each do | user |
+					email_list << user.named_email
+				end
+			end
+		end
+
+		UserMailer.send_mail(:contact) do 
+			[
+				current_user || params[:email],
+				params[:subject],
+				params[:message],
+				email_list
+			]
+		end
+
+		UserMailer.send_mail(:contact_details) do 
+			[
+				current_user || params[:email],
+				params[:subject],
+				params[:message],
+				request,
+				params
+			]
+		end
+
+		redirect_to contact_sent_path
+	end
+
+	def contact_sent
+		@main_title = @page_title = 'page_titles.contact.Contact_Us'
+		@sent = true
+		render 'contact'
+	end
+
 	def update_user_settings
 		return do_403 unless logged_in?
 		current_user.firstname = params[:name]

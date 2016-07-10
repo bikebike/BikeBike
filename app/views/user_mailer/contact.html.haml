@@ -1,0 +1,5 @@
+%h1 From
+%p=@from.is_a?(User) ? @from.named_email : @from
+
+%h1 Message
+%blockquote=markdown(@message)

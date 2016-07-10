@@ -184,6 +184,22 @@ class UserMailer < ActionMailer::Base
 		mail to: 'goodgodwin@hotmail.com', subject: @subject
 	end
 
+	def contact(from, subject, message, email_list)
+		@message = message
+		@from = from
+
+		mail to: email_list.join(', '), subject: @subject, reply_to: from.is_a?(User) ? from.named_email : from
+	end
+
+	def contact_details(from, subject, message, request, params)
+		@message = message
+		@from = from
+		@request = request
+		@params = params
+
+		mail to: 'goodgodwin@hotmail.com', subject: @subject
+	end
+
 	private
 	def set_host(*args)
 		if Rails.env.production?

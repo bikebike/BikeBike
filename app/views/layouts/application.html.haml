@@ -40,36 +40,39 @@
 					= yield
 			#footer
 				%footer= render 'shared/footer'
-		- if @confirmation_dlg.present?	|| @info_dlg.present? || @login_dlg.present?
-			#content-overlay
-				#overlay
-				- if @confirmation_dlg.present?
-					.dlg#confirmation-dlg
-						.dlg-content
-							%h2.title=_'modals.confirm'
-							.dlg-inner
-								%p.message=''
-								%a.button.confirm=_'modals.yes_button'
-								%button.delete.close=_'modals.no_button'
-				- if @info_dlg.present?
-					.dlg#info-dlg
-						.dlg-content
-							%h2.title=_'modals.info'
-							.dlg-inner
-								%p.message=''
-								%button.close=_'modals.done_button'
-				- if @login_dlg.present?
-					.dlg#login-dlg
-						.dlg-content
-							%h2.title=_'forms.actions.generic.login'
-							.dlg-inner
-								= form_tag do_confirm_path, class: 'flex-form' do
-									= hidden_field_tag :dest, settings_path
-									= emailfield :email, nil, big: true
-									= button_tag :continue, :value => :confirm_email
-								.flex-form
-									= link_to (_'forms.actions.generic.facebook_sign_in','Facebook Sign In'), auth_at_provider_path(provider: :facebook, dest: settings_path), class: [:button, :facebook]
-									%button.close.subdued=_'forms.actions.generic.cancel'
+		#content-overlay
+			#overlay
+			.dlg#contact-dlg
+				.dlg-content
+					%h2.title=_'articles.contact.headings.contact'
+					.dlg-inner= render 'contact', cancel_btn: true
+		- if @confirmation_dlg.present?
+			.dlg#confirmation-dlg
+				.dlg-content
+					%h2.title=_'modals.confirm'
+					.dlg-inner
+						%p.message=''
+						%a.button.confirm=_'modals.yes_button'
+						%button.delete.close=_'modals.no_button'
+		- if @info_dlg.present?
+			.dlg#info-dlg
+				.dlg-content
+					%h2.title=_'modals.info'
+					.dlg-inner
+						%p.message=''
+						%button.close=_'modals.done_button'
+		- if @login_dlg.present?
+			.dlg#login-dlg
+				.dlg-content
+					%h2.title=_'forms.actions.generic.login'
+					.dlg-inner
+						= form_tag do_confirm_path, class: 'flex-form' do
+							= hidden_field_tag :dest, settings_path
+							= emailfield :email, nil, big: true
+							= button_tag :continue, :value => :confirm_email
+						.flex-form
+							= link_to (_'forms.actions.generic.facebook_sign_in','Facebook Sign In'), auth_at_provider_path(provider: :facebook, dest: settings_path), class: [:button, :facebook]
+							%button.close.subdued=_'forms.actions.generic.cancel'
 		
 		= yield :footer_scripts if content_for?(:footer_scripts)
 		= inline_scripts

@@ -1,72 +1,13 @@
 = columns(medium: 12) do
-	%h2=_'articles.conference_registration.headings.Registration_Info','Registration Info'
-= columns(medium: 5, large: 4) do
+	%h2=_'articles.conference_registration.headings.Registration_Info'
+= columns(medium: 12) do
 	%p=_'articles.conference_registration.paragraphs.Registration_Info', :p
-= columns(medium: 7, large: 8) do
-	= form_tag register_path(@this_conference.slug) do
-		%h3=_'articles.conference_registration.headings.name','What is your name?'
-		.text-field.input-field
-			= label_tag :name
-			= text_field_tag :name, @name, required: true
-		%h3=_'articles.conference_registration.headings.location','Where are you coming from?'
-		.text-field.input-field
-			= label_tag :location
-			= text_field_tag :location, @registration.city, required: true
-		%h3=_'articles.conference_registration.headings.arrival_and_departure','How long do you plan to spend in the area?'
-		.date-span.input-field
-			.date-labels
-				= label_tag :arrival
-				= label_tag :departure
-			.date-field.input-field
-				= datetime_local_field_tag :arrival, @registration.arrival.strftime("%Y-%m-%dT%T")
-				= datetime_local_field_tag :departure, @registration.departure.strftime("%Y-%m-%dT%T")
-		%h3=_'articles.conference_registration.headings.languages','Which languages do you speak?'
-		.check-box-field.input-field
-			- [:en, :es, :fr].each do |language|
-				= check_box_tag "languages[#{language}]", 1, @languages.include?(language)
-				= label_tag "languages_#{language}" do
-					= _"languages.#{language}"
-		%h3=_'articles.conference_registration.headings.housing','Do you need a place to stay?'
-		.radio-button-field.input-field
-			- [:none, :tent, :house].each do |option|
-				= radio_button_tag :housing, option, (@registration.housing || '').to_sym == option, required: true
-				= label_tag "housing_#{option}" do
-					- option_name = _"articles.conference_registration.questions.housing.#{option}"
-					= svg_sprite('icons', "bb-#{option}", option_name)
-					= option_name
-		%h3=_'articles.conference_registration.headings.bike','Do you need a bike?'
-		.radio-button-field.input-field
-			- [:none, :small, :medium, :large].each do |option|
-				= radio_button_tag :bike, option, (@registration.bike || '').to_sym == option, required: true
-				= label_tag "bike_#{option}" do
-					- option_name = _"articles.conference_registration.questions.bike.#{option}"
-					= svg_sprite('icons', "bb-#{option == :none ? :none : :bike}", option_name)
-					= option_name
-		%h3=_'articles.conference_registration.headings.food','What are your eating habits?'
-		.radio-button-field.input-field
-			= radio_button_tag :food, :meat, (@registration.food || '').to_sym == :meat, required: true
-			= label_tag :food_meat do
-				- option_name = _"articles.conference_registration.questions.food.meat"
-				= svg_sprite('icons', 'bb-meat', option_name)
-				= option_name
-			= radio_button_tag :food, :vegetarian, (@registration.food || '').to_sym == :vegetarian, required: true
-			= label_tag :food_vegetarian do
-				- option_name = _"articles.conference_registration.questions.food.vegetarian"
-				= svg_sprite('icons', 'bb-meat', 'meat')
-				= svg_sprite('icons', 'bb-none', option_name)
-				= option_name
-			= radio_button_tag :food, :vegan, (@registration.food || '').to_sym == :vegan, required: true
-			= label_tag :food_vegan do
-				- option_name = _"articles.conference_registration.questions.food.vegan"
-				= svg_sprite('icons', 'bb-milk', 'milk')
-				= svg_sprite('icons', 'bb-none', option_name)
-				= option_name
-		%h3=_'articles.conference_registration.headings.allergies','Do you have any allergies?'
-		.text-field.input-field
-			= label_tag :allergies
-			= text_field_tag :allergies, @registration.allergies
-		%h3=_'articles.conference_registration.headings.other','Anything else we should know about your visit?'
-		.select-field.input-field
-			= label_tag :other
-			= text_area_tag :other, @registration.other
+= form_tag register_path(@this_conference.slug) do
+	= columns(medium: 12) do
+		= radiobuttons :housing, ConferenceRegistration.all_housing_options, @registration.housing, 'articles.conference_registration.questions.housing', heading: 'articles.conference_registration.headings.housing', vertical: true, big: true, inline: true
+		= radiobuttons :bike, ConferenceRegistration.all_bike_options, @registration.bike, 'articles.conference_registration.questions.bike', heading: 'articles.conference_registration.headings.bike', inline: true, big: true
+		= radiobuttons :food, ConferenceRegistration.all_food_options, @registration.food, 'articles.conference_registration.questions.food', heading: 'articles.conference_registration.headings.food', inline: true, big: true
+	= columns(medium: 12) do
+		= textfield :allergies, @registration.allergies, heading: 'articles.conference_registration.headings.allergies'
+		= textarea :other, @registration.other, plain: true, heading: 'articles.conference_registration.headings.other'
 		= button_tag :register, :value => :save

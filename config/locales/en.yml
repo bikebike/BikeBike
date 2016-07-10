@@ -5302,6 +5302,13 @@ en:
           amenities: Amenities
           edit_event: Edit Event
           edit_location: Edit Location
+    contact:
+      headings:
+        contact: Send us a question or a complement
+        reason: What are you contacting us about?
+        sent: Thank you for contacting us
+      paragraphs:
+        sent: Thanks for reaching out. We will respond to you by email as soon we are able.
     policy:
       headings:
         The_Agreement: The Agreement
@@ -5454,6 +5461,8 @@ en:
           medium: Medium
           none: None
           small: Small
+          'yes': 'Yes' 
+          'no': 'No'
         food:
           meat: Omnivore
           vegan: Vegan
@@ -5629,6 +5638,9 @@ en:
         event_location: Location
         time: Time
         time_span: Length
+        reasons:
+          website: Something about the website
+          conference: Something about the conference
     actions:
       generic:
         login: Sign In
@@ -5674,6 +5686,8 @@ en:
     About_BikeBike: About Bike!Bike!
     about:
       About_BikeBike: About Bike!Bike!
+    contact:
+      Contact_Us: Contact   Us
     conferences:
       Conference_Registration: Conference Registration
       Create_Workshop: Create a Workshop
@@ -5702,6 +5716,7 @@ en:
   links:
     footer:
       help_text:
+        contact: Contact Us
         contributors: Contributors
         facebook: Join our Facebook group
         select_language: Change your language
