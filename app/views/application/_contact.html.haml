@@ -1,4 +1,4 @@
-= form_tag contact_send_path do
+= form_tag contact_send_path, class: 'contact-form' do
 	= emailfield :email, nil, big: true, required: true unless logged_in?
 	= contact_reason_select
 	= textfield :subject, nil, required: true, big: true

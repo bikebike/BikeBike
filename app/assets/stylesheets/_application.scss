@@ -2193,6 +2193,20 @@ body {
 		font-size: 2em;
 		margin-bottom: 1em;
 	}
+
+	#contact-dlg {
+		.title {
+			background-color: $colour-4;
+		}
+
+		.email-field {
+			margin-top: 2em;
+		}
+
+		textarea {
+			min-height: 7.5em;
+		}
+	}
 }
 
 @include keyframes(fade-out) {
