@@ -14,13 +14,13 @@
 		%td=@from.is_a?(User) ? @from.email : @from
 	%tr
 		%td IP Address
-		%td=@request.remote_ip
+		%td=@request['remote_ip']
 	%tr
 		%td UUID
-		%td=@request.uuid
+		%td=@request['uuid']
 	%tr
 		%td URL
-		%td=@request.original_url 
+		%td=@request['original_url'] 
 
 %h1 Message
 %blockquote=markdown(@message)
@@ -32,15 +32,15 @@
 		%th Value
 	- @params.each do | key, value |
 		%tr
-			%td=key.to_s
-			%td=value.to_s
+			%td=key
+			%td=value
 
 %h1 Request Environment
 %table.error-report
 	%tr
 		%th Key
 		%th Value
-	- @request.env.each do | key, value |
+	- @request['env'].each do | key, value |
 		%tr
-			%td=key.to_s
-			%td=value.to_s
+			%td=key
+			%td=value
