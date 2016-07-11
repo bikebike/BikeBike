@@ -9,9 +9,9 @@ class UserMailer < ActionMailer::Base
 	default from: "Bike!Bike! <noreply@bikebike.org>"
 
 	def email_confirmation(confirmation)
-		@confirmation = confirmation
+		@confirmation = EmailConfirmation.find(confirmation)
 		@subject = _'email.subject.confirm_email','Please confirm your email address'
-		mail to: confirmation.user.named_email, subject: @subject
+		mail to: @confirmation.user.named_email, subject: @subject
 	end
 
 	def registration_confirmation(registration)
