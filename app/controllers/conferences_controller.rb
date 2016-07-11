@@ -558,7 +558,7 @@ class ConferencesController < ApplicationController
 						@errors[:name] = :empty
 					end
 
-					if params[:location].present? && params[:location].gsub(/[\s\W]/, '').present? && (l = Geocoder.search(params[:location])).present?
+					if params[:location].present? && params[:location].gsub(/[\s\W]/, '').present? && (l = Geocoder.search(params[:location], params: { language: 'en' })).present?
 						corrected = view_context.location(l.first)
 
 						if corrected.present?

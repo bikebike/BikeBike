@@ -149,6 +149,7 @@ class UserMailer < ActionMailer::Base
 
 	def contact(from, subject, message, email_list)
 		@message = message
+		@subject = subject
 		@from = from.is_a?(Integer) ? User.find(from) : from
 
 		mail to: email_list.join(', '), subject: @subject, reply_to: from.is_a?(User) ? from.named_email : from
@@ -156,6 +157,7 @@ class UserMailer < ActionMailer::Base
 
 	def contact_details(from, subject, message, request, params)
 		@message = message
+		@subject = subject
 		@from = from.is_a?(Integer) ? User.find(from) : from
 		@request = request
 		@params = params
