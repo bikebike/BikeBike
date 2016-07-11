@@ -443,13 +443,13 @@ module ApplicationHelper
 	end
 
 	def get_remote_location
-		Geocoder.search(session['remote_ip'] || (session['remote_ip'] = open("http://checkip.dyndns.org").first.gsub(/^.*\s([\d\.]+).*$/s, '\1').gsub(/[^\.\d]/, '')), params: { language: 'en' }).first
+		Geocoder.search(session['remote_ip'] || (session['remote_ip'] = open("http://checkip.dyndns.org").first.gsub(/^.*\s([\d\.]+).*$/s, '\1').gsub(/[^\.\d]/, '')), language: 'en').first
 	end
 
 	def lookup_ip_location
 		begin
 			if is_test? && ApplicationController::get_location.present?
-				Geocoder.search(ApplicationController::get_location, params: { language: 'en' }).first
+				Geocoder.search(ApplicationController::get_location, language: 'en').first
 			elsif request.remote_ip == '127.0.0.1' || request.remote_ip == '::1'
 				get_remote_location
 			else
@@ -546,7 +546,7 @@ module ApplicationHelper
 		$panoramios ||= Hash.new
 		$panoramios[location] ||= 0
 		$panoramios[location] += 1
-		result = Geocoder.search(location, params: { language: 'en' }).first
+		result = Geocoder.search(location, language: 'en').first
 		if result
 			points = Geocoder::Calculations.bounding_box([result.latitude, result.longitude], 5, { :unit => :km })
 			options = {:set => :public, :size => :original, :from => 0, :to => 20, :mapfilter => false, :miny => points[0], :minx => points[1], :maxy => points[2], :maxx => points[3]}
