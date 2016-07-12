@@ -1,9 +1,9 @@
 %p=@message.html_safe if @message.present?
 %pre=@report
 
-- if @exception.present? && @exception.respond_to?(:backtrace)
+- if @exception.present?
 	%h1 Backtrace
-	%pre=@exception.backtrace.join("\n")
+	%pre=@exception
 
 %h1 Details
 %table.error-report
