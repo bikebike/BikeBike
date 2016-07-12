@@ -125,7 +125,7 @@ class ApplicationController < LinguaFrancaApplicationController
 			report += " in <code>#{params[:url]}:#{params[:lineNumber]}</code>"
 		end
 
-		suppress(Exception) do
+		begin
 			# log the error
 			logger.info exception.to_s
 			logger.info exception.backtrace.join("\n")
@@ -141,6 +141,9 @@ class ApplicationController < LinguaFrancaApplicationController
 					current_user,
 				]
 			end if Rails.env.preview? || Rails.env.production?
+		rescue exception2
+			logger.info exception2.to_s
+			logger.info exception2.backtrace.join("\n")
 		end
 		render json: {}
 	end
@@ -192,7 +195,7 @@ class ApplicationController < LinguaFrancaApplicationController
 					"An error has occurred in #{Rails.env}",
 					nil,
 					exception.to_s,
-					exception,
+					exception.backtrace.join("\n"),
 					request,
 					params,
 					current_user,
@@ -395,20 +398,25 @@ class ApplicationController < LinguaFrancaApplicationController
 	end
 
 	def i18n_exception(str, exception, locale, key)
+		# log it
+		logger.info "Missing translation found for: #{key}"
+
 		# send and email if this is production
-		suppress(Exception) do
+		begin
 			UserMailer.send_mail(:error_report) do 
 				[
 					"A missing translation found in #{Rails.env}",
 					"<p>A translation for <code>#{key}</code> in <code>#{locale.to_s}</code> was found. The text that was rendered to the user was:</p><blockquote>#{str || 'nil'}</blockquote>",
 					exception.to_s,
-					exception,
+					nil,
 					request,
 					params,
 					current_user,
 				]
 			end if Rails.env.preview? || Rails.env.production?
-			logger.info "Missing translation found for: #{key}"
+		rescue exception2
+			logger.info exception2.to_s
+			logger.info exception2.backtrace.join("\n")
 		end
 	end
 end
