@@ -400,6 +400,13 @@ input {
 		}
 	}
 }
+.number-field,
+.email-field,
+.telephone-field,
+.text-field,
+.text-area-field {
+	text-align: left;
+}
 
 .telephone-field {
 	max-width: 15em;
@@ -2134,6 +2141,7 @@ body {
 		left: 0;
 		max-width: 50rem;
 		max-height: 100%;
+		font-size: 0.9em;
 		overflow-y: auto;
 		margin: auto;
 		z-index: 1001;
