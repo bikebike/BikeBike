@@ -157,7 +157,7 @@ class UserMailer < ActionMailer::Base
 
 	def contact_details(from, subject, message, request, params)
 		@message = message
-		@subject = subject
+		@subject = "Details for: \"#{subject}\""
 		@from = from.is_a?(Integer) ? User.find(from) : from
 		@request = request
 		@params = params
