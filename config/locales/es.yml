@@ -957,7 +957,6 @@ es:
         other: Discapacidades, preferencias de hospedaje, etc.
         subject: Tema
         message: 'Tu mensaje:'
-        continue: Continuar
         reasons:
           website: Algo sobre el sitio web
           conference: Algo sobre la conferencia
@@ -982,6 +981,7 @@ es:
         show_interest: '+1'
         add: +
         facebook_sign_in: Iniciar sesión usando Facebook
+        continue: Continuar
   links:
     footer:
       help_text:
