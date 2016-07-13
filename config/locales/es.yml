@@ -1023,6 +1023,8 @@ es:
     Pre_Register: 'Pre-Registrate'
     user_settings:
       Your_Account: Su cuenta
+    contact:
+      Contact_Us: Contáctenos
   actions:
     workshops:
       create: Crear
