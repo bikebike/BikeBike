@@ -937,6 +937,10 @@ es:
       paragraphs: 
       headings:
         confirm_email: Por favor confirma tu dirección de e-mail.
+    contact:
+      headings:
+        contact: Envíenos una pregunta o un complemento
+        reason: ¿Qué está en contacto con nosotros acerca?
   forms:
     labels:
       generic:
@@ -953,6 +957,9 @@ es:
         other: Discapacidades, preferencias de hospedaje, etc.
         subject: Tema
         message: 'Tu mensaje:'
+        reasons:
+          website: Algo sobre el sitio web
+          conference: Algo sobre la conferencia
     actions:
       generic:
         agree: Estoy en acuerdo.
@@ -973,12 +980,14 @@ es:
         remove_interest: '-1'
         show_interest: '+1'
         add: +
+        facebook_sign_in: Iniciar sesión usando Facebook
   links:
     footer:
       help_text:
         contributors: Contribuyentes
         select_language: Cambia tu idioma
         facebook: Unirte a nuestro grupo de Facebook
+        contact: Contáctenos
       text:
         Help_contribute: Ayuda o contribuye
         File_an_Issue: Reportar un problema
