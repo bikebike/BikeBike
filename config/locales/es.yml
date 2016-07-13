@@ -957,6 +957,7 @@ es:
         other: Discapacidades, preferencias de hospedaje, etc.
         subject: Tema
         message: 'Tu mensaje:'
+        continue: Continuar
         reasons:
           website: Algo sobre el sitio web
           conference: Algo sobre la conferencia
@@ -1020,6 +1021,8 @@ es:
     About: 'Acerca de'
     Register: 'Registrate'
     Pre_Register: 'Pre-Registrate'
+    user_settings:
+      Your_Account: Su cuenta
   actions:
     workshops:
       create: Crear
