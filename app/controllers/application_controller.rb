@@ -16,6 +16,22 @@ class ApplicationController < LinguaFrancaApplicationController
 	@@test_location
 
 	def capture_page_info
+		if request.method == "GET" && (params[:controller] != 'application' || params[:action] != 'contact')
+			session[:last_request]
+			request_info = {
+				'params' => params,
+				'request' => {
+					'remote_ip'    => request.remote_ip,
+					'uuid'         => request.uuid,
+					'original_url' => request.original_url,
+					'env'          => Hash.new
+				}
+			}
+			request.env.each do | key, value |
+				request_info['request']['env'][key.to_s] = value.to_s
+			end
+			session['request_info'] = request_info
+		end
 		# set the translator to the current user if we're logged in
 		I18n.config.translator = current_user
 		I18n.config.callback = self
@@ -253,13 +269,14 @@ class ApplicationController < LinguaFrancaApplicationController
 			]
 		end
 
+		request_info = session['request_info'] || { 'request' => request, 'params' => params }
 		UserMailer.send_mail(:contact_details) do 
 			[
 				current_user || params[:email],
 				params[:subject],
 				params[:message],
-				request,
-				params
+				request_info['request'],
+				request_info['params']
 			]
 		end
 
