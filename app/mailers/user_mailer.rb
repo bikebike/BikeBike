@@ -9,13 +9,13 @@ class UserMailer < ActionMailer::Base
 	default from: "Bike!Bike! <noreply@bikebike.org>"
 
 	def email_confirmation(confirmation)
-		@confirmation = EmailConfirmation.find(confirmation)
+		@confirmation = EmailConfirmation.find(confirmation) if confirmation.present?
 		@subject = _'email.subject.confirm_email','Please confirm your email address'
 		mail to: @confirmation.user.named_email, subject: @subject
 	end
 
 	def registration_confirmation(registration)
-		@registration = ConferenceRegistration.find(registration)
+		@registration = ConferenceRegistration.find(registration) if registration.present?
 		@conference = @registration.conference
 		@user = @registration.user
 		@subject = @conference.registration_status.to_sym == :pre ?
@@ -35,7 +35,7 @@ class UserMailer < ActionMailer::Base
 		@host = host
 		@content = content
 		@banner = nil
-		@conference = Conference.find(conference)
+		@conference = Conference.find(conference) if conference.present?
 		@user = Conference.find(user) if user.present?
 		@subject = "[#{conference ? conference.title : 'Bike!Bike!'}] #{subject}"
 		if @user && @user.named_email
@@ -44,8 +44,8 @@ class UserMailer < ActionMailer::Base
 	end
 
 	def workshop_facilitator_request(workshop, requester, message)
-		@workshop = Workshop.find(workshop)
-		@requester = User.find(requester)
+		@workshop = Workshop.find(workshop) if workshop.present?
+		@requester = User.find(requester) if requester.present?
 		addresses = []
 		@workshop.active_facilitators.each do |f|
 			addresses << f.named_email
@@ -59,9 +59,9 @@ class UserMailer < ActionMailer::Base
 	end
 
 	def workshop_facilitator_request_approved(workshop, user)
-		@workshop = Workshop.find(workshop)
+		@workshop = Workshop.find(workshop) if workshop.present?
 		@conference = Conference.find(@workshop.conference_id)
-		@user = User.find(user)
+		@user = User.find(user) if user.present?
 		@subject = (_'email.subject.workshop_request_approved',
 					"You have been added as a facilitator of #{@workshop.title}",
 					:vars => {:workshop_title => @workshop.title})
@@ -69,9 +69,9 @@ class UserMailer < ActionMailer::Base
 	end
 
 	def workshop_facilitator_request_denied(workshop, user)
-		@workshop = Workshop.find(workshop)
+		@workshop = Workshop.find(workshop) if workshop.present?
 		@conference = @workshop.conference
-		@user = User.find(user)
+		@user = User.find(user) if user.present?
 		@subject = (_'email.subject.workshop_request_denied',
 					"Your request to facilitate #{@workshop.title} has been denied",
 					:vars => {:workshop_title => @workshop.title})
@@ -79,12 +79,12 @@ class UserMailer < ActionMailer::Base
 	end
 
 	def workshop_translated(workshop, data, locale, user, translator)
-		@workshop = Workshop.find(workshop)
+		@workshop = Workshop.find(workshop) if workshop.present?
 		@data = data
 		@locale = locale
 		@locale_name = language_name(locale)
-		@user = User.find(user)
-		@translator = User.find(translator)
+		@user = User.find(user) if user.present?
+		@translator = User.find(translator) if translator.present?
 		@subject = (_'email.subject.workshop_translated',
 					"The #{@locale_name} translation for #{@workshop.title} has been modified",
 					vars: {language: @language_name, workshop_title: @workshop.title})
@@ -102,10 +102,10 @@ class UserMailer < ActionMailer::Base
 	end
 
 	def workshop_original_content_changed(workshop, data, user, translator)
-		@workshop = Workshop.find(workshop)
+		@workshop = Workshop.find(workshop) if workshop.present?
 		@data = data
-		@user = User.find(user)
-		@translator = User.find(translator)
+		@user = User.find(user) if user.present?
+		@translator = User.find(translator) if translator.present?
 		@subject = (_'email.subject.workshop_original_content_changed',
 					"Original content for #{@workshop.title} has been modified",
 					vars: {workshop_title: @workshop.title})
@@ -123,9 +123,9 @@ class UserMailer < ActionMailer::Base
 	end
 
 	def workshop_comment(workshop, comment, user)
-		@workshop = Workshop.find(workshop)
+		@workshop = Workshop.find(workshop) if workshop.present?
 		@comment = comment
-		@user = User.find(user)
+		@user = User.find(user) if user.present?
 
 		if comment.reply?
 			@subject = (_'email.subject.workshop_comment.reply', vars: { user_name: comment.user.name })
@@ -143,7 +143,7 @@ class UserMailer < ActionMailer::Base
 		@exception = exception
 		@request = request
 		@params = params
-		@user = User.find(user)
+		@user = User.find(user) if user.present?
 		mail to: 'goodgodwin@hotmail.com', subject: @subject
 	end
 
