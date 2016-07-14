@@ -605,10 +605,10 @@ input {
 				content: '+';
 				border: 0;
 				font-size: 2.5em;
-				top: 0;//-0.25em;
-				left: 0.175em;
-				// top: -0.125em;
-				// left: 0.05em;
+				// top: 0;//-0.25em;
+				// left: 0.175em;
+				top: -0.15em;
+				left: 0.05em;
 				line-height: 1em;
 				color: #FFF;
 				height: 1em;
@@ -740,6 +740,10 @@ form {
 			margin-left: 1em;
 			height: 2.6em;
 		}
+	}
+
+	&.centered {
+		text-align: center;
 	}
 }
 
@@ -1156,6 +1160,10 @@ ul.warnings li,
 	.logo {
 		font-size: 5em;
 	}
+}
+
+.clearfix {
+	@include clearfix;
 }
 
 .flow-steps {
@@ -2281,29 +2289,34 @@ html :focus {
 	}
 }
 
-#main form.payment {
-	text-align: center;
+#main form.custom-payment {
+	// text-align: center;
 
 	input[type="number"] {
-		margin-top: 1em;
+		/*margin-top: 1em;
 		font-size: 1.5em;
 		text-align: center;
-		width: 4em;
 		height: 1.9em;
 		border: 0;
 		@include default-box-shadow(top);
 		background-color: $black;
 		color: $colour-3;
-		vertical-align: bottom;
+		vertical-align: bottom;*/
+		width: 4em;
+		margin-right: 0.5em;
 	}
 
-	> button {
+	button {
 		background-color: $colour-1;
 	}
 
 	.currency {
 		color: #888;
-		font-size: 1.667em;
+		font-size: 1.5em;
+	}
+
+	.number-field {
+		margin-bottom: 0;
 	}
 }
 

@@ -5366,7 +5366,7 @@ en:
         location: Where are you coming from?
         name: What is your name?
         Payment: Payment
-        payment: Fees paid
+        payment: Payment
         Allergies: Allergies
         Stats: Stats
         Workshops: Workshops
@@ -5393,19 +5393,20 @@ en:
           space: Available Space
           availability: Availability
           address: Address
+          notes: Notes
       paragraphs:
         Policy_Agreement: Ensuring that all attendees feel welcome, safe, and respected at all times is especially important to us all. Please ensure that you have fully read and understand our safer spaces policy below, if you have any questions or concerns you can reach out to the organizers at any time.
         Confirm_Agreement: By clicking the "I Agree" button, you are pledging to do
           your best to uphold Bike!Bike!'s safer space agreement. Thank you!
         Registration_Info: Please fill in this registration form to help us prepare
-          for your arrival to Guadalajara. If you wish to ask questions or tell us
-          information we did not ask, please fill in the "More Info" field at the
-          bottom of the page.
+          for your arrival to %{city}. If you wish to ask questions or tell us
+          information we did not ask, please fill in the preferences field at the
+          bottom of the page or use the contact us link.
         Payment: Thank you for completing your registration. We'll see you at Bike!Bike!
           Payment is by donation and can be done now or upon arrival but to help us
           fund the conference, we ask that you pay the registration donation as soon
           as you can.
-        currency: "(amounts are in $USD)"
+        currency: "(amounts are in USD)"
         email_confirm: Go to your inbox! You should see an email from Bike!Bike! in
           just a few moments. There will be a link in the email for you to click on.
           Check your spam box if you do not see it. If you encounter any problems,

@@ -729,7 +729,7 @@ es:
         email_confirm: Confirmar correo electrónico
         housing: ¿Necesitas hospedaje?
         other: ¿Hay algo más que quisieras decirnos?
-        payment: Cargos pagados
+        payment: Pago
         payment_confirm: Por favor confirma tu pago
         city: Ciudad
         date: Fecha
@@ -737,9 +737,9 @@ es:
         fees_paid: Cargos pagados
       paragraphs:
         Registration_Info: Por favor llena esta forma de registro para ayudarnos a
-          prepararnos para tu llegada a Guadalajara. Si tienes alguna pregunta o información
-          que no te hayamos pedido por favor llena el campo "Más información" al final
-          de la página.
+          prepararnos para tu llegada a %{city}. Si tienes alguna pregunta o información
+          que no te hayamos pedido por favor llena el campo preferencias al final
+          de la página o utilice el enlace contáctenos.
         Payment: Las y los esperamos del 1 al 4 de octubre del 2015.Más información
           en: bikebike@gdlenbici.org
         Workshops: 'Título de la actividad: Que necesitas? Tipo de espacio? Tema?
@@ -756,7 +756,7 @@ es:
           al ser confirmada podrás completar el registro, agregar talleres y pagar
           el donativo de registro. Si ya te registraste puedes re-confirmar tu dirección
           de e-mail para modificar los detalles de tu registro.
-        currency: (cantidades en dólares americanos $USD)
+        currency: (cantidades en dólares americanos USD)
         done: ¡Gracias por registrarte para Bike!Bike!
         email_confirm: ¡Ve a tu bandeja de entrada! Deberías ver un e-mail por parte
           de Bike!Bike! en unos momentos. Contendrá un enlace sobre el cual debes

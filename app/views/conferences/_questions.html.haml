@@ -1,10 +1,13 @@
 = columns(medium: 12) do
 	%h2=_'articles.conference_registration.headings.Registration_Info'
 = columns(medium: 12) do
-	%p=_'articles.conference_registration.paragraphs.Registration_Info', :p
-= form_tag register_path(@this_conference.slug) do
+	%p=_'articles.conference_registration.paragraphs.Registration_Info', :p, vars: { city: @this_conference.location.city }
+= form_tag register_path(@this_conference.slug), class: [:centered, :clearfix] do
 	= columns(medium: 12) do
 		= radiobuttons :housing, ConferenceRegistration.all_housing_options, @registration.housing, 'articles.conference_registration.questions.housing', heading: 'articles.conference_registration.headings.housing', vertical: true, big: true, inline: true
+		= fieldset :hosting_dates, heading: 'articles.conference_registration.headings.arrival_and_departure' do
+			= selectfield :arrival, @registration.arrival || @this_conference.start_date, conference_days_options_list(:before)
+			= selectfield :departure, @registration.departure || @this_conference.start_date, conference_days_options_list(:after)
 		= radiobuttons :bike, ConferenceRegistration.all_bike_options, @registration.bike, 'articles.conference_registration.questions.bike', heading: 'articles.conference_registration.headings.bike', inline: true, big: true
 		= radiobuttons :food, ConferenceRegistration.all_food_options, @registration.food, 'articles.conference_registration.questions.food', heading: 'articles.conference_registration.headings.food', inline: true, big: true
 	= columns(medium: 12) do

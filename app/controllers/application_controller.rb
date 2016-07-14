@@ -235,7 +235,7 @@ class ApplicationController < LinguaFrancaApplicationController
 		end
 		expiry ||= (Time.now + 12.hours)
 		session[:confirm_uid] = user.id
-		UserMailer.send_mail :email_confirmation do
+		UserMailer.send_mail! :email_confirmation do
 			EmailConfirmation.create(user_id: user.id, expiry: expiry, url: url)
 		end
 	end

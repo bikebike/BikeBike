@@ -2109,7 +2109,15 @@ class ConferencesController < ApplicationController
 			]
 		
 		steps -= [:questions, :payment] unless status == :open
-		steps -= [:hosting] unless @registration.present? && view_context.same_city?(@registration.city, @conference.location)
+		if @registration.present?
+			if view_context.same_city?(@registration.city, @conference.location)
+				steps -= [:questions]
+			else
+				steps -= [:hosting]
+			end
+		else
+			steps -= [:hosting, :questions]
+		end
 
 		steps -= [:administration] unless @registration.present? && @conference.host?(current_user)
 

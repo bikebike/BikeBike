@@ -1112,6 +1112,7 @@ module ApplicationHelper
 				lang: options[:lang],
 				min: options[:min],
 				max: options[:max],
+				step: options[:step],
 				aria: description_id ? { describedby: description_id } : nil
 			}
 
