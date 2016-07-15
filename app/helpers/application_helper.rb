@@ -1100,7 +1100,7 @@ module ApplicationHelper
 
 	def textfield(name, value, options = {})
 		html = ''
-		id = name.to_s.gsub('[', '_').gsub(']', '')
+		id = unique_id(name)
 		description_id = nil
 		
 		if options[:heading].present?
@@ -1149,7 +1149,13 @@ module ApplicationHelper
 
 		case options[:type]
 		when :select
-			html += select_tag(name, options_for_select(options[:options], value), input_options)
+			option_list = options_for_select(options[:options], value)
+
+			# make sure that we have an empty option if the select is required
+			if options[:required] && options[:options].first.present? && options[:options].first.last.present?
+				option_list = ('<option value="" disabled></option>' + option_list).html_safe
+			end
+			html += select_tag(name, option_list, input_options)
 		else
 			html += send("#{(options[:type] || :text).to_s}_field_tag", name, value, input_options)
 		end
@@ -1273,7 +1279,7 @@ module ApplicationHelper
 					options[:big] ? 'big' : nil
 				].compact).html_safe,
 				aria: {
-					labeledby: label_id,
+					labelledby: label_id,
 					describedby: description_id
 				},
 				class: [
