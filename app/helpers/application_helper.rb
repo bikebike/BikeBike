@@ -1025,7 +1025,7 @@ module ApplicationHelper
 		end
 
 		aria = {}
-		aria[:labeledby] = label_id if label_id.present?
+		aria[:labelledby] = label_id if label_id.present?
 		aria[:describedby] = description_id if description_id.present?
 		if options[:plain]
 			html += (text_area_tag name, value,
@@ -1071,7 +1071,7 @@ module ApplicationHelper
 
 		(html + content_tag(:fieldset, content_tag(:div, class: :fieldgroup, &block).html_safe,
 				aria: {
-					labeledby: label_id,
+					labelledby: label_id,
 					describedby: description_id
 				}
 			)
