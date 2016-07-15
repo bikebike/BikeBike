@@ -5302,6 +5302,13 @@ en:
           amenities: Amenities
           edit_event: Edit Event
           edit_location: Edit Location
+      edit:
+        headings:
+          host_organizations: Host Organizations
+          members: Organization Members
+          paypal_info: PayPal Info
+        paragraphs:
+          paypal_info: PayPal info is used for donations and fee payments. You must enter all fields to enable online fee payments, see the <a href="https://developer.paypal.com/docs/classic/api/apiCredentials/#creating-an-api-signature" target="_blank">PayPal API credential guide</a> for more information.
     contact:
       headings:
         contact: Send us a question or a complement
@@ -5365,8 +5372,8 @@ en:
         preferred_language: What is your preferred language?
         location: Where are you coming from?
         name: What is your name?
-        Payment: Payment
-        payment: Payment
+        Payment: Registration Fees
+        payment: Donation
         Allergies: Allergies
         Stats: Stats
         Workshops: Workshops
@@ -5388,12 +5395,16 @@ en:
         Verify_Account: Verify your account
         Hosting: Hosting
         can_provide_housing: Can you provide housing to attendees visiting the city?
+        questions: Your Visit
         host:
           considerations: Special Considerations
           space: Available Space
           availability: Availability
           address: Address
           notes: Notes
+        admin:
+          edit:
+            info: 'Conference Info'
       paragraphs:
         Policy_Agreement: Ensuring that all attendees feel welcome, safe, and respected at all times is especially important to us all. Please ensure that you have fully read and understand our safer spaces policy below, if you have any questions or concerns you can reach out to the organizers at any time.
         Confirm_Agreement: By clicking the "I Agree" button, you are pledging to do
@@ -5642,6 +5653,15 @@ en:
         reasons:
           website: Something about the website
           conference: Something about the conference
+        paypal_email_address: PayPal Email Address
+        paypal_username: PayPal API Username
+        paypal_password: PayPal API Password
+        paypal_signature: PayPal Signature
+        registration_statuses:
+          closed: Closed
+          open: Open
+          pre: Pre-Registration
+        registration_status: Registration Status
     actions:
       generic:
         login: Sign In
@@ -5673,6 +5693,7 @@ en:
         set_host: Set Host
         add_comment: Add Comment
         reply: Reply
+        add_member: Add
       aria:
         remove_interest: Click if you are no longer interested in this workshop
         show_interest: Click if you are interested in this workshop
@@ -5748,6 +5769,7 @@ en:
         Meals: Meals
         Events: Events
         Schedule: Schedule
+        Workshop_Times: Workshop Times
   actions:
     workshops:
       create: New Workshop

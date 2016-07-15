@@ -594,6 +594,32 @@ class ConferencesController < ApplicationController
 						availability: [ params[:first_day], params[:last_day] ],
 						notes: params[:notes]
 					}
+				when :questions
+					@registration.housing = params[:housing]
+					@registration.arrival = params[:arrival]
+					@registration.departure = params[:departure]
+					@registration.bike = params[:bike]
+					@registration.food = params[:food]
+					@registration.allergies = params[:allergies]
+					@registration.other = params[:other]
+				when :payment
+					amount = params[:amount].to_f
+
+					if amount > 0
+						@registration.payment_confirmation_token = ENV['RAILS_ENV'] == 'test' ? 'token' : Digest::SHA256.hexdigest(rand(Time.now.to_f * 1000000).to_i.to_s)
+						# @registration.save
+						
+						host = "#{request.protocol}#{request.host_with_port}"
+						response = PayPal!.setup(
+							PayPalRequest(amount),
+							register_paypal_confirm_url(@this_conference.slug, :paypal_confirm, @registration.payment_confirmation_token),
+							register_paypal_confirm_url(@this_conference.slug, :paypal_cancel, @registration.payment_confirmation_token)
+						)
+						if ENV['RAILS_ENV'] != 'test'
+							redirect_to response.redirect_uri
+						end
+						return
+					end
 				end
 
 				if @errors.present?
@@ -1126,7 +1152,7 @@ class ConferencesController < ApplicationController
 
 	def admin_update
 		set_conference
-		set_conference_registration
+		# set_conference_registration
 		return do_403 unless @this_conference.host? current_user
 
 		# set the page title in case we render instead of redirecting
@@ -1138,11 +1164,16 @@ class ConferencesController < ApplicationController
 		when 'edit'
 			case params[:button]
 			when 'save'
+				@this_conference.registration_status = params[:registration_status]
 				@this_conference.info = LinguaFranca::ActiveRecord::UntranslatedValue.new(params[:info]) unless @this_conference.info! == params[:info]
 
 				params[:info_translations].each do | locale, value |
-					@this_conference.set_column_for_locale(:info, locale, value, current_user.id) unless value = @this_conference._info(locale)
+					@this_conference.set_column_for_locale(:info, locale, value, current_user.id) unless value == @this_conference._info(locale)
 				end
+				@this_conference.paypal_email_address = params[:paypal_email_address]
+				@this_conference.paypal_username = params[:paypal_username]
+				@this_conference.paypal_password = params[:paypal_password]
+				@this_conference.paypal_signature = params[:paypal_signature]
 				@this_conference.save
 				return redirect_to register_step_path(@this_conference.slug, :administration)
 			when 'add_member'
@@ -2096,21 +2127,21 @@ class ConferencesController < ApplicationController
 	def registration_steps(conference = nil)
 		conference ||= @this_conference || @conference
 		status = conference.registration_status
-		return [] unless status == :pre || status == :open
+		# return [] unless status == :pre || status == :open
 
-		steps = [
+		steps = status == :pre || status == :open ? [
 				:policy,
 				:contact_info,
 				:questions,
 				:hosting,
 				:payment,
-				:workshops,
-				:administration
-			]
+				:workshops
+			] : []
 		
-		steps -= [:questions, :payment] unless status == :open
+		steps -= [:questions] unless status == :open
+		steps -= [:payment] unless status == :open && conference.paypal_email_address.present? && conference.paypal_username.present? && conference.paypal_password.present? && conference.paypal_signature.present?
 		if @registration.present?
-			if view_context.same_city?(@registration.city, @conference.location)
+			if view_context.same_city?(@registration.city, conference.location)
 				steps -= [:questions]
 			else
 				steps -= [:hosting]
@@ -2119,13 +2150,13 @@ class ConferencesController < ApplicationController
 			steps -= [:hosting, :questions]
 		end
 
-		steps -= [:administration] unless @registration.present? && @conference.host?(current_user)
+		steps += [:administration] if conference.host?(current_user)
 
 		return steps
 	end
 
 	def required_steps(conference = nil)
-		# return the intersection of current steps and reuired steps
+		# return the intersection of current steps and required steps
 		registration_steps(conference || @this_conference || @conference) & # current steps
 			[:policy, :contact_info, :hosting, :questions] # all required steps
 	end
@@ -2349,9 +2380,9 @@ class ConferencesController < ApplicationController
 
 	def PayPal!
 		Paypal::Express::Request.new(
-			:username   => @this_conference.paypal_username,
-			:password   => @this_conference.paypal_password,
-			:signature  => @this_conference.paypal_signature
+			username:  @this_conference.paypal_username,
+			password:  @this_conference.paypal_password,
+			signature: @this_conference.paypal_signature
 		)
 	end
 
@@ -2363,7 +2394,7 @@ class ConferencesController < ApplicationController
 			:amount        => amount.to_f,   # item value
 			:custom_fields => {
 				CARTBORDERCOLOR: "00ADEF",
-				LOGOIMG: "https://cdn.bikebike.org/assets/bblogo-paypal.png"
+				LOGOIMG: "https://en.bikebike.org/assets/bblogo-paypal.png"
 			}
 		)
 	end

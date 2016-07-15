@@ -7,6 +7,11 @@
 				- if @conference.present? && (@conference.registration_status == :pre || @conference.registration_status == :open)
 					%p=_'articles.user_settings.paragraphs.conference_registration', :t
 					= link_to (_'actions.conference.edit_registration'), register_path(@conference.slug), class: :button
+				- if @conferences.present?
+					%h3=_'articles.user_settings.headings.Your_Conferences'
+					- @conferences.each do | conference |
+						= link_to (_!conference.title), administration_step_path(conference.slug, :edit), class: :button
+
 
 				= form_tag update_settings_path do
 					= textfield :name, current_user.name, required: true, heading: 'articles.conference_registration.headings.name', big: true

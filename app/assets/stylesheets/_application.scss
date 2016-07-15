@@ -333,6 +333,7 @@ input {
 .number-field,
 .email-field,
 .telephone-field,
+.password-field,
 .text-field {
 	position: relative;
 	margin-bottom: 2em;
@@ -402,6 +403,7 @@ input {
 }
 .number-field,
 .email-field,
+.password-field,
 .telephone-field,
 .text-field,
 .text-area-field {
@@ -605,10 +607,8 @@ input {
 				content: '+';
 				border: 0;
 				font-size: 2.5em;
-				// top: 0;//-0.25em;
-				// left: 0.175em;
-				top: -0.15em;
-				left: 0.05em;
+				top: -0.025em;
+				left: 0.175em;
 				line-height: 1em;
 				color: #FFF;
 				height: 1em;
@@ -641,6 +641,13 @@ input {
 	display: block;
 	margin: 0 2em 5em;
 	font-size: 0.75em;
+
+	input[type="radio"] + label {
+		@include after {
+			top: -0.15em;
+			left: 0.05em;
+		}
+	}
 }
 
 .check-box-field.inline {
@@ -2285,7 +2292,7 @@ html :focus {
 
 #main .skip {
 	button {
-		background-color: #CCC;
+		background-color: #888;
 	}
 }
 
@@ -3175,6 +3182,13 @@ html[data-lingua-franca-example="html"] {
 		width: 100%;
 		margin-bottom: 2em;
 	}
+
+	&.inline-label {
+		label {
+			float: left;
+			margin-right: 0.5em;
+		}
+	}
 }
 
 .toggleable {
@@ -3468,67 +3482,6 @@ html[data-ontop] {
 			@include _(box-shadow, 0 0 2em -0.5em rgba(0, 0, 0, 0.5));
 		}
 	}
-	
-	.flow-steps {
-		#registration-steps {
-			li {
-				display: inline-block;
-				text-align: center;
-				float: left;
-
-				@include after {
-					content: '';
-					top: 1.125em;
-					left: auto;
-					right: -0.25em;
-					@include _(transform, rotate(45deg));
-				}
-
-				/*&.enabled:hover,
-				&.enabled:hover ~ li {
-					@include after {
-						@include _(transform, rotate(-135deg));
-						background-color: transparent;
-					}
-				}*/
-
-				&:first-child {
-					@include _(border-radius, 0.15em 0 0 0.15em);
-				}
-
-				&:last-child {
-					@include _(border-radius, 0);
-				}
-			}
-		}
-
-		#post-registration-steps {
-			margin-bottom: -2em;
-
-			li {
-				&:last-child {
-					@include _(border-bottom-right-radius, 0.15em);
-					@include _(border-bottom-left-radius, 0.15em);
-				}
-
-				&:first-child {
-					@include _(border-top-right-radius, 0.15em);
-					@include _(border-bottom-left-radius, 0);
-				}
-			}
-		}
-
-		ul {
-			display: inline-block;
-			text-align: left;
-			margin-top: -4em;
-			vertical-align: top;
-		}
-
-		li {
-			text-align: center;
-		}
-	}
 
 	#registration-admin-menu {
 		a {
@@ -3698,6 +3651,61 @@ html[data-ontop] {
 	}
 }
 
+@media (min-width: 825px) {
+	.flow-steps {
+		#registration-steps {
+			li {
+				display: inline-block;
+				text-align: center;
+				float: left;
+
+				@include after {
+					content: '';
+					top: 1.125em;
+					left: auto;
+					right: -0.25em;
+					@include _(transform, rotate(45deg));
+				}
+
+				&:first-child {
+					@include _(border-radius, 0.15em 0 0 0.15em);
+				}
+
+				&:last-child {
+					@include _(border-radius, 0);
+				}
+			}
+		}
+
+		#post-registration-steps {
+			margin-bottom: -2em;
+
+			li {
+				&:last-child {
+					@include _(border-bottom-right-radius, 0.15em);
+					@include _(border-bottom-left-radius, 0.15em);
+				}
+
+				&:first-child {
+					@include _(border-top-right-radius, 0.15em);
+					@include _(border-bottom-left-radius, 0);
+				}
+			}
+		}
+
+		ul {
+			display: inline-block;
+			text-align: left;
+			margin-top: -4em;
+			vertical-align: top;
+		}
+
+		li {
+			text-align: center;
+		}
+	}
+}
+
 @include breakpoint(large) {
 	#main-nav {
 		.nav {
@@ -3759,8 +3767,7 @@ html[data-ontop] {
 		overflow: visible;
 		padding: 0;
 		width: 100%;
-		margin-bottom: 1em;
-		//height: 4.5em;
+		margin-bottom: 2.5em;
 
 		footer {
 			max-width: $row-width;

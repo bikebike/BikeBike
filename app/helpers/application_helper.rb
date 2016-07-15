@@ -754,6 +754,18 @@ module ApplicationHelper
 		return days
 	end
 
+	def registration_status_options_list(conference = nil)
+		conference ||= @this_conference || @conference
+		return [] unless conference
+
+		options = Array.new
+		[:closed, :pre, :open].each do | opt |
+			options << [(_"forms.labels.generic.registration_statuses.#{opt}"), opt]
+		end
+
+		return options
+	end
+
 	def day_select(value = nil, args = {})
 		selectfield :day, value, conference_days_options_list(:during, nil, args[:format]), args
 	end
@@ -823,7 +835,7 @@ module ApplicationHelper
 
 	def registration_step_menu
 		steps = current_registration_steps(@registration)
-		return '' unless steps.present?
+		return '' unless steps.present? && steps.length > 1
 
 		pre_registration_steps = ''
 		post_registration_steps = ''
@@ -889,7 +901,7 @@ module ApplicationHelper
 		steps = ''
 		admin_steps.each do | step |
 			steps += content_tag(:li, class: (step.to_s == @admin_step ? :current : nil)) do
-				link_to _("menu.submenu.admin.#{step.to_s.titlecase}"), step == :edit ?
+				link_to _("menu.submenu.admin.#{step.to_s.titlecase.gsub(/\s/, '_')}"), step == :edit ?
 					register_step_path(@this_conference.slug, :administration) :
 					administration_step_path(@this_conference.slug, step.to_s)
 			end
@@ -1082,6 +1094,10 @@ module ApplicationHelper
 		textfield(name, value, options.merge({type: :email}))
 	end
 
+	def passwordfield(name, value, options = {})
+		textfield(name, value, options.merge({type: :password}))
+	end
+
 	def textfield(name, value, options = {})
 		html = ''
 		id = name.to_s.gsub('[', '_').gsub(']', '')
@@ -1127,6 +1143,8 @@ module ApplicationHelper
 			input_options[:autocomplete] = 'email'
 		when :phone
 			input_options[:autocomplete] = 'tel'
+		when :paypal_email_address, :paypal_username, :paypal_password, :paypal_signature
+			input_options[:autocomplete] = 'false'
 		end
 
 		case options[:type]
@@ -1140,12 +1158,14 @@ module ApplicationHelper
 				class: [
 					"#{(options[:type] || :text).to_s}-field",
 					'input-field',
+					value.present? ? nil : 'empty',
 					options[:big] ? 'big' : nil,
 					options[:small] ? 'small' : nil,
 					options[:stretch] ? 'stretch-item' : nil,
 					options[:full] ? 'full' : nil,
+					options[:inline_label] ? 'inline-label' : nil,
 					(@errors || {})[name].present? ? 'has-error' : nil
-			])
+			].compact)
 
 		html += _original_content(options[:original_value], options[:original_lang]) if options[:original_value].present?
 

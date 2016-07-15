@@ -136,7 +136,7 @@
 	}
 	
 	window.initNodeFunctions = [ function(node) {
-		forEachElement('.number-field,.email-field,.text-field', function(field) {
+		forEachElement('.number-field,.email-field,.text-field,.password-field', function(field) {
 			var input = field.querySelector('input');
 			var positionLabel = function(input) { 
 				field.classList[input.value ? 'remove' : 'add']('empty');

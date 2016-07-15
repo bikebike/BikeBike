@@ -235,12 +235,20 @@ class ApplicationController < LinguaFrancaApplicationController
 		end
 		expiry ||= (Time.now + 12.hours)
 		session[:confirm_uid] = user.id
+
+		# send the confirmation email and make sure it get sent as quickly as possible
 		UserMailer.send_mail! :email_confirmation do
 			EmailConfirmation.create(user_id: user.id, expiry: expiry, url: url)
 		end
 	end
 
 	def user_settings
+		@conferences = Array.new
+		if logged_in?
+			Conference.all.each do | conference |
+				@conferences << conference if conference.host? current_user
+			end
+		end
 		@main_title = @page_title = 'page_titles.user_settings.Your_Account'
 	end
 
