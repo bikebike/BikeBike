@@ -1120,7 +1120,7 @@ module ApplicationHelper
 				_(options[:label], :t, vars: options[:vars] || {})
 			end
 		elsif options[:label] != false
-			html += label_tag id
+			html += label_tag id, (_"forms.labels.generic.#{name}")
 		end
 		input_options = {
 				id: id,
