@@ -1153,7 +1153,7 @@ module ApplicationHelper
 
 			# make sure that we have an empty option if the select is required
 			if options[:required] && options[:options].first.present? && options[:options].first.last.present?
-				option_list = ('<option value=""> </option>' + option_list).html_safe
+				option_list = ('<option value="">&nbsp;</option>' + option_list).html_safe
 			end
 			html += select_tag(name, option_list, input_options)
 		else
