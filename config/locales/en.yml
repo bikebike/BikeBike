@@ -5417,6 +5417,8 @@ en:
           Payment is by donation and can be done now or upon arrival but to help us
           fund the conference, we ask that you pay the registration donation as soon
           as you can.
+        Payment_Made: You have already made a payment of $%{fees_paid}.
+        Payment_Add: Thank you! You may add to this amount if you wish by making another payment below.
         currency: "(amounts are in USD)"
         email_confirm: Go to your inbox! You should see an email from Bike!Bike! in
           just a few moments. There will be a link in the email for you to click on.
@@ -5622,6 +5624,9 @@ en:
         and for community bicycle projects. The conference is a space for participants
         from shops and related advocacy groups to converge in a different city each
         year over a 4 day period to have workshops and strengthen our social network.
+  images:
+    conference:
+      poster: '%{conference_title} poster'
   forms:
     labels:
       generic:

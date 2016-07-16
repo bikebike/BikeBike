@@ -25,6 +25,12 @@ else
 	gem 'bumbleberry', :git => 'git://github.com/bumbleberry/bumbleberry.git'
 end
 
+if Dir.exists?('../paypal-express')
+	gem 'paypal-express', :path => "../paypal-express"
+else
+	gem 'paypal-express', :git => 'git://github.com/bikebike/paypal-express.git'
+end
+
 gem 'uglifier', '>= 1.3.0'
 gem 'sorcery', '>= 0.8.1'
 gem 'oauth2', '~> 0.8.0'
@@ -35,7 +41,7 @@ gem 'geocoder'
 gem 'paper_trail', '~> 3.0.5'
 gem 'sitemap_generator'
 gem 'activerecord-session_store'
-gem 'paypal-express', '0.7.1'
+# gem 'paypal-express', '0.7.1'
 gem 'sass-json-vars'
 gem 'premailer-rails'
 gem 'redcarpet'

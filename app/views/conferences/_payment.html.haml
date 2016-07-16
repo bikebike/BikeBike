@@ -1,6 +1,11 @@
 = columns(medium: 12) do
 	%h2=_'articles.conference_registration.headings.Payment'
-	%p=_'articles.conference_registration.paragraphs.Payment', 'Thank you for completing your registration. We\'ll see you at Bike!Bike! Payment is by donation and can be done now or upon arrival but to help us fund the conference, we ask that you pay the registration donation as soon as you can.'
+	- if @registration.registration_fees_paid.present?
+		%p
+			%strong=_'articles.conference_registration.paragraphs.Payment_Made', :p, vars: { fees_paid: @registration.registration_fees_paid }
+			= _'articles.conference_registration.paragraphs.Payment_Add'
+	- else
+		%p=_'articles.conference_registration.paragraphs.Payment', :p
 = columns(large: 9, push: 1) do
 	= form_tag register_path(@this_conference.slug), :class => :payment do
 		= hidden_field_tag :button, :payment

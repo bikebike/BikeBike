@@ -237,7 +237,7 @@ class ApplicationController < LinguaFrancaApplicationController
 		session[:confirm_uid] = user.id
 
 		# send the confirmation email and make sure it get sent as quickly as possible
-		UserMailer.send_mail! :email_confirmation do
+		UserMailer.send_mail :email_confirmation do
 			EmailConfirmation.create(user_id: user.id, expiry: expiry, url: url)
 		end
 	end

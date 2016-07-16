@@ -941,6 +941,9 @@ es:
       headings:
         contact: Envíenos una pregunta o un complemento
         reason: ¿Qué está en contacto con nosotros acerca?
+  images:
+    conference:
+      poster: '%{conference_title} póster'
   forms:
     labels:
       generic:

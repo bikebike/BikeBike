@@ -5,6 +5,6 @@
 			%h2.primary=location(@conference.organizations.first.locations.first)
 			.secondary
 				= date_span(@conference.start_date.to_date, @conference.end_date.to_date)
-	%img{src: @conference.poster.full.url || image_path('default_poster.jpg'), role: :presentation, alt: ''}
+	%img{src: @conference.poster.full.url || image_path('default_poster.jpg'), role: :presentation, alt: (_'images.conference.poster', vars: { conference_title: @conference.title })}
 - content_for :og_image do
 	= @conference.poster.full.url || image_path('default_poster.jpg')
