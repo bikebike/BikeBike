@@ -1211,7 +1211,7 @@ module ApplicationHelper
 
 		if options[:heading].present?
 			label_id ||= unique_id("#{name.to_s}-label")
-			html += content_tag(:h3, _(options[:heading], :t), id: label_id)
+			html += content_tag(:h3, _(options[:heading], :t, vars: options[:vars] || {}), id: label_id)
 		end
 
 		help = nil

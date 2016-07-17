@@ -168,6 +168,7 @@ en:
         one: 1 error prohibited this %{model} from being saved
         other: "%{count} errors prohibited this %{model} from being saved"
   warnings:
+      location_corrected: 
       housing:
           space:
             overbooked: Overbooked
@@ -5354,13 +5355,13 @@ en:
         administration: Administration
         Policy_Agreement: Safer Space Agreement
         policy: Policy
-        arrival_and_departure: For what days will you need housing? (If you don't
-          need housing, just tell us how long you plan to hang out with Bike!Bike!)
+        arrival_and_departure: How long do you plan to stay in %{city}?
         other: Is there anything else you'd like to tell us?
         email_confirm: Confirm Email
         Enter_Your_Email: Enter your email address
         Registration_Info: Registration Info
         Your_Registration: Your Registration
+        Your_Conferences: Your Conferences
         Youre_Done: You're Done!
         allergies: Do you have any allergies?
         arrival: Arrival
@@ -5405,6 +5406,7 @@ en:
         admin:
           edit:
             info: 'Conference Info'
+        companion: Companion
       paragraphs:
         Policy_Agreement: Ensuring that all attendees feel welcome, safe, and respected at all times is especially important to us all. Please ensure that you have fully read and understand our safer spaces policy below, if you have any questions or concerns you can reach out to the organizers at any time.
         Confirm_Agreement: By clicking the "I Agree" button, you are pledging to do
@@ -5442,7 +5444,7 @@ en:
           Pressing 'test' will send the email only to you, make sure you do this and
           use caution in general before pressing 'send'
         payment_confirm: You are about to confirm your payment of %{amount} for registration.
-        participants_emailed: Your email has been sent to all participants of %%{conference_title}.
+        participants_emailed: Your email has been sent to all participants of %{conference_title}.
         workshops: You can now take a look at proposed workshops and even propose
           one yourself if you like.
         Contact_Info: Please let us know a little bit about you.
@@ -5462,6 +5464,8 @@ en:
         admin:
           edit:
             info: This is the copy that is displayed on the front page of the site.
+        companion: Is there someone who you would like us to ensure that you are housed with?
+        arrival_and_departure: If you don't need housing, just tell us how long you plan to hang out with Bike!Bike!
       host:
         considerations:
           vegan: Vegan or vegetarian only
@@ -5667,6 +5671,7 @@ en:
           open: Open
           pre: Pre-Registration
         registration_status: Registration Status
+        companion: Email address
     actions:
       generic:
         login: Sign In

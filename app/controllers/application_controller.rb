@@ -124,7 +124,7 @@ class ApplicationController < LinguaFrancaApplicationController
 		render 'application/permission_denied', status: 403
 	end
 
-	def error_500(exception)
+	def error_500(exception = nil)
 		@page_title = 'page_titles.500.An_Error_Occurred'
 		@main_title = 'error.500.title'
 		params[:_original_action] = params[:action]

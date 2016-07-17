@@ -707,7 +707,7 @@ es:
     conference_registration:
       headings:
         Registration_Info: Registro
-        arrival_and_departure: ¿Que día llegas a Guadalajara?
+        arrival_and_departure: ¿Que día llegas a %{city}?
         allergies: ¿Eres alergico a algo?
         languages: ¿Hablas?
         food: ¿Que comes?
@@ -1049,13 +1049,13 @@ es:
   translate:
     content:
       translate_now: Translar ahora
-      can_you_help: ¿Se puede traducir del %%{language_a} al %%{language_b}?
+      can_you_help: ¿Se puede traducir del %{language_a} al %{language_b}?
       outdated_translation: El contenido que ha sido superado
       translation_out_of_date: Contenido traducido en esta página puede no ser exacta
       un_translated: Contenido sin traducir
       not_translation: No es una traducción
       translation_last_modified: El texto en el idioma original fue modificada por
-        última vez el %%{date}
+        última vez el %{date}
       change_locale: "Leer en %{language}"
     pages:
       contexts:
@@ -1087,7 +1087,7 @@ es:
       pluraliztion_same_as_other: Igual que el otro
       Enabled_Locales: Idiomas habilitados
       History: Historia
-      Locale_Translation: Traducción en %%{language}
+      Locale_Translation: Traducción en %{language}
       Other_Locales: Otros idiomas
       Save: Ahorre
       explain_zero_fallback: Esta traducción se utilice la versión plural para el
@@ -1096,10 +1096,10 @@ es:
       use_default_value: Utilice el valor predeterminado
       variables: Variables
     site:
-      go_to_locale: Ver el sitio %%{language} ahora
-      locale_is_available: '%%{site_name} está disponible en %%{language}'
-      locale_needs_help: ¿Puedes ayudar a traducir el sitio al %%{language}?
-      locale_not_available: Lo sentimos, %%{site_name} no está disponible en %%{language}.
+      go_to_locale: Ver el sitio %{language} ahora
+      locale_is_available: '%{site_name} está disponible en %{language}'
+      locale_needs_help: ¿Puedes ayudar a traducir el sitio al %{language}?
+      locale_not_available: Lo sentimos, %{site_name} no está disponible en %{language}.
     volunteer:
       become_a_volunteer: Conviértete en un traductor voluntario
       volunteer: ¿Puedes ayudar a traducir esto?
@@ -1123,7 +1123,7 @@ es:
           confirma tu dirección de e-mail por favor.
     subject:
       confirm_email: E-mail de confirmación
-      registration_confirmed: ¡Gracias por registrarte para %%{conference_title}!
+      registration_confirmed: ¡Gracias por registrarte para %{conference_title}!
       workshop_facilitator_request: Solicitud para facilitar %{workshop_title} por
         parte de %{requester_name}
       workshop_request_approved: Has sido agregadx como facilitador(a) a %{workshop_title}

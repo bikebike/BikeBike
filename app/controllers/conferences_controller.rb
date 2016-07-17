@@ -431,7 +431,7 @@ class ConferencesController < ApplicationController
 		if request.format.xls?
 			logger.info "Generating stats.xls"
 			@excel_data = {
-				:columns => [:name, :email, :city, :date, :languages, :arrival, :departure, :housing, :bike, :food, :allergies, :other, :fees_paid],
+				:columns => [:name, :email, :city, :date, :languages, :arrival, :departure, :housing, :companion, :bike, :food, :allergies, :other, :fees_paid],
 				:key => 'articles.conference_registration.headings',
 				:data => []
 			}
@@ -480,6 +480,7 @@ class ConferencesController < ApplicationController
 							:arrival => r.arrival ? r.arrival.strftime("%F %T") : '',
 							:departure => r.departure ? r.departure.strftime("%F %T") : '',
 							:housing => (I18n.t"articles.conference_registration.questions.housing.#{r.housing || 'none'}"),
+							:companion => (r.housing_data[:companions] || []).join(', '),
 							:bike => (I18n.t"articles.conference_registration.questions.bike.#{r.bike || 'none'}"),
 							:food => (I18n.t"articles.conference_registration.questions.food.#{r.food || 'meat'}"),
 							:fees_paid => (r.registration_fees_paid || 0.0),
@@ -533,8 +534,8 @@ class ConferencesController < ApplicationController
 			@register_template = :confirm_email
 		end
 
-		steps = registration_steps
-		return do_404 unless steps.present?
+		steps = nil
+		return do_404 unless registration_steps.present?
 		
 		@register_template = :administration if params[:admin_step].present?
 
@@ -542,8 +543,10 @@ class ConferencesController < ApplicationController
 		@warnings = []
 		form_step = params[:button] ? params[:button].to_sym : nil
 
+		# process any data that was passed to us
 		if form_step
 			if form_step.to_s =~ /^prev_(.+)$/
+				steps = registration_steps
 				@register_template = steps[steps.find_index($1.to_sym) - 1]
 			elsif form_step == :paypal_confirm
 				if @registration.present? && @registration.payment_confirmation_token == params[:confirmation_token]
@@ -636,6 +639,9 @@ class ConferencesController < ApplicationController
 					@registration.housing = params[:housing]
 					@registration.arrival = params[:arrival]
 					@registration.departure = params[:departure]
+					@registration.housing_data = {
+						companions: [ params[:companion] ]
+					}
 					@registration.bike = params[:bike]
 					@registration.food = params[:food]
 					@registration.allergies = params[:allergies]
@@ -666,6 +672,7 @@ class ConferencesController < ApplicationController
 					@register_template = form_step
 				else
 					unless @registration.nil?
+						steps = registration_steps
 						@register_template = steps[steps.find_index(form_step) + 1]
 
 						# have we reached a new level?
@@ -689,6 +696,9 @@ class ConferencesController < ApplicationController
 			end
 		end
 
+		steps ||= registration_steps
+
+		# make sure we're on a valid step
 		@register_template ||= (params[:step] || current_step).to_sym
 
 		if logged_in? && @register_template != :paypal_confirm
@@ -703,143 +713,10 @@ class ConferencesController < ApplicationController
 			# then we'll redirect to the current registration step
 		end
 
-		# process data from the last view
-		# case (params[:button] || '').to_sym
-		# when :confirm_email
-		# 	@register_template = :email_sent if is_post
-		# when :policy
-		# 	@register_template = :questions if is_post
-		# when :save
-		# 	if is_post
-		# 		new_registration = !@registration
-		# 		@registration = ConferenceRegistration.new if new_registration
-
-		# 		@registration.conference_id = @this_conference.id
-		# 		@registration.user_id = current_user.id
-		# 		@registration.is_attending = 'yes'
-		# 		@registration.is_confirmed = true
-		# 		@registration.city = params[:location]
-		# 		@registration.arrival = params[:arrival]
-		# 		@registration.languages = params[:languages].keys.to_json
-		# 		@registration.departure = params[:departure]
-		# 		@registration.housing = params[:housing]
-		# 		@registration.bike = params[:bike]
-		# 		@registration.food = params[:food]
-		# 		@registration.allergies = params[:allergies]
-		# 		@registration.other = params[:other]
-		# 		@registration.save
-
-		# 		current_user.firstname = params[:name].squish
-		# 		current_user.lastname = nil
-		# 		current_user.save
-
-		# 		if new_registration
-		# 			UserMailer.send_mail :registration_confirmation do
-		# 				{
-		# 					:args => @registration
-		# 				}
-		# 			end
-		# 		end
-
-		# 		@register_template = @registration.registration_fees_paid ? :done : :payment
-		# 	end
-		# when :payment
-		# 	if is_post && @registration
-		# 		amount = params[:amount].to_f
-
-		# 		if amount > 0
-		# 			@registration.payment_confirmation_token = ENV['RAILS_ENV'] == 'test' ? 'token' : Digest::SHA256.hexdigest(rand(Time.now.to_f * 1000000).to_i.to_s)
-		# 			@registration.save
-					
-		# 			host = "#{request.protocol}#{request.host_with_port}"
-		# 			response = PayPal!.setup(
-		# 				PayPalRequest(amount),
-		# 				register_paypal_confirm_url(@this_conference.slug, :paypal_confirm, @registration.payment_confirmation_token),
-		# 				register_paypal_confirm_url(@this_conference.slug, :paypal_cancel, @registration.payment_confirmation_token)
-		# 			)
-		# 			if ENV['RAILS_ENV'] != 'test'
-		# 				redirect_to response.redirect_uri
-		# 			end
-		# 			return
-		# 		end
-		# 		@register_template = :done
-		# 	end
-		# when :paypal_confirm
-		# 	if @registration && @registration.payment_confirmation_token == params[:confirmation_token]
-
-		# 		if ENV['RAILS_ENV'] == 'test'
-		# 			@amount = YAML.load(@registration.payment_info)[:amount]
-		# 		else
-		# 			@amount = PayPal!.details(params[:token]).amount.total
-		# 			# testing this does't work in test but it works in devo and prod
-		# 			@registration.payment_info = {:payer_id => params[:PayerID], :token => params[:token], :amount => @amount}.to_yaml
-		# 		end
-
-		# 		@amount = (@amount * 100).to_i.to_s.gsub(/^(.*)(\d\d)$/, '\1.\2')
-
-		# 		@registration.save!
-		# 		@register_template = :paypal_confirm
-		# 	end
-		# when :paypal_confirmed
-		# 	info = YAML.load(@registration.payment_info)
-		# 	@amount = nil
-		# 	status = nil
-		# 	if ENV['RAILS_ENV'] == 'test'
-		# 		status = info[:status]
-		# 		@amount = info[:amount]
-		# 	else
-		# 		paypal = PayPal!.checkout!(info[:token], info[:payer_id], PayPalRequest(info[:amount]))
-		# 		status = paypal.payment_info.first.payment_status
-		# 		@amount = paypal.payment_info.first.amount.total
-		# 	end
-		# 	if status == 'Completed'
-		# 		@registration.registration_fees_paid = @amount
-		# 		@registration.save!
-		# 		@register_template = :done
-		# 	else
-		# 		@register_template = :payment
-		# 	end
-		# when :paypal_cancel
-		# 	if @registration
-		# 		@registration.payment_confirmation_token = nil
-		# 		@registration.save
-		# 		@register_template = :payment
-		# 	end
-		# when :register
-		# 	@register_template = :questions
-		# end
-
-		# if @register_template == :payment && !@this_conference.paypal_username
-		# 	@register_template = :done
-		# end
-
-		# # don't let the user edit registration if registration is closed
-		# if !@conference.registration_open && @register_template == :questions
-		# 	@register_template = :done
-		# end
-
-		# prepare data for the next view
+		# prepare the form
 		case @register_template
 		when :questions
-			@registration ||= ConferenceRegistration.new(
-					:conference_id => @this_conference.id,
-					:user_id => current_user.id,
-					:is_attending => 'yes',
-					:is_confirmed => true,
-					:city => view_context.location(view_context.lookup_ip_location),
-					:arrival => @this_conference.start_date,
-					:departure => @this_conference.end_date,
-					:housing => nil,
-					:bike => nil,
-					:other => ''
-				);
-			@languages = current_user.languages
-
-			if @languages.blank? && @registration.languages.present?
-				@languages = (@registration.languages.is_a?(String) ? JSON.parse(@registration.languages) : @registration.languages).map &:to_sym
-			end
-
-			@languages ||= [I18n.locale.to_sym]
+			@registration.housing_data ||= { }
 		when :workshops
 			@page_title = 'articles.conference_registration.headings.Workshops'
 			@workshops = Workshop.where(conference_id: @this_conference.id)

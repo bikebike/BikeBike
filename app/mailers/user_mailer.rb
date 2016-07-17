@@ -65,7 +65,7 @@ class UserMailer < ActionMailer::Base
 		@subject = (_'email.subject.workshop_request_approved',
 					"You have been added as a facilitator of #{@workshop.title}",
 					:vars => {:workshop_title => @workshop.title})
-		mail to: user.named_email, subject: @subject
+		mail to: @user.named_email, subject: @subject
 	end
 
 	def workshop_facilitator_request_denied(workshop, user)
@@ -75,7 +75,7 @@ class UserMailer < ActionMailer::Base
 		@subject = (_'email.subject.workshop_request_denied',
 					"Your request to facilitate #{@workshop.title} has been denied",
 					:vars => {:workshop_title => @workshop.title})
-		mail to: user.named_email, subject: @subject
+		mail to: @user.named_email, subject: @subject
 	end
 
 	def workshop_translated(workshop, data, locale, user, translator)
@@ -98,7 +98,7 @@ class UserMailer < ActionMailer::Base
 
 		@wrapper_id = :full_width
 
-		mail to: user.named_email, subject: @subject
+		mail to: @user.named_email, subject: @subject
 	end
 
 	def workshop_original_content_changed(workshop, data, user, translator)
@@ -119,21 +119,21 @@ class UserMailer < ActionMailer::Base
 
 		@wrapper_id = :full_width
 
-		mail to: user.named_email, subject: @subject
+		mail to: @user.named_email, subject: @subject
 	end
 
 	def workshop_comment(workshop, comment, user)
 		@workshop = Workshop.find(workshop) if workshop.present?
-		@comment = comment
+		@comment = Comment.find(comment) if comment.present?
 		@user = User.find(user) if user.present?
 
-		if comment.reply?
-			@subject = (_'email.subject.workshop_comment.reply', vars: { user_name: comment.user.name })
+		if @comment.reply?
+			@subject = (_'email.subject.workshop_comment.reply', vars: { user_name: @comment.user.name })
 		else
-			@subject = (_'email.subject.workshop_comment.comment', vars: { user_name: comment.user.name, workshop_title: workshop.title })
+			@subject = (_'email.subject.workshop_comment.comment', vars: { user_name: @comment.user.name, workshop_title: @workshop.title })
 		end
 
-		mail to: user.named_email, subject: @subject
+		mail to: @user.named_email, subject: @subject
 	end
 
 	def error_report(subject, message, report, exception, request, params, user)
@@ -152,7 +152,7 @@ class UserMailer < ActionMailer::Base
 		@subject = subject
 		@from = from.is_a?(Integer) ? User.find(from) : from
 
-		mail to: email_list.join(', '), subject: @subject, reply_to: from.is_a?(User) ? from.named_email : from
+		mail to: email_list.join(', '), subject: @subject, reply_to: @from.is_a?(User) ? @from.named_email : @from
 	end
 
 	def contact_details(from, subject, message, request, params)
