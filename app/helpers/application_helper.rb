@@ -916,6 +916,14 @@ module ApplicationHelper
 			(button_tag interested, :value => :toggle_interest, :class => (workshop.interested?(current_user) ? :delete : :add), aria: { labelledby: id })
 	end
 
+	def interest_text(workshop)
+		if workshop.interested?(current_user)
+			return _'articles.workshops.info.you_are_interested_count', :vars => {:count => (workshop.interested_count - 1)}
+		end
+
+		return _'articles.workshops.info.interested_count', :vars => {:count => workshop.interested_count}
+	end
+
 	def host_guests_widget(registration)
 		html = ''
 		classes = ['host']

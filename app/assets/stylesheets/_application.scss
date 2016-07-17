@@ -2759,41 +2759,42 @@ html[data-lingua-franca-example="html"] {
 	}
 }
 
-.workshop-list {
+#main .workshop-list {
 	list-style: none;
 	padding: 0;
 
 	.workshop-description {
-		font-size: 0.8em;
+		font-size: 0.9em;
 		max-height: 20em;
 		padding: 1em;
 		overflow: hidden;
 	}
 
-	.workshop-link {
-		position: static;
+	// .workshop-link {
+	// 	position: static;
 
-		@include before {
-			content: '';
-			display: block;
-			position: absolute;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			left: 0
-		}
-		@include after {
-			display: none;
-		}
-	}
+	// 	@include before {
+	// 		content: '';
+	// 		display: block;
+	// 		position: absolute;
+	// 		top: 0;
+	// 		right: 0;
+	// 		bottom: 0;
+	// 		left: 0
+	// 	}
+	// 	@include after {
+	// 		display: none;
+	// 	}
+	// }
 
 	> li {
 		position: relative;
 		margin-bottom: 1em;
-		border: 0.2em solid;
-		@include _(border-radius, 0.25em);
-		@include _(transition, box-shadow 250ms ease-in-out);
-		will-change: box-shadow;
+		border-bottom: 0.1rem solid #EEE;
+		// border: 0.2em solid;
+		// @include _(border-radius, 0.25em);
+		// @include _(transition, box-shadow 250ms ease-in-out);
+		// will-change: box-shadow;
 
 		ul {
 			padding-left: 2.5em;
@@ -2804,40 +2805,64 @@ html[data-lingua-franca-example="html"] {
 			border: 0;
 		}
 
-		&:hover {
-			@include default-box-shadow;
+		&:last-child {
+			border: 0;
 		}
+
+		// &:hover {
+		// 	@include default-box-shadow;
+		// }
 
 		&.interested {
 			.workshop-interest {
-				background-color: rgba($colour-5, 0.5);
+				// background-color: rgba($colour-5, 0.5);
 			}
 		}
 
 		&.mine {
 			.workshop-interest {
-				background-color: lighten($colour-1, 25%);
-				background-color: rgba($colour-1, 0.5);
+				// background-color: lighten($colour-1, 25%);
+				// background-color: rgba($colour-1, 0.5);
 			}
 		}
 	}
 
+	.actions {
+		position: relative;
+		margin: 0;
+		@include _(box-shadow, 0 -1em 1em $white);
+	}
+
 	.title {
 		margin: 0;
-		background-color: $black;
-		color: #FFF;
-		padding: 0.25em 0.5em 0.5em;
+		// background-color: $black;
+		// color: #FFF;
+		// padding: 0.25em 0.5em 0.5em;
 	}
 
 	p {
-		margin-top: 0;
+		margin: 0;
 		font-size: 1em;
 	}
 
 	.workshop-interest {
-		padding: 0.5em 1em;
-		font-weight: bold;
-		background-color: #EEE;
+		// padding: 0.5em 1em;
+		// font-weight: bold;
+		// background-color: #EEE;
+	}
+	
+	.interest-button {
+		button {
+			margin: 0 0 0 1em;
+			font-size: 0.8em;
+			padding-top: 0.333em;
+			padding-bottom: 0.333em;
+			background-color: $colour-5;
+		}
+	}
+
+	h5, h6 {
+		margin: 1em 0 0;
 	}
 }
 
@@ -2859,14 +2884,14 @@ html[data-lingua-franca-example="html"] {
 		}
 	}
 
-	body.home & {
-		text-align: left;
-		font-style: italic;
-		color: #888;
-		margin-top: -0.5em;
-		margin-bottom: -0.5em;
-		margin-left: 1em;
-	}
+	// body.home & {
+	// 	text-align: left;
+	// 	font-style: italic;
+	// 	color: #888;
+	// 	margin-top: -0.5em;
+	// 	margin-bottom: -0.5em;
+	// 	margin-left: 1em;
+	// }
 }
 
 .original-text {

@@ -5614,6 +5614,7 @@ en:
           one: You and one other are interested in this workshop
           other: You and %{count} others are interested in this workshop
           zero: You are interested in this workshop
+        read_more: More info
     user_settings:
       headings:
         Your_Account: Account Settings

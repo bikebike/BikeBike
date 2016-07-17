@@ -13,13 +13,4 @@
 				- if @conference.registration_status == :open
 					%h3=_'articles.workshops.headings.Proposed_Workshops'
 					%p=_'articles.workshops.paragraphs.Proposed_Workshops'
-					%ul.workshop-list
-						- (@conference.workshops || []).sort_by{ |w| w.title.downcase }.each do |w|
-							%li
-								%h4=w.title
-								.workshop-interest
-									- if w.interested?(current_user)
-										=_'articles.workshops.info.you_are_interested_count', :vars => {:count => (w.interested_count - 1)}
-									- elsif w.interested_count > 0
-										=_'articles.workshops.info.interested_count', :vars => {:count => w.interested_count}
-								.workshop-description=markdown w.info
+					= render 'workshops/workshop_previews', :workshops => @conference.workshops

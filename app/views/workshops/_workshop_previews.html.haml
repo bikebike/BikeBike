@@ -2,11 +2,14 @@
 	- workshops.sort_by{ |w| w.title.downcase }.each do |w|
 		- is_interested = w.interested?(current_user)
 		%li{class: [is_interested ? :interested : nil]}
-			= link_to view_workshop_path(w.conference.slug, w.id), class: 'workshop-link' do
-				%h4.title=w.title
+			%h4.title=w.title
 			.workshop-interest
-				- if is_interested
-					=_'articles.workshops.info.you_are_interested_count', "You and #{w.interested_count - 1} others are interested in this workshop", :vars => {:count => (w.interested_count - 1)}
+				- if w.can_show_interest?(current_user)
+					= form_tag toggle_workshop_interest_path(w.conference.slug, w.id), class: 'js-xhr' do
+						%span.interest-text=interest_text(w)
+						%span.interest-button=interest_button(w)
 				- elsif w.interested_count > 0
-					=_'articles.workshops.info.interested_count', "#{w.interested_count} people are interested in this workshop", :vars => {:count => w.interested_count}
-			.workshop-description=w.info.html_safe
+					%span.interest-text=interest_text(w)
+			.workshop-description=richtext w.info, 4
+			.actions.right
+				= link_to (_'articles.workshops.info.read_more'), view_workshop_path(w.conference.slug, w.id), class: 'workshop-link', class: [:button, :small]

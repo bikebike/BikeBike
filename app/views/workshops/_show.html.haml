@@ -3,13 +3,12 @@
 	= columns(medium: 12) do
 		%h2=_!workshop.title
 		.workshop-interest
-			- if workshop.interested?(current_user)
-				=_'articles.workshops.info.you_are_interested_count', "You and #{workshop.interested_count - 1} others are interested in this workshop", :vars => {:count => (workshop.interested_count - 1)}
-			- else
-				=_'articles.workshops.info.interested_count', "#{workshop.interested_count} people are interested in this workshop", :vars => {:count => workshop.interested_count}
-			- if preview.blank? && workshop.can_show_interest?(current_user)
+			- if workshop.can_show_interest?(current_user)
 				= form_tag toggle_workshop_interest_path(workshop.conference.slug, workshop.id), class: 'js-xhr' do
+					%span.interest-text=interest_text(workshop)
 					%span.interest-button=interest_button(workshop)
+			- else
+				%span.interest-text=interest_text(workshop)
 		= richtext workshop.info
 		- if preview.blank? && translations_available_for_editing
 			.actions

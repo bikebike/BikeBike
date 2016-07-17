@@ -76,7 +76,7 @@ class Workshop < ActiveRecord::Base
     end
 
     def can_show_interest?(user)
-        !active_facilitator?(user)
+        user.present? && !active_facilitator?(user)
     end
 
     def interested?(user)
