@@ -1543,6 +1543,7 @@ table.schedule {
 	margin: 0 0 1em;
 
 	td {
+		position: relative;
 		text-align: center;
 
 		&.empty {
@@ -1569,6 +1570,25 @@ table.schedule {
 
 		.title {
 			@include font-family(secondary);
+		}
+
+		.event-detail-link {
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			color: inherit;
+
+			@include after {
+				display: none;
+			}
+
+			&:hover {
+				outline: 0.33rem solid #02CA9E;
+				outline-offset: 0.25rem;
+				z-index: 1;
+			}
 		}
 
 		.status {
@@ -1621,6 +1641,7 @@ table.schedule {
 			}
 		}
 
+
 		#main .columns & form {
 			margin-top: 0;
 			
@@ -1632,10 +1653,45 @@ table.schedule {
 	}
 }
 
+.event-dlg {
+    @include _-(flex, 0);
+    position: relative;
+    z-index: 1000;
+	background-color: $white;
+	text-align: left;
+	padding: 2em 2em 0.5em;
+	min-width: 100%;
+	max-height: 100%;
+	overflow: auto;
+	margin: auto;
+	@include _(opacity, 0);
+	@include _(transition, opacity 150ms ease-in-out);
+	@include default-box-shadow(top, 2);
+
+	.actions {
+		margin: 2em 0 0;
+	}
+
+	&.open {
+		@include _(opacity, 1);
+	}
+}
+
+.event-details {
+	.title {
+		margin: 0 0 0.5em;
+	}
+
+	.address {
+		text-align: center;
+	}
+}
+
 #admin-schedule {
-	.workshop-list {
+	.workshops-to-schedule {
 		@include _-(display, flex);
 		@include _(flex-wrap, wrap);
+		list-style: none;
 		padding: 0;
 
 		li {
@@ -1643,6 +1699,7 @@ table.schedule {
 			@include _(flex-basis, 48%);
 			margin: 1%;
 			@include _(transition, background-color 250ms ease-in-out);
+			background-color: #EEE;
 
 			.title {
 				@include _(transition, background-color 250ms ease-in-out);
@@ -1689,6 +1746,26 @@ table.schedule {
 			.details {
 				margin: 0 5% 1em;
 				width: 90%;
+			}
+
+			.title {
+				margin: 0 0 0.5em;
+				padding: 0.5em;
+				background-color: $black;
+				color: $white;
+			}
+
+			.drop-downs {
+				padding: 0 1em 1em;
+
+				select {
+					width: 100%;
+				}
+			}
+
+			.actions {
+				margin: 0;
+				padding: 0 0.5em;
 			}
 		}
 
@@ -2126,6 +2203,15 @@ body {
 		display: block;
 	}
 
+	body.has-overlay.is-event-dlg & {
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		@include _-(display, flex);
+	}
+
 	.dlg {
 		@include before {
 			content: '';
@@ -2167,19 +2253,21 @@ body {
 		@include _(transform-origin, center 250%);
 	}
 
-	.title {
-		padding: 0.5em;
-		background-color: $colour-5;
-		color: $white;
-		@include _(text-stroke, 1px rgba(0, 0, 0, 0.25));
-	}
-
-	.dlg-inner {
-		padding: 0 2em 2em;
+	.dlg {
+		.title {
+			padding: 0.5em;
+			background-color: $colour-5;
+			color: $white;
+			@include _(text-stroke, 1px rgba(0, 0, 0, 0.25));
+		}
 	}
 
 	button, .button {
 		margin: 0 0.25em 0.5em;
+	}
+
+	.dlg-inner {
+		padding: 0 2em 2em;
 	}
 
 	.message {
@@ -2808,23 +2896,6 @@ html[data-lingua-franca-example="html"] {
 		&:last-child {
 			border: 0;
 		}
-
-		// &:hover {
-		// 	@include default-box-shadow;
-		// }
-
-		&.interested {
-			.workshop-interest {
-				// background-color: rgba($colour-5, 0.5);
-			}
-		}
-
-		&.mine {
-			.workshop-interest {
-				// background-color: lighten($colour-1, 25%);
-				// background-color: rgba($colour-1, 0.5);
-			}
-		}
 	}
 
 	.actions {
@@ -2845,28 +2916,22 @@ html[data-lingua-franca-example="html"] {
 		font-size: 1em;
 	}
 
-	.workshop-interest {
-		// padding: 0.5em 1em;
-		// font-weight: bold;
-		// background-color: #EEE;
-	}
-	
-	.interest-button {
-		button {
-			margin: 0 0 0 1em;
-			font-size: 0.8em;
-			padding-top: 0.333em;
-			padding-bottom: 0.333em;
-			background-color: $colour-5;
-		}
-	}
-
 	h5, h6 {
 		margin: 1em 0 0;
 	}
 }
 
-#main .workshop-interest {
+.interest-button {
+	button {
+		margin: 0 0 0 1em;
+		font-size: 0.8em;
+		padding-top: 0.333em;
+		padding-bottom: 0.333em;
+		background-color: $colour-5;
+	}
+}
+
+#main .workshop-interest, .workshop-interest {
 	text-align: right;
 
 	form {
@@ -3073,116 +3138,116 @@ html[data-lingua-franca-example="html"] {
 	}
 }
 
-.programme {
+// .programme {
 
-	.schedule {
-		width: auto;
-		margin: 0;
-		min-width: 100%;
-		@include _(box-shadow, none);
-		table-layout: fixed;
-		border-spacing: 0.25em;
-		border-collapse: separate;
+// 	.schedule {
+// 		width: auto;
+// 		margin: 0;
+// 		min-width: 100%;
+// 		@include _(box-shadow, none);
+// 		table-layout: fixed;
+// 		border-spacing: 0.25em;
+// 		border-collapse: separate;
 
-		td {
-			position: relative;
-			vertical-align: middle;
+// 		td {
+// 			position: relative;
+// 			vertical-align: middle;
 
-			.title {
-				text-align: center;
-				@include font-family(secondary);
-				color: #666;
-			}
+// 			.title {
+// 				text-align: center;
+// 				@include font-family(secondary);
+// 				color: #666;
+// 			}
 			
 
-			&.previewable {
-				cursor: pointer;
+// 			&.previewable {
+// 				cursor: pointer;
 
-				&:hover {
-					@include default-box-shadow(top, 2);
-				}
-			}
+// 				&:hover {
+// 					@include default-box-shadow(top, 2);
+// 				}
+// 			}
 
-			&.workshop {
-				background-color: lighten($colour-1, 35);
-				border: 0.25em solid $colour-1;
+// 			&.workshop {
+// 				background-color: lighten($colour-1, 35);
+// 				border: 0.25em solid $colour-1;
 
-				.preview {
-					position: absolute;
-					top: 0;
-					right: 0;
-					bottom: 0;
-					left: 0;
+// 				.preview {
+// 					position: absolute;
+// 					top: 0;
+// 					right: 0;
+// 					bottom: 0;
+// 					left: 0;
 
-					@include after {
-						display: none;
-					}
-				}
-			}
+// 					@include after {
+// 						display: none;
+// 					}
+// 				}
+// 			}
 
-			&.event {
-				background-color: lighten($colour-5, 35);
-				border: 0.25em solid $colour-5;
-			}
+// 			&.event {
+// 				background-color: lighten($colour-5, 35);
+// 				border: 0.25em solid $colour-5;
+// 			}
 
-			&.meal {
-				background-color: lighten($colour-3, 25);
-				border: 0.25em solid $colour-3;
-			}
+// 			&.meal {
+// 				background-color: lighten($colour-3, 25);
+// 				border: 0.25em solid $colour-3;
+// 			}
 
-			&.not-interested {
-				.title {
-					opacity: 0.5;
-				}
-			}
+// 			&.not-interested {
+// 				.title {
+// 					opacity: 0.5;
+// 				}
+// 			}
 
-			.info {
-				position: fixed;
-				top: 0;
-				right: 0;
-				bottom: 0;
-				left: 0;
-				z-index: 1000;
-				background-color: $white;
-				text-align: left;
-				overflow-y: auto;
-				@include _(transition, transform 250ms ease-in-out);
-				@include _(transform-origin, center bottom);
-				@include _(transform, rotate(180deg) translate3d(0, 0, 0));
+// 			.info {
+// 				position: fixed;
+// 				top: 0;
+// 				right: 0;
+// 				bottom: 0;
+// 				left: 0;
+// 				z-index: 1000;
+// 				background-color: $white;
+// 				text-align: left;
+// 				overflow-y: auto;
+// 				@include _(transition, transform 250ms ease-in-out);
+// 				@include _(transform-origin, center bottom);
+// 				@include _(transform, rotate(180deg) translate3d(0, 0, 0));
 
-				.close {
-					float: right;
-					font-size: 2em;
+// 				.close {
+// 					float: right;
+// 					font-size: 2em;
 
-					@include before {
-						content: '×';
-						padding: 0 0.5em;
-					}
+// 					@include before {
+// 						content: '×';
+// 						padding: 0 0.5em;
+// 					}
 
-					@include after {
-						display: none;
-					}
-				}
+// 					@include after {
+// 						display: none;
+// 					}
+// 				}
 
-				h2 {
-					margin-bottom: 0.5em;
-				}
-			}
+// 				h2 {
+// 					margin-bottom: 0.5em;
+// 				}
+// 			}
 
-			&:target .info {
-				@include _(transform, rotate(0) translate3d(0, 0, 0));
-			}
-		}
-	}
+// 			&:target .info {
+// 				@include _(transform, rotate(0) translate3d(0, 0, 0));
+// 			}
+// 		}
+// 	}
 
-	.programme-day {
-		margin-top: 2em;
-	}
+// 	.programme-day {
+// 		margin-top: 2em;
+// 	}
 
-	.programme-day-part {
-		overflow-x: auto;
-	}
-}
+// 	.programme-day-part {
+// 		overflow-x: auto;
+// 	}
+// }
 
 .select-field {
 	line-height: 1.75em;
@@ -3526,6 +3591,10 @@ html[data-ontop] {
 
 	.workshop-list {
 		padding: 0 2em;
+	}
+
+	.event-dlg {
+		min-width: 75%;
 	}
 
 	#main {

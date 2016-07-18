@@ -20,7 +20,28 @@
 				%li.guest{id: "guest-#{id}", data: { id: id, 'affected-hosts': @hosts_affected_by_guests[id].join(',') }}
 					%h4= registration.user.name
 					.city=registration.city
-					.email.on-top-only=registration.user.email
+					.on-top-only.details
+						= data_set(:h4, 'articles.admin.housing.headings.email') do
+							= registration.user.email
+						= data_set(:h4, 'articles.admin.housing.headings.housing') do
+							= registration.housing
+						- if registration.arrival.present?
+							= data_set(:h4, 'articles.admin.housing.headings.arrival_departure') do
+								= date_span(registration.arrival.to_date, registration.departure.to_date)
+						- if (registration.housing_data || {})['companions'].present?
+							= data_set(:h4, 'articles.admin.housing.headings.companion') do
+								- companion = User.find_by_email(registration.housing_data['companions'].first)
+								- if companion
+									= "#{companion.firstname} (#{companion.email})"
+								- else
+									= registration.housing_data['companions'].first
+									= _'articles.admin.housing.headings.unregistered'
+						- if registration.allergies.present?
+							= data_set(:h4, 'articles.admin.housing.headings.allergies') do
+								= registration.allergies
+						- if registration.other.present?
+							= data_set(:h4, 'articles.admin.housing.headings.other') do
+								= registration.other
 					= button_tag :set_host, type: :button, class: [:small, 'set-host', 'not-on-top']
 
 

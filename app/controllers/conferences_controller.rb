@@ -743,6 +743,7 @@ class ConferencesController < ApplicationController
 			case @admin_step.to_sym
 			when :stats
 				@registrations = ConferenceRegistration.where(:conference_id => @this_conference.id)
+
 				if request.format.xlsx?
 					logger.info "Generating stats.xls"
 					@excel_data = {
@@ -773,6 +774,23 @@ class ConferencesController < ApplicationController
 						# format.html
 						format.xlsx { render xlsx: :stats, filename: "stats-#{DateTime.now.strftime('%Y-%m-%d')}" }
 					end
+				else
+					@registration_count = @registrations.size
+					@bikes = @registrations.count { |r| r.bike == 'yes' }
+					@donation_count =0
+					@donations = 0
+					@food = { meat: 0, vegan: 0, vegetarian: 0, all: 0 }
+					@registrations.each do | r |
+						if r.food.present?
+							@food[r.food.to_sym] += 1
+							@food[:all] += 1
+						end
+
+						if r.registration_fees_paid.present? && r.registration_fees_paid > 0
+							@donation_count += 1
+							@donations += r.registration_fees_paid
+						end
+					end
 				end
 			when :housing
 				# do a full analysis
@@ -795,184 +813,14 @@ class ConferencesController < ApplicationController
 					'days' => []
 				}
 			when :schedule
+				@can_edit = true
+				@entire_page = true
 				get_scheule_data
 			end
 		when :done
 			@amount = ((@registration.registration_fees_paid || 0) * 100).to_i.to_s.gsub(/^(.*)(\d\d)$/, '\1.\2')
 		end
 
-	end
-
-	def get_block_data
-		@workshop_blocks = @this_conference.workshop_blocks || []
-		@block_days = []
-		day = @this_conference.start_date
-		while day <= @this_conference.end_date
-			@block_days << day.wday
-			day += 1.day
-		end
-	end
-
-	def get_scheule_data
-		@meals = Hash[@this_conference.meals.map{ |k, v| [k.to_i, v] }].sort.to_h
-		@events = Event.where(:conference_id => @this_conference.id).order(start_time: :asc)
-		@workshops = Workshop.where(:conference_id => @this_conference.id).order(start_time: :asc)
-		@locations = {}
-
-		get_block_data
-
-		@schedule = {}
-		day_1 = @this_conference.start_date.wday
-
-		@workshop_blocks.each_with_index do | info, block |
-			info['days'].each do | block_day |
-				day_diff = block_day.to_i - day_1
-				day_diff += 7 if day_diff < 0
-				day = (@this_conference.start_date + day_diff.days).to_date
-				time = info['time'].to_f
-				@schedule[day] ||= { times: {}, locations: {} }
-				@schedule[day][:times][time] ||= {}
-				@schedule[day][:times][time][:type] = :workshop
-				@schedule[day][:times][time][:length] = info['length'].to_f
-				@schedule[day][:times][time][:item] = { block: block, workshops: {} }
-			end
-		end
-
-		@workshops.each do | workshop |
-			if workshop.block.present?
-				block = @workshop_blocks[workshop.block['block'].to_i]
-				day_diff = workshop.block['day'].to_i - day_1
-				day_diff += 7 if day_diff < 0
-				day = (@this_conference.start_date + day_diff.days).to_date
-
-				if @schedule[day].present? && @schedule[day][:times].present? && @schedule[day][:times][block['time'].to_f].present?
-					@schedule[day][:times][block['time'].to_f][:item][:workshops][workshop.event_location_id] = { workshop: workshop, status: { errors: [], warnings: [], conflict_score: nil } }
-					@schedule[day][:locations][workshop.event_location_id] ||= workshop.event_location
-				end
-			end
-		end
-
-		@meals.each do | time, meal |
-			day = meal['day'].to_date
-			time = meal['time'].to_f
-			@schedule[day] ||= {}
-			@schedule[day][:times] ||= {}
-			@schedule[day][:times][time] ||= {}
-			@schedule[day][:times][time][:type] = :meal
-			@schedule[day][:times][time][:length] = (meal['length'] || 1.0).to_f
-			@schedule[day][:times][time][:item] = meal
-		end
-
-		@events.each do | event |
-			day = event.start_time.midnight.to_date
-			time = event.start_time.hour.to_f + (event.start_time.min / 60.0)
-			@schedule[day] ||= {}
-			@schedule[day][:times] ||= {}
-			@schedule[day][:times][time] ||= {}
-			@schedule[day][:times][time][:type] = :event
-			@schedule[day][:times][time][:length] = (event.end_time - event.start_time) / 3600.0
-			@schedule[day][:times][time][:item] = event
-		end
-
-		@schedule = @schedule.sort.to_h
-		@schedule.each do | day, data |
-			@schedule[day][:times] = data[:times].sort.to_h
-		end
-
-		@schedule.each do | day, data |
-			last_event = nil
-			data[:times].each do | time, time_data |
-				if last_event.present?
-					@schedule[day][:times][last_event][:next_event] = time
-				end
-				last_event = time
-			end
-		end
-
-		@schedule.deep_dup.each do | day, data |
-			data[:times].each do | time, time_data |
-				if time_data[:next_event].present? || time_data[:length] > 0.5
-					span = 0.5
-					length = time_data[:next_event].present? ? time_data[:next_event] - time : time_data[:length]
-					while span < length
-						@schedule[day][:times][time + span] ||= {
-							type: (span >= time_data[:length] ? :empty : :nil),
-							length: 0.5
-						}
-						span += 0.5
-					end
-				end
-			end
-		end
-
-		@schedule = @schedule.sort.to_h
-		@schedule.each do | day, data |
-			@schedule[day][:times] = data[:times].sort.to_h
-
-			data[:times].each do | time, time_data |
-				if time_data[:type] == :workshop && time_data[:item].present? && time_data[:item][:workshops].present?
-					ids = time_data[:item][:workshops].keys
-					(0..ids.length).each do | i |
-						if time_data[:item][:workshops][ids[i]].present?
-							workshop_i = time_data[:item][:workshops][ids[i]][:workshop]
-							conflicts = {}
-							
-							(i+1..ids.length).each do | j |
-								workshop_j = time_data[:item][:workshops][ids[j]].present? ? time_data[:item][:workshops][ids[j]][:workshop] : nil
-								if workshop_i.present? && workshop_j.present?
-									workshop_i.active_facilitators.each do | facilitator_i |
-										workshop_j.active_facilitators.each do | facilitator_j |
-											if facilitator_i.id == facilitator_j.id
-												@schedule[day][:times][time][:status] ||= {}
-												@schedule[day][:times][time][:item][:workshops][ids[j]][:status][:errors] << {
-														name: :common_facilitator,
-														facilitator: facilitator_i,
-														workshop: workshop_i,
-														i18nVars: {
-															facilitator_name: facilitator_i.name,
-															workshop_title: workshop_i.title
-														}
-													}
-											end
-										end
-									end
-								end
-							end
-
-							(0..ids.length).each do | j |
-								workshop_j = time_data[:item][:workshops][ids[j]].present? ? time_data[:item][:workshops][ids[j]][:workshop] : nil
-								if workshop_i.present? && workshop_j.present? && workshop_i.id != workshop_j.id
-									workshop_i.interested.each do | interested_i |
-										workshop_j.interested.each do | interested_j |
-											conflicts[interested_i.id] ||= true
-										end
-									end
-								end
-							end
-
-							needs = JSON.parse(workshop_i.needs || '[]').map &:to_sym
-							amenities = JSON.parse(workshop_i.event_location.amenities || '[]').map &:to_sym
-
-							needs.each do | need |
-								@schedule[day][:times][time][:item][:workshops][ids[i]][:status][:errors] << {
-										name: :need_not_available,
-										need: need,
-										location: workshop_i.event_location,
-										workshop: workshop_i,
-										i18nVars: {
-											need: need.to_s,
-											location: workshop_i.event_location.title,
-											workshop_title: workshop_i.title
-										}
-									} unless amenities.include? need
-							end
-
-							@schedule[day][:times][time][:item][:workshops][ids[i]][:status][:conflict_score] = workshop_i.interested.present? ? (conflicts.length / workshop_i.interested.size) : 0
-						end
-					end
-				end
-			end
-		end
 	end
 
 	def get_housing_data
@@ -1290,10 +1138,16 @@ class ConferencesController < ApplicationController
 				workshop.block = nil
 				workshop.save!
 				success = true
+			when 'publish'
+				@this_conference.workshop_schedule_published = !@this_conference.workshop_schedule_published
+				@this_conference.save
+				return redirect_to administration_step_path(@this_conference.slug, :schedule)
 			end
 
 			if success
 				if request.xhr?
+					@can_edit = true
+					@entire_page = false
 					get_scheule_data
 					schedule = render_to_string partial: 'conferences/admin/schedule'
 					return render json: [ {
@@ -1314,51 +1168,51 @@ class ConferencesController < ApplicationController
 		do_404
 	end
 
-	def registrations
-		registrations = ConferenceRegistration.where(:conference_id => @conference.id)
-		@registrations = registrations
-	end
+	# def registrations
+	# 	registrations = ConferenceRegistration.where(:conference_id => @conference.id)
+	# 	@registrations = registrations
+	# end
 
-	def register_confirm
-		set_conference
-		@conference_registration = ConferenceRegistration.find_by(confirmation_token: params[:confirmation_token])
-		if !@conference_registration.nil? && @conference_registration.conference_id == @conference.id && !@conference_registration.complete
-			@conference_registration.is_confirmed = true
-			@conference_registration.save!
-			session[:registration] = YAML.load(@conference_registration.data)
-			session[:registration][:path] = Array.new
-			session[:registration][:registration_id] = @conference_registration.id
-			session[:registration_step] = 'confirm'
-			redirect_to action: 'register'
-		else
-			return do_404
-		end
-	end
+	# def register_confirm
+	# 	set_conference
+	# 	@conference_registration = ConferenceRegistration.find_by(confirmation_token: params[:confirmation_token])
+	# 	if !@conference_registration.nil? && @conference_registration.conference_id == @conference.id && !@conference_registration.complete
+	# 		@conference_registration.is_confirmed = true
+	# 		@conference_registration.save!
+	# 		session[:registration] = YAML.load(@conference_registration.data)
+	# 		session[:registration][:path] = Array.new
+	# 		session[:registration][:registration_id] = @conference_registration.id
+	# 		session[:registration_step] = 'confirm'
+	# 		redirect_to action: 'register'
+	# 	else
+	# 		return do_404
+	# 	end
+	# end
 
-	def register_pay_registration
-		set_conference
-		@conference_registration = ConferenceRegistration.find_by(confirmation_token: params[:confirmation_token])
-		host = "#{request.protocol}#{request.host_with_port}"
-		if !@conference_registration.nil? && @conference_registration.conference_id == @conference.id && @conference_registration.complete
-			amount = (params[:auto_payment_amount] || params[:payment_amount]).to_f
-			if amount > 0
-				response = PayPal!.setup(
-					PayPalRequest(amount),
-					host + (@conference.url + "/register/paypal-confirm/#{@conference_registration.payment_confirmation_token}/").gsub(/\/\/+/, '/'),
-					host + (@conference.url + "/register/paypal-cancel/#{@conference_registration.confirmation_token}/").gsub(/\/\/+/, '/')
-				)
-				redirect_to response.redirect_uri
-			else
-				session[:registration] = YAML.load(@conference_registration.data)
-				session[:registration][:registration_id] = @conference_registration.id
-				session[:registration][:path] = Array.new
-				session[:registration_step] = 'pay_now'
-				redirect_to action: 'register'
-			end
-		else
-			return do_404
-		end
-	end
+	# def register_pay_registration
+	# 	set_conference
+	# 	@conference_registration = ConferenceRegistration.find_by(confirmation_token: params[:confirmation_token])
+	# 	host = "#{request.protocol}#{request.host_with_port}"
+	# 	if !@conference_registration.nil? && @conference_registration.conference_id == @conference.id && @conference_registration.complete
+	# 		amount = (params[:auto_payment_amount] || params[:payment_amount]).to_f
+	# 		if amount > 0
+	# 			response = PayPal!.setup(
+	# 				PayPalRequest(amount),
+	# 				host + (@conference.url + "/register/paypal-confirm/#{@conference_registration.payment_confirmation_token}/").gsub(/\/\/+/, '/'),
+	# 				host + (@conference.url + "/register/paypal-cancel/#{@conference_registration.confirmation_token}/").gsub(/\/\/+/, '/')
+	# 			)
+	# 			redirect_to response.redirect_uri
+	# 		else
+	# 			session[:registration] = YAML.load(@conference_registration.data)
+	# 			session[:registration][:registration_id] = @conference_registration.id
+	# 			session[:registration][:path] = Array.new
+	# 			session[:registration_step] = 'pay_now'
+	# 			redirect_to action: 'register'
+	# 		end
+	# 	else
+	# 		return do_404
+	# 	end
+	# end
 
 	# def register_paypal_confirm
 	# 	set_conference
@@ -1776,261 +1630,261 @@ class ConferencesController < ApplicationController
 		return redirect_to view_workshop_url(@this_conference.slug, workshop.id, anchor: "comment-#{new_comment.id}")
 	end
 
-	def schedule
-		set_conference
-		return do_404 unless @this_conference.workshop_schedule_published || @this_conference.host?(current_user)
+	# def schedule
+	# 	set_conference
+	# 	return do_404 unless @this_conference.workshop_schedule_published || @this_conference.host?(current_user)
 		
-		@events = Event.where(:conference_id => @this_conference.id).order(start_time: :asc)
-		@locations = EventLocation.where(:conference_id => @this_conference.id)
+	# 	@events = Event.where(:conference_id => @this_conference.id).order(start_time: :asc)
+	# 	@locations = EventLocation.where(:conference_id => @this_conference.id)
 
-		render 'schedule/show'
-	end
+	# 	render 'schedule/show'
+	# end
 
-	def edit_schedule
-		set_conference
-		return do_404 unless @this_conference.host?(current_user)
+	# def edit_schedule
+	# 	set_conference
+	# 	return do_404 unless @this_conference.host?(current_user)
 		
-		@workshops = Workshop.where(:conference_id => @this_conference.id)
-		@events = Event.where(:conference_id => @this_conference.id)
-		if session[:workshops]
-			(0...@workshops.count).each do |i|
-				id = @workshops[i].id
-				w = session[:workshops][id.to_s]
-				if w
-					@workshops[i].start_time = w[:start_time]
-					@workshops[i].end_time = w[:end_time]
-					@workshops[i].event_location_id = w[:event_location_id]
-				end
-			end
-		end
-		if session[:events]
-			(0...@events.count).each do |i|
-				id = @events[i].id
-				w = session[:events][id.to_s]
-				if w
-					@events[i].start_time = w[:start_time]
-					@events[i].end_time = w[:end_time]
-					@events[i].event_location_id = w[:event_location_id]
-				end
-			end
-		end
-		@locations = EventLocation.where(:conference_id => @this_conference.id)
-		@location_hash = Hash.new
-		@locations.each do |l|
-			@location_hash[l.id.to_s] = l
-		end
+	# 	@workshops = Workshop.where(:conference_id => @this_conference.id)
+	# 	@events = Event.where(:conference_id => @this_conference.id)
+	# 	if session[:workshops]
+	# 		(0...@workshops.count).each do |i|
+	# 			id = @workshops[i].id
+	# 			w = session[:workshops][id.to_s]
+	# 			if w
+	# 				@workshops[i].start_time = w[:start_time]
+	# 				@workshops[i].end_time = w[:end_time]
+	# 				@workshops[i].event_location_id = w[:event_location_id]
+	# 			end
+	# 		end
+	# 	end
+	# 	if session[:events]
+	# 		(0...@events.count).each do |i|
+	# 			id = @events[i].id
+	# 			w = session[:events][id.to_s]
+	# 			if w
+	# 				@events[i].start_time = w[:start_time]
+	# 				@events[i].end_time = w[:end_time]
+	# 				@events[i].event_location_id = w[:event_location_id]
+	# 			end
+	# 		end
+	# 	end
+	# 	@locations = EventLocation.where(:conference_id => @this_conference.id)
+	# 	@location_hash = Hash.new
+	# 	@locations.each do |l|
+	# 		@location_hash[l.id.to_s] = l
+	# 	end
 
-		@days = Array.new
-		start_day = @this_conference.start_date.strftime('%u').to_i
-		end_day = start_day + ((@this_conference.end_date - @this_conference.start_date) / 86400)
+	# 	@days = Array.new
+	# 	start_day = @this_conference.start_date.strftime('%u').to_i
+	# 	end_day = start_day + ((@this_conference.end_date - @this_conference.start_date) / 86400)
 
-		(start_day..end_day).each do |i|
-			@days << [(@this_conference.start_date + (i - start_day).days).strftime('%a'), ((i + 1) - start_day)]
-		end
+	# 	(start_day..end_day).each do |i|
+	# 		@days << [(@this_conference.start_date + (i - start_day).days).strftime('%a'), ((i + 1) - start_day)]
+	# 	end
 
-		@hours = Array.new
-		(0..48).each do |i|
-			hour = (Date.today + (i / 2.0).hours).strftime('%R')
-			@hours << hour
-		end
+	# 	@hours = Array.new
+	# 	(0..48).each do |i|
+	# 		hour = (Date.today + (i / 2.0).hours).strftime('%R')
+	# 		@hours << hour
+	# 	end
 
-		@event_durations = [['30 mins', 30], ['1 hour', 60], ['1.5 hours', 90], ['2 hours', 120], ['2.5 hours', 150]]
-		@workshop_durations = [['1 hour', 60], ['1.5 hours', 90], ['2 hours', 120]]
+	# 	@event_durations = [['30 mins', 30], ['1 hour', 60], ['1.5 hours', 90], ['2 hours', 120], ['2.5 hours', 150]]
+	# 	@workshop_durations = [['1 hour', 60], ['1.5 hours', 90], ['2 hours', 120]]
 
-		schedule_data = get_schedule_data
-		@schedule = schedule_data[:schedule]
-		@errors = schedule_data[:errors]
-		@warnings = schedule_data[:warnings]
-		@conflict_score = schedule_data[:conflict_score]
-		@error_count = schedule_data[:error_count]
-		if session[:day_parts]
-			@day_parts = JSON.parse(session[:day_parts])
-		elsif @this_conference.day_parts
-			@day_parts = JSON.parse(@this_conference.day_parts)
-		else
-			@day_parts = {:morning => 0, :afternoon => 13, :evening => 18}
-		end
-		@saved = session[:workshops].nil?
+	# 	schedule_data = get_schedule_data
+	# 	@schedule = schedule_data[:schedule]
+	# 	@errors = schedule_data[:errors]
+	# 	@warnings = schedule_data[:warnings]
+	# 	@conflict_score = schedule_data[:conflict_score]
+	# 	@error_count = schedule_data[:error_count]
+	# 	if session[:day_parts]
+	# 		@day_parts = JSON.parse(session[:day_parts])
+	# 	elsif @this_conference.day_parts
+	# 		@day_parts = JSON.parse(@this_conference.day_parts)
+	# 	else
+	# 		@day_parts = {:morning => 0, :afternoon => 13, :evening => 18}
+	# 	end
+	# 	@saved = session[:workshops].nil?
 
-		render 'schedule/edit'
-	end
+	# 	render 'schedule/edit'
+	# end
 
-	def save_schedule
-		set_conference
-		return do_404 unless @this_conference.host?(current_user)
+	# def save_schedule
+	# 	set_conference
+	# 	return do_404 unless @this_conference.host?(current_user)
 
-		@days = Array.new
-		start_day = @this_conference.start_date.strftime('%u').to_i
-		end_day = start_day + ((@this_conference.end_date - @this_conference.start_date) / 86400)
+	# 	@days = Array.new
+	# 	start_day = @this_conference.start_date.strftime('%u').to_i
+	# 	end_day = start_day + ((@this_conference.end_date - @this_conference.start_date) / 86400)
 
-		(start_day..end_day).each do |i|
-			@days << [(@this_conference.start_date + (i - start_day).days).strftime('%a'), i]
-		end
+	# 	(start_day..end_day).each do |i|
+	# 		@days << [(@this_conference.start_date + (i - start_day).days).strftime('%a'), i]
+	# 	end
 
-		@workshops = Workshop.where(:conference_id => @this_conference.id)
-		@events = Event.where(:conference_id => @this_conference.id)
-		@locations = EventLocation.where(:conference_id => @this_conference.id)
+	# 	@workshops = Workshop.where(:conference_id => @this_conference.id)
+	# 	@events = Event.where(:conference_id => @this_conference.id)
+	# 	@locations = EventLocation.where(:conference_id => @this_conference.id)
 
-		do_save = (params[:button] == 'save' || params[:button] == 'publish')
-		session[:workshops] = do_save ? nil : Hash.new
-		session[:events] = do_save ? nil : Hash.new
-		session[:day_parts] = do_save ? nil : Hash.new
+	# 	do_save = (params[:button] == 'save' || params[:button] == 'publish')
+	# 	session[:workshops] = do_save ? nil : Hash.new
+	# 	session[:events] = do_save ? nil : Hash.new
+	# 	session[:day_parts] = do_save ? nil : Hash.new
 
-		(0...@workshops.count).each do |i|
-			id = @workshops[i].id.to_s
-			if params[:workshop_day][id].present? && params[:workshop_hour][id].present? && params[:workshop_duration][id].present?
-				date = @this_conference.start_date + (params[:workshop_day][id].to_i - 1).days
-				h = params[:workshop_hour][id].split(':')
-				date = date.change({hour: h.first, minute: h.last})
-				@workshops[i].start_time = date
-				@workshops[i].end_time = date + (params[:workshop_duration][id].to_i).minutes
-			else
-				@workshops[i].start_time = nil
-				@workshops[i].end_time = nil
-			end
-			@workshops[i].event_location_id = params[:workshop_location][id]
-			if do_save
-				@workshops[i].save
-			else
-				session[:workshops][id] = {
-					:start_time => @workshops[i].start_time,
-					:end_time => @workshops[i].end_time,
-					:event_location_id => @workshops[i].event_location_id
-				}
-			end
-		end
+	# 	(0...@workshops.count).each do |i|
+	# 		id = @workshops[i].id.to_s
+	# 		if params[:workshop_day][id].present? && params[:workshop_hour][id].present? && params[:workshop_duration][id].present?
+	# 			date = @this_conference.start_date + (params[:workshop_day][id].to_i - 1).days
+	# 			h = params[:workshop_hour][id].split(':')
+	# 			date = date.change({hour: h.first, minute: h.last})
+	# 			@workshops[i].start_time = date
+	# 			@workshops[i].end_time = date + (params[:workshop_duration][id].to_i).minutes
+	# 		else
+	# 			@workshops[i].start_time = nil
+	# 			@workshops[i].end_time = nil
+	# 		end
+	# 		@workshops[i].event_location_id = params[:workshop_location][id]
+	# 		if do_save
+	# 			@workshops[i].save
+	# 		else
+	# 			session[:workshops][id] = {
+	# 				:start_time => @workshops[i].start_time,
+	# 				:end_time => @workshops[i].end_time,
+	# 				:event_location_id => @workshops[i].event_location_id
+	# 			}
+	# 		end
+	# 	end
 
-		(0...@events.count).each do |i|
-			id = @events[i].id.to_s
-			if params[:event_day][id].present? && params[:event_hour][id].present? && params[:event_duration][id].present?
-				date = @this_conference.start_date + (params[:event_day][id].to_i - 1).days
-				h = params[:event_hour][id].split(':')
-				date = date.change({hour: h.first, minute: h.last})
-				@events[i].start_time = date
-				@events[i].end_time = date + (params[:event_duration][id].to_i).minutes
-			else
-				@events[i].start_time = nil
-				@events[i].end_time = nil
-			end
-			@events[i].event_location_id = params[:event_location][id]
-			if do_save
-				@events[i].save
-			else
-				session[:events][id] = {
-					:start_time => @events[i].start_time,
-					:end_time => @events[i].end_time,
-					:event_location_id => @events[i].event_location_id
-				}
-			end
-		end
+	# 	(0...@events.count).each do |i|
+	# 		id = @events[i].id.to_s
+	# 		if params[:event_day][id].present? && params[:event_hour][id].present? && params[:event_duration][id].present?
+	# 			date = @this_conference.start_date + (params[:event_day][id].to_i - 1).days
+	# 			h = params[:event_hour][id].split(':')
+	# 			date = date.change({hour: h.first, minute: h.last})
+	# 			@events[i].start_time = date
+	# 			@events[i].end_time = date + (params[:event_duration][id].to_i).minutes
+	# 		else
+	# 			@events[i].start_time = nil
+	# 			@events[i].end_time = nil
+	# 		end
+	# 		@events[i].event_location_id = params[:event_location][id]
+	# 		if do_save
+	# 			@events[i].save
+	# 		else
+	# 			session[:events][id] = {
+	# 				:start_time => @events[i].start_time,
+	# 				:end_time => @events[i].end_time,
+	# 				:event_location_id => @events[i].event_location_id
+	# 			}
+	# 		end
+	# 	end
 
-		if params[:day_parts]
-			day_parts = {:morning => 0}
-			params[:day_parts].each do |part, h|
-				h = h.split(':')
-				day_parts[part.to_sym] = h[0].to_f + (h[1].to_i > 0 ? 0.5 : 0)
-			end
-			if do_save
-				@this_conference.day_parts = day_parts.to_json
-			else
-				session[:day_parts] = day_parts.to_json
-			end
-		end
+	# 	if params[:day_parts]
+	# 		day_parts = {:morning => 0}
+	# 		params[:day_parts].each do |part, h|
+	# 			h = h.split(':')
+	# 			day_parts[part.to_sym] = h[0].to_f + (h[1].to_i > 0 ? 0.5 : 0)
+	# 		end
+	# 		if do_save
+	# 			@this_conference.day_parts = day_parts.to_json
+	# 		else
+	# 			session[:day_parts] = day_parts.to_json
+	# 		end
+	# 	end
 
-		save_conference = do_save
+	# 	save_conference = do_save
 
-		if params[:button] == 'publish'
-			@this_conference.workshop_schedule_published = true
-			save_conference = true
-		elsif params[:button] == 'unpublish'
-			@this_conference.workshop_schedule_published = false
-			save_conference = true
-		end
+	# 	if params[:button] == 'publish'
+	# 		@this_conference.workshop_schedule_published = true
+	# 		save_conference = true
+	# 	elsif params[:button] == 'unpublish'
+	# 		@this_conference.workshop_schedule_published = false
+	# 		save_conference = true
+	# 	end
 
-		if save_conference
-			@this_conference.save
-		end
+	# 	if save_conference
+	# 		@this_conference.save
+	# 	end
 
-		redirect_to edit_schedule_url(@this_conference.slug)
-	end
+	# 	redirect_to edit_schedule_url(@this_conference.slug)
+	# end
 
-	def add_event
-		set_conference
-		return do_404 unless @this_conference.host?(current_user)
+	# def add_event
+	# 	set_conference
+	# 	return do_404 unless @this_conference.host?(current_user)
 		
-		render 'events/edit'
-	end
+	# 	render 'events/edit'
+	# end
 
-	def edit_event
-		set_conference
-		return do_404 unless @this_conference.host?(current_user)
+	# def edit_event
+	# 	set_conference
+	# 	return do_404 unless @this_conference.host?(current_user)
 
-		@event = Event.find(params[:id])
-		return do_403 unless @event.conference_id == @this_conference.id
+	# 	@event = Event.find(params[:id])
+	# 	return do_403 unless @event.conference_id == @this_conference.id
 
-		render 'events/edit'
-	end
+	# 	render 'events/edit'
+	# end
 
-	def save_event
-		set_conference
-		return do_404 unless @this_conference.host?(current_user)
+	# def save_event
+	# 	set_conference
+	# 	return do_404 unless @this_conference.host?(current_user)
 
 
-		if params[:event_id]
-			event = Event.find(params[:event_id])
-			return do_403 unless event.conference_id == @this_conference.id
-		else
-			event = Event.new(:conference_id => @this_conference.id)
-		end
+	# 	if params[:event_id]
+	# 		event = Event.find(params[:event_id])
+	# 		return do_403 unless event.conference_id == @this_conference.id
+	# 	else
+	# 		event = Event.new(:conference_id => @this_conference.id)
+	# 	end
 
-		event.title = params[:title]
-		event.info = params[:info]
-		event.event_type = params[:event_type]
+	# 	event.title = params[:title]
+	# 	event.info = params[:info]
+	# 	event.event_type = params[:event_type]
 
-		event.save
+	# 	event.save
 
-		return redirect_to schedule_url(@this_conference.slug)
-	end
+	# 	return redirect_to schedule_url(@this_conference.slug)
+	# end
 
-	def add_location
-		set_conference
-		return do_404 unless @this_conference.host?(current_user)
+	# def add_location
+	# 	set_conference
+	# 	return do_404 unless @this_conference.host?(current_user)
 		
-		render 'event_locations/edit'
-	end
+	# 	render 'event_locations/edit'
+	# end
 
-	def edit_location
-		set_conference
-		return do_404 unless @this_conference.host?(current_user)
+	# def edit_location
+	# 	set_conference
+	# 	return do_404 unless @this_conference.host?(current_user)
 
-		@location = EventLocation.find(params[:id])
-		return do_403 unless @location.conference_id == @this_conference.id
+	# 	@location = EventLocation.find(params[:id])
+	# 	return do_403 unless @location.conference_id == @this_conference.id
 
-		@amenities = JSON.parse(@location.amenities || '[]').map &:to_sym
+	# 	@amenities = JSON.parse(@location.amenities || '[]').map &:to_sym
 
-		render 'event_locations/edit'
-	end
+	# 	render 'event_locations/edit'
+	# end
 
-	def save_location
-		set_conference
-		return do_404 unless @this_conference.host?(current_user)
+	# def save_location
+	# 	set_conference
+	# 	return do_404 unless @this_conference.host?(current_user)
 
 
-		if params[:location_id]
-			location = EventLocation.find(params[:location_id])
-			return do_403 unless location.conference_id == @this_conference.id
-		else
-			location = EventLocation.new(:conference_id => @this_conference.id)
-		end
+	# 	if params[:location_id]
+	# 		location = EventLocation.find(params[:location_id])
+	# 		return do_403 unless location.conference_id == @this_conference.id
+	# 	else
+	# 		location = EventLocation.new(:conference_id => @this_conference.id)
+	# 	end
 
-		location.title = params[:title]
-		location.address = params[:address]
-		location.amenities = (params[:needs] || {}).keys.to_json
+	# 	location.title = params[:title]
+	# 	location.address = params[:address]
+	# 	location.amenities = (params[:needs] || {}).keys.to_json
 
-		location.save
+	# 	location.save
 
-		return redirect_to schedule_url(@this_conference.slug)
-	end
+	# 	return redirect_to schedule_url(@this_conference.slug)
+	# end
 
 	# DELETE /conferences/1
 	#def destroy

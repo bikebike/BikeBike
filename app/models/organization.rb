@@ -31,6 +31,8 @@ class Organization < ActiveRecord::Base
 
 	def host?(user)
 		return false unless user.present?
+		return true if user.administrator?
+		
 		users.each do |u|
 			return true if u.id == user.id
 		end

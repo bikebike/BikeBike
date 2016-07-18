@@ -36,6 +36,10 @@ class User < ActiveRecord::Base
 		return "#{name} <#{email}>"
 	end
 
+	def administrator?
+		role == 'administrator'
+	end
+
 	def self.get(email)
 		user = where(email: email).first
 

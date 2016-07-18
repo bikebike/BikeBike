@@ -74,5 +74,11 @@
 								= link_to (_'forms.actions.generic.facebook_sign_in','Facebook Sign In'), auth_at_provider_path(provider: :facebook, dest: settings_path), class: [:button, :facebook]
 								%button.close.subdued=_'forms.actions.generic.cancel'
 		
+			- if @event_dlg.present?
+				.event-dlg#event-dlg{ data: { type: :event } }
+					.event-details
+					.actions.right
+						%a.more-details.button{href: '#'}=_'articles.workshops.info.read_more'
+						%button.close-btn.subdued=_'forms.actions.generic.close'
 		= yield :footer_scripts if content_for?(:footer_scripts)
 		= inline_scripts

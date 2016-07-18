@@ -12,4 +12,4 @@
 					%span.interest-text=interest_text(w)
 			.workshop-description=richtext w.info, 4
 			.actions.right
-				= link_to (_'articles.workshops.info.read_more'), view_workshop_path(w.conference.slug, w.id), class: 'workshop-link', class: [:button, :small]
+				= link_to (_'articles.workshops.info.read_more'), view_workshop_path(w.conference.slug, w.id), class: ['workshop-link', :button, :small]

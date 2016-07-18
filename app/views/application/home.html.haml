@@ -6,11 +6,11 @@
 			= columns(medium: 10, push: {medium: 1}) do
 				%h2=_!@conference.title
 				= @conference.info.html_safe
-				- if @conference.workshops
-					- if @schedule
-						%h3=_'articles.workshops.headings.Schedule'
-						= render 'schedule/programme', :schedule => @schedule, :conference => @conference, :workshops => @workshops, :events => @events, :locations => @locations, :show_interest => true, :day_parts => @day_parts, :show_previews => true
 				- if @conference.registration_status == :open
-					%h3=_'articles.workshops.headings.Proposed_Workshops'
-					%p=_'articles.workshops.paragraphs.Proposed_Workshops'
-					= render 'workshops/workshop_previews', :workshops => @conference.workshops
+					- if @conference.workshop_schedule_published
+						%h3=_'articles.workshops.headings.Schedule'
+						= render 'conferences/admin/schedule'
+					- else
+						%h3=_'articles.workshops.headings.Proposed_Workshops'
+						%p=_'articles.workshops.paragraphs.Proposed_Workshops'
+						= render 'workshops/workshop_previews', :workshops => @conference.workshops

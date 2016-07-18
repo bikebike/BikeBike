@@ -1,5 +1,17 @@
 .details
 	= data_set(:h4, 'articles.admin.stats.headings.registrations') do
 		= @registrations.size
+	= data_set(:h4, 'articles.admin.stats.headings.bikes') do
+		= "#{@bikes} (#{(@bikes / @registration_count) * 100.0}%)"
+	= data_set(:h4, 'articles.admin.stats.headings.food.meat') do
+		= "#{@food[:meat]} (#{(@food[:meat] / @food[:all]) * 100.0}%)"
+	= data_set(:h4, 'articles.admin.stats.headings.food.vegetarian') do
+		= "#{@food[:vegetarian]} (#{(@food[:vegetarian] / @food[:all]) * 100.0}%)"
+	= data_set(:h4, 'articles.admin.stats.headings.food.vegan') do
+		= "#{@food[:vegan]} (#{(@food[:vegan] / @food[:all]) * 100.0}%)"
+	= data_set(:h4, 'articles.admin.stats.headings.donation_count') do
+		= "#{@donation_count} (#{(@donation_count / @registration_count) * 100.0}%)"
+	= data_set(:h4, 'articles.admin.stats.headings.donation_total') do
+		= "$#{@donations}"
 .actions
 	= link_to (_'links.download.Excel'), administration_step_path(@this_conference.slug, :stats, :format => :xlsx), class: [:button, :download]

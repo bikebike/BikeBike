@@ -30,7 +30,38 @@
 				overlay.querySelector('.dlg.open').focus();
 			}
 		}, true);
+		window.openOverlay = function(dlg, primaryContent, body) {
+			primaryContent.setAttribute('aria-hidden', 'true');
+			body.classList.add('has-overlay');
+			var type = dlg.getAttribute('data-type');
+			if (type) {
+				body.classList.add('is-' + type + '-dlg');
+			}
+			dlg.removeAttribute('aria-hidden');
+			dlg.setAttribute('role', 'alertdialog');
+			dlg.setAttribute('tabindex', '0');
+			dlg.focus();
+			setTimeout(function() { dlg.classList.add('open'); }, 100);
+		}
+		window.closeOverlay = function(dlg, primaryContent, body) {
+			setTimeout(function() {
+					body.classList.remove('has-overlay');
+					body.removeAttribute('style');
+				}, 250);
+			var type = dlg.getAttribute('data-type');
+			if (type) {
+				body.classList.remove('is-' + type + '-dlg');
+			}
+			primaryContent.removeAttribute('aria-hidden');
+			dlg.setAttribute('aria-hidden', 'true');
+			dlg.removeAttribute('tabindex');
+			dlg.classList.remove('open');
+			dlg.removeAttribute('role');
+		}
+
 		function openDlg(dlg, link) {
+			document.getElementById('overlay').onclick =
+				dlg.querySelector('.close').onclick = function() { closeDlg(dlg); };
 			body.setAttribute('style', 'width: ' + body.clientWidth + 'px');
 			var msg = link.querySelector('.message');
 			if (msg) {
@@ -61,27 +92,12 @@
 					}
 				});
 			}
-			primaryContent.setAttribute('aria-hidden', 'true');
-			document.getElementById('overlay').onclick =
-				dlg.querySelector('.close').onclick = function() { console.log('overlay'); closeDlg(dlg); };
-			body.classList.add('has-overlay');
-			dlg.removeAttribute('aria-hidden');
-			dlg.setAttribute('role', 'alertdialog');
-			dlg.setAttribute('tabindex', '0');
-			dlg.focus();
-			setTimeout(function() { dlg.classList.add('open'); }, 100);
+			window.openOverlay(dlg, primaryContent, body);
 		}
 		function closeDlg(dlg) {
-			setTimeout(function() {
-					body.classList.remove('has-overlay');
-					body.removeAttribute('style');
-				}, 250);
-			primaryContent.removeAttribute('aria-hidden');
-			dlg.setAttribute('aria-hidden', 'true');
-			dlg.removeAttribute('tabindex');
-			dlg.classList.remove('open');
-			dlg.removeAttribute('role');
+			window.closeOverlay(dlg, primaryContent, body);
 		}
+
 		var confirmationDlg = document.getElementById('confirmation-dlg');
 		forEachElement('[data-confirmation]', function(link) {
 			link.addEventListener('click', function(event) {

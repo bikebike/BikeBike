@@ -67,14 +67,17 @@ class ApplicationController < LinguaFrancaApplicationController
 		@workshops = Workshop.where(:conference_id => @conference.id)
 
 		if @conference.workshop_schedule_published
-			@events = Event.where(:conference_id => @conference.id)
-			schedule = get_schedule_data
-			@schedule = schedule[:schedule]
-			@locations = Hash.new
-			EventLocation.where(:conference_id => @conference.id).each do |l|
-				@locations[l.id.to_s] = l
-			end
-			@day_parts = @conference.day_parts ? JSON.parse(@conference.day_parts) : {:morning => 0, :afternoon => 13, :evening => 18}
+			@event_dlg = true
+			view_context.add_inline_script :schedule
+			get_scheule_data#(false)
+			# @events = Event.where(:conference_id => @conference.id)
+			# schedule = get_schedule_data
+			# @schedule = schedule[:schedule]
+			# @locations = Hash.new
+			# EventLocation.where(:conference_id => @conference.id).each do |l|
+			# 	@locations[l.id.to_s] = l
+			# end
+			# @day_parts = @conference.day_parts ? JSON.parse(@conference.day_parts) : {:morning => 0, :afternoon => 13, :evening => 18}
 		end
 	end
 
@@ -442,6 +445,184 @@ class ApplicationController < LinguaFrancaApplicationController
 		rescue exception2
 			logger.info exception2.to_s
 			logger.info exception2.backtrace.join("\n")
+		end
+	end
+
+
+	def get_block_data
+		conference = @this_conference || @conference
+		@workshop_blocks = conference.workshop_blocks || []
+		@block_days = []
+		day = conference.start_date
+		while day <= conference.end_date
+			@block_days << day.wday
+			day += 1.day
+		end
+	end
+
+	def get_scheule_data(do_analyze = true)
+		conference = @this_conference || @conference
+		@meals = Hash[conference.meals.map{ |k, v| [k.to_i, v] }].sort.to_h
+		@events = Event.where(:conference_id => conference.id).order(start_time: :asc)
+		@workshops = Workshop.where(:conference_id => conference.id).order(start_time: :asc)
+		@locations = {}
+
+		get_block_data
+
+		@schedule = {}
+		day_1 = conference.start_date.wday
+
+		@workshop_blocks.each_with_index do | info, block |
+			info['days'].each do | block_day |
+				day_diff = block_day.to_i - day_1
+				day_diff += 7 if day_diff < 0
+				day = (conference.start_date + day_diff.days).to_date
+				time = info['time'].to_f
+				@schedule[day] ||= { times: {}, locations: {} }
+				@schedule[day][:times][time] ||= {}
+				@schedule[day][:times][time][:type] = :workshop
+				@schedule[day][:times][time][:length] = info['length'].to_f
+				@schedule[day][:times][time][:item] = { block: block, workshops: {} }
+			end
+		end
+
+		@workshops.each do | workshop |
+			if workshop.block.present?
+				block = @workshop_blocks[workshop.block['block'].to_i]
+				day_diff = workshop.block['day'].to_i - day_1
+				day_diff += 7 if day_diff < 0
+				day = (conference.start_date + day_diff.days).to_date
+
+				if @schedule[day].present? && @schedule[day][:times].present? && @schedule[day][:times][block['time'].to_f].present?
+					@schedule[day][:times][block['time'].to_f][:item][:workshops][workshop.event_location_id] = { workshop: workshop, status: { errors: [], warnings: [], conflict_score: nil } }
+					@schedule[day][:locations][workshop.event_location_id] ||= workshop.event_location
+				end
+			end
+		end
+
+		@meals.each do | time, meal |
+			day = meal['day'].to_date
+			time = meal['time'].to_f
+			@schedule[day] ||= {}
+			@schedule[day][:times] ||= {}
+			@schedule[day][:times][time] ||= {}
+			@schedule[day][:times][time][:type] = :meal
+			@schedule[day][:times][time][:length] = (meal['length'] || 1.0).to_f
+			@schedule[day][:times][time][:item] = meal
+		end
+
+		@events.each do | event |
+			day = event.start_time.midnight.to_date
+			time = event.start_time.hour.to_f + (event.start_time.min / 60.0)
+			@schedule[day] ||= {}
+			@schedule[day][:times] ||= {}
+			@schedule[day][:times][time] ||= {}
+			@schedule[day][:times][time][:type] = :event
+			@schedule[day][:times][time][:length] = (event.end_time - event.start_time) / 3600.0
+			@schedule[day][:times][time][:item] = event
+		end
+
+		@schedule = @schedule.sort.to_h
+		@schedule.each do | day, data |
+			@schedule[day][:times] = data[:times].sort.to_h
+		end
+
+		@schedule.each do | day, data |
+			last_event = nil
+			data[:times].each do | time, time_data |
+				if last_event.present?
+					@schedule[day][:times][last_event][:next_event] = time
+				end
+				last_event = time
+			end
+		end
+
+		@schedule.deep_dup.each do | day, data |
+			data[:times].each do | time, time_data |
+				if time_data[:next_event].present? || time_data[:length] > 0.5
+					span = 0.5
+					length = time_data[:next_event].present? ? time_data[:next_event] - time : time_data[:length]
+					while span < length
+						@schedule[day][:times][time + span] ||= {
+							type: (span >= time_data[:length] ? :empty : :nil),
+							length: 0.5
+						}
+						span += 0.5
+					end
+				end
+			end
+		end
+
+		@schedule = @schedule.sort.to_h
+
+		return unless do_analyze
+
+		@schedule.each do | day, data |
+			@schedule[day][:times] = data[:times].sort.to_h
+
+			data[:times].each do | time, time_data |
+				if time_data[:type] == :workshop && time_data[:item].present? && time_data[:item][:workshops].present?
+					ids = time_data[:item][:workshops].keys
+					(0..ids.length).each do | i |
+						if time_data[:item][:workshops][ids[i]].present?
+							workshop_i = time_data[:item][:workshops][ids[i]][:workshop]
+							conflicts = {}
+							
+							(i+1..ids.length).each do | j |
+								workshop_j = time_data[:item][:workshops][ids[j]].present? ? time_data[:item][:workshops][ids[j]][:workshop] : nil
+								if workshop_i.present? && workshop_j.present?
+									workshop_i.active_facilitators.each do | facilitator_i |
+										workshop_j.active_facilitators.each do | facilitator_j |
+											if facilitator_i.id == facilitator_j.id
+												@schedule[day][:times][time][:status] ||= {}
+												@schedule[day][:times][time][:item][:workshops][ids[j]][:status][:errors] << {
+														name: :common_facilitator,
+														facilitator: facilitator_i,
+														workshop: workshop_i,
+														i18nVars: {
+															facilitator_name: facilitator_i.name,
+															workshop_title: workshop_i.title
+														}
+													}
+											end
+										end
+									end
+								end
+							end
+
+							(0..ids.length).each do | j |
+								workshop_j = time_data[:item][:workshops][ids[j]].present? ? time_data[:item][:workshops][ids[j]][:workshop] : nil
+								if workshop_i.present? && workshop_j.present? && workshop_i.id != workshop_j.id
+									workshop_i.interested.each do | interested_i |
+										workshop_j.interested.each do | interested_j |
+											conflicts[interested_i.id] ||= true
+										end
+									end
+								end
+							end
+
+							needs = JSON.parse(workshop_i.needs || '[]').map &:to_sym
+							amenities = JSON.parse(workshop_i.event_location.amenities || '[]').map &:to_sym
+
+							needs.each do | need |
+								@schedule[day][:times][time][:item][:workshops][ids[i]][:status][:errors] << {
+										name: :need_not_available,
+										need: need,
+										location: workshop_i.event_location,
+										workshop: workshop_i,
+										i18nVars: {
+											need: need.to_s,
+											location: workshop_i.event_location.title,
+											workshop_title: workshop_i.title
+										}
+									} unless amenities.include? need
+							end
+
+							@schedule[day][:times][time][:item][:workshops][ids[i]][:status][:conflict_score] = workshop_i.interested.present? ? (conflicts.length / workshop_i.interested.size) : 0
+						end
+					end
+				end
+			end
 		end
 	end
 end

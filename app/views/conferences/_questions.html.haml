@@ -10,7 +10,7 @@
 			= selectfield :departure, @registration.departure || @this_conference.start_date, conference_days_options_list(:after)
 		= radiobuttons :bike, ConferenceRegistration.all_bike_options, @registration.bike, 'articles.conference_registration.questions.bike', heading: 'articles.conference_registration.headings.bike', inline: true, big: true
 		= radiobuttons :food, ConferenceRegistration.all_food_options, @registration.food, 'articles.conference_registration.questions.food', heading: 'articles.conference_registration.headings.food', inline: true, big: true
-		= emailfield :companion, (@registration.housing_data[:companions] || [nil]).first, heading: 'articles.conference_registration.headings.companion', help: 'articles.conference_registration.paragraphs.companion', big: true
+		= emailfield :companion, (@registration.housing_data['companions'] || [nil]).first, heading: 'articles.conference_registration.headings.companion', help: 'articles.conference_registration.paragraphs.companion', big: true
 		= textfield :allergies, @registration.allergies, heading: 'articles.conference_registration.headings.allergies'
 		= textarea :other, @registration.other, plain: true, heading: 'articles.conference_registration.headings.other'
 		= button_tag :register, :value => :questions
