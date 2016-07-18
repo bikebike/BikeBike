@@ -804,7 +804,7 @@ class ConferencesController < ApplicationController
 				@time = nil
 				@length = 1.5
 			when :meals
-				@meals = Hash[@this_conference.meals.map{ |k, v| [k.to_i, v] }].sort.to_h
+				@meals = Hash[(@this_conference.meals || {}).map{ |k, v| [k.to_i, v] }].sort.to_h
 			when :workshop_times
 				get_block_data
 				@workshop_blocks << {
