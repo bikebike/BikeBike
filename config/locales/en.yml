@@ -5465,7 +5465,8 @@ en:
         Contact_Info: Please let us know a little bit about you.
         Create_Workshop: At Bike!Bike! anyone can lead a workshop or just propose and idea that someone else can volunteer to lead. If, where, and when the workshop will be scheduled will ultimately be decided by the conference organizers.
         Workshops_Looking_For_Facilitators: Would you like to lend a hand facilitating a workshop proposed by someone else? Below is a list of workshops that are actively looking for volunteers, if you are interested in helping out you can make a facilitation request.
-        Your_Workshops: The following is a list of all the workshops that you have created or have requested to facilitate.
+        Your_Workshops: The following is a list of all the workshops that you are facilitating.
+        Workshops_You_Have_Requested: The following is a list of all the workshops that you have requested to facilitate.
         Pre_Registration_Details: By completing the pre-registration process you are letting us know that you are interested in coming, it allows us to contact you when we have news, and lets us better plan by knowing who might be coming. Once registration is fully open, we will need to ask a few more questions and you can confirm whether or not you will actually be coming.
         Registration_Details: By completing the registration process you are confirming with us that you are coming, it allows us to contact you when we have news, and lets us better plan by knowing how many people will hosted. Once registered you will be given access to faciliatate your own workshop and view details on existing workshops. If you are already registered or have pre-registered, you can use this form sign in and access or update your details.
         Verify_Account: In order to confirm that you are a real person and that we will be able to contact you later, please verify your email address. Before continuing with pre-registration, we will send you an email that will allow you to continue with the process.
@@ -5585,6 +5586,7 @@ en:
         notes: Notes
         Workshops: Workshops
         Your_Workshops: Your Workshops
+        Workshops_You_Have_Requested: Workshops you have Requested to Facilitate
         facilitate: Request to Facilitate ‘%{workshop_title}’
         add_facilitator: Add a facilitator
         needs_facilitators: Looking for help?
