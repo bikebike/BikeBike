@@ -5308,6 +5308,8 @@ en:
       housing:
         headings:
           guests: Guests
+          email: Email
+          housing: Preference
       locations:
         headings:
           add_event: Add Event
@@ -5315,8 +5317,6 @@ en:
           amenities: Amenities
           edit_event: Edit Event
           edit_location: Edit Location
-          email: Email
-          housing: Preference
       edit:
         headings:
           host_organizations: Host Organizations
