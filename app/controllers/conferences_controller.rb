@@ -722,13 +722,16 @@ class ConferencesController < ApplicationController
 			
 			# initalize our arrays
 			@my_workshops = Array.new
+			@requested_workshops = Array.new
 			@workshops_in_need = Array.new
 			@workshops = Array.new
 
 			# put wach workshop into the correct array
 			Workshop.where(conference_id: @this_conference.id).each do | workshop |
-				if workshop.creator?(current_user) || workshop.collaborator?(current_user)
+				if workshop.active_facilitator?(current_user)
 					@my_workshops << workshop
+				elsif workshop.requested_collaborator?(current_user)
+					@requested_workshops << workshop
 				elsif workshop.needs_facilitators
 					@workshops_in_need << workshop
 				else
@@ -738,6 +741,7 @@ class ConferencesController < ApplicationController
 
 			# sort the arrays by name
 			@my_workshops.sort! { |a, b| a.title.downcase <=> b.title.downcase }
+			@requested_workshops.sort! { |a, b| a.title.downcase <=> b.title.downcase }
 			@workshops_in_need.sort! { |a, b| a.title.downcase <=> b.title.downcase }
 			@workshops.sort! { |a, b| a.title.downcase <=> b.title.downcase }
 		when :contact_info
