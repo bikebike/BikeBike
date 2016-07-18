@@ -462,7 +462,7 @@ class ApplicationController < LinguaFrancaApplicationController
 
 	def get_scheule_data(do_analyze = true)
 		conference = @this_conference || @conference
-		@meals = Hash[conference.meals.map{ |k, v| [k.to_i, v] }].sort.to_h
+		@meals = Hash[(conference.meals || {}).map{ |k, v| [k.to_i, v] }].sort.to_h
 		@events = Event.where(:conference_id => conference.id).order(start_time: :asc)
 		@workshops = Workshop.where(:conference_id => conference.id).order(start_time: :asc)
 		@locations = {}
