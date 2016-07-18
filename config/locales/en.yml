@@ -5406,6 +5406,7 @@ en:
         Add_Workshop: Propose a Workshop
         Workshops_Looking_For_Facilitators: Workshops Looking for Facilitators
         All_Workshops: All Other Workshops
+        Workshops_You_Have_Requested: Workshops you have Requested to Facilitate
         Pre_Registration_Details: Pre-Registration is now open!
         Registration_Details: Registration is now open!
         Verify_Account: Verify your account
@@ -5586,7 +5587,6 @@ en:
         notes: Notes
         Workshops: Workshops
         Your_Workshops: Your Workshops
-        Workshops_You_Have_Requested: Workshops you have Requested to Facilitate
         facilitate: Request to Facilitate ‘%{workshop_title}’
         add_facilitator: Add a facilitator
         needs_facilitators: Looking for help?
