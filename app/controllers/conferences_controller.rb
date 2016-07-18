@@ -727,7 +727,7 @@ class ConferencesController < ApplicationController
 
 			# put wach workshop into the correct array
 			Workshop.where(conference_id: @this_conference.id).each do | workshop |
-				if workshop.can_edit?(current_user)
+				if workshop.creator?(current_user) || workshop.collaborator?(current_user)
 					@my_workshops << workshop
 				elsif workshop.needs_facilitators
 					@workshops_in_need << workshop
