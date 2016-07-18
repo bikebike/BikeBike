@@ -1,9 +1,9 @@
 %article
 	= columns(medium: 12) do
-		%h2=_'articles.conference_registration.headings.Pre_Registration_Details','Pre-Registration is now open!'
-		%p=_'articles.conference_registration.paragraphs.Pre_Registration_Details', 'By completing the pre-registration process you are letting us know that you are interested in coming, it allows us to contact you when we have news, and lets us better plan by knowing who might be coming. Once registration is fully open, we will need to ask a few more questions and you can confirm whether or not you will actually be coming.'
-		%h3=_'articles.conference_registration.headings.Verify_Account','Verify your account'
-		%p=_'articles.conference_registration.paragraphs.Verify_Account', 'In order to confirm that you are a real person and that we will be able to contact you later, please verify your email address. Before continuing with pre-registration, we will send you an email that will allow you to continue with the process.'
+		%h2=_"articles.conference_registration.headings.#{@this_conference.registration_status == :open ? '': 'Pre_'}Registration_Details"
+		%p=_"articles.conference_registration.paragraphs.#{@this_conference.registration_status == :open ? '': 'Pre_'}Registration_Details"
+		%h3=_'articles.conference_registration.headings.Verify_Account'
+		%p=_'articles.conference_registration.paragraphs.Verify_Account'
 	= columns(medium: 12) do
 		= form_tag register_path(@this_conference.slug), class: 'flex-form' do
 			.email-field.input-field.big
@@ -11,5 +11,5 @@
 				= label_tag :email
 			= button_tag :continue, :value => :confirm_email
 	= columns(medium: 12, class: 'flex-column') do
-		%p.stretch-item=_'articles.conference_registration.paragraphs.facebook_sign_in','Alternatively you can sign in using your Facebook account and skip waiting for us to send you an email.'
+		%p.stretch-item=_'articles.conference_registration.paragraphs.facebook_sign_in'
 		= link_to (_'forms.actions.generic.facebook_sign_in','Facebook Sign In'), auth_at_provider_path(:provider => :facebook), class: [:button, :facebook]
