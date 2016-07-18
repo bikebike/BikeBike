@@ -13,4 +13,4 @@
 					- else
 						%h3=_'articles.workshops.headings.Proposed_Workshops'
 						%p=_'articles.workshops.paragraphs.Proposed_Workshops'
-						= render 'workshops/workshop_previews', :workshops => @conference.workshops
+						= render 'workshops/workshop_previews', :workshops => (@conference.workshops.sort { |a, b| a.title.downcase <=> b.title.downcase })
