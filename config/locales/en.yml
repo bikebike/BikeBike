@@ -5279,6 +5279,8 @@ en:
     confirm: Please Confirm
     yes_button: 'Yes' 
     no_button: 'No'
+    done_button: Close
+    info: More Info
     workshops:
       facilitators:
         confirm_remove: Are you sure you would like to remove %{user_name} as a facilitator of this workshop?
@@ -5293,6 +5295,16 @@ en:
           confirm: You are about to delete ‘%{title}’. Are you sure you want to continue?
   articles:
     admin:
+      stats:
+        headings:
+          bikes: Bikes
+          donation_count: Number of donations
+          donation_total: Total danated
+          food:
+            meat: Onmivores
+            vegetarian: Vegetarians
+            vegan: Vegans
+          registrations: Number of registrations
       housing:
         headings:
           guests: Guests
@@ -5303,6 +5315,8 @@ en:
           amenities: Amenities
           edit_event: Edit Event
           edit_location: Edit Location
+          email: Email
+          housing: Preference
       edit:
         headings:
           host_organizations: Host Organizations
@@ -5676,6 +5690,10 @@ en:
           pre: Pre-Registration
         registration_status: Registration Status
         companion: Email address
+        block_number: Block 
+        days: Days
+        length: Length
+        workshop_block: Block
     actions:
       generic:
         login: Sign In
@@ -5710,6 +5728,11 @@ en:
         add_member: Add
         publish: Publish Schedule
         un_publish: Un-Publish Schedule
+        add_block: Add
+        close: Close
+        deschedule: De-Schedule
+        reschedule: Reschedule
+        schedule_workshop: Schedule
       aria:
         remove_interest: Click if you are no longer interested in this workshop
         show_interest: Click if you are interested in this workshop
