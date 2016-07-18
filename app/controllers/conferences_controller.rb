@@ -719,12 +719,27 @@ class ConferencesController < ApplicationController
 			@registration.housing_data ||= { }
 		when :workshops
 			@page_title = 'articles.conference_registration.headings.Workshops'
-			@workshops = Workshop.where(conference_id: @this_conference.id)
-			@my_workshops = Workshop.joins(:workshop_facilitators).where(
-					workshop_facilitators: { user_id: current_user.id },
-					conference_id: @this_conference.id
-				)
-			@workshops_in_need = Workshop.where(conference_id: @this_conference.id, needs_facilitators: true)
+			
+			# initalize our arrays
+			@my_workshops = Array.new
+			@workshops_in_need = Array.new
+			@workshops = Array.new
+
+			# put wach workshop into the correct array
+			Workshop.where(conference_id: @this_conference.id).each do | workshop |
+				if workshop.can_edit?(current_user)
+					@my_workshops << workshop
+				elsif workshop.needs_facilitators
+					@workshops_in_need << workshop
+				else
+					@workshops << workshop
+				end
+			end
+
+			# sort the arrays by name
+			@my_workshops.sort! { |a, b| a.title.downcase <=> b.title.downcase }
+			@workshops_in_need.sort! { |a, b| a.title.downcase <=> b.title.downcase }
+			@workshops.sort! { |a, b| a.title.downcase <=> b.title.downcase }
 		when :contact_info
 			@page_title = 'articles.conference_registration.headings.Contact_Info'
 		when :hosting
