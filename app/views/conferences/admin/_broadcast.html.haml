@@ -11,7 +11,7 @@
 			= button_tag :edit, value: :edit
 	- else
 		= textfield :subject, @subject, required: true, big: true
-		= textarea :body, @body, heading: 'articles.conference_registration.headings.admin.edit.info', help: 'articles.conference_registration.paragraphs.admin.edit.info', lang: @this_conference.locale, edit_on: :focus
+		= textarea :body, @body, lang: @this_conference.locale, edit_on: :focus
 		.actions.right
 			= button_tag :preview, value: :preview
 	-# I18n.backend.enabled_locales.each do | locale |
