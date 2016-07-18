@@ -8,11 +8,11 @@
 	- else
 		%p=_'articles.conference_registration.paragraphs.Create_Workshop', :p
 	= link_to (_'articles.conference_registration.headings.Add_Workshop'), create_workshop_path(@this_conference.slug), class: :button
-- if @workshop_requests.present?
+- if @requested_workshops.present?
 	= columns(medium: 12) do
 		%h3=_'articles.conference_registration.headings.Workshops_You_Have_Requested'
 		%p=_'articles.conference_registration.paragraphs.Workshops_You_Have_Requested', :p
-		= render 'workshops/workshop_previews', :workshops => @workshop_requests
+		= render 'workshops/workshop_previews', :workshops => @requested_workshops
 - if @workshops_in_need.present?
 	= columns(medium: 12) do
 		%h3=_'articles.conference_registration.headings.Workshops_Looking_For_Facilitators'
