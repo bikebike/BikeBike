@@ -12,7 +12,7 @@
 	= columns(medium: 12) do
 		%h3=_'articles.conference_registration.headings.Workshops_You_Have_Requested'
 		%p=_'articles.conference_registration.paragraphs.Workshops_You_Have_Requested', :p
-		= render 'workshops/workshop_previews', :workshops => @workshops_in_need
+		= render 'workshops/workshop_previews', :workshops => @workshop_requests
 - if @workshops_in_need.present?
 	= columns(medium: 12) do
 		%h3=_'articles.conference_registration.headings.Workshops_Looking_For_Facilitators'
