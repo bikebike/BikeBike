@@ -88,13 +88,6 @@ class UserMailer < ActionMailer::Base
 		@subject = (_'email.subject.workshop_translated',
 					"The #{@locale_name} translation for #{@workshop.title} has been modified",
 					vars: {language: @language_name, workshop_title: @workshop.title})
-		@data.each do |field, values|
-			diff = Diffy::Diff.new(values[:old], values[:new])
-			@data[field][:diff] = {
-				text: diff.to_s(:text),
-				html: diff.to_s(:html)
-			}
-		end
 
 		@wrapper_id = :full_width
 

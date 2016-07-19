@@ -207,17 +207,21 @@ pre {
 		display: inline-block;
 		padding: 0.5em;
 		margin: 0;
-		background-color: lighten($colour-3, 33%);
-		border: 2px solid #DDD;
-		white-space: nowrap;
+		border-bottom: 1px solid #DDD;
+		//white-space: nowrap;
 
 		&:nth-child(odd) {
 			margin-right: -3px;
 			float: left;
+			clear: left;
 		}
 
-		&:nth-child(even) {
-			background-color: lighten($colour-5	, 33%);
+		ins {
+			color: #080;//lighten($colour-3, 33%);
+		}
+
+		del {
+			color: #800;
 		}
 	}
 }

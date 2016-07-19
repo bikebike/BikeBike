@@ -5,9 +5,8 @@
 	%b=_'email.translations.headings.new_value'
 	%blockquote=_!values[:new].html_safe
 	%b=_'email.translations.headings.old_value'
-	%blockquote=_!values[:old].html_safe
-	%b=_'email.translations.headings.diff'
-	=_!(values[:diff][:html].html_safe)
+	- if values[:old].present?
+		%blockquote=_!values[:old].html_safe
 
 %p
 	=_'email.workshop.paragraph.view_workshop',"You can view the workshop here: "
