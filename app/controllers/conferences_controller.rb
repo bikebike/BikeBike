@@ -1008,19 +1008,36 @@ class ConferencesController < ApplicationController
 		when 'broadcast'
 			@subject = params[:subject]
 			@body = params[:body]
+			@send_to = params[:send_to]
 			@register_template = :administration
 			if params[:button] == 'send'
+				view_context.broadcast_to(@send_to).each do | user |
+					UserMailer.send_mail :broadcast do
+						[
+							"#{request.protocol}#{request.host_with_port}",
+							@subject,
+							@body,
+							user,
+							@this_conference
+						]
+					end
+				end
 				return redirect_to administration_step_path(@this_conference.slug, :broadcast_sent)
 			elsif params[:button] == 'preview'
+				@send_to_count = view_context.broadcast_to(@send_to).size
 				@broadcast_step = :preview
 			elsif params[:button] == 'test'
 				@broadcast_step = :test
-				UserMailer.delay.broadcast(
-					"#{request.protocol}#{request.host_with_port}",
-					@subject,
-					@body,
-					current_user,
-					@this_conference)
+				UserMailer.send_mail :broadcast do
+					[
+						"#{request.protocol}#{request.host_with_port}",
+						@subject,
+						@body,
+						current_user,
+						@this_conference
+					]
+				end
+				@send_to_count = view_context.broadcast_to(@send_to).size
 			end
 			return render 'conferences/register'
 		when 'locations'

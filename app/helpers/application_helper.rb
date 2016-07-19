@@ -878,15 +878,72 @@ module ApplicationHelper
 		return html.html_safe
 	end
 
-	def broadcast_methods
-		[
+	def broadcast_to(to, conference = nil)
+		conference ||= @this_conference || @conference
+
+		users = []
+		
+		case to.to_sym
+		when :registered
+			ConferenceRegistration.where(conference_id: conference.id).each do | r |
+				users << r.user if ((r.steps_completed || []).include? 'questions') && r.user.present?
+			end
+		when :pre_registered
+			ConferenceRegistration.where(conference_id: conference.id).each do | r |
+				users << r.user if ((r.steps_completed || []).include? 'contact_info') && r.user.present?
+			end
+		when :workshop_facilitators
+			user_hash = {}
+			Workshop.where(conference_id: conference.id).each do | w |
+				w.active_facilitators.each do | u |
+					user_hash[u.id] ||= u if u.present?
+				end
+			end
+			users = user_hash.values
+		when :unregistered
+			ConferenceRegistration.where(conference_id: conference.id).each do | r |
+				users << r.user unless ((r.steps_completed || []).include? (conference.registration_status == :open ? 'questions' : 'contact_info')) || r.user.nil?
+			end
+		when :housing_providers
+			ConferenceRegistration.where(conference_id: conference.id, can_provide_housing: true).each do | r |
+				users << r.user if r.user.present?
+			end
+		when :guests
+			ConferenceRegistration.where(conference_id: conference.id, housing: 'house').each do | r |
+				users << r.user if r.user.present?
+			end
+		when :all
+			User.all.each do | u |
+				users << u if u.present? && (u.is_subscribed.nil? || u.is_subscribed)
+			end
+		end
+		
+		puts "Users:"
+		users.each do | u |
+			puts "\t#{u.id}\t#{u.email}"
+		end
+		return users
+	end
+
+	def broadcast_options(conference = nil)
+		conference ||= @this_conference || @conference
+
+		options = [
 			:registered,
-			:confirmed_registrations,
-			:unconfirmed_registrations,
-			:unconfirmed_registrations,
+			:pre_registered,
 			:workshop_facilitators,
-			:everyone,
+			:unregistered,
+			:housing_providers,
+			:guests,
+			:all
 		]
+
+		if conference.registration_status != :open
+			options -= [:registered, :guests]
+			options -= [:pre_registered] unless conference.registration_status != :pre
+		end
+
+		return options
 	end
 
 	def admin_steps
@@ -982,8 +1039,8 @@ module ApplicationHelper
 		@confirmation_dlg ||= true
 		args[:data] ||= {}
 		args[:data][:confirmation] = true
-		button_tag args do
-			(button_name.to_s + content_tag(:template, confirmation_text, class: 'message')).html_safe
+		button_tag button_name, args do
+			((_"forms.actions.generic.#{button_name.to_s}") + content_tag(:template, confirmation_text, class: 'message')).html_safe
 		end
 	end
 

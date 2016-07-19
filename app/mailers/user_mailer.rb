@@ -36,8 +36,8 @@ class UserMailer < ActionMailer::Base
 		@content = content
 		@banner = nil
 		@conference = Conference.find(conference) if conference.present?
-		@user = Conference.find(user) if user.present?
-		@subject = "[#{conference ? conference.title : 'Bike!Bike!'}] #{subject}"
+		@user = User.find(user) if user.present?
+		@subject = "[#{@conference ? @conference.title : 'Bike!Bike!'}] #{subject}"
 		if @user && @user.named_email
 			mail to: @user.named_email, subject: @subject
 		end

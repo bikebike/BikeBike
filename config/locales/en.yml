@@ -5485,6 +5485,9 @@ en:
           schedule:
             published: Your scheulde is currently published and viewable on the front-page. Un-publishing the schedule will remove it from the front-page and show a list of proposed workshops instead.
             un_published: Your schedule is not yet published. Publishing the schedule will replace the list of proposed workshops on the front-page with the schedule as it is shown below.
+          broadcast:
+            test: Please take a look at this preview to ensure that you want to send this email. Clicking ‘Test’ will send the email only to you. Only after that then the email will be set to %{send_to_count} people. 
+            preview: Clicking ‘Send’ will send this message to %{send_to_count} people. Please confirm that you have verified that the test email sent to you is what you want to be sent.
         companion: Is there someone who you would like us to ensure that you are housed with?
         arrival_and_departure: If you don't need housing, just tell us how long you plan to hang out with Bike!Bike!
       host:
@@ -5698,6 +5701,7 @@ en:
         days: Days
         length: Length
         workshop_block: Block
+        send_to: Send To
     actions:
       generic:
         login: Sign In
@@ -5741,6 +5745,15 @@ en:
         remove_interest: Click if you are no longer interested in this workshop
         show_interest: Click if you are interested in this workshop
         add: Add new
+    options:
+      send_to:
+        registered: Everyone who has registered
+        pre_registered: Everyone who has pre-registered or registered
+        unregistered: Everyone who has not completed their registration
+        workshop_facilitators: All workshop facilitators
+        housing_providers: Housing providers
+        guests: Everyone who has requested housing
+        all: Everyone
   page_titles:
     '403':
       Access_Denied: Access Denied

@@ -1054,6 +1054,10 @@ ul.warnings li,
 		@include _(border-radius, 50%);
 		@include default-box-shadow(top, 2);
 	}
+
+	&.make-room {
+		margin-bottom: 2em;
+	}
 }
 
 .warning-info {
@@ -2844,6 +2848,16 @@ html[data-lingua-franca-example="html"] {
 .workshop-notes {
 	p {
 		font-size: 1em;
+	}
+}
+
+.major-group {
+	border-bottom: 0.333em solid #EEE;
+	padding-bottom: 2em;
+	margin-bottom: 1em;
+
+	&:last-child {
+		border-bottom: 0;
 	}
 }
 
