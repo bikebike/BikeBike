@@ -1,10 +1,13 @@
 = render :partial => 'application/header', :locals => {:image_file => 'runes.jpg'}
 = row do
 	= columns(medium: 12) do
-		= paragraph(_'error.locale_not_available.description', :p, @main_title_vars)
+		%p= _'error.locale_not_available.description', :p, @main_title_vars
 		%ul.locales
 			- @alt_lang_urls.each do |locale, url|
 				%li
 					- locale_translation = language(locale, true)
 					%a.button{href: url, lang: locale}
 						=_'translate.content.change_locale', "Read in #{locale_translation}", vars: {language: locale_translation}, locale: locale
+		%h2= _'error.locale_not_available.volunteer.title'
+		%p= _'error.locale_not_available.volunteer.description'
+		= render 'contact', cancel_btn: false, contact_reason: :website

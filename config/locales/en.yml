@@ -5855,19 +5855,20 @@ en:
       Translate: Edit %{language} version
   error:
     '403':
-      description: You do not currently have sufficient permissions to access this page. If you believe this is an error, please contact us or file an issue.
+      description: You do not currently have sufficient permissions to access this page. If you believe this is an error, please contact us.
       title: You do not have access to this page
     '404':
-      description: Sorry, we couldn't find the page you were looking for. If you really
-        believe that it should exist please contact admin@bikebike.org or file an
-        issue on github: https://github.com/bikebike/BikeBike/issues
+      description: The page you are looking for could not be found. If you think this was in error, please contact us.
       title: '404: This page doesn''t exist'
     locale_not_available:
       description: This site has yet to be translated into %{language}. We are actively looking for volunteers who can translate existing copy and new copy as we add new features. If you think you can help, please contact us!
       title: '404: %{language} Translations Missing'
+      volunteer:
+        title: Can you help us translate?
+        description: 'If you can help us translate this or any other language, please let us know by contacting us using the form below:'
     '500':
       title: There is a problem
-      description: 'An error has occurred, details about the error have been sent to our development team. In addition, you may contact us or report an issue.'
+      description: 'An error has occurred, details about the error have been sent to our development team. In addition, you may contact us using the form below to let us better understand what happened and how you were affected.'
   roles:
     workshops:
       facilitator:
