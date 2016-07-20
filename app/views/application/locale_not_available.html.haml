@@ -10,4 +10,4 @@
 						=_'translate.content.change_locale', "Read in #{locale_translation}", vars: {language: locale_translation}, locale: locale
 		%h2= _'error.locale_not_available.volunteer.title'
 		%p= _'error.locale_not_available.volunteer.description'
-		= render 'contact', cancel_btn: false, contact_reason: :website
+		= render 'contact', cancel_btn: false, contact_reason: :website, locale: :en

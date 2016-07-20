@@ -216,13 +216,21 @@ module ApplicationHelper
 		content_tag(:span, text.html_safe, id: id, class: 'screen-reader-text')
 	end
 
-	def url_for_locale(locale)
-		new_params = params.merge({action: (params[:_original_action] || params[:action])})
-		new_params.delete(:_original_action)
+	def url_for_locale(locale, url = nil)
+		unless url.present?
+			new_params = params.merge({action: (params[:_original_action] || params[:action])})
+			new_params.delete(:_original_action)
+
+			if Rails.env.development? || Rails.env.test?
+				url = url_for(new_params.merge({lang: locale.to_s}))
+			else
+				url = url_for(new_params)
+			end
+		end
 		
-		return url_for(new_params.merge({lang: locale.to_s})) if Rails.env.development? || Rails.env.test?
-		return "https://preview-#{locale.to_s}.bikebike.org#{url_for(new_params)}" if Rails.env.preview?
-		"https://#{locale.to_s}.bikebike.org#{url_for(new_params)}"
+		return url if Rails.env.development? || Rails.env.test?
+		return "https://preview-#{locale.to_s}.bikebike.org#{url}" if Rails.env.preview?
+		"https://#{locale.to_s}.bikebike.org#{url}"
 	end
 
 	def registration_steps(conference = @conference)
