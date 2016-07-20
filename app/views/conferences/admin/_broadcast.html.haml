@@ -12,7 +12,7 @@
 			= richtext @body, 4
 		.actions.right
 			= button_tag :test, value: :test, class: :secondary if @broadcast_step == :preview
-			= button_with_confirmation :send, (_'modals.admin.broadcast.confirm', vars: { number: @subscriber_count || 0 }), value: :send, class: :delete if @broadcast_step == :test
+			= button_with_confirmation :send, (_'modals.admin.broadcast.confirm', vars: { number: "<strong>#{(@send_to_count || 0)}</strong>".html_safe }), value: :send, class: :delete if @broadcast_step == :test
 			= button_tag :edit, value: :edit
 	- else
 		= selectfield :send_to, nil, broadcast_options, full: true

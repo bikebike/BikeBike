@@ -5488,6 +5488,7 @@ en:
           broadcast:
             test: Please take a look at this preview to ensure that you want to send this email. Clicking ‘Test’ will send the email only to you. Only after that then the email will be set to %{send_to_count} people. 
             preview: Clicking ‘Send’ will send this message to %{send_to_count} people. Please confirm that you have verified that the test email sent to you is what you want to be sent.
+            sent: Your message has been sent.
         companion: Is there someone who you would like us to ensure that you are housed with?
         arrival_and_departure: If you don't need housing, just tell us how long you plan to hang out with Bike!Bike!
       host:
@@ -5570,6 +5571,7 @@ en:
         What_is_BikeBike: What is Bike!Bike!?
     permission_denied:
       headings:
+        confirmation_sent: Confirmation Sent
         confirm_email: Please confirm your email address
         login_required: Login Required
       paragraphs:

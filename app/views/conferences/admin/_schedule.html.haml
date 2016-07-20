@@ -11,7 +11,7 @@
 #schedule-preview
 	- @schedule.each do | day, data |
 		%h4=date(day, :weekday)
-		%table.schedule{class: data[:locations].present? ? 'has-locations' : 'no-locations'}
+		%table.schedule{class: [data[:locations].present? ? 'has-locations' : 'no-locations', "locations-#{data[:locations].size}"]}
 			- if data[:locations].present?
 				%thead
 					%tr
@@ -81,15 +81,15 @@
 										.title= time_data[:item]['title']
 										.location= location.title
 									- when :event
-										%a.event-detail-link=off_screen(time_data[:item].title)
+										%a.event-detail-link=off_screen(time_data[:item][:title])
 										%template.event-details
-											%h1.title=time_data[:item].title
+											%h1.title=time_data[:item][:title]
 											%p.address
 												= time_data[:item].event_location.title + _!(': ')
 												%a{ href: "http://www.google.com/maps/place/#{time_data[:item].event_location.latitude},#{time_data[:item].event_location.longitude}" }
 													= time_data[:item].event_location.address
-											= richtext time_data[:item].info, 1
-										.title= time_data[:item].title
+											= richtext time_data[:item][:info], 1
+										.title= time_data[:item][:title]
 										.location= time_data[:item].event_location.title
 							%td.status{rowspan: rowspan}
 - if @entire_page

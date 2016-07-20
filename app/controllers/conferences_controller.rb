@@ -1121,6 +1121,8 @@ class ConferencesController < ApplicationController
 				event.save
 
 				return redirect_to administration_step_path(@this_conference.slug, :events)
+			when 'cancel'
+				return redirect_to administration_step_path(@this_conference.slug, :events)
 			end
 		when 'workshop_times'
 			case params[:button]

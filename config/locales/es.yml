@@ -35,6 +35,7 @@ es:
       default: '%d/%m/%Y'
       long: '%d de %B de %Y'
       short: '%d de %b'
+      weekday: "%A"
       span_same_month_date_2: '%e, %Y'
       span_same_month_date_1: '%B %e'
       span_same_year_date_1: "%B %e"

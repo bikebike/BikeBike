@@ -1546,6 +1546,30 @@ table.schedule {
 	width: 100%;
 	margin: 0 0 1em;
 
+	&.locations-1 td.workshop {
+		width: 100%;
+	}
+
+	&.locations-2 td.workshop {
+		width: 50%;
+	}
+
+	&.locations-3 td.workshop {
+		width: 33.333%;
+	}
+
+	&.locations-4 td.workshop {
+		width: 25%;
+	}
+
+	&.locations-5 td.workshop {
+		width: 20%;
+	}
+
+	&.locations-6 td.workshop {
+		width: 16.66667%;
+	}
+
 	td {
 		position: relative;
 		text-align: center;
