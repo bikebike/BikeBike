@@ -5645,6 +5645,7 @@ en:
       headings:
         Your_Account: Account Settings
         email_subscribe: Notifications
+        Your_Conferences: Your Conferences
       paragraphs:
         conference_registration: Looking to register or modify your current registration?
         email_subscribe: Would you like to be notified about upcoming conferences? If you have registered for a conference we will always send you notifications and announcements until the conference.
