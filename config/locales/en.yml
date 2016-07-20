@@ -5704,6 +5704,12 @@ en:
         length: Length
         workshop_block: Block
         send_to: Send To
+        street_address: Street Address
+        city: City
+        subregion: State / Province
+        country: Country
+        postal_code: Postal Code
+        status: Status
     actions:
       generic:
         login: Sign In
@@ -5805,6 +5811,7 @@ en:
         Help_contribute: Help contribute
     download:
       Excel: Download Data in Excel Format
+      Organizations_Excel: Download Organization Data
   page_descriptions:
     home: Bike!Bike! A conference for bike collectives, co-ops, non-profit DIY bike
       shops

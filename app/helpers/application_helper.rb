@@ -951,7 +951,7 @@ module ApplicationHelper
 	end
 
 	def valid_admin_steps
-		admin_steps + [:broadcast_sent]
+		admin_steps + [:broadcast_sent, :organizations]
 	end
 
 	def admin_menu

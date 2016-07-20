@@ -760,6 +760,46 @@ class ConferencesController < ApplicationController
 			@page_title = 'articles.conference_registration.headings.Administration'
 
 			case @admin_step.to_sym
+			when :organizations
+				@organizations = Organization.all
+
+				if request.format.xlsx?
+					logger.info "Generating stats.xls"
+					@excel_data = {
+						columns: [:name, :street_address, :city, :subregion, :country, :postal_code, :email, :phone, :status],
+						keys: {
+								name: 'forms.labels.generic.name',
+								street_address: 'forms.labels.generic.street_address',
+								city: 'forms.labels.generic.city',
+								subregion: 'forms.labels.generic.subregion',
+								country: 'forms.labels.generic.country',
+								postal_code: 'forms.labels.generic.postal_code',
+								email: 'forms.labels.generic.email',
+								phone: 'forms.labels.generic.phone',
+								status: 'forms.labels.generic.status'
+							},
+						data: [],
+					}
+					@organizations.each do | org |
+						if org.present?
+							address = org.locations.first
+							@excel_data[:data] << {
+								name: org.name,
+								street_address: address.present? ? address.street : nil,
+								city: address.present? ? address.city : nil,
+								subregion: address.present? ? I18n.t("geography.subregions.#{address.country}.#{address.territory}") : nil,
+								country: address.present? ? I18n.t("geography.countries.#{address.country}") : nil,
+								postal_code: address.present? ? address.postal_code : nil,
+								email: org.email_address,
+								phone: org.phone,
+								status: org.status
+							}
+						end
+					end
+					return respond_to do | format |
+						format.xlsx { render xlsx: :stats, filename: "organizations" }
+					end
+				end
 			when :stats
 				@registrations = ConferenceRegistration.where(:conference_id => @this_conference.id)
 

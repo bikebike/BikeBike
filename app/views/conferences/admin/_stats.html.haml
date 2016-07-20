@@ -15,3 +15,4 @@
 		= "$#{@donations || 0.00}"
 .actions
 	= link_to (_'links.download.Excel'), administration_step_path(@this_conference.slug, :stats, :format => :xlsx), class: [:button, :download]
+	= link_to (_'links.download.Organizations_Excel'), administration_step_path(@this_conference.slug, :organizations, :format => :xlsx), class: [:button, :download, :subdued]

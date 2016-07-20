@@ -8,7 +8,9 @@
     - @excel_data[:data].each do |row|
       %tr
         - @excel_data[:columns].each do |column|
-          %td{class: @excel_data[:column_types][column].present? ? @excel_data[:column_types][column].to_s : nil}=_!row[column]
+          %td{class: (@excel_data[:column_types].present? && @excel_data[:column_types][column].present?) ? @excel_data[:column_types][column].to_s : nil}
+            - if row[column].present?
+              =_!row[column]
 
 - format_xls 'table' do
   - workbook use_autowidth: true
