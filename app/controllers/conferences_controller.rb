@@ -1614,10 +1614,8 @@ class ConferencesController < ApplicationController
 						workshop.id, user_id)
 				f.role = :collaborator
 				f.save
-				UserMailer.send_mail :workshop_facilitator_request_approved do
-					{
-						:args => [ workshop, user ]
-					}
+				UserMailer.send_mail :workshop_facilitator_request_approved, user.locale do
+					[ workshop, user ]
 				end
 				return redirect_to view_workshop_url(@this_conference.slug, workshop.id)		
 			end
@@ -1626,10 +1624,8 @@ class ConferencesController < ApplicationController
 				WorkshopFacilitator.delete_all(
 					:workshop_id => workshop.id,
 					:user_id => user_id)
-				UserMailer.send_mail :workshop_facilitator_request_denied do
-					{
-						:args => [ workshop, user ]
-					}
+				UserMailer.send_mail :workshop_facilitator_request_denied, user.locale do
+					[ workshop, user ]
 				end
 				return redirect_to view_workshop_url(@this_conference.slug, workshop.id)		
 			end
@@ -1669,10 +1665,8 @@ class ConferencesController < ApplicationController
 		unless workshop.facilitator?(user)
 			WorkshopFacilitator.create(user_id: user.id, workshop_id: workshop.id, role: :collaborator)
 			
-			UserMailer.send_mail :workshop_facilitator_request_approved do
-				{
-					:args => [ workshop, user ]
-				}
+			UserMailer.send_mail :workshop_facilitator_request_approved, user.locale do
+				[ workshop, user ]
 			end
 		end
 
@@ -1690,14 +1684,14 @@ class ConferencesController < ApplicationController
 			comment = Comment.find_by!(id: params[:comment_id].to_i, model_type: :workshops, model_id: workshop.id)
 			new_comment = comment.add_comment(current_user, params[:reply])
 
-			UserMailer.send_mail :workshop_comment do
+			UserMailer.send_mail :workshop_comment, comment.user.locale do
 				[ workshop, new_comment, comment.user ]
 			end
 		elsif params[:button] = 'add_comment'
 			new_comment = workshop.add_comment(current_user, params[:comment])
 
 			workshop.active_facilitators.each do | u |
-				UserMailer.send_mail :workshop_comment do
+				UserMailer.send_mail :workshop_comment, u.locale do
 					[ workshop, new_comment, u ]
 				end
 			end

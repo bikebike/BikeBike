@@ -158,6 +158,7 @@ class ApplicationController < LinguaFrancaApplicationController
 					request,
 					params,
 					current_user,
+					Time.now.strftime("%d/%m/%Y %H:%M")
 				]
 			end if Rails.env.preview? || Rails.env.production?
 		rescue exception2
@@ -218,8 +219,9 @@ class ApplicationController < LinguaFrancaApplicationController
 					request,
 					params,
 					current_user,
+					Time.now.strftime("%d/%m/%Y %H:%M")
 				]
-			end if Rails.env.preview? || Rails.env.production?
+			end# if Rails.env.preview? || Rails.env.production?
 		end
 
 		# raise the error if we are in development so that we can debug it
@@ -403,7 +405,7 @@ class ApplicationController < LinguaFrancaApplicationController
 		if object.respond_to?(:get_translators)
 			object.get_translators(data, locale).each do |id, user|
 				if user.id != current_user.id && user.id != translator_id
-					UserMailer.send_mail mailer do
+					UserMailer.send_mail mailer, user.locale do
 						{ :args => [object, data, locale, user, translator] }
 					end
 				end
@@ -417,7 +419,7 @@ class ApplicationController < LinguaFrancaApplicationController
 		if object.respond_to?(:get_translators)
 			object.get_translators(data).each do |id, user|
 				if user.id != current_user.id
-					UserMailer.send_mail mailer do
+					UserMailer.send_mail mailer, user.locale do
 						{ :args => [object, data, user, current_user] }
 					end
 				end
@@ -440,6 +442,7 @@ class ApplicationController < LinguaFrancaApplicationController
 					request,
 					params,
 					current_user,
+					Time.now.strftime("%d/%m/%Y %H:%M")
 				]
 			end if Rails.env.preview? || Rails.env.production?
 		rescue exception2

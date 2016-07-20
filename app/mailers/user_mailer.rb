@@ -129,13 +129,14 @@ class UserMailer < ActionMailer::Base
 		mail to: @user.named_email, subject: @subject
 	end
 
-	def error_report(subject, message, report, exception, request, params, user)
+	def error_report(subject, message, report, exception, request, params, user, time = nil)
 		@subject = subject
 		@message = message
 		@report = report
 		@exception = exception
 		@request = request
 		@params = params
+		@time = time
 		@user = User.find(user) if user.present?
 		mail to: 'goodgodwin@hotmail.com', subject: @subject
 	end
