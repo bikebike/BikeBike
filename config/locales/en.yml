@@ -5212,8 +5212,7 @@ en:
         0 is treated as a plural in English
       use_default_value: Use the default value
       use_custom_value: Use a custom value
-      explain_zero_fallback: This translation will use the plural version for the
-        number 0
+      explain_zero_fallback: This translation will use the plural version for the number 0
       History: History
       Locale_Translation: "%{language} Translation"
       Save: Save
@@ -5221,8 +5220,7 @@ en:
       needs_translations: This page contains untranslated content
       requires_translation: This %{model} is in %{language}.
       translation_out_of_date: Translated content on this page may no longer be accurate
-      translation_last_modified: The text in the original language was last modified
-        on %{date}
+      translation_last_modified: The text in the original language was last modified on %{date}
       translate_now: Translate it now
       can_you_help: Can you translate from %{language_a} to %{language_b}?
       un_translated: Untranslated content
@@ -5266,10 +5264,8 @@ en:
       no_value: Undefined
       default_value: Default
       variables: Variables
-      uses_default_value: This translation will use the plural version for the number
-        0
-      uses_custom_value: This translation has been overridden, normally the number
-        0 is treated as a plural in English
+      uses_default_value: This translation will use the plural version for the number 0
+      uses_custom_value: This translation has been overridden, normally the number 0 is treated as a plural in English
       use_default_value: Use the default value
       use_custom_value: Use a custom value
   conference:
@@ -5337,29 +5333,16 @@ en:
         How: How is it enforced?
         Why: Why have a Safer Space Agreement?
       paragraphs:
-        How: The host city has the responsibility of mediating safer space issues.
-          They will decide what constitutes a warning and what constitutes expulsion
-          from the conference.
-        Why: In order to set a common ground, we state our shared beliefs and desires
-          for the space which is Bike!Bike!. We rally around these ideas for inspiration
-          and to ensure that if there is behaviour which does not make us feel safe,
-          we have something to point to. By agreeing to a commitment of mutual respect,
-          we hope that if conflict does arise, we will remember what we have agreed
-          to, and act accordingly.
+        How: The host city has the responsibility of mediating safer space issues. They will decide what constitutes a warning and what constitutes expulsion from the conference.
+        Why: In order to set a common ground, we state our shared beliefs and desires for the space which is Bike!Bike!. We rally around these ideas for inspiration and to ensure that if there is behaviour which does not make us feel safe, we have something to point to. By agreeing to a commitment of mutual respect, we hope that if conflict does arise, we will remember what we have agreed to, and act accordingly.
       term:
-        accessible: We commit to making spaces as accessible as possible; physically,
-          socially, and personally.
-        commitment: We enter with a commitment to mutual respect, mutual aid, anti-oppression
-          advocacy, conflict resolution, anti-violence, and community building.
+        accessible: We commit to making spaces as accessible as possible; physically, socially, and personally.
+        commitment: We enter with a commitment to mutual respect, mutual aid, anti-oppression advocacy, conflict resolution, anti-violence, and community building.
         empowerment: We support the empowerment of each person and group.
-        hearing: We commit to hearing each other and creating opportunities for all
-          voices to be heard.
-        intent: We accept a shared responsibility to hold ourselves and one another
-          accountable for these agreements’ intent.
-        learning: We promote inclusive learning spaces and questions in the spirit
-          of personal growth.
-        respect: We respect everyone's names, preferred gender pronouns, expressed
-          identities and experiences.
+        hearing: We commit to hearing each other and creating opportunities for all voices to be heard.
+        intent: We accept a shared responsibility to hold ourselves and one another accountable for these agreements’ intent.
+        learning: We promote inclusive learning spaces and questions in the spirit of personal growth.
+        respect: We respect everyone's names, gender pronouns, expressed identities and experiences.
         spaces: We respect each others bodies and spaces.
         open_minds: We encourage open minds and open hearts.
         peaceful: We are peaceful and honest.
@@ -5425,44 +5408,21 @@ en:
         companion: Companion
       paragraphs:
         Policy_Agreement: Ensuring that all attendees feel welcome, safe, and respected at all times is especially important to us all. Please ensure that you have fully read and understand our safer spaces policy below, if you have any questions or concerns you can reach out to the organizers at any time.
-        Confirm_Agreement: By clicking the "I Agree" button, you are pledging to do
-          your best to uphold Bike!Bike!'s safer space agreement. Thank you!
-        Registration_Info: Please fill in this registration form to help us prepare
-          for your arrival to %{city}. If you wish to ask questions or tell us
-          information we did not ask, please fill in the preferences field at the
-          bottom of the page or use the contact us link.
-        Payment: Thank you for completing your registration. We'll see you at Bike!Bike!
-          Payment is by donation and can be done now or upon arrival but to help us
-          fund the conference, we ask that you pay the registration donation as soon
-          as you can.
+        Confirm_Agreement: By clicking the "I Agree" button, you are pledging to do your best to uphold Bike!Bike!'s safer space agreement. Thank you!
+        Registration_Info: Please fill in this registration form to help us prepare for your arrival to %{city}. If you wish to ask questions or tell us information we did not ask, please fill in the preferences field at the bottom of the page or use the contact us link.
+        Payment: Thank you for completing your registration. We'll see you at Bike!Bike! Payment is by donation and can be done now or upon arrival but to help us fund the conference, we ask that you pay the registration donation as soon as you can.
         Payment_Made: You have already made a payment of $%{fees_paid}.
         Payment_Add: Thank you! You may add to this amount if you wish by making another payment below.
         currency: "(amounts are in USD)"
-        email_confirm: Go to your inbox! You should see an email from Bike!Bike! in
-          just a few moments. There will be a link in the email for you to click on.
-          Check your spam box if you do not see it. If you encounter any problems,
-          please contact us.
-        confirm_email_address: We ask that you first confirm your email address, once
-          your email address is confirmed you will be able to complete registration,
-          add workshops and pay your registration donation fee. If you have already
-          registered, you can re-confirm you e-mail address to modify your your registration
-          details.
-        Workshops: Workshops are organized and run by attendees, they can be about
-          anything that might concern community bicycle projects and can be in any
-          format including presentations, hands-on workshops, discussion groups, and
-          bicycle rides. If you would like to host you own workshop you can click
-          on the "create workshop" button.
-        Stats: Check Out who's coming and what they've paid so far. See at a glance
-          how much accommodation is needed and what people prefer to eat.
+        email_confirm: Go to your inbox! You should see an email from Bike!Bike! in just a few moments. There will be a link in the email for you to click on. Check your spam box if you do not see it. If you encounter any problems, please contact us.
+        confirm_email_address: We ask that you first confirm your email address, once your email address is confirmed you will be able to complete registration, add workshops and pay your registration donation fee. If you have already registered, you can re-confirm you e-mail address to modify your your registration details.
+        Workshops: Workshops are organized and run by attendees, they can be about anything that might concern community bicycle projects and can be in any format including presentations, hands-on workshops, discussion groups, and bicycle rides. If you would like to host you own workshop you can click on the "create workshop" button.
+        Stats: Check Out who's coming and what they've paid so far. See at a glance how much accommodation is needed and what people prefer to eat.
         done: Thank you for registering for Bike!Bike!
-        Email_Participants: This page is used to contact all participants. Text can
-          be entered as [Markdown](http://daringfireball.net/projects/markdown/basics).
-          Pressing 'test' will send the email only to you, make sure you do this and
-          use caution in general before pressing 'send'
+        Email_Participants: This page is used to contact all participants. Text can be entered as [Markdown](http://daringfireball.net/projects/markdown/basics). Pressing 'test' will send the email only to you, make sure you do this and use caution in general before pressing 'send'
         payment_confirm: You are about to confirm your payment of %{amount} for registration.
         participants_emailed: Your email has been sent to all participants of %{conference_title}.
-        workshops: You can now take a look at proposed workshops and even propose
-          one yourself if you like.
+        workshops: You can now take a look at proposed workshops and even propose one yourself if you like.
         Contact_Info: Please let us know a little bit about you.
         Create_Workshop: At Bike!Bike! anyone can lead a workshop or just propose and idea that someone else can volunteer to lead. If, where, and when the workshop will be scheduled will ultimately be decided by the conference organizers.
         Workshops_Looking_For_Facilitators: Would you like to lend a hand facilitating a workshop proposed by someone else? Below is a list of workshops that are actively looking for volunteers, if you are interested in helping out you can make a facilitation request.
@@ -5532,27 +5492,11 @@ en:
     about_bikebike:
       paragraphs:
         bicycle_project_paragraph: 'From collectives that use the bicycle as an excuse to change society, economy and the environment. Non-profit groups that have a community bike shops, cooperatives and other projects that promote the use of the bicycle and that come together to turn their communities into a place where riding is easier, more inclusive, safer and more fun. The list below uses the criteria found in the old Bicycle Organization Organization Project for what constitutes a community bike shop. The bike project need not meet all these criteria. Rather, it is a general list of qualities which are common among many bicycle projects.'
-        Who_is_Invited: You don’t have to be an expert or belong to a huge group,
-          you just need to be willing to share what you know about organization, mechanics,
-          social impact, inequality alternatives, better access to bicycles or knowledge
-          and social issues in your community or city.
-        Types_of_Workshops: Workshops are organized and run by attendees, they can
-          be about anything that might concern community bicycle projects and can
-          be in any format including presentations, hands-on workshops, discussion
-          groups, and bicycle rides. If you would like to host you own workshop you
-          can enter details after registering. What ends up in the final schedule
-          and when they happen are decided on by the conference hosts.
-        Amenities: Traditionally conference hosts arrange shared accommodations, one
-          to two meals a day, and bicycles will be available for registered attendees
-          however you should check the conference details on the current conference.
-          More information on how you can arrange your own accommodation and other
-          recommended places to visit should also be provided to you by the hosts
-          on the conference page or in hard copy upon arrival.
+        Who_is_Invited: You don’t have to be an expert or belong to a huge group, you just need to be willing to share what you know about organization, mechanics, social impact, addressing inequality, and increasing accessibility to cycling in your community.
+        Types_of_Workshops: Workshops are organized and run by attendees, they can be about anything that might concern community bicycle projects and can be in any format including presentations, hands-on workshops, discussion groups, and bicycle rides. If you would like to host your own workshop you can enter details after registering. What ends up in the final schedule and when they happen are decided on by the conference hosts.
+        Amenities: Traditionally conference hosts arrange shared accommodations, one to two meals a day, and bicycles will be available for registered attendees. However you should check the conference details on the current conference. More information on how you can arrange your own accommodation and other recommended places to visit should also be provided to you by the hosts on the conference page or in hard copy upon arrival.
         Volunteer: Yes. Please!
-        What_is_BikeBike: Bike!Bike! is an international annual gathering organized
-          by and for community bicycle projects. The conference is a space for participants
-          from shops and related advocacy groups to converge in a different city each
-          year over a 4 day period to have workshops and strengthen our social network.
+        What_is_BikeBike: Bike!Bike! is an international, annual gathering organized by and for community bicycle projects. The conference is a space for participants from shops and related advocacy groups to converge in a different city each year over a 4 day period to have workshops and strengthen our social network.
       term:
         non_profit: Bike shops that are accessible to people without money
         recycle_parts: Non-profit bicycle organizations
@@ -5602,32 +5546,13 @@ en:
           can access the page by restarting the registration process.
         info: Describe your workshop in detail; highlighting text will reveal formatting controls.
         space: What kind of space do you need for your workshop?
-        theme: Which of the themes below best match your workshop? This will help
-          hosts to avoid scheduling conflicts. Select other if none of the options
-          match in any way.
+        theme: Which of the themes below best match your workshop? This will help hosts to avoid scheduling conflicts. Select other if none of the options match in any way.
         Delete_Workshop: Deleting a workshop cannot be undone, are you sure that you want to proceed?
-        new_workshop: 'Workshops in the past have tended to fit into a few broad categories:
-          structural/organizational (how to start a shop, how to register a non-profit,
-          consensus decision making, etc,) mechanical (how to weld two tandems to
-          a tall bike, building 3-speed hubs out of fishing tackle and old socks,
-          etc,) anti-oppression (safe spaces, women’s workshops, etc,) and recreational
-          (touring tips, yoga for cyclists, etc.) This year we would like to try a
-          panel, a forum, or other types of settings that you think might facilitate
-          learning – be inventive, let us know what you want to see!'
-        Workshops: Do you have an exciting skill to share with us?  Want to chat about
-          creating safe community spaces?  Want to make sure we fit a good bike ride
-          into the weekend?  Propose a workshop!  Don’t worry if you’re not an expert,
-          we want to hear about everyone’s experience within the many configurations
-          of community shops we’re coming from.
+        new_workshop: 'Workshops in the past have tended to fit into a few broad categories: structural/organizational (how to start a shop, how to register a non-profit, consensus decision making, etc,) mechanical (how to weld two tandems to a tall bike, building 3-speed hubs out of fishing tackle and old socks, etc,) anti-oppression (safe spaces, women’s workshops, etc,) and recreational (touring tips, yoga for cyclists, etc.) This year we would like to try a panel, a forum, or other types of settings that you think might facilitate learning – be inventive, let us know what you want to see!'
+        Workshops: Do you have an exciting skill to share with us?  Want to chat about creating safe community spaces?  Want to make sure we fit a good bike ride into the weekend?  Propose a workshop!  Don’t worry if you’re not an expert, we want to hear about everyone’s experience within the many configurations of community shops we’re coming from.
         notes: Notes are only viewable by conference hosts and workshop facilitators
-        facilitate_request: Please tell the current workshop facilitators who you
-          are, why you want to help facilitate the workshop, and how you think you
-          will help make the workshop better. All of the current facilitators will
-          be emailed and they may ask more questions before approving or denying your
-          request. Please note that this will reveal your email address to the facilitators.
-        facilitate_request_sent: Your request has been sent. You will receive an email
-          once your request is approved or denied or if the current facilitators have
-          any questions.
+        facilitate_request: Please tell the current workshop facilitators who you are, why you want to help facilitate the workshop, and how you think you will help make the workshop better. All of the current facilitators will be emailed and they may ask more questions before approving or denying your request. Please note that this will reveal your email address to the facilitators.
+        facilitate_request_sent: Your request has been sent. You will receive an email once your request is approved or denied or if the current facilitators have any questions.
         languages: What language will the workshop be presented in? Will there be translations or translators available?
         needs: If you need any of the following the conference organizers will do their best to make sure you have them. If you have any other requests, you can include them in the notes section.
         needs_facilitators: Are you actively looking for help running this workshop? Anyone who is registered for the conference can request to facilitate at any time but checking this box will improve your chances of finding collaborators.
@@ -5814,8 +5739,7 @@ en:
       Excel: Download Data in Excel Format
       Organizations_Excel: Download Organization Data
   page_descriptions:
-    home: Bike!Bike! A conference for bike collectives, co-ops, non-profit DIY bike
-      shops
+    home: Bike!Bike! A conference for bike collectives, co-ops, non-profit DIY bike shops
   donate:
     button_label: Donate
   menu:
@@ -5900,8 +5824,7 @@ en:
   email:
     confirmation:
       paragraph:
-        please_confirm: Hello! To gain access to registration and other features of
-          Bike!Bike!, please confirm your email address.
+        please_confirm: Hello! To gain access to registration and other features of Bike!Bike!, please confirm your email address.
       link:
         please_confirm: Confirm now
     subject:
@@ -5910,8 +5833,7 @@ en:
       pre_registration_confirmed: Thank you for pre-registering for %{conference_title}
       workshop_facilitator_request: Request to facilitate %{workshop_title} from %{requester_name}
       workshop_request_approved: You have been added as a facilitator of %{workshop_title}
-      workshop_request_denied: Your request to facilitate %{workshop_title} has been
-        denied
+      workshop_request_denied: Your request to facilitate %{workshop_title} has been denied
       workshop_translated: The %{language} translation for %{workshop_title} has been modified
       workshop_original_content_changed: Original content for %{workshop_title} has been modified
       workshop_comment:
@@ -5923,11 +5845,7 @@ en:
         thank_you: Thank you %{name},
     registration:
       paragraph:
-        confirmed: You have successfully registered for %{conference_title}. You can
-          modify your registration details, pay, or add workshops at any time by restarting
-          the registration process. If you have yet to pay or add your workshops and
-          plan to do so, we ask that you take care of it as soon as possible to help
-          us prepare in advance of your arrival.
+        confirmed: You have successfully registered for %{conference_title}. You can modify your registration details, pay, or add workshops at any time by restarting the registration process. If you have yet to pay or add your workshops and plan to do so, we ask that you take care of it as soon as possible to help us prepare in advance of your arrival.
     translations:
       headings:
         new_value: 'New Value: '
@@ -5942,12 +5860,8 @@ en:
     workshop:
       paragraph:
         request_approved: You have been added as a facilitator of %{workshop_title}.
-        request_denied: Your request to become a facilitator of %{workshop_title}
-          has been denied. If you think this was in error, you may contact the current
-          facilitators by making another request to facilitate.
-        request_instructions: 'You can approve or deny this request on your workshop
-          page:'
+        request_denied: Your request to become a facilitator of %{workshop_title} has been denied. If you think this was in error, you may contact the current facilitators by making another request to facilitate.
+        request_instructions: 'You can approve or deny this request on your workshop page:'
         request_message: "%{user_name} has requested to help facilitate %{workshop_title}:"
-        request_reply_instructions: You can also reply directly to this email to ask
-          follow-up questions.
+        request_reply_instructions: You can also reply directly to this email to ask follow-up questions.
         view_workshop: 'View the workshop here: '

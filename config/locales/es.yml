@@ -737,37 +737,23 @@ es:
         email: Email
         fees_paid: Cargos pagados
       paragraphs:
-        Registration_Info: Por favor llena esta forma de registro para ayudarnos a
-          prepararnos para tu llegada a %{city}. Si tienes alguna pregunta o información
-          que no te hayamos pedido por favor llena el campo preferencias al final
-          de la página o utilice el enlace contáctenos.
+        Registration_Info: Por favor llena esta forma de registro para ayudarnos a prepararnos para tu llegada a %{city}. Si tienes alguna pregunta o información que no te hayamos pedido por favor llena el campo preferencias al final de la página o utilice el enlace contáctenos.
         Payment: Las y los esperamos del 1 al 4 de octubre del 2015.Más información
           en: bikebike@gdlenbici.org
-        Workshops: 'Título de la actividad: Que necesitas? Tipo de espacio? Tema?
-          Quién es responsable? Descripción? Tiempo?'
-        Confirm_Agreement: Al hacer click en el botón "Acepto", estás comprometiéndote
-          a cumplir el Acuerdo de Espacios Más Seguros de Bike!Bike!. ¡Gracias!
-        Email_Participants: Esta página se usa para contactar a todxs lxs participantes.
-          El texto se puede ingresar como [Markdown](http://daringfireball.net/projects/markdown/basics).
-          Presionar "prueba" enviará el correo solamente a tí, asegurate de hacerlo
-          y sé cuidadosx antes de presionar 'enviar'.
-        Stats: Ve quién vendrá y lo que han pagado hasta ahora. Ve en resumen cuánto
-          hospedaje se necesita y qué prefiere comer la gente.
-        confirm_email_address: Te pedimos confirmar tu dirección de e-mail primero,
-          al ser confirmada podrás completar el registro, agregar talleres y pagar
-          el donativo de registro. Si ya te registraste puedes re-confirmar tu dirección
+        Workshops: 'Título de la actividad: Que necesitas? Tipo de espacio? Tema? Quién es responsable? Descripción? Tiempo?'
+        Confirm_Agreement: Al hacer click en el botón "Acepto", estás comprometiéndote a cumplir el Acuerdo de Espacios Más Seguros de Bike!Bike!. ¡Gracias!
+        Email_Participants: Esta página se usa para contactar a todxs lxs participantes. El texto se puede ingresar como [Markdown](http://daringfireball.net/projects/markdown/basics).
+          Presionar "prueba" enviará el correo solamente a tí, asegurate de hacerlo y sé cuidadosx antes de presionar 'enviar'.
+        Stats: Ve quién vendrá y lo que han pagado hasta ahora. Ve en resumen cuánto hospedaje se necesita y qué prefiere comer la gente.
+        confirm_email_address: Te pedimos confirmar tu dirección de e-mail primero, al ser confirmada podrás completar el registro, agregar talleres y pagar el donativo de registro. Si ya te registraste puedes re-confirmar tu dirección
           de e-mail para modificar los detalles de tu registro.
         currency: (cantidades en dólares americanos USD)
         done: ¡Gracias por registrarte para Bike!Bike!
-        email_confirm: ¡Ve a tu bandeja de entrada! Deberías ver un e-mail por parte
-          de Bike!Bike! en unos momentos. Contendrá un enlace sobre el cual debes
-          hacer click. Revisa tu bandeja de correo no deseado si no lo ves. Si tienes
-          algún problema, por favor envía un e-mail a admin@bikebike.org
+        email_confirm: ¡Ve a tu bandeja de entrada! Deberías ver un e-mail por parte de Bike!Bike! en unos momentos. Contendrá un enlace sobre el cual debes hacer click. Revisa tu bandeja de correo no deseado si no lo ves. Si tienes algún problema, por favor envía un e-mail a admin@bikebike.org
         participants_emailed: Tu correo ha sido enviado a todxs lxs participantes
           de %{conference_title}.
         payment_confirm: Estás por confirmar tu pago de %{amount} para el registro.
-        workshops: Ahora puedes revisar los talleres propuestos e incluso proponer
-          uno si quieres.
+        workshops: Ahora puedes revisar los talleres propuestos e incluso proponer uno si quieres.
       questions:
         food:
           meat: Carnivoro
@@ -797,37 +783,11 @@ es:
         Test_Email_Sent: Un email fue enviado a %{email_address}
     about_bikebike:
       paragraphs:
-        Who_is_Invited: No es necesario ser personas o grupos expertas solo tener
-          las ganas y la disposición de compartir lo que sabes de organización estructural,
-          mecánica, del cambio social, de alternativas contra la desigualdad o un
-          mejor acceso al uso de la bici y el conocimiento y otros problemas sociales
-          en tu barrio o ciudad.
-        bicycle_project_paragraph: La siguiente lista usa el criterio utilizado en
-          la vieja Bicycle Organization Organization Project (Proyecto de Organización
-          de Organizaciones Ciclistas) para definir qué constituye un taller comunitario
-          de bicis. El proyecto no necesariamente debe cumplir con todos los criterios.
-          En cambio, es una lista general de las cualidades que son comunes entre
-          varios proyectos ciclistas.
-        What_is_BikeBike: 'Bike!Bike! es una reunión internacional anual organizada
-          por y para proyectos comunitarios que trabajan en proyectos de bici. La
-          conferencia es un espacio para que los participantes, principalmente miembros
-          de talleres de y grupos de activismo ciclista, se reúnan en una ciudad distinta
-          cada año durante cuatro días para llevar a cabo talleres informativos y
-          fortalecer nuestra red comunitaria y social. '
-        Types_of_Workshops: 'Los talleres son organizados e impartidos por los participantes.
-          Pueden ser sobre cualquier tema de interés para los proyectos comunitarios
-          de bici y pueden ser en cualquier formato, incluyendo: presentaciones, talleres
-          prácticos, grupos de discusión y rodadas en bici. Si quieres impartir tu
-          propio taller, puedes ingresar los detalles después de registrarse. Los
-          que terminan en el programa final y cuándo son programados, es decisión
-          de los anfitriones de la conferencia. '
-        Amenities: 'Tradicionalmente, los anfitriones de la conferencia coordinan
-          hospedaje compartido, proveen una o dos comidas al día y hay bicicletas
-          disponibles para los participantes registrados; sin embargo, debes checar
-          los detalles particulares sobre la conferencia de cada año. Más información
-          sobre cómo puedes obtener hospedaje por tu cuenta y otros lugares recomendados
-          para visitar, también debe ser proveída por el anfitrión en la página de
-          la conferencia o en un documento físico al llegar a la conferencia. '
+        Who_is_Invited: No es necesario ser personas o grupos expertas solo tener las ganas y la disposición de compartir lo que sabes de organización estructural, mecánica, del cambio social, de alternativas contra la desigualdad o un mejor acceso al uso de la bici y el conocimiento y otros problemas sociales en tu barrio o ciudad.
+        bicycle_project_paragraph: La siguiente lista usa el criterio utilizado en la vieja Bicycle Organization Organization Project (Proyecto de Organización de Organizaciones Ciclistas) para definir qué constituye un taller comunitario de bicis. El proyecto no necesariamente debe cumplir con todos los criterios. En cambio, es una lista general de las cualidades que son comunes entre varios proyectos ciclistas.
+        What_is_BikeBike: 'Bike!Bike! es una reunión internacional anual, organizada por y para proyectos comunitarios que trabajan en proyectos de bici. La conferencia es un espacio para que los participantes, principalmente miembros de talleres de y grupos de activismo ciclista, se reúnan en una ciudad distinta cada año durante cuatro días para llevar a cabo talleres informativos y fortalecer nuestra red comunitaria y social. '
+        Types_of_Workshops: 'Los talleres son organizados e impartidos por los participantes. Pueden ser sobre cualquier tema de interés para los proyectos comunitarios de bici y pueden ser en cualquier formato, incluyendo: presentaciones, talleres prácticos, grupos de discusión y rodadas en bici. Si quieres impartir tu propio taller, puedes ingresar los detalles después de registrarse. Los que terminan en el programa final y cuándo son programados, es decisión de los anfitriones de la conferencia. '
+        Amenities: 'Tradicionalmente, los anfitriones de la conferencia coordinan hospedaje compartido, proveen una o dos comidas al día y hay bicicletas disponibles para los participantes registrados; sin embargo, debes checar los detalles particulares sobre la conferencia de cada año. Más información sobre cómo puedes obtener hospedaje por tu cuenta y otros lugares recomendados para visitar, también debe ser proveída por el anfitrión en la página de la conferencia o en un documento físico al llegar a la conferencia. '
         Volunteer: '¡Sí, por favor! '
       headings:
         Amenities: ¿Dónde puedo dormir? ¿Qué puedo comer? ¿Cómo puedo moverme?
@@ -837,49 +797,23 @@ es:
         Who_is_Invited: ¿Quién es invitado?
         bicycle_project: ¿Qué es un proyecto ciclista comunitario?
       term:
-        education: Los talleres tienen un enfoque en la educación, en enseñar a otros
-          cómo arreglar bicicletas
+        education: Los talleres tienen un enfoque en la educación, en enseñar a otros cómo arreglar bicicletas
         export_bikes: Organizaciones que se incluyen bicicletas para las comunidades de otros países.
-        low_cost: Hay organizaciones que envían bicicletas donadas a comunidades en
-          otros países
+        low_cost: Hay organizaciones que envían bicicletas donadas a comunidades en otros países
         no_money: Hay organizaciones que reciclan bicicletas y algunas de sus partes
         non_profit: Los talleres son accesibles para gente sin dinero
         recycle_parts: Son organizaciones sin fines de lucro
         volunteer_run: Los talleres son operados por voluntarios
     workshops:
       paragraphs:
-        Proposed_Workshops: ¿Te gustaría facilitar tu propio taller? Simplemente regístrate
-          y visita la página de Talleres. Si ya te registraste puedes acceder a la
-          página reiniciando el proceso de registro.
-        Workshops: ¿Tienes alguna habilidad emocionante que quieres compartir con
-          nosotros? ¿Quieres charlar sobre crear espacios comunitarios seguros? ¿Quieres
-          asegurarte de que hagamos un buen paseo el fin de semana? ¡Propón un taller!
-          No te preocupes si no eres unx expertx, queremos escuchar acerca de las
-          experiencias de todxs dentro de los diferentes talleres comunitarios de
-          los que venimos con sus diferentes configuraciones.
-        new_workshop: 'Anteriormente los talleres se han podido integrar en una serie
-          de categorías amplias: organización/estructura (cómo iniciar un taller comunitario,
-          cómo registrar una asociación sin fines de lucro, toma de decisiones mediante
-          consenso, etc) mecánica (cómo soldar dos tandems en una tall-bike, cómo
-          construir una masa de cambios internos con accesorios de pesca y calcetines
-          viejos, etc) y recreación (tips de cicloturismo, yoga para ciclistas, etc.)
-          Este año quisieramos intentar páneles, foros u otro tipo de contextos que
-          creas que puedan facilitar el aprendizaje - sé inventivx, ¡Dinos qué quieres
-          ver!'
-        notes: Las notas se comparten solo con lxs organizadorxs de la conferencia
-          y con lxs facilitadorxs de los talleres.
+        Proposed_Workshops: ¿Te gustaría facilitar tu propio taller? Simplemente regístrate y visita la página de Talleres. Si ya te registraste puedes acceder a la página reiniciando el proceso de registro.
+        Workshops: ¿Tienes alguna habilidad emocionante que quieres compartir con nosotros? ¿Quieres charlar sobre crear espacios comunitarios seguros? ¿Quieres asegurarte de que hagamos un buen paseo el fin de semana? ¡Propón un taller! No te preocupes si no eres unx expertx, queremos escuchar acerca de las experiencias de todxs dentro de los diferentes talleres comunitarios de los que venimos con sus diferentes configuraciones.
+        new_workshop: 'Anteriormente los talleres se han podido integrar en una serie de categorías amplias: organización/estructura (cómo iniciar un taller comunitario, cómo registrar una asociación sin fines de lucro, toma de decisiones mediante consenso, etc) mecánica (cómo soldar dos tandems en una tall-bike, cómo construir una masa de cambios internos con accesorios de pesca y calcetines viejos, etc) y recreación (tips de cicloturismo, yoga para ciclistas, etc.) Este año quisieramos intentar páneles, foros u otro tipo de contextos que creas que puedan facilitar el aprendizaje - sé inventivx, ¡Dinos qué quieres ver!'
+        notes: Las notas se comparten solo con lxs organizadorxs de la conferencia y con lxs facilitadorxs de los talleres.
         space: ¿Qué tipo de espacio necesitas para tu taller?
-        theme: ¿Cuáles de estos temas describen mejor tu taller? Esto ayudará a los
-          anfitriones a evitar conflictos de horario. Seleciona 'otro' si ninguna
-          de las opciones se relaciona de ninguna forma.
-        facilitate_request: Por favor dile a lxs facilitadorxs actuales quién eres,
-          porqué quieres ayudar en este taller y cómo crees que ayudarás a hacer un
-          mejor taller. Todxs lxs facilitadorxs actuales recibirán un email y pueden
-          hacerte más preguntas antes de aprovar o denegar tu petición. Por favor
-          sabe que este proceso revelará tu direción de email a lxs facilitadorxs.
-        facilitate_request_sent: Tu petición ha sido enviada. Recibirás un email cuando
-          tu solicutud sea aprobada o denegada o si lxs facilitadorxs tienen alguna
-          pregunta.
+        theme: ¿Cuáles de estos temas describen mejor tu taller? Esto ayudará a los anfitriones a evitar conflictos de horario. Seleciona 'otro' si ninguna de las opciones se relaciona de ninguna forma.
+        facilitate_request: Por favor dile a lxs facilitadorxs actuales quién eres, porqué quieres ayudar en este taller y cómo crees que ayudarás a hacer un mejor taller. Todxs lxs facilitadorxs actuales recibirán un email y pueden hacerte más preguntas antes de aprovar o denegar tu petición. Por favor sabe que este proceso revelará tu direción de email a lxs facilitadorxs.
+        facilitate_request_sent: Tu petición ha sido enviada. Recibirás un email cuando tu solicutud sea aprobada o denegada o si lxs facilitadorxs tienen alguna pregunta.
       headings:
         Proposed_Workshops: Talleres propuestos
         facilitators: facilitadores
@@ -893,6 +827,7 @@ es:
         theme: Tema
         facilitate: Solicita ser facilitador(a) de %{workshop_title}
       info:
+        read_more: Más información
         interested_count:
           one: Una persona está interesadx en este taller.
           other: '%{count} personas están interesadxs en este taller.'
@@ -907,32 +842,18 @@ es:
         How: ¿Cómo se hace cumplir esta política?
         Why: ¿Porqué tener un Acuerdo de Espacios Más Seguros?
       paragraphs:
-        How: La ciudad anfitriona tiene la responsabilidad de mediar en cualquier
-          situación concerniente a Espacios Más Seguros. Ellas decidirán qué amerita
-          una advertencia y qué amerita una expulsión de la conferencia.
-        Why: Para establecer un punto de partida, declaramos nuestras creencias y
-          deseos compartidos para el espacio que es Bike!Bike!. Nos reunimos alrededor
-          de estas ideas para inspirarnos y para asegurar que si existen conductas
-          que no nos hagan sentir seguras haya algo en qué basarnos. Al aceptar un
-          compromiso de respeto mutuo esperamos que, de surgir un conflicto, recordaremos
-          a qué nos comprometimos y actuaremos en consecuencia.
+        How: La ciudad anfitriona tiene la responsabilidad de mediar en cualquier situación concerniente a Espacios Más Seguros. Ellas decidirán qué amerita una advertencia y qué amerita una expulsión de la conferencia.
+        Why: Para establecer un punto de partida, declaramos nuestras creencias y deseos compartidos para el espacio que es Bike!Bike!. Nos reunimos alrededor de estas ideas para inspirarnos y para asegurar que si existen conductas que no nos hagan sentir seguras haya algo en qué basarnos. Al aceptar un compromiso de respeto mutuo esperamos que, de surgir un conflicto, recordaremos a qué nos comprometimos y actuaremos en consecuencia.
       term:
         empowerment: Apoyamos el empoderamiento de cada persona y cada grupo.
         peaceful: Somos pacíficxs y honestxs.
         spaces: Respetamos los cuerpos y espacios de cada quién.
-        hearing: Nos comprometemos a escucharnos y a crear oportunidades para que
-          todas las voces sean escuchadas.
-        commitment: Entramos con un compromiso hacia el respeto mutuo, la ayuda mutua,
-          el apoyo anti-opresión, la resolución de conflictos, la anti-violencia y
-          la construcción de comunidad.
-        respect: Respetamos los nombres de todxs, sus pronombres de género preferidos,
-          sus identidades expresas y sus experiencias.
-        accessible: Nos comprometemos a hacer los espacios tan accesible como sea
-          posible; fisica, social y personalmente.
-        intent: Aceptamos una responsabilidad compartida para hacernos responsables
-          a nosotrxs mismxs y a lxs demás de los propósitos de este acuerdo.
-        learning: Promovemos espacios de aprendizaje y preguntas incluyentes en el
-          espíritu de crecimiento personal.
+        hearing: Nos comprometemos a escucharnos y a crear oportunidades para que todas las voces sean escuchadas.
+        commitment: Entramos con un compromiso hacia el respeto mutuo, la ayuda mutua, el apoyo anti-opresión, la resolución de conflictos, la anti-violencia y la construcción de comunidad.
+        respect: Respetamos los nombres de todxs, sus pronombres de género preferidos, sus identidades expresas y sus experiencias.
+        accessible: Nos comprometemos a hacer los espacios tan accesible como sea posible; fisica, social y personalmente.
+        intent: Aceptamos una responsabilidad compartida para hacernos responsables a nosotrxs mismxs y a lxs demás de los propósitos de este acuerdo.
+        learning: Promovemos espacios de aprendizaje y preguntas incluyentes en el espíritu de crecimiento personal.
         open_minds: Fomentamos mentes y corazones abiertxs.
     permission_denied:
       paragraphs: 
@@ -942,6 +863,9 @@ es:
       headings:
         contact: Envíenos una pregunta o un complemento
         reason: ¿Qué está en contacto con nosotros acerca?
+        sent: Gracias por contactarnos
+      paragraphs:
+        sent: Gracias por comunicarte. Te responderemos vía correo electrónico tan pronto como podamos.
   images:
     conference:
       poster: '%{conference_title} póster'
@@ -992,7 +916,7 @@ es:
         contributors: Contribuyentes
         select_language: Cambia tu idioma
         facebook: Unirte a nuestro grupo de Facebook
-        contact: Contáctenos
+        contact: Contáctanos
       text:
         Help_contribute: Ayuda o contribuye
         File_an_Issue: Reportar un problema
@@ -1017,6 +941,7 @@ es:
     policy:
       Safer_Spaces_Policy: Acuerdo del Espacio Mas Seguro
     '403':
+      Access_Denied: Acceso Denegado
       Please_Check_Email: Por favor confirma tu e-mail
       Please_Confirm_Email: Página no encontrada
     '404':
@@ -1028,7 +953,7 @@ es:
     user_settings:
       Your_Account: Su cuenta
     contact:
-      Contact_Us: Contáctenos
+      Contact_Us: Contáctanos
   actions:
     workshops:
       create: Crear
@@ -1045,8 +970,20 @@ es:
       Translate: Editar versión en %{language}
   error:
     '404':
-      description: Descripcion
-      title: Titulo
+      title: '404: Esta página no existe'
+      description: La página que buscas no pudo ser encontrada. Si piensas que esto fue un error, por favor contáctanos.
+    '403':
+      title: Lo sentimos. Por el momento no tienes acceso a esta página
+      description: Por el momento no tienes los permisos suficientes para acceder a esta página. Si crees que esto es un error, por favor contáctanos.
+    '500':
+      title: Tenemos un problema
+      description: Ha ocurrido un error, los detalles sobre el mismo han sido enviados a nuestro equipo de desarrolladores. También puedes contactarnos a través del formulario en la parte inferior, para ayudarnos a entender qué pasó y como esto te afectó
+    locale_not_available:
+      title: '404: No tenemos traducción al %{language}'
+      description: El sitio aún debe ser traducido al %{language}. Estamos en la búsqueda de voluntari@s que puedan traducir la versión existente y la nueva versión, a medida que le agregamos nuevas características. Si piensas que puedes ayudar, por favor contáctanos.
+      volunteer:
+        title: ¿Puedes ayudarnos a traducir?
+        description: 'Si puedes ayudarnos a traducir al francés u otro idioma, por favor háznoslo saber contactándonos a través del siguiente formulario:'
   translate:
     content:
       translate_now: Translar ahora
@@ -1136,22 +1073,14 @@ es:
         thank_you: Gracias %{name},
     registration:
       paragraph:
-        confirmed: Te has registrado exitosamente para %{conference_title}, Puedes
-          modificar los detalles de tu registro, pagar o agregar talleres en cualquier
-          momento reiniciando el proceso de registro. Si aún tienes que pagar o agregar
-          tus talleres y quieres hacerlo te pedimos que lo hagas lo más pronto posible
-          para ayudarnos a prepararnos para tu llegada.
+        confirmed: Te has registrado exitosamente para %{conference_title}, Puedes modificar los detalles de tu registro, pagar o agregar talleres en cualquier momento reiniciando el proceso de registro. Si aún tienes que pagar o agregar tus talleres y quieres hacerlo te pedimos que lo hagas lo más pronto posible para ayudarnos a prepararnos para tu llegada.
     workshop:
       paragraph:
         request_approved: Has sido agregado como facilitador(a) para %{workshop_title}
-        request_denied: Tu petición para ser facilitador(a) de %{workshop_title} ha
-          sido denegada. Si crees que esto es un error, puedes contactar a lxs facilitadorxs
-          actuales haciendo otra petición para ser facilitador(a).
-        request_instructions: Puedes aprobar o denegar esta petición en la página
-          de tu taller.
+        request_denied: Tu petición para ser facilitador(a) de %{workshop_title} ha sido denegada. Si crees que esto es un error, puedes contactar a lxs facilitadorxs actuales haciendo otra petición para ser facilitador(a).
+        request_instructions: Puedes aprobar o denegar esta petición en la página de tu taller.
         request_message: '%{user_name} ha solicitado ser facilitador(a) para %{workshop_title}'
-        request_reply_instructions: También puedes responder directamente a este email
-          para hacer preguntas adicionales.
+        request_reply_instructions: También puedes responder directamente a este email para hacer preguntas adicionales.
   roles:
     workshops:
       facilitator:
