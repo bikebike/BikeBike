@@ -701,7 +701,7 @@ es:
         region_country: '%{region}, %{country}'
   conference:
     actions:
-      Register: Registrate
+      Register: Regístrate
   donate:
     button_label: Donar
   articles:
@@ -715,6 +715,7 @@ es:
         Enter_Your_Email: Correo electrónico
         location: Ciudad y pais 
         name: Nombre
+        preferred_language: ¿Qué idioma prefieres usar?
         Allergies: ¿Eres alergico a algo?
         Workshops: Actividades
         Your_Workshops: Actividades
@@ -723,6 +724,7 @@ es:
         Stats: Estadísticas
         Payment: Pago
         Your_Registration: Tu registro
+        Your_Conferences: Tus conferencias
         Youre_Done: ¡Estás listx!
         arrival: Llegada
         bike: ¿Necesitas una bici?
@@ -736,24 +738,49 @@ es:
         date: Fecha
         email: Email
         fees_paid: Cargos pagados
+        Pre_Registration_Details: ¡El Pre-Registro ya está abierto!
+        can_provide_housing: ¿Puedes proporcionar hospedaje a quienes visitan la ciudad?
+        Verify_Account: Verifica tu cuenta
+        policy: Normatividad
+        Contact_Info: Información de contacto
+        contact_info: Información de contacto
+        workshops: Talleres
+        Workshops: Talleres
+        Administration: Administrar mi cuenta
+        administration: Administrar mi cuenta
+        hosting: Hospedaje
+        Hosting: Hospedaje
       paragraphs:
+        host:
+          address: Tu dirección y número telefónico serán compartidos con lxs visitantes y lxs organizadorxs de Bike!Bike!
+          space: ¿Cuántos espacios tienes para compartir?
+          availability: Lo más común, es que lxs asistentes lleguen y se vayan los días en que inicia y finaliza la conferencia pero a menudo algunxs visitantes llegan unos días antes y se van unos días después. ¿Cuándo estará disponible tu espacio?
+          considerations: Los organizadores tratarán de emparejar de la mejor manera posible anfitriones con invitadxs. ¿Cuál de las siguientes consideraciones crees que lxs organizadores deben tener en cuenta al momento de escoger a quien vaya a quedarse contigo?
+          notes: Deja un mensaje a los organizadores respecto a lo que deben considerar al momento de escoger a la persona que vas a hospedar.
+        Policy_Agreement: Asegurar que todos los asistentes se sientan bienvenidos, seguro y respetada en todo momento es especialmente importante para todos nosotros. Por favor asegúrese de que plenamente ha leído y entendido nuestra política de espacios más seguros a continuación, si tiene alguna pregunta o preocupación que usted puede llegar a los organizadores en cualquier momento.
+        facebook_sign_in: De manera alternativa puedes registrarte usando tu cuenta de Facebook y así evitarás tener que esperar a que te enviemos un correo electrónico
+        can_provide_housing: Alojar a lxs asistentes a la conferencia es una parte importante de Bike!Bike!, proporciona a mucha gente que normalmente no podría costear el hospedaje, la oportunidad de venir a la conferencia, permitiéndoles conocer nuestra ciudad y a sus residentes. Tendrás que conceder acceso a tu casa a lxs huéspedes durante la noche, teniendo en cuenta que los eventos pueden terminar hasta muy tarde. Si no se puede acceder a tu casa durante el día, debes asegurarte de comunicar estoy muy claramente a tus invitadxs.
+        Verify_Account: Con el fin de confirmar que usted es una persona real y que será capaz de contactar con usted más tarde, por favor, verifique su dirección de correo electrónico. Antes de continuar con el registro previo, le enviaremos un correo electrónico que le permitirá continuar con el proceso.
+        Pre_Registration_Details: Al completar el proceso de pre-registro nos estás haciendo saber que estás interesad@ en asistir, lo que nos permite contactarte cuando tengamos noticias, y planear mejor [el evento] sabiendo quienes podrían venir. Una vez que el registro esté completamente abierto, necesitaremos hacerte algunas preguntas más en donde podrás confirmar si asistirás o no.
         Registration_Info: Por favor llena esta forma de registro para ayudarnos a prepararnos para tu llegada a %{city}. Si tienes alguna pregunta o información que no te hayamos pedido por favor llena el campo preferencias al final de la página o utilice el enlace contáctenos.
         Payment: Las y los esperamos del 1 al 4 de octubre del 2015.Más información
           en: bikebike@gdlenbici.org
         Workshops: 'Título de la actividad: Que necesitas? Tipo de espacio? Tema? Quién es responsable? Descripción? Tiempo?'
-        Confirm_Agreement: Al hacer click en el botón "Acepto", estás comprometiéndote a cumplir el Acuerdo de Espacios Más Seguros de Bike!Bike!. ¡Gracias!
+        Confirm_Agreement: Al hacer click en el botón "Estoy de acuerdo", estás comprometiéndote a cumplir el Acuerdo de Espacios Más Seguros de Bike!Bike!. ¡Gracias!
         Email_Participants: Esta página se usa para contactar a todxs lxs participantes. El texto se puede ingresar como [Markdown](http://daringfireball.net/projects/markdown/basics).
           Presionar "prueba" enviará el correo solamente a tí, asegurate de hacerlo y sé cuidadosx antes de presionar 'enviar'.
+        Contact_Info: Por favor déjanos conocerte un poco más
         Stats: Ve quién vendrá y lo que han pagado hasta ahora. Ve en resumen cuánto hospedaje se necesita y qué prefiere comer la gente.
-        confirm_email_address: Te pedimos confirmar tu dirección de e-mail primero, al ser confirmada podrás completar el registro, agregar talleres y pagar el donativo de registro. Si ya te registraste puedes re-confirmar tu dirección
-          de e-mail para modificar los detalles de tu registro.
+        confirm_email_address: Te pedimos confirmar tu dirección de correo electrónico primero, al ser confirmada podrás completar el registro, agregar talleres y pagar el donativo de registro. Si ya te registraste puedes re-confirmar tu dirección
+          de correo electrónico para modificar los detalles de tu registro.
         currency: (cantidades en dólares americanos USD)
         done: ¡Gracias por registrarte para Bike!Bike!
-        email_confirm: ¡Ve a tu bandeja de entrada! Deberías ver un e-mail por parte de Bike!Bike! en unos momentos. Contendrá un enlace sobre el cual debes hacer click. Revisa tu bandeja de correo no deseado si no lo ves. Si tienes algún problema, por favor envía un e-mail a admin@bikebike.org
+        email_confirm: ¡Ve a tu bandeja de entrada! Deberías ver un correo electrónico por parte de Bike!Bike! en unos momentos. Contendrá un enlace sobre el cual debes hacer click. Revisa tu bandeja de correo no deseado si no lo ves. Si tienes algún problema, por favor envía un correo electrónico a admin@bikebike.org
         participants_emailed: Tu correo ha sido enviado a todxs lxs participantes
           de %{conference_title}.
         payment_confirm: Estás por confirmar tu pago de %{amount} para el registro.
         workshops: Ahora puedes revisar los talleres propuestos e incluso proponer uno si quieres.
+      can_provide_housing: Puedo proporcionar hospedaje
       questions:
         food:
           meat: Carnivoro
@@ -768,6 +795,17 @@ es:
           house: Espacio interior
           none: Yo encontraré donde dormir.
           tent: Espacio para tienda de campaña
+        host:
+          considerations: Consideraciones especiales
+          space: Espacio Disponible
+          availability: Disponibilidad
+          address: Dirección
+      host:
+        considerations:
+          vegan: Sólo veganxs y vegetarianxs
+          smoking: Está permitido fumar
+          quiet: Lugar calmado/silencioso
+          pets: En el lugar hay perros o gatos
       terms:
         Bikes: Bici
         Donation_Count: Contéo de donaciones
@@ -836,6 +874,14 @@ es:
           other: Tú y otras %{count} personas están interesadxs en este taller.
           zero: Tú estás interesadx en este taller.
           one: Tú y otra persona están interesadxs en este taller.
+    user_settings:
+      headings:
+        Your_Account: Configuraciones de la cuenta
+        email_subscribe: Notificaciones
+      paragraphs:
+        conference_registration: Buscando dar de alta o modificar su registro?
+        email_subscribe: ¿Te gustaría ser notificadx acerca de próximas conferencias? Si te registraste en alguna conferencia, seguiremos enviándote notificaciones y anuncios acerca de la misma aun después de su realización.
+      email_subscribe: Suscribirse
     policy:
       headings:
         The_Agreement: Acuerdo de Espacios Más Seguros
@@ -843,22 +889,22 @@ es:
         Why: ¿Porqué tener un Acuerdo de Espacios Más Seguros?
       paragraphs:
         How: La ciudad anfitriona tiene la responsabilidad de mediar en cualquier situación concerniente a Espacios Más Seguros. Ellas decidirán qué amerita una advertencia y qué amerita una expulsión de la conferencia.
-        Why: Para establecer un punto de partida, declaramos nuestras creencias y deseos compartidos para el espacio que es Bike!Bike!. Nos reunimos alrededor de estas ideas para inspirarnos y para asegurar que si existen conductas que no nos hagan sentir seguras haya algo en qué basarnos. Al aceptar un compromiso de respeto mutuo esperamos que, de surgir un conflicto, recordaremos a qué nos comprometimos y actuaremos en consecuencia.
+        Why: Para establecer un punto de partida, declaramos nuestras creencias y deseos compartidos para el espacio que es Bike!Bike!. Nos reunimos alrededor de estas ideas para inspirarnos y para asegurarnos que si existen conductas que no nos hagan sentir segurxs haya algo en que basarnos. Al aceptar un compromiso de respeto mutuo esperamos que, de surgir un conflicto, recordaremos a qué nos comprometimos y actuaremos en consecuencia.
       term:
         empowerment: Apoyamos el empoderamiento de cada persona y cada grupo.
         peaceful: Somos pacíficxs y honestxs.
         spaces: Respetamos los cuerpos y espacios de cada quién.
         hearing: Nos comprometemos a escucharnos y a crear oportunidades para que todas las voces sean escuchadas.
-        commitment: Entramos con un compromiso hacia el respeto mutuo, la ayuda mutua, el apoyo anti-opresión, la resolución de conflictos, la anti-violencia y la construcción de comunidad.
-        respect: Respetamos los nombres de todxs, sus pronombres de género preferidos, sus identidades expresas y sus experiencias.
-        accessible: Nos comprometemos a hacer los espacios tan accesible como sea posible; fisica, social y personalmente.
+        commitment: Entramos con un compromiso hacia el respeto y apoyo mutuos, la defensa contra la opresión, la resolución de conflictos, la no-violencia y la construcción de comunidad.
+        respect: Respetamos los nombres de todxs, sus pronombres de género, sus identidades expresas y sus experiencias.
+        accessible: Nos comprometemos a hacer los espacios tan accesibles como sea posible; fisica, social y personalmente.
         intent: Aceptamos una responsabilidad compartida para hacernos responsables a nosotrxs mismxs y a lxs demás de los propósitos de este acuerdo.
         learning: Promovemos espacios de aprendizaje y preguntas incluyentes en el espíritu de crecimiento personal.
-        open_minds: Fomentamos mentes y corazones abiertxs.
+        open_minds: Alentamos la apertura de mentes y de corazones.
     permission_denied:
       paragraphs: 
       headings:
-        confirm_email: Por favor confirma tu dirección de e-mail.
+        confirm_email: Por favor confirma tu dirección de correo electrónico.
     contact:
       headings:
         contact: Envíenos una pregunta o un complemento
@@ -876,7 +922,7 @@ es:
         info: Descripción
         allergies: Alergias
         email: Correo electrónico
-        location: Ciudad y pais
+        location: Ciudad y país
         name: Nombre
         arrival: Fecha de llegada
         content: Contenido
@@ -888,6 +934,13 @@ es:
         reasons:
           website: Algo sobre el sitio web
           conference: Algo sobre la conferencia
+        address: Dirección
+        phone: Número telefónico
+        bed_space: Número de Camas
+        floor_space: Número de Camas
+        tent_space: Espacios para tienda de campaña
+        first_day: Primer día
+        last_day: Último día
     actions:
       generic:
         agree: Estoy en acuerdo.
@@ -895,7 +948,7 @@ es:
         edit_registration: Cambiar mi registracion
         custom_amount: Cantidad diferente
         Log_out: Salir
-        login: Inicia session
+        login: Iniciar sesión
         cancel: Cancelar
         confirm: Confirmar
         confirm_amount: Confirmar
@@ -910,6 +963,8 @@ es:
         add: +
         facebook_sign_in: Iniciar sesión usando Facebook
         continue: Continuar
+        previous: Anterior
+        next: Siguiente
   links:
     footer:
       help_text:
@@ -932,7 +987,7 @@ es:
       Create_Workshop: Crear taller
       Delete_Workshop: Eliminar taller
       Edit_Workshop: Editar taller
-      Email_Participants: Enviar e-mail a los participantes
+      Email_Participants: Enviar correo electrónico a los participantes
       Registration_Stats: Estadísticas de registro
       View_Workshop: Ver talleres
       Workshops: Talleres
@@ -942,16 +997,16 @@ es:
       Safer_Spaces_Policy: Acuerdo del Espacio Mas Seguro
     '403':
       Access_Denied: Acceso Denegado
-      Please_Check_Email: Por favor confirma tu e-mail
-      Please_Confirm_Email: Página no encontrada
+      Please_Check_Email: Por favor confirma tu correo electrónico
+      Please_Confirm_Email: Confirma tu correo electrónico
     '404':
       Page_Not_Found: Crear un taller
     Policy: 'Política'
     About: 'Acerca de'
-    Register: 'Registrate'
-    Pre_Register: 'Pre-Registrate'
+    Register: 'Regístrate'
+    Pre_Register: 'Pre-Regístrate'
     user_settings:
-      Your_Account: Su cuenta
+      Your_Account: Tu cuenta
     contact:
       Contact_Us: Contáctanos
   actions:
@@ -968,6 +1023,7 @@ es:
       View_All: Ve todos los talleres
     conference:
       Translate: Editar versión en %{language}
+      edit_registration: Mi registro
   error:
     '404':
       title: '404: Esta página no existe'
@@ -1050,15 +1106,13 @@ es:
         Edit: Editar conferencia
         Stats: Estadísticas
   page_descriptions:
-    home: Bike!Bike! Una conferencia de colectivos ciclistas, cooperativas y talleres
-      de bicicletas autogestivos sin fines de lucro.
+    home: Bike!Bike! Una conferencia de colectivos ciclistas, cooperativas y talleres de bicicletas autogestivos sin fines de lucro.
   email:
     confirmation:
       link:
         please_confirm: Confirmar ahora
       paragraph:
-        please_confirm: ¡Hola! Para ingresar al registro y otras funciones de Bike!Bike!
-          confirma tu dirección de e-mail por favor.
+        please_confirm: ¡Hola! Para ingresar al registro y otras funciones de Bike!Bike! confirma tu dirección de correo electrónico por favor.
     subject:
       confirm_email: E-mail de confirmación
       registration_confirmed: ¡Gracias por registrarte para %{conference_title}!
@@ -1067,6 +1121,7 @@ es:
       workshop_request_approved: Has sido agregadx como facilitador(a) a %{workshop_title}
       workshop_request_denied: Tu petición para facilitar %{workshop_title} ha sido
         denegada.
+      registration_confirmed: Gracias por pre - registrarte en %{conference_title}
     general:
       paragraph:
         see_you: ¡Nos vemos en %{conference_location}!
@@ -1074,6 +1129,7 @@ es:
     registration:
       paragraph:
         confirmed: Te has registrado exitosamente para %{conference_title}, Puedes modificar los detalles de tu registro, pagar o agregar talleres en cualquier momento reiniciando el proceso de registro. Si aún tienes que pagar o agregar tus talleres y quieres hacerlo te pedimos que lo hagas lo más pronto posible para ayudarnos a prepararnos para tu llegada.
+        pre_registered: Te has pre-registrado exitosamente para %{conference_title}. Te haremos saber cuando el registro completo esté disponible y si hay alguna novedad acerca de la conferencia sobre la que debas saber. Te invitamos a inscribirte como voluntario o facilitador de un taller tan pronto como puedas. Puedes inscribirte ahora, o cambiar tus detalles de registro en cualquier momento haciendo clic en el enlace de pre-registro nuevamente.
     workshop:
       paragraph:
         request_approved: Has sido agregado como facilitador(a) para %{workshop_title}
@@ -1105,3 +1161,5 @@ es:
         organization: Asuntos organizacionales
         other: Otro
         race_gender: Políticas de raza, género o clase
+  warnings:
+    location_corrected: Tu ubicación fue corregida de "%{original}" a "%{corrected}". Si esto no refleja tu ubicación prevista, puedes cambiarla nuevamente en el paso de "información de contacto".

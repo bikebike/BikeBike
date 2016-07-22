@@ -168,7 +168,7 @@ en:
         one: 1 error prohibited this %{model} from being saved
         other: "%{count} errors prohibited this %{model} from being saved"
   warnings:
-      location_corrected: 
+      location_corrected: Your location was corrected from "%{original}" to "%{corrected}". If this doesn't reflect your intended location, you can change this again in the contact info step.
       housing:
           space:
             overbooked: Overbooked
@@ -5846,6 +5846,7 @@ en:
     registration:
       paragraph:
         confirmed: You have successfully registered for %{conference_title}. You can modify your registration details, pay, or add workshops at any time by restarting the registration process. If you have yet to pay or add your workshops and plan to do so, we ask that you take care of it as soon as possible to help us prepare in advance of your arrival.
+        pre_confirmed: You have successfully pre-registered for %{conference_title}. We will let you know when registration is fully open and if there is any important news about the conference that you should know about. We encourage you to create or volunteer to facilitate workshops soon. You can do that, or change your registration details at any time by clicking on the pre-register link again.
     translations:
       headings:
         new_value: 'New Value: '

@@ -90,9 +90,6 @@ a {
 table, .table {
     margin-bottom: 2em;
 	margin-left: 1em;
-	// background-color: #F8F8F8;
-	// width: 100%;
-	// @include default-box-shadow(top, 2, true);
 
 	th, td, .table-th, .table-td {
 		text-align: left;
@@ -106,14 +103,6 @@ table, .table {
 		&.big {
 			font-size: 1.5em;
 		}
-
-		/*&:first-child {
-			padding-left: 1em;
-		}
-
-		&:last-child {
-			padding-right: 1em;
-		}*/
 
 		&.status {
 			width: 0.1rem;
@@ -223,7 +212,6 @@ nav.sub-menu {
 		font-size: 0.9em;
 		border: 1px solid #AAA;
 		border-bottom-width: 0.2em;
-		//@include _(text-shadow, 0 0.125em 0.25em #BBB);
 		@include _(border-radius, 0.15em);
 		@include default-box-shadow(top, 2);
 		@include _(text-shadow, 0 0.05em 0.05em #FFF);
@@ -1261,29 +1249,14 @@ ul.warnings li,
 			}
 
 			&.current {
-				// border-width: 0.333em;
 
 				@include before {
 					top: -0.25em;
 					font-size: 3em;
 					background-color: $white;
 					border: 0.075em solid $colour-1;
-					// border-width: 0 0.075em;
-					// width: 0.575em;
 				}
 
-				// @include after {
-				// 	content: '';
-				// 	position: absolute;
-				// 	top: 0;
-				// 	right: 0;
-				// 	left: 0;
-				// 	margin: auto;
-				// 	background-color: $colour-2;
-				// 	width: 0.5em;
-				// 	height: 0.5em;
-				// }
-				
 				&.post {
 					@include before {
 						border-color: $colour-5;
@@ -1317,6 +1290,7 @@ ul.warnings li,
 			right: 0;
 			bottom: 0;
 			left: 0;
+			z-index: 1;
 		}
 
 		@include after {
@@ -1330,108 +1304,6 @@ ul.warnings li,
 		color: $black;
 	}
 }
-
-/*.flow-steps {
-	ul {
-		display: block;
-		position: relative;
-		list-style: none;
-		padding: 0;
-		margin-top: -1em;
-		//overflow: hidden;
-		text-align: center;
-		@include default-box-shadow(top, 2);
-		@include clearfix;
-	}
-
-	li {
-		position: relative;
-		display: block;
-		@include font-family(secondary);
-		color: $white;
-		background-color: #BBB;
-		border: 0;
-		padding: 1em 1.5em;
-		font-size: 1.25em;
-		outline: 0;
-		cursor: default;
-		@include _(text-stroke, 1px rgba(0, 0, 0, 0.25));
-
-		&:last-child {
-			@include _(border-radius, 0 0 0.15em 0.15em);
-		}
-
-		&.enabled {
-			background-color: $colour-1;
-
-			&.current {
-				background-color: lighten(desaturate($colour-1, 33%), 15%);
-			}
-		}
-	}
-
-	a {
-		color: inherit;
-		position: static;
-
-		@include before {
-			content: '';
-			position: absolute;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			left: 0;
-		}
-
-		@include after {
-			border-bottom: 0 solid rgba(0,0,0,0.25);
-		}
-
-		@include after {
-			border-bottom: 0.2em solid rgba(0,0,0,0.25);
-		}
-	}
-
-	#registration-steps {
-
-		li {
-			&:first-child {
-				@include _(border-radius, 0.15em 0.15em 0 0);
-			}
-
-			&:last-child {
-				@include _(border-radius, 0);
-			}
-
-			&.enabled {
-				background-color: $colour-5;
-
-				&.current {
-					background-color: lighten(desaturate($colour-5, 33%), 15%);
-					//text-decoration: underline;
-				}
-			}
-
-			@include after {
-				content: '';
-				position: absolute;
-				z-index: 1;
-				top: 2.25em;
-				left: 0;
-				right: 0;
-				width: 1.25em;
-				height: 1.25em;
-				margin: auto;
-				border: 0 solid;
-				border-width: 0.1em 0.1em 0 0;
-				background-color: inherit;
-				@include _(transform, rotate(135deg));
-				@include _(transition, 'transform 200ms ease-in-out, background-color 200ms ease-in-out');
-				@include _(box-shadow, 0.2em -0.4em 0.8em -0.4em #000);
-			}
-		}
-	}
-}*/
 
 #main article #registration-admin-menu {
 	margin: 1em 0 0;
@@ -1453,6 +1325,7 @@ ul.warnings li,
 			background-color: #EEE;
 		}
 	}
+
 	li {
 		margin: 0;
 
@@ -2229,11 +2102,6 @@ $header-tilt: 8deg;
 		font-size: 4.1vw;
 	}
 
-	// .github {
-	// 	@include _(flex, 1);
-	// 	@include _(flex-basis, 50%);
-	// }
-
 	.site-info, .user-controls, .external {
 		width: 100%;
 		text-align: center;
@@ -2293,27 +2161,6 @@ $header-tilt: 8deg;
 	}
 
 	.github {
-		//position: relative;
-		//background-color: $white;
-		//@include _(border-radius, 0.25em);
-		//border: 0.1em solid #DDD;
-		//padding: 0.5em 0.5em 0.5em 2em;
-		//text-align: center;
-		//z-index: $zindex-base + 2;
-
-		//a {
-		//	margin: 0 0.5em;
-		//	font-size: 0.8em;
-		//	font-weight: bold;
-		//	color: inherit;
-		//}
-
-		//.icons {
-		//	position: absolute;
-		//	left: 0.5em;
-		//	top: 0.45em;
-		//	@include _(transition, 150ms fill ease-in-out);
-		//}
 		a {
 			@include after {
 				display: none;
@@ -2571,18 +2418,8 @@ html :focus {
 }
 
 #main form.custom-payment {
-	// text-align: center;
 
 	input[type="number"] {
-		/*margin-top: 1em;
-		font-size: 1.5em;
-		text-align: center;
-		height: 1.9em;
-		border: 0;
-		@include default-box-shadow(top);
-		background-color: $black;
-		color: $colour-3;
-		vertical-align: bottom;*/
 		width: 4em;
 		margin-right: 0.5em;
 	}
@@ -3054,31 +2891,10 @@ html[data-lingua-franca-example="html"] {
 		overflow: hidden;
 	}
 
-	// .workshop-link {
-	// 	position: static;
-
-	// 	@include before {
-	// 		content: '';
-	// 		display: block;
-	// 		position: absolute;
-	// 		top: 0;
-	// 		right: 0;
-	// 		bottom: 0;
-	// 		left: 0
-	// 	}
-	// 	@include after {
-	// 		display: none;
-	// 	}
-	// }
-
 	> li {
 		position: relative;
 		margin-bottom: 1em;
 		border-bottom: 0.1rem solid #EEE;
-		// border: 0.2em solid;
-		// @include _(border-radius, 0.25em);
-		// @include _(transition, box-shadow 250ms ease-in-out);
-		// will-change: box-shadow;
 
 		ul {
 			padding-left: 2.5em;
@@ -3102,9 +2918,6 @@ html[data-lingua-franca-example="html"] {
 
 	.title {
 		margin: 0;
-		// background-color: $black;
-		// color: #FFF;
-		// padding: 0.25em 0.5em 0.5em;
 	}
 
 	p {
@@ -3144,15 +2957,6 @@ html[data-lingua-franca-example="html"] {
 			background-color: $colour-4;			
 		}
 	}
-
-	// body.home & {
-	// 	text-align: left;
-	// 	font-style: italic;
-	// 	color: #888;
-	// 	margin-top: -0.5em;
-	// 	margin-bottom: -0.5em;
-	// 	margin-left: 1em;
-	// }
 }
 
 .original-text {
@@ -3333,117 +3137,6 @@ html[data-lingua-franca-example="html"] {
 		}
 	}
 }
-
-// .programme {
-
-// 	.schedule {
-// 		width: auto;
-// 		margin: 0;
-// 		min-width: 100%;
-// 		@include _(box-shadow, none);
-// 		table-layout: fixed;
-// 		border-spacing: 0.25em;
-// 		border-collapse: separate;
-
-// 		td {
-// 			position: relative;
-// 			vertical-align: middle;
-
-// 			.title {
-// 				text-align: center;
-// 				@include font-family(secondary);
-// 				color: #666;
-// 			}
-			
-
-// 			&.previewable {
-// 				cursor: pointer;
-
-// 				&:hover {
-// 					@include default-box-shadow(top, 2);
-// 				}
-// 			}
-
-// 			&.workshop {
-// 				background-color: lighten($colour-1, 35);
-// 				border: 0.25em solid $colour-1;
-
-// 				.preview {
-// 					position: absolute;
-// 					top: 0;
-// 					right: 0;
-// 					bottom: 0;
-// 					left: 0;
-
-// 					@include after {
-// 						display: none;
-// 					}
-// 				}
-// 			}
-
-// 			&.event {
-// 				background-color: lighten($colour-5, 35);
-// 				border: 0.25em solid $colour-5;
-// 			}
-
-// 			&.meal {
-// 				background-color: lighten($colour-3, 25);
-// 				border: 0.25em solid $colour-3;
-// 			}
-
-// 			&.not-interested {
-// 				.title {
-// 					opacity: 0.5;
-// 				}
-// 			}
-
-// 			.info {
-// 				position: fixed;
-// 				top: 0;
-// 				right: 0;
-// 				bottom: 0;
-// 				left: 0;
-// 				z-index: 1000;
-// 				background-color: $white;
-// 				text-align: left;
-// 				overflow-y: auto;
-// 				@include _(transition, transform 250ms ease-in-out);
-// 				@include _(transform-origin, center bottom);
-// 				@include _(transform, rotate(180deg) translate3d(0, 0, 0));
-
-// 				.close {
-// 					float: right;
-// 					font-size: 2em;
-
-// 					@include before {
-// 						content: '×';
-// 						padding: 0 0.5em;
-// 					}
-
-// 					@include after {
-// 						display: none;
-// 					}
-// 				}
-
-// 				h2 {
-// 					margin-bottom: 0.5em;
-// 				}
-// 			}
-
-// 			&:target .info {
-// 				@include _(transform, rotate(0) translate3d(0, 0, 0));
-// 			}
-// 		}
-// 	}
-
-// 	.programme-day {
-// 		margin-top: 2em;
-// 	}
-
-// 	.programme-day-part {
-// 		overflow-x: auto;
-// 	}
-// }
 
 .select-field {
 	line-height: 1.75em;
@@ -3889,11 +3582,6 @@ html[data-ontop] {
 			@include _(flex, none);
 			@include _(flex-basis, auto);
 			margin: 0 1em;
-			//bottom: 0.5em;
-			//float: left;
-			//margin-right: 1em;
-			//margin-left: 1em;
-			//margin-bottom: -0.3333em;
 		}
 		.facebook, .external {
 			margin: 0;
@@ -3954,61 +3642,6 @@ html[data-ontop] {
 	}
 }
 
-/*@media (min-width: 825px) {
-	.flow-steps {
-		#registration-steps {
-			li {
-				display: inline-block;
-				text-align: center;
-				float: left;
-
-				@include after {
-					content: '';
-					top: 1.125em;
-					left: auto;
-					right: -0.25em;
-					@include _(transform, rotate(45deg));
-				}
-
-				&:first-child {
-					@include _(border-radius, 0.15em 0 0 0.15em);
-				}
-
-				&:last-child {
-					@include _(border-radius, 0);
-				}
-			}
-		}
-
-		#post-registration-steps {
-			margin-bottom: -2em;
-
-			li {
-				&:last-child {
-					@include _(border-bottom-right-radius, 0.15em);
-					@include _(border-bottom-left-radius, 0.15em);
-				}
-
-				&:first-child {
-					@include _(border-top-right-radius, 0.15em);
-					@include _(border-bottom-left-radius, 0);
-				}
-			}
-		}
-
-		ul {
-			display: inline-block;
-			text-align: left;
-			margin-top: -4em;
-			vertical-align: top;
-		}
-
-		li {
-			text-align: center;
-		}
-	}
-}*/
-
 @include breakpoint(large) {
 	#main-nav {
 		.nav {
@@ -4033,7 +3666,6 @@ html[data-ontop] {
 	
 	#main {
 		padding-left: $sidebar-width;
-	    //min-height: 100vh;
 	}
 
 	#header-title {
