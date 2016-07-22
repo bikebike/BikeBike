@@ -746,8 +746,8 @@ es:
         contact_info: Información de contacto
         workshops: Talleres
         Workshops: Talleres
-        Administration: Administrar mi cuenta
-        administration: Administrar mi cuenta
+        Administration: Administrar cuenta
+        administration: Administrar cuenta
         hosting: Hospedaje
         Hosting: Hospedaje
       paragraphs:
@@ -865,7 +865,7 @@ es:
         theme: Tema
         facilitate: Solicita ser facilitador(a) de %{workshop_title}
       info:
-        read_more: Más información
+        read_more: Leer más
         interested_count:
           one: Una persona está interesadx en este taller.
           other: '%{count} personas están interesadxs en este taller.'
@@ -888,7 +888,7 @@ es:
         How: ¿Cómo se hace cumplir esta política?
         Why: ¿Porqué tener un Acuerdo de Espacios Más Seguros?
       paragraphs:
-        How: La ciudad anfitriona tiene la responsabilidad de mediar en cualquier situación concerniente a Espacios Más Seguros. Ellas decidirán qué amerita una advertencia y qué amerita una expulsión de la conferencia.
+        How: La ciudad anfitriona tiene la responsabilidad de mediar en cualquier situación concerniente a Espacios Más Seguros. Ellxs decidirán qué amerita una advertencia y qué amerita una expulsión de la conferencia.
         Why: Para establecer un punto de partida, declaramos nuestras creencias y deseos compartidos para el espacio que es Bike!Bike!. Nos reunimos alrededor de estas ideas para inspirarnos y para asegurarnos que si existen conductas que no nos hagan sentir segurxs haya algo en que basarnos. Al aceptar un compromiso de respeto mutuo esperamos que, de surgir un conflicto, recordaremos a qué nos comprometimos y actuaremos en consecuencia.
       term:
         empowerment: Apoyamos el empoderamiento de cada persona y cada grupo.
@@ -899,7 +899,7 @@ es:
         respect: Respetamos los nombres de todxs, sus pronombres de género, sus identidades expresas y sus experiencias.
         accessible: Nos comprometemos a hacer los espacios tan accesibles como sea posible; fisica, social y personalmente.
         intent: Aceptamos una responsabilidad compartida para hacernos responsables a nosotrxs mismxs y a lxs demás de los propósitos de este acuerdo.
-        learning: Promovemos espacios de aprendizaje y preguntas incluyentes en el espíritu de crecimiento personal.
+        learning: Con el espíritu de fomentar el crecimiento personal, promovemos los espacios de aprendizaje y la formulación de preguntas en lenguaje incluyente.
         open_minds: Alentamos la apertura de mentes y de corazones.
     permission_denied:
       paragraphs: 
