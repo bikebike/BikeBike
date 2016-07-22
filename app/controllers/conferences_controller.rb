@@ -531,7 +531,6 @@ class ConferencesController < ApplicationController
 
 			@is_host = @this_conference.host? current_user
 		else
-			@page_title = "articles.conference_registration.headings.#{@this_conference.registration_status == :open ? '': 'Pre_'}Registration_Details"
 			@register_template = :confirm_email
 		end
 
@@ -880,8 +879,8 @@ class ConferencesController < ApplicationController
 				@entire_page = true
 				get_scheule_data
 			end
-		when :done
-			@amount = ((@registration.registration_fees_paid || 0) * 100).to_i.to_s.gsub(/^(.*)(\d\d)$/, '\1.\2')
+		when :confirm_email
+			@page_title = "articles.conference_registration.headings.#{@this_conference.registration_status == :open ? '': 'Pre_'}Registration_Details"
 		end
 
 	end

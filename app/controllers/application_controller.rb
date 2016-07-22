@@ -194,7 +194,7 @@ class ApplicationController < LinguaFrancaApplicationController
 	end
 	
 	def locale_not_available!(locale = nil)
-		# set_default_locale
+		set_default_locale
 		params[:_original_action] = params[:action]
 		params[:action] = 'error-locale-not-available'
 		@page_title = 'page_titles.404.Locale_Not_Available'

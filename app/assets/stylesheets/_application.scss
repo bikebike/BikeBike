@@ -1175,7 +1175,7 @@ ul.warnings li,
 	ul {
 		@include _-(display, flex);
 		list-style: none;
-		margin: 2em 0 5em;
+		margin: 2em 2em 5em 0;
 		padding: 0;
 	}
 
@@ -3630,7 +3630,7 @@ html[data-ontop] {
 
 	.flow-steps {
 		ul {
-			margin-bottom: 1em;
+			margin: 2em 0 1em 0;
 		}
 
 		.step {
