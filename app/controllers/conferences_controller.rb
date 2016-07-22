@@ -531,6 +531,7 @@ class ConferencesController < ApplicationController
 
 			@is_host = @this_conference.host? current_user
 		else
+			@page_title = "articles.conference_registration.headings.#{@this_conference.registration_status == :open ? '': 'Pre_'}Registration_Details"
 			@register_template = :confirm_email
 		end
 
