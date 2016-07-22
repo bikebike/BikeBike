@@ -1,5 +1,4 @@
 = columns(medium: 12) do
-	%h2=_'articles.conference_registration.headings.Payment'
 	- if @registration.registration_fees_paid.present?
 		%p
 			%strong=_'articles.conference_registration.paragraphs.Payment_Made', :p, vars: { fees_paid: @registration.registration_fees_paid }

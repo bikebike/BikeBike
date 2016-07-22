@@ -1,7 +1,5 @@
 = columns(medium: 12) do
-	%h2=_(@page_title)
 	%p=_'articles.conference_registration.paragraphs.Contact_Info', :s, 2
-= columns(medium: 12) do
 	= form_tag register_path(@this_conference.slug) do
 		= textfield :name, @name, required: true, heading: 'articles.conference_registration.headings.name', big: true
 		= textfield :location, (params[:location] || @registration.city || location(lookup_ip_location)), required: true, heading: 'articles.conference_registration.headings.location'

@@ -1,5 +1,4 @@
 = render :partial => 'page_header', :locals => {:page_key => 'Conference_Registration'}
-= registration_step_menu
 
 - if @warnings.present?
 	= row class: 'warnings', tag: :ul do
@@ -8,4 +7,7 @@
 				= warning
 %article
 	= row do
+		= columns(medium: 12) do
+			%h2=_(@page_title)
+			= registration_step_menu
 		= render @register_template.to_s

@@ -13,6 +13,9 @@
 						%h2=_@page_title, :t
 				- else
 					%h2=_@page_title, :t
+
+				= registration_step_menu
+				
 				= textfield :title, @title, required: true, lang: @translation, big: true, original_value: @is_translating ? @workshop.title! : nil, original_lang: @workshop.locale
 				= textarea :info, @info, help: 'articles.workshops.paragraphs.info', lang: @translation, original_value: @is_translating ? richtext(@workshop.info!, 4).html_safe : nil, original_lang: @workshop.locale
 			- if !@is_translating && (@workshop.id.blank? || @can_edit)

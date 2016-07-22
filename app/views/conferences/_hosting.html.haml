@@ -1,6 +1,4 @@
 = columns(medium: 12) do
-	%h2=_(@page_title)
-= columns(medium: 12) do
 	= form_tag register_path(@this_conference.slug) do
 		= checkbox :can_provide_housing, @registration.can_provide_housing, 'articles.conference_registration.can_provide_housing', heading: 'articles.conference_registration.headings.can_provide_housing', help: 'articles.conference_registration.paragraphs.can_provide_housing', inline: true, toggles: 'hosting-options', centered: true
 		#hosting-options

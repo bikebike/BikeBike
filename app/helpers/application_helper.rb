@@ -851,16 +851,17 @@ module ApplicationHelper
 
 		steps.each do | step |
 			text = _"articles.conference_registration.headings.#{step[:name].to_s}"
-			h = content_tag :li, class: [step[:enabled] ? :enabled : nil, @register_template == step[:name] ? :current : nil] do
+			
+			if step[:name] == :workshops
+				post_registration = true
+			end
+
+			h = content_tag :li, class: [step[:enabled] ? :enabled : nil, @register_template == step[:name] ? :current : nil, post_registration ? :post : :pre].compact do
 				if step[:enabled]
 					content_tag :div, (link_to text, register_step_path(@this_conference.slug, step[:name])).html_safe, class: :step
 				else
 					content_tag :div, text, class: :step
 				end
-			end
-
-			if step[:name] == :workshops
-				post_registration = true
 			end
 
 			if post_registration
@@ -874,9 +875,7 @@ module ApplicationHelper
 			row class: 'flow-steps' do
 				columns do
 					(content_tag :ul, id: 'registration-steps' do
-						pre_registration_steps.html_safe
-					end).html_safe + 
-					(content_tag :ul, id: 'post-registration-steps' do
+						pre_registration_steps.html_safe +
 						post_registration_steps.html_safe
 					end).html_safe
 				end

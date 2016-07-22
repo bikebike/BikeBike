@@ -717,6 +717,9 @@ class ConferencesController < ApplicationController
 		case @register_template
 		when :questions
 			@registration.housing_data ||= { }
+			@page_title = 'articles.conference_registration.headings.Registration_Info'
+		when :payment
+			@page_title = 'articles.conference_registration.headings.Payment'
 		when :workshops
 			@page_title = 'articles.conference_registration.headings.Workshops'
 			
@@ -1386,6 +1389,7 @@ class ConferencesController < ApplicationController
 			@translations_available_for_editing << locale if @workshop.can_translate?(current_user, locale)
 		end
 		@page_title = 'page_titles.conferences.View_Workshop'
+		@register_template = :workshops
 
 		render 'workshops/show'
 	end
@@ -1397,6 +1401,7 @@ class ConferencesController < ApplicationController
 		@languages = [I18n.locale.to_sym]
 		@needs = []
 		@page_title = 'page_titles.conferences.Create_Workshop'
+		@register_template = :workshops
 		render 'workshops/new'
 	end
 
@@ -1405,6 +1410,7 @@ class ConferencesController < ApplicationController
 		@translation = params[:locale]
 		@page_title = 'page_titles.conferences.Translate_Workshop'
 		@page_title_vars = { language: view_context.language_name(@translation) }
+		@register_template = :workshops
 
 		edit_workshop
 	end
@@ -1439,6 +1445,7 @@ class ConferencesController < ApplicationController
 		@space = @workshop.space.to_sym if @workshop.space
 		@theme = @workshop.theme.to_sym if @workshop.theme
 		@notes = @workshop.notes
+		@register_template = :workshops
 
 		render 'workshops/new'
 	end
@@ -1462,6 +1469,7 @@ class ConferencesController < ApplicationController
 			end
 			return redirect_to view_workshop_url(@this_conference.slug, @workshop.id)
 		end
+		@register_template = :workshops
 
 		render 'workshops/delete'
 	end
@@ -1565,6 +1573,7 @@ class ConferencesController < ApplicationController
 		return do_404 unless @workshop
 		return do_403 if @workshop.facilitator?(current_user) || !current_user
 
+		@register_template = :workshops
 		render 'workshops/facilitate'
 	end
 
@@ -1594,6 +1603,7 @@ class ConferencesController < ApplicationController
 		return do_404 unless @workshop
 		return do_403 unless @workshop.requested_collaborator?(current_user)
 
+		@register_template = :workshops
 		render 'workshops/facilitate_request_sent'
 	end
 

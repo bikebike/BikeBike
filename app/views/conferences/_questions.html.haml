@@ -1,6 +1,4 @@
 = columns(medium: 12) do
-	%h2=_'articles.conference_registration.headings.Registration_Info'
-= columns(medium: 12) do
 	%p=_'articles.conference_registration.paragraphs.Registration_Info', :p, vars: { city: @this_conference.location.city }
 = form_tag register_path(@this_conference.slug), class: [:centered, :clearfix] do
 	= columns(medium: 12) do

@@ -5,6 +5,7 @@
 			= (hidden_field_tag :workshop_id, @workshop.id) if @workshop
 			= columns(medium: 12) do
 				%h2=_'articles.workshops.headings.facilitate', "Request to Facilitate ‘#{@workshop.title}’", :vars => { :workshop_title => @workshop.title }
+				= registration_step_menu
 				=m('articles.workshops.paragraphs.facilitate_request','Please tell the current workshop facilitators who you are, why you want to help facilitate the workshop, and how you think you will help make the workshop better. All of the current facilitators will be emailed and they may ask more questions before approving or denying your request. Please note that this will reveal your email address to the facilitators.')
 				.text-area-field.input-field
 					= label_tag :message
