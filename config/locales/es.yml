@@ -707,6 +707,9 @@ es:
   articles:
     conference_registration:
       headings:
+        Workshops_Looking_For_Facilitators: Talleres que necesitan facilitadorxs
+        Add_Workshop: Proponer un taller
+        workshops: Talleres
         Registration_Info: Registro
         arrival_and_departure: ¿Que día llegas a %{city}?
         allergies: ¿Eres alergico a algo?
@@ -717,8 +720,9 @@ es:
         name: Nombre
         preferred_language: ¿Qué idioma prefieres usar?
         Allergies: ¿Eres alergico a algo?
-        Workshops: Actividades
-        Your_Workshops: Actividades
+        Workshops: Talleres
+        Your_Workshops: Talleres
+        add_facilitator: Añadir un(a) facilitador(a)
         Policy_Agreement: Acuerdo del Espacio Mas Seguro
         Preview: Vista previa
         Stats: Estadísticas
@@ -750,7 +754,12 @@ es:
         administration: Administrar cuenta
         hosting: Hospedaje
         Hosting: Hospedaje
+        Workshops_You_Have_Requested: Talleres que ha solicitado para facilitar
       paragraphs:
+        info: Describa su taller en detalle. Resaltar el texto para modificar el formato.
+        Workshops_You_Have_Requested: La siguiente es una lista de todos los talleres que ha solicitado para facilitar.
+        Workshops_Looking_For_Facilitators: ¿Le gustaría ayudar a facilitar un taller propuesto por otra persona? A continuación se muestra una lista de los talleres que necesitan facilitadorxs. Si están interesadxs en ayudar, pueden facilitar uno de estos talleres.
+        All_Workshops: Todos los otros talleres
         host:
           address: Tu dirección y número telefónico serán compartidos con lxs visitantes y lxs organizadorxs de Bike!Bike!
           space: ¿Cuántos espacios tienes para compartir?
@@ -766,6 +775,7 @@ es:
         Payment: Las y los esperamos del 1 al 4 de octubre del 2015.Más información
           en: bikebike@gdlenbici.org
         Workshops: 'Título de la actividad: Que necesitas? Tipo de espacio? Tema? Quién es responsable? Descripción? Tiempo?'
+        Create_Workshop: En Bike!Bike! cualquiera puede facilitar un taller o simplemente proponer una idea. Lxs organizadorxs de la conferencia confirmarán si se efectúa el taller, tanto como el lugar y horario.
         Confirm_Agreement: Al hacer click en el botón "Estoy de acuerdo", estás comprometiéndote a cumplir el Acuerdo de Espacios Más Seguros de Bike!Bike!. ¡Gracias!
         Email_Participants: Esta página se usa para contactar a todxs lxs participantes. El texto se puede ingresar como [Markdown](http://daringfireball.net/projects/markdown/basics).
           Presionar "prueba" enviará el correo solamente a tí, asegurate de hacerlo y sé cuidadosx antes de presionar 'enviar'.
@@ -809,7 +819,7 @@ es:
       terms:
         Bikes: Bici
         Donation_Count: Contéo de donaciones
-        Languages: Lenguajes
+        Languages: Idiomas
         Total_Donations: Donaciones totales
         Food: Comida
         Housing: Hospedaje
@@ -852,18 +862,23 @@ es:
         theme: ¿Cuáles de estos temas describen mejor tu taller? Esto ayudará a los anfitriones a evitar conflictos de horario. Seleciona 'otro' si ninguna de las opciones se relaciona de ninguna forma.
         facilitate_request: Por favor dile a lxs facilitadorxs actuales quién eres, porqué quieres ayudar en este taller y cómo crees que ayudarás a hacer un mejor taller. Todxs lxs facilitadorxs actuales recibirán un email y pueden hacerte más preguntas antes de aprovar o denegar tu petición. Por favor sabe que este proceso revelará tu direción de email a lxs facilitadorxs.
         facilitate_request_sent: Tu petición ha sido enviada. Recibirás un email cuando tu solicutud sea aprobada o denegada o si lxs facilitadorxs tienen alguna pregunta.
+        languages: ¿En qué idioma se presentará el taller? Habrá traducción o traductor(a) disponible?
+        needs: Si necesitan alguno de los siguientes, lxs organizadorxs de la conferencia harán todo lo posible para proporcionarlos. Si tienen cualquier otra solicitud, pueden incluirlo en la sección de comentarios.
+        needs_facilitators: ¿Están buscando ayuda para su taller? Cualquier persona que está registrada para la conferencia puede ayudar a facilitar un taller en cualquier momento, pero si marcan esta casilla mejorarán las posibilidades de encontrar colaboradores.
       headings:
+        needs_facilitators: ¿Necesitan ayuda?
+        Comments: Comentarios
         Proposed_Workshops: Talleres propuestos
         facilitators: facilitadores
         Delete_Workshop: Eliminar Actividad
         Workshops: Talleres
         Your_Workshops: Tus talleres
-        languages: Lenguajes
+        languages: Idiomas
         needs: Necesidades
         notes: Notas
         space: Espacio
         theme: Tema
-        facilitate: Solicita ser facilitador(a) de %{workshop_title}
+        facilitate: Solicita ser facilitador(a) de ‘%{workshop_title}’
       info:
         read_more: Leer más
         interested_count:
@@ -943,6 +958,7 @@ es:
         last_day: Último día
     actions:
       generic:
+        add_comment: Añadir comentario
         agree: Estoy en acuerdo.
         register: Registrar
         edit_registration: Cambiar mi registracion
@@ -993,6 +1009,7 @@ es:
       Workshops: Talleres
       Edit: Editar conferencia
       Facilitate_Workshop: Solicitud para ser facilitador(a) de taller.
+      Translate_Workshop: Editar la traducción taller %{language}
     policy:
       Safer_Spaces_Policy: Acuerdo del Espacio Mas Seguro
     '403':
@@ -1021,6 +1038,7 @@ es:
       Remove: Eliminar
       View: Ve este taller
       View_All: Ve todos los talleres
+      Make_Owner: Hacer propietario
     conference:
       Translate: Editar versión en %{language}
       edit_registration: Mi registro
@@ -1051,6 +1069,7 @@ es:
       translation_last_modified: El texto en el idioma original fue modificada por
         última vez el %{date}
       change_locale: "Leer en %{language}"
+      Translation_of: Traducción de
     pages:
       contexts:
         geography: geografia
@@ -1101,7 +1120,7 @@ es:
     submenu:
       registration:
         Registration: Registro
-        Workshops: Actividades
+        Workshops: Talleres
         Broadcast: Emitir
         Edit: Editar conferencia
         Stats: Estadísticas
@@ -1116,10 +1135,10 @@ es:
     subject:
       confirm_email: E-mail de confirmación
       registration_confirmed: ¡Gracias por registrarte para %{conference_title}!
-      workshop_facilitator_request: Solicitud para facilitar %{workshop_title} por
+      workshop_facilitator_request: Solicitud para facilitar ‘%{workshop_title}’ por
         parte de %{requester_name}
-      workshop_request_approved: Has sido agregadx como facilitador(a) a %{workshop_title}
-      workshop_request_denied: Tu petición para facilitar %{workshop_title} ha sido
+      workshop_request_approved: Has sido agregadx como facilitador(a) a ‘%{workshop_title}’
+      workshop_request_denied: Tu petición para facilitar ‘%{workshop_title}’ ha sido
         denegada.
       registration_confirmed: Gracias por pre - registrarte en %{conference_title}
     general:
@@ -1132,10 +1151,10 @@ es:
         pre_registered: Te has pre-registrado exitosamente para %{conference_title}. Te haremos saber cuando el registro completo esté disponible y si hay alguna novedad acerca de la conferencia sobre la que debas saber. Te invitamos a inscribirte como voluntario o facilitador de un taller tan pronto como puedas. Puedes inscribirte ahora, o cambiar tus detalles de registro en cualquier momento haciendo clic en el enlace de pre-registro nuevamente.
     workshop:
       paragraph:
-        request_approved: Has sido agregado como facilitador(a) para %{workshop_title}
-        request_denied: Tu petición para ser facilitador(a) de %{workshop_title} ha sido denegada. Si crees que esto es un error, puedes contactar a lxs facilitadorxs actuales haciendo otra petición para ser facilitador(a).
+        request_approved: Has sido agregado como facilitador(a) para ‘%{workshop_title}’
+        request_denied: Tu petición para ser facilitador(a) de ‘%{workshop_title}’ ha sido denegada. Si crees que esto es un error, puedes contactar a lxs facilitadorxs actuales haciendo otra petición para ser facilitador(a).
         request_instructions: Puedes aprobar o denegar esta petición en la página de tu taller.
-        request_message: '%{user_name} ha solicitado ser facilitador(a) para %{workshop_title}'
+        request_message: '%{user_name} ha solicitado ser facilitador(a) para ‘%{workshop_title}’'
         request_reply_instructions: También puedes responder directamente a este email para hacer preguntas adicionales.
   roles:
     workshops:
@@ -1161,5 +1180,6 @@ es:
         organization: Asuntos organizacionales
         other: Otro
         race_gender: Políticas de raza, género o clase
+      needs_facilitators: Se necesitan mas facilitadorxs
   warnings:
     location_corrected: Tu ubicación fue corregida de "%{original}" a "%{corrected}". Si esto no refleja tu ubicación prevista, puedes cambiarla nuevamente en el paso de "información de contacto".

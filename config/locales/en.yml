@@ -5544,7 +5544,7 @@ en:
         Proposed_Workshops: Would you like to facilitate your own workshop? Simply
           register and visit the workshops page. If you have already registered you
           can access the page by restarting the registration process.
-        info: Describe your workshop in detail; highlighting text will reveal formatting controls.
+        info: Describe your workshop in detail. Select text to apply formatting.
         space: What kind of space do you need for your workshop?
         theme: Which of the themes below best match your workshop? This will help hosts to avoid scheduling conflicts. Select other if none of the options match in any way.
         Delete_Workshop: Deleting a workshop cannot be undone, are you sure that you want to proceed?
@@ -5831,13 +5831,13 @@ en:
       confirm_email: Confirmation Email
       registration_confirmed: Thank you for registering for %{conference_title}
       pre_registration_confirmed: Thank you for pre-registering for %{conference_title}
-      workshop_facilitator_request: Request to facilitate %{workshop_title} from %{requester_name}
-      workshop_request_approved: You have been added as a facilitator of %{workshop_title}
-      workshop_request_denied: Your request to facilitate %{workshop_title} has been denied
-      workshop_translated: The %{language} translation for %{workshop_title} has been modified
-      workshop_original_content_changed: Original content for %{workshop_title} has been modified
+      workshop_facilitator_request: Request to facilitate ‘%{workshop_title}’ from %{requester_name}
+      workshop_request_approved: You have been added as a facilitator of ‘%{workshop_title}’
+      workshop_request_denied: Your request to facilitate ‘%{workshop_title}’ has been denied
+      workshop_translated: The %{language} translation for ‘%{workshop_title}’ has been modified
+      workshop_original_content_changed: Original content for ‘%{workshop_title}’ has been modified
       workshop_comment:
-        comment: '%{user_name} commented on %{workshop_title}'
+        comment: '%{user_name} commented on ‘%{workshop_title}’'
         reply: '%{user_name} replied to your comment'
     general:
       paragraph:
@@ -5853,16 +5853,16 @@ en:
         old_value: 'Old Value: '
         diff: 'Difference: '
       paragraph:
-        workshop_translated: '%{user_name} has modified the %{language} translation for %{workshop_title}.'
-        workshop_original_content_changed: '%{user_name} has modified the original content for %{workshop_title}. Translations may need to be updated.'
+        workshop_translated: '%{user_name} has modified the %{language} translation for ‘%{workshop_title}’.'
+        workshop_original_content_changed: '%{user_name} has modified the original content for ‘%{workshop_title}’. Translations may need to be updated.'
     workshop_comment:
       paragraph:
         user_said: '%{user_name} said: '
     workshop:
       paragraph:
-        request_approved: You have been added as a facilitator of %{workshop_title}.
-        request_denied: Your request to become a facilitator of %{workshop_title} has been denied. If you think this was in error, you may contact the current facilitators by making another request to facilitate.
+        request_approved: You have been added as a facilitator of ‘%{workshop_title}’.
+        request_denied: Your request to become a facilitator of ‘%{workshop_title}’ has been denied. If you think this was in error, you may contact the current facilitators by making another request to facilitate.
         request_instructions: 'You can approve or deny this request on your workshop page:'
-        request_message: "%{user_name} has requested to help facilitate %{workshop_title}:"
+        request_message: "%{user_name} has requested to help facilitate ‘%{workshop_title}’:"
         request_reply_instructions: You can also reply directly to this email to ask follow-up questions.
         view_workshop: 'View the workshop here: '

@@ -1269,12 +1269,12 @@ ul.warnings li,
 	.step {
 		color: #CCC;
 		position: absolute;
-		@include _(transform-origin, 0 50%);
+		@include _(transform-origin, 10% 60%);
 		@include _(transform, rotate(45deg));
 		text-align: left;
 		top: 0.5em;
 		left: 50%;
-		white-space: nowrap;
+		line-height: 1.2em;
 	}
 
 	a {
@@ -1296,6 +1296,11 @@ ul.warnings li,
 		@include after {
 			display: none;
 		}
+	}
+
+	.current .step {
+		//top: 1.5em;
+		@include _(transform-origin, 10% 100%);
 	}
 
 	.current .step,
