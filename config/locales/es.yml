@@ -721,7 +721,7 @@ es:
         preferred_language: ¿Qué idioma prefieres usar?
         Allergies: ¿Eres alergico a algo?
         Workshops: Talleres
-        Your_Workshops: Talleres
+        Your_Workshops: Tus talleres
         add_facilitator: Añadir un(a) facilitador(a)
         Policy_Agreement: Acuerdo del Espacio Mas Seguro
         Preview: Vista previa
@@ -755,16 +755,21 @@ es:
         hosting: Hospedaje
         Hosting: Hospedaje
         Workshops_You_Have_Requested: Talleres que ha solicitado para facilitar
+        All_Workshops: Todos los otros talleres
+        host:
+          considerations: Consideraciones especiales
+          space: Espacio Disponible
+          availability: Disponibilidad
+          address: Dirección
       paragraphs:
-        info: Describa su taller en detalle. Resaltar el texto para modificar el formato.
         Workshops_You_Have_Requested: La siguiente es una lista de todos los talleres que ha solicitado para facilitar.
         Workshops_Looking_For_Facilitators: ¿Le gustaría ayudar a facilitar un taller propuesto por otra persona? A continuación se muestra una lista de los talleres que necesitan facilitadorxs. Si están interesadxs en ayudar, pueden facilitar uno de estos talleres.
-        All_Workshops: Todos los otros talleres
+        Your_Workshops: La siguiente es una lista de todos los talleres que están facilitando.
         host:
           address: Tu dirección y número telefónico serán compartidos con lxs visitantes y lxs organizadorxs de Bike!Bike!
           space: ¿Cuántos espacios tienes para compartir?
           availability: Lo más común, es que lxs asistentes lleguen y se vayan los días en que inicia y finaliza la conferencia pero a menudo algunxs visitantes llegan unos días antes y se van unos días después. ¿Cuándo estará disponible tu espacio?
-          considerations: Los organizadores tratarán de emparejar de la mejor manera posible anfitriones con invitadxs. ¿Cuál de las siguientes consideraciones crees que lxs organizadores deben tener en cuenta al momento de escoger a quien vaya a quedarse contigo?
+          considerations: Lxs organizadores tratarán de emparejar de la mejor manera posible anfitriones con invitadxs. ¿Cuál de las siguientes consideraciones crees que lxs organizadores deben tener en cuenta al momento de escoger a quien vaya a quedarse contigo?
           notes: Deja un mensaje a los organizadores respecto a lo que deben considerar al momento de escoger a la persona que vas a hospedar.
         Policy_Agreement: Asegurar que todos los asistentes se sientan bienvenidos, seguro y respetada en todo momento es especialmente importante para todos nosotros. Por favor asegúrese de que plenamente ha leído y entendido nuestra política de espacios más seguros a continuación, si tiene alguna pregunta o preocupación que usted puede llegar a los organizadores en cualquier momento.
         facebook_sign_in: De manera alternativa puedes registrarte usando tu cuenta de Facebook y así evitarás tener que esperar a que te enviemos un correo electrónico
@@ -805,11 +810,6 @@ es:
           house: Espacio interior
           none: Yo encontraré donde dormir.
           tent: Espacio para tienda de campaña
-        host:
-          considerations: Consideraciones especiales
-          space: Espacio Disponible
-          availability: Disponibilidad
-          address: Dirección
       host:
         considerations:
           vegan: Sólo veganxs y vegetarianxs
@@ -865,6 +865,7 @@ es:
         languages: ¿En qué idioma se presentará el taller? Habrá traducción o traductor(a) disponible?
         needs: Si necesitan alguno de los siguientes, lxs organizadorxs de la conferencia harán todo lo posible para proporcionarlos. Si tienen cualquier otra solicitud, pueden incluirlo en la sección de comentarios.
         needs_facilitators: ¿Están buscando ayuda para su taller? Cualquier persona que está registrada para la conferencia puede ayudar a facilitar un taller en cualquier momento, pero si marcan esta casilla mejorarán las posibilidades de encontrar colaboradores.
+        info: Describa su taller en detalle. Resaltar el texto para modificar el formato.
       headings:
         needs_facilitators: ¿Necesitan ayuda?
         Comments: Comentarios
@@ -917,8 +918,8 @@ es:
         learning: Con el espíritu de fomentar el crecimiento personal, promovemos los espacios de aprendizaje y la formulación de preguntas en lenguaje incluyente.
         open_minds: Alentamos la apertura de mentes y de corazones.
     permission_denied:
-      paragraphs: 
       headings:
+        confirmation_sent: Confirmar correo electrónico
         confirm_email: Por favor confirma tu dirección de correo electrónico.
     contact:
       headings:
@@ -952,7 +953,7 @@ es:
         address: Dirección
         phone: Número telefónico
         bed_space: Número de Camas
-        floor_space: Número de Camas
+        floor_space: Espacios para dormir en el piso
         tent_space: Espacios para tienda de campaña
         first_day: Primer día
         last_day: Último día
@@ -981,6 +982,9 @@ es:
         continue: Continuar
         previous: Anterior
         next: Siguiente
+      aria:
+        remove_interest: Haga clic en si ya no está interesado en este taller
+        show_interest: Haga clic en si usted está interesado en este taller
   links:
     footer:
       help_text:
@@ -1182,4 +1186,5 @@ es:
         race_gender: Políticas de raza, género o clase
       needs_facilitators: Se necesitan mas facilitadorxs
   warnings:
-    location_corrected: Tu ubicación fue corregida de "%{original}" a "%{corrected}". Si esto no refleja tu ubicación prevista, puedes cambiarla nuevamente en el paso de "información de contacto".
+    messages:
+      location_corrected: Tu ubicación fue corregida de "%{original}" a "%{corrected}". Si esto no refleja tu ubicación prevista, puedes cambiarla nuevamente en el paso de "información de contacto".

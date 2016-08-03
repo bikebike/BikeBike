@@ -40,6 +40,10 @@ class User < ActiveRecord::Base
 		role == 'administrator'
 	end
 
+	def self.AVAILABLE_LANGUAGES
+		[:en, :es, :fr, :ar]
+	end
+
 	def self.get(email)
 		user = where(email: email).first
 

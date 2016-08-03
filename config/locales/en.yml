@@ -168,6 +168,7 @@ en:
         one: 1 error prohibited this %{model} from being saved
         other: "%{count} errors prohibited this %{model} from being saved"
   warnings:
+    messages:
       location_corrected: Your location was corrected from "%{original}" to "%{corrected}". If this doesn't reflect your intended location, you can change this again in the contact info step.
       housing:
           space:

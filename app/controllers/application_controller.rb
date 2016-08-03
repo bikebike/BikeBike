@@ -221,7 +221,7 @@ class ApplicationController < LinguaFrancaApplicationController
 					current_user,
 					Time.now.strftime("%d/%m/%Y %H:%M")
 				]
-			end# if Rails.env.preview? || Rails.env.production?
+			end if Rails.env.preview? || Rails.env.production?
 		end
 
 		# raise the error if we are in development so that we can debug it

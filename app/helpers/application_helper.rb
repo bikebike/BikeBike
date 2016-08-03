@@ -525,11 +525,6 @@ module ApplicationHelper
 		subdomain == 'test'
 	end
 
-	#def location(location)
-	#	territory = Carmen::Country.coded(location.country).subregions.coded(location.territory)
-	#	location.city + (territory ? ' ' + territory.name : '') + ', ' + Carmen::Country.coded(location.country).name
-	#end
-
 	def rand_hash(length = 16, model = nil, field = nil)
 		if field
 			hash = rand_hash(length)
@@ -580,7 +575,7 @@ module ApplicationHelper
 		YAML.load(File.read(Rails.root.join("config/#{name.to_s}.yml")))[Rails.env].symbolize_keys
 	end
 
-	def location(location)
+	def location(location, locale = I18n.locale)
 		return nil if location.blank?
 
 		city = nil
@@ -613,11 +608,11 @@ module ApplicationHelper
 
 		hash = Hash.new
 		hash[:city] = _!(city) unless city.blank?
-		hash[:region] = _("geography.subregions.#{country}.#{region}") unless region.blank? || country.blank?
-		hash[:country] = _("geography.countries.#{country}") unless country.blank?
+		hash[:region] = _("geography.subregions.#{country}.#{region}", locale: locale) unless region.blank? || country.blank?
+		hash[:country] = _("geography.countries.#{country}", locale: locale) unless country.blank?
 
 		# return the formatted location or the first value if we only have one value
-		return hash.length > 1 ? _("geography.formats.#{hash.keys.join('_')}", vars: hash) : hash.values.first
+		return hash.length > 1 ? _("geography.formats.#{hash.keys.join('_')}", locale: locale, vars: hash) : hash.values.first
 	end
 
 	def same_city?(location1, location2)

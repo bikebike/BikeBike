@@ -20,7 +20,7 @@
 				= textarea :info, @info, help: 'articles.workshops.paragraphs.info', lang: @translation, original_value: @is_translating ? richtext(@workshop.info!, 4).html_safe : nil, original_lang: @workshop.locale
 			- if !@is_translating && (@workshop.id.blank? || @can_edit)
 				= columns(medium: 6) do
-					= checkboxes :languages, [:en, :es, :fr], @languages, 'languages', vertical: true, heading: 'articles.workshops.headings.languages', help: 'articles.workshops.paragraphs.languages'
+					= checkboxes :languages, User.AVAILABLE_LANGUAGES, @languages, 'languages', vertical: true, heading: 'articles.workshops.headings.languages', help: 'articles.workshops.paragraphs.languages'
 					= radiobuttons :theme, Workshop.all_themes, @workshop.theme, 'workshop.options.theme', vertical: true, heading: 'articles.workshops.headings.theme', help: 'articles.workshops.paragraphs.theme', other: true
 				= columns(medium: 6) do
 					= checkboxes :needs, Workshop.all_needs, JSON.parse(@workshop.needs || '[]'), 'workshop.options.needs', vertical: true, heading: 'articles.workshops.headings.needs', help: 'articles.workshops.paragraphs.needs'

@@ -600,12 +600,12 @@ class ConferencesController < ApplicationController
 					end
 
 					if params[:location].present? && params[:location].gsub(/[\s\W]/, '').present? && (l = Geocoder.search(params[:location], language: 'en')).present?
-						corrected = view_context.location(l.first)
+						corrected = view_context.location(l.first, @this_conference.locale)
 
 						if corrected.present?
 							@registration.city = corrected
 							if params[:location].gsub(/[\s,]/, '').downcase != @registration.city.gsub(/[\s,]/, '').downcase
-								@warnings << view_context._('warnings.messages.location_corrected',"Your location was corrected from \"#{params[:location]}\" to \"#{corrected}\". If this doesn't reflect your intended location, you can change this again in the contact info step.", vars: {original: params[:location], corrected: corrected})
+								@warnings << view_context._('warnings.messages.location_corrected', vars: {original: params[:location], corrected: corrected})
 							end
 						else
 							@errors[:location] = :unknown
@@ -1995,7 +1995,7 @@ class ConferencesController < ApplicationController
 		steps -= [:questions] unless status == :open
 		steps -= [:payment] unless status == :open && conference.paypal_email_address.present? && conference.paypal_username.present? && conference.paypal_password.present? && conference.paypal_signature.present?
 		if @registration.present?
-			if view_context.same_city?(@registration.city, conference.location)
+			if view_context.same_city?(@registration.city, view_context.location(conference.location, conference.locale))
 				steps -= [:questions]
 			else
 				steps -= [:hosting]

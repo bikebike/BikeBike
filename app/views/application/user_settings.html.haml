@@ -9,14 +9,15 @@
 					= link_to (_'actions.conference.edit_registration'), register_path(@conference.slug), class: :button
 				- if @conferences.present?
 					%h3=_'articles.user_settings.headings.Your_Conferences'
-					- @conferences.each do | conference |
-						= link_to (_!conference.title), administration_step_path(conference.slug, :edit), class: :button
+					.link-dump
+						- @conferences.each do | conference |
+							= link_to (_!conference.title), administration_step_path(conference.slug, :edit), class: :button
 
 
 				= form_tag update_settings_path do
 					= textfield :name, current_user.name, required: true, heading: 'articles.conference_registration.headings.name', big: true
-					= checkboxes :languages, [:en, :es, :fr], current_user.languages || [I18n.locale], 'languages', heading: 'articles.conference_registration.headings.languages'
-					= radiobuttons :preferred_language, [:en, :es, :fr], current_user.locale || I18n.locale, 'languages', heading: 'articles.conference_registration.headings.preferred_language'
+					= checkboxes :languages, User.AVAILABLE_LANGUAGES, current_user.languages || [I18n.locale], 'languages', heading: 'articles.conference_registration.headings.languages'
+					= radiobuttons :preferred_language, I18n.backend.enabled_locales, current_user.locale || I18n.locale, 'languages', heading: 'articles.conference_registration.headings.preferred_language'
 					= checkbox :email_subscribe, current_user.is_subscribed != false, 'articles.user_settings.email_subscribe', heading: 'articles.user_settings.headings.email_subscribe', help: 'articles.user_settings.paragraphs.email_subscribe', inline: true, right_help: true
 					.actions
 						= button_tag :save, value: :save
