@@ -636,6 +636,9 @@ class ConferencesController < ApplicationController
 						notes: params[:notes]
 					}
 				when :questions
+					# create the companion's user account and send a registration link unless they have already registered
+					generate_confirmation(User.create(email: params[:companion]), register_path(@this_conference.slug)) unless User.find_by_email(params[:companion])
+					
 					@registration.housing = params[:housing]
 					@registration.arrival = params[:arrival]
 					@registration.departure = params[:departure]
@@ -1664,10 +1667,17 @@ class ConferencesController < ApplicationController
 	end
 
 	def add_workshop_facilitator
-		user = User.find_by_email(params[:email]) || User.create(email: params[:email])
-
 		set_conference
 		set_conference_registration!
+
+		user = User.find_by_email(params[:email])
+
+		# create the user if they don't exist and send them a link to register
+		unless user
+			user = User.create(email: params[:email])
+			generate_confirmation(user, register_path(@this_conference.slug))
+		end
+
 		workshop = Workshop.find_by_id_and_conference_id(params[:workshop_id], @this_conference.id)
 
 		return do_404 unless workshop && current_user
