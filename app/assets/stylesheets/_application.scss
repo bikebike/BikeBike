@@ -3151,6 +3151,7 @@ html[data-lingua-franca-example="html"] {
 
 .select-field {
 	line-height: 1.75em;
+	position: relative;
 
 	select {
 		display: block;
@@ -3158,13 +3159,58 @@ html[data-lingua-franca-example="html"] {
 		font-family: inherit;
 		font-size: 1.5em;
 		padding: 0 0.5em;
-		border: 0.1rem solid #CCC;
+		border: 0.1em solid;
 		cursor: pointer;
 		@include default-box-shadow(top, 1.5, false);
 
 		td &,
 		.table-td & {
 			@include _(box-shadow, none);
+		}
+	}
+
+	@if capable_of(pointer-events) {
+		label {
+			@include after {
+				content: '';
+				position: absolute;
+				display: block;
+				border: 0.1em solid;
+				width: 1.75em;
+				height: 1.75em;
+				background-color: $colour-5;
+				font-size: 1.5em;
+				z-index: 1;
+				right: 0em;
+				bottom: 0em;
+				pointer-events: none;
+			}
+
+			@include before {
+				content: '';
+				position: absolute;
+				display: block;
+				@include _(transform, rotate(-45deg));
+				border: 0 solid $white;
+				border-width: 0 0 0.25em 0.25em;
+				width: 1em;
+				height: 1em;
+				right: 0.75em;
+				bottom: 1em;
+				z-index: 2;
+				pointer-events: none;
+			}
+		}
+
+		&:hover label {
+			@include after {
+				background-color: $colour-3;
+			}
+		}
+
+		select {
+			padding-right: 2.25em;
+			@include _(appearance, none);
 		}
 	}
 
