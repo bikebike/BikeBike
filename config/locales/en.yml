@@ -5430,8 +5430,8 @@ en:
         Your_Workshops: The following is a list of all the workshops that you are facilitating.
         Workshops_You_Have_Requested: The following is a list of all the workshops that you have requested to facilitate.
         Pre_Registration_Details: By completing the pre-registration process you are letting us know that you are interested in coming, it allows us to contact you when we have news, and lets us better plan by knowing who might be coming. Once registration is fully open, we will need to ask a few more questions and you can confirm whether or not you will actually be coming.
-        Registration_Details: By completing the registration process you are confirming with us that you are coming, it allows us to contact you when we have news, and lets us better plan by knowing how many people will hosted. Once registered you will be given access to faciliatate your own workshop and view details on existing workshops. If you are already registered or have pre-registered, you can use this form sign in and access or update your details.
-        Verify_Account: In order to confirm that you are a real person and that we will be able to contact you later, please verify your email address. Before continuing with pre-registration, we will send you an email that will allow you to continue with the process.
+        Registration_Details: By completing the registration process you are confirming with us that you are coming, it allows us to contact you when we have news, and lets us better plan by knowing how many people will hosted. Once registered you will be given access to facilitate your own workshop and view details on existing workshops. If you are already registered or have pre-registered, you can use this form sign in and access or update your details.
+        Verify_Account: In order to confirm that you are a real person and that we will be able to contact you later, please verify your email address. We will send you an email that will allow you to continue with the registration process.
         facebook_sign_in: Alternatively you can sign in using your Facebook account and skip waiting for us to send you an email.
         can_provide_housing: Hosting visiting conference attendees is an important part of Bike!Bike!, it allows many people who would not normally be able to afford the cost of accommodations the chance to come to the conference and lets attendees really get to know our city and its residents. You will need to grant access to your home to guests overnight keeping in mind that events can sometimes go late into the evening. If your home will not be accessible during the day you should make sure to clearly communicate this with your guests.
         host:
@@ -5439,7 +5439,7 @@ en:
           space: How much space do you have to share?
           availability: The most common arrival and departure dates for attendees are the first and last day of the conference but people often arrive earlier or later. When will your space be available?
           considerations: Organizers will do their best to match up hosts and guests, what considerations should organizers keep in mind when selecting guests to stay in your home?
-          notes: Leave a message for organizers should take into consideration when selecting guests for your household.
+          notes: Leave a message for organizers to take into consideration when selecting guests for your household.
         admin:
           edit:
             info: This is the copy that is displayed on the front page of the site.
@@ -5700,7 +5700,7 @@ en:
     about:
       About_BikeBike: About Bike!Bike!
     contact:
-      Contact_Us: Contact   Us
+      Contact_Us: Contact Us
     conferences:
       Conference_Registration: Conference Registration
       Create_Workshop: Create a Workshop

@@ -97,6 +97,10 @@ es:
       x_seconds:
         one: 1 segundo
         other: '%{count} segundos'
+      x_hours:
+        one: 1 hora
+        other: "%{count} horas"
+      x_and_y: "%{x} %{y}"
     prompts:
       day: Día
       hour: Hora
@@ -129,15 +133,33 @@ es:
         one: No se puede eliminar el registro porque existe un %{record} dependiente
         many: No se puede eliminar el registro porque existen %{record} dependientes
       taken: ya está en uso
-      too_long: es demasiado largo (%{count} caracteres máximo)
-      too_short: es demasiado corto (%{count} caracteres mínimo)
-      wrong_length: no tiene la longitud correcta (%{count} caracteres exactos)
+      too_long:
+        one: es demasiado largo (1 carácter máximo)
+        other: es demasiado largo (%{count} caracteres máximo)
+      too_short:
+        one: es demasiado corto (%{count} carácter mínimo)
+        other: es demasiado corto (%{count} caracteres mínimo)
+      wrong_length:
+        one: no tiene la longitud correcta (1 carácter exactos)
+        other: no tiene la longitud correcta (%{count} caracteres exactos)
       other_than: debe ser distinto de %{count}
+      fields:
+        location:
+          empty: Por favor, introduzca su ubicación
+          unknown: Por favor, incluya su ciudad o pueblo, no hemos podido encontrar una localidad de "%{value}"
+        name:
+          empty: Por favor ingrese un nombre valido
     template:
       body: 'Se encontraron problemas con los siguientes campos:'
       header:
         one: No se pudo guardar este/a %{model} porque se encontró 1 error
         other: No se pudo guardar este/a %{model} porque se encontraron %{count} errores
+  warnings:
+    messages:
+      location_corrected: Tu ubicación fue corregida de "%{original}" a "%{corrected}". Si esto no refleja tu ubicación prevista, puedes cambiarla nuevamente en el paso de "información de contacto".
+      housing:
+          space:
+            overbooked: Con exceso de reservas
   helpers:
     select:
       prompt: Por favor seleccione
@@ -648,6 +670,7 @@ es:
         AZ: Arizona
         AR: Arkansas
         Calif: California
+        CA: California
         CO: Colorado
         CT: Connecticut
         DE: Delaware
@@ -702,6 +725,18 @@ es:
   conference:
     actions:
       Register: Regístrate
+  modals:
+    confirm: Por favor, confirmar
+    yes_button: Sí
+    no_button: 'No'
+    done_button: Cerca
+    info: Más información
+    workshops:
+      facilitators:
+        confirm_remove: ¿Estás seguro de que quieres eliminar %{user_name} como facilitador de este taller?
+        confirm_remove_self: ¿Estás seguro de que quieres eliminar a sí mismo como un facilitador de este taller?
+        confirm_cancel_request: ¿Está seguro de que desea cancelar su solicitud para convertirse en un facilitador de este taller?
+        confirm_transfer_ownership: Mediante la transferencia de la propiedad, perderá las capacidades administrativas, como la eliminación y la aprobación de nuevos facilitadores. ¿Seguro que deseas transferir la propiedad a %{user_name}?
   donate:
     button_label: Donar
   articles:
@@ -712,21 +747,20 @@ es:
         workshops: Talleres
         Registration_Info: Registro
         arrival_and_departure: ¿Que día llegas a %{city}?
-        allergies: ¿Eres alergico a algo?
+        allergies: ¿Tienes alergias?
         languages: ¿Hablas?
         food: ¿Que comes?
         Enter_Your_Email: Correo electrónico
         location: Ciudad y pais 
         name: Nombre
         preferred_language: ¿Qué idioma prefieres usar?
-        Allergies: ¿Eres alergico a algo?
+        Allergies: ¿Tienes alergias?
         Workshops: Talleres
         Your_Workshops: Tus talleres
         add_facilitator: Añadir un(a) facilitador(a)
         Policy_Agreement: Acuerdo del Espacio Mas Seguro
         Preview: Vista previa
         Stats: Estadísticas
-        Payment: Pago
         Your_Registration: Tu registro
         Your_Conferences: Tus conferencias
         Youre_Done: ¡Estás listx!
@@ -736,13 +770,15 @@ es:
         email_confirm: Confirmar correo electrónico
         housing: ¿Necesitas hospedaje?
         other: ¿Hay algo más que quisieras decirnos?
-        payment: Pago
+        Payment: Pago
+        payment: Contribución
         payment_confirm: Por favor confirma tu pago
         city: Ciudad
         date: Fecha
         email: Email
         fees_paid: Cargos pagados
         Pre_Registration_Details: ¡El Pre-Registro ya está abierto!
+        Registration_Details: ¡El Registro ya está abierto!
         can_provide_housing: ¿Puedes proporcionar hospedaje a quienes visitan la ciudad?
         Verify_Account: Verifica tu cuenta
         policy: Normatividad
@@ -754,41 +790,46 @@ es:
         administration: Administrar cuenta
         hosting: Hospedaje
         Hosting: Hospedaje
-        Workshops_You_Have_Requested: Talleres que ha solicitado para facilitar
+        Workshops_You_Have_Requested: Talleres que te ofreciste a impartir
         All_Workshops: Todos los otros talleres
+        questions: Tu Visita
+        companion: Acompañante
         host:
           considerations: Consideraciones especiales
           space: Espacio Disponible
           availability: Disponibilidad
           address: Dirección
       paragraphs:
-        Workshops_You_Have_Requested: La siguiente es una lista de todos los talleres que ha solicitado para facilitar.
-        Workshops_Looking_For_Facilitators: ¿Le gustaría ayudar a facilitar un taller propuesto por otra persona? A continuación se muestra una lista de los talleres que necesitan facilitadorxs. Si están interesadxs en ayudar, pueden facilitar uno de estos talleres.
-        Your_Workshops: La siguiente es una lista de todos los talleres que están facilitando.
+        Payment_Made: Usted ya ha realizado un pago de $ %{fees_paid}.
+        Payment_Add: ¡Gracias! Puede añadir a esta cantidad si desea realizar otra de pago a continuación.
+        companion: ¿Quieres que nos aseguremos de que la persona que viaja contigo se hospede en el mismo lugar que tú?
+        Workshops_You_Have_Requested: La siguiente es una lista de todos los talleres que pediste facilitar.
+        Workshops_Looking_For_Facilitators: Te gustaría ayudar a facilitar un taller propuesto por otra persona? A continuación se muestra una lista de los talleres que necesitan facilitadorxs. Si estás interesadx en ayudar, puedes facilitar uno de estos talleres.
+        Your_Workshops: La siguiente es una lista de todos los talleres que se están facilitando.
         host:
           address: Tu dirección y número telefónico serán compartidos con lxs visitantes y lxs organizadorxs de Bike!Bike!
           space: ¿Cuántos espacios tienes para compartir?
           availability: Lo más común, es que lxs asistentes lleguen y se vayan los días en que inicia y finaliza la conferencia pero a menudo algunxs visitantes llegan unos días antes y se van unos días después. ¿Cuándo estará disponible tu espacio?
           considerations: Lxs organizadores tratarán de emparejar de la mejor manera posible anfitriones con invitadxs. ¿Cuál de las siguientes consideraciones crees que lxs organizadores deben tener en cuenta al momento de escoger a quien vaya a quedarse contigo?
-          notes: Deja un mensaje a los organizadores respecto a lo que deben considerar al momento de escoger a la persona que vas a hospedar.
+          notes: Deja un mensaje a lxs organizadores respecto a lo que deben considerar al momento de escoger a la persona que vas a hospedar.
         Policy_Agreement: Asegurar que todos los asistentes se sientan bienvenidos, seguro y respetada en todo momento es especialmente importante para todos nosotros. Por favor asegúrese de que plenamente ha leído y entendido nuestra política de espacios más seguros a continuación, si tiene alguna pregunta o preocupación que usted puede llegar a los organizadores en cualquier momento.
         facebook_sign_in: De manera alternativa puedes registrarte usando tu cuenta de Facebook y así evitarás tener que esperar a que te enviemos un correo electrónico
         can_provide_housing: Alojar a lxs asistentes a la conferencia es una parte importante de Bike!Bike!, proporciona a mucha gente que normalmente no podría costear el hospedaje, la oportunidad de venir a la conferencia, permitiéndoles conocer nuestra ciudad y a sus residentes. Tendrás que conceder acceso a tu casa a lxs huéspedes durante la noche, teniendo en cuenta que los eventos pueden terminar hasta muy tarde. Si no se puede acceder a tu casa durante el día, debes asegurarte de comunicar estoy muy claramente a tus invitadxs.
-        Verify_Account: Con el fin de confirmar que usted es una persona real y que será capaz de contactar con usted más tarde, por favor, verifique su dirección de correo electrónico. Antes de continuar con el registro previo, le enviaremos un correo electrónico que le permitirá continuar con el proceso.
+        Verify_Account: Con el fin de confirmar que eres una persona real y que podremos contactarte posteriormente, te pedimos que por favor verifiques tu dirección de correo electrónico. Te enviaremos un mensaje para que puedas continuar con el proceso de pre-registro.
         Pre_Registration_Details: Al completar el proceso de pre-registro nos estás haciendo saber que estás interesad@ en asistir, lo que nos permite contactarte cuando tengamos noticias, y planear mejor [el evento] sabiendo quienes podrían venir. Una vez que el registro esté completamente abierto, necesitaremos hacerte algunas preguntas más en donde podrás confirmar si asistirás o no.
-        Registration_Info: Por favor llena esta forma de registro para ayudarnos a prepararnos para tu llegada a %{city}. Si tienes alguna pregunta o información que no te hayamos pedido por favor llena el campo preferencias al final de la página o utilice el enlace contáctenos.
-        Payment: Las y los esperamos del 1 al 4 de octubre del 2015.Más información
-          en: bikebike@gdlenbici.org
-        Workshops: 'Título de la actividad: Que necesitas? Tipo de espacio? Tema? Quién es responsable? Descripción? Tiempo?'
+        Registration_Details: Al completar el proceso de registro, estás confirmándonos que vendrás, lo que nos permite contactarte cuando tengamos noticias y nos posibilita planear mejor el hospedaje al saber cuántas personas vendrán. Una vez registradx, tendrás la opción de acceder a facilitar tu propio taller, y a ver detalles de los talleres ya existentes. Si ya estás registradx o preregistradx, puedes utilizas esta forma de inscripción y acceder a tu cuenta ó actualizarla.
+        Registration_Info: Por favor ayúdanos llenando esta forma de registro y así estar preparadxs para tu llegada a %{city}. Si tienes alguna duda o quieres añadir información que no te hayamos solicitado, te pedimos que llenes el campo de preferencias al final de la página o utilices el enlace “contáctanos”.
+        Payment: Gracias por completar tu registro. Nos veremos en Bike!Bike! La contribución puedes hacerla ahora o al momento de tu llegada. Sin embargo, te pedimos que lo hagas tan pronto como te sea posible para ayudarnos a financiar la conferencia.
+        Workshops: 'Título de la taller: Que necesitas? Tipo de espacio? Tema? Quién es responsable? Descripción? Tiempo?'
         Create_Workshop: En Bike!Bike! cualquiera puede facilitar un taller o simplemente proponer una idea. Lxs organizadorxs de la conferencia confirmarán si se efectúa el taller, tanto como el lugar y horario.
         Confirm_Agreement: Al hacer click en el botón "Estoy de acuerdo", estás comprometiéndote a cumplir el Acuerdo de Espacios Más Seguros de Bike!Bike!. ¡Gracias!
         Email_Participants: Esta página se usa para contactar a todxs lxs participantes. El texto se puede ingresar como [Markdown](http://daringfireball.net/projects/markdown/basics).
           Presionar "prueba" enviará el correo solamente a tí, asegurate de hacerlo y sé cuidadosx antes de presionar 'enviar'.
-        Contact_Info: Por favor déjanos conocerte un poco más
+        Contact_Info: Por favor déjanos conocerte un poco más.
         Stats: Ve quién vendrá y lo que han pagado hasta ahora. Ve en resumen cuánto hospedaje se necesita y qué prefiere comer la gente.
         confirm_email_address: Te pedimos confirmar tu dirección de correo electrónico primero, al ser confirmada podrás completar el registro, agregar talleres y pagar el donativo de registro. Si ya te registraste puedes re-confirmar tu dirección
           de correo electrónico para modificar los detalles de tu registro.
-        currency: (cantidades en dólares americanos USD)
+        currency: (cantidades en dólares estadounidenses USD)
         done: ¡Gracias por registrarte para Bike!Bike!
         email_confirm: ¡Ve a tu bandeja de entrada! Deberías ver un correo electrónico por parte de Bike!Bike! en unos momentos. Contendrá un enlace sobre el cual debes hacer click. Revisa tu bandeja de correo no deseado si no lo ves. Si tienes algún problema, por favor envía un correo electrónico a admin@bikebike.org
         participants_emailed: Tu correo ha sido enviado a todxs lxs participantes
@@ -798,14 +839,16 @@ es:
       can_provide_housing: Puedo proporcionar hospedaje
       questions:
         food:
-          meat: Carnivoro
-          vegetarian: Vegetariano
-          vegan: Vegano
+          meat: Carnívorx
+          vegetarian: Vegetarianx
+          vegan: Veganx
         bike:
           large: Grande
           medium: Mediana
           small: Pequeña
           none: Nada
+          'yes': Sí 
+          'no': 'No'
         housing:
           house: Espacio interior
           none: Yo encontraré donde dormir.
@@ -854,6 +897,7 @@ es:
         volunteer_run: Los talleres son operados por voluntarios
     workshops:
       paragraphs:
+        Delete_Workshop: La eliminación de un taller no se puede deshacer, ¿está seguro de que desea continuar?
         Proposed_Workshops: ¿Te gustaría facilitar tu propio taller? Simplemente regístrate y visita la página de Talleres. Si ya te registraste puedes acceder a la página reiniciando el proceso de registro.
         Workshops: ¿Tienes alguna habilidad emocionante que quieres compartir con nosotros? ¿Quieres charlar sobre crear espacios comunitarios seguros? ¿Quieres asegurarte de que hagamos un buen paseo el fin de semana? ¡Propón un taller! No te preocupes si no eres unx expertx, queremos escuchar acerca de las experiencias de todxs dentro de los diferentes talleres comunitarios de los que venimos con sus diferentes configuraciones.
         new_workshop: 'Anteriormente los talleres se han podido integrar en una serie de categorías amplias: organización/estructura (cómo iniciar un taller comunitario, cómo registrar una asociación sin fines de lucro, toma de decisiones mediante consenso, etc) mecánica (cómo soldar dos tandems en una tall-bike, cómo construir una masa de cambios internos con accesorios de pesca y calcetines viejos, etc) y recreación (tips de cicloturismo, yoga para ciclistas, etc.) Este año quisieramos intentar páneles, foros u otro tipo de contextos que creas que puedan facilitar el aprendizaje - sé inventivx, ¡Dinos qué quieres ver!'
@@ -863,15 +907,16 @@ es:
         facilitate_request: Por favor dile a lxs facilitadorxs actuales quién eres, porqué quieres ayudar en este taller y cómo crees que ayudarás a hacer un mejor taller. Todxs lxs facilitadorxs actuales recibirán un email y pueden hacerte más preguntas antes de aprovar o denegar tu petición. Por favor sabe que este proceso revelará tu direción de email a lxs facilitadorxs.
         facilitate_request_sent: Tu petición ha sido enviada. Recibirás un email cuando tu solicutud sea aprobada o denegada o si lxs facilitadorxs tienen alguna pregunta.
         languages: ¿En qué idioma se presentará el taller? Habrá traducción o traductor(a) disponible?
-        needs: Si necesitan alguno de los siguientes, lxs organizadorxs de la conferencia harán todo lo posible para proporcionarlos. Si tienen cualquier otra solicitud, pueden incluirlo en la sección de comentarios.
-        needs_facilitators: ¿Están buscando ayuda para su taller? Cualquier persona que está registrada para la conferencia puede ayudar a facilitar un taller en cualquier momento, pero si marcan esta casilla mejorarán las posibilidades de encontrar colaboradores.
+        needs: Si necesitan algo de lo siguiente, lxs organizadores de la conferencia harán todo lo posible para proporcionarlo. Si tienen cualquier otra solicitud, pueden incluirla en la sección de comentarios.
+        needs_facilitators: ¿Están buscando ayuda para su taller? Cualquier persona que esté registrada para la conferencia puede ayudar a facilitar un taller en cualquier momento, pero si marcan esta casilla mejorarán las posibilidades de encontrar colaboradores.
         info: Describa su taller en detalle. Resaltar el texto para modificar el formato.
       headings:
         needs_facilitators: ¿Necesitan ayuda?
+        add_facilitator: Añadir un(a) facilitador(a)
         Comments: Comentarios
         Proposed_Workshops: Talleres propuestos
         facilitators: facilitadores
-        Delete_Workshop: Eliminar Actividad
+        Delete_Workshop: Eliminar Taller
         Workshops: Talleres
         Your_Workshops: Tus talleres
         languages: Idiomas
@@ -885,7 +930,7 @@ es:
         interested_count:
           one: Una persona está interesadx en este taller.
           other: '%{count} personas están interesadxs en este taller.'
-          zero: Nadie está interesadx en este taller todavía.
+          zero: Nadie está interesadx en este taller aún.
         you_are_interested_count:
           other: Tú y otras %{count} personas están interesadxs en este taller.
           zero: Tú estás interesadx en este taller.
@@ -894,6 +939,7 @@ es:
       headings:
         Your_Account: Configuraciones de la cuenta
         email_subscribe: Notificaciones
+        Your_Conferences: Tus conferencias
       paragraphs:
         conference_registration: Buscando dar de alta o modificar su registro?
         email_subscribe: ¿Te gustaría ser notificadx acerca de próximas conferencias? Si te registraste en alguna conferencia, seguiremos enviándote notificaciones y anuncios acerca de la misma aun después de su realización.
@@ -921,10 +967,11 @@ es:
       headings:
         confirmation_sent: Confirmar correo electrónico
         confirm_email: Por favor confirma tu dirección de correo electrónico.
+        login_required: Necesario iniciar sesión
     contact:
       headings:
         contact: Envíenos una pregunta o un complemento
-        reason: ¿Qué está en contacto con nosotros acerca?
+        reason: ¿Porqué motivo nos estás contactando?
         sent: Gracias por contactarnos
       paragraphs:
         sent: Gracias por comunicarte. Te responderemos vía correo electrónico tan pronto como podamos.
@@ -934,9 +981,9 @@ es:
   forms:
     labels:
       generic:
-        title: Título de la actividad
+        title: Título de la taller
         info: Descripción
-        allergies: Alergias
+        allergies: Alérgicx
         email: Correo electrónico
         location: Ciudad y país
         name: Nombre
@@ -957,11 +1004,12 @@ es:
         tent_space: Espacios para tienda de campaña
         first_day: Primer día
         last_day: Último día
+        companion: Acompañante
     actions:
       generic:
         add_comment: Añadir comentario
         agree: Estoy en acuerdo.
-        register: Registrar
+        register: Registrarse
         edit_registration: Cambiar mi registracion
         custom_amount: Cantidad diferente
         Log_out: Salir
@@ -982,9 +1030,11 @@ es:
         continue: Continuar
         previous: Anterior
         next: Siguiente
+        reply: Responder
       aria:
         remove_interest: Haga clic en si ya no está interesado en este taller
         show_interest: Haga clic en si usted está interesado en este taller
+        add: Añadir nuevo
   links:
     footer:
       help_text:
@@ -1020,8 +1070,12 @@ es:
       Access_Denied: Acceso Denegado
       Please_Check_Email: Por favor confirma tu correo electrónico
       Please_Confirm_Email: Confirma tu correo electrónico
+      Please_Login: Por favor Iniciar sesión
     '404':
       Page_Not_Found: Crear un taller
+      Locale_Not_Available: Locale no disponible
+    '500':
+      An_Error_Occurred: Ocurrió un error
     Policy: 'Política'
     About: 'Acerca de'
     Register: 'Regístrate'
@@ -1043,6 +1097,8 @@ es:
       View: Ve este taller
       View_All: Ve todos los talleres
       Make_Owner: Hacer propietario
+      Leave: Renunciar
+      Cancel_Request: Cancelar solicitud
     conference:
       Translate: Editar versión en %{language}
       edit_registration: Mi registro
@@ -1138,6 +1194,7 @@ es:
         please_confirm: ¡Hola! Para ingresar al registro y otras funciones de Bike!Bike! confirma tu dirección de correo electrónico por favor.
     subject:
       confirm_email: E-mail de confirmación
+      pre_registration_confirmed: ¡Gracias por pre-registrarte para %{conference_title}!
       registration_confirmed: ¡Gracias por registrarte para %{conference_title}!
       workshop_facilitator_request: Solicitud para facilitar ‘%{workshop_title}’ por
         parte de %{requester_name}
@@ -1145,6 +1202,22 @@ es:
       workshop_request_denied: Tu petición para facilitar ‘%{workshop_title}’ ha sido
         denegada.
       registration_confirmed: Gracias por pre - registrarte en %{conference_title}
+      workshop_comment:
+        comment: '%{user_name} ha comentado acerca de ‘%{workshop_title}’'
+        reply: '%{user_name} respondido a tu comentario'
+      workshop_original_content_changed: El contenido original de ‘%{workshop_title}’ ha sido modificado
+      workshop_translated: La traducción al %{language} de ‘%{workshop_title}’ ha sido modificada
+    translations:
+      headings:
+        new_value: 'Nuevo valor: '
+        old_value: 'Viejo Valor: '
+        diff: 'Diferencia: '
+      paragraph:
+        workshop_translated: '%{user_name} ha modificado la traducción al %{language} de ‘%{workshop_title}’.'
+        workshop_original_content_changed: '%{user_name} ha modificado el contenido original de Mi Increíble Taller. Puede ser que las traducciones requieran actualizarse.'
+    workshop_comment:
+      paragraph:
+        user_said: '%{user_name} escribió'
     general:
       paragraph:
         see_you: ¡Nos vemos en %{conference_location}!
@@ -1152,7 +1225,7 @@ es:
     registration:
       paragraph:
         confirmed: Te has registrado exitosamente para %{conference_title}, Puedes modificar los detalles de tu registro, pagar o agregar talleres en cualquier momento reiniciando el proceso de registro. Si aún tienes que pagar o agregar tus talleres y quieres hacerlo te pedimos que lo hagas lo más pronto posible para ayudarnos a prepararnos para tu llegada.
-        pre_registered: Te has pre-registrado exitosamente para %{conference_title}. Te haremos saber cuando el registro completo esté disponible y si hay alguna novedad acerca de la conferencia sobre la que debas saber. Te invitamos a inscribirte como voluntario o facilitador de un taller tan pronto como puedas. Puedes inscribirte ahora, o cambiar tus detalles de registro en cualquier momento haciendo clic en el enlace de pre-registro nuevamente.
+        pre_confirmed: Te has pre-registrado exitosamente para %{conference_title}. Te haremos saber cuando el registro completo esté disponible y si hay alguna novedad acerca de la conferencia sobre la que debas saber. Te invitamos a inscribirte como voluntario o facilitador de un taller tan pronto como puedas. Puedes inscribirte ahora, o cambiar tus detalles de registro en cualquier momento haciendo clic en el enlace de pre-registro nuevamente.
     workshop:
       paragraph:
         request_approved: Has sido agregado como facilitador(a) para ‘%{workshop_title}’
@@ -1160,6 +1233,7 @@ es:
         request_instructions: Puedes aprobar o denegar esta petición en la página de tu taller.
         request_message: '%{user_name} ha solicitado ser facilitador(a) para ‘%{workshop_title}’'
         request_reply_instructions: También puedes responder directamente a este email para hacer preguntas adicionales.
+        view_workshop: Ver el taller aquí
   roles:
     workshops:
       facilitator:
@@ -1167,6 +1241,7 @@ es:
         collaborator: Colaborador
         requested: Solicitó
         unregistered: No registrado
+        facilitator: Facilitador(a)
   workshop:
     options:
       needs:
@@ -1185,6 +1260,3 @@ es:
         other: Otro
         race_gender: Políticas de raza, género o clase
       needs_facilitators: Se necesitan mas facilitadorxs
-  warnings:
-    messages:
-      location_corrected: Tu ubicación fue corregida de "%{original}" a "%{corrected}". Si esto no refleja tu ubicación prevista, puedes cambiarla nuevamente en el paso de "información de contacto".
