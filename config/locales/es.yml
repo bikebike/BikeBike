@@ -101,6 +101,7 @@ es:
         one: 1 hora
         other: "%{count} horas"
       x_and_y: "%{x} %{y}"
+      time_ago: "hace %{time}"
     prompts:
       day: Día
       hour: Hora

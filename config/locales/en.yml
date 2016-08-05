@@ -101,6 +101,7 @@ en:
         one: 1 second
         other: "%{count} seconds"
       x_and_y: "%{x} %{y}"
+      time_ago: "%{time} ago"
     prompts:
       day: Day
       hour: Hour
