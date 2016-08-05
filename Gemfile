@@ -3,6 +3,7 @@ source 'http://rubygems.org'
 gem 'rails', '4.2.0'
 gem 'pg'
 gem 'rake', '11.1.2'
+gem 'ruby_dep', '1.3.1' # Lock at 1.3.1 since 1.4 requires ruby 2.5. We should unlock once we upgrade the ruby version on our server
 
 gem 'rack-mini-profiler'
 
