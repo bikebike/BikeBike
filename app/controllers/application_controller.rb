@@ -241,6 +241,11 @@ class ApplicationController < LinguaFrancaApplicationController
 		expiry ||= (Time.now + 12.hours)
 		session[:confirm_uid] = user.id
 
+		unless user.locale.present?
+			user.locale = I18n.locale
+			user.save
+		end
+
 		# send the confirmation email and make sure it get sent as quickly as possible
 		UserMailer.send_mail :email_confirmation do
 			EmailConfirmation.create(user_id: user.id, expiry: expiry, url: url)
@@ -324,12 +329,8 @@ class ApplicationController < LinguaFrancaApplicationController
 			end
 			user = User.find_by_email(params[:email])
 
-			unless user
-				# not really a good UX so we should fix this later
-				#do_404
-				#return
-				user = User.new(:email => params[:email])
-				user.save!
+			unless user.present?
+				user = User.create(:email => params[:email], locale: I18n.locale)
 			end
 
 			# generate the confirmation, send the email and show the 403

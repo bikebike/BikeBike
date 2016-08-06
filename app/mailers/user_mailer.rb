@@ -10,6 +10,7 @@ class UserMailer < ActionMailer::Base
 
 	def email_confirmation(confirmation)
 		@confirmation = EmailConfirmation.find(confirmation) if confirmation.present?
+		I18n.locale = @confirmation.user.locale if @confirmation.user.locale.present?
 		@subject = _'email.subject.confirm_email','Please confirm your email address'
 		mail to: @confirmation.user.named_email, subject: @subject
 	end
@@ -18,6 +19,7 @@ class UserMailer < ActionMailer::Base
 		@registration = ConferenceRegistration.find(registration) if registration.present?
 		@conference = @registration.conference
 		@user = @registration.user
+		I18n.locale = @user.locale if @user.locale.present?
 		@subject = @conference.registration_status.to_sym == :pre ?
 			_(
 				'email.subject.pre_registration_confirmed',
@@ -47,6 +49,7 @@ class UserMailer < ActionMailer::Base
 		@workshop = Workshop.find(workshop) if workshop.present?
 		@requester = User.find(requester) if requester.present?
 		addresses = []
+		I18n.locale = @workshop.active_facilitators.first.locale if @workshop.active_facilitators.first.locale.present?
 		@workshop.active_facilitators.each do |f|
 			addresses << f.named_email
 		end
@@ -62,6 +65,7 @@ class UserMailer < ActionMailer::Base
 		@workshop = Workshop.find(workshop) if workshop.present?
 		@conference = Conference.find(@workshop.conference_id)
 		@user = User.find(user) if user.present?
+		I18n.locale = @user.locale if @user.locale.present?
 		@subject = (_'email.subject.workshop_request_approved',
 					"You have been added as a facilitator of #{@workshop.title}",
 					:vars => {:workshop_title => @workshop.title})
@@ -72,6 +76,7 @@ class UserMailer < ActionMailer::Base
 		@workshop = Workshop.find(workshop) if workshop.present?
 		@conference = @workshop.conference
 		@user = User.find(user) if user.present?
+		I18n.locale = @user.locale if @user.present? && @user.locale.present?
 		@subject = (_'email.subject.workshop_request_denied',
 					"Your request to facilitate #{@workshop.title} has been denied",
 					:vars => {:workshop_title => @workshop.title})
@@ -84,6 +89,7 @@ class UserMailer < ActionMailer::Base
 		@locale = locale
 		@locale_name = language_name(locale)
 		@user = User.find(user) if user.present?
+		I18n.locale = @user.locale if @user.present? && @user.locale.present?
 		@translator = User.find(translator) if translator.present?
 		@subject = (_'email.subject.workshop_translated',
 					"The #{@locale_name} translation for #{@workshop.title} has been modified",
@@ -98,6 +104,7 @@ class UserMailer < ActionMailer::Base
 		@workshop = Workshop.find(workshop) if workshop.present?
 		@data = data
 		@user = User.find(user) if user.present?
+		I18n.locale = @user.locale if @user.present? && @user.locale.present?
 		@translator = User.find(translator) if translator.present?
 		@subject = (_'email.subject.workshop_original_content_changed',
 					"Original content for #{@workshop.title} has been modified",
@@ -119,6 +126,7 @@ class UserMailer < ActionMailer::Base
 		@workshop = Workshop.find(workshop) if workshop.present?
 		@comment = Comment.find(comment) if comment.present?
 		@user = User.find(user) if user.present?
+		I18n.locale = @user.locale if @user.present? && @user.locale.present?
 
 		if @comment.reply?
 			@subject = (_'email.subject.workshop_comment.reply', vars: { user_name: @comment.user.name })

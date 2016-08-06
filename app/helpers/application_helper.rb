@@ -1361,6 +1361,9 @@ module ApplicationHelper
 	end
 
 	def comment(comment)
+		add_inline_script :time
+		add_js_translation('datetime.distance_in_words')
+
 		content_tag(:div, class: 'comment-body') do
 			content_tag(:h4, comment.user.name, class: 'comment-title') +
 			content_tag(:time, time(comment.created_at, :default), datetime: comment.created_at.to_s) +

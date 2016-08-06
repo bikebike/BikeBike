@@ -1009,7 +1009,7 @@ es:
     actions:
       generic:
         add_comment: Añadir comentario
-        agree: Estoy en acuerdo.
+        agree: Estoy en acuerdo
         register: Registrarse
         edit_registration: Cambiar mi registracion
         custom_amount: Cantidad diferente
