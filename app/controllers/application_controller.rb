@@ -357,7 +357,12 @@ class ApplicationController < LinguaFrancaApplicationController
 	end
 
 	def confirm(uid = nil)
-		@confirmation = EmailConfirmation.find_by_token!(params[:token])
+		@confirmation = EmailConfirmation.find_by_token(params[:token])
+
+		unless @confirmation.present?
+			@token_not_found = true
+			return do_404
+		end
 
 		confirm_user = nil
 		if uid.is_a?(User)

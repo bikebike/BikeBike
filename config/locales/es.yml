@@ -1107,6 +1107,7 @@ es:
     '404':
       title: '404: Esta página no existe'
       description: La página que buscas no pudo ser encontrada. Si piensas que esto fue un error, por favor contáctanos.
+      token_not_found: El token de inicio de sesión se ha caducado o no se encuentra. Por favor intenta acceder de nuevo.
     '403':
       title: Lo sentimos. Por el momento no tienes acceso a esta página
       description: Por el momento no tienes los permisos suficientes para acceder a esta página. Si crees que esto es un error, por favor contáctanos.

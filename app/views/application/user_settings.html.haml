@@ -13,7 +13,6 @@
 						- @conferences.each do | conference |
 							= link_to (_!conference.title), administration_step_path(conference.slug, :edit), class: :button
 
-
 				= form_tag update_settings_path do
 					= textfield :name, current_user.name, required: true, heading: 'articles.conference_registration.headings.name', big: true
 					= checkboxes :languages, User.AVAILABLE_LANGUAGES, current_user.languages || [I18n.locale], 'languages', heading: 'articles.conference_registration.headings.languages'
@@ -23,7 +22,4 @@
 						= button_tag :save, value: :save
 			- else
 				%h2=_'forms.actions.generic.login'
-				= form_tag do_confirm_path, class: 'flex-form' do
-					= emailfield :email, nil, big: true
-					= button_tag :continue, :value => :confirm_email
-					= link_to (_'forms.actions.generic.facebook_sign_in','Facebook Sign In'), auth_at_provider_path(provider: :facebook), class: [:button, :facebook]
+				= render 'login'

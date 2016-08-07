@@ -5787,6 +5787,7 @@ en:
     '404':
       description: The page you are looking for could not be found. If you think this was in error, please contact us.
       title: '404: This page doesn''t exist'
+      token_not_found: Your login token was expired or not found. Please try signing in again.
     locale_not_available:
       description: This site has yet to be translated into %{language}. We are actively looking for volunteers who can translate existing copy and new copy as we add new features. If you think you can help, please contact us!
       title: '404: %{language} Translations Missing'
