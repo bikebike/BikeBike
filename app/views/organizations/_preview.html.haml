@@ -1,5 +1,0 @@
-= link_to organization do
-	%h5
-		= organization.name
-	%figure.org-preview.preview-tile{:style => (organization.cover? ? ('background-image: url(' + organization.cover.preview.url + ')') : nil)}
-		= image_tag organization.avatar.preview.url

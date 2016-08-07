@@ -59,6 +59,10 @@ class ApplicationController < LinguaFrancaApplicationController
 			@alt_lang_urls[locale] = view_context.url_for_locale(locale) # don't show the current locale
 		end
 
+		# give each environment a different icon and theme colour so that we can easily see where we are. See https://css-tricks.com/give-development-domain-different-favicon-production
+		@favicon = Rails.env.development? || Rails.env.preview? ? "favicon-#{Rails.env.to_s}.ico" : 'favicon.ico'
+		@theme_colour = Rails.env.preview? ? '#EF57B4' : (Rails.env.development? ? '#D89E59' : '#00ADEF')
+
 		# call the base method to detect the language
 		super
 	end

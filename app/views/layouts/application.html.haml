@@ -8,8 +8,8 @@
 		%meta{ name: 'description', content: (yield_or_default :description, I18n.t('page_descriptions.home')) }
 		= csrf_meta_tags
 		= stylesheets
-		%link{ href: asset_path('favicon.ico'), rel: 'shortcut icon', type: 'image/x-icon' }
-		%link{ href: asset_path('favicon.ico'), rel: 'icon', type: 'image/x-icon' }
+		%link{ href: asset_path(@favicon), rel: 'shortcut icon', type: 'image/x-icon' }
+		%link{ href: asset_path(@favicon), rel: 'icon', type: 'image/x-icon' }
 		- @alt_lang_urls.each do |locale, url|
 			%link{ rel: :alternate, hreflang: locale, href: url }
 		- if content_for?(:og_image)
@@ -18,15 +18,13 @@
 			%meta{property: 'og:title', content: title}
 			%meta{property: 'og:type', content: 'website'}
 			%meta{property: 'og:image', content: og_image}
+		%meta{name: "theme-color", content: @theme_colour}
 		= yield :head
 
 	%body{ class: page_style }
 		#primary-content
 			= render 'shared/navbar'
 			%main#main
-				- if content_for?(:side_bar)
-					%nav#side-bar
-						= yield :side_bar
 				%header#banner=yield :banner
 				- if @submenu
 					=row do
