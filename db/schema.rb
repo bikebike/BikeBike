@@ -286,11 +286,11 @@ ActiveRecord::Schema.define(version: 20160708042511) do
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
 
   create_table "translation_records", force: :cascade do |t|
-    t.string  "locale"
-    t.integer "translator_id"
-    t.string  "key"
-    t.text    "value"
-    t.date    "created_at"
+    t.string   "locale"
+    t.integer  "translator_id"
+    t.string   "key"
+    t.text     "value"
+    t.datetime "created_at"
   end
 
   create_table "translations", force: :cascade do |t|

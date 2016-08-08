@@ -217,17 +217,20 @@ module ApplicationHelper
 	end
 
 	def url_for_locale(locale, url = nil)
+		return url unless locale.present?
+
 		unless url.present?
 			new_params = params.merge({action: (params[:_original_action] || params[:action])})
 			new_params.delete(:_original_action)
 
 			if Rails.env.development? || Rails.env.test?
-				url = url_for(new_params.merge({lang: locale.to_s}))
-			else
-				url = url_for(new_params)
+				return url_for(new_params.merge({lang: locale.to_s}))
 			end
-		end
 		
+			subdomain = Rails.env.preview? ? "preview-#{locale.to_s}" : locale.to_s
+			return url_for(new_params.merge(host: "#{subdomain}.bikebike.org"))
+		end
+
 		return url if Rails.env.development? || Rails.env.test?
 		return "https://preview-#{locale.to_s}.bikebike.org#{url}" if Rails.env.preview?
 		"https://#{locale.to_s}.bikebike.org#{url}"
