@@ -3212,6 +3212,16 @@ html[data-lingua-franca-example="html"] {
 			padding-right: 2.25em;
 			@include _(appearance, none);
 		}
+
+		&.small {
+			@include after {
+				font-size: 1em;
+			}
+
+			@include before {
+				font-size: 0.725em;
+			}			
+		}
 	}
 
 	&.full select {
@@ -3220,6 +3230,8 @@ html[data-lingua-franca-example="html"] {
 	}
 
 	&.inline-label {
+		display: inline-block;
+
 		label {
 			float: left;
 			margin-right: 0.5em;
