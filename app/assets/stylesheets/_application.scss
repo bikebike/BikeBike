@@ -3213,7 +3213,7 @@ html[data-lingua-franca-example="html"] {
 			@include _(appearance, none);
 		}
 
-		&.small {
+		&.small label {
 			@include after {
 				font-size: 1em;
 			}
