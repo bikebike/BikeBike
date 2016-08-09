@@ -49,23 +49,17 @@ class ConferencesController < ApplicationController
 				@register_template = steps[steps.find_index($1.to_sym) - 1]
 			elsif form_step == :paypal_confirm
 				if @registration.present? && @registration.payment_confirmation_token == params[:confirmation_token]
-
-					# if ENV['RAILS_ENV'] == 'test'
-					#	@amount = YAML.load(@registration.payment_info)[:amount]
-					# else
 					@amount = PayPal!.details(params[:token]).amount.total
-					# testing this does't work in test but it works in devo and prod
 					@registration.payment_info = {:payer_id => params[:PayerID], :token => params[:token], :amount => @amount}.to_yaml
-					# end
 
 					@amount = (@amount * 100).to_i.to_s.gsub(/^(.*)(\d\d)$/, '\1.\2')
 
 					@registration.save!
-					@register_template = :paypal_confirm
 				end
+
+				@page_title = 'articles.conference_registration.headings.Payment'
 				@register_template = :paypal_confirm
 			elsif form_step == :paypal_confirmed
-				#@register_template = :paypal_confirm
 				info = YAML.load(@registration.payment_info)
 				@amount = nil
 				status = nil
@@ -85,6 +79,7 @@ class ConferencesController < ApplicationController
 					@errors = :incomplete
 					@register_template = :payment
 				end
+				@page_title = 'articles.conference_registration.headings.Payment'
 			else
 
 				case form_step
