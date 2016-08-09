@@ -74,6 +74,13 @@ class ConferencesController < ApplicationController
 				if status == 'Completed'
 					@registration.registration_fees_paid ||= 0
 					@registration.registration_fees_paid += @amount
+
+					# don't complete the step unless fees have been paid
+					if @registration.registration_fees_paid > 0
+						@registration.steps_completed << :payment
+						@registration.steps_completed.uniq!
+					end
+
 					@registration.save!
 				else
 					@errors = :incomplete
@@ -170,12 +177,17 @@ class ConferencesController < ApplicationController
 				else
 					unless @registration.nil?
 						steps = registration_steps
-						@register_template = steps[steps.find_index(form_step) + 1]
+						step_index = steps.find_index(form_step)
+						@register_template = steps[step_index + 1] if step_index.present?
 
 						# have we reached a new level?
 						unless @registration.steps_completed.include? form_step.to_s
-							@registration.steps_completed ||= []
-							@registration.steps_completed << form_step
+							# this step is only completed if a payment has been made
+							unless form_step == :payment
+								@registration.steps_completed ||= []
+								@registration.steps_completed << form_step
+								@registration.steps_completed.uniq!
+							end
 
 							# workshops is the last step
 							if @register_template == :workshops
@@ -194,6 +206,8 @@ class ConferencesController < ApplicationController
 		end
 
 		steps ||= registration_steps
+
+		puts " ==== @register_template = #{@register_template}, params[:step] = #{params[:step]}, current_step = #{current_step} ==== "
 
 		# make sure we're on a valid step
 		@register_template ||= (params[:step] || current_step).to_sym
@@ -745,127 +759,6 @@ class ConferencesController < ApplicationController
 		end
 		do_404
 	end
-
-	# def registrations
-	# 	registrations = ConferenceRegistration.where(:conference_id => @conference.id)
-	# 	@registrations = registrations
-	# end
-
-	# def register_confirm
-	# 	set_conference
-	# 	@conference_registration = ConferenceRegistration.find_by(confirmation_token: params[:confirmation_token])
-	# 	if !@conference_registration.nil? && @conference_registration.conference_id == @conference.id && !@conference_registration.complete
-	# 		@conference_registration.is_confirmed = true
-	# 		@conference_registration.save!
-	# 		session[:registration] = YAML.load(@conference_registration.data)
-	# 		session[:registration][:path] = Array.new
-	# 		session[:registration][:registration_id] = @conference_registration.id
-	# 		session[:registration_step] = 'confirm'
-	# 		redirect_to action: 'register'
-	# 	else
-	# 		return do_404
-	# 	end
-	# end
-
-	# def register_pay_registration
-	# 	set_conference
-	# 	@conference_registration = ConferenceRegistration.find_by(confirmation_token: params[:confirmation_token])
-	# 	host = "#{request.protocol}#{request.host_with_port}"
-	# 	if !@conference_registration.nil? && @conference_registration.conference_id == @conference.id && @conference_registration.complete
-	# 		amount = (params[:auto_payment_amount] || params[:payment_amount]).to_f
-	# 		if amount > 0
-	# 			response = PayPal!.setup(
-	# 				PayPalRequest(amount),
-	# 				host + (@conference.url + "/register/paypal-confirm/#{@conference_registration.payment_confirmation_token}/").gsub(/\/\/+/, '/'),
-	# 				host + (@conference.url + "/register/paypal-cancel/#{@conference_registration.confirmation_token}/").gsub(/\/\/+/, '/')
-	# 			)
-	# 			redirect_to response.redirect_uri
-	# 		else
-	# 			session[:registration] = YAML.load(@conference_registration.data)
-	# 			session[:registration][:registration_id] = @conference_registration.id
-	# 			session[:registration][:path] = Array.new
-	# 			session[:registration_step] = 'pay_now'
-	# 			redirect_to action: 'register'
-	# 		end
-	# 	else
-	# 		return do_404
-	# 	end
-	# end
-
-	# def register_paypal_confirm
-	# 	set_conference
-	# 	@conference_registration = ConferenceRegistration.find_by(payment_confirmation_token: params[:confirmation_token])
-	# 	if !@conference_registration.nil? && @conference_registration.conference_id == @conference.id && @conference_registration.complete && @conference_registration.registration_fees_paid.nil?
-	# 		if !is_test?
-	# 			#@conference_registration.payment_info = {:payer_id => '1234', :token => '5678', :amount => '0.00'}.to_yaml
-	# 		#else
-	# 			@conference_registration.payment_info = {:payer_id => params[:PayerID], :token => params[:token], :amount => PayPal!.details(params[:token]).amount.total}.to_yaml
-	# 			@conference_registration.save!
-	# 		end
-	# 		session[:registration] = YAML.load(@conference_registration.data)
-	# 		session[:registration][:registration_id] = @conference_registration.id
-	# 		session[:registration][:path] = Array.new
-	# 		session[:registration_step] = 'paypal-confirmed'
-	# 		redirect_to action: 'register'
-	# 	else
-	# 		return do_404
-	# 	end
-	# end
-
-	# def register_paypal_cancel
-	# 	set_conference
-	# 	@conference_registration = ConferenceRegistration.find_by(confirmation_token: params[:confirmation_token])
-	# 	if !@conference_registration.nil? && @conference_registration.conference_id == @conference.id && @conference_registration.complete && @conference_registration.payment_info.nil?
-	# 		session[:registration] = YAML.load(@conference_registration.data)
-	# 		redirect_to action: 'register'
-	# 	end
-	# end
-
-	# def register_step
-	# 	set_conference
-	# 	data = params
-	# 	if params[:conference][:user][:email]
-	# 		user = User.find_by(:email => params[:conference][:user][:email])
-	# 		data[:conference][:user][:username] = user.username
-	# 	end
-	# 	render json: data
-	# end
-
-	# def add_field
-	# 	set_conference
-	# 	field = RegistrationFormField.find(params[:field])
-	# 	@conference.registration_form_fields << field
-
-	# 	@registration_form_fields = RegistrationFormField.where(["id NOT IN (?)", @conference.registration_form_fields.map(&:id)])
-
-	# 	form = render_to_string :partial => 'registration_form_fields/conference_form'
-	# 	list = render_to_string :partial => 'registration_form_fields/list'
-	# 	render json: {form: form, list: list}
-	# end
-
-	# def remove_field
-	# 	set_conference
-	# 	field = RegistrationFormField.find(params[:field])
-	# 	@conference.registration_form_fields.delete(field)
-
-	# 	@registration_form_fields = RegistrationFormField.where(["id NOT IN (?)", @conference.registration_form_fields.map(&:id)])
-
-	# 	form = render_to_string :partial => 'registration_form_fields/conference_form'
-	# 	list = render_to_string :partial => 'registration_form_fields/list'
-	# 	render json: {form: form, list: list}
-	# end
-
-	# def reorder
-	# 	set_conference
-	# 	params[:registration_form_field_id].each do |key, value|
-	# 		update_field_position(value.to_i, params[:position][key].to_i)
-	# 	end
-	# 	render json: [].to_json
-	# end
-
-	# def form
-	# 	set_conference
-	# end
 
 	def workshops
 		set_conference
