@@ -979,7 +979,7 @@ en:
         Confirm_Agreement: By clicking the "I Agree" button, you are pledging to do your best to uphold Bike!Bike!'s safer space agreement. Thank you!
         Registration_Info: Please fill in this registration form to help us prepare for your arrival to %{city}. If you wish to ask questions or tell us information we did not ask, please fill in the preferences field at the bottom of the page or use the contact us link.
         Payment: Thank you for completing your registration. We'll see you at Bike!Bike! Payment is by donation and can be done now or upon arrival but to help us fund the conference, we ask that you pay the registration donation as soon as you can.
-        Payment_Made: You have already made a payment of $%{fees_paid}.
+        Payment_Made: You have made a payment of $%{fees_paid}.
         Payment_Add: Thank you! You may add to this amount if you wish by making another payment below.
         currency: "(amounts are in USD)"
         email_confirm: Go to your inbox! You should see an email from Bike!Bike! in just a few moments. There will be a link in the email for you to click on. Check your spam box if you do not see it. If you encounter any problems, please contact us.
@@ -988,8 +988,8 @@ en:
         Stats: Check Out who's coming and what they've paid so far. See at a glance how much accommodation is needed and what people prefer to eat.
         done: Thank you for registering for Bike!Bike!
         Email_Participants: This page is used to contact all participants. Text can be entered as [Markdown](http://daringfireball.net/projects/markdown/basics). Pressing 'test' will send the email only to you, make sure you do this and use caution in general before pressing 'send'
-        payment_confirm: You are about to confirm your payment of %{amount} for registration.
-        participants_emailed: Your email has been sent to all participants of %{conference_title}.
+        payment_confirm: You are about to confirm your payment of $%{amount} for registration.
+        participants_emailed: Your email has been sent to all participants of %{conference_title}.
         workshops: You can now take a look at proposed workshops and even propose one yourself if you like.
         Contact_Info: Please let us know a little bit about you.
         Create_Workshop: At Bike!Bike! anyone can lead a workshop or just propose and idea that someone else can volunteer to lead. If, where, and when the workshop will be scheduled will ultimately be decided by the conference organizers.
