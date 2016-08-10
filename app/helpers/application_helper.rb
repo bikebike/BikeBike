@@ -754,6 +754,8 @@ module ApplicationHelper
 			belongs_to_periods = []
 			belongs_to_periods << :before if day <= conference.start_date
 			belongs_to_periods << :after if day >= conference.end_date
+			belongs_to_periods << :before_plus_one if day <= (conference.start_date + 1.day)
+			belongs_to_periods << :after_minus_one if day >= (conference.end_date - 1.day)
 			belongs_to_periods << :during if day >= conference.start_date && day <= conference.end_date
 			days << [date(day.to_date, format || :span_same_year_date_1), day] if belongs_to_periods.include?(period)
 		end
