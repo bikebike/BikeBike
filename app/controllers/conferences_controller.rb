@@ -183,7 +183,7 @@ class ConferencesController < ApplicationController
 						# have we reached a new level?
 						unless @registration.steps_completed.include? form_step.to_s
 							# this step is only completed if a payment has been made
-							unless form_step == :payment
+							if form_step != :payment || (@registration.registration_fees_paid || 0) > 0
 								@registration.steps_completed ||= []
 								@registration.steps_completed << form_step
 								@registration.steps_completed.uniq!
