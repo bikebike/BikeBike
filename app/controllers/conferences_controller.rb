@@ -207,8 +207,6 @@ class ConferencesController < ApplicationController
 
 		steps ||= registration_steps
 
-		puts " ==== @register_template = #{@register_template}, params[:step] = #{params[:step]}, current_step = #{current_step} ==== "
-
 		# make sure we're on a valid step
 		@register_template ||= (params[:step] || current_step).to_sym
 
