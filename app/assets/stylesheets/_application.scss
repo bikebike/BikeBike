@@ -605,6 +605,13 @@ input {
 		}
 	}
 
+	&.inline input[type="radio"] + label {
+		@include after {
+    		top: -0.15em;
+    		left: 0.05em;
+		}
+	}
+
 	.other {
 		position: absolute;
 		top: 0;
@@ -643,11 +650,6 @@ input {
 
 	label {
 		min-width: 7.5em;
-
-		@include after {
-			top: -0.15em;
-			left: 0.05em;
-		}
 	}
 }
 
@@ -3687,19 +3689,21 @@ html[data-ontop] {
 			border: 0.1em solid;
 		}
 
-		&.inline {			
+		&.inline {
 			label {
 				float: left;
-
-				@include after {
-					top: -0.025em;
-					left: 0.175em;
-				}
 			}
 
 			&.vertical {
 				label {
 					float: none;
+				}
+			}
+
+			input[type="radio"] + label {
+				@include after {
+					top: -0.025em;
+					left: 0.175em;
 				}
 			}
 		}
