@@ -338,7 +338,7 @@ class ApplicationController < LinguaFrancaApplicationController
 			end
 
 			# generate the confirmation, send the email and show the 403
-			referrer = params[:dest] || request.referer.gsub(/^.*?\/\/.*?\//, '/')
+			referrer = params[:dest] || (request.present? && request.referer.present? ? request.referer.gsub(/^.*?\/\/.*?\//, '/') : settings_path)
 			generate_confirmation(params[:email], referrer)
 			template = 'login_confirmation_sent'
 			@page_title ||= 'page_titles.403.Please_Check_Email'
