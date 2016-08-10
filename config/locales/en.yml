@@ -870,6 +870,8 @@ en:
             vegetarian: Vegetarians
             vegan: Vegans
           registrations: Number of registrations
+          completed_registrations: Number of registrations
+          incomplete_registrations: Incomplete registrations
       housing:
         headings:
           guests: Guests

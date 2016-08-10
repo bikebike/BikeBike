@@ -349,19 +349,26 @@ class ConferencesController < ApplicationController
 					end
 				else
 					@registration_count = @registrations.size
-					@bikes = @registrations.count { |r| r.bike == 'yes' }
-					@donation_count =0
+					@completed_registrations = 0
+					@bikes = 0#@registrations.count { |r| r.bike == 'yes' }
+					@donation_count = 0
 					@donations = 0
 					@food = { meat: 0, vegan: 0, vegetarian: 0, all: 0 }
 					@registrations.each do | r |
-						if r.food.present?
+						if r.steps_completed.include? 'questions'
+							@completed_registrations += 1
+
+							@bikes += 1 if r.bike == 'yes'
+
+							#if r.food.present?
 							@food[r.food.to_sym] += 1
 							@food[:all] += 1
-						end
+							#end
 
-						if r.registration_fees_paid.present? && r.registration_fees_paid > 0
-							@donation_count += 1
-							@donations += r.registration_fees_paid
+							if r.registration_fees_paid.present? && r.registration_fees_paid > 0
+								@donation_count += 1
+								@donations += r.registration_fees_paid
+							end
 						end
 					end
 				end
