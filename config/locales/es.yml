@@ -927,6 +927,7 @@ es:
         space: Espacio
         theme: Tema
         facilitate: Solicita ser facilitador(a) de ‘%{workshop_title}’
+        Schedule: Programar
       info:
         read_more: Leer más
         interested_count:
