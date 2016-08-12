@@ -90,8 +90,7 @@ class ApplicationController < LinguaFrancaApplicationController
 	end
 
 	def robots
-		robot = is_production? && !is_test_server? ? 'live' : 'dev'
-		render :text => File.read("config/robots-#{robot}.txt"), :content_type => 'text/plain'
+		render :text => File.read("config/robots-#{Rails.env.production? ? 'live' : 'dev'}.txt"), :content_type => 'text/plain'
 	end
 
 	def humans
