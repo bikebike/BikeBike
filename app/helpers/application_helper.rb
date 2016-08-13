@@ -656,12 +656,6 @@ module ApplicationHelper
 		link_to "<span class=\"title\">#{title}</span>".html_safe, link, :class => classes
 	end
 
-	def language_name(locale, original_language = false)
-		args = {}
-		args[:locale] = locale if original_language
-		_("languages.#{locale}", args)
-	end
-
 	def date(date, format = :long)
 		I18n.l(date.is_a?(String) ? Date.parse(date) : date, :format => format)
 	end
