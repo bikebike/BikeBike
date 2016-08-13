@@ -163,6 +163,10 @@ en:
           unknown: 'Please include your city or town, we could not find a locality from "%{value}"'
         name:
           empty: 'Please enter a valid name'
+        address:
+          empty: 'Please enter an address'
+        space:
+          empty: 'Please select a space'
     template:
       body: 'There were problems with the following fields:'
       header:
@@ -861,6 +865,7 @@ en:
   articles:
     admin:
       stats:
+        description: On this page you can view a breakdown of the registration process so far as well as download more detailed data in spreadsheets.
         headings:
           bikes: Bikes
           donation_count: Number of donations
@@ -872,25 +877,49 @@ en:
           registrations: Number of registrations
           completed_registrations: Number of registrations
           incomplete_registrations: Incomplete registrations
+      meals:
+        description: On this page you can schedule the meals that you will be serving.
+        no_locations_warning: Before you can add meals, you must first add locations.
+      events:
+        description: On this page you can schedule events. Events are any type of event that isn't a meal or a workshop. You can scheulde group meetings, parties, or group ride for example.
+        no_locations_warning: Before you can add events, you must first add locations.
+      schedule:
+        description: On this page you can schedule workshops and publish your schedule to the front page.
+        no_locations_warning: Before you can schedule workshops, you must first add locations.
       housing:
+        description: The housing tool can be used to help you set up visitors that have requested to be housed with a host.
         headings:
           guests: Guests
           email: Email
           housing: Preference
       locations:
+        description: Locations are used to schedule workshops, events, and meals. Once your schedule is published, users will be able to see the name and address and be given a link to a map so that they can find their way.
         headings:
           add_event: Add Event
           add_location: Add Location
+          add_meal: Add a Meal
           amenities: Amenities
           edit_event: Edit Event
           edit_location: Edit Location
+        paragraphs:
+          title: Give your location a title, for example "The Bike Kitchen" or "Smith Park"
+          meal_title: Give your meal a title, for example "Breakfast"
+          meal_info: Describe your meal. This will only be visible to conference hosts.
+          address: Enter the street address (without the city) of the location 
+          space: The space type will help you to schedule workshops. If workshops will occur in this space, select "Meeting Room", "Repair Space", or "Outdoor Space" as you feel this space best matches. Otherwise select event space.
+          amenities: Amenities match up to workshop needs. Selecting the amenities will help you match up a workshop with this location when a facilitator has requested a specific amenity.
       edit:
+        description: Edit basic info about your conference. Here you can open or close registration, edit what shows up on the front page, set up your payment details, and add members to your organization so that they can access these pages too.
         headings:
           host_organizations: Host Organizations
           members: Organization Members
           paypal_info: PayPal Info
         paragraphs:
           paypal_info: PayPal info is used for donations and fee payments. You must enter all fields to enable online fee payments, see the <a href="https://developer.paypal.com/docs/classic/api/apiCredentials/#creating-an-api-signature" target="_blank">PayPal API credential guide</a> for more information.
+      broadcast:
+        description: The broadcast tool is used to contact users through email. You can send messages en masse to select groups of users.
+      workshop_times:
+        description: Before you scheulde workshops, you must first create blocks of time when the workshops will be.
     contact:
       headings:
         contact: Send us a question or a complement
@@ -1020,6 +1049,8 @@ en:
             test: Please take a look at this preview to ensure that you want to send this email. Clicking ‘Test’ will send the email only to you. Only after that then the email will be set to %{send_to_count} people. 
             preview: Clicking ‘Send’ will send this message to %{send_to_count} people. Please confirm that you have verified that the test email sent to you is what you want to be sent.
             sent: Your message has been sent.
+          events:
+            info: Describe your event for anyone attending the conference.
         companion: Is there someone who you would like us to ensure that you are housed with?
         arrival_and_departure: If you don't need housing, just tell us how long you plan to hang out with Bike!Bike!
       host:

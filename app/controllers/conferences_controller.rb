@@ -267,6 +267,7 @@ class ConferencesController < ApplicationController
 		when :policy
 			@page_title = 'articles.conference_registration.headings.Policy_Agreement'
 		when :administration
+			@warnings << flash[:error] if flash[:error].present?
 			@admin_step = params[:admin_step] || 'edit'
 			return do_404 unless view_context.valid_admin_steps.include?(@admin_step.to_sym)
 			@page_title = 'articles.conference_registration.headings.Administration'
@@ -336,7 +337,7 @@ class ConferencesController < ApplicationController
 							],
 						column_types: {
 								name: :bold,
-								date: :date,
+								#date: :date,
 								arrival: [:date, :day],
 								departure: [:date, :day],
 								registration_fees_paid: :money
@@ -360,7 +361,6 @@ class ConferencesController < ApplicationController
 							},
 						data: []
 					}
-					#@registrations.sort_by! { |a, b| a.title.downcase <=> b.title.downcase }
 					@registrations.each do | r |
 						user = r.user_id ? User.where(id: r.user_id).first : nil
 						if user.present?
@@ -378,14 +378,15 @@ class ConferencesController < ApplicationController
 								end
 							end
 							steps = r.steps_completed || []
+
 							@excel_data[:data] << {
 								name: user.firstname || '',
 								email: user.email || '',
 								status: (view_context._"articles.conference_registration.terms.registration_status.#{(steps.include? 'questions') ? 'registered' : ((steps.include? 'contact_info') ? 'preregistered' : 'unregistered')}"),
-								date: r.created_at ? r.created_at.strftime("%F %T") : '',
+								date: r.created_at,# ? r.created_at.strftime("%F %T") : '',
 								city: r.city || '',
-								preferred_language: user.locale.present? ? (view_context.language user.locale) : '',
-								languages: ((r.languages || []).map { |x| view_context.language x }).join(', ').to_s,
+								preferred_language: user.locale.present? ? (view_context.language_name user.locale) : '',
+								languages: ((r.languages || []).map { |x| view_context.language_name x }).join(', ').to_s,
 								arrival: r.arrival ? r.arrival.strftime("%F %T") : '',
 								departure: r.departure ? r.departure.strftime("%F %T") : '',
 								housing: r.housing || '',
@@ -619,6 +620,7 @@ class ConferencesController < ApplicationController
 			end
 			return redirect_to administration_step_path(@this_conference.slug, :housing)
 		when 'broadcast'
+			@hide_description = true
 			@subject = params[:subject]
 			@body = params[:body]
 			@send_to = params[:send_to]
@@ -660,11 +662,16 @@ class ConferencesController < ApplicationController
 				return render 'conferences/register'
 			when 'save'
 				location = EventLocation.find_by! id: params[:id].to_i, conference_id: @this_conference.id
-				location.title = params[:title]
-				location.address = params[:address]
-				location.amenities = (params[:needs] || {}).keys.to_json
-				location.space = params[:space]
-				location.save!
+				empty_param = get_empty(params, [:title, :address, :space])
+				if empty_param.present?
+					flash[:error] = (view_context._"errors.messages.fields.#{empty_param.to_s}.empty")
+				else
+					location.title = params[:title]
+					location.address = params[:address]
+					location.amenities = (params[:needs] || {}).keys.to_json
+					location.space = params[:space]
+					location.save!
+				end
 				return redirect_to administration_step_path(@this_conference.slug, :locations)
 			when 'cancel'
 				return redirect_to administration_step_path(@this_conference.slug, :locations)
@@ -673,13 +680,18 @@ class ConferencesController < ApplicationController
 				location.destroy
 				return redirect_to administration_step_path(@this_conference.slug, :locations)
 			when 'create'
-				EventLocation.create(
-						conference_id: @this_conference.id,
-						title: params[:title],
-						address: params[:address],
-						amenities: (params[:needs] || {}).keys.to_json,
-						space: params[:space]
-					)
+				empty_param = get_empty(params, [:title, :address, :space])
+				if empty_param.present?
+					flash[:error] = (view_context._"errors.messages.fields.#{empty_param.to_s}.empty")
+				else
+					EventLocation.create(
+							conference_id: @this_conference.id,
+							title: params[:title],
+							address: params[:address],
+							amenities: (params[:needs] || {}).keys.to_json,
+							space: params[:space]
+						)
+				end
 				return redirect_to administration_step_path(@this_conference.slug, :locations)
 			end
 		when 'meals'
@@ -1442,6 +1454,15 @@ class ConferencesController < ApplicationController
 			registration ||= ConferenceRegistration.find(session[:registration][:registration_id])
 			data ||= YAML.load(registration.data)
 			UserMailer.conference_registration_payment_received(@conference, data, registration).deliver
+		end
+
+		def get_empty(hash, keys)
+			keys = [keys] unless keys.is_a?(Array)
+			keys.each do | key |
+				puts " ===== #{key} = #{hash[key]} ===== "
+				return key unless hash[key].present?
+			end
+			return nil
 		end
 
 	def PayPal!

@@ -618,6 +618,11 @@ module ApplicationHelper
 		return hash.length > 1 ? _("geography.formats.#{hash.keys.join('_')}", locale: locale, vars: hash) : hash.values.first
 	end
 
+	def location_link(location)
+		return '' unless location.present? && location.address.present?
+		content_tag(:a, (_!location.address), href: "http://www.google.com/maps/place/#{location.latitude},#{location.longitude}")
+	end
+
 	def same_city?(location1, location2)
 		return false unless location1.present? && location2.present?
 
@@ -651,7 +656,7 @@ module ApplicationHelper
 		link_to "<span class=\"title\">#{title}</span>".html_safe, link, :class => classes
 	end
 
-	def language(locale, original_language = false)
+	def language_name(locale, original_language = false)
 		args = {}
 		args[:locale] = locale if original_language
 		_("languages.#{locale}", args)
@@ -828,7 +833,11 @@ module ApplicationHelper
 	end
 
 	def location_name(id)
-		location = EventLocation.find(id)
+		begin
+			location = EventLocation.find(id)
+		rescue
+			return ''
+		end
 		return '' unless location.present?
 		return location.title
 	end
@@ -1193,6 +1202,9 @@ module ApplicationHelper
 			end
 		elsif options[:label] != false
 			html += label_tag id, (_"forms.labels.generic.#{name}")
+		elsif options[:type] == :select
+			# add an empty label so that the drop down button will still appear
+			html += label_tag id, ''
 		end
 		input_options = {
 				id: id,
@@ -1302,18 +1314,26 @@ module ApplicationHelper
 			values = values.present? ? values.map(&:to_s) : [] unless is_single
 			boxes = boxes.map(&:to_s)
 		end
+
+		# convert the required value into a pure boolean
+		required = !!options[:required]
+
 		boxes.each do | box |
 			checked = (is_single ? values.present? : values.include?(box))
 			values -= [box] if checked && !is_single
 			id = nil
 			if options[:radiobuttons].present?
 				id = unique_id("#{name.to_s}_#{box}")
-				boxes_html += radio_button_tag(name, box, checked, id: id)
+				boxes_html += radio_button_tag(name, box, checked, id: id, required: required)
 			else
 				_name = (is_single ? name : "#{name.to_s}[#{box}]")
 				id = unique_id(_name)
-				boxes_html += check_box_tag(_name, 1, checked, data: { toggles: options[:toggles] }.compact, id: id)
+				boxes_html += check_box_tag(_name, 1, checked, data: { toggles: options[:toggles] }.compact, id: id, required: required)
 			end
+			
+			# we only need the required attribute on one element
+			required = false
+
 			if is_single
 				label = _(label_key.to_s)
 			elsif box.is_a?(Integer)

@@ -123,6 +123,10 @@ table, .table {
 	tbody th {
 		width: 0.1rem;
 	}
+
+	&.admin-edit {
+		width: 100%;
+	}
 }
 
 .table {
@@ -496,7 +500,7 @@ input {
 }
 
 .input-field-help {
-	margin: 0.5em 1em 0;
+	margin: 0.5em 1em;
 	line-height: 1.3333em;
 	font-size: 1.125em;
 }
@@ -760,6 +764,7 @@ form {
 #main .columns td.form,
 #main .columns .table-td.form {
 	border: 0;
+	width: 1px;
 	
 	form {
 		margin: 0;
@@ -768,6 +773,7 @@ form {
 	button {
 		display: block;
 		width: 100%;
+		white-space: nowrap;
 
 		+ button {
 			margin-top: 0.5em;

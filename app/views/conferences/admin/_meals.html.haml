@@ -1,30 +1,34 @@
-- if @this_conference.meals.present?
-	%table.meals
-		%tr
-			%th=_'forms.labels.generic.title'
-			%th=_'forms.labels.generic.info'
-			%th=_'forms.labels.generic.event_location'
-			%th=_'forms.labels.generic.day'
-			%th=_'forms.labels.generic.time'
-			%th.form
-		- @meals.each do | time, meal |
+- if @this_conference.event_locations.present?
+	- if @this_conference.meals.present?
+		%table.meals.admin-edit
 			%tr
-				%th
-					=_!(meal['title'] || '')
-				%td=_!(meal['info'] || '')
-				%td=_!location_name(meal['location'].to_i)
-				%td=date(meal['day'], :weekday)
-				%td=time(meal['time'].to_f)
-				%td.form
-					= form_tag administration_update_path(@this_conference.slug, :meals) do
-						= hidden_field_tag :meal, time
-						= button_tag :delete, value: :delete, class: [:small, :delete]
-= form_tag administration_update_path(@this_conference.slug, :meals) do
-	.flex-inputs
-		= location_select nil, small: true, stretch: true
-		= day_select nil, small: true, format: :weekday
-		= time_select nil, small: true
-	= textfield :title, nil, required: true, big: true
-	= textfield :info, nil
-	.actions.next-prev
-		= button_tag :add_meal, value: :add_meal
+				%th=_'forms.labels.generic.title'
+				%th=_'forms.labels.generic.info'
+				%th=_'forms.labels.generic.event_location'
+				%th=_'forms.labels.generic.day'
+				%th=_'forms.labels.generic.time'
+				%th.form
+			- @meals.each do | time, meal |
+				%tr
+					%th
+						=_!(meal['title'] || '')
+					%td=_!(meal['info'] || '')
+					%td=_!location_name(meal['location'].to_i)
+					%td=date(meal['day'], :weekday)
+					%td=time(meal['time'].to_f)
+					%td.form
+						= form_tag administration_update_path(@this_conference.slug, :meals) do
+							= hidden_field_tag :meal, time
+							= button_tag :delete, value: :delete, class: [:small, :delete]
+	= form_tag administration_update_path(@this_conference.slug, :meals) do
+		%h4=_'articles.admin.locations.headings.add_meal', :t
+		.flex-inputs
+			= location_select nil, small: true, stretch: true
+			= day_select nil, small: true, format: :weekday
+			= time_select nil, small: true
+		= textfield :title, nil, required: true, big: true, help: 'articles.admin.locations.paragraphs.meal_title'
+		= textfield :info, nil, help: 'articles.admin.locations.paragraphs.meal_info'
+		.actions.next-prev
+			= button_tag :add_meal, value: :add_meal
+- else
+	.warning-info=_'articles.admin.meals.no_locations_warning'

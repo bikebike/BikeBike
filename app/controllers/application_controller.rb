@@ -201,7 +201,7 @@ class ApplicationController < LinguaFrancaApplicationController
 		params[:_original_action] = params[:action]
 		params[:action] = 'error-locale-not-available'
 		@page_title = 'page_titles.404.Locale_Not_Available'
-		@main_title_vars = { vars: { language: view_context.language(locale) } }
+		@main_title_vars = { vars: { language: view_context.language_name(locale) } }
 		@main_title = 'error.locale_not_available.title'
 		render 'application/locale_not_available', status: 404
 	end
@@ -507,7 +507,7 @@ class ApplicationController < LinguaFrancaApplicationController
 
 				if @schedule[day].present? && @schedule[day][:times].present? && @schedule[day][:times][block['time'].to_f].present?
 					@schedule[day][:times][block['time'].to_f][:item][:workshops][workshop.event_location_id] = { workshop: workshop, status: { errors: [], warnings: [], conflict_score: nil } }
-					@schedule[day][:locations][workshop.event_location_id] ||= workshop.event_location
+					@schedule[day][:locations][workshop.event_location_id] ||= workshop.event_location if workshop.event_location.present?
 				end
 			end
 		end
@@ -613,18 +613,19 @@ class ApplicationController < LinguaFrancaApplicationController
 								end
 							end
 
+							location = workshop_i.event_location || EventLocation.new
 							needs = JSON.parse(workshop_i.needs || '[]').map &:to_sym
-							amenities = JSON.parse(workshop_i.event_location.amenities || '[]').map &:to_sym
+							amenities = JSON.parse(location.amenities || '[]').map &:to_sym
 
 							needs.each do | need |
 								@schedule[day][:times][time][:item][:workshops][ids[i]][:status][:errors] << {
 										name: :need_not_available,
 										need: need,
-										location: workshop_i.event_location,
+										location: location,
 										workshop: workshop_i,
 										i18nVars: {
 											need: need.to_s,
-											location: workshop_i.event_location.title,
+											location: location.title,
 											workshop_title: workshop_i.title
 										}
 									} unless amenities.include? need
