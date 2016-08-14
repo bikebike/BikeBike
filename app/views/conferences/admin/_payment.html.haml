@@ -1,0 +1,20 @@
+= form_tag administration_update_path(@this_conference.slug, :payment) do
+	= textarea :payment_message, (@this_conference.payment_message! || "<p>#{I18n.t('articles.conference_registration.paragraphs.Payment', locale: @this_conference.locale)}</p>"), help: 'articles.conference_registration.paragraphs.admin.payment.message', lang: @this_conference.locale, edit_on: :focus, short: true
+	- I18n.backend.enabled_locales.each do | locale |
+		- if locale.to_s != @this_conference.locale.to_s
+			= textarea "payment_message_translations[#{locale.to_s}]", (@this_conference._payment_message(locale) || "<p>#{I18n.t('articles.conference_registration.paragraphs.Payment', locale: locale)}</p>"), label: 'translate.pages.Locale_Translation', vars: { language: _("languages.#{locale}") }, lang: locale, edit_on: :focus, short: true
+
+	%h4=_'articles.admin.payment.headings.payment_amounts', :t
+	= fieldset :payment_amounts, help: 'articles.admin.payment.paragraphs.payment_amounts' do
+		- payment_amounts = @this_conference.payment_amounts.present? ? @this_conference.payment_amounts : Conference.default_payment_amounts
+		- for i in 1..5 do
+			= numberfield "payment_amounts[#{i - 1}]", payment_amounts[i - 1], step: 0.01, min: 0.00, label: false
+
+	%h4=_'articles.admin.edit.headings.paypal_info', :t
+	%p=(_'articles.admin.edit.paragraphs.paypal_info', :p).html_safe
+	= emailfield :paypal_email_address, @this_conference.paypal_email_address || @this_conference.email_address || (@this_conference.organizations.present? && @this_conference.organizations.first.present? ? @this_conference.organizations.first.email_address : nil)
+	= textfield :paypal_username, @this_conference.paypal_username
+	= passwordfield :paypal_password, @this_conference.paypal_password
+	= textfield :paypal_signature, @this_conference.paypal_signature
+	.actions.right
+		= button_tag :save, value: :save

@@ -889,6 +889,7 @@ en:
       housing:
         description: The housing tool can be used to help you set up visitors that have requested to be housed with a host.
         headings:
+          hosts: Hosts
           guests: Guests
           email: Email
           housing: Preference
@@ -918,8 +919,16 @@ en:
           paypal_info: PayPal info is used for donations and fee payments. You must enter all fields to enable online fee payments, see the <a href="https://developer.paypal.com/docs/classic/api/apiCredentials/#creating-an-api-signature" target="_blank">PayPal API credential guide</a> for more information.
       broadcast:
         description: The broadcast tool is used to contact users through email. You can send messages en masse to select groups of users.
+      broadcast_sent:
+        description: Your message has been sent.
       workshop_times:
         description: Before you scheulde workshops, you must first create blocks of time when the workshops will be.
+      payment:
+        description: Here you can set up how users will pay you for registration
+        headings:
+          payment_amounts: Suggested Payment Amounts
+        paragraphs:
+          payment_amounts: Enter up to five suggested payment amounts. Users will still be able to select any amount including none but these amounts will show up as easy to select buttons on the 'Donations' page.
     contact:
       headings:
         contact: Send us a question or a complement
@@ -1005,13 +1014,15 @@ en:
         admin:
           edit:
             info: Info
+          payment:
+            message: XXX
         companion: Companion
       paragraphs:
         Policy_Agreement: Ensuring that all attendees feel welcome, safe, and respected at all times is especially important to us all. Please ensure that you have fully read and understand our safer spaces policy below, if you have any questions or concerns you can reach out to the organizers at any time.
         Confirm_Agreement: By clicking the "I Agree" button, you are pledging to do your best to uphold Bike!Bike!'s safer space agreement. Thank you!
         Registration_Info: Please fill in this registration form to help us prepare for your arrival to %{city}. If you wish to ask questions or tell us information we did not ask, please fill in the preferences field at the bottom of the page or use the contact us link.
         Payment: Thank you for completing your registration. We'll see you at Bike!Bike! Payment is by donation and can be done now or upon arrival but to help us fund the conference, we ask that you pay the registration donation as soon as you can.
-        Payment_Made: You have made a payment of $%{fees_paid}.
+        Payment_Made: You have made a payment of %{fees_paid}.
         Payment_Add: Thank you! You may add to this amount if you wish by making another payment below.
         currency: "(amounts are in USD)"
         email_confirm: Go to your inbox! You should see an email from Bike!Bike! in just a few moments. There will be a link in the email for you to click on. Check your spam box if you do not see it. If you encounter any problems, please contact us.
@@ -1048,9 +1059,10 @@ en:
           broadcast:
             test: Please take a look at this preview to ensure that you want to send this email. Clicking ‘Test’ will send the email only to you. Only after that then the email will be set to %{send_to_count} people. 
             preview: Clicking ‘Send’ will send this message to %{send_to_count} people. Please confirm that you have verified that the test email sent to you is what you want to be sent.
-            sent: Your message has been sent.
           events:
             info: Describe your event for anyone attending the conference.
+          payment:
+            message: This is the text that will be displayed on the 'Donation' page.
         companion: Is there someone who you would like us to ensure that you are housed with?
         arrival_and_departure: If you don't need housing, just tell us how long you plan to hang out with Bike!Bike!
       host:
@@ -1196,6 +1208,7 @@ en:
   forms:
     labels:
       generic:
+        payment_message: Payment Message
         other: Disabilities, housing preferences, etc.
         email: Email address
         allergies: Allergies
@@ -1361,11 +1374,14 @@ en:
         Workshops: Workshops
         Stats: Stats
         Broadcast: Broadcast
+        Payment: Payment
         Edit: Edit Conference
       admin:
         Edit: Edit
         Stats: Stats
+        Payment: Payment
         Broadcast: Broadcast
+        Broadcast_Sent: Broadcast Sent
         Housing: Housing
         Locations: Locations
         Meals: Meals

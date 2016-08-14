@@ -802,7 +802,7 @@ es:
           availability: Disponibilidad
           address: Dirección
       paragraphs:
-        Payment_Made: Usted ya ha realizado un pago de $ %{fees_paid}.
+        Payment_Made: Usted ya ha realizado un pago de %{fees_paid}.
         Payment_Add: ¡Gracias! Puede añadir a esta cantidad si desea realizar otra de pago a continuación.
         companion: ¿Quieres que nos aseguremos de que la persona que viaja contigo se hospede en el mismo lugar que tú?
         Workshops_You_Have_Requested: La siguiente es una lista de todos los talleres que pediste facilitar.
@@ -1034,6 +1034,7 @@ es:
         previous: Anterior
         next: Siguiente
         reply: Responder
+        close: Cerca
       aria:
         remove_interest: Haga clic en si ya no está interesado en este taller
         show_interest: Haga clic en si usted está interesado en este taller

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160708042511) do
+ActiveRecord::Schema.define(version: 20160814000940) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -137,6 +137,8 @@ ActiveRecord::Schema.define(version: 20160708042511) do
     t.string   "registration_status"
     t.json     "meals"
     t.json     "workshop_blocks"
+    t.text     "payment_message"
+    t.json     "payment_amounts"
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -286,11 +288,11 @@ ActiveRecord::Schema.define(version: 20160708042511) do
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
 
   create_table "translation_records", force: :cascade do |t|
-    t.string   "locale"
-    t.integer  "translator_id"
-    t.string   "key"
-    t.text     "value"
-    t.datetime "created_at"
+    t.string  "locale"
+    t.integer "translator_id"
+    t.string  "key"
+    t.text    "value"
+    t.date    "created_at"
   end
 
   create_table "translations", force: :cascade do |t|

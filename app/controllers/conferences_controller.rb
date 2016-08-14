@@ -268,7 +268,7 @@ class ConferencesController < ApplicationController
 			@page_title = 'articles.conference_registration.headings.Policy_Agreement'
 		when :administration
 			@warnings << flash[:error] if flash[:error].present?
-			@admin_step = params[:admin_step] || 'edit'
+			@admin_step = params[:admin_step] || view_context.admin_steps.first.to_s
 			return do_404 unless view_context.valid_admin_steps.include?(@admin_step.to_sym)
 			@page_title = 'articles.conference_registration.headings.Administration'
 
@@ -383,7 +383,7 @@ class ConferencesController < ApplicationController
 								name: user.firstname || '',
 								email: user.email || '',
 								status: (view_context._"articles.conference_registration.terms.registration_status.#{(steps.include? 'questions') ? 'registered' : ((steps.include? 'contact_info') ? 'preregistered' : 'unregistered')}"),
-								date: r.created_at,# ? r.created_at.strftime("%F %T") : '',
+								date: r.created_at ? r.created_at.strftime("%F %T") : '',
 								city: r.city || '',
 								preferred_language: user.locale.present? ? (view_context.language_name user.locale) : '',
 								languages: ((r.languages || []).map { |x| view_context.language_name x }).join(', ').to_s,
@@ -462,7 +462,7 @@ class ConferencesController < ApplicationController
 		ConferenceRegistration.where(:conference_id => @this_conference.id).each do | registration |
 			if registration.can_provide_housing
 				@hosts[registration.id] = registration
-			else
+			elsif registration.housing.present? && registration.housing != 'none'
 				@guests[registration.id] = registration
 			end
 		end
@@ -515,6 +515,14 @@ class ConferencesController < ApplicationController
 						@housing_data[host_id][:warnings][:space][space] << :overbooked
 					end
 
+					@housing_data[host_id][:guest_data] ||= {}
+					@housing_data[host_id][:guest_data][guest_id] = { warnings: {}, errors: {} }
+
+					if (guest.housing == 'house' && space == :tent) ||
+						(guest.housing == 'tent' && (space == :bed_space || space == :floor_space))
+						@housing_data[host_id][:guest_data][guest_id][:warnings][:space] = { actual: space.to_s, expected: guest.housing}
+					end
+
 					companions = data['companions'] || []
 					companions.each do | companion |
 						user = User.find_by_email(companion)
@@ -523,16 +531,17 @@ class ConferencesController < ApplicationController
 									:user_id => user.id,
 									:conference_id => @this_conference.id
 								)
-							housing_data = reg.housing_data || {}
-							companion_host = housing_data['host'].present? ? housing_data['host'].to_i : nil
-							if companion_host.blank?
-								@hosts_affected_by_guests[guest_id] << companion_host
-								if companion_host != host_id
-									# set this as an error if the guest has selected only one other to stay with, but if they have requested to stay with more, make this only a warning
-									status = companions.size > 1 ? :warnings : :errors
-									@housing_data[host_id][:guests][guest][status] ||= {}
-									@housing_data[host_id][:guests][guest][status][:companions] ||= []
-									@housing_data[host_id][:guests][guest][status][:companions] << reg.id
+							if reg.present? && @guests[reg.id].present?
+								housing_data = reg.housing_data || {}
+								companion_host = housing_data['host'].present? ? housing_data['host'].to_i : nil
+								if companion_host.blank?
+									@hosts_affected_by_guests[guest_id] << companion_host
+									if companion_host != host_id && reg.housing.present? && reg.housing != 'none'
+										# set this as an error if the guest has selected only one other to stay with, but if they have requested to stay with more, make this only a warning
+										status = companions.size > 1 ? :warnings : :errors
+										@housing_data[host_id][:guest_data][guest_id][status][:companions] ||= []
+										@housing_data[host_id][:guest_data][guest_id][status][:companions] << { name: reg.user.name, id: reg.id }
+									end
 								end
 							end
 						end
@@ -568,12 +577,8 @@ class ConferencesController < ApplicationController
 				params[:info_translations].each do | locale, value |
 					@this_conference.set_column_for_locale(:info, locale, value, current_user.id) unless value == @this_conference._info(locale)
 				end
-				@this_conference.paypal_email_address = params[:paypal_email_address]
-				@this_conference.paypal_username = params[:paypal_username]
-				@this_conference.paypal_password = params[:paypal_password]
-				@this_conference.paypal_signature = params[:paypal_signature]
 				@this_conference.save
-				return redirect_to register_step_path(@this_conference.slug, :administration)
+				return redirect_to administration_step_path(@this_conference.slug, :edit)
 			when 'add_member'
 				org = nil
 				@this_conference.organizations.each do | organization |
@@ -582,6 +587,24 @@ class ConferencesController < ApplicationController
 				org.users << (User.get params[:email])
 				org.save
 				return redirect_to administration_step_path(@this_conference.slug, :edit)
+			end
+		when 'payment'
+			case params[:button]
+			when 'save'
+				@this_conference.payment_message = LinguaFranca::ActiveRecord::UntranslatedValue.new(params[:payment_message]) unless @this_conference.payment_message! == params[:payment_message]
+
+				params[:payment_message_translations].each do | locale, value |
+					@this_conference.set_column_for_locale(:payment_message, locale, value, current_user.id) unless value == @this_conference._payment_message(locale)
+				end
+
+				@this_conference.payment_amounts = ((params[:payment_amounts] || {}).values.map &:to_i) - [0]
+
+				@this_conference.paypal_email_address = params[:paypal_email_address]
+				@this_conference.paypal_username = params[:paypal_username]
+				@this_conference.paypal_password = params[:paypal_password]
+				@this_conference.paypal_signature = params[:paypal_signature]
+				@this_conference.save
+				return redirect_to administration_step_path(@this_conference.slug, :payment)
 			end
 		when 'housing'
 			space = params[:button].split(':')[0]

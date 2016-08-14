@@ -109,6 +109,21 @@ table, .table {
 			background-color: transparent;
 			border: 0;
 		}
+
+		&.state {
+			background-size: 1.333em;
+			background-repeat: no-repeat;
+			background-position: center;
+			width: 1.75em;
+
+			&.happy {
+				background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 87.8 73.2'><polygon fill='#{$colour-5}' points='34.3 73.2 0 32.6 18.7 16.8 35.4 36.5 70.1 0 87.8 16.8 '/></svg>");
+			}
+
+			&.unhappy {
+				background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path xmlns="http://www.w3.org/2000/svg" d="M50 5C25.1 5 5 25.1 5 50c0 24.9 20.1 45 45 45s45-20.1 45-45C95 25.1 74.9 5 50 5zM72.5 64.3l-8.2 8.2L50 58.2 35.7 72.5l-8.2-8.2L41.8 50 27.5 35.7l8.2-8.2L50 41.8l14.3-14.3 8.2 8.2L58.2 50 72.5 64.3z" fill="#{$colour-4}"/></svg>');
+			}
+		}
 	}
 
 	th, .table-th {
@@ -117,6 +132,39 @@ table, .table {
 		&.corner {
 			background-color: transparent;
 			border: 0;
+		}
+	}
+
+	td, .table-td {
+		&.inner-table {
+			padding: 0;
+
+			table {
+				margin: 0;
+				width: 100%;
+			}
+
+			tr:first-child {
+				td, th {
+					border-top: 0;
+				}
+			}
+
+			tr:last-child {
+				td, th {
+					border-bottom: 0;
+				}
+			}
+			
+			td, th {
+				&:first-child {
+					border-left: 0
+				}
+
+				&:last-child {
+					border-right: 0
+				}
+			}
 		}
 	}
 
@@ -280,6 +328,10 @@ textarea, .textarea {
 
 	&:hover, &:focus, &:active {
 		@include _(box-shadow, 0 0 0 0.3em rgba(0,0,0,0.05));
+	}
+
+	&.short {
+		min-height: 10em;
 	}
 }
 
@@ -1438,6 +1490,92 @@ ul.warnings li,
 }
 
 #admin-housing {
+	.host-table {
+		tr.place-guest {
+			td {
+				background-color: lighten($colour-1, 40%);
+
+				&:hover {
+					background-color: $colour-1;
+				}
+			}
+
+			a {
+				display: block;
+				color: $white;
+				text-align: center;
+				@include font-family(secondary);
+
+				@include after {
+					display: none;
+				}
+			}
+		}
+
+		button, .button {
+			float: right;
+		}
+
+		td {
+			vertical-align: top;
+		}
+
+		.state {
+			position: relative;
+			font-family: inherit;
+
+			&.unhappy {
+				cursor: pointer;
+			}
+
+			ul {
+				display: none;
+				position: absolute;
+				right: 100%;
+				top: 0;
+				background-color: $white;
+				border: 0.1em solid #CCC;
+				padding: 0.25em 0.75em;
+				margin: 0;
+				list-style: none;
+				@include default-box-shadow(top, 2);
+			}
+
+			li {
+				margin: 0;
+			}
+
+			&:hover {
+				ul {
+					display: block;
+				}			
+			}
+		}
+	}
+
+	#guest-selector {
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background-color: rgba($black, 0.5);
+
+		.guest-dlg {
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			background-color: $white;
+			width: 80%;
+			max-width: 25em;
+			@include default-box-shadow(top, 2);
+		}
+	}
+}
+
+#admin-housing {
 	#hosts {
 		background-color: $white;
 
@@ -2407,7 +2545,7 @@ html :focus {
 	padding: 0.5em 1.5em;
 }
 
-#main .three-options {
+#main .graded-options {
 	text-align: center;
 
 	button {
@@ -2416,12 +2554,23 @@ html :focus {
 		font-size: 1.5em;
 		margin: 0.25em;
 
-		&:first-child {
+		&.option-1 {
 			background-color: $colour-3;
 		}
 
 		&:last-child {
 			background-color: $colour-5;
+		}
+	}
+
+	&.option-count-4 button.option-3,
+	&.option-count-5 button.option-4 {
+		background-color: mix($colour-3, $colour-5);
+	}
+	
+	&.option-count-5 {
+		button.option-2 {
+			background-color: mix($colour-3, $colour-4);
 		}
 	}
 }

@@ -1,5 +1,5 @@
 class Conference < ActiveRecord::Base
-	translates :info, :title
+	translates :info, :title, :payment_message
 
 	mount_uploader :cover, CoverUploader
 	mount_uploader :poster, PosterUploader
@@ -62,6 +62,10 @@ class Conference < ActiveRecord::Base
 
 	def registration_status=(new_registration_status)
 		write_attribute :registration_status, new_registration_status.to_s
+	end
+
+	def self.default_payment_amounts
+		[25, 50, 100]
 	end
 
 end

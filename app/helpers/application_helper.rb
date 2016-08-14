@@ -957,7 +957,7 @@ module ApplicationHelper
 	end
 
 	def admin_steps
-		[:edit, :stats, :broadcast, :housing, :locations, :meals, :events, :workshop_times, :schedule]
+		[:stats, :edit, :payment, :broadcast, :housing, :locations, :meals, :events, :workshop_times, :schedule]
 	end
 
 	def valid_admin_steps
@@ -991,6 +991,81 @@ module ApplicationHelper
 		return _'articles.workshops.info.interested_count', :vars => {:count => workshop.interested_count}
 	end
 
+	def host_guests_table(registration)
+		id = registration.id
+		html = ''
+
+		@housing_data[id][:guests].each do | area, guests |
+			guest_rows = ''
+			guests.each do | guest_id, guest |
+				status_html = ''
+
+				@housing_data[id][:guest_data][guest_id][:errors].each do | error, value |
+					if value.is_a?(Array)
+						value.each do | v |
+							status_html += _("errors.housing.space.#{error.to_s}", vars: {value: v})
+						end
+					else
+						status_html += _("errors.housing.space.#{error.to_s}", vars: {value: value })
+					end
+				end
+
+				@housing_data[id][:guest_data][guest_id][:warnings].each do | error, value |
+					if value.is_a?(Array)
+						value.each do | v |
+							status_html += _("warnings.housing.space.#{error.to_s}", v)
+						end
+					else
+						status_html += _("warnings.housing.space.#{error.to_s}", vars: value)
+					end
+				end
+
+				if status_html.present?
+					status_html = content_tag(:ul, status_html.html_safe)
+				end
+
+				guest_rows += content_tag :tr, id: "hosted-guest-#{guest_id}" do
+					(content_tag :td, guest[:guest].user.name) +
+					(content_tag :td do
+						(guest[:guest].city + 
+						(button_tag :remove, class: [:small, :delete])).html_safe
+					end) +
+					(content_tag :td, status_html.html_safe, class: [:state, status_html.present? ? :unhappy : :happy])
+				end
+
+				for i in guests.size..(@housing_data[id][:space][area] || 0)
+					guest_rows += content_tag :tr, class: 'empty-space' do
+						(content_tag :td, '', colspan: 2) +
+						(content_tag :td)
+					end
+				end
+			end
+
+			status_html = ''
+			if @housing_data[id][:warnings].present? && @housing_data[id][:warnings][:space].present? && @housing_data[id][:warnings][:space][area].present?
+				@housing_data[id][:warnings][:space][area].each do | w |
+					status_html += content_tag(:li, _("warnings.housing.space.#{w.to_s}"))
+				end
+			end
+			if status_html.present?
+				status_html = content_tag(:ul, status_html.html_safe)
+			end
+
+			html += content_tag :tr do
+				(content_tag :th, (_"forms.labels.generic.#{area}"), colspan: 2) +
+				(content_tag :th, status_html.html_safe, class: [:state, status_html.present? ? :unhappy : :happy])
+			end
+			html += guest_rows
+			html += content_tag :tr, class: 'place-guest' do
+				content_tag :td, colspan: 3 do
+					content_tag :a, (_'forms.actions.generic.place_guest'), class: 'select-guest', href: '#', data: { host: id, space: area }
+				end
+			end
+		end
+
+		content_tag :table, html.html_safe, class: 'host-table'
+	end
+	
 	def host_guests_widget(registration)
 		html = ''
 		classes = ['host']
@@ -1102,19 +1177,25 @@ module ApplicationHelper
 		aria = {}
 		aria[:labelledby] = label_id if label_id.present?
 		aria[:describedby] = description_id if description_id.present?
+		css_class = [
+				options[:short] === true ? :short : nil
+			].compact
+
 		if options[:plain]
 			html += (text_area_tag name, value,
 				id: id,
 				lang: options[:lang],
-				aria: aria)
+				aria: aria,
+				class: css_class
+				)
 		else
 			html += content_tag(:div, value.present? ? value.html_safe : '',
 					id: id,
-					class: 'textarea',
 					data: { name: name, 'edit-on': options[:edit_on] || :load },
 					lang: options[:lang],
 					aria: aria,
-					tabindex: 0
+					tabindex: 0,
+					class: [:textarea] + css_class
 				)
 
 			add_stylesheet :editor
