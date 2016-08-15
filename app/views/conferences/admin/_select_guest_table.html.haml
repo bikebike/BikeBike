@@ -1,0 +1,46 @@
+= hidden_field_tag :host, host.id
+.host-field
+	%h4.inline=_'forms.labels.generic.name'
+	%span.plain-value= host.user.name
+.host-field
+	%h4.inline=_'articles.conference_registration.headings.host.availability'
+	%span.plain-value= date_span(host.housing_data['availability'][0].to_date, host.housing_data['availability'][1].to_date)
+- if host.housing_data['considerations'].present?
+	.host-field
+		%h4.inline=_'articles.conference_registration.headings.host.considerations'
+		%span.plain-value= (host.housing_data['considerations'].map { | consideration | _"articles.conference_registration.host.considerations.#{consideration}" }).join(', ')
+- if sanitize(host.housing_data['notes'], tags: []).present?
+	.host-field
+		%h4=_'articles.conference_registration.headings.host.notes'
+		%blockquote= host.housing_data['notes'].html_safe
+%table.guests.admin-edit
+	%tr
+		%th.corner
+		%th=_'forms.labels.generic.city'
+		%th=_'forms.labels.generic.housing'
+		%th=_'articles.admin.housing.headings.arrival_departure'
+		%th=_'forms.labels.generic.companion'
+		%th=_'forms.labels.generic.food'
+		%th=_'forms.labels.generic.allergies'
+		%th=_'forms.labels.generic.other'
+	- @guests.each do | id, registration |
+		%tr.selectable{class: get_housing_match(host, registration, space).to_s.gsub('_', '-'), data: {host: host.id, guest: id, space: space}}
+			%th=registration.user.name
+			%td=registration.city
+			%td=_"articles.conference_registration.questions.housing.#{registration.housing}"
+			%td=date_span(registration.arrival.to_date, registration.departure.to_date)
+			- companion = companion(registration)
+			%td=companion.present? ? (companion.is_a?(User) ? companion.name : (_"articles.conference_registration.terms.registration_status.#{companion}")) : ''
+			%td=_"articles.conference_registration.questions.food.#{registration.food}"
+			%td=registration.allergies
+			%td
+				.p=registration.other
+
+.legend
+	%h4 Legend
+	%ul
+		%li.good-match Good Match
+		%li.bad-match Poor Match
+		%li.selected-space Also in this space
+		%li.other-space Also with this host
+		%li.other-host Already hosted

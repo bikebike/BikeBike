@@ -1003,20 +1003,20 @@ module ApplicationHelper
 				@housing_data[id][:guest_data][guest_id][:errors].each do | error, value |
 					if value.is_a?(Array)
 						value.each do | v |
-							status_html += _("errors.housing.space.#{error.to_s}", vars: {value: v})
+							status_html += content_tag(:li, _("errors.messages.housing.space.#{error.to_s}", vars: v))
 						end
 					else
-						status_html += _("errors.housing.space.#{error.to_s}", vars: {value: value })
+						status_html += content_tag(:li, _("errors.messages.housing.space.#{error.to_s}", vars: value))
 					end
 				end
 
 				@housing_data[id][:guest_data][guest_id][:warnings].each do | error, value |
 					if value.is_a?(Array)
 						value.each do | v |
-							status_html += _("warnings.housing.space.#{error.to_s}", v)
+							status_html += content_tag(:li, _("warnings.messages.housing.space.#{error.to_s}", v))
 						end
 					else
-						status_html += _("warnings.housing.space.#{error.to_s}", vars: value)
+						status_html += content_tag(:li, _("warnings.messages.housing.space.#{error.to_s}", vars: value))
 					end
 				end
 
@@ -1028,23 +1028,26 @@ module ApplicationHelper
 					(content_tag :td, guest[:guest].user.name) +
 					(content_tag :td do
 						(guest[:guest].city + 
-						(button_tag :remove, class: [:small, :delete])).html_safe
+						(content_tag :a, (_'actions.workshops.Remove'), href: '#', class: 'remove-guest', data: { guest: guest_id })).html_safe
 					end) +
 					(content_tag :td, status_html.html_safe, class: [:state, status_html.present? ? :unhappy : :happy])
 				end
+			end
 
-				for i in guests.size..(@housing_data[id][:space][area] || 0)
-					guest_rows += content_tag :tr, class: 'empty-space' do
-						(content_tag :td, '', colspan: 2) +
-						(content_tag :td)
-					end
+			space_size = (@housing_data[id][:space][area] || 0)
+
+			# add empty rows to represent empty guest spots
+			for i in guests.size...space_size
+				guest_rows += content_tag :tr, class: 'empty-space' do
+					(content_tag :td, '&nbsp'.html_safe, colspan: 2) +
+					(content_tag :td)
 				end
 			end
 
 			status_html = ''
 			if @housing_data[id][:warnings].present? && @housing_data[id][:warnings][:space].present? && @housing_data[id][:warnings][:space][area].present?
 				@housing_data[id][:warnings][:space][area].each do | w |
-					status_html += content_tag(:li, _("warnings.housing.space.#{w.to_s}"))
+					status_html += content_tag(:li, _("warnings.messages.housing.space.#{w.to_s}"))
 				end
 			end
 			if status_html.present?
@@ -1057,13 +1060,50 @@ module ApplicationHelper
 			end
 			html += guest_rows
 			html += content_tag :tr, class: 'place-guest' do
-				content_tag :td, colspan: 3 do
+				content_tag :td, class: guests.size >= space_size ? 'full' : nil, colspan: 3 do
 					content_tag :a, (_'forms.actions.generic.place_guest'), class: 'select-guest', href: '#', data: { host: id, space: area }
 				end
 			end
 		end
 
 		content_tag :table, html.html_safe, class: 'host-table'
+	end
+
+	def get_housing_match(host, guest, space)
+		housing_data = guest.housing_data || []
+		
+		if housing_data['host'].present?
+			if housing_data['host'] == host.id
+				return space == housing_data['space'] ? :selected_space : :other_space
+			end
+
+			return :other_host
+		end
+
+		if space_matches?(space, guest.housing) && available_dates_match?(host, guest)
+			return :good_match
+		end
+
+		return :bad_match
+	end
+
+	def space_matches?(host_space, guest_space)
+		return false unless host_space.present? && guest_space.present?
+
+		if host_space.to_s == 'bed_space' || host_space.to_s == 'floor_space'
+			return guest_space.to_s == 'house'
+		end
+
+		return host_space.to_s == 'tent_space' && guest_space.to_s == 'tent'
+	end
+
+	def available_dates_match?(host, guest)
+		if host.housing_data['availability'][0] <= guest.arrival &&
+		 	host.housing_data['availability'][1] >= guest.departure
+		 	return true
+		 end
+
+		 return false
 	end
 	
 	def host_guests_widget(registration)
@@ -1458,6 +1498,22 @@ module ApplicationHelper
 		html += help if help.present? && options[:right_help]
 
 		return html.html_safe
+	end
+
+	def companion(registration)
+		if registration.housing_data.present? && registration.housing_data['companions'].present? && registration.housing_data['companions'].first.present?
+			companion_user = User.find_by_email(registration.housing_data['companions'].first)
+
+			if companion_user.present?
+				cr = ConferenceRegistration.where(user_id: companion_user.id).order(created_at: :desc).limit(1).first
+
+				if cr.present? && ((cr.steps_completed || []).include? 'questions')
+					return companion_user
+				end
+			end
+			return :unregistered
+		end
+		return nil
 	end
 
 	def comment(comment)

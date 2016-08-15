@@ -138,7 +138,7 @@ class ConferencesController < ApplicationController
 					}
 				when :questions
 					# create the companion's user account and send a registration link unless they have already registered
-					generate_confirmation(User.create(email: params[:companion]), register_path(@this_conference.slug)) unless User.find_by_email(params[:companion])
+					generate_confirmation(User.create(email: params[:companion]), register_path(@this_conference.slug)) if params[:companion].present? && User.find_by_email(params[:companion]).nil?
 					
 					@registration.housing = params[:housing]
 					@registration.arrival = params[:arrival]
@@ -225,7 +225,18 @@ class ConferencesController < ApplicationController
 		# prepare the form
 		case @register_template
 		when :questions
-			@registration.housing_data ||= { }
+			# see if someone else has asked to be your companion
+			if @registration.housing_data.blank?
+				ConferenceRegistration.where(
+					conference_id: @this_conference.id, can_provide_housing: [nil, false]
+					).where.not(housing_data: nil).each do | r |
+					@registration.housing_data = {
+							companions: [ r.user.email ]
+						} if r.housing_data['companions'].present? && r.housing_data['companions'].include?(current_user.email)
+				end
+				
+				@registration.housing_data ||= { }
+			end
 			@page_title = 'articles.conference_registration.headings.Registration_Info'
 		when :payment
 			@page_title = 'articles.conference_registration.headings.Payment'
@@ -337,7 +348,7 @@ class ConferencesController < ApplicationController
 							],
 						column_types: {
 								name: :bold,
-								#date: :date,
+								date: :datetime,
 								arrival: [:date, :day],
 								departure: [:date, :day],
 								registration_fees_paid: :money
@@ -483,11 +494,15 @@ class ConferencesController < ApplicationController
 				@housing_data[id][:space][s.to_sym] = size
 			end
 		end
+		
+		@guests_housed = 0
+
 		@guests.each do | guest_id, guest |
 			data = guest.housing_data || {}
 			@hosts_affected_by_guests[guest_id] ||= []
 
 			if data['host']
+				@guests_housed += 1
 				host_id = (data['host'].present? ? data['host'].to_i : nil)
 				host = host_id.present? ? @hosts[host_id] : nil
 
@@ -506,21 +521,14 @@ class ConferencesController < ApplicationController
 
 					@housing_data[host_id][:guests][space][guest_id] = { guest: guest }
 
-					# make sure the host isn't overbooked
-					space_available = ((host_data['space'] || {})[space.to_s] || 0).to_i
-					if @housing_data[host_id][:guests][space].size > space_available
-						@housing_data[host_id][:warnings] ||= {}
-						@housing_data[host_id][:warnings][:space] ||= {}
-						@housing_data[host_id][:warnings][:space][space] ||= []
-						@housing_data[host_id][:warnings][:space][space] << :overbooked
-					end
-
 					@housing_data[host_id][:guest_data] ||= {}
 					@housing_data[host_id][:guest_data][guest_id] = { warnings: {}, errors: {} }
 
+					@housing_data[host_id][:guest_data][guest_id][:warnings][:dates] = {} unless view_context.available_dates_match?(host, guest)
+
 					if (guest.housing == 'house' && space == :tent) ||
 						(guest.housing == 'tent' && (space == :bed_space || space == :floor_space))
-						@housing_data[host_id][:guest_data][guest_id][:warnings][:space] = { actual: space.to_s, expected: guest.housing}
+						@housing_data[host_id][:guest_data][guest_id][:warnings][:space] = { actual: (view_context._"forms.labels.generic.#{space.to_s}"), expected: (view_context._"articles.conference_registration.questions.housing.#{guest.housing}")}
 					end
 
 					companions = data['companions'] || []
@@ -534,14 +542,10 @@ class ConferencesController < ApplicationController
 							if reg.present? && @guests[reg.id].present?
 								housing_data = reg.housing_data || {}
 								companion_host = housing_data['host'].present? ? housing_data['host'].to_i : nil
-								if companion_host.blank?
-									@hosts_affected_by_guests[guest_id] << companion_host
-									if companion_host != host_id && reg.housing.present? && reg.housing != 'none'
-										# set this as an error if the guest has selected only one other to stay with, but if they have requested to stay with more, make this only a warning
-										status = companions.size > 1 ? :warnings : :errors
-										@housing_data[host_id][:guest_data][guest_id][status][:companions] ||= []
-										@housing_data[host_id][:guest_data][guest_id][status][:companions] << { name: reg.user.name, id: reg.id }
-									end
+								@hosts_affected_by_guests[guest_id] << companion_host
+								if companion_host != host_id && reg.housing.present? && reg.housing != 'none'
+									# set this as an error if the guest has selected only one other to stay with, but if they have requested to stay with more, make this only a warning
+									@housing_data[host_id][:guest_data][guest_id][:warnings][:companions] = { name: "<strong>#{reg.user.name}</strong>".html_safe, id: reg.id }
 								end
 							end
 						end
@@ -554,6 +558,24 @@ class ConferencesController < ApplicationController
 				end
 			end
 		end
+		
+		@hosts.each do | id, host |
+			host_data = host.housing_data
+
+			@hosts[id].housing_data['space'].each do | space, size |
+				# make sure the host isn't overbooked
+				space = space.to_sym
+				space_available = (size || 0).to_i
+				@housing_data[id][:warnings] ||= {}
+				@housing_data[id][:warnings][:space] ||= {}
+				@housing_data[id][:warnings][:space][space] ||= []
+
+				if @housing_data[id][:guests][space].size > space_available
+					@housing_data[id][:warnings][:space][space] << :overbooked
+				end
+			end
+		end
+
 		return @hosts_affected_by_guests
 	end
 
@@ -607,41 +629,41 @@ class ConferencesController < ApplicationController
 				return redirect_to administration_step_path(@this_conference.slug, :payment)
 			end
 		when 'housing'
-			space = params[:button].split(':')[0]
-			host_id = params[:button].split(':')[1].to_i
-			guest_id = params[:guest_id].to_i
-			
-			get_housing_data
-
 			# modify the guest data
-			@guests[guest_id].housing_data ||= {}
-			@guests[guest_id].housing_data['space'] = space
-			@guests[guest_id].housing_data['host'] = host_id
-			@guests[guest_id].save!
 
-			if request.xhr?
+			if params[:button] == 'get-guest-list'
+				# get_housing_data
+				analyze_housing
+				return render partial: 'conferences/admin/select_guest_table', locals: { host: @hosts[params['host'].to_i], space: params['space'] }
+			elsif params[:button] == 'set-guest'
+				guest = ConferenceRegistration.where(
+						id: params[:guest].to_i,
+						conference_id: @this_conference.id
+					).limit(1).first
+
+				guest.housing_data ||= {}
+				guest.housing_data['space'] = params[:space]
+				guest.housing_data['host'] = params[:host].to_i
+				guest.save!
+				
 				analyze_housing
 
-				# get the hosts that need updating
-				affected_hosts = {}
-				affected_hosts[host_id] = @hosts[host_id]
-				if params['affected-hosts'].present?
-					params['affected-hosts'].split(',').each do | id |
-						affected_hosts[id.to_i] = @hosts[id.to_i]
-					end
-				end
-				@hosts_affected_by_guests[guest_id].each do | id |
-					affected_hosts[id] ||= @hosts[id]
-				end
+				return render partial: 'conferences/admin/hosts_table'
+			elsif params[:button] == 'remove-guest'
+				guest = ConferenceRegistration.where(
+						id: params[:guest].to_i,
+						conference_id: @this_conference.id
+					).limit(1).first
 
-				json = { hosts: {}, affected_hosts: @hosts_affected_by_guests }
-				puts @hosts_affected_by_guests[guest_id].to_json.to_s
-				affected_hosts.each do | id, host |
-					json[:hosts][id] = view_context.host_guests_widget(host)
-				end
-				return render json: json
+				guest.housing_data ||= {}
+				guest.housing_data.delete('space')
+				guest.housing_data.delete('host')
+				guest.save!
+				
+				analyze_housing
+
+				return render partial: 'conferences/admin/hosts_table'
 			end
-			return redirect_to administration_step_path(@this_conference.slug, :housing)
 		when 'broadcast'
 			@hide_description = true
 			@subject = params[:subject]

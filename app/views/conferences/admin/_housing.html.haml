@@ -1,47 +1,7 @@
 - add_inline_script :housing
-= form_tag administration_update_path(@this_conference.slug, :housing), id: :hosts, class: 'on-top-target' do
-	= hidden_field_tag :guest_id
-	.on-top-controls
-		= button_tag :close, type: :button, class: ['on-top-close']
-	%ul
-		- @hosts.each do | id, registration |
-			- if registration.user.present?
-				- widget_data = host_guests_widget(registration)
-				%li{id: "host-#{id}", class: widget_data[:class]}
-					%h4=registration.user.name
-					.email=registration.user.email
-					.address=registration.housing_data['address']
-					.guests=widget_data[:html]
-#guests
-	%h4=_'articles.admin.housing.headings.guests', :t
-	%ul.guests
-		- @guests.each do | id, registration |
-			- if registration.user.present?
-				%li.guest{id: "guest-#{id}", data: { id: id, 'affected-hosts': @hosts_affected_by_guests[id].join(',') }}
-					%h4= registration.user.name
-					.city=registration.city
-					.on-top-only.details
-						= data_set(:h4, 'articles.admin.housing.headings.email') do
-							= registration.user.email
-						= data_set(:h4, 'articles.admin.housing.headings.housing') do
-							= registration.housing
-						- if registration.arrival.present?
-							= data_set(:h4, 'articles.admin.housing.headings.arrival_departure') do
-								= date_span(registration.arrival.to_date, registration.departure.to_date)
-						- if (registration.housing_data || {})['companions'].present?
-							= data_set(:h4, 'articles.admin.housing.headings.companion') do
-								- companion = User.find_by_email(registration.housing_data['companions'].first)
-								- if companion
-									= "#{companion.firstname} (#{companion.email})"
-								- else
-									= registration.housing_data['companions'].first
-									= _'articles.admin.housing.headings.unregistered'
-						- if registration.allergies.present?
-							= data_set(:h4, 'articles.admin.housing.headings.allergies') do
-								= registration.allergies
-						- if registration.other.present?
-							= data_set(:h4, 'articles.admin.housing.headings.other') do
-								= registration.other
-					= button_tag :set_host, type: :button, class: [:small, 'set-host', 'not-on-top']
-
-
+= form_tag administration_update_path(@this_conference.slug, :housing), id: 'housing-table-form' do
+	#housing-table= render partial: 'conferences/admin/hosts_table'
+#guest-selector
+	= form_tag administration_update_path(@this_conference.slug, :housing), class: 'guest-dlg', id: 'guest-list-table' do
+		%h3 Select a Guest
+		#table

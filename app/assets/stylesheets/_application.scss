@@ -1490,6 +1490,43 @@ ul.warnings li,
 }
 
 #admin-housing {
+	.guests-housed {
+		margin-bottom: 1em;
+		text-align: right;
+
+		h5 {
+			display: inline-block;
+			margin: 0;
+			padding-right: 0.5em;
+		}
+
+		.data {
+			display: inline-block;
+			font-size: 1.125em;
+		}
+	}
+
+	#housing-table {
+		@include _(transition, opacity 1s ease-in-out);
+
+		&.loading {
+			@include _(opacity, 0.5);
+			pointer-events: none;
+		}
+
+		tr.host {
+			th {
+				vertical-align: top;
+			}
+
+			.address {
+				margin-top: 1em;
+				text-align: right;
+				@include font-family(primary);
+			}
+		}
+	}
+
 	.host-table {
 		tr.place-guest {
 			td {
@@ -1497,6 +1534,14 @@ ul.warnings li,
 
 				&:hover {
 					background-color: $colour-1;
+				}
+
+				&.full {
+					background-color: #E8E8E8;
+
+					&:hover {
+						background-color: #CCC;
+					}					
 				}
 			}
 
@@ -1512,6 +1557,7 @@ ul.warnings li,
 			}
 		}
 
+		.remove-guest,
 		button, .button {
 			float: right;
 		}
@@ -1535,13 +1581,15 @@ ul.warnings li,
 				top: 0;
 				background-color: $white;
 				border: 0.1em solid #CCC;
-				padding: 0.25em 0.75em;
+				padding: 0.25em 0.75em 0.25em 1.5em;
 				margin: 0;
-				list-style: none;
+				list-style-type: square;
 				@include default-box-shadow(top, 2);
+				z-index: 10;
 			}
 
 			li {
+				white-space: nowrap;
 				margin: 0;
 			}
 
@@ -1554,12 +1602,19 @@ ul.warnings li,
 	}
 
 	#guest-selector {
+		display: none;
 		position: fixed;
 		top: 0;
 		right: 0;
 		bottom: 0;
 		left: 0;
 		background-color: rgba($black, 0.5);
+		cursor: pointer;
+		z-index: 1000;
+
+		&.open {
+			display: block;
+		}
 
 		.guest-dlg {
 			position: absolute;
@@ -1569,9 +1624,141 @@ ul.warnings li,
 			left: 0;
 			background-color: $white;
 			width: 80%;
-			max-width: 25em;
+			margin: auto;
+			padding: 1em;
+			height: 80%;
+			cursor: default;
 			@include default-box-shadow(top, 2);
+
+			h3 {
+				margin: 0 0 1em;
+			}
 		}
+	}
+}
+
+@include keyframes(whiten) {
+	to { background-color: $white; }
+}
+
+#table {
+	position: relative;
+	overflow: auto;
+	height: 80%;
+	height: calc(100% - 4em);
+	background-color: $white;
+	@include _(transition, background-color 250ms ease-in-out);
+
+	&.loading {
+		background-color: #CCC;
+		@include _(animation, whiten ease-in-out 1s infinite alternate both);
+
+		.host-field, table, .legend {
+			display: none;
+		}
+	}
+
+	table {
+		min-width: 100em;
+	}
+
+	h4 {
+		margin: 0;
+
+		&.inline {
+			display: inline-block;
+			padding-right: 0.5em;
+		}
+	}
+
+	.plain-value {
+		font-size: 1.2em;
+	}
+
+	blockquote {
+		margin-top: 0;
+		font-size: 0.85em;
+
+		> :first-child {
+			margin-top: 0;
+		}
+	}
+
+	tr.selectable {
+		cursor: pointer;
+
+		&:hover {
+			th {
+				background-color: $colour-2;
+			}
+		}
+
+		&.other-host, &.other-space, &.bad-match {
+			td, th {
+				opacity: 0.5;
+			}
+		}
+
+		&.selected-space, &.other-space {
+			td {
+				background-color: lighten($colour-5, 35);
+			}
+
+			th {
+				background-color: $colour-5;
+			}
+		}
+
+		&.other-host {
+			td {
+				background-color: lighten($colour-1, 40%);
+			}
+
+			th {
+				background-color: $colour-1;
+			}
+		}
+
+		&:hover {
+			td {
+				opacity: 1;
+				background-color: lighten($colour-2, 25%);
+			}
+		}
+	}
+
+	.legend ul {
+		@include _-(display, flex);
+		list-style: none;
+		padding: 0;
+
+		li {
+			@include _(flex, 1);
+			text-align: center;
+			margin-bottom: 0.5em;
+			padding: 0.125em 0.5em;
+			margin: 0.1em;
+			border: 0.1em solid #EEE;
+			background-color: #F8F8F8;
+			@include font-family(secondary);
+
+			&.other-host, &.other-space, &.bad-match {
+				opacity: 0.5;
+			}
+
+			&.selected-space, &.other-space {
+				background-color: $colour-5;
+			}
+
+			&.other-host {
+				background-color: $colour-1;
+			}
+		}
+	}
+
+	.p {
+		max-height: 4em;
+		overflow: auto;
 	}
 }
 
@@ -1862,9 +2049,9 @@ table.schedule {
 }
 
 .event-dlg {
-    @include _-(flex, 0);
-    position: relative;
-    z-index: 1000;
+	@include _-(flex, 0);
+	position: relative;
+	z-index: 1000;
 	background-color: $white;
 	text-align: left;
 	padding: 2em 2em 0.5em;

@@ -167,6 +167,9 @@ en:
           empty: 'Please enter an address'
         space:
           empty: 'Please select a space'
+      housing:
+        space:
+          companions: This host wishes to be housed with %{name}
     template:
       body: 'There were problems with the following fields:'
       header:
@@ -177,7 +180,10 @@ en:
       location_corrected: Your location was corrected from "%{original}" to "%{corrected}". If this doesn't reflect your intended location, you can change this again in the contact info step.
       housing:
           space:
-            overbooked: Overbooked
+            overbooked: This space is overbooked
+            companions: This guest wishes to be housed with %{name}
+            space: This guest wishes to be housed in a %{expected}
+            dates: This guest's arrival or departure dates conflict with the host's availability dates
   helpers:
     select:
       prompt: Please select
@@ -887,12 +893,13 @@ en:
         description: On this page you can schedule workshops and publish your schedule to the front page.
         no_locations_warning: Before you can schedule workshops, you must first add locations.
       housing:
-        description: The housing tool can be used to help you set up visitors that have requested to be housed with a host.
+        description: The housing tool can be used to help you set up visitors that have requested to be housed with a host. When you see an error icon beside a host's space or a guest's details, hover over it to see warnings. Ideally you should only check marks which will indicate that all hosts and guests are happy.
         headings:
           hosts: Hosts
           guests: Guests
           email: Email
           housing: Preference
+          arrival_departure: In City
       locations:
         description: Locations are used to schedule workshops, events, and meals. Once your schedule is published, users will be able to see the name and address and be given a link to a map so that they can find their way.
         headings:

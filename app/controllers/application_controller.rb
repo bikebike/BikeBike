@@ -8,7 +8,7 @@ class ApplicationController < LinguaFrancaApplicationController
 
 	# Prevent CSRF attacks by raising an exception.
 	# For APIs, you may want to use :null_session instead.
-	protect_from_forgery with: :exception, :except => [:do_confirm, :js_error]
+	protect_from_forgery with: :exception, :except => [:do_confirm, :js_error, :admin_update]
 
 	before_filter :capture_page_info
 
