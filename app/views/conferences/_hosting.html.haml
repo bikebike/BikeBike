@@ -8,8 +8,10 @@
 				- [:bed_space, :floor_space, :tent_space].each do | space |
 					= numberfield space, @hosting_data['space'][space.to_s] || 0, min: 0, required: true
 			= fieldset :hosting_dates, heading: 'articles.conference_registration.headings.host.availability', help: 'articles.conference_registration.paragraphs.host.availability' do
-				= selectfield :first_day, @hosting_data['availability'][0] || @this_conference.start_date, conference_days_options_list(:before)
-				= selectfield :last_day, @hosting_data['availability'][1] || @this_conference.start_date, conference_days_options_list(:after)
+				- first_day_options = conference_days_options_list(:before)
+				- last_day_options = conference_days_options_list(:after)
+				= selectfield :first_day, @hosting_data['availability'][0] || first_day_options.first.last, first_day_options
+				= selectfield :last_day, @hosting_data['availability'][1] || last_day_options.last.last, last_day_options
 			= checkboxes :considerations, [:vegan, :smoking, :pets, :quiet], @hosting_data['considerations'], 'articles.conference_registration.host.considerations', heading: 'articles.conference_registration.headings.host.considerations', help: 'articles.conference_registration.paragraphs.host.considerations', vertical: true
 			= textarea :notes, @hosting_data['notes'], help: 'articles.conference_registration.paragraphs.host.notes', edit_on: :focus
 		.actions.next-prev
