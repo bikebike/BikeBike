@@ -5,3 +5,6 @@
 	= form_tag administration_update_path(@this_conference.slug, :housing), class: 'guest-dlg', id: 'guest-list-table' do
 		%h3 Select a Guest
 		#table
+.actions
+	= link_to (_'links.download.Excel'), administration_step_path(@this_conference.slug, :housing, :format => :xlsx), class: [:button, :download]
+

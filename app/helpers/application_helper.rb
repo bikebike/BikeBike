@@ -1529,6 +1529,122 @@ module ApplicationHelper
 		end
 	end
 
+	def excel_table(excel_data)
+		format_xls 'table' do
+			workbook use_autowidth: true
+			format bg_color: '333333'
+			format 'td', font_name: 'Calibri', fg_color: '333333'
+			format 'th', font_name: 'Calibri', b: true, bg_color: '333333', fg_color: 'ffffff'
+			format 'th.sub-table', font_name: 'Calibri', b: true, bg_color: 'DDDDDD', fg_color: '333333'
+			format 'td.datetime', num_fmt: 22, font_name: 'Courier New', sz: 10, fg_color: '333333'
+			format 'td.date.day', num_fmt: 14, font_name: 'Courier New', sz: 10, fg_color: '333333'
+			format 'td.money', num_fmt: 2, font_name: 'Courier New', sz: 10, fg_color: '333333'
+			format 'td.bold', font_name: 'Calibri', fg_color: '333333', b: true
+		end
+
+		key = excel_data[:key] || 'excel.columns'
+		
+		content_tag(:table) do
+			(content_tag(:thead) do
+				content_tag(:tr, excel_header_columns(excel_data))
+			end) +
+			content_tag(:tbody, excel_rows(excel_data))
+		end
+	end
+
+	def excel_header_columns(data, padding = {}, class_name = nil)
+		columns = ''
+
+		data[:columns].each do |column|
+			unless data[:column_types].present? && data[:column_types][column] == :table
+				# columns += content_tag(:th, _(data[:keys][column].present? ? data[:keys][column] : "#{key}.#{column.to_s}"), class: class_name)
+				columns += content_tag(:th, data[:keys][column].present? ? _(data[:keys][column]) : '', class: class_name)
+			end
+		end
+
+		pad_columns(columns, padding, :th)
+	end
+
+	def excel_empty_row(data, padding = {})
+		columns = ''
+
+		data[:columns].each do |column|
+			unless data[:column_types].present? && data[:column_types][column] == :table
+				columns += content_tag(:td)
+			end
+		end
+
+		content_tag(:tr, pad_columns(columns, padding))
+	end
+
+	def pad_columns(columns, padding, column_type = :td)
+		left = ''
+
+		for i in 1..(padding['left'] || 0)
+			left += content_tag(:td)
+		end
+
+		right = ''
+		for i in 1..(padding['right'] || 0)
+			right += content_tag(:td)
+		end
+
+		(left + columns + right).html_safe
+	end
+
+	def excel_columns(row, data, padding = {})
+		columns = ''
+
+		data[:columns].each do |column|
+			value = row[column].present? ? (_!row[column].to_s) : ''
+			class_name = nil
+			is_sub_table = false
+
+			if data[:column_types].present? && data[:column_types][column].present?
+				if data[:column_types][column] == :table
+					is_sub_table = true
+				else
+					class_name = data[:column_types][column]
+				end
+			end
+
+			columns += content_tag(:td, value, { class: class_name }) unless is_sub_table
+		end
+
+		pad_columns(columns, padding)
+	end
+
+	def excel_sub_tables(row, data, padding = {})
+		rows = ''
+
+		# shift the table right
+		new_padding = {
+			'left' => (padding['right'] || 0) + 1,
+			'right' => (padding['right'] || 0) - 1
+		}
+
+		data[:columns].each do |column|
+			if data[:column_types].present? && data[:column_types][column] == :table
+				puts row[column].to_json.to_s
+				rows += content_tag(:tr, excel_header_columns(row[column], new_padding, 'sub-table'))
+				rows += excel_rows(row[column], new_padding)
+				rows += excel_empty_row(row[column], new_padding)
+			end
+
+		end
+
+		rows.html_safe
+	end
+
+	def excel_rows(data, padding = {})
+		rows = ''
+		data[:data].each do |row|
+			rows += content_tag(:tr, excel_columns(row, data, padding)) +
+				excel_sub_tables(row, data, padding)
+		end
+		rows.html_safe
+	end
+
 	private
 		def _original_content(value, lang)
 			content_tag(:div, (

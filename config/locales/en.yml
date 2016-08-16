@@ -1264,7 +1264,7 @@ en:
         subregion: State / Province
         country: Country
         postal_code: Postal Code
-        status: Status,
+        status: Status
         bike: Bike
         food: Food
         housing: Housing

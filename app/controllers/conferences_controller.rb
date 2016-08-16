@@ -288,7 +288,7 @@ class ConferencesController < ApplicationController
 				@organizations = Organization.all
 
 				if request.format.xlsx?
-					logger.info "Generating stats.xls"
+					logger.info "Generating organizations.xls"
 					@excel_data = {
 						columns: [:name, :street_address, :city, :subregion, :country, :postal_code, :email, :phone, :status],
 						keys: {
@@ -439,6 +439,80 @@ class ConferencesController < ApplicationController
 			when :housing
 				# do a full analysis
 				analyze_housing
+				
+				if request.format.xlsx?
+					logger.info "Generating housing.xls"
+					@excel_data = {
+						columns: [:name, :phone, :street_address, :email, :availability, :considerations, :empty, :empty, :empty, :guests],
+						keys: {
+								name: 'forms.labels.generic.name',
+								street_address: 'forms.labels.generic.street_address',
+								email: 'forms.labels.generic.email',
+								phone: 'forms.labels.generic.phone',
+								availability: 'articles.conference_registration.headings.host.availability',
+								considerations: 'articles.conference_registration.headings.host.considerations'
+							},
+						column_types: {
+								name: :bold,
+								guests: :table
+							},
+						data: [],
+					}
+					@hosts.each do | id, host |
+						data = (host.housing_data || {})
+						host_data = {
+							name: host.user.name,
+							street_address: data['address'],
+							email: host.user.email,
+							phone: data['phone'],
+							availability: data['availability'].present? && data['availability'][1].present? ? view_context.date_span(data['availability'][0].to_date, data['availability'][1].to_date) : '',
+							considerations: (data['considerations'].map { | consideration | view_context._"articles.conference_registration.host.considerations.#{consideration}" }).join(', '),
+							empty: '',
+							guests: {
+								columns: [:name, :area, :email, :arrival_departure, :allergies, :food, :companion, :city],
+								keys: {
+									name: 'forms.labels.generic.name',
+									area: 'articles.workshops.headings.space',
+									email: 'forms.labels.generic.email',
+									arrival_departure: 'articles.admin.housing.headings.arrival_departure',
+									companion: 'forms.labels.generic.companion',
+									city: 'forms.labels.generic.city',
+									food: 'forms.labels.generic.food',
+									allergies: 'forms.labels.generic.allergies'
+								},
+								column_types: {
+									name: :bold
+								},
+								data: []
+							}
+						}
+
+						@housing_data[id][:guests].each do | space, space_data |
+							space_data.each do | guest_id, guest_data |
+								guest = guest_data[:guest]
+								if guest.present?
+									companion = view_context.companion(guest)
+
+									host_data[:guests][:data] << {
+										name: guest.user.name,
+										area: (view_context._"forms.labels.generic.#{space}"),
+										email: guest.user.email,
+										arrival_departure: guest.arrival.present? && guest.departure.present? ? view_context.date_span(guest.arrival.to_date, guest.departure.to_date) : '',
+										companion: companion.present? ? (companion.is_a?(User) ? companion.name : (view_context._"articles.conference_registration.terms.registration_status.#{companion}")) : '',
+										city: guest.city,
+										food: (view_context._"articles.conference_registration.questions.food.#{guest.food}"),
+										allergies: guest.allergies
+									}
+								end
+							end
+						end
+
+						@excel_data[:data] << host_data
+					end
+					return respond_to do | format |
+						format.xlsx { render xlsx: :stats, filename: "housing" }
+					end
+				end
 			when :locations
 				@locations = EventLocation.where(:conference_id => @this_conference.id)
 			when :events
