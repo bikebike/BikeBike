@@ -20,7 +20,7 @@
 						%tr
 							%th.corner
 							- data[:locations].each do | id, location |
-								%th=location.title
+								%th=location.is_a?(Symbol) ? '' : location.title
 							%th.status
 				%tbody
 					- data[:times].each do | time, time_data |

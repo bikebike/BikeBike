@@ -2036,13 +2036,13 @@ table.schedule {
 			}
 		}
 
-
 		#main .columns & form {
 			margin-top: 0;
 			
 			button {
 				margin-top: 0.5em;
 				float: left;
+				z-index: 1;
 			}
 		}
 	}

@@ -571,6 +571,7 @@ class ApplicationController < LinguaFrancaApplicationController
 
 		@schedule.each do | day, data |
 			@schedule[day][:times] = data[:times].sort.to_h
+			@schedule[day][:locations][0] = :add if @schedule[day][:locations].size > 0
 
 			data[:times].each do | time, time_data |
 				if time_data[:type] == :workshop && time_data[:item].present? && time_data[:item][:workshops].present?

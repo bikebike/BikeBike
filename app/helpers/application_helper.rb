@@ -966,12 +966,14 @@ module ApplicationHelper
 
 	def admin_menu
 		steps = ''
+		first = true
 		admin_steps.each do | step |
 			steps += content_tag(:li, class: (step.to_s == @admin_step ? :current : nil)) do
-				link_to _("menu.submenu.admin.#{step.to_s.titlecase.gsub(/\s/, '_')}"), step == :edit ?
+				link_to _("menu.submenu.admin.#{step.to_s.titlecase.gsub(/\s/, '_')}"), first ?
 					register_step_path(@this_conference.slug, :administration) :
 					administration_step_path(@this_conference.slug, step.to_s)
 			end
+			first = false
 		end
 		content_tag :ul, steps.html_safe, id: 'registration-admin-menu'
 	end
