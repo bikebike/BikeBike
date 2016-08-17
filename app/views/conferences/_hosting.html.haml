@@ -2,6 +2,7 @@
 	= form_tag register_path(@this_conference.slug) do
 		= checkbox :can_provide_housing, @registration.can_provide_housing, 'articles.conference_registration.can_provide_housing', heading: 'articles.conference_registration.headings.can_provide_housing', help: 'articles.conference_registration.paragraphs.can_provide_housing', inline: true, toggles: 'hosting-options', centered: true
 		#hosting-options
+			= checkbox :not_attending, @registration.is_attending == 'n', 'articles.conference_registration.not_attending', help: 'articles.conference_registration.paragraphs.not_attending', inline: true, right_help: true
 			= textfield :address, @hosting_data['address'], required: true, heading: 'articles.conference_registration.headings.host.address', help: 'articles.conference_registration.paragraphs.host.address'
 			= telephonefield :phone, @hosting_data['phone'], required: true
 			= fieldset :space, heading: 'articles.conference_registration.headings.host.space', help: 'articles.conference_registration.paragraphs.host.space' do

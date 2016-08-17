@@ -817,6 +817,7 @@ es:
         Policy_Agreement: Asegurar que todos los asistentes se sientan bienvenidos, seguro y respetada en todo momento es especialmente importante para todos nosotros. Por favor asegúrese de que plenamente ha leído y entendido nuestra política de espacios más seguros a continuación, si tiene alguna pregunta o preocupación que usted puede llegar a los organizadores en cualquier momento.
         facebook_sign_in: De manera alternativa puedes registrarte usando tu cuenta de Facebook y así evitarás tener que esperar a que te enviemos un correo electrónico
         can_provide_housing: Alojar a lxs asistentes a la conferencia es una parte importante de Bike!Bike!, proporciona a mucha gente que normalmente no podría costear el hospedaje, la oportunidad de venir a la conferencia, permitiéndoles conocer nuestra ciudad y a sus residentes. Tendrás que conceder acceso a tu casa a lxs huéspedes durante la noche, teniendo en cuenta que los eventos pueden terminar hasta muy tarde. Si no se puede acceder a tu casa durante el día, debes asegurarte de comunicar estoy muy claramente a tus invitadxs.
+        not_attending: Si sólo está proporcionando vivienda y no desea recibir más actualizaciones sobre la conferencia, marque esta casilla.
         Verify_Account: Con el fin de confirmar que eres una persona real y que podremos contactarte posteriormente, te pedimos que por favor verifiques tu dirección de correo electrónico. Te enviaremos un mensaje para que puedas continuar con el proceso de pre-registro.
         Pre_Registration_Details: Al completar el proceso de pre-registro nos estás haciendo saber que estás interesad@ en asistir, lo que nos permite contactarte cuando tengamos noticias, y planear mejor [el evento] sabiendo quienes podrían venir. Una vez que el registro esté completamente abierto, necesitaremos hacerte algunas preguntas más en donde podrás confirmar si asistirás o no.
         Registration_Details: Al completar el proceso de registro, estás confirmándonos que vendrás, lo que nos permite contactarte cuando tengamos noticias y nos posibilita planear mejor el hospedaje al saber cuántas personas vendrán. Una vez registradx, tendrás la opción de acceder a facilitar tu propio taller, y a ver detalles de los talleres ya existentes. Si ya estás registradx o preregistradx, puedes utilizas esta forma de inscripción y acceder a tu cuenta ó actualizarla.
@@ -839,6 +840,7 @@ es:
         payment_confirm: Estás por confirmar tu pago de %{amount} para el registro.
         workshops: Ahora puedes revisar los talleres propuestos e incluso proponer uno si quieres.
       can_provide_housing: Puedo proporcionar hospedaje
+      not_attending: Yo no asistirá a la conferencia
       questions:
         food:
           meat: Carnívorx

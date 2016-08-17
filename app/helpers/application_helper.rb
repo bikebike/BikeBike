@@ -896,11 +896,11 @@ module ApplicationHelper
 		case to.to_sym
 		when :registered
 			ConferenceRegistration.where(conference_id: conference.id).each do | r |
-				users << r.user if ((r.steps_completed || []).include? 'questions') && r.user.present?
+				users << r.user if ((r.steps_completed || []).include? 'questions') && r.user.present? && r.is_attending != 'n'
 			end
 		when :pre_registered
 			ConferenceRegistration.where(conference_id: conference.id).each do | r |
-				users << r.user if ((r.steps_completed || []).include? 'contact_info') && r.user.present?
+				users << r.user if ((r.steps_completed || []).include? 'contact_info') && r.user.present? && r.is_attending != 'n'
 			end
 		when :workshop_facilitators
 			user_hash = {}
@@ -912,7 +912,7 @@ module ApplicationHelper
 			users = user_hash.values
 		when :unregistered
 			ConferenceRegistration.where(conference_id: conference.id).each do | r |
-				users << r.user unless ((r.steps_completed || []).include? (conference.registration_status == :open ? 'questions' : 'contact_info')) || r.user.nil?
+				users << r.user unless ((r.steps_completed || []).include? (conference.registration_status == :open ? 'questions' : 'contact_info')) || r.user.nil? || r.is_attending == 'n'
 			end
 		when :housing_providers
 			ConferenceRegistration.where(conference_id: conference.id, can_provide_housing: true).each do | r |
@@ -920,7 +920,7 @@ module ApplicationHelper
 			end
 		when :guests
 			ConferenceRegistration.where(conference_id: conference.id, housing: 'house').each do | r |
-				users << r.user if r.user.present?
+				users << r.user if r.user.present? && r.is_attending != 'n'
 			end
 		when :all
 			User.all.each do | u |

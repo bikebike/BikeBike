@@ -124,6 +124,17 @@ class ConferencesController < ApplicationController
 					current_user.save! unless @errors.present?
 				when :hosting
 					@registration.can_provide_housing = params[:can_provide_housing].present?
+					if params[:not_attending]
+						@registration.is_attending = 'n'
+
+						if current_user.is_subscribed.nil?
+							current_user.is_subscribed = false
+							current_user.save!
+						end
+					else
+						@registration.is_attending = 'y'
+					end
+					
 					@registration.housing_data = {
 						address: params[:address],
 						phone: params[:phone],
@@ -1326,6 +1337,11 @@ class ConferencesController < ApplicationController
 		if @registration.present?
 			if view_context.same_city?(@registration.city, view_context.location(conference.location, conference.locale))
 				steps -= [:questions]
+				
+				# if this is a housing provider that is not attending the conference, remove these steps
+				if @registration.is_attending == 'n'
+					steps -= [:payment, :workshops]
+				end
 			else
 				steps -= [:hosting]
 			end
@@ -1545,7 +1561,7 @@ class ConferencesController < ApplicationController
 					:conference_id		=> @conference.id,
 					:user_id			=> session[:registration][:user][:id],
 					:email				=> session[:registration][:email],
-					:is_attending		=> 'yes',
+					:is_attending		=> 'y',
 					:is_participant		=> session[:registration][:is_participant],
 					:is_volunteer		=> session[:registration][:is_volunteer],
 					:is_confirmed		=> false,

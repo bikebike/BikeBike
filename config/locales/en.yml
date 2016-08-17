@@ -1021,8 +1021,6 @@ en:
         admin:
           edit:
             info: Info
-          payment:
-            message: XXX
         companion: Companion
       paragraphs:
         Policy_Agreement: Ensuring that all attendees feel welcome, safe, and respected at all times is especially important to us all. Please ensure that you have fully read and understand our safer spaces policy below, if you have any questions or concerns you can reach out to the organizers at any time.
@@ -1051,6 +1049,7 @@ en:
         Verify_Account: In order to confirm that you are a real person and that we will be able to contact you later, please verify your email address. We will send you an email that will allow you to continue with the registration process.
         facebook_sign_in: Alternatively you can sign in using your Facebook account and skip waiting for us to send you an email.
         can_provide_housing: Hosting visiting conference attendees is an important part of Bike!Bike!, it allows many people who would not normally be able to afford the cost of accommodations the chance to come to the conference and lets attendees really get to know our city and its residents. You will need to grant access to your home to guests overnight keeping in mind that events can sometimes go late into the evening. If your home will not be accessible during the day you should make sure to clearly communicate this with your guests.
+        not_attending: If you are only providing housing and would not like to receive further updates about the conference, check this box.
         host:
           address: Your address and phone number will be shared with your guests and conference organizers.
           space: How much space do you have to share?
@@ -1079,6 +1078,7 @@ en:
           quiet: Quiet household
           pets: House has dogs or cats
       can_provide_housing: I can provide housing
+      not_attending: I will not be attending the conference
       questions:
         bike:
           large: Large
