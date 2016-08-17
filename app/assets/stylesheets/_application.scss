@@ -1913,27 +1913,27 @@ table.schedule {
 	width: 100%;
 	margin: 0 0 1em;
 
-	&.locations-1 td.workshop {
+	&.locations-1 td.workshop.filled {
 		width: 100%;
 	}
 
-	&.locations-2 td.workshop {
+	&.locations-2 td.workshop.filled {
 		width: 50%;
 	}
 
-	&.locations-3 td.workshop {
+	&.locations-3 td.workshop.filled {
 		width: 33.333%;
 	}
 
-	&.locations-4 td.workshop {
+	&.locations-4 td.workshop.filled {
 		width: 25%;
 	}
 
-	&.locations-5 td.workshop {
+	&.locations-5 td.workshop.filled {
 		width: 20%;
 	}
 
-	&.locations-6 td.workshop {
+	&.locations-6 td.workshop.filled {
 		width: 16.66667%;
 	}
 
@@ -1952,6 +1952,15 @@ table.schedule {
 
 			&.filled {
 				background-color: lighten($colour-1, 25%);
+			}
+
+			&.open {
+				cursor: pointer;
+				white-space: nowrap;
+
+				&:hover {
+					background-color: lighten($colour-1, 25%);
+				}
 			}
 		}
 

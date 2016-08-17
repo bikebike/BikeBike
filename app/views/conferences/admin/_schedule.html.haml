@@ -1,3 +1,4 @@
+- add_inline_script :schedule
 - conference = @this_conference || @conference
 - if conference.event_locations.blank? && @entire_page
 	.warning-info=_'articles.admin.schedule.no_locations_warning'
@@ -14,7 +15,7 @@
 	#schedule-preview
 		- @schedule.each do | day, data |
 			%h4=date(day, :weekday)
-			%table.schedule{class: [data[:locations].present? ? 'has-locations' : 'no-locations', "locations-#{data[:locations].size}"]}
+			%table.schedule{class: [data[:locations].present? ? 'has-locations' : 'no-locations', "locations-#{data[:num_locations]}"]}
 				- if data[:locations].present?
 					%thead
 						%tr
@@ -35,7 +36,7 @@
 											- status = time_data[:item][:workshops][id][:status]
 										- else
 											- workshop = status = nil
-										%td{class: [time_data[:type], workshop.present? ? :filled : nil], rowspan: rowspan}
+										%td{class: [time_data[:type], workshop.present? ? :filled : :open], rowspan: rowspan, data: workshop.present? ? nil : { block: (time_data[:item][:block] + 1), day: day }}
 											- if workshop.present? && workshop.event_location.present?
 												= link_to off_screen(workshop.title), view_workshop_path(@conference.slug, workshop.id), class: 'event-detail-link'
 												%template.event-details{data: { href: view_workshop_path(@conference.slug, workshop.id) }}
@@ -60,7 +61,7 @@
 											- elsif @can_edit
 												.title="Block #{time_data[:item][:block] + 1}"
 								- else
-									%td{class: time_data[:type], rowspan: rowspan, colspan: data[:locations].present? ? data[:locations].size : 1}
+									%td{class: [time_data[:type], :open], rowspan: rowspan, colspan: data[:locations].present? ? data[:locations].size : 1, data: { block: (time_data[:item][:block] + 1), day: day }}
 										- if @can_edit
 											.title="Block #{time_data[:item][:block] + 1}"
 								%td.status{rowspan: rowspan}

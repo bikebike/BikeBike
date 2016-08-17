@@ -25,7 +25,7 @@
 		.flex-inputs
 			= location_select nil, small: true, stretch: true
 			= day_select nil, small: true, format: :weekday
-			= time_select nil, small: true
+			= hour_select nil, small: true
 		= textfield :title, nil, required: true, big: true, help: 'articles.admin.locations.paragraphs.meal_title'
 		= textfield :info, nil, help: 'articles.admin.locations.paragraphs.meal_info'
 		.actions.next-prev

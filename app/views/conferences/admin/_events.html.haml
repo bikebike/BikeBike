@@ -31,7 +31,7 @@
 		.flex-inputs
 			= location_select @event.event_location_id, small: true, stretch: true
 			= day_select @day, small: true, format: :weekday
-			= time_select @time, small: true
+			= hour_select @time, small: true
 			= length_select @length, small: true
 		- I18n.backend.enabled_locales.each do | locale |
 			- if locale.to_s != @event.locale.to_s

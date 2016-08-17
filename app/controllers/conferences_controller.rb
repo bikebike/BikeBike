@@ -1281,15 +1281,19 @@ class ConferencesController < ApplicationController
 			comment = Comment.find_by!(id: params[:comment_id].to_i, model_type: :workshops, model_id: workshop.id)
 			new_comment = comment.add_comment(current_user, params[:reply])
 
-			UserMailer.send_mail :workshop_comment, comment.user.locale do
-				[ workshop, new_comment, comment.user ]
+			unless comment.user.id == current_user.id
+				UserMailer.send_mail :workshop_comment, comment.user.locale do
+					[ workshop, new_comment, comment.user ]
+				end
 			end
 		elsif params[:button] = 'add_comment'
 			new_comment = workshop.add_comment(current_user, params[:comment])
 
 			workshop.active_facilitators.each do | u |
-				UserMailer.send_mail :workshop_comment, u.locale do
-					[ workshop, new_comment, u ]
+				unless u.id == current_user.id
+					UserMailer.send_mail :workshop_comment, u.locale do
+						[ workshop, new_comment, u ]
+					end
 				end
 			end
 		else

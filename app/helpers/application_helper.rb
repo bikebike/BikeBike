@@ -777,7 +777,7 @@ module ApplicationHelper
 		selectfield :day, value, conference_days_options_list(:during, nil, args[:format]), args
 	end
 
-	def time_select(value = nil, args = {}, start_time = 8, end_time = 23.5, step = 0.5)
+	def hour_select(value = nil, args = {}, start_time = 8, end_time = 23.5, step = 0.5)
 		time = start_time
 		times = []
 		while time <= end_time

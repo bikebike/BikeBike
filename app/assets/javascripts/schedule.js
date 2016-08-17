@@ -1,5 +1,14 @@
 (function() {
-	var body = document.querySelector('body');
+	function initSchedule() {
+		forEachElement('table.schedule td.workshop.empty', function(block) {
+			block.addEventListener('click', function(event) {
+				console.log('clicked');
+			});
+		});
+	}
+	initSchedule();
+
+	/*var body = document.querySelector('body');
 	var primaryContent = document.getElementById('primary-content');
 	var eventDlg = document.getElementById('event-dlg');
 
@@ -26,5 +35,5 @@
 			eventDlg.querySelector('.close-btn').onclick = closeDlg;
 			document.getElementById('overlay').onclick = closeDlg;
 		});
-	});
+	});*/
 })();
