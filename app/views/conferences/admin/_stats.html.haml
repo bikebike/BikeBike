@@ -1,3 +1,4 @@
+- add_inline_script :registrations
 .details
 	= data_set(:h4, 'articles.admin.stats.headings.completed_registrations') do
 		= (@completed_registrations || 0).to_s
@@ -18,3 +19,10 @@
 .actions
 	= link_to (_'links.download.Excel'), administration_step_path(@this_conference.slug, :stats, :format => :xlsx), class: [:button, :download]
 	= link_to (_'links.download.Organizations_Excel'), administration_step_path(@this_conference.slug, :organizations, :format => :xlsx), class: [:button, :download, :subdued]
+%h4 Registrations
+= searchfield :search, nil, big: true
+.table-scroller
+	%table.registrations.admin-edit
+		%thead
+			%tr=excel_header_columns(@excel_data)
+		%tbody#search-rows=excel_rows(@excel_data)

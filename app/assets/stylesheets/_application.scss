@@ -166,6 +166,10 @@ table, .table {
 				}
 			}
 		}
+
+		&.bold {
+			@include font-family(secondary);
+		}
 	}
 
 	tbody th {
@@ -175,6 +179,14 @@ table, .table {
 	&.admin-edit {
 		width: 100%;
 	}
+
+	tr.hidden {
+		display: none;
+	}
+}
+
+.table-scroller {
+	overflow: auto;
 }
 
 .table {
@@ -376,6 +388,7 @@ input {
 
 .number-field,
 .email-field,
+.search-field,
 .telephone-field,
 .password-field,
 .text-field {
@@ -449,6 +462,7 @@ input {
 .email-field,
 .password-field,
 .telephone-field,
+.search-field,
 .text-field,
 .text-area-field {
 	text-align: left;

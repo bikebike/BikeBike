@@ -1288,6 +1288,10 @@ module ApplicationHelper
 		textfield(name, value, options.merge({type: :number}))
 	end
 
+	def searchfield(name, value, options = {})
+		textfield(name, value, options.merge({type: :search}))
+	end
+
 	def emailfield(name, value, options = {})
 		textfield(name, value, options.merge({type: :email}))
 	end
@@ -1345,7 +1349,7 @@ module ApplicationHelper
 		when :phone
 			input_options[:autocomplete] = 'tel'
 		when :paypal_email_address, :paypal_username, :paypal_password, :paypal_signature
-			input_options[:autocomplete] = 'false'
+			input_options[:autocomplete] = 'off'
 		end
 
 		case options[:type]
@@ -1358,6 +1362,7 @@ module ApplicationHelper
 			end
 			html += select_tag(name, option_list, input_options)
 		else
+			input_options[:autocomplete] = 'off' if options[:type] == :search
 			html += send("#{(options[:type] || :text).to_s}_field_tag", name, value, input_options)
 		end
 
@@ -1544,8 +1549,6 @@ module ApplicationHelper
 			format 'td.bold', font_name: 'Calibri', fg_color: '333333', b: true
 		end
 
-		key = excel_data[:key] || 'excel.columns'
-		
 		content_tag(:table) do
 			(content_tag(:thead) do
 				content_tag(:tr, excel_header_columns(excel_data))

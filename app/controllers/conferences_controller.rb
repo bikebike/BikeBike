@@ -134,7 +134,7 @@ class ConferencesController < ApplicationController
 					else
 						@registration.is_attending = 'y'
 					end
-					
+
 					@registration.housing_data = {
 						address: params[:address],
 						phone: params[:phone],
@@ -336,95 +336,96 @@ class ConferencesController < ApplicationController
 					end
 				end
 			when :stats
-				if request.format.xlsx?
-					@registrations = ConferenceRegistration.where(:conference_id => @this_conference.id).sort { |a,b| (a.user.present? ? (a.user.firstname || '') : '').downcase <=> (b.user.present? ? (b.user.firstname || '') : '').downcase }
-					logger.info "Generating stats.xls"
-					@excel_data = {
-						columns: [
-								:name,
-								:email,
-								:status,
-								:registration_fees_paid,
-								:date,
-								:city,
-								:preferred_language,
-								:languages,
-								:arrival,
-								:departure,
-								:housing,
-								:bike,
-								:food,
-								:companion,
-								:allergies
-							],
-						column_types: {
-								name: :bold,
-								date: :datetime,
-								arrival: [:date, :day],
-								departure: [:date, :day],
-								registration_fees_paid: :money
-							},
-						keys: {
-								name: 'forms.labels.generic.name',
-								email: 'forms.labels.generic.email',
-								status: 'forms.labels.generic.registration_status',
-								city: 'forms.labels.generic.location',
-								date: 'articles.conference_registration.terms.Date',
-								languages: 'articles.conference_registration.terms.Languages',
-								preferred_language: 'articles.conference_registration.terms.Preferred_Languages',
-								arrival: 'forms.labels.generic.arrival',
-								departure: 'forms.labels.generic.departure',
-								housing: 'forms.labels.generic.housing',
-								bike: 'forms.labels.generic.bike',
-								food: 'forms.labels.generic.food',
-								companion: 'articles.conference_registration.terms.companion',
-								allergies: 'forms.labels.generic.allergies',
-								registration_fees_paid: 'articles.conference_registration.headings.fees_paid'
-							},
-						data: []
-					}
-					@registrations.each do | r |
-						user = r.user_id ? User.where(id: r.user_id).first : nil
-						if user.present?
-							companion = ''
-							if r.housing_data.present? && r.housing_data['companions'].present?
-								companion_user = User.find_by_email(r.housing_data['companions'].first)
-								companion = view_context._'articles.conference_registration.terms.registration_status.unregistered'
+				@registrations = ConferenceRegistration.where(:conference_id => @this_conference.id).sort { |a,b| (a.user.present? ? (a.user.firstname || '') : '').downcase <=> (b.user.present? ? (b.user.firstname || '') : '').downcase }
+				@excel_data = {
+					columns: [
+							:name,
+							:email,
+							:status,
+							:registration_fees_paid,
+							:date,
+							:city,
+							:preferred_language,
+							:languages,
+							:arrival,
+							:departure,
+							:housing,
+							:bike,
+							:food,
+							:companion,
+							:allergies
+						],
+					column_types: {
+							name: :bold,
+							date: :datetime,
+							arrival: [:date, :day],
+							departure: [:date, :day],
+							registration_fees_paid: :money
+						},
+					keys: {
+							name: 'forms.labels.generic.name',
+							email: 'forms.labels.generic.email',
+							status: 'forms.labels.generic.registration_status',
+							city: 'forms.labels.generic.location',
+							date: 'articles.conference_registration.terms.Date',
+							languages: 'articles.conference_registration.terms.Languages',
+							preferred_language: 'articles.conference_registration.terms.Preferred_Languages',
+							arrival: 'forms.labels.generic.arrival',
+							departure: 'forms.labels.generic.departure',
+							housing: 'forms.labels.generic.housing',
+							bike: 'forms.labels.generic.bike',
+							food: 'forms.labels.generic.food',
+							companion: 'articles.conference_registration.terms.companion',
+							allergies: 'forms.labels.generic.allergies',
+							registration_fees_paid: 'articles.conference_registration.headings.fees_paid'
+						},
+					data: []
+				}
+				@registrations.each do | r |
+					user = r.user_id ? User.where(id: r.user_id).first : nil
+					if user.present?
+						companion = ''
+						if r.housing_data.present? && r.housing_data['companions'].present?
+							companion_user = User.find_by_email(r.housing_data['companions'].first)
+							companion = view_context._'articles.conference_registration.terms.registration_status.unregistered'
 
-								if companion_user.present?
-									cr = ConferenceRegistration.where(user_id: companion_user.id).order(created_at: :desc).limit(1).first
+							if companion_user.present?
+								cr = ConferenceRegistration.where(user_id: companion_user.id).order(created_at: :desc).limit(1).first
 
-									if cr.present? && ((cr.steps_completed || []).include? 'questions')
-										companion = companion_user.named_email
-									end
+								if cr.present? && ((cr.steps_completed || []).include? 'questions')
+									companion = companion_user.named_email
 								end
 							end
-							steps = r.steps_completed || []
-
-							@excel_data[:data] << {
-								name: user.firstname || '',
-								email: user.email || '',
-								status: (view_context._"articles.conference_registration.terms.registration_status.#{(steps.include? 'questions') ? 'registered' : ((steps.include? 'contact_info') ? 'preregistered' : 'unregistered')}"),
-								date: r.created_at ? r.created_at.strftime("%F %T") : '',
-								city: r.city || '',
-								preferred_language: user.locale.present? ? (view_context.language_name user.locale) : '',
-								languages: ((r.languages || []).map { |x| view_context.language_name x }).join(', ').to_s,
-								arrival: r.arrival ? r.arrival.strftime("%F %T") : '',
-								departure: r.departure ? r.departure.strftime("%F %T") : '',
-								housing: r.housing || '',
-								bike: r.bike.present? ? (view_context._"articles.conference_registration.questions.bike.#{r.bike}") : '',
-								food: r.food.present? ? (view_context._"articles.conference_registration.questions.food.#{r.food}") : '',
-								companion: companion,
-								allergies: r.allergies,
-								registration_fees_paid: r.registration_fees_paid
-							}
 						end
+						steps = r.steps_completed || []
+
+						@excel_data[:data] << {
+							name: user.firstname || '',
+							email: user.email || '',
+							status: (view_context._"articles.conference_registration.terms.registration_status.#{(steps.include? 'questions') ? 'registered' : ((steps.include? 'contact_info') ? 'preregistered' : 'unregistered')}"),
+							date: r.created_at ? r.created_at.strftime("%F %T") : '',
+							city: r.city || '',
+							preferred_language: user.locale.present? ? (view_context.language_name user.locale) : '',
+							languages: ((r.languages || []).map { |x| view_context.language_name x }).join(', ').to_s,
+							arrival: r.arrival ? r.arrival.strftime("%F %T") : '',
+							departure: r.departure ? r.departure.strftime("%F %T") : '',
+							housing: r.housing || '',
+							bike: r.bike.present? ? (view_context._"articles.conference_registration.questions.bike.#{r.bike}") : '',
+							food: r.food.present? ? (view_context._"articles.conference_registration.questions.food.#{r.food}") : '',
+							companion: companion,
+							allergies: r.allergies,
+							registration_fees_paid: r.registration_fees_paid
+						}
 					end
+				end
+
+				if request.format.xlsx?
+					logger.info "Generating stats.xls"
 					return respond_to do | format |
 						format.xlsx { render xlsx: :stats, filename: "stats-#{DateTime.now.strftime('%Y-%m-%d')}" }
 					end
 				else
-					@registrations = ConferenceRegistration.where(:conference_id => @this_conference.id)
+					# @registrations = ConferenceRegistration.where(:conference_id => @this_conference.id)
 					@registration_count = @registrations.size
 					@completed_registrations = 0
 					@bikes = 0
