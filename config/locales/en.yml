@@ -1309,6 +1309,8 @@ en:
         deschedule: De-Schedule
         reschedule: Reschedule
         schedule_workshop: Schedule
+        delete_block: Delete
+        update_block: Update
       aria:
         remove_interest: Click if you are no longer interested in this workshop
         show_interest: Click if you are interested in this workshop
