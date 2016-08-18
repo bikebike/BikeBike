@@ -547,7 +547,7 @@ class ApplicationController < LinguaFrancaApplicationController
 				end
 				last_event = time
 			end
-			@schedule[day][:num_locations] = data[:locations].size
+			@schedule[day][:num_locations] = (data[:locations] || []).size
 		end
 
 		@schedule.deep_dup.each do | day, data |
