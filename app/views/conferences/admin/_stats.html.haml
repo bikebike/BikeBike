@@ -22,7 +22,4 @@
 %h4 Registrations
 = searchfield :search, nil, big: true
 .table-scroller
-	%table.registrations.admin-edit
-		%thead
-			%tr=excel_header_columns(@excel_data)
-		%tbody#search-rows=excel_rows(@excel_data)
+	= html_table @excel_data, id: 'search-table', class: ['registrations', 'admin-edit'], primary_key: :id, column_names: [:registration_fees_paid, :city, :preferred_language, :arrival, :departure, :housing, :bike, :food, :companion_email, :allergies], editable: administration_update_path(@this_conference.slug, :stats), column_options: @column_options

@@ -30,7 +30,7 @@
 			%td=_"articles.conference_registration.questions.housing.#{registration.housing}"
 			%td=date_span(registration.arrival.to_date, registration.departure.to_date)
 			- companion = companion(registration)
-			%td=companion.present? ? (companion.is_a?(User) ? companion.name : (_"articles.conference_registration.terms.registration_status.#{companion}")) : ''
+			%td=companion.present? ? (companion.is_a?(User) ? companion.named_email : (_"articles.conference_registration.terms.registration_status.#{companion}")) : ''
 			%td=_"articles.conference_registration.questions.food.#{registration.food}"
 			%td=registration.allergies
 			%td

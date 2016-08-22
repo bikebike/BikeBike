@@ -353,6 +353,7 @@ class ConferencesController < ApplicationController
 							:bike,
 							:food,
 							:companion,
+							:companion_email,
 							:allergies
 						],
 					column_types: {
@@ -360,7 +361,8 @@ class ConferencesController < ApplicationController
 							date: :datetime,
 							arrival: [:date, :day],
 							departure: [:date, :day],
-							registration_fees_paid: :money
+							registration_fees_paid: :money,
+							allergies: :text
 						},
 					keys: {
 							name: 'forms.labels.generic.name',
@@ -376,6 +378,7 @@ class ConferencesController < ApplicationController
 							bike: 'forms.labels.generic.bike',
 							food: 'forms.labels.generic.food',
 							companion: 'articles.conference_registration.terms.companion',
+							companion_email: 'forms.labels.generic.email',
 							allergies: 'forms.labels.generic.allergies',
 							registration_fees_paid: 'articles.conference_registration.headings.fees_paid'
 						},
@@ -384,22 +387,12 @@ class ConferencesController < ApplicationController
 				@registrations.each do | r |
 					user = r.user_id ? User.where(id: r.user_id).first : nil
 					if user.present?
-						companion = ''
-						if r.housing_data.present? && r.housing_data['companions'].present?
-							companion_user = User.find_by_email(r.housing_data['companions'].first)
-							companion = view_context._'articles.conference_registration.terms.registration_status.unregistered'
-
-							if companion_user.present?
-								cr = ConferenceRegistration.where(user_id: companion_user.id).order(created_at: :desc).limit(1).first
-
-								if cr.present? && ((cr.steps_completed || []).include? 'questions')
-									companion = companion_user.named_email
-								end
-							end
-						end
+						companion = view_context.companion(r)
+						companion = companion.is_a?(User) ? companion.name : (view_context._"articles.conference_registration.terms.registration_status.#{companion}") if companion.present?
 						steps = r.steps_completed || []
 
 						@excel_data[:data] << {
+							id: r.id,
 							name: user.firstname || '',
 							email: user.email || '',
 							status: (view_context._"articles.conference_registration.terms.registration_status.#{(steps.include? 'questions') ? 'registered' : ((steps.include? 'contact_info') ? 'preregistered' : 'unregistered')}"),
@@ -409,12 +402,25 @@ class ConferencesController < ApplicationController
 							languages: ((r.languages || []).map { |x| view_context.language_name x }).join(', ').to_s,
 							arrival: r.arrival ? r.arrival.strftime("%F %T") : '',
 							departure: r.departure ? r.departure.strftime("%F %T") : '',
-							housing: r.housing || '',
+							housing: r.housing.present? ? (view_context._"articles.conference_registration.questions.housing.#{r.housing}") : '',
 							bike: r.bike.present? ? (view_context._"articles.conference_registration.questions.bike.#{r.bike}") : '',
 							food: r.food.present? ? (view_context._"articles.conference_registration.questions.food.#{r.food}") : '',
 							companion: companion,
+							companion_email: ((r.housing_data || {})['companions'] || ['']).first,
 							allergies: r.allergies,
-							registration_fees_paid: r.registration_fees_paid
+							registration_fees_paid: r.registration_fees_paid,
+							raw_values: {
+								housing: r.housing,
+								bike: r.bike,
+								food: r.food,
+								arrival: r.arrival,
+								departure: r.departure
+							},
+							html_values: {
+								date: r.created_at.present? ? r.created_at.strftime("%F %T") : '',
+								arrival: r.arrival.present? ? view_context.date(r.arrival.to_date, :span_same_year_date_1) : '',
+								departure: r.departure.present? ? view_context.date(r.departure.to_date, :span_same_year_date_1) : ''
+							}
 						}
 					end
 				end
@@ -425,13 +431,28 @@ class ConferencesController < ApplicationController
 						format.xlsx { render xlsx: :stats, filename: "stats-#{DateTime.now.strftime('%Y-%m-%d')}" }
 					end
 				else
-					# @registrations = ConferenceRegistration.where(:conference_id => @this_conference.id)
 					@registration_count = @registrations.size
 					@completed_registrations = 0
 					@bikes = 0
 					@donation_count = 0
 					@donations = 0
 					@food = { meat: 0, vegan: 0, vegetarian: 0, all: 0 }
+					@column_options = {
+						housing: ConferenceRegistration.all_housing_options.map { |h| [
+							(view_context._"articles.conference_registration.questions.housing.#{h}"),
+							h] },
+						bike: ConferenceRegistration.all_bike_options.map { |b| [
+							(view_context._"articles.conference_registration.questions.bike.#{b}"),
+							b] },
+						food: ConferenceRegistration.all_food_options.map { |f| [
+							(view_context._"articles.conference_registration.questions.food.#{f}"),
+							f] },
+						arrival: view_context.conference_days_options_list(:before_plus_one),
+						departure: view_context.conference_days_options_list(:after_minus_one),
+						preferred_language: I18n.backend.enabled_locales.map { |l| [
+								(view_context.language_name l), l
+							] }
+					}
 					@registrations.each do | r |
 						if r.steps_completed.include? 'questions'
 							@completed_registrations += 1
@@ -1057,7 +1078,7 @@ class ConferencesController < ApplicationController
 					@workshop.destroy
 				end
 
-				return redirect_to workshops_url
+				return redirect_to register_step_path(@this_conference.slug, 'workshops')
 			end
 			return redirect_to view_workshop_url(@this_conference.slug, @workshop.id)
 		end

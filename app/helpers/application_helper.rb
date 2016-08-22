@@ -1536,6 +1536,18 @@ module ApplicationHelper
 		end
 	end
 
+	def html_table(excel_data, options = {})
+		options[:html] = true
+		attributes = { class: options[:class], id: options[:id] }
+		attributes[:data] = { 'update-url' => options[:editable] } if options[:editable].present?
+		content_tag(:table, attributes) do
+			(content_tag(:thead) do
+				content_tag(:tr, excel_header_columns(excel_data))
+			end) +
+			content_tag(:tbody, excel_rows(excel_data, {}, options))
+		end
+	end
+
 	def excel_table(excel_data)
 		format_xls 'table' do
 			workbook use_autowidth: true
@@ -1562,7 +1574,6 @@ module ApplicationHelper
 
 		data[:columns].each do |column|
 			unless data[:column_types].present? && data[:column_types][column] == :table
-				# columns += content_tag(:th, _(data[:keys][column].present? ? data[:keys][column] : "#{key}.#{column.to_s}"), class: class_name)
 				columns += content_tag(:th, data[:keys][column].present? ? _(data[:keys][column]) : '', class: class_name)
 			end
 		end
@@ -1597,7 +1608,7 @@ module ApplicationHelper
 		(left + columns + right).html_safe
 	end
 
-	def excel_columns(row, data, padding = {})
+	def excel_columns(row, data, padding = {}, options = {})
 		columns = ''
 
 		data[:columns].each do |column|
@@ -1613,13 +1624,73 @@ module ApplicationHelper
 				end
 			end
 
-			columns += content_tag(:td, value, { class: class_name }) unless is_sub_table
+			unless is_sub_table
+				attributes = { class: [class_name] }
+				if options[:html] && row[:html_values].present? && row[:html_values][column].present?
+					value = row[:html_values][column]
+				end
+				
+				if options[:editable]
+					attributes[:data] = { 'column-id' => column }
+				end
+
+				if (options[:column_names] || []).include? column
+					attributes[:tabindex] = 0
+				end
+
+				columns += content_tag(:td, value, attributes)
+			end
 		end
 
 		pad_columns(columns, padding)
 	end
 
-	def excel_sub_tables(row, data, padding = {})
+	def editor_columns(row, data, padding = {}, options = {})
+		columns = ''
+
+		data[:columns].each do |column|
+			value = row[column].present? ? (_!row[column].to_s) : ''
+			class_name = nil
+			is_sub_table = false
+
+			if data[:column_types].present? && data[:column_types][column].present?
+				if data[:column_types][column] == :table
+					is_sub_table = true
+				else
+					class_name = data[:column_types][column]
+				end
+			end
+
+			unless is_sub_table
+				attributes = { class: [class_name] }
+				
+				if options[:editable]
+					attributes[:data] = { 'column-id' => column }
+				end
+
+				if (options[:column_names] || []).include? column
+					attributes[:class] << 'has-editor'
+					raw_value = value
+
+					if options[:html] && row[:html_values].present? && row[:html_values][column].present?
+						value = row[:html_values][column]
+					end
+					# create the control but add the original value to set the width and height
+					if (options[:column_options] || {})[column].present?
+						value = (value + select_tag(column, options_for_select(options[:column_options][column], row[:raw_values][column] || raw_value), class: 'cell-editor')).html_safe
+					else
+						value = (value + content_tag(:textarea, raw_value, name: column, class: 'cell-editor')).html_safe
+					end
+				end
+
+				columns += content_tag(:td, value, attributes)
+			end
+		end
+
+		pad_columns(columns, padding)
+	end
+
+	def excel_sub_tables(row, data, padding = {}, options = {})
 		rows = ''
 
 		# shift the table right
@@ -1630,7 +1701,6 @@ module ApplicationHelper
 
 		data[:columns].each do |column|
 			if data[:column_types].present? && data[:column_types][column] == :table
-				puts row[column].to_json.to_s
 				rows += content_tag(:tr, excel_header_columns(row[column], new_padding, 'sub-table'))
 				rows += excel_rows(row[column], new_padding)
 				rows += excel_empty_row(row[column], new_padding)
@@ -1641,11 +1711,25 @@ module ApplicationHelper
 		rows.html_safe
 	end
 
-	def excel_rows(data, padding = {})
+	def excel_rows(data, padding = {}, options = {})
 		rows = ''
 		data[:data].each do |row|
-			rows += content_tag(:tr, excel_columns(row, data, padding)) +
+			attributes = {}
+			
+			if options[:primary_key].present?
+				attributes[:data] = { key: row[options[:primary_key]] }
+			end
+
+			attributes[:class] = []
+			
+			if options[:editable]
+				attributes[:class] << :editable
+				# attributes[:tabindex] = 0
+			end
+			
+			rows += content_tag(:tr, excel_columns(row, data, padding, options), attributes) +
 				excel_sub_tables(row, data, padding)
+			rows += content_tag(:tr, editor_columns(row, data, padding, options), class: :editor) if options[:editable]
 		end
 		rows.html_safe
 	end

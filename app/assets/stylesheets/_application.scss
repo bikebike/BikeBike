@@ -183,10 +183,108 @@ table, .table {
 	tr.hidden {
 		display: none;
 	}
+
+	tr[data-key] {
+		cursor: default;
+		
+		&:hover {
+			background-color: lighten($colour-2, 33%);
+		}
+
+		&.editable {
+			+ .editor {
+				display: none;
+				background-color: lighten($colour-1, 50%);
+				
+				td {
+					position: relative;
+					vertical-align: top;
+					background: inherit;
+					cursor: default;
+					opacity: 0.5;
+
+					&.has-editor {
+						opacity: 1;
+					}
+
+					.cell-editor {
+						top: 0;
+						right: 0;
+						bottom: 0;
+						left: 0;
+						padding: inherit;
+						font: inherit;
+						margin: inherit;
+						background: inherit;
+						border: 0;
+						min-height: 0;
+						width: 100% !important;
+						border-radius: 0;
+						line-height: inherit;
+						overflow: hidden;
+						box-shadow: none;
+						text-align: inherit;
+						//border-bottom: 0.25em solid rgba(0,0,0,0.25);
+					}
+					select.cell-editor {
+						-webkit-appearance: none;
+						-moz-appearance: none;
+						-ms-appearance: none;
+						appearance: none;
+						cursor: pointer;
+					}
+				}
+			}
+
+			&.editing {
+				display: none;
+
+				+ .editor {
+					display: table-row;
+
+					.cell-editor {
+						position: absolute;
+					}
+				}
+			}
+		}
+
+		/*td[name] {
+			position: relative;
+			cursor: text;
+
+			&:hover {
+				background-color: lighten($colour-2, 25%);
+			}
+
+			input, textarea, select {
+			}
+		}
+
+		&[data-editing="1"] {
+		}*/
+	}
+
+	tr.editable, tr.editor {
+		td {
+			white-space: nowrap;
+
+			&.text {
+				white-space: normal;
+			}
+
+			&.date, &.datetime, &.money {
+				font-family: monospace;
+				font-size: 1.25em;
+				text-align: right;
+			}
+		}
+	}
 }
 
 .table-scroller {
 	overflow: auto;
+	background-color: $white;
 }
 
 .table {
