@@ -1057,7 +1057,7 @@ class ConferencesController < ApplicationController
 					@workshop.destroy
 				end
 
-				return redirect_to workshops_url
+				return redirect_to register_step_path(@this_conference.slug, 'workshops')
 			end
 			return redirect_to view_workshop_url(@this_conference.slug, @workshop.id)
 		end
