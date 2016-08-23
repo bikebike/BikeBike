@@ -438,8 +438,10 @@ class ConferencesController < ApplicationController
 
 							@bikes += 1 if r.bike == 'yes'
 
-							@food[r.food.to_sym] += 1
-							@food[:all] += 1
+							if r.food.present?
+								@food[r.food.to_sym] += 1
+								@food[:all] += 1
+							end
 
 							if r.registration_fees_paid.present? && r.registration_fees_paid > 0
 								@donation_count += 1
