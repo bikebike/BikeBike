@@ -342,7 +342,7 @@ class ApplicationController < LinguaFrancaApplicationController
 			template = 'login_confirmation_sent'
 			@page_title ||= 'page_titles.403.Please_Check_Email'
 
-			if (conference = /^\/conferences\/(\w+)\/register\/?$/.match(request.referrer.gsub(/^https?:\/\/.*?\//, '/')))
+			if (request.present? && request.referrer.present? && conference = /^\/conferences\/(\w+)\/register\/?$/.match(request.referrer.gsub(/^https?:\/\/.*?\//, '/')))
 				@this_conference = Conference.find_by!(slug: conference[1])
 				@banner_image = @this_conference.cover_url
 				template = 'conferences/email_confirm'
