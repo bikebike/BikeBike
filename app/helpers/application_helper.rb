@@ -610,9 +610,11 @@ module ApplicationHelper
 		return nil unless city.present?
 
 		hash = Hash.new
-		hash[:city] = _!(city) unless city.blank?
-		hash[:region] = _("geography.subregions.#{country}.#{region}", locale: locale) unless region.blank? || country.blank?
-		hash[:country] = _("geography.countries.#{country}", locale: locale) unless country.blank?
+		region_translation = region.present? && country.present? ? _("geography.subregions.#{country}.#{region}", locale: locale) : ''
+		country_translation = country.present? ? _("geography.countries.#{country}", locale: locale) : ''
+		hash[:city] = _!(city) if city.present?
+		hash[:region] = region_translation if region_translation.present?
+		hash[:country] = country_translation if country_translation.present?
 
 		# return the formatted location or the first value if we only have one value
 		return hash.length > 1 ? _("geography.formats.#{hash.keys.join('_')}", locale: locale, vars: hash) : hash.values.first
