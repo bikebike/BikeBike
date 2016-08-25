@@ -185,7 +185,7 @@ table, .table {
 	}
 
 	tr[data-key] {
-		cursor: default;
+		cursor: cell;
 		
 		&:hover {
 			background-color: lighten($colour-2, 33%);
@@ -205,6 +205,16 @@ table, .table {
 
 					&.has-editor {
 						opacity: 1;
+
+						@include after {
+							content: '';
+							position: absolute;
+							top: 100%;
+							right: 0;
+							left: 0;
+							height: 0.25em;
+							background-color: rgba($black, 0.125);
+						}
 					}
 
 					.cell-editor {
@@ -224,14 +234,23 @@ table, .table {
 						overflow: hidden;
 						box-shadow: none;
 						text-align: inherit;
-						//border-bottom: 0.25em solid rgba(0,0,0,0.25);
+
+						&[type=number]::-webkit-inner-spin-button, 
+						&[type=number]::-webkit-outer-spin-button { 
+							-webkit-appearance: none; 
+						}
 					}
+
 					select.cell-editor {
 						-webkit-appearance: none;
 						-moz-appearance: none;
 						-ms-appearance: none;
 						appearance: none;
 						cursor: pointer;
+					}
+
+					&.date .cell-editor {
+						text-align-last: right;
 					}
 				}
 			}
@@ -269,15 +288,32 @@ table, .table {
 		td {
 			white-space: nowrap;
 
-			&.text {
-				white-space: normal;
-			}
-
-			&.date, &.datetime, &.money {
+			&.date, &.datetime, &.money, &.number {
 				font-family: monospace;
 				font-size: 1.25em;
 				text-align: right;
 			}
+
+			&.text {
+				max-width: 20em;
+			}
+		}
+	}
+
+	tr.editable td.text,
+	tr.editor td.text .value {
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+			
+	tr.editor {
+		td.text .cell-editor {
+			white-space: normal;
+			bottom: auto;
+			height: 10em;
+			z-index: 1;
+			background: inherit;
+			overflow: auto !important;
 		}
 	}
 }

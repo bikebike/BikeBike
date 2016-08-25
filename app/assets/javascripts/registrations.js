@@ -3,15 +3,17 @@
 
 	function filterTable() {
 		forEach(document.getElementById('search-table').getElementsByTagName('TBODY')[0].getElementsByTagName('TR'), function(tr) {
-			tr.classList.remove('hidden');
+			if (tr.classList.contains('editable')) {
+				tr.classList.remove('hidden');
 
-			var value = searchControl.value;
-			if (value) {
-				var words = value.split(/\s+/);
-				for (var i = 0; i < words.length; i++) {
-					var word = new RegExp(words[i].replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&"), "i");
-					if (tr.innerHTML.search(word) == -1) {
-						tr.classList.add('hidden');
+				var value = searchControl.value;
+				if (value) {
+					var words = value.split(/\s+/);
+					for (var i = 0; i < words.length; i++) {
+						var word = new RegExp(words[i].replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&"), "i");
+						if (tr.innerHTML.search(word) == -1) {
+							tr.classList.add('hidden');
+						}
 					}
 				}
 			}
@@ -30,39 +32,50 @@
 	function saveRow(row) {
 		if (row) {
 			row.classList.remove('editing');
-			/*row.removeAttribute('data-editing');
-			forEach(row.getElementsByTagName('TD'), function(cell) {
-				var input = cell.getElementsByClassName('cell-editor')[0];
-				if (input) {
-					cell.removeChild(input);
+			var table = row.parentElement.parentElement;
+			var editRow = row.nextSibling;
+			var url = table.getAttribute('data-update-url');
+			var data = new FormData();
+			var request = new XMLHttpRequest();
+			request.onreadystatechange = function() {
+				if (request.readyState == 4) {
+					row.classList.remove('requesting');
+					if (request.status == 200 && request.responseText) {
+						var tempTable = document.createElement('table');
+						tempTable.innerHTML = request.responseText;
+						var rows = tempTable.getElementsByTagName('tr');
+						row.innerHTML = rows[0].innerHTML;
+						editRow.innerHTML = rows[1].innerHTML;
+					}
 				}
-
-			});*/
+			}
+			request.open('POST', url, true);
+			cells = editRow.getElementsByClassName('cell-editor');
+			data.append('key', row.getAttribute('data-key'));
+			var changed = false;
+			for (var i = 0; i < cells.length; i++) {
+				if (cells[i].value !== cells[i].getAttribute('data-value')) {
+					data.append(cells[i].getAttribute('name'), cells[i].value);
+					changed = true;
+				}
+			}
+			if (changed) {
+				row.classList.add('requesting');
+				request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+				request.send(data);
+			}
 		}
 	}
 
 	function editTableCell(cell) {
 		if (selectorMatches(cell, 'tr[data-key].editable td')) {
 			editTableRow(cell.parentElement, cell);
-		}
-		/*var currentRow = document.querySelector('[data-key][data-editing="1"]');
-		if (currentRow && !currentRow.contains(cell)) {
-			saveRow(currentRow);
-		}
-
-		if (selectorMatches(cell, 'tr[data-key] td[name]')) {
-			if (!cell.getElementsByClassName('cell-editor').length) {
-				//var tr = cell.parentElement;
-
-				//saveRow(document.querySelector('[data-key][data-editing="1"]'), tr);
-				cell.parentElement.setAttribute('data-editing', "1");
-
-				var value = cell.innerHTML;
-				cell.innerHTML += '<textarea type="text" name="' + cell.getAttribute('name') + '" class="cell-editor">' + value + '</textarea>';
-				cell.parentElement.classList.add();
-				setTimeout(function() { cell.getElementsByClassName('cell-editor')[0].focus(); }, 100);
+		} else if (!selectorMatches(cell, 'tr[data-key].editable + tr, tr[data-key].editable + tr *')) {
+			var currentRow = document.querySelector('tr[data-key].editable.editing');
+			if (currentRow) {
+				saveRow(currentRow);
 			}
-		}*/
+		}
 	}
 	function editTableRow(row, cell) {
 		if (selectorMatches(row, 'tr[data-key].editable')) {
@@ -78,11 +91,39 @@
 				if (cell) {
 					focusElement = editor.querySelector('td[data-column-id="' + cell.getAttribute('data-column-id') + '"] .cell-editor');
 				}
-				(focusElement || editor.getElementsByClassName('cell-editor')[0]).focus();
+				focusElement = focusElement || editor.getElementsByClassName('cell-editor')[0];
+				focusElement.focus();
+				if (focusElement.tagName === 'TEXTAREA' || (focusElement.tagName === 'INPUT' && focusElement.type != 'number' && focusElement.type != 'email')) {
+					focusElement.setSelectionRange(0, focusElement.value.length);
+				}
 			}
 		}
 	}
 	document.addEventListener('click', function (event) { editTableCell(event.target); });
+	document.addEventListener('keyup', function (event) {
+		if (event.code === "Enter") {
+			var currentRow = document.querySelector('tr[data-key].editable.editing');
+			if (currentRow) {
+				event.stopPropagation();
+				event.preventDefault();
+				var next = event.shiftKey ? 'previousSibling' : 'nextSibling';
+				var cell = document.activeElement.parentElement.getAttribute('data-column-id');
+				var row = currentRow[next] ? currentRow[next][next] : null;
+				if (!row) {
+					rows = currentRow.parentElement.children;
+					row = event.shiftKey ? rows[rows.length - 2] : rows[0];
+				}
+				editTableRow(row, row.querySelector('[data-column-id="' + cell + '"]'));
+			}
+		} else if (event.code === "Escape") {
+			var currentRow = document.querySelector('tr[data-key].editable.editing');
+			if (currentRow) {
+				event.stopPropagation();
+				event.preventDefault();
+				saveRow(currentRow);
+			}
+		}
+	});
 	if (document.observe) {
 		document.observe("focusin", function (event) { editTableCell(event.target); });
 	} else {

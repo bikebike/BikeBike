@@ -13,11 +13,19 @@ class ConferenceRegistration < ActiveRecord::Base
 		[:none, :tent, :house]
 	end
 
+	def self.all_spaces
+		[:bed_space, :floor_space, :tent_space]
+	end
+
 	def self.all_bike_options
 		[:yes, :no]
 	end
 
 	def self.all_food_options
 		[:meat, :vegetarian, :vegan]
+	end
+
+	def self.all_considerations
+		[:vegan, :smoking, :pets, :quiet]
 	end
 end

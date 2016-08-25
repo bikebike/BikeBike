@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
     accepts_nested_attributes_for :authentications
 
 	before_save do |user|
-		user.locale = I18n.locale
+		user.locale ||= I18n.locale
 	end
 
 	def can_translate?(to_locale = nil, from_locale = nil)
@@ -48,9 +48,6 @@ class User < ActiveRecord::Base
 		user = where(email: email).first
 
 		unless user
-			# not really a good UX so we should fix this later
-			#do_404
-			#return
 			user = new(email: email)
 			user.save!
 		end

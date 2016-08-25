@@ -756,7 +756,7 @@ module ApplicationHelper
 			belongs_to_periods << :before_plus_one if day <= (conference.start_date + 1.day)
 			belongs_to_periods << :after_minus_one if day >= (conference.end_date - 1.day)
 			belongs_to_periods << :during if day >= conference.start_date && day <= conference.end_date
-			days << [date(day.to_date, format || :span_same_year_date_1), day] if belongs_to_periods.include?(period)
+			days << [date(day.to_date, format || :span_same_year_date_1), day.to_date] if belongs_to_periods.include?(period)
 		end
 		return days
 	end
@@ -1558,6 +1558,7 @@ module ApplicationHelper
 			format 'td.datetime', num_fmt: 22, font_name: 'Courier New', sz: 10, fg_color: '333333'
 			format 'td.date.day', num_fmt: 14, font_name: 'Courier New', sz: 10, fg_color: '333333'
 			format 'td.money', num_fmt: 2, font_name: 'Courier New', sz: 10, fg_color: '333333'
+			format 'td.number', font_name: 'Courier New', sz: 10, fg_color: '333333'
 			format 'td.bold', font_name: 'Calibri', fg_color: '333333', b: true
 		end
 
@@ -1670,16 +1671,27 @@ module ApplicationHelper
 
 				if (options[:column_names] || []).include? column
 					attributes[:class] << 'has-editor'
-					raw_value = value
+					raw_value = row[:raw_values][column] || value
 
 					if options[:html] && row[:html_values].present? && row[:html_values][column].present?
 						value = row[:html_values][column]
 					end
+
+					editor_attributes = { class: 'cell-editor', data: { value: raw_value.to_s } }
+
 					# create the control but add the original value to set the width and height
+					editor_value = content_tag(:span, CGI::escapeHTML(value), class: 'value')
 					if (options[:column_options] || {})[column].present?
-						value = (value + select_tag(column, options_for_select(options[:column_options][column], row[:raw_values][column] || raw_value), class: 'cell-editor')).html_safe
+						value = (editor_value.html_safe + select_tag(column, options_for_select([['', '']] + options[:column_options][column], raw_value), editor_attributes)).html_safe
+					elsif data[:column_types][column] == :text
+						editor_attributes[:name] = column
+						value = (editor_value.html_safe + content_tag(:textarea, raw_value, editor_attributes)).html_safe
 					else
-						value = (value + content_tag(:textarea, raw_value, name: column, class: 'cell-editor')).html_safe
+						editor_attributes[:name] = column
+						editor_attributes[:value] = raw_value
+						type = data[:column_types][column] || :unknown
+						editor_attributes[:type] = { money: :number, number: :number, email: :email }[type] || :text
+						value = (editor_value.html_safe + content_tag(:input, nil, editor_attributes)).html_safe
 					end
 				end
 
@@ -1724,7 +1736,6 @@ module ApplicationHelper
 			
 			if options[:editable]
 				attributes[:class] << :editable
-				# attributes[:tabindex] = 0
 			end
 			
 			rows += content_tag(:tr, excel_columns(row, data, padding, options), attributes) +
@@ -1732,6 +1743,38 @@ module ApplicationHelper
 			rows += content_tag(:tr, editor_columns(row, data, padding, options), class: :editor) if options[:editable]
 		end
 		rows.html_safe
+	end
+
+	def registrations_table_options
+		{
+			id: 'search-table',
+			class: ['registrations', 'admin-edit'],
+			primary_key: :id,
+			column_names: [
+					:registration_fees_paid,
+					:is_attending,
+					:city,
+					:preferred_language,
+					:arrival,
+					:departure,
+					:housing,
+					:bike,
+					:food,
+					:companion_email,
+					:allergies,
+					:other,
+					:can_provide_housing,
+					:address,
+					:phone,
+					:first_day,
+					:last_day,
+					:notes
+				] +
+				User.AVAILABLE_LANGUAGES.map { |l| "language_#{l}".to_sym } +
+				ConferenceRegistration.all_spaces,
+			editable: administration_update_path(@this_conference.slug, :stats),
+			column_options: @column_options
+		}
 	end
 
 	private
