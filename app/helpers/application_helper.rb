@@ -1680,7 +1680,7 @@ module ApplicationHelper
 					editor_attributes = { class: 'cell-editor', data: { value: raw_value.to_s } }
 
 					# create the control but add the original value to set the width and height
-					editor_value = content_tag(:span, CGI::escapeHTML(value), class: 'value')
+					editor_value = content_tag(:div, value, class: 'value')
 					if (options[:column_options] || {})[column].present?
 						value = (editor_value.html_safe + select_tag(column, options_for_select([['', '']] + options[:column_options][column], raw_value), editor_attributes)).html_safe
 					elsif data[:column_types][column] == :text
