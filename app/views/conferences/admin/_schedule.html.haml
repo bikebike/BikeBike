@@ -118,7 +118,7 @@
 										- needs << (_"workshop.options.needs.#{need}")
 									= _!(needs.join ', ')
 								= data_set(:h5, 'articles.workshops.headings.theme') do
-									= workshop.theme.present? ? (_"workshop.options.theme.#{workshop.theme}") : ''
+									= Workshop.all_themes.include?((workshop.theme || '').to_sym) ? (_"workshop.options.theme.#{workshop.theme}") : workshop.theme
 								= data_set(:h5, 'articles.workshops.headings.space') do
 									= workshop.space.present? ? (_"workshop.options.space.#{workshop.space}") : ''
 								= data_set(:h5, 'forms.labels.generic.info') do
