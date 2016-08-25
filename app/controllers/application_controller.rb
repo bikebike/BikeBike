@@ -342,7 +342,7 @@ class ApplicationController < LinguaFrancaApplicationController
 			template = 'login_confirmation_sent'
 			@page_title ||= 'page_titles.403.Please_Check_Email'
 
-			if (conference = /^\/conferences\/(\w+)\/register\/?$/.match(request.referrer.gsub(/^https?:\/\/.*?\//, '/')))
+			if (request.present? && request.referrer.present? && conference = /^\/conferences\/(\w+)\/register\/?$/.match(request.referrer.gsub(/^https?:\/\/.*?\//, '/')))
 				@this_conference = Conference.find_by!(slug: conference[1])
 				@banner_image = @this_conference.cover_url
 				template = 'conferences/email_confirm'
@@ -547,7 +547,7 @@ class ApplicationController < LinguaFrancaApplicationController
 				end
 				last_event = time
 			end
-			@schedule[day][:num_locations] = data[:locations].size
+			@schedule[day][:num_locations] = (data[:locations] || []).size
 		end
 
 		@schedule.deep_dup.each do | day, data |
@@ -572,7 +572,7 @@ class ApplicationController < LinguaFrancaApplicationController
 
 		@schedule.each do | day, data |
 			@schedule[day][:times] = data[:times].sort.to_h
-			@schedule[day][:locations][0] = :add if @schedule[day][:locations].size > 0
+			@schedule[day][:locations][0] = :add if (@schedule[day][:locations] || []).size > 0
 
 			data[:times].each do | time, time_data |
 				if time_data[:type] == :workshop && time_data[:item].present? && time_data[:item][:workshops].present?
