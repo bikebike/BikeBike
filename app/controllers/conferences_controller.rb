@@ -508,6 +508,7 @@ class ConferencesController < ApplicationController
 			column_types: {
 					name: :bold,
 					date: :datetime,
+					email: :email,
 					companion_email: :email,
 					arrival: [:date, :day],
 					departure: [:date, :day],
@@ -532,7 +533,7 @@ class ConferencesController < ApplicationController
 					bike: 'forms.labels.generic.bike',
 					food: 'forms.labels.generic.food',
 					companion: 'articles.conference_registration.terms.companion',
-					companion_email: 'forms.labels.generic.email',
+					companion_email: 'articles.conference_registration.terms.companion_email',
 					allergies: 'forms.labels.generic.allergies',
 					registration_fees_paid: 'articles.conference_registration.headings.fees_paid',
 					other: 'articles.conference_registration.headings.other',
@@ -645,7 +646,7 @@ class ConferencesController < ApplicationController
 				preferred_language: I18n.backend.enabled_locales.map { |l| [
 						(view_context.language_name l), l
 					] },
-				is_attending: yes_no,
+				is_attending: [yes_no.first],
 				can_provide_housing: yes_no,
 				first_day: view_context.conference_days_options_list(:before),
 				last_day: view_context.conference_days_options_list(:after)
@@ -782,59 +783,80 @@ class ConferencesController < ApplicationController
 
 		case params[:admin_step]
 		when 'stats'
-			registration = ConferenceRegistration.where(
-						id: params[:key].to_i,
-						conference_id: @this_conference.id
-					).limit(1).first
-			user_changed = false
-			params.each do | key, value |
-				case key.to_sym
-				when :city
-					registration.city = value.present? ? view_context.location(Geocoder.search(value, language: @this_conference.locale).first, @this_conference.locale) : nil
-				when :housing, :bike, :food, :allergies, :other
-					registration.send("#{key.to_s}=", value)
-				when :registration_fees_paid
-					registration.registration_fees_paid = value.to_i
-				when :can_provide_housing
-					registration.send("#{key.to_s}=", value.present?)
-				when :arrival, :departure
-					registration.send("#{key.to_s}=", value.present? ? Date.parse(value) : nil)
-				when :companion_email
-					registration.housing_data ||= {}
-					registration.housing_data['companions'] = [value]
-				when :preferred_language
-					registration.user.locale = value
-					user_changed = true
-				when :is_attending
-					registration.is_attending = value.present? ? 'y' : 'n'
-				when :address, :phone, :first_day, :last_day, :notes
-					registration.housing_data ||= {}
-					registration.housing_data[key.to_s] = value
+			if params[:button] == 'save' || params[:button] == 'update'
+				if params[:button] == 'save'
+					return do_404 unless params[:email].present? && params[:name].present?
+
+					user = User.find_by_email(params[:email]) || User.create(email: params[:email])
+					user.firstname = params[:name]
+					user.save!
+					registration = ConferenceRegistration.new(
+							conference:      @this_conference,
+							user_id:         user.id,
+							steps_completed: []
+						)
 				else
-					if key.start_with?('language_')
-						l = key.split('_').last
-						if User.AVAILABLE_LANGUAGES.include? l.to_sym
-							registration.user.languages ||= []
-							if value.present?
-								registration.user.languages |= [l]
-							else
-								registration.user.languages -= [l]
-							end
-							user_changed = true
-						end
-					elsif ConferenceRegistration.all_spaces.include? key.to_sym
+					registration = ConferenceRegistration.where(
+								id: params[:key].to_i,
+								conference_id: @this_conference.id
+							).limit(1).first
+				end
+
+				user_changed = false
+				params.each do | key, value |
+					case key.to_sym
+					when :city
+						registration.city = value.present? ? view_context.location(Geocoder.search(value, language: @this_conference.locale).first, @this_conference.locale) : nil
+					when :housing, :bike, :food, :allergies, :other
+						registration.send("#{key.to_s}=", value)
+					when :registration_fees_paid
+						registration.registration_fees_paid = value.to_i
+					when :can_provide_housing
+						registration.send("#{key.to_s}=", value.present?)
+					when :arrival, :departure
+						registration.send("#{key.to_s}=", value.present? ? Date.parse(value) : nil)
+					when :companion_email
 						registration.housing_data ||= {}
-						registration.housing_data['space'] ||= {}
-						registration.housing_data['space'][key.to_s] = value
+						registration.housing_data['companions'] = [value]
+					when :preferred_language
+						registration.user.locale = value
+						user_changed = true
+					when :is_attending
+						registration.is_attending = value.present? ? 'y' : 'n'
+					when :address, :phone, :first_day, :last_day, :notes
+						registration.housing_data ||= {}
+						registration.housing_data[key.to_s] = value
+					else
+						if key.start_with?('language_')
+							l = key.split('_').last
+							if User.AVAILABLE_LANGUAGES.include? l.to_sym
+								registration.user.languages ||= []
+								if value.present?
+									registration.user.languages |= [l]
+								else
+									registration.user.languages -= [l]
+								end
+								user_changed = true
+							end
+						elsif ConferenceRegistration.all_spaces.include? key.to_sym
+							registration.housing_data ||= {}
+							registration.housing_data['space'] ||= {}
+							registration.housing_data['space'][key.to_s] = value
+						end
 					end
 				end
+				registration.user.save! if user_changed
+				registration.save!
+				
+				if params[:button] == 'save'
+					return redirect_to register_step_path(@this_conference.slug, :administration)
+				end
+				
+				get_stats(true, params[:key].to_i) 
+				options = view_context.registrations_table_options
+				options[:html] = true
+				return render html: view_context.excel_rows(@excel_data, {}, options)
 			end
-			registration.user.save! if user_changed
-			registration.save!
-			get_stats(true, params[:key].to_i) 
-			options = view_context.registrations_table_options
-			options[:html] = true
-			return render html: view_context.excel_rows(@excel_data, {}, options)
 		when 'edit'
 			case params[:button]
 			when 'save'

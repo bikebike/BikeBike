@@ -52,6 +52,7 @@
 			request.open('POST', url, true);
 			cells = editRow.getElementsByClassName('cell-editor');
 			data.append('key', row.getAttribute('data-key'));
+			data.append('button', 'update');
 			var changed = false;
 			for (var i = 0; i < cells.length; i++) {
 				if (cells[i].value !== cells[i].getAttribute('data-value')) {
@@ -133,4 +134,32 @@
 
 	searchControl.addEventListener('keyup', filterTable);
 	searchControl.addEventListener('search', filterTable);
+
+	forEachElement('[data-expands]', function(button) {
+		button.addEventListener('click', function(event) {
+			var element = document.getElementById(event.target.getAttribute('data-expands'));
+			document.body.classList.add('expanded-element');
+			element.classList.add('expanded');
+		});
+	});
+	forEachElement('[data-contracts]', function(button) {
+		button.addEventListener('click', function(event) {
+			var element = document.getElementById(event.target.getAttribute('data-contracts'));
+			document.body.classList.remove('expanded-element');
+			element.classList.remove('expanded');
+		});
+	});
+	forEachElement('[data-opens-modal]', function(button) {
+		button.addEventListener('click', function(event) {
+			var element = document.getElementById(event.target.getAttribute('data-opens-modal'));
+			document.body.classList.add('modal-open');
+			element.classList.add('open');
+		});
+	});
+	forEachElement('[data-closes-modal]', function(element) {
+		element.addEventListener('click', function(event) {
+			document.getElementById(event.target.getAttribute('data-closes-modal')).classList.remove('open');
+			document.body.classList.remove('modal-open');
+		});
+	});
 })();

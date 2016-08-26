@@ -1538,6 +1538,27 @@ module ApplicationHelper
 		end
 	end
 
+	def html_edit_table(excel_data, options = {})
+		attributes = { class: options[:class], id: options[:id] }
+		attributes[:data] = { 'update-url' => options[:editable] } if options[:editable].present?
+		
+		content_tag(:table, attributes) do
+			(content_tag(:tbody) do
+				rows = ''
+				excel_data[:columns].each do |column|
+					if (excel_data[:column_types] || {})[column] != :table && ((options[:column_names] || []).include? column)
+						rows += content_tag(:tr, { class: 'always-edit', data: { key: '' } }) do
+							attributes = { class: [excel_data[:column_types][column]], data: { 'column-id' => column } }
+							columns = content_tag(:th, excel_data[:keys][column].present? ? _(excel_data[:keys][column]) : '') + 
+							edit_column(nil, column, nil, attributes, excel_data, options)
+						end
+					end
+				end
+				rows.html_safe
+			end)
+		end
+	end
+
 	def html_table(excel_data, options = {})
 		options[:html] = true
 		attributes = { class: options[:class], id: options[:id] }
@@ -1672,36 +1693,44 @@ module ApplicationHelper
 				end
 
 				if (options[:column_names] || []).include? column
-					attributes[:class] << 'has-editor'
-					raw_value = row[:raw_values][column] || value
-
-					if options[:html] && row[:html_values].present? && row[:html_values][column].present?
-						value = row[:html_values][column]
-					end
-
-					editor_attributes = { class: 'cell-editor', data: { value: raw_value.to_s } }
-
-					# create the control but add the original value to set the width and height
-					editor_value = content_tag(:div, value, class: 'value')
-					if (options[:column_options] || {})[column].present?
-						value = (editor_value.html_safe + select_tag(column, options_for_select([['', '']] + options[:column_options][column], raw_value), editor_attributes)).html_safe
-					elsif data[:column_types][column] == :text
-						editor_attributes[:name] = column
-						value = (editor_value.html_safe + content_tag(:textarea, raw_value, editor_attributes)).html_safe
-					else
-						editor_attributes[:name] = column
-						editor_attributes[:value] = raw_value
-						type = data[:column_types][column] || :unknown
-						editor_attributes[:type] = { money: :number, number: :number, email: :email }[type] || :text
-						value = (editor_value.html_safe + content_tag(:input, nil, editor_attributes)).html_safe
-					end
+					columns += edit_column(row, column, value, attributes, data, options)
+				else
+					columns += content_tag(:td, value, attributes)
 				end
 
-				columns += content_tag(:td, value, attributes)
 			end
 		end
 
 		pad_columns(columns, padding)
+	end
+
+	def edit_column(row, column, value, attributes, data, options)
+		attributes[:class] << 'has-editor'
+		raw_value = row.present? ? (row[:raw_values][column] || value) : nil
+
+		if row.present? && options[:html] && row[:html_values].present? && row[:html_values][column].present?
+			value = row[:html_values][column]
+		end
+
+		editor_attributes = { class: 'cell-editor', data: { value: raw_value.to_s } }
+
+		# create the control but add the original value to set the width and height
+		editor_value = content_tag(:div, value, class: 'value')
+		if (options[:column_options] || {})[column].present?
+			value = (editor_value.html_safe + select_tag(column, options_for_select([['', '']] + options[:column_options][column], raw_value), editor_attributes)).html_safe
+		elsif data[:column_types][column] == :text
+			editor_attributes[:name] = column
+			value = (editor_value.html_safe + content_tag(:textarea, raw_value, editor_attributes)).html_safe
+		else
+			editor_attributes[:name] = column
+			editor_attributes[:value] = raw_value
+			editor_attributes[:required] = :required if (options[:required_columns] || []).include? column
+			type = data[:column_types][column] || :unknown
+			editor_attributes[:type] = { money: :number, number: :number, email: :email }[type] || :text
+			value = (editor_value.html_safe + content_tag(:input, nil, editor_attributes)).html_safe
+		end
+
+		return content_tag(:td, value, attributes)
 	end
 
 	def excel_sub_tables(row, data, padding = {}, options = {})
@@ -1745,6 +1774,15 @@ module ApplicationHelper
 			rows += content_tag(:tr, editor_columns(row, data, padding, options), class: :editor) if options[:editable]
 		end
 		rows.html_safe
+	end
+
+	def registrations_edit_table_options
+		options = registrations_table_options
+		options[:id] = 'create-table'
+		options[:class] << 'always-editing'
+		options[:column_names] += [:name, :email]
+		options[:required_columns] = [:name, :email]
+		return options
 	end
 
 	def registrations_table_options

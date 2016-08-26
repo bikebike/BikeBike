@@ -882,7 +882,8 @@ en:
             vegan: Vegans
           registrations: Number of registrations
           completed_registrations: Number of registrations
-          incomplete_registrations: Incomplete registrations
+          completed_registrations: Number of registrations
+          Registrations: Registrations
       meals:
         description: On this page you can schedule the meals that you will be serving.
         no_locations_warning: Before you can add meals, you must first add locations.
@@ -1116,6 +1117,7 @@ en:
           preregistered: Preregistered
           registered: Registered
         companion: Companion
+        companion_email: Companion Email
         Preferred_Languages: Preferred Language
         is_attending: Attending?
     about_bikebike:
