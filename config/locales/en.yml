@@ -1,7 +1,6 @@
 ---
 en:
   date:
-    abbr_day_names:
     - Sun
     - Mon
     - Tue
@@ -882,7 +881,7 @@ en:
             vegan: Vegans
           registrations: Number of registrations
           completed_registrations: Number of registrations
-          completed_registrations: Number of registrations
+          incomplete_registrations: Incomplete registrations
           Registrations: Registrations
       meals:
         description: On this page you can schedule the meals that you will be serving.
