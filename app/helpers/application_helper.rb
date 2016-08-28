@@ -1542,20 +1542,67 @@ module ApplicationHelper
 		attributes = { class: options[:class], id: options[:id] }
 		attributes[:data] = { 'update-url' => options[:editable] } if options[:editable].present?
 		
-		content_tag(:table, attributes) do
-			(content_tag(:tbody) do
-				rows = ''
-				excel_data[:columns].each do |column|
-					if (excel_data[:column_types] || {})[column] != :table && ((options[:column_names] || []).include? column)
-						rows += content_tag(:tr, { class: 'always-edit', data: { key: '' } }) do
-							attributes = { class: [excel_data[:column_types][column]], data: { 'column-id' => column } }
-							columns = content_tag(:th, excel_data[:keys][column].present? ? _(excel_data[:keys][column]) : '') + 
-							edit_column(nil, column, nil, attributes, excel_data, options)
+		if options[:column_names].is_a? Hash
+			return content_tag(:table, attributes) do
+				max_columns = 0
+				column_names = {}
+				(content_tag(:thead) do
+					headers = ''
+					options[:column_names].each do | header_name, columns |
+						column_names[header_name] ||= []
+						headers += content_tag(:th, excel_data[:keys][header_name].present? ? _(excel_data[:keys][header_name]) : '', colspan: 2)
+						row_count = columns.size
+						columns.each do | column |
+							column_names[header_name] << column
+							if (options[:row_spans] || {})[column].present?
+								row_count += (options[:row_spans][column] - 1)
+								for i in 1...options[:row_spans][column]
+									column_names[header_name] << false
+								end
+							end
+						end
+						max_columns = row_count if row_count > max_columns
+					end
+					content_tag(:tr, headers.html_safe)
+				end) + (content_tag(:tbody) do
+					rows = ''
+
+					for i in 0...max_columns
+						columns_html = ''
+						column_names.each do | header_name, columns |
+							column = columns[i]
+							if column.present?
+								attributes = { class: [excel_data[:column_types][column]], data: { 'column-id' => column } }
+								if (options[:row_spans] || {})[column].present?
+									attributes[:rowspan] = options[:row_spans][column]
+								end
+								columns_html += content_tag(:th, excel_data[:keys][column].present? ? _(excel_data[:keys][column]) : '', rowspan: attributes[:rowspan]) + 
+								edit_column(nil, column, nil, attributes, excel_data, options)
+							elsif column != false
+								columns_html += content_tag(:td, ' ', colspan: 2, class: :empty)
+							end
+						end
+						rows += content_tag(:tr, columns_html.html_safe, { class: 'always-edit', data: { key: '' } })
+					end
+					rows.html_safe
+				end)
+			end
+		else
+			return content_tag(:table, attributes) do
+				(content_tag(:tbody) do
+					rows = ''
+					excel_data[:columns].each do |column|
+						if (excel_data[:column_types] || {})[column] != :table && ((options[:column_names] || []).include? column)
+							rows += content_tag(:tr, { class: 'always-edit', data: { key: '' } }) do
+								attributes = { class: [excel_data[:column_types][column]], data: { 'column-id' => column } }
+								columns = content_tag(:th, excel_data[:keys][column].present? ? _(excel_data[:keys][column]) : '') + 
+								edit_column(nil, column, nil, attributes, excel_data, options)
+							end
 						end
 					end
-				end
-				rows.html_safe
-			end)
+					rows.html_safe
+				end)
+			end
 		end
 	end
 
@@ -1777,12 +1824,49 @@ module ApplicationHelper
 	end
 
 	def registrations_edit_table_options
-		options = registrations_table_options
-		options[:id] = 'create-table'
-		options[:class] << 'always-editing'
-		options[:column_names] += [:name, :email]
-		options[:required_columns] = [:name, :email]
-		return options
+		{
+			id: 'create-table',
+			class: ['registrations', 'admin-edit', 'always-editing'],
+			primary_key: :id,
+			column_names: {
+					contact_info: [
+							:name,
+							:email,
+							:is_subscribed,
+							:city,
+							:preferred_language
+						] + User.AVAILABLE_LANGUAGES.map { |l| "language_#{l}".to_sym },
+					questions: [
+							:registration_fees_paid,
+							:is_attending,
+							:arrival,
+							:departure,
+							:housing,
+							:bike,
+							:food,
+							:companion_email,
+							:allergies,
+							:other
+						],
+					hosting: [
+							:can_provide_housing,
+							:address,
+							:phone,
+							:first_day,
+							:last_day
+						] + ConferenceRegistration.all_spaces +
+						ConferenceRegistration.all_considerations + [
+							:notes
+						]
+				},
+			row_spans: {
+					allergies: 3,
+					other: 2
+				},
+			required_columns: [:name, :email],
+			editable: administration_update_path(@this_conference.slug, :stats),
+			column_options: @column_options
+		}
 	end
 
 	def registrations_table_options
@@ -1793,6 +1877,7 @@ module ApplicationHelper
 			column_names: [
 					:registration_fees_paid,
 					:is_attending,
+					:is_subscribed,
 					:city,
 					:preferred_language,
 					:arrival,
@@ -1811,7 +1896,8 @@ module ApplicationHelper
 					:notes
 				] +
 				User.AVAILABLE_LANGUAGES.map { |l| "language_#{l}".to_sym } +
-				ConferenceRegistration.all_spaces,
+				ConferenceRegistration.all_spaces +
+				ConferenceRegistration.all_considerations,
 			editable: administration_update_path(@this_conference.slug, :stats),
 			column_options: @column_options
 		}

@@ -1244,6 +1244,7 @@ en:
         body: Body
         day: Day
         event_location: Location
+        other_notes: Other
         time: Time
         time_span: Length
         reasons:

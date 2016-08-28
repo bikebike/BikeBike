@@ -32,6 +32,6 @@
 		.modal-edit-overlay{data: { 'closes-modal': 'new-registration' }}
 		.modal-edit-content
 			=html_edit_table @excel_data, registrations_edit_table_options
-			.actions
+			.actions.right
 				%a.button.subdued{data: { 'closes-modal': 'new-registration' }}='Cancel'
 				= button_tag :save, value: :save, class: :modify

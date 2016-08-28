@@ -481,6 +481,7 @@ class ConferencesController < ApplicationController
 					:email,
 					:status,
 					:is_attending,
+					:is_subscribed,
 					:registration_fees_paid,
 					:date,
 					:city,
@@ -502,7 +503,8 @@ class ConferencesController < ApplicationController
 					:last_day,
 					:address,
 					:phone
-				] + ConferenceRegistration.all_spaces + [
+				] + ConferenceRegistration.all_spaces +
+				ConferenceRegistration.all_considerations + [
 					:notes
 				],
 			column_types: {
@@ -524,7 +526,8 @@ class ConferencesController < ApplicationController
 					email: 'forms.labels.generic.email',
 					status: 'forms.labels.generic.registration_status',
 					is_attending: 'articles.conference_registration.terms.is_attending',
-					city: 'forms.labels.generic.location',
+					is_subscribed: 'articles.user_settings.headings.email_subscribe',
+					city: 'forms.labels.generic.event_location',
 					date: 'articles.conference_registration.terms.Date',
 					preferred_language: 'articles.conference_registration.terms.Preferred_Languages',
 					arrival: 'forms.labels.generic.arrival',
@@ -536,13 +539,16 @@ class ConferencesController < ApplicationController
 					companion_email: 'articles.conference_registration.terms.companion_email',
 					allergies: 'forms.labels.generic.allergies',
 					registration_fees_paid: 'articles.conference_registration.headings.fees_paid',
-					other: 'articles.conference_registration.headings.other',
+					other: 'forms.labels.generic.other_notes',
 					can_provide_housing: 'articles.conference_registration.can_provide_housing',
 					first_day: 'forms.labels.generic.first_day',
 					last_day: 'forms.labels.generic.last_day',
 					notes: 'forms.labels.generic.notes',
 					phone: 'forms.labels.generic.phone',
-					address: 'forms.labels.generic.address'
+					address: 'forms.labels.generic.address',
+					contact_info: 'articles.conference_registration.headings.contact_info',
+					questions: 'articles.conference_registration.headings.questions',
+					hosting: 'articles.conference_registration.headings.hosting'
 				},
 			data: []
 		}
@@ -552,6 +558,9 @@ class ConferencesController < ApplicationController
 		ConferenceRegistration.all_spaces.each do |s|
 			@excel_data[:column_types][s] = :number
 			@excel_data[:keys][s] = "forms.labels.generic.#{s.to_s}"
+		end
+		ConferenceRegistration.all_considerations.each do |c|
+			@excel_data[:keys][c] = "articles.conference_registration.host.considerations.#{c.to_s}"
 		end
 		@registrations.each do | r |
 			user = r.user_id ? User.where(id: r.user_id).first : nil
@@ -572,10 +581,10 @@ class ConferencesController < ApplicationController
 						email: user.email || '',
 						status: (view_context._"articles.conference_registration.terms.registration_status.#{(steps.include? 'questions') ? 'registered' : ((steps.include? 'contact_info') ? 'preregistered' : 'unregistered')}"),
 						is_attending: (view_context._"articles.conference_registration.questions.bike.#{r.is_attending == 'n' ? 'no' : 'yes'}"),
+						is_subscribed: user.is_subscribed == false ? (view_context._'articles.conference_registration.questions.bike.no') : '',
 						date: r.created_at ? r.created_at.strftime("%F %T") : '',
 						city: r.city || '',
 						preferred_language: user.locale.present? ? (view_context.language_name user.locale) : '',
-						#languages: ((r.languages || []).map { |x| view_context.language_name x }).join(', ').to_s,
 						arrival: r.arrival ? r.arrival.strftime("%F %T") : '',
 						departure: r.departure ? r.departure.strftime("%F %T") : '',
 						housing: r.housing.present? ? (view_context._"articles.conference_registration.questions.housing.#{r.housing}") : '',
@@ -600,6 +609,7 @@ class ConferencesController < ApplicationController
 							departure: r.departure.present? ? r.departure.to_date : nil,
 							preferred_language: user.locale,
 							is_attending: r.is_attending != 'n',
+							is_subscribed: user.is_subscribed,
 							can_provide_housing: r.can_provide_housing,
 							first_day: availability[0].present? ? availability[0].to_date : nil,
 							last_day: availability[1].present? ? availability[1].to_date : nil
@@ -620,6 +630,11 @@ class ConferencesController < ApplicationController
 					ConferenceRegistration.all_spaces.each do |s|
 						space = (housing_data['space'] || {})[s.to_s]
 						data[s] = space.present? ? space.to_i : nil
+					end
+					ConferenceRegistration.all_considerations.each do |c|
+						consideration = (housing_data['considerations'] || []).include?(c.to_s)
+						data[c] = (consideration ? (view_context._'articles.conference_registration.questions.bike.yes') : '')
+						data[:raw_values][c] = consideration
 					end
 					@excel_data[:data] << data
 				end
@@ -647,12 +662,18 @@ class ConferencesController < ApplicationController
 						(view_context.language_name l), l
 					] },
 				is_attending: [yes_no.first],
+				is_subscribed: [yes_no.last],
 				can_provide_housing: yes_no,
 				first_day: view_context.conference_days_options_list(:before),
 				last_day: view_context.conference_days_options_list(:after)
 			}
 			User.AVAILABLE_LANGUAGES.each do | l |
 				@column_options["language_#{l}".to_sym] = [
+						[(view_context._"articles.conference_registration.questions.bike.yes"), true]
+					]
+			end
+			ConferenceRegistration.all_considerations.each do | c |
+				@column_options[c.to_sym] = [
 						[(view_context._"articles.conference_registration.questions.bike.yes"), true]
 					]
 			end
@@ -821,6 +842,9 @@ class ConferencesController < ApplicationController
 					when :preferred_language
 						registration.user.locale = value
 						user_changed = true
+					when :is_subscribed
+						registration.user.is_subscribed = (value != "false")
+						user_changed = true
 					when :is_attending
 						registration.is_attending = value.present? ? 'y' : 'n'
 					when :address, :phone, :first_day, :last_day, :notes
@@ -837,6 +861,14 @@ class ConferencesController < ApplicationController
 									registration.user.languages -= [l]
 								end
 								user_changed = true
+							end
+						elsif ConferenceRegistration.all_considerations.include? key.to_sym
+							registration.housing_data ||= {}
+							registration.housing_data['considerations'] ||= {}
+							if value.present?
+								registration.housing_data['considerations'] |= [key]
+							else
+								registration.housing_data['considerations'] -= [key]
 							end
 						elsif ConferenceRegistration.all_spaces.include? key.to_sym
 							registration.housing_data ||= {}

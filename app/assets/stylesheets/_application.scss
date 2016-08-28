@@ -393,7 +393,7 @@ body.expanded-element {
 	background-color: rgba($black, 0.5);
 
 	&.open {
-		display: block;
+		display: flex;
 	}
 
 	.modal-edit-overlay {
@@ -407,23 +407,39 @@ body.expanded-element {
 
 	table {
 		margin: 0;
+		background-color: $white;
+
+		td.empty {
+			background-color: #F8F8F8;
+			border-bottom-color: #F8F8F8;
+		}
+	}
+
+	thead th {
+		text-align: center;
+		font-size: 1.125em;
+		color: $white;
+		border-color: lighten($colour-1, 12.5%);
+		background-color: $colour-1;
+	}
+
+	tbody th {
+		white-space: nowrap;
 	}
 
 	.modal-edit-content {
-		position: absolute;
-		top: 0;
-		right: 0;
-		left: 0;
-		bottom: 0;
-		max-width: 40em;
+		position: relative;
+		min-width: 50em;
+		max-width: 75em;
 		margin: auto;
 		overflow: auto;		
 		z-index: 1002;
 		background-color: #F8F8F8;
+		flex: 1;
 	}
 
-	table {
-		background-color: $white;
+	.actions {
+		margin: 1em 1em 0;
 	}
 }
 
