@@ -573,7 +573,7 @@ class ApplicationController < LinguaFrancaApplicationController
 		@schedule.each do | day, data |
 			@schedule[day][:times] = data[:times].sort.to_h
 			if do_analyze || @schedule[day][:locations].empty?
-				@schedule[day][:locations] ||= []
+				@schedule[day][:locations] ||= {}
 				@schedule[day][:locations][0] = :add
 			end
 
