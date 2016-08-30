@@ -822,7 +822,7 @@ module ApplicationHelper
 		locations = []
 		if @this_conference.event_locations.present?
 			@this_conference.event_locations.each do | location |
-				locations << [ location.title, location.id ]
+				locations << [ location.title, location.id ] unless ((args[:invalid_locations] || []).include? location.id)
 			end
 		end
 		selectfield :event_location, value, locations, args

@@ -1,6 +1,7 @@
 (function() {
 	function closeGuestSelector() {
 		document.getElementById('guest-selector').classList.remove('open');
+		document.body.classList.remove('modal-open');
 	}
 	function _post(form, params, f) {
 		var request = new XMLHttpRequest();
@@ -16,7 +17,6 @@
 		params['authenticity_token'] = form.querySelector('[name="authenticity_token"]').value;
 		var data = [];
 		for (var key in params) {
-			//data.push(key + '=' + encodeURI(params[key]));
 			data.push(key + '=' + params[key]);
 		}
 		request.send(data.join('&'));
@@ -29,6 +29,7 @@
 				document.getElementById('guest-selector').classList.add('open');
 				var table = document.getElementById('table');
 				table.classList.add('loading');
+				document.body.classList.add('modal-open');
 				_post(
 						document.getElementById('housing-table-form'),
 						{

@@ -1761,7 +1761,7 @@ ul.warnings li,
 	}
 }
 
-#admin-housing {
+#admin-housing, #admin-schedule {
 	.guests-housed {
 		margin-bottom: 1em;
 		text-align: right;
@@ -1873,7 +1873,19 @@ ul.warnings li,
 		}
 	}
 
-	#guest-selector {
+	#workshop-selector {
+		td, th {
+			white-space: nowrap;
+		}
+
+		td .text {
+			max-width: 50em;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+	}
+
+	#guest-selector, #workshop-selector {
 		display: none;
 		position: fixed;
 		top: 0;
@@ -1888,7 +1900,7 @@ ul.warnings li,
 			display: block;
 		}
 
-		.guest-dlg {
+		.guest-dlg, .workshop-dlg {
 			position: absolute;
 			top: 0;
 			right: 0;
@@ -1931,7 +1943,7 @@ ul.warnings li,
 	}
 
 	table {
-		min-width: 100em;
+		margin: 0 0 2em;
 	}
 
 	h4 {
@@ -2035,6 +2047,10 @@ ul.warnings li,
 }
 
 #admin-housing {
+	#table table {
+		min-width: 100em;
+	}
+
 	#hosts {
 		background-color: $white;
 
@@ -2208,9 +2224,8 @@ table.schedule {
 	&.locations-6 td.workshop.filled {
 		width: 16.66667%;
 	}
-
 	td {
-		position: relative;
+		//position: relative;
 		text-align: center;
 
 		&.empty {
@@ -2249,21 +2264,20 @@ table.schedule {
 		}
 
 		.event-detail-link {
-			position: absolute;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			left: 0;
+			display: inline-block;
+			display: inline-flex;
+			position: relative;
+			height: 100%;
+			width: 100%;
 			color: inherit;
+			align-items: center;
 
 			@include after {
 				display: none;
 			}
 
-			&:hover {
-				outline: 0.33rem solid #02CA9E;
-				outline-offset: 0.25rem;
-				z-index: 1;
+			.details {
+				flex: 1;
 			}
 		}
 
@@ -2327,6 +2341,12 @@ table.schedule {
 			}
 		}
 	}
+}
+
+body.home table.schedule td .event-detail-link:hover {
+	outline: 0.33rem solid #02CA9E;
+	outline-offset: 0.25rem;
+	z-index: 1;
 }
 
 .event-dlg {

@@ -129,7 +129,6 @@
 		document.observe("focusin", function (event) { editTableCell(event.target); });
 	} else {
 		document.addEventListener("focus", function (event) { editTableCell(event.target); }, true);
-		// document.addEventListener("focus", function (event) { editTableCell(event.target); }, true);
 	}
 
 	searchControl.addEventListener('keyup', filterTable);

@@ -1,9 +1,9 @@
-- add_inline_script :schedule
 - conference = @this_conference || @conference
 - if conference.event_locations.blank? && @entire_page
 	.warning-info=_'articles.admin.schedule.no_locations_warning'
 - else
 	- if @entire_page
+		- add_inline_script :schedule
 		= form_tag administration_update_path(conference.slug, :schedule) do
 			- if conference.workshop_schedule_published
 				%p=_'articles.conference_registration.paragraphs.admin.schedule.published', :p
@@ -16,7 +16,7 @@
 		- @schedule.each do | day, data |
 			%h4=date(day, :weekday)
 			%table.schedule{class: [data[:locations].present? ? 'has-locations' : 'no-locations', "locations-#{data[:num_locations]}"]}
-				- if data[:locations].present?
+				- if data[:locations].present? && data[:locations].values.first != :add
 					%thead
 						%tr
 							%th.corner
@@ -29,40 +29,36 @@
 							- rowspan = (time_data[:length] * 2).to_i
 							%th=time(time)
 							- if time_data[:type] == :workshop
-								- if time_data[:item][:workshops].present?
-									- data[:locations].each do | id, location |
-										- if time_data[:item][:workshops][id].present?
-											- workshop = time_data[:item][:workshops][id][:workshop]
-											- status = time_data[:item][:workshops][id][:status]
-										- else
-											- workshop = status = nil
-										%td{class: [time_data[:type], workshop.present? ? :filled : :open], rowspan: rowspan, data: workshop.present? ? nil : { block: (time_data[:item][:block] + 1), day: day }}
-											- if workshop.present? && workshop.event_location.present?
-												= link_to off_screen(workshop.title), view_workshop_path(@conference.slug, workshop.id), class: 'event-detail-link'
-												%template.event-details{data: { href: view_workshop_path(@conference.slug, workshop.id) }}
-													%h1.title=workshop.title
-													%p.address
-														= workshop.event_location.title + _!(': ')
-														= location_link workshop.event_location
-													.workshop-description= richtext workshop.info, 1
-												.title=workshop.title
-												- if @can_edit
-													= form_tag administration_update_path(conference.slug, :schedule), class: 'js-xhr' do
-														.status
-															.conflict-score
-																%span.title Conflict Score: 
-																%span.value="#{status[:conflict_score] * 100.0}%"
-															- if status[:errors].present?
-																.errors
-																	- status[:errors].each do | error |
-																		.error=_"errors.messages.schedule.#{error[:name].to_s}", vars: error[:i18nVars]
-														= hidden_field_tag :id, workshop.id
-														= button_tag :deschedule, value: :deschedule_workshop, class: [:delete, :small]
-											- elsif @can_edit
-												.title="Block #{time_data[:item][:block] + 1}"
-								- else
-									%td{class: [time_data[:type], :open], rowspan: rowspan, colspan: data[:locations].present? ? data[:locations].size : 1, data: { block: (time_data[:item][:block] + 1), day: day }}
-										- if @can_edit
+								- data[:locations].each do | id, location |
+									- if time_data[:item][:workshops][id].present?
+										- workshop = time_data[:item][:workshops][id][:workshop]
+										- status = time_data[:item][:workshops][id][:status]
+									- else
+										- workshop = status = nil
+									%td{class: [time_data[:type], workshop.present? ? :filled : :open], rowspan: rowspan, data: workshop.present? ? nil : { block: time_data[:item][:block], day: day, location: id }}
+										- if workshop.present? && workshop.event_location.present?
+											= link_to view_workshop_path(@conference.slug, workshop.id), class: 'event-detail-link' do
+												.details
+													.title=workshop.title
+											%template.event-details{data: { href: view_workshop_path(@conference.slug, workshop.id) }}
+												%h1.title=workshop.title
+												%p.address
+													= workshop.event_location.title + _!(': ')
+													= location_link workshop.event_location
+												.workshop-description= richtext workshop.info, 1
+											- if @can_edit
+												= form_tag administration_update_path(conference.slug, :schedule), class: 'deschedule-workshop' do
+													.status
+														.conflict-score
+															%span.title Conflict Score: 
+															%span.value="#{status[:conflict_score] * 100.0}%"
+														- if status[:errors].present?
+															.errors
+																- status[:errors].each do | error |
+																	.error=_"errors.messages.schedule.#{error[:name].to_s}", vars: error[:i18nVars]
+													= hidden_field_tag :id, workshop.id
+													= button_tag :deschedule, value: :deschedule_workshop, class: [:delete, :small]
+										- elsif @can_edit
 											.title="Block #{time_data[:item][:block] + 1}"
 								%td.status{rowspan: rowspan}
 									- if time_data[:status].present? && time_data[:status][:errors].present?
@@ -75,63 +71,30 @@
 										- when :meal
 											- location = EventLocation.where(id: time_data[:item]['location'].to_i).first
 											- if location.present?
-												%a.event-detail-link=off_screen(time_data[:item]['title'])
+												%a.event-detail-link
+													.details
+														.title= time_data[:item]['title']
+														.location= location.title
 												%template.event-details
 													%h1.title=time_data[:item]['title']
 													%p.address
 														= location.title + _!(': ')
 														= location_link location
-												.title= time_data[:item]['title']
-												.location= location.title
 										- when :event
 											- if time_data[:item].event_location.present?
-												%a.event-detail-link=off_screen(time_data[:item][:title])
+												%a.event-detail-link
+													.details
+														.title= time_data[:item][:title]
+														.location= time_data[:item].event_location.title
 												%template.event-details
 													%h1.title=time_data[:item][:title]
 													%p.address
 														= time_data[:item].event_location.title + _!(': ')
 														= location_link time_data[:item].event_location
 													= richtext time_data[:item][:info], 1
-												.title= time_data[:item][:title]
-												.location= time_data[:item].event_location.title
 								%td.status{rowspan: rowspan}
 	- if @entire_page
-		%ul.workshops-to-schedule
-			- @workshops.each do | workshop |
-				%li{id: "workshop-#{workshop.id}", class: workshop.block.present? ? 'booked' : 'not-booked'}
-					%h4.title= workshop.title
-					= form_tag administration_update_path(conference.slug, :schedule), class: 'js-xhr' do
-						.already-booked
-							.field-error='This block is already booked'
-						.workshop-description
-							.details
-								= data_set(:h5, 'articles.workshops.headings.interested_count') do
-									= workshop.interested_count
-								= data_set(:h5, 'articles.workshops.headings.facilitators') do
-									- facilitators = []
-									- workshop.active_facilitators.each do | facilitator |
-										- facilitators << facilitator.name
-									= facilitators.join ', '
-								= data_set(:h5, 'articles.workshops.headings.needs') do
-									- needs = []
-									- JSON.parse(workshop.needs || '[]').each do | need |
-										- needs << (_"workshop.options.needs.#{need}")
-									= _!(needs.join ', ')
-								= data_set(:h5, 'articles.workshops.headings.theme') do
-									= Workshop.all_themes.include?((workshop.theme || '').to_sym) ? (_"workshop.options.theme.#{workshop.theme}") : workshop.theme
-								= data_set(:h5, 'articles.workshops.headings.space') do
-									= workshop.space.present? ? (_"workshop.options.space.#{workshop.space}") : ''
-								= data_set(:h5, 'forms.labels.generic.info') do
-									= link_info_dlg truncate(workshop.info), (richtext workshop.info.html_safe), workshop.title
-								- if workshop.notes.present? && strip_tags(workshop.notes).length > 0
-									= data_set(:h5, 'forms.labels.generic.notes') do
-										= link_info_dlg truncate(workshop.notes), (richtext workshop.notes.html_safe), workshop.title
-
-							= hidden_field_tag :id, workshop.id
-							.drop-downs
-								= location_select workshop.event_location_id, small: true
-								= block_select workshop.block.present? ? "#{workshop.block['day']}:#{workshop.block['block']}" : nil, small: true
-							.actions.next-prev
-								= button_tag :deschedule, value: :deschedule_workshop, class: [:delete, 'booked-only', :small]
-								= button_tag :reschedule, value: :schedule_workshop, class: [:secondary, 'booked-only', :small]
-								= button_tag :schedule_workshop, value: :schedule_workshop, class: ['not-booked-only', :small]
+		#workshop-selector
+			= form_tag administration_update_path(@this_conference.slug, :schedule), class: 'workshop-dlg', id: 'workshop-table-form' do
+				%h3 Select a Workshop
+				#table
