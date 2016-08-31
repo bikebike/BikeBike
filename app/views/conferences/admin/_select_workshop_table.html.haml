@@ -1,11 +1,16 @@
 .host-field
 	%h4.inline=_'forms.labels.generic.event_location'
-	- if @location.present? && @location.to_i > 0
+	- if @event_location.present?
 		%span.plain-value
-			= EventLocation.find(@location.to_i).title
+			= @event_location.title
 			= hidden_field_tag :event_location, @location
 	- else
 		= location_select(nil, inline_label: true, small: true, invalid_locations: (((((@schedule[@day] || {})[:times] || {})[@time] || {})[:item] || {})[:workshops] || {}).keys, label: false)
+- if @event_location.present?
+	.host-field
+		%h4.inline=_'articles.admin.locations.headings.amenities'
+		%span.plain-value
+			= (JSON.parse(@event_location.amenities || '[]').map { |a| _"workshop.options.needs.#{a}" }).join(', ')
 .host-field
 	%h4.inline=_'forms.labels.generic.day'
 	%span.plain-value
@@ -24,7 +29,7 @@
 		%th=_'articles.workshops.headings.interested_count'
 		%th=_'articles.workshops.headings.notes'
 	- @ordered_workshops.each do | id, workshop |
-		%tr.selectable{data: {workshop: id}}
+		%tr.selectable{class: get_workshop_match(workshop, @day, @block, @event_location).to_s.gsub('_', '-'), data: {workshop: id}}
 			%th=workshop.title
 			%td=Workshop.all_themes.include?((workshop.theme || '').to_sym) ? (_"workshop.options.theme.#{workshop.theme}") : workshop.theme
 			%td=workshop.space.present? ? (_"workshop.options.space.#{workshop.space}") : ''

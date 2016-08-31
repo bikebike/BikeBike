@@ -5,9 +5,10 @@
 		= row do
 			= columns(medium: 10, push: {medium: 1}) do
 				%h2=_!@conference.title
-				= @conference.info.html_safe
+				= richtext @conference.info
 				- if @conference.registration_status == :open
 					- if @conference.workshop_schedule_published
+						- add_inline_script :home_schedule
 						%h3=_'articles.workshops.headings.Schedule'
 						= render 'conferences/admin/schedule'
 					- else

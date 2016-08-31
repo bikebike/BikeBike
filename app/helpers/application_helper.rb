@@ -1091,6 +1091,57 @@ module ApplicationHelper
 		return :bad_match
 	end
 
+	def get_workshop_match(workshop, day, block, location)
+		if workshop.event_location_id.present? && workshop.present?
+			if (Date.parse params[:day]).wday == workshop.block['day'] && block == workshop.block['block'].to_i
+				return :selected_space
+			end
+
+			if location.present? && location.id == workshop.event_location_id
+				return :other_space
+			end
+
+			# xxx
+			return :other_host
+		end
+
+		if location.present?
+			needs = JSON.parse(workshop.needs || '[]').map &:to_sym
+			amenities = JSON.parse(location.amenities || '[]').map &:to_sym
+
+			if (needs & amenities).length < needs.length
+				return :bad_match
+			end
+		end
+
+		(((((@schedule[@day] || {})[:times] || {})[@time] || {})[:item] || {})[:workshops] || {}).each do | l, w |
+			if w[:workshop].id != workshop.id
+				f_a = w[:workshop].active_facilitators.map { | f | f.id }
+				f_b = workshop.active_facilitators.map { | f | f.id }
+				if (f_a & f_b).present?
+					return :bad_match
+				end
+			end
+		end
+
+		# housing_data = guest.housing_data || []
+		
+		# if housing_data['host'].present?
+		# 	if housing_data['host'] == host.id
+		# 		return space == housing_data['space'] ? :selected_space : :other_space
+		# 	end
+
+		# 	return :other_host
+		# end
+
+		# if space_matches?(space, guest.housing) && available_dates_match?(host, guest)
+		# 	return :good_match
+		# end
+
+		# return :bad_match
+		return :good_match
+	end
+
 	def space_matches?(host_space, guest_space)
 		return false unless host_space.present? && guest_space.present?
 

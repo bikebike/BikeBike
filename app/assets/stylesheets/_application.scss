@@ -3573,7 +3573,6 @@ html[data-lingua-franca-example="html"] {
 	}
 
 	p {
-		margin: 0;
 		font-size: 1em;
 	}
 
@@ -3602,7 +3601,7 @@ html[data-lingua-franca-example="html"] {
 	button {
 		font-size: 0.9em;
 		margin: 1em;
-		background-color: $colour-1;
+		background-color: $colour-5;
 		vertical-align: middle;
 
 		&.delete {

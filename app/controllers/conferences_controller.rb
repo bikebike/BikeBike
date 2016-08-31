@@ -1127,6 +1127,7 @@ class ConferencesController < ApplicationController
 				@time = @workshop_blocks[@block]['time'].to_f
 				@day = (Date.parse params[:day])
 				@location = params[:location]
+				@event_location = @location.present? && @location.to_i > 0 ? EventLocation.find(@location.to_i) : nil
 
 				@workshops.sort { |a, b| a.title.downcase <=> b.title.downcase }.each do | workshop |
 					@ordered_workshops[workshop.id] = workshop

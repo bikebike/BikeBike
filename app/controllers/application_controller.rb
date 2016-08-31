@@ -568,8 +568,6 @@ class ApplicationController < LinguaFrancaApplicationController
 
 		@schedule = @schedule.sort.to_h
 
-		# return unless do_analyze
-
 		@schedule.each do | day, data |
 			@schedule[day][:times] = data[:times].sort.to_h
 			if do_analyze || @schedule[day][:locations].empty?
