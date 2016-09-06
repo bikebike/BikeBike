@@ -83,7 +83,7 @@ class ConferencesController < ApplicationController
 
 					@registration.save!
 				else
-					@errors = :incomplete
+					@errors[:payment] = :incomplete
 					@register_template = :payment
 				end
 				@page_title = 'articles.conference_registration.headings.Payment'
