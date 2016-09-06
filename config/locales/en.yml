@@ -158,6 +158,8 @@ en:
       mini_magick_processing_error: 'Failed to manipulate with MiniMagick, maybe it
         is not an image? Original Error: %{e}'
       fields:
+        payment:
+          incomplete: Your payment was not completed.
         location:
           empty: 'Please enter your location'
           unknown: 'Please include your city or town, we could not find a locality from "%{value}"'
