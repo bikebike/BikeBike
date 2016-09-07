@@ -2844,7 +2844,7 @@ body.error-locale-not-available {
 body {
 	#primary-content {
 		@include _(transition, 'filter 250ms ease-in-out, -webkit-filter 250ms ease-in-out');
-		display: flex;
+		display: -webkit-flex;
 		flex-direction: column;
 		min-height: 100vh;
 		overflow: hidden;
