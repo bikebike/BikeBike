@@ -134,7 +134,7 @@
 	var htmlNode = document.documentElement;
 	document.addEventListener('keydown', function(event) {
 		if (htmlNode.dataset.input != 'kb' &&
-				((!["input", "textarea", "select", "option"].includes(event.target.nodeName.toLowerCase()) &&
+				((["input", "textarea", "select", "option"].indexOf(event.target.nodeName.toLowerCase()) < 0 &&
 				!event.target.attributes.contenteditable) || event.key == "Tab")) {
 			htmlNode.setAttribute('data-input', 'kb');
 		}
