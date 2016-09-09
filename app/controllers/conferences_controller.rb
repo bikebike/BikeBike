@@ -579,7 +579,7 @@ class ConferencesController < ApplicationController
 						id: r.id,
 						name: user.firstname || '',
 						email: user.email || '',
-						status: (view_context._"articles.conference_registration.terms.registration_status.#{(steps.include? 'questions') ? 'registered' : ((steps.include? 'contact_info') ? 'preregistered' : 'unregistered')}"),
+						status: (view_context._"articles.conference_registration.terms.registration_status.#{view_context.registration_status(r)}"),
 						is_attending: (view_context._"articles.conference_registration.questions.bike.#{r.is_attending == 'n' ? 'no' : 'yes'}"),
 						is_subscribed: user.is_subscribed == false ? (view_context._'articles.conference_registration.questions.bike.no') : '',
 						date: r.created_at ? r.created_at.strftime("%F %T") : '',

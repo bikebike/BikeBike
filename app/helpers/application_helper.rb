@@ -243,6 +243,12 @@ module ApplicationHelper
 		}[@this_conference.registration_status]
 	end
 
+	def registration_status(registration)
+		return :unregistered if registration.nil? || registration.user.firstname.blank? || registration.city.blank?
+		return :registered if registration.housing.present? || (registration.can_provide_housing && registration.housing_data.present? && registration.housing_data['availability'].present?)
+		return :preregistered
+	end
+
 	def sortable(objects, id = 'id', url: nil, &block)
 		result = '<ul class="sortable sortable-' + objects[0].class.name.underscore.gsub('_', '-') + (url ? ('" data-url="' + url) : '') + '" data-id="' + id + '">'
 		objects.each_index do |i|
@@ -902,7 +908,7 @@ module ApplicationHelper
 			end
 		when :pre_registered
 			ConferenceRegistration.where(conference_id: conference.id).each do | r |
-				users << r.user if ((r.steps_completed || []).include? 'contact_info') && r.user.present? && r.is_attending != 'n'
+				users << r.user if registration_status(r) == :preregistered && r.is_attending != 'n'
 			end
 		when :workshop_facilitators
 			user_hash = {}
@@ -914,7 +920,7 @@ module ApplicationHelper
 			users = user_hash.values
 		when :unregistered
 			ConferenceRegistration.where(conference_id: conference.id).each do | r |
-				users << r.user unless ((r.steps_completed || []).include? (conference.registration_status == :open ? 'questions' : 'contact_info')) || r.user.nil? || r.is_attending == 'n'
+				users << r.user if registration_status(r) == :unregistered && r.is_attending != 'n'
 			end
 		when :housing_providers
 			ConferenceRegistration.where(conference_id: conference.id, can_provide_housing: true).each do | r |
@@ -1101,7 +1107,6 @@ module ApplicationHelper
 				return :other_space
 			end
 
-			# xxx
 			return :other_host
 		end
 
