@@ -351,7 +351,7 @@ class ConferencesController < ApplicationController
 					@donations = 0
 					@food = { meat: 0, vegan: 0, vegetarian: 0, all: 0 }
 					@registrations.each do | r |
-						if r.steps_completed.include? 'questions'
+						if view_context.registration_status(r) == :registered
 							@completed_registrations += 1
 
 							@bikes += 1 if r.bike == 'yes'
