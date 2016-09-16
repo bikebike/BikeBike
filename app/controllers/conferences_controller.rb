@@ -398,7 +398,7 @@ class ConferencesController < ApplicationController
 							email: host.user.email,
 							phone: data['phone'],
 							availability: data['availability'].present? && data['availability'][1].present? ? view_context.date_span(data['availability'][0].to_date, data['availability'][1].to_date) : '',
-							considerations: (data['considerations'].map { | consideration | view_context._"articles.conference_registration.host.considerations.#{consideration}" }).join(', '),
+							considerations: ((data['considerations'] || []).map { | consideration | view_context._"articles.conference_registration.host.considerations.#{consideration}" }).join(', '),
 							empty: '',
 							guests: {
 								columns: [:name, :area, :email, :arrival_departure, :allergies, :food, :companion, :city],
