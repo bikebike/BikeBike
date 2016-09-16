@@ -1158,6 +1158,7 @@ module ApplicationHelper
 	end
 
 	def available_dates_match?(host, guest)
+		return false unless host.housing_data['availability'].present? && host.housing_data['availability'][1].present?
 		if host.housing_data['availability'][0] <= guest.arrival &&
 		 	host.housing_data['availability'][1] >= guest.departure
 		 	return true
