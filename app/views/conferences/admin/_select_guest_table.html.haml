@@ -4,7 +4,7 @@
 	%span.plain-value= host.user.name
 .host-field
 	%h4.inline=_'articles.conference_registration.headings.host.availability'
-	%span.plain-value= date_span(host.housing_data['availability'][0].to_date, host.housing_data['availability'][1].to_date)
+	%span.plain-value= host.housing_data['availability'].present? && host.housing_data['availability'][1].present? ? date_span(host.housing_data['availability'][0].to_date, host.housing_data['availability'][1].to_date) : ''
 - if host.housing_data['considerations'].present?
 	.host-field
 		%h4.inline=_'articles.conference_registration.headings.host.considerations'
