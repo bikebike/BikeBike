@@ -864,7 +864,7 @@ class ConferencesController < ApplicationController
 							end
 						elsif ConferenceRegistration.all_considerations.include? key.to_sym
 							registration.housing_data ||= {}
-							registration.housing_data['considerations'] ||= {}
+							registration.housing_data['considerations'] ||= []
 							if value.present?
 								registration.housing_data['considerations'] |= [key]
 							else
