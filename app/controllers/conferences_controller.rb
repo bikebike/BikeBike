@@ -847,7 +847,15 @@ class ConferencesController < ApplicationController
 						user_changed = true
 					when :is_attending
 						registration.is_attending = value.present? ? 'y' : 'n'
-					when :address, :phone, :first_day, :last_day, :notes
+					when :first_day
+						registration.housing_data ||= {}
+						registration.housing_data['availability'] ||= []
+						registration.housing_data['availability'][0] = value
+					when :last_day
+						registration.housing_data ||= {}
+						registration.housing_data['availability'] ||= []
+						registration.housing_data['availability'][1] = value
+					when :address, :phone, :notes
 						registration.housing_data ||= {}
 						registration.housing_data[key.to_s] = value
 					else
