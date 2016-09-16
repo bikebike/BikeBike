@@ -432,7 +432,7 @@ class ConferencesController < ApplicationController
 										arrival_departure: guest.arrival.present? && guest.departure.present? ? view_context.date_span(guest.arrival.to_date, guest.departure.to_date) : '',
 										companion: companion.present? ? (companion.is_a?(User) ? companion.name : (view_context._"articles.conference_registration.terms.registration_status.#{companion}")) : '',
 										city: guest.city,
-										food: (view_context._"articles.conference_registration.questions.food.#{guest.food}"),
+										food: guest.food.present? ? (view_context._"articles.conference_registration.questions.food.#{guest.food}") : '',
 										allergies: guest.allergies
 									}
 								end
