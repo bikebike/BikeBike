@@ -38,11 +38,11 @@ class ConferenceRegistration < ActiveRecord::Base
 	around_update :check_status
 
 	def check_status
-		yield #saves
+		yield
+		
 		old_status = status(true)
 		new_status = status
 
-		puts " ===== #{old_status.to_s} : #{new_status.to_s} ==> #{conference.registration_status} ===== "
 		if old_status.present? && old_status != new_status
 			if (conference.registration_status == :pre && new_status == :preregistered) ||
 				(conference.registration_status == :open && new_status == :registered)
