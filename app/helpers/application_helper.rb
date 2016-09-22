@@ -244,9 +244,8 @@ module ApplicationHelper
 	end
 
 	def registration_status(registration)
-		return :unregistered if registration.nil? || registration.user.firstname.blank? || registration.city.blank?
-		return :registered if registration.housing.present? || (registration.can_provide_housing && registration.housing_data.present? && registration.housing_data['availability'].present?)
-		return :preregistered
+		return :unregistered if registration.nil?
+		return registration.status
 	end
 
 	def sortable(objects, id = 'id', url: nil, &block)

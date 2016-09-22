@@ -635,7 +635,7 @@ class ApplicationController < LinguaFrancaApplicationController
 										} unless amenities.include? need
 								end
 
-								@schedule[day][:times][time][:item][:workshops][ids[i]][:status][:conflict_score] = workshop_i.interested.present? ? (conflicts.length / workshop_i.interested.size) : 0
+								@schedule[day][:times][time][:item][:workshops][ids[i]][:status][:conflict_score] = (conflicts || []).length
 							end
 						end
 					end

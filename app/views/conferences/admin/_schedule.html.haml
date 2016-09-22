@@ -22,7 +22,6 @@
 							%th.corner
 							- data[:locations].each do | id, location |
 								%th=location.is_a?(Symbol) ? '' : location.title
-							%th.status
 				%tbody
 					- data[:times].each do | time, time_data |
 						%tr
@@ -50,8 +49,8 @@
 												= form_tag administration_update_path(conference.slug, :schedule), class: 'deschedule-workshop' do
 													.status
 														.conflict-score
-															%span.title Conflict Score: 
-															%span.value="#{status[:conflict_score] * 100.0}%"
+															%span.title Conflicts: 
+															%span.value="#{status[:conflict_score]} / #{workshop.interested.size}"
 														- if status[:errors].present?
 															.errors
 																- status[:errors].each do | error |
@@ -60,11 +59,6 @@
 													= button_tag :deschedule, value: :deschedule_workshop, class: [:delete, :small]
 										- elsif @can_edit
 											.title="Block #{time_data[:item][:block] + 1}"
-								%td.status{rowspan: rowspan}
-									- if time_data[:status].present? && time_data[:status][:errors].present?
-										%ul.errors
-											- time_data[:status][:errors].each do | error |
-												%li=error.to_json.to_s
 							- elsif time_data[:type] != :nil
 								%td{class: time_data[:type], rowspan: rowspan, colspan: data[:locations].present? ? data[:locations].size : 1}
 									- case time_data[:type]
@@ -92,7 +86,6 @@
 														= time_data[:item].event_location.title + _!(': ')
 														= location_link time_data[:item].event_location
 													= richtext time_data[:item][:info], 1
-								%td.status{rowspan: rowspan}
 	- if @entire_page
 		#workshop-selector
 			= form_tag administration_update_path(@this_conference.slug, :schedule), class: 'workshop-dlg', id: 'workshop-table-form' do

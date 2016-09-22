@@ -2201,6 +2201,10 @@ table.schedule {
 	width: 100%;
 	margin: 0 0 1em;
 
+	tbody {
+		border: 0.1rem solid #EEE;
+	}
+
 	&.locations-1 td.workshop.filled {
 		width: 100%;
 	}
@@ -2225,38 +2229,39 @@ table.schedule {
 		width: 16.66667%;
 	}
 	td {
-		//position: relative;
 		text-align: center;
-
-		&.empty {
-			border-top: 0;
-			border-bottom: 0;
-			background-color: #F8F8F8;
-		}
+		border: 0;
+		background-color: #F8F8F8;
 
 		&.workshop {
-			background-color: lighten($colour-1, 40%);
 
 			&.filled {
 				background-color: lighten($colour-1, 25%);
+				border: 0.1rem solid #EEE;
 			}
 
 			&.open {
-				cursor: pointer;
-				white-space: nowrap;
+				#admin-schedule & {
+					background-color: lighten($colour-1, 40%);
+					cursor: pointer;
+					white-space: nowrap;
+					border: 0.1rem solid #EEE;
 
-				&:hover {
-					background-color: lighten($colour-1, 25%);
+					&:hover {
+						background-color: lighten($colour-1, 25%);
+					}
 				}
 			}
 		}
 
 		&.event {
 			background-color: lighten($colour-2, 25%);
+			border: 0.1rem solid #EEE;
 		}
 
 		&.meal {
 			background-color: lighten($colour-3, 25%);
+			border: 0.1rem solid #EEE;
 		}
 
 		.title {

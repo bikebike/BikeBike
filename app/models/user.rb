@@ -12,6 +12,10 @@ class User < ActiveRecord::Base
     has_many :authentications, :dependent => :destroy
     accepts_nested_attributes_for :authentications
 
+	before_update do |user|
+		user.locale ||= I18n.locale
+	end
+
 	before_save do |user|
 		user.locale ||= I18n.locale
 	end

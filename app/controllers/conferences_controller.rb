@@ -201,13 +201,13 @@ class ConferencesController < ApplicationController
 							end
 
 							# workshops is the last step
-							if @register_template == :workshops
-								UserMailer.send_mail :registration_confirmation do
-									{
-										:args => @registration
-									}
-								end
-							end
+							# if @register_template == :workshops
+							# 	UserMailer.send_mail :registration_confirmation do
+							# 		{
+							# 			:args => @registration
+							# 		}
+							# 	end
+							# end
 						end
 
 						@registration.save!
