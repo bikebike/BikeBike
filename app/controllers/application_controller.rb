@@ -606,17 +606,6 @@ class ApplicationController < LinguaFrancaApplicationController
 									end
 								end
 
-								(0..ids.length).each do | j |
-									workshop_j = time_data[:item][:workshops][ids[j]].present? ? time_data[:item][:workshops][ids[j]][:workshop] : nil
-									if workshop_i.present? && workshop_j.present? && workshop_i.id != workshop_j.id
-										workshop_i.interested.each do | interested_i |
-											workshop_j.interested.each do | interested_j |
-												conflicts[interested_i.id] ||= true
-											end
-										end
-									end
-								end
-
 								location = workshop_i.event_location || EventLocation.new
 								needs = JSON.parse(workshop_i.needs || '[]').map &:to_sym
 								amenities = JSON.parse(location.amenities || '[]').map &:to_sym
@@ -635,7 +624,16 @@ class ApplicationController < LinguaFrancaApplicationController
 										} unless amenities.include? need
 								end
 
-								@schedule[day][:times][time][:item][:workshops][ids[i]][:status][:conflict_score] = (conflicts || []).length
+								# collect common interested users
+								interests = []
+								(0..ids.length).each do | j |
+									workshop_j = time_data[:item][:workshops][ids[j]].present? ? time_data[:item][:workshops][ids[j]][:workshop] : nil
+									if workshop_i.present? && workshop_j.present? && workshop_i.id != workshop_j.id
+										interests = interests | workshop_j.interested.map { | u | u.user_id }
+									end
+								end
+
+								@schedule[day][:times][time][:item][:workshops][ids[i]][:status][:conflict_score] = (interests & (workshop_i.interested.map { | u | u.user_id })).length
 							end
 						end
 					end
