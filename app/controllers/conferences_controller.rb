@@ -199,15 +199,6 @@ class ConferencesController < ApplicationController
 								@registration.steps_completed << form_step
 								@registration.steps_completed.uniq!
 							end
-
-							# workshops is the last step
-							# if @register_template == :workshops
-							# 	UserMailer.send_mail :registration_confirmation do
-							# 		{
-							# 			:args => @registration
-							# 		}
-							# 	end
-							# end
 						end
 
 						@registration.save!

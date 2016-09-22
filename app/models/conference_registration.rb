@@ -55,21 +55,4 @@ class ConferenceRegistration < ActiveRecord::Base
 			end
 		end
 	end
-
-	# before_update do | registration |
-	# 	old_status = status
-	# 	new_status = registration.status
-	# 	puts " ===== #{old_status.to_s} : #{new_status.to_s} ===== "
-	# 	if old_status.present? && old_status != new_status
-	# 		if (conference.registration_status == :pre && new_status == :preregistered) ||
-	# 			(conference.registration_status == :open && new_status == :registered)
-	# 		end
-
-	# 		UserMailer.send_mail :registration_confirmation do
-	# 			{
-	# 				:args => registration
-	# 			}
-	# 		end
-	# 	end
-	# end
 end
