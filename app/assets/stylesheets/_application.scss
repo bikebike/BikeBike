@@ -2197,6 +2197,10 @@ ul.warnings li,
 	border-bottom: 0;
 }
 
+#schedule-preview {
+	overflow: auto;
+}
+
 table.schedule {
 	width: 100%;
 	margin: 0 0 1em;
