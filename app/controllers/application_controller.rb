@@ -570,10 +570,10 @@ class ApplicationController < LinguaFrancaApplicationController
 
 		@schedule.each do | day, data |
 			@schedule[day][:times] = data[:times].sort.to_h
-			if do_analyze || @schedule[day][:locations].empty?
-				@schedule[day][:locations] ||= {}
-				@schedule[day][:locations][0] = :add
-			end
+			@schedule[day][:locations] ||= {}
+			
+			# add an empty block if no workshops are scheduled on this day yet
+			@schedule[day][:locations][0] = :add if do_analyze || @schedule[day][:locations].empty?
 
 			if do_analyze
 				data[:times].each do | time, time_data |
