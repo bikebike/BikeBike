@@ -13,18 +13,76 @@ class OauthsController < ApplicationController
     set_callback
 
     user_info = (sorcery_fetch_user_hash auth_params[:provider] || {})[:user_info]
-    user = User.find_by_email(user_info['email'])
-    
+
+    email = user_info['email']
+    fb_id = user_info['id']
+
+    # try to find the user by facebook id
+    user = User.find_by_fb_id(fb_id)
+
+    # otherwise find the user by email
+    unless user.present?
+      # only look if the email address is present
+      user = User.find_by_email(email) if email.present?
+    end
+
     # create the user if the email is not recognized
-    unless user
-      user = User.new(email: user_info['email'], firstname: user_info['name'])
+    if user.nil?
+      if email.present?
+        user = User.new(email: email, firstname: user_info['name'], fb_id: fb_id)
+        user.save!
+      else
+        session[:oauth_update_user_info] = user_info
+        return redirect_to oauth_update_path
+      end
+    elsif user.fb_id.blank? || user.email.blank?
+      user.email = email
+      user.fb_id = fb_id
       user.save!
     end
     
-    # log in the user
-    auto_login(user) if user
+    if user.present? && user.email.present?
+      # log in the user
+      auto_login(user)
+    end
     
-    redirect_to (session[:oauth_last_url] || home_path)
+    oauth_last_url = (session[:oauth_last_url] || home_path)
+    session.delete(:oauth_last_url)
+    redirect_to oauth_last_url
+  end
+
+  def update
+    @main_title = @page_title = 'articles.conference_registration.headings.email_confirm'
+    @errors = { email: flash[:error] } if flash[:error].present?
+    render 'application/update_user'
+  end
+  
+  def save
+    unless params[:email].present?
+      return redirect_to oauth_update_path
+    end
+    
+    user = User.find_by_email(params[:email])
+
+    if user.present?
+      flash[:error] = :exists
+      return redirect_to oauth_update_path
+    end
+    
+    # create the user
+    user = User.new(email: params[:email], firstname: session[:oauth_update_user_info]['name'], fb_id: session[:oauth_update_user_info]['id'])
+    user.save!
+
+    # log in
+    auto_login(user)
+
+    # clear out the session
+    oauth_last_url = (session[:oauth_last_url] || home_path)
+    session.delete(:oauth_last_url)
+    session.delete(:oauth_update_user_info)
+
+    # go to our final destination
+    redirect_to oauth_last_url
   end
 
   private

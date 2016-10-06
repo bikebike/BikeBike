@@ -47,7 +47,7 @@ BikeBike::Application.routes.draw do
 
     get   '/confirm/:token' => 'application#confirm', :as => :confirm
     match '/doconfirm' => 'application#do_confirm', :as => :do_confirm, via: [:get, :post]
-    #post '/doconfirm' => 'application#do_confirm', :as => :do_confirm
+
     match '/user/logout' => 'application#user_logout', :as => :logout, :via => [:get, :post]
     get   '/contact' => 'application#contact', :as => :contact
     post  '/contact/send' => 'application#contact_send', :as => :contact_send
@@ -55,10 +55,10 @@ BikeBike::Application.routes.draw do
     get   '/user' => 'application#user_settings', :as => :settings
     post  '/user/update' => 'application#update_user_settings', :as => :update_settings
     match '/oauth/callback' => 'oauths#callback', :via => [:get, :post]
+    get   '/oauth/update' => 'oauths#update', :as => :oauth_update
+    post  '/oauth/save' => 'oauths#save', :as => :oauth_save
     get   '/oauth/:provider' => 'oauths#oauth', :as => :auth_at_provider
-    # post  '/translator-request' => 'application#translator_request', :as => :translator_request
 
-    # patch '/capture_view' => 'application#capture_view'
     post  '/js_error' => 'application#js_error'
     get   '/error_403' => 'application#do_403'
     get   '/error_404' => 'application#error_404'

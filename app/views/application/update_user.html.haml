@@ -1,0 +1,9 @@
+= render :partial => 'application/header', :locals => {:image_file => 'grafitti.jpg'}
+%article
+	= row do
+		= columns do
+			%h2=_'articles.conference_registration.headings.Enter_Your_Email'
+			%p=_'articles.conference_registration.paragraphs.provide_email', :p			
+			= form_tag oauth_save_path, class: 'flex-form' do
+				= emailfield :email, nil, required: true, big: true
+				= button_tag :save, value: :save

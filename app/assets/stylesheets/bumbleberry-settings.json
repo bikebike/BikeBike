@@ -5,8 +5,8 @@
             "chrome": ["51"]
         },
         "development": {
-            "and_chr": ["51"],
-            "chrome": ["52"],
+            "and_chr": ["53"],
+            "chrome": ["53"],
             "edge": ["13"],
             "firefox": ["44"],
             "ie": ["11"],

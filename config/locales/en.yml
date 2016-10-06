@@ -169,6 +169,8 @@ en:
           empty: 'Please enter an address'
         space:
           empty: 'Please select a space'
+        email:
+          exists: An account with this email address already exists
       housing:
         space:
           companions: This host wishes to be housed with %{name}
@@ -1026,6 +1028,7 @@ en:
             info: Info
         companion: Companion
       paragraphs:
+        provide_email: Bike!Bike! uses email to communicate between you and your conference hosts, however your Facebook account does not provide us an email address. Before proceeding, you must provide us an email address.
         Policy_Agreement: Ensuring that all attendees feel welcome, safe, and respected at all times is especially important to us all. Please ensure that you have fully read and understand our safer spaces policy below, if you have any questions or concerns you can reach out to the organizers at any time.
         Confirm_Agreement: By clicking the "I Agree" button, you are pledging to do your best to uphold Bike!Bike!'s safer space agreement. Thank you!
         Registration_Info: Please fill in this registration form to help us prepare for your arrival to %{city}. If you wish to ask questions or tell us information we did not ask, please fill in the preferences field at the bottom of the page or use the contact us link.

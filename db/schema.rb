@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160814000940) do
+ActiveRecord::Schema.define(version: 20161006021205) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -328,7 +328,7 @@ ActiveRecord::Schema.define(version: 20160814000940) do
     t.string   "activation_state"
     t.string   "activation_token"
     t.datetime "activation_token_expires_at"
-    t.integer  "failed_logins_count",             default: 0
+    t.integer  "failed_logins_count",                       default: 0
     t.datetime "lock_expires_at"
     t.string   "unlock_token"
     t.string   "avatar"
@@ -340,6 +340,7 @@ ActiveRecord::Schema.define(version: 20160814000940) do
     t.json     "languages"
     t.string   "locale"
     t.boolean  "is_subscribed"
+    t.integer  "fb_id",                           limit: 8
   end
 
   add_index "users", ["activation_token"], name: "index_users_on_activation_token", using: :btree
