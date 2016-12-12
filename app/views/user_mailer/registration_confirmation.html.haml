@@ -1,8 +1,8 @@
 %p=_'email.general.paragraph.thank_you', "Thank you #{@user.firstname},", :vars => {:name => @user.firstname}
 
 - if @conference.registration_status.to_sym == :pre
-	%p=_'email.registration.paragraph.pre_registered', :vars => {:conference_title => @conference.title}
+  %p=_'email.registration.paragraph.pre_registered', :vars => {:conference_title => @conference.title}
 - else
-	%p=_'email.registration.paragraph.confirmed', :vars => {:conference_title => @conference.title}
+  %p=_'email.registration.paragraph.confirmed', :vars => {:conference_title => @conference.title}
 
-	%p=_'email.general.paragraph.see_you', :vars => {:conference_location => @conference.location.city}
+  %p=_'email.general.paragraph.see_you', :vars => {:conference_location => @conference.location.city}

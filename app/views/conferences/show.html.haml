@@ -5,30 +5,30 @@
 - description "#{@conference.title} conference in #{location_name} for DIY bicycle collectives, co-ops, and advocacy groups"
 = render 'header'
 %article.row
-	.columns.large-10
-		- if @register_step
-			%h2='Conference Registration'
-			- if @actions
-				= form_tag (@conference.url + '/register/').gsub(/\/\/+/, '/'), :method => :post, :multipart => @multipart do
-					= hidden_field_tag :step, @register_step
-					- if @error_message
-						.columns.medium-8.medium-centered
-							%p.error=@error_message
-					= render @register_template
-					.columns= form_actions @actions
-			- else
-				= render @register_template
-		- else
-			%h2=('About '+@conference.title)
-			=p @conference, :info
-			- if @conference.registration_open
-				.columns.small-12.centered
-					%a.button.register-now{href: @conference.url(:register)}
-						=_'conference.Register_Now'
+  .columns.large-10
+    - if @register_step
+      %h2='Conference Registration'
+      - if @actions
+        = form_tag (@conference.url + '/register/').gsub(/\/\/+/, '/'), :method => :post, :multipart => @multipart do
+          = hidden_field_tag :step, @register_step
+          - if @error_message
+            .columns.medium-8.medium-centered
+              %p.error=@error_message
+          = render @register_template
+          .columns= form_actions @actions
+      - else
+        = render @register_template
+    - else
+      %h2=('About '+@conference.title)
+      =p @conference, :info
+      - if @conference.registration_open
+        .columns.small-12.centered
+          %a.button.register-now{href: @conference.url(:register)}
+            =_'conference.Register_Now'
 
 
 - content_for :side_bar do
-	%h5= @conference.title+' is hosted by:'
-	%ul.preview-list.org-list.small-block-grid-2.large-block-grid-1
-		- @conference.organizations.each do |organization|
-			%li=render 'organizations/preview', :organization => organization
+  %h5= @conference.title+' is hosted by:'
+  %ul.preview-list.org-list.small-block-grid-2.large-block-grid-1
+    - @conference.organizations.each do |organization|
+      %li=render 'organizations/preview', :organization => organization

@@ -1,0 +1,42 @@
+- unless @location.present?
+  - if @locations.present?
+    = columns(medium: 12) do
+      %table.locations.admin-edit
+        %tr
+          %th=_'forms.labels.generic.title'
+          %th=_'forms.labels.generic.address'
+          %th=_'articles.workshops.headings.space'
+          %th=_'articles.admin.locations.headings.amenities'
+          %th.form
+        - @locations.each do | location |
+          %tr
+            %th=_!(location.title || '')
+            %td=location_link location
+            %td=location.space.present? ? (_"workshop.options.space.#{location.space}") : ''
+            %td
+              - amenities = location.amenities.present? ? JSON.parse(location.amenities) : []
+              =_!(amenities.collect { |amenity| _"workshop.options.needs.#{amenity}" }).join(', ')
+            %td.form
+              = admin_update_form do
+                = hidden_field_tag :id, location.id
+                = link_to (_'forms.actions.generic.edit'), edit_location_path(@this_conference, location.id), class: [:button, :small, :modify]
+                = button_with_confirmation :delete, (_'modals.admin.generic.delete.confirm', :p, vars: { title: location.title }), value: :delete, class: [:delete, :small]
+= admin_update_form do
+  = columns(medium: 12) do
+    %h5=_"articles.admin.locations.headings.#{@location.present? ? 'edit' : 'add'}_location", :t
+    = hidden_field_tag :id, @location.id if @location.present?
+    = textfield :title, @location.present? ? @location.title : nil, required: true, big: true, help: 'articles.admin.locations.paragraphs.title'
+    .flex-column.address-form
+      = textfield :address, @location.present? ? @location.address : nil, required: true, help: 'articles.admin.locations.paragraphs.address', stretch: true
+      .city=location(@this_conference.city)
+  = columns(medium: 6) do
+    = radiobuttons :space, EventLocation.all_spaces, @space, 'workshop.options.space', vertical: true, heading: 'articles.workshops.headings.space', required: true, help: 'articles.admin.locations.paragraphs.space'
+  = columns(medium: 6) do
+    = checkboxes :needs, EventLocation.all_amenities, @amenities || [], 'workshop.options.needs', vertical: true, heading: 'articles.admin.locations.headings.amenities', help: 'articles.admin.locations.paragraphs.amenities'
+  = columns(medium: 12) do
+    .actions.next-prev
+      - if @location.present?
+        = button_tag :save, value: :save
+        = button_tag :cancel, value: :cancel, class: :subdued, formnovalidate: true
+      - else
+        = button_tag :create, value: :create

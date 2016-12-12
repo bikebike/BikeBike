@@ -171,9 +171,37 @@ en:
           empty: 'Please select a space'
         email:
           exists: An account with this email address already exists
+        start_date:
+          start_date_after_end_date: Start date must be before end date
+          error: Error setting start date
+        end_date:
+          error: Error setting end date
       housing:
         space:
           companions: This host wishes to be housed with %{name}
+      admin:
+        administrators: Error updating organizations
+        dates: Error updating dates
+        description: Error saving your conference description
+        poster: An error occurred uploading your conference poster
+        payment_message: An error occurred saving your the payment message 
+        suggested_amounts: An error occurred saving your payment amounts
+        paypal: An error occurred saving your paypal details
+        registration_status: An error occurred updating your conference registration status
+        registrations: Error updaing registration
+        broadcast: Error sending your message
+        providers: Error saving housing provider
+        housing: Error
+        locations: Error saving your location
+        meals: Error saving your meal
+        events: Error saving your event
+        workshop_times: Error saving your workshop time
+        schedule: Error
+        publish_schedule: An error occurred while publishing your schedule
+        error_adding_org_member: Error adding user to organization
+        error_removing_org_member: Error removing user from organization
+        error_adding_administrator: Error adding administrator
+        error_removing_administrator: Error removing administrator
     template:
       body: 'There were problems with the following fields:'
       header:
@@ -183,11 +211,38 @@ en:
     messages:
       location_corrected: Your location was corrected from "%{original}" to "%{corrected}". If this doesn't reflect your intended location, you can change this again in the contact info step.
       housing:
-          space:
-            overbooked: This space is overbooked
-            companions: This guest wishes to be housed with %{name}
-            space: This guest wishes to be housed in a %{expected}
-            dates: This guest's arrival or departure dates conflict with the host's availability dates
+        space:
+          overbooked: This space is overbooked
+          companions: This guest wishes to be housed with %{name}
+          space: This guest wishes to be housed in a %{expected}
+          dates: This guest's arrival or departure dates conflict with the host's availability dates
+  success:
+    messages:
+      admin:
+        administrators: Organizations updated 
+        dates: Conference dates updated successfully
+        description: Conference description updated successfully
+        poster: Conference poster uploaded
+        payment_message: Your payment message has been updated
+        suggested_amounts: Your suggested payment amounts have been updated
+        paypal: Your paypal information has been updated
+        registration_status: Your conference registration status has been updated
+        stats: ''
+        registrations: Registration updated
+        broadcast: Message sent
+        providers: Provider updated
+        housing: Housing updated
+        locations: Location saved
+        meals: Meal saved
+        events: Event saved
+        workshop_times: Workshop times saved
+        schedule: Schedule updated
+        publish_schedule: Your schedule has been published
+        unpublish_schedule: Your schedule has been un-published
+        org_member_added: User added to organization
+        org_member_removed: User removed from organization
+        administrator_added: Administrator added to conference
+        administrator_removed: Administrator removed from conference
   helpers:
     select:
       prompt: Please select
@@ -873,7 +928,20 @@ en:
         delete: 
           confirm: You are about to delete ‘%{title}’. Are you sure you want to continue?
   articles:
+    conferences:
+      headings:
+        conferences: National and Regional Conferences
+        Conference_List: Conferences
+        types:
+          future: Upcoming conferences
+          passed: Passed conferences
+      paragraphs:
+        conferences: Bike!Bike! conferences are held nationally once a year in a different city in North America; regional conferences can be held anywhere, anytime.
     admin:
+      headings:
+        back: Back to Administration
+      paragraphs:
+        administration: From this dashboard you can configure your conference details, open registration, view statictics, compile your workshop scheulde, and more.
       stats:
         description: On this page you can view a breakdown of the registration process so far as well as download more detailed data in spreadsheets.
         headings:
@@ -891,21 +959,47 @@ en:
       meals:
         description: On this page you can schedule the meals that you will be serving.
         no_locations_warning: Before you can add meals, you must first add locations.
+        heading: Meals
       events:
         description: On this page you can schedule events. Events are any type of event that isn't a meal or a workshop. You can scheulde group meetings, parties, or group ride for example.
         no_locations_warning: Before you can add events, you must first add locations.
+        heading: Events
+        headings:
+          locations: Locations
+          meals: Meals
+          events: Events
+        descriptions:
+          locations: Create the list of locations that you will be using for events, meals, and workshops.
+          meals: List the meals that you will be providing, the meals will be added to your schedule
+          events: Create event details. These events should be any type of event other than meals and workshops such as meeting, rides, and parties. The events will be added to your schedule.
       schedule:
         description: On this page you can schedule workshops and publish your schedule to the front page.
         no_locations_warning: Before you can schedule workshops, you must first add locations.
+        heading: Schedule
+        headings:
+          workshop_times: Workshop Times
+          schedule: Schedule Workshops
+          publish_schedule: Publish Your Schedule
+        descriptions:
+          workshop_times: Set up blocks of time each day when workshops will be held.
+          schedule: Set a time and location for all proposed workshops.
+          publish_schedule: Once you have finalized your schedule, make it public here.
       housing:
-        description: The housing tool can be used to help you set up visitors that have requested to be housed with a host. When you see an error icon beside a host's space or a guest's details, hover over it to see warnings. Ideally you should only check marks which will indicate that all hosts and guests are happy.
+        description: Arrange housing for registratnts visiting your city. Pair each registratnt who has asked for housing with a registratnt that has volunteered to house guests base on their individual needs and wants.
+        heading: Housing
         headings:
           hosts: Hosts
           guests: Guests
           email: Email
           housing: Preference
           arrival_departure: In City
+          providers: Housing Providers
+          housing: Arrange Housing
+        descriptions:
+          providers: Although most housing providers shuold be encouraged to supply their own details through the registration process, you can add and edit housing provider details manually here.
+          housing: Pair each housing provider with a list of guests.
       locations:
+        heading: Locations
         description: Locations are used to schedule workshops, events, and meals. Once your schedule is published, users will be able to see the name and address and be given a link to a map so that they can find their way.
         headings:
           add_event: Add Event
@@ -929,18 +1023,56 @@ en:
           paypal_info: PayPal Info
         paragraphs:
           paypal_info: PayPal info is used for donations and fee payments. You must enter all fields to enable online fee payments, see the <a href="https://developer.paypal.com/docs/classic/api/apiCredentials/#creating-an-api-signature" target="_blank">PayPal API credential guide</a> for more information.
+      info:
+        heading: Basic Info
+        headings:
+          dates: Conference Dates
+          administrators: Administrators and Organizations
+          description: Description
+          poster: Poster
+          Host_Organizations: Host Organizations
+          External_Administrators: External Administrators
+        description: These are the basic details about your conference that you will likely want to configure before enabling your conference. One ready, contact the site administrator to make the conference public.
+        descriptions:
+          dates: Set your conference start and end dates
+          description: Modify the text that is displayed on the front page
+          poster: Upload your conference poster
+          administrators: Set the conference host organizations and other members who have access to these administration tools
+          Host_Organizations: Select all organizations from known organizations in %{city_name} that will be helping to host your conference. All members of each organization will be granted access to these administration tools, if you require administrators that are not members of an organization, you can add them below. If an organization is not listed here, please contact a site administrator.
+          External_Administrators: Users from outside of organizations in your city can be granted administration privledges here.
+      registration:
+        heading: Registration
+        headings:
+          registration_status: Registration Status
+          stats: Statistics
+          registrations: Modify Registrations
+          broadcast: Contact Users
+        description: Open or close registration, view registration statistics, modify information subbmitted by registratnts and contact users.
+        descriptions:
+          registration_status: Open or close registration to your conference.
+          stats: View a breakdown of statictics, how many users have registered, how much money have been collected, etc.
+          registrations: View and edit all data collected through the registration process.
+          broadcast: Send emails to targeted subsets of users.
       broadcast:
+        heading: Broadcast
         description: The broadcast tool is used to contact users through email. You can send messages en masse to select groups of users.
       broadcast_sent:
         description: Your message has been sent.
       workshop_times:
+        heading: Workshop Times
         description: Before you scheulde workshops, you must first create blocks of time when the workshops will be.
       payment:
-        description: Here you can set up how users will pay you for registration
+        heading: Payment
+        description: If you wish to collect dontaions and registration fees, you will need to confgure your payment details
         headings:
-          payment_amounts: Suggested Payment Amounts
-        paragraphs:
-          payment_amounts: Enter up to five suggested payment amounts. Users will still be able to select any amount including none but these amounts will show up as easy to select buttons on the 'Donations' page.
+          payment_message: Payment Message
+          suggested_amounts: Suggested Payment Amounts
+          paypal: PayPal Info
+        descriptions:
+          payment_message: Set the message that is displayed on the registration fee page. A default message will be supplied but if you wish to communicate how funds will be used you may want to set a personal message.
+          suggested_amounts: Enter up to five suggested payment amounts. Users will still be able to select any amount including none but these amounts will show up as easy to select buttons on the 'Donations' page.
+          paypal:
+            To enable PayPal payments, you will need to supply information on your organization's PayPal account
     contact:
       headings:
         contact: Send us a question or a complement
@@ -970,6 +1102,7 @@ en:
     conference_registration:
       headings:
         Administration: Administration
+        Conference_Administration: '%{title} Administration'
         administration: Administration
         Policy_Agreement: Safer Space Agreement
         policy: Policy
@@ -1224,6 +1357,8 @@ en:
   forms:
     labels:
       generic:
+        start_date: Start Date
+        end_date: End Date
         search: Search
         payment_message: Payment Message
         other: Disabilities, housing preferences, etc.
@@ -1279,8 +1414,12 @@ en:
         bike: Bike
         food: Food
         housing: Housing
+        no_file_selected: No file selected
     actions:
       generic:
+        upload: Upload
+        select_file: Select a file
+        administrate: Administrate
         login: Sign In
         Log_out: Sign out
         agree: I Agree
@@ -1311,6 +1450,7 @@ en:
         add_comment: Add Comment
         reply: Reply
         add_member: Add
+        remove_member: Remove
         publish: Publish Schedule
         un_publish: Un-Publish Schedule
         add_block: Add
@@ -1333,7 +1473,22 @@ en:
         housing_providers: Housing providers
         guests: Everyone who has requested housing
         all: Everyone
+      conferences:
+        types:
+          annual: 'Annual Bike!Bike!'
+          'n': 'North'
+          s: 'South'
+          e: 'East'
+          w: 'West'
+          ne: 'Northeast'
+          nw: 'Northwest'
+          se: 'Southeast'
+          sw: 'Southwest'
+    confirmations:
+      delete: Are you sure you want to delete?
   page_titles:
+    administration:
+      Administration: '%{title} Administration'
     '403':
       Access_Denied: Access Denied
       Please_Confirm_Email: Please confirm your email
@@ -1345,6 +1500,7 @@ en:
       About_BikeBike: About Bike!Bike!
     contact:
       Contact_Us: Contact Us
+    Conferences: Conferences
     conferences:
       Conference_Registration: Conference Registration
       Create_Workshop: Create a Workshop
@@ -1408,6 +1564,19 @@ en:
         Events: Events
         Schedule: Schedule
         Workshop_Times: Workshop Times
+        info: Basic Info
+        registration: Registration
+        edit: Edit
+        stats: Stats
+        payment: Payment
+        broadcast: Broadcast
+        broadcast_sent: Broadcast Sent
+        housing: Housing
+        locations: Locations
+        meals: Meals
+        events: Events
+        schedule: Schedule
+        workshop_times: Workshop Times
   actions:
     workshops:
       create: New Workshop
@@ -1470,6 +1639,8 @@ en:
         other: Other
         race_gender: Race, Gender, or Class Politics
       needs_facilitators: Needs Additional Facilitators
+  user:
+    not_found: Unregistered
   email:
     confirmation:
       paragraph:

@@ -1,0 +1,41 @@
+= columns(large: 8, push: { large: 2}) do
+  %h3=_'articles.admin.info.headings.Host_Organizations'
+  %p=_'articles.admin.info.descriptions.Host_Organizations', vars: { city_name: @this_conference.city.city }
+  = admin_update_form do
+    = checkboxes :organizations, (@organizations.map { |org| [org.name, org.id] }), @this_conference.organizations.map(&:id), 'test.test', vertical: true, big: true
+    .actions.right.small
+      = button_tag :save, value: :set_organizations
+  - @this_conference.organizations.each do | organization |
+    %h4=organization.name
+    - if organization.users.present?
+      .details.org-members
+        - organization.users.each do | user |
+          = raw_data_set(:h5, user.name) do
+            = user.email
+            - unless user.id == current_user.id && !current_user.administrator?
+              = admin_update_form class: [:inline, :right] do
+                = hidden_field_tag :user_id, user.id
+                = hidden_field_tag :org_id, organization.id
+                = button_tag :remove_member, value: :remove_org_member, class: [:small, :delete]
+    = admin_update_form class: 'mini-flex-form' do
+      = hidden_field_tag :org_id, organization.id
+      = emailfield :email, nil, required: true
+      = button_tag :add_member, value: :add_org_member, class: :small
+
+  %h3=_'articles.admin.info.headings.External_Administrators'
+  %p=_'articles.admin.info.descriptions.External_Administrators'
+  - if @this_conference.administrators.present?
+    .details.org-members
+      - @this_conference.administrators.each do | user |
+        = raw_data_set(:h5, user.name) do
+          = user.email
+          - unless user.id == current_user.id && !current_user.administrator?
+            = admin_update_form class: [:inline, :right] do
+              = hidden_field_tag :user_id, user.id
+              = button_tag :remove_member, value: :remove_administrator, class: [:small, :delete]
+  = admin_update_form class: 'mini-flex-form' do
+    = userfield :email, nil, required: true
+    -#= emailfield :email, nil, required: true
+    = button_tag :add_member, value: :add_administrator, class: :small
+= columns(large: 2) do
+  &nbsp;

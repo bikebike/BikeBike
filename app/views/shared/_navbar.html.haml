@@ -1,21 +1,27 @@
 %nav
-	#main-nav
-		- begin
-			= row(class: 'inner-nav') do
-				= columns(medium: 4, class: 'inner-nav') do
-					= link_to home_path, :class => 'logo' do
-						= svg_sprite('icons', "bb-icon-logo", "Logo")
-						= svg_sprite('icons', "bb-icon-logo-text", "Logo Text")
-						= off_screen _!'Bike Bike'
-				= columns(medium: 8, class: 'nav') do
-					= nav_link :about
-					= nav_link :policy
-					- case (@conference && @conference.registration_status ? @conference.registration_status.to_sym : :closed)
-					- when :pre
-						= nav_link register_path(@conference.slug), :pre_register, :register
-					- when :open
-						= nav_link register_path(@conference.slug), :register
-					- else
-						= render 'shared/donate_button', :email_address => (@conference.paypal_email_address || @conference.email_address || (@conference.organizations.present? && @conference.organizations.first.present? ? @conference.organizations.first.email_address : nil))
-		- rescue
-		
+  #main-nav
+    = row(class: 'inner-nav') do
+      = columns(medium: 3) do
+        - protect do
+          = link_to home_path, :class => 'logo' do
+            -#= svg_sprite('icons', "bb-icon-logo", "Logo")
+            -#= svg_sprite('icons', "bb-icon-logo-text", "Logo Text")
+            = svg 'logo', (_!'Bike Bike')
+            = svg 'logo-text', (_!'Bike Bike')
+            = off_screen _!'Bike Bike'
+      = columns(medium: 6, class: 'nav') do
+        - protect do
+          = nav_link :about
+          = nav_link :policy
+          = nav_link :conferences
+      = columns(medium: 3, class: 'locale-nav') do
+        - protect do
+          %ul.locales
+            - @alt_lang_urls.each do |locale, url|
+              %li{class: locale == I18n.locale.to_s ? 'current' : nil}
+                - locale_translation = language_name(locale, true)
+                - translation_text = (_'translate.content.change_locale', "Read in #{locale_translation}", vars: {language: locale_translation}, locale: locale)
+                %a{href: url, lang: locale, title: translation_text}
+                  %span{aria: {hidden: true}}=locale
+                  = off_screen translation_text
+    

@@ -1,0 +1,24 @@
+- body_class 'banner-bottom'
+= render :partial => 'application/header', :locals  => {:page_group => :administration, :page_key => 'Administration', :image_file => 'admin.jpg'}
+
+%article
+  = row do
+    = form_tag save_conference_path, class: 'composition' do
+      = columns(medium: 12) do
+        %h2=_@page_title, :t
+        = hidden_field_tag :id, @this_conference.id if @this_conference.id.present?
+
+      = columns(medium: 12) do
+        = textfield :city, location(@this_conference.city), required: true, big: true
+      = columns(medium: 12, class: 'flex-column') do
+        = selectfield :type, @this_conference.conferencetype, Conference.conference_types.keys.map { |k| [(_"forms.options.conferences.types.#{k}"), k]}, required: true, stretch: true
+        = numberfield :year, @this_conference.conference_year || Date.today.year, required: true
+      = columns(medium: 6) do
+        = checkbox :is_public, @this_conference.is_public != false, 'forms.labels.generic.is_public'
+      = columns(medium: 6) do
+        = checkbox :is_featured, @this_conference.is_featured != false, 'forms.labels.generic.is_featured'
+      = columns(medium: 12) do
+        .actions.next-prev
+          = button_tag :save, value: :save
+          - if @this_conference.id.present?
+            = button_with_confirmation :delete, value: :delete, class: 'delete'

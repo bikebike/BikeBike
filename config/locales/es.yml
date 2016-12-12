@@ -742,6 +742,15 @@ es:
   donate:
     button_label: Donar
   articles:
+    conferences:
+      headings:
+        conferences: Conferencias nacionales y regionales
+        Conference_List: Conferencias
+        types:
+          future: Próximas conferencias
+          passed: Conferencias aprobadas
+      paragraphs:
+        conferences: Bike!Bike! conferencias se llevan a cabo nacionalmente una vez al año en una ciudad diferente en América del Norte; Las conferencias regionales pueden celebrarse en cualquier lugar y en cualquier momento.
     conference_registration:
       headings:
         Workshops_Looking_For_Facilitators: Talleres que necesitan facilitadorxs
@@ -1012,6 +1021,8 @@ es:
         companion: Acompañante
     actions:
       generic:
+        create: Crear
+        administrate: Administrar
         add_comment: Añadir comentario
         agree: Estoy en acuerdo
         register: Registrarse
@@ -1054,6 +1065,7 @@ es:
     download:
       Excel: Descarga los datos en formato excel
   page_titles:
+    Conferences: Conferencias
     About_BikeBike: Acerca de Bike!Bike!
     about:
       About_BikeBike: Quienes Bike!Bike!

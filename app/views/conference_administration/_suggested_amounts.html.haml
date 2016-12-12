@@ -1,0 +1,8 @@
+= columns(medium: 12) do
+  = form_tag administration_update_path(@this_conference.slug, @admin_step) do
+    = fieldset :payment_amounts, label: false do
+      - payment_amounts = @this_conference.payment_amounts.present? ? @this_conference.payment_amounts : Conference.default_payment_amounts
+      - for i in 1..5 do
+        = numberfield "payment_amounts[#{i - 1}]", payment_amounts[i - 1], step: 0.01, min: 0.00, label: false
+    .actions.right
+      = button_tag :save, value: :save

@@ -1,0 +1,38 @@
+- body_class 'banner-bottom' unless @this_conference.poster.present?
+- content_for :banner do
+  = render :partial => 'application/header', :locals  => { page_group: :administration, page_key: 'Administration', image_file: @this_conference.poster_url || 'admin.jpg'}
+
+%article{id: "admin-#{@admin_step}"}
+  = row do
+    = columns(medium: 12) do
+      %h2.floating=(_"articles.admin.#{@admin_group}.headings.#{@admin_step}", :t)
+  = row do
+    = columns(medium: 12) do
+      %nav.sub-nav
+        %ul
+          %li=link_to (_'articles.admin.headings.back'), administrate_conference_path(@this_conference.slug)
+          - administration_steps[@admin_group].each do | step |
+            %li
+              - title = (_"articles.admin.#{@admin_group}.headings.#{step}", :t)
+              - if step == @admin_step.to_sym
+                = title
+              - else
+                = link_to title, administration_step_path(@this_conference.slug, step.to_s)
+  - if @success_message.present?
+    = row do
+      = columns(class: 'info-messages') do
+        .success-info.info-message=_"success.messages.admin.#{@success_message}", :s
+  - if @error_message.present?
+    = row do
+      = columns(class: 'info-messages') do
+        .error-info.info-message=_"errors.messages.admin.#{@error_message}", :s
+  - if @warnings.present?
+    = row class: 'warnings', tag: :ul do
+      - @warnings.each do | warning |
+        = columns tag: :li, class: 'warning-info info-message' do
+          = warning
+  = row do
+    = columns(medium: 12) do
+      %p=((_"articles.admin.#{@admin_group}.descriptions.#{@admin_step}", :s)) unless @hide_description === true
+  = row do
+    = render @admin_step

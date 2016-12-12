@@ -1,89 +1,89 @@
 - is_facilitator = workshop.active_facilitator?(current_user)
 = row class: 'view-object' do
-	= columns(medium: 12) do
-		%h2=_!workshop.title
-		.workshop-interest
-			- if workshop.can_show_interest?(current_user)
-				= form_tag toggle_workshop_interest_path(workshop.conference.slug, workshop.id), class: 'js-xhr' do
-					%span.interest-text=interest_text(workshop)
-					%span.interest-button=interest_button(workshop)
-			- else
-				%span.interest-text=interest_text(workshop)
-		= richtext workshop.info
-		- if preview.blank? && translations_available_for_editing
-			.actions
-				- translations_available_for_editing.each do |locale|
-					= link_to (_'actions.workshops.Translate', "Translate into #{language_name(locale)}", :vars => {:language => language_name(locale)}), translate_workshop_url(workshop.conference.slug, workshop.id, locale), :class => [:button, :translate]
-	= columns(medium: 6) do
-		%h3=_'articles.workshops.headings.facilitators'
-		.facilitators
-			- workshop.workshop_facilitators.each do |f|
-				- u = User.find(f.user_id)
-				- is_this_user = (f.user_id == current_user.id)
-				- if logged_in? && (workshop.public_facilitator?(u) || is_this_user || is_facilitator)
-					.facilitator
-						.name=_!u.name
-						.role
-							=_"roles.workshops.facilitator.#{workshop.role(u).to_s}"
-						- if is_facilitator && preview.blank?
-							.details
-								.email=u.email
-							- if f.role.to_sym == :requested
-								=(link_to (_'actions.workshops.Approve'), approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'approve'), :class => [:button, :modify])
-								=(link_to (_'actions.workshops.Deny'), approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'deny'), :class => [:button, :delete])
-							- elsif workshop.can_remove?(current_user, u)
-								=(link_with_confirmation (_'actions.workshops.Make_Owner'), (_'modals.workshops.facilitators.confirm_transfer_ownership', vars: { user_name: u.name}),approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'switch_ownership'), :class => [:button, :modify]) unless f.role.to_sym == :creator || !workshop.creator?(current_user)
-								=(link_with_confirmation (_"actions.workshops.#{is_this_user ? 'Leave' : 'Remove'}"), (_"modals.workshops.facilitators.confirm_remove#{is_this_user ? '_self' : ''}", vars: { user_name: u.name}), approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'remove'), :class => [:button, :delete])
-						- if is_this_user && workshop.requested_collaborator?(current_user)
-							.details
-								=(link_with_confirmation (_'actions.workshops.Cancel_Request'), (_'modals.workshops.facilitators.confirm_cancel_request'), approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'remove'), :class => [:button, :delete])
-			- unless preview.present?
-				=(link_to (_'actions.workshops.Facilitate'), facilitate_workshop_path(workshop.conference.slug, workshop.id), :class => [:button, workshop.needs_facilitators ? :accented : :subdued]) unless workshop.facilitator?(current_user)
-				- if is_facilitator
-					%h4=_'articles.workshops.headings.add_facilitator','Add a facilitator'
-					= form_tag workshop_add_facilitator_path(workshop.conference.slug, workshop.id), :class => 'add-facilitator mini-flex-form' do
-						.email-field.input-field
-							= email_field_tag :email, nil, required: true
-							= label_tag :email
-						= off_screen (_'forms.actions.aria.add'), 'add-new-desc'
-						= button_tag :add, aria: { labelledby: 'add-new-desc' }
-	- languages = JSON.parse(workshop.languages || '[]')
-	- if languages.present?
-		= columns(medium: 6) do
-			%h3=_'articles.workshops.headings.languages','Workshop Language'
-			%p= _!((languages.map { |x| _"languages.#{x}" }).join(', ').to_s.html_safe)
-	- if workshop.theme.present?
-		= columns(medium: 6) do
-			%h3=_'articles.workshops.headings.theme','Theme'
-			%p= Workshop.all_themes.include?((workshop.theme || '').to_sym) ? (_"workshop.options.theme.#{workshop.theme}") : workshop.theme
-	- if is_facilitator || workshop.conference.host?(current_user)
-		- needs = JSON.parse(workshop.needs || '[]')
-		- if needs.present?
-			= columns(medium: 6) do
-				%h3=_'articles.workshops.headings.needs','What do you need?'
-				%p= _!((needs.map { |x| _"workshop.options.needs.#{x}" }).join(', ').to_s.html_safe)
-		- if workshop.notes.present?
-			= columns(medium: 12, class: 'workshop-notes') do
-				%h3=_'articles.workshops.headings.notes','Notes'
-				= richtext workshop.notes, 3
-	= columns(medium: 12, id: :comments) do
-		%h3=_'articles.workshops.headings.Comments'
-		%ul.comments
-			- workshop.comments.each do | comment |
-				%li.comment{id: "comment-#{comment.id}"}
-					= comment(comment)
-					- sub_comments = comment.comments
-					- if sub_comments.present?
-						%ul.sub-comments.comments
-							- sub_comments.each do | sub_comment |
-								%li.sub-comment.comment{id: "comment-#{sub_comment.id}"}
-									= comment(sub_comment)
-					= form_tag workshop_comment_path(workshop.conference.slug, workshop.id) do
-						= hidden_field_tag :comment_id, comment.id
-						= textarea :reply, nil, plain: true, required: true, label: false, labelledby: "replyto-#{comment.id}"
-						.actions.right
-							= button_tag :reply, value: :reply, data: {opens: "#comment-#{comment.id} form", focus: :textarea}, class: :small, id: "replyto-#{comment.id}"
-		= form_tag workshop_comment_path(workshop.conference.slug, workshop.id) do
-			= textarea :comment, nil, plain: true, required: true, label: false, labelledby: :add_comment
-			.actions.right
-				= button_tag :add_comment, value: :add_comment, id: :add_comment
+  = columns(medium: 12) do
+    %h2=_!workshop.title
+    .workshop-interest
+      - if workshop.can_show_interest?(current_user)
+        = form_tag toggle_workshop_interest_path(workshop.conference.slug, workshop.id), class: 'js-xhr' do
+          %span.interest-text=interest_text(workshop)
+          %span.interest-button=interest_button(workshop)
+      - else
+        %span.interest-text=interest_text(workshop)
+    = richtext workshop.info
+    - if preview.blank? && translations_available_for_editing
+      .actions
+        - translations_available_for_editing.each do |locale|
+          = link_to (_'actions.workshops.Translate', "Translate into #{language_name(locale)}", :vars => {:language => language_name(locale)}), translate_workshop_url(workshop.conference.slug, workshop.id, locale), :class => [:button, :translate]
+  = columns(medium: 6) do
+    %h3=_'articles.workshops.headings.facilitators'
+    .facilitators
+      - workshop.workshop_facilitators.each do |f|
+        - u = User.find(f.user_id)
+        - is_this_user = (f.user_id == current_user.id)
+        - if logged_in? && (workshop.public_facilitator?(u) || is_this_user || is_facilitator)
+          .facilitator
+            .name=_!u.name
+            .role
+              =_"roles.workshops.facilitator.#{workshop.role(u).to_s}"
+            - if is_facilitator && preview.blank?
+              .details
+                .email=u.email
+              - if f.role.to_sym == :requested
+                =(link_to (_'actions.workshops.Approve'), approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'approve'), :class => [:button, :modify])
+                =(link_to (_'actions.workshops.Deny'), approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'deny'), :class => [:button, :delete])
+              - elsif workshop.can_remove?(current_user, u)
+                =(link_with_confirmation (_'actions.workshops.Make_Owner'), (_'modals.workshops.facilitators.confirm_transfer_ownership', vars: { user_name: u.name}),approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'switch_ownership'), :class => [:button, :modify]) unless f.role.to_sym == :creator || !workshop.creator?(current_user)
+                =(link_with_confirmation (_"actions.workshops.#{is_this_user ? 'Leave' : 'Remove'}"), (_"modals.workshops.facilitators.confirm_remove#{is_this_user ? '_self' : ''}", vars: { user_name: u.name}), approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'remove'), :class => [:button, :delete])
+            - if is_this_user && workshop.requested_collaborator?(current_user)
+              .details
+                =(link_with_confirmation (_'actions.workshops.Cancel_Request'), (_'modals.workshops.facilitators.confirm_cancel_request'), approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'remove'), :class => [:button, :delete])
+      - unless preview.present?
+        =(link_to (_'actions.workshops.Facilitate'), facilitate_workshop_path(workshop.conference.slug, workshop.id), :class => [:button, workshop.needs_facilitators ? :accented : :subdued]) unless workshop.facilitator?(current_user)
+        - if is_facilitator
+          %h4=_'articles.workshops.headings.add_facilitator','Add a facilitator'
+          = form_tag workshop_add_facilitator_path(workshop.conference.slug, workshop.id), :class => 'add-facilitator mini-flex-form' do
+            .email-field.input-field
+              = email_field_tag :email, nil, required: true
+              = label_tag :email
+            = off_screen (_'forms.actions.aria.add'), 'add-new-desc'
+            = button_tag :add, aria: { labelledby: 'add-new-desc' }
+  - languages = JSON.parse(workshop.languages || '[]')
+  - if languages.present?
+    = columns(medium: 6) do
+      %h3=_'articles.workshops.headings.languages','Workshop Language'
+      %p= _!((languages.map { |x| _"languages.#{x}" }).join(', ').to_s.html_safe)
+  - if workshop.theme.present?
+    = columns(medium: 6) do
+      %h3=_'articles.workshops.headings.theme','Theme'
+      %p= Workshop.all_themes.include?((workshop.theme || '').to_sym) ? (_"workshop.options.theme.#{workshop.theme}") : workshop.theme
+  - if is_facilitator || workshop.conference.host?(current_user)
+    - needs = JSON.parse(workshop.needs || '[]')
+    - if needs.present?
+      = columns(medium: 6) do
+        %h3=_'articles.workshops.headings.needs','What do you need?'
+        %p= _!((needs.map { |x| _"workshop.options.needs.#{x}" }).join(', ').to_s.html_safe)
+    - if workshop.notes.present?
+      = columns(medium: 12, class: 'workshop-notes') do
+        %h3=_'articles.workshops.headings.notes','Notes'
+        = richtext workshop.notes, 3
+  = columns(medium: 12, id: :comments) do
+    %h3=_'articles.workshops.headings.Comments'
+    %ul.comments
+      - workshop.comments.each do | comment |
+        %li.comment{id: "comment-#{comment.id}"}
+          = comment(comment)
+          - sub_comments = comment.comments
+          - if sub_comments.present?
+            %ul.sub-comments.comments
+              - sub_comments.each do | sub_comment |
+                %li.sub-comment.comment{id: "comment-#{sub_comment.id}"}
+                  = comment(sub_comment)
+          = form_tag workshop_comment_path(workshop.conference.slug, workshop.id) do
+            = hidden_field_tag :comment_id, comment.id
+            = textarea :reply, nil, plain: true, required: true, label: false, labelledby: "replyto-#{comment.id}"
+            .actions.right
+              = button_tag :reply, value: :reply, data: {opens: "#comment-#{comment.id} form", focus: :textarea}, class: :small, id: "replyto-#{comment.id}"
+    = form_tag workshop_comment_path(workshop.conference.slug, workshop.id) do
+      = textarea :comment, nil, plain: true, required: true, label: false, labelledby: :add_comment
+      .actions.right
+        = button_tag :add_comment, value: :add_comment, id: :add_comment

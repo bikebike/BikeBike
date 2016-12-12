@@ -1,0 +1,5 @@
+= columns(medium: 12) do
+  = admin_update_form do
+    = translate_textarea :info, @this_conference, label: 'articles.conference_registration.headings.admin.edit.info', help: 'articles.conference_registration.paragraphs.admin.edit.info', edit_on: :focus
+    .actions.right
+      = button_tag :save, value: :save

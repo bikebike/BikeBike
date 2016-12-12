@@ -1,0 +1,8 @@
+= columns(medium: 12) do
+  = form_tag administration_update_path(@this_conference.slug, @admin_step) do
+    - if @this_conference.workshop_schedule_published
+      %p=_'articles.conference_registration.paragraphs.admin.schedule.published', :p
+      .actions= button_tag :un_publish, value: :publish, class: :delete
+    - else
+      %p=_'articles.conference_registration.paragraphs.admin.schedule.un_published', :p
+      .actions= button_tag :publish, value: :publish

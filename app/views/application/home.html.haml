@@ -1,17 +1,5 @@
-- this_is_the_front_page
-- if @conference
-	= render 'conferences/header'
-	%article
-		= row do
-			= columns(medium: 10, push: {medium: 1}) do
-				%h2=_!@conference.title
-				= richtext @conference.info
-				- if @conference.registration_status == :open
-					- if @conference.workshop_schedule_published
-						- add_inline_script :home_schedule
-						%h3=_'articles.workshops.headings.Schedule'
-						= render 'conferences/admin/schedule'
-					- else
-						%h3=_'articles.workshops.headings.Proposed_Workshops'
-						%p=_'articles.workshops.paragraphs.Proposed_Workshops'
-						= render 'workshops/workshop_previews', :workshops => (@conference.workshops.sort { |a, b| a.title.downcase <=> b.title.downcase })
+- content_for :og_image do
+  = @conference.poster.full.url || image_path('default_poster.jpg')
+- if @conferences
+  - @conferences.each do | conference |
+    = render 'conferences/conference', conference: conference, links: [ :read_more, :register ]

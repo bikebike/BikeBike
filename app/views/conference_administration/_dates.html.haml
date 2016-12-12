@@ -1,0 +1,17 @@
+= admin_update_form do
+  = row do
+    = columns(medium: 6, push: { medium: 1 }) do
+      = fieldset :start_date, inline: true, inline_label: true do
+        = month_select @start_month, name: :start_month, label: false
+        = month_day_select @start_day, name: :start_day, label: false
+
+  = row do
+    = columns(medium: 6, push: { medium: 1 }) do
+      = fieldset :end_date, inline: true, inline_label: true do
+        = month_select @end_month, name: :end_month, label: false
+        = month_day_select @end_day, name: :end_day, label: false
+
+  = row do
+    = columns(medium: 6, push: { medium: 1 }) do
+      .actions
+        = button_tag :save, value: :save

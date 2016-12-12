@@ -1,0 +1,27 @@
+- body_class 'banner-bottom' unless @this_conference.poster.present?
+- content_for :banner do
+  = render :partial => 'application/header', :locals  => { page_group: :administration, page_key: 'Administration', image_file: @this_conference.poster_url || 'admin.jpg'}
+
+%article
+  = row do
+    = columns(medium: 12) do
+      = columns(medium: 12, id: :conferences, class: 'list-view') do
+        %h2=@this_conference.title
+        %p=_'articles.admin.paragraphs.administration', :p
+        %ul.break
+          - administration_steps.each do | step, actions |
+            %li
+              .info
+                %h3=_"articles.admin.#{step}.heading", :t
+              .help
+                %p=_"articles.admin.#{step}.description", :p
+
+                .actions.figures
+                  - actions.each do | action |
+                    - action_text = (_"articles.admin.#{step}.headings.#{action}", :t)
+                    .figure
+                      = link_to administration_step_path(@this_conference.slug, action.to_s) do
+                        %header= action_text
+                        .body
+                          = svg "admin/#{action.to_s}", action_text
+                          .description=(_"articles.admin.#{step}.descriptions.#{action}", :s)

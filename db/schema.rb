@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161006021205) do
+ActiveRecord::Schema.define(version: 20161211065022) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,25 @@ ActiveRecord::Schema.define(version: 20161006021205) do
     t.datetime "updated_at"
   end
 
+  create_table "cities", force: :cascade do |t|
+    t.string   "city"
+    t.string   "territory"
+    t.string   "country"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "locale"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "place_id"
+  end
+
+  create_table "city_cache", force: :cascade do |t|
+    t.string   "search"
+    t.integer  "city_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "comments", force: :cascade do |t|
     t.string   "model_type"
     t.integer  "model_id"
@@ -31,6 +50,13 @@ ActiveRecord::Schema.define(version: 20161006021205) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "user_id"
+  end
+
+  create_table "conference_administrators", force: :cascade do |t|
+    t.integer  "conference_id"
+    t.integer  "user_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "conference_admins", force: :cascade do |t|
@@ -107,8 +133,8 @@ ActiveRecord::Schema.define(version: 20161006021205) do
   create_table "conferences", force: :cascade do |t|
     t.string   "title"
     t.string   "slug"
-    t.datetime "start_date"
-    t.datetime "end_date"
+    t.date     "start_date"
+    t.date     "end_date"
     t.text     "info"
     t.string   "poster"
     t.string   "cover"
@@ -139,6 +165,11 @@ ActiveRecord::Schema.define(version: 20161006021205) do
     t.json     "workshop_blocks"
     t.text     "payment_message"
     t.json     "payment_amounts"
+    t.string   "conferencetype"
+    t.integer  "year"
+    t.integer  "city_id"
+    t.boolean  "is_public"
+    t.boolean  "is_featured"
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -222,6 +253,7 @@ ActiveRecord::Schema.define(version: 20161006021205) do
     t.string   "city"
     t.string   "street"
     t.string   "postal_code"
+    t.integer  "city_id"
   end
 
   add_index "locations", ["latitude", "longitude"], name: "index_locations_on_latitude_and_longitude", using: :btree

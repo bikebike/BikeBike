@@ -3,67 +3,67 @@ require 'carrierwave/processing/mini_magick'
 
 class PosterUploader < CarrierWave::Uploader::Base
 
-	include CarrierWave::ImageOptimizer
-	include CarrierWave::MiniMagick
+  include CarrierWave::ImageOptimizer
+  include CarrierWave::MiniMagick
 
-	storage :file
-	process :optimize
+  storage :file
+  process :optimize
 
-	@@sizes = {
-		:thumb   => [120,  120],
-		:icon    => [48,   48],
-		:preview => [512,  512],
-		:full    => [1024, 1024]
-	}
+  @@sizes = {
+    :thumb   => [120,  120],
+    :icon    => [48,   48],
+    :preview => [512,  512],
+    :full    => [1024, 1024]
+  }
 
-	def store_dir
-		"uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
-	end
+  def store_dir
+    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+  end
 
-	version :thumb do
-		process :resize_to_fill => @@sizes[:thumb]
-	end
+  version :thumb do
+    process :resize_to_fill => @@sizes[:thumb]
+  end
 
-	version :icon do
-		process :resize_to_fill => @@sizes[:icon]
-	end
+  version :icon do
+    process :resize_to_fill => @@sizes[:icon]
+  end
 
-	version :preview do
-		process :resize_to_fit => @@sizes[:preview]
-	end
+  version :preview do
+    process :resize_to_fit => @@sizes[:preview]
+  end
 
-	version :full do
-		process :resize_to_fit => @@sizes[:full]
-	end
+  version :full do
+    process :resize_to_fit => @@sizes[:full]
+  end
 
-	def image
-		@image ||= MiniMagick::Image.open(file.path)
-	end
+  def image
+    @image ||= MiniMagick::Image.open(file.path)
+  end
 
-	def is_landscape?
-		image['width'] > image['height']
-	end
+  def is_landscape?
+    image['width'] > image['height']
+  end
 
-	def manipulate!
-		cache_stored_file! if !cached?
-		image = ::MiniMagick::Image.open(current_path)
+  def manipulate!
+    cache_stored_file! if !cached?
+    image = ::MiniMagick::Image.open(current_path)
 
-		begin
-			image.format(@format.to_s.downcase) if @format
-			image = yield(image)
-			image.write(current_path)
-			begin
-				image.run_command("identify", current_path)
-			rescue
-				image.run_command("identify", '"' + current_path + '"')
-			end
-		ensure
-			image.destroy!
-		end
-	rescue ::MiniMagick::Error, ::MiniMagick::Invalid => e
-		default = I18n.translate(:"errors.messages.mini_magick_processing_error", :e => e, :locale => :en)
-		message = I18n.translate(:"errors.messages.mini_magick_processing_error", :e => e, :default => default)
-		raise CarrierWave::ProcessingError, message
-	end
+    begin
+      image.format(@format.to_s.downcase) if @format
+      image = yield(image)
+      image.write(current_path)
+      begin
+        image.run_command("identify", current_path)
+      rescue
+        image.run_command("identify", '"' + current_path + '"')
+      end
+    ensure
+      image.destroy!
+    end
+  rescue ::MiniMagick::Error, ::MiniMagick::Invalid => e
+    default = I18n.translate(:"errors.messages.mini_magick_processing_error", :e => e, :locale => :en)
+    message = I18n.translate(:"errors.messages.mini_magick_processing_error", :e => e, :default => default)
+    raise CarrierWave::ProcessingError, message
+  end
 
 end

@@ -230,4 +230,15 @@
 		});
 	};
 	initNode();
+	document.addEventListener('DOMContentLoaded', function() {
+		var errors = document.getElementsByClassName('has-error');
+		if (errors.length <= 0) {
+			errors = document.getElementsByClassName('info-message');
+		}
+		
+		if (errors.length > 0) {
+			errors[0].scrollIntoView();
+		}
+	});
 })();
+

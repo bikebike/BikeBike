@@ -1,29 +1,29 @@
 - org_index = session[:registration][:new_org_index] || 0
 = hidden_field_tag :new_org_index, org_index
 - if session[:registration][:new_organization].length > 1
-	%h3=_'registration.new_organization.list.title','Your New Organizations'
-	%ul.columns.medium-11.medium-offset-1.end
-		- session[:registration][:new_organization].each_with_index do |new_organization, index|
-			- if new_organization.present? && new_organization[:name].present?
-				%li
-					- if index == org_index && new_organization[:name]
-						%strong=new_organization[:name]
-					- else
-						= new_organization[:name]
+  %h3=_'registration.new_organization.list.title','Your New Organizations'
+  %ul.columns.medium-11.medium-offset-1.end
+    - session[:registration][:new_organization].each_with_index do |new_organization, index|
+      - if new_organization.present? && new_organization[:name].present?
+        %li
+          - if index == org_index && new_organization[:name]
+            %strong=new_organization[:name]
+          - else
+            = new_organization[:name]
 %h3=_'registration.new_organization.title','Your Organization Information'
 .columns.medium-12
-	= text_field_tag :organization_name, session[:registration][:new_organization][org_index][:name], :required => true
+  = text_field_tag :organization_name, session[:registration][:new_organization][org_index][:name], :required => true
 .columns.medium-12= text_area_tag :organization_info, session[:registration][:new_organization][org_index][:info], :data => {:editor => ""}
 .columns.medium-7
-	= email_field_tag :organization_email, session[:registration][:new_organization][org_index][:email], :required => true
-	= text_field_tag :organization_street, session[:registration][:new_organization][org_index][:street], :required => true
-	= text_field_tag :organization_city, session[:registration][:new_organization][org_index][:city], :required => true
-	= country_select_tag :organization_country, session[:registration][:new_organization][org_index][:country], :required => true
-	= subregion_select_tag :organization_territory, session[:registration][:new_organization][org_index][:territory], session[:registration][:new_organization][org_index][:country] || 'US', html: {class: session[:registration][:new_organization][org_index][:country] ? 'can' : 'cant', data: {:country => session[:registration][:new_organization][org_index][:country]}}
+  = email_field_tag :organization_email, session[:registration][:new_organization][org_index][:email], :required => true
+  = text_field_tag :organization_street, session[:registration][:new_organization][org_index][:street], :required => true
+  = text_field_tag :organization_city, session[:registration][:new_organization][org_index][:city], :required => true
+  = country_select_tag :organization_country, session[:registration][:new_organization][org_index][:country], :required => true
+  = subregion_select_tag :organization_territory, session[:registration][:new_organization][org_index][:territory], session[:registration][:new_organization][org_index][:country] || 'US', html: {class: session[:registration][:new_organization][org_index][:country] ? 'can' : 'cant', data: {:country => session[:registration][:new_organization][org_index][:country]}}
 .columns.medium-5
-	= image_field_tag :logo
+  = image_field_tag :logo
 .columns
-	= check_box_tag :add_another_org, (org_index <= session[:registration][:new_organization].length - 1)
+  = check_box_tag :add_another_org, (org_index <= session[:registration][:new_organization].length - 1)
 
 - content_for :footer_scripts do
-	= javascript_include_tag 'editor'
+  = javascript_include_tag 'editor'

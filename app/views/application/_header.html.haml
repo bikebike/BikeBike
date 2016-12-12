@@ -1,20 +1,20 @@
 - content_for :banner do
-	- image = image_path(image_file || 'empty-racks.jpg')
-	- style = nil
-	- cover = nil
-	- figure = nil
-	- if capable_of(:css_mixblendmode)
-		- cover = "<div class=\"cover\" style=\"background-image: url(#{image})\"></div>"
-	- else
-		- style = "background-image: url(#{image})"
-	#header-title.short{style: style}
-		= (render banner_image, {:image => image}) if defined?(banner_image) == "local-variable"
-		= cover.html_safe if cover
-		- if @page_title.present? || defined?(page_group)
-			- content_for :title do
-				=@page_title.present? ? I18n.t(@page_title, @page_title_vars) : I18n.t("page_titles.#{page_group.to_s}.#{page_key.to_s}")
-			= row do
-				= columns do
-					%h1=_(@main_title || "page_titles.#{page_group.to_s}.#{page_key.to_s}", :t, @main_title_vars)
-	- content_for :og_image do
-		= image
+  - image = image_path(image_file || 'empty-racks.jpg')
+  - style = nil
+  - cover = nil
+  - figure = nil
+  - if capable_of(:css_mixblendmode)
+    - cover = "<div class=\"cover\" style=\"background-image: url(#{image})\"></div>"
+  - else
+    - style = "background-image: url(#{image})"
+  #header-title.short{style: style}
+    = (render banner_image, {:image => image}) if defined?(banner_image) == "local-variable"
+    = cover.html_safe if cover
+    - if @page_title.present? || defined?(page_group)
+      - content_for :title do
+        = I18n.t(@page_title || "page_titles.#{page_group.to_s}.#{page_key.to_s}", @page_title_vars)
+      = row do
+        = columns do
+          %h1=_(@main_title || "page_titles.#{page_group.to_s}.#{page_key.to_s}", :t, @main_title_vars || (@page_title_vars.present? && @page_title.blank? ? { vars: @page_title_vars } : nil))
+  - content_for :og_image do
+    = image

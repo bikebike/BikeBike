@@ -1,0 +1,8 @@
+=_'email.general.paragraph.thank_you', "Thank you #{@user.firstname},", :vars => {:name => @user.firstname}
+
+- if @conference.registration_status.to_sym == :pre
+  =_'email.general.paragraph.pre_registered', "You have successfully pre-registered for #{@conference.title}. We will let you know when registration is fully open and if there is any important news about the conference that you should know about. We encourage you to create or volunteer to facilitate workshops soon. You can do that, or change your registration details at any time by clicking on the pre-register link again.", :vars => {:conference_title => @conference.title}
+- else
+  =_'email.registration.paragraph.confirmed', :vars => {:conference_title => @conference.title}
+
+  =_'email.general.paragraph.see_you', :vars => {:conference_location => @conference.location.city}

@@ -1,13 +1,13 @@
-= render :partial => 'page_header', :locals => {:page_key => 'Conference_Registration'}
+= render :partial => 'page_header', :locals => {:page_key => 'Conference_Administration'}
 
 - if @warnings.present?
-	= row class: 'warnings', tag: :ul do
-		- @warnings.each do | warning |
-			= columns tag: :li do
-				= warning
+  = row class: 'warnings', tag: :ul do
+    - @warnings.each do | warning |
+      = columns tag: :li do
+        = warning
 %article
-	= row do
-		= columns(medium: 12) do
-			%h2=_(@page_title)
-			= registration_step_menu
-		= render @register_template.to_s
+  = row do
+    = columns(medium: 12) do
+      %h2=_(@page_title)
+      = registration_step_menu
+    = render @register_template.to_s

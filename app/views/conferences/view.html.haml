@@ -1,0 +1,5 @@
+- content_for :og_image do
+  = @this_conference.poster.full.url || image_path('default_poster.jpg')
+- content_for :title do
+  =@this_conference.title
+= render 'conferences/conference', conference: @this_conference, links: @links

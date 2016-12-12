@@ -1,0 +1,41 @@
+- if @this_conference.event_locations.blank?
+  = columns(medium: 12) do
+    .warning-info=_'articles.admin.events.no_locations_warning'
+- else
+  = columns(medium: 12) do
+    - if @events.present? && @event.id.blank?
+      %table.events.admin-edit
+        %tr
+          %th=_'forms.labels.generic.title'
+          %th=_'forms.labels.generic.event_location'
+          %th=_'forms.labels.generic.day'
+          %th=_'forms.labels.generic.time'
+          %th=_'forms.labels.generic.time_span'
+          %th.form
+        - @events.each do | event |
+          %tr
+            %th=event.title
+            %td=_!(event.event_location.present? ? event.event_location.title : '')
+            %td=date(event.start_time.to_date, :weekday)
+            %td=time(event.start_time, :short)
+            %td=hours(event.start_time, event.end_time)
+            %td.form
+              = admin_update_form do
+                = hidden_field_tag :id, event.id
+                = link_to (_'forms.actions.generic.edit'), edit_event_path(@this_conference, event.id), class: [:button, :small, :modify]
+                = button_with_confirmation :delete, (_'modals.admin.generic.delete.confirm', :p, vars: { title: event.title }), value: :delete, class: [:delete, :small]
+
+  = columns(medium: 12) do
+    %h3=_"articles.admin.locations.headings.#{@event.id.present? ? 'edit' : 'add'}_event", :t
+
+    = admin_update_form do
+      = hidden_field_tag :id, @event.id if @event.id.present?
+      .flex-inputs
+        = location_select @event.event_location_id, small: true, stretch: true
+        = day_select @day, small: true, format: :weekday
+        = hour_select @time, small: true
+        = length_select @length, small: true
+      = translate_fields @event, { title: { type: :textfield, big: true, label: 'forms.labels.generic.title' }, info: { type: :textarea, label: 'forms.labels.generic.info', edit_on: :focus } }
+      .actions.next-prev
+        = button_tag :save, value: :save
+        = button_tag :cancel, value: :cancel, class: :subdued, formnovalidate: true if @event.id.present?

@@ -1,0 +1,10 @@
+- add_inline_script :housing
+= columns(medium: 12) do
+  = admin_update_form id: 'housing-table-form' do
+    #housing-table= render partial: 'hosts_table'
+  #guest-selector
+    = admin_update_form class: 'guest-dlg', id: 'guest-list-table' do
+      %h3 Select a Guest
+      #table
+  .actions
+    = link_to (_'links.download.Excel'), administration_step_path(@this_conference.slug, @admin_step, :format => :xlsx), class: [:button, :download]

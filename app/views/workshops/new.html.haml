@@ -1,41 +1,41 @@
 = render 'conferences/page_header', :page_key => 'Conference_Registration'
 
 %article
-	= row do
-		= form_tag save_workshop_path(@this_conference.slug), class: 'composition' do
-			= columns(medium: 12) do
-				- if @workshop.id.present?
-					= hidden_field_tag :workshop_id, @workshop.id
-					- if @is_translating
-						%h2=_(@page_title, vars: @page_title_vars)
-						= hidden_field_tag :translation, @translation
-					- else
-						%h2=_@page_title, :t
-				- else
-					%h2=_@page_title, :t
+  = row do
+    = form_tag save_workshop_path(@this_conference.slug), class: 'composition' do
+      = columns(medium: 12) do
+        - if @workshop.id.present?
+          = hidden_field_tag :workshop_id, @workshop.id
+          - if @is_translating
+            %h2=_(@page_title, vars: @page_title_vars)
+            = hidden_field_tag :translation, @translation
+          - else
+            %h2=_@page_title, :t
+        - else
+          %h2=_@page_title, :t
 
-				= registration_step_menu
-				
-				= textfield :title, @title, required: true, lang: @translation, big: true, original_value: @is_translating ? @workshop.title! : nil, original_lang: @workshop.locale
-				= textarea :info, @info, help: 'articles.workshops.paragraphs.info', lang: @translation, original_value: @is_translating ? richtext(@workshop.info!, 4).html_safe : nil, original_lang: @workshop.locale
-			- if !@is_translating && (@workshop.id.blank? || @can_edit)
-				= columns(medium: 6) do
-					= checkboxes :languages, User.AVAILABLE_LANGUAGES, @languages, 'languages', vertical: true, heading: 'articles.workshops.headings.languages', help: 'articles.workshops.paragraphs.languages'
-					= radiobuttons :theme, Workshop.all_themes, @workshop.theme, 'workshop.options.theme', vertical: true, heading: 'articles.workshops.headings.theme', help: 'articles.workshops.paragraphs.theme', other: true
-				= columns(medium: 6) do
-					= checkboxes :needs, Workshop.all_needs, JSON.parse(@workshop.needs || '[]'), 'workshop.options.needs', vertical: true, heading: 'articles.workshops.headings.needs', help: 'articles.workshops.paragraphs.needs'
-					= radiobuttons :space, Workshop.all_spaces, @workshop.space, 'workshop.options.space', vertical: true, heading: 'articles.workshops.headings.space', help: 'articles.workshops.paragraphs.space'
+        = registration_step_menu
+        
+        = textfield :title, @title, required: true, lang: @translation, big: true, original_value: @is_translating ? @workshop.title! : nil, original_lang: @workshop.locale
+        = textarea :info, @info, help: 'articles.workshops.paragraphs.info', lang: @translation, original_value: @is_translating ? richtext(@workshop.info!, 4).html_safe : nil, original_lang: @workshop.locale
+      - if !@is_translating && (@workshop.id.blank? || @can_edit)
+        = columns(medium: 6) do
+          = checkboxes :languages, User.AVAILABLE_LANGUAGES, @languages, 'languages', vertical: true, heading: 'articles.workshops.headings.languages', help: 'articles.workshops.paragraphs.languages'
+          = radiobuttons :theme, Workshop.all_themes, @workshop.theme, 'workshop.options.theme', vertical: true, heading: 'articles.workshops.headings.theme', help: 'articles.workshops.paragraphs.theme', other: true
+        = columns(medium: 6) do
+          = checkboxes :needs, Workshop.all_needs, JSON.parse(@workshop.needs || '[]'), 'workshop.options.needs', vertical: true, heading: 'articles.workshops.headings.needs', help: 'articles.workshops.paragraphs.needs'
+          = radiobuttons :space, Workshop.all_spaces, @workshop.space, 'workshop.options.space', vertical: true, heading: 'articles.workshops.headings.space', help: 'articles.workshops.paragraphs.space'
 
-					%h3#needs_facilitators-label=_'articles.workshops.headings.needs_facilitators','Looking for help?'
-					.input-field-help#needs_facilitators-desc=_'articles.workshops.paragraphs.needs_facilitators', :s, 2
-					%fieldset.check-box-field.vertical.input-field{aria: {labeledby: 'needs_facilitators-label', describedby: 'needs_facilitators-desc'}}
-						= check_box_tag :needs_facilitators, 1, @workshop.needs_facilitators
-						= label_tag :needs_facilitators do
-							= _'workshop.options.needs_facilitators', 'Needs Additional Facilitators'
-				= columns(medium: 12) do
-					= textarea :notes, @workshop.notes, warning: 'articles.workshops.paragraphs.notes'
-			= columns(medium: 12) do
-				.actions.next-prev
-					= button_tag :save, value: :save
-					= button_tag :cancel, value: :cancel, class: :subdued, formnovalidate: true
+          %h3#needs_facilitators-label=_'articles.workshops.headings.needs_facilitators','Looking for help?'
+          .input-field-help#needs_facilitators-desc=_'articles.workshops.paragraphs.needs_facilitators', :s, 2
+          %fieldset.check-box-field.vertical.input-field{aria: {labeledby: 'needs_facilitators-label', describedby: 'needs_facilitators-desc'}}
+            = check_box_tag :needs_facilitators, 1, @workshop.needs_facilitators
+            = label_tag :needs_facilitators do
+              = _'workshop.options.needs_facilitators', 'Needs Additional Facilitators'
+        = columns(medium: 12) do
+          = textarea :notes, @workshop.notes, warning: 'articles.workshops.paragraphs.notes'
+      = columns(medium: 12) do
+        .actions.next-prev
+          = button_tag :save, value: :save
+          = button_tag :cancel, value: :cancel, class: :subdued, formnovalidate: true
 

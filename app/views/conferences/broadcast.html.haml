@@ -1,35 +1,35 @@
 = render 'page_header', :page_key => 'Email_Participants'
 %article
-	= row do
-		= columns(medium: 12) do
-			- if @email_sent == :yes
-				%p=_('articles.conference_registration.paragraphs.participants_emailed',"All participants of #{@this_conference.title} have been emailed.", :vars => {:conference_title => @this_conference.title})
-			- if @email_sent != :yes
-				=m('articles.conference_registration.paragraphs.Email_Participants','This page is used to contact all participants. Text can be entered as [Markdown](http://daringfireball.net/projects/markdown/basics). Pressing \'test\' will send the email only to you, make sure you do this and use caution in general before pressing \'send\'')
-			- if @email_sent == :yes || @email_sent == :preview
-				%h2=_'articles.conference_registration.headings.Preview'
-				.email-preview
-					%h3=@subject
-					=markdown @content
-			- if @email_sent != :yes
-				= form_tag broadcast_path(@this_conference.slug), class: 'composition' do
-					- if @email_sent == :preview
-						= hidden_field_tag :subject, @subject
-						= hidden_field_tag :content, @content
-					- else
-						.text-field.input-field.big
-							= label_tag :subject
-							= text_field_tag :subject, @subject, :required => true
-						.select-field.input-field
-							= label_tag :content
-							= text_area_tag :content, @content, :required => true
-					.actions.right
-						- if @email_sent == :test
-							.note=_('articles.conference_registration.notes.Test_Email_Sent',"An email was sent to #{current_user.email}", vars: {:email_address => current_user.email})
-						- if @email_sent == :preview # let the user send the 
-							= button_tag :edit, :value => :edit
-							= button_tag :send, :value => :send
-						- else
-							= button_tag :preview, :value => :preview 
-						= button_tag :test, :value => :test
+  = row do
+    = columns(medium: 12) do
+      - if @email_sent == :yes
+        %p=_('articles.conference_registration.paragraphs.participants_emailed',"All participants of #{@this_conference.title} have been emailed.", :vars => {:conference_title => @this_conference.title})
+      - if @email_sent != :yes
+        =m('articles.conference_registration.paragraphs.Email_Participants','This page is used to contact all participants. Text can be entered as [Markdown](http://daringfireball.net/projects/markdown/basics). Pressing \'test\' will send the email only to you, make sure you do this and use caution in general before pressing \'send\'')
+      - if @email_sent == :yes || @email_sent == :preview
+        %h2=_'articles.conference_registration.headings.Preview'
+        .email-preview
+          %h3=@subject
+          =markdown @content
+      - if @email_sent != :yes
+        = form_tag broadcast_path(@this_conference.slug), class: 'composition' do
+          - if @email_sent == :preview
+            = hidden_field_tag :subject, @subject
+            = hidden_field_tag :content, @content
+          - else
+            .text-field.input-field.big
+              = label_tag :subject
+              = text_field_tag :subject, @subject, :required => true
+            .select-field.input-field
+              = label_tag :content
+              = text_area_tag :content, @content, :required => true
+          .actions.right
+            - if @email_sent == :test
+              .note=_('articles.conference_registration.notes.Test_Email_Sent',"An email was sent to #{current_user.email}", vars: {:email_address => current_user.email})
+            - if @email_sent == :preview # let the user send the 
+              = button_tag :edit, :value => :edit
+              = button_tag :send, :value => :send
+            - else
+              = button_tag :preview, :value => :preview 
+            = button_tag :test, :value => :test
 

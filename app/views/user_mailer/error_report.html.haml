@@ -2,52 +2,52 @@
 %pre=@report
 
 - if @exception.present?
-	%h1 Backtrace
-	%pre=@exception
+  %h1 Backtrace
+  %pre=@exception
 
 %h1 Details
 %table.error-report
-	%tr
-		%th Key
-		%th Value
-	%tr
-		%td User ID
-		%td=@user.present? ? @user.id : ''
-	%tr
-		%td User Name
-		%td=@user.present? ? @user.name : ''
-	%tr
-		%td User Email
-		%td=@user.present? ? @user.email : ''
-	%tr
-		%td IP Address
-		%td=@request['remote_ip']
-	%tr
-		%td UUID
-		%td=@request['uuid']
-	%tr
-		%td URL
-		%td=@request['original_url'] 
-	%tr
-		%td Time
-		%td=@time
+  %tr
+    %th Key
+    %th Value
+  %tr
+    %td User ID
+    %td=@user.present? ? @user.id : ''
+  %tr
+    %td User Name
+    %td=@user.present? ? @user.name : ''
+  %tr
+    %td User Email
+    %td=@user.present? ? @user.email : ''
+  %tr
+    %td IP Address
+    %td=@request['remote_ip']
+  %tr
+    %td UUID
+    %td=@request['uuid']
+  %tr
+    %td URL
+    %td=@request['original_url'] 
+  %tr
+    %td Time
+    %td=@time
 
 %h1 Params
 %table.error-report
-	%tr
-		%th Key
-		%th Value
-	- @params.each do | key, value |
-		%tr
-			%td=key
-			%td=value
+  %tr
+    %th Key
+    %th Value
+  - @params.each do | key, value |
+    %tr
+      %td=key
+      %td=value
 
 %h1 Request Environment
 %table.error-report
-	%tr
-		%th Key
-		%th Value
-	- @request['env'].each do | key, value |
-		%tr
-			%td=key
-			%td=value
+  %tr
+    %th Key
+    %th Value
+  - @request['env'].each do | key, value |
+    %tr
+      %td=key
+      %td=value

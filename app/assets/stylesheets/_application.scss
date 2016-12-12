@@ -6,638 +6,674 @@ $bug-list: ("search-element-appearance": ());
 $zindex-base: 0;
 
 html, body {
-	color: $black;
-	position: relative;
-	z-index: $zindex-base;
+    color: $black;
+    position: relative;
+    z-index: $zindex-base;
 }
 
 body {
-	padding-bottom: 20vw;
+    padding-bottom: 20vw;
 }
 
-h1, h2, h3, h4, h5, h6, label, button, .button, dt, th, .table-th, nav.sub-menu {
-	@include font-family(secondary);
-	font-weight: normal;
+h1, h2, h3, h4, h5, h6, label, button, .button, dt, th, .table-th, nav.sub-menu, legend {
+    @include font-family(secondary);
+    font-weight: normal;
 }
 
 h2 {
-	margin: 0;
-	font-size: 6vw;
+    margin: 0;
+    font-size: 6vw;
 }
 
-h3 {
-	font-size: 4.5vw;
+h3, legend {
+    font-size: 4.5vw;
+    margin: 0.75em 0;
 }
 
 h3.subtitle {
-	font-size: 1.5em;
+    font-size: 1.5em;
 }
 
 h4 {
-	font-size: 1.25em;
+    font-size: 1.25em;
 }
 
 h5 {
-	font-size: 1.125em;
+    font-size: 1.125em;
 }
 
 h6 {
-	font-size: 1em;
+    font-size: 1em;
+}
+
+legend {
+    font-size: 1.25em;
 }
 
 p {
-	font-size: 4vw;
+    font-size: 4vw;
 }
 
 a {
-	text-decoration: none;
-	color: $link-colour;
-	border-bottom: 0 solid;
-	outline: 0;
-	position: relative;
-	cursor: pointer;
+    text-decoration: none;
+    color: $link-colour;
+    border-bottom: 0 solid;
+    outline: 0;
+    position: relative;
+    cursor: pointer;
 
-	@include after {
-		content: '';
-		position: absolute;
-		border-bottom: 0 solid;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		opacity: 0;
-		@include _(transition, all 150ms ease-in-out);
-		@include _(transform-origin, 25% 50%);
-		@include _(transform, scaleX(0));
-	}
+    @include after {
+        content: '';
+        position: absolute;
+        border-bottom: 0 solid;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        opacity: 0;
+        @include _(transition, all 150ms ease-in-out);
+        @include _(transform-origin, 25% 50%);
+        @include _(transform, scaleX(0));
+    }
 
-	&:hover,
-	&:active,
-	&:focus {
-		@include after {
-			border-bottom: 0.1em solid;
-			opacity: 1;
-			@include _(transform, scaleX(1));
-		}
-	}
+    &:hover,
+    &:active,
+    &:focus {
+        @include after {
+            border-bottom: 0.1em solid;
+            opacity: 1;
+            @include _(transform, scaleX(1));
+        }
+    }
+}
+
+nav.sub-nav {
+    text-align: center;
+
+    ul {
+        margin: 0.85em 0;
+        list-style: none;
+        padding: 0;
+    }
+
+    li {
+        display: inline-block;
+
+        @include after {
+            content: '|';
+            margin: 0 0.5em;
+        }
+
+        &:last-child {
+            @include after {
+                display: none;
+            }
+        }
+    }
 }
 
 .screen-reader-text { 
-	clip: rect(1px, 1px, 1px, 1px); 
-	height: 1px; 
-	width: 1px; 
-	overflow: hidden; 
-	position: absolute !important;
+    clip: rect(1px, 1px, 1px, 1px); 
+    height: 1px; 
+    width: 1px; 
+    overflow: hidden; 
+    position: absolute !important;
 }
 
 table, .table {
     margin-bottom: 2em;
-	margin-left: 1em;
+    margin-left: 1em;
 
-	th, td, .table-th, .table-td {
-		text-align: left;
-		padding: 0.25em 0.5em;
-		border: 0.1rem solid #EEE;
+    th, td, .table-th, .table-td {
+        text-align: left;
+        padding: 0.25em 0.5em;
+        border: 0.1rem solid $light-gray;
 
-		&.center {
-			text-align: center;
-		}
+        &.center {
+            text-align: center;
+        }
 
-		&.big {
-			font-size: 1.5em;
-		}
+        &.big {
+            font-size: 1.5em;
+        }
 
-		&.status {
-			width: 0.1rem;
-			background-color: transparent;
-			border: 0;
-		}
+        &.status {
+            width: 0.1rem;
+            background-color: transparent;
+            border: 0;
+        }
 
-		&.state {
-			background-size: 1.333em;
-			background-repeat: no-repeat;
-			background-position: center;
-			width: 1.75em;
+        &.state {
+            background-size: 1.333em;
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 1.75em;
 
-			&.happy {
-				background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 87.8 73.2'><polygon fill='#{$colour-5}' points='34.3 73.2 0 32.6 18.7 16.8 35.4 36.5 70.1 0 87.8 16.8 '/></svg>");
-			}
+            &.happy {
+                background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 87.8 73.2'><polygon fill='#{$colour-5}' points='34.3 73.2 0 32.6 18.7 16.8 35.4 36.5 70.1 0 87.8 16.8 '/></svg>");
+            }
 
-			&.unhappy {
-				background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path xmlns="http://www.w3.org/2000/svg" d="M50 5C25.1 5 5 25.1 5 50c0 24.9 20.1 45 45 45s45-20.1 45-45C95 25.1 74.9 5 50 5zM72.5 64.3l-8.2 8.2L50 58.2 35.7 72.5l-8.2-8.2L41.8 50 27.5 35.7l8.2-8.2L50 41.8l14.3-14.3 8.2 8.2L58.2 50 72.5 64.3z" fill="#{$colour-4}"/></svg>');
-			}
-		}
-	}
+            &.unhappy {
+                background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path xmlns="http://www.w3.org/2000/svg" d="M50 5C25.1 5 5 25.1 5 50c0 24.9 20.1 45 45 45s45-20.1 45-45C95 25.1 74.9 5 50 5zM72.5 64.3l-8.2 8.2L50 58.2 35.7 72.5l-8.2-8.2L41.8 50 27.5 35.7l8.2-8.2L50 41.8l14.3-14.3 8.2 8.2L58.2 50 72.5 64.3z" fill="#{$colour-4}"/></svg>');
+            }
+        }
+    }
 
-	th, .table-th {
-		background-color: #F8F8F8;
+    th, .table-th {
+        background-color: #F8F8F8;
 
-		&.corner {
-			background-color: transparent;
-			border: 0;
-		}
-	}
+        &.corner {
+            background-color: transparent;
+            border: 0;
+        }
+    }
 
-	td, .table-td {
-		&.inner-table {
-			padding: 0;
+    td, .table-td {
+        &.inner-table {
+            padding: 0;
 
-			table {
-				margin: 0;
-				width: 100%;
-			}
+            table {
+                margin: 0;
+                width: 100%;
+            }
 
-			tr:first-child {
-				td, th {
-					border-top: 0;
-				}
-			}
+            tr:first-child {
+                td, th {
+                    border-top: 0;
+                }
+            }
 
-			tr:last-child {
-				td, th {
-					border-bottom: 0;
-				}
-			}
-			
-			td, th {
-				&:first-child {
-					border-left: 0
-				}
+            tr:last-child {
+                td, th {
+                    border-bottom: 0;
+                }
+            }
+            
+            td, th {
+                &:first-child {
+                    border-left: 0
+                }
 
-				&:last-child {
-					border-right: 0
-				}
-			}
-		}
+                &:last-child {
+                    border-right: 0
+                }
+            }
+        }
 
-		&.bold {
-			@include font-family(secondary);
-		}
-	}
+        &.bold {
+            @include font-family(secondary);
+        }
+    }
 
-	tbody th {
-		width: 0.1rem;
-	}
+    tbody th {
+        width: 0.1rem;
+    }
 
-	&.admin-edit {
-		width: 100%;
-	}
+    &.admin-edit {
+        width: 100%;
+    }
 
-	tr.hidden {
-		display: none;
-	}
+    tr.hidden {
+        display: none;
+    }
 
-	tr[data-key] {
-		cursor: cell;
-			
-		&.editable:hover {
-			background-color: lighten($colour-2, 33%);
-		}
+    tr[data-key] {
+        cursor: cell;
+            
+        &.editable:hover {
+            background-color: lighten($colour-2, 33%);
+        }
 
-		+ .editor {
-			display: none;
-			background-color: lighten($colour-1, 50%);
+        + .editor {
+            display: none;
+            background-color: lighten($colour-1, 50%);
 
-			td {
-				opacity: 0.5;
+            td {
+                opacity: 0.5;
 
-				&.has-editor {
-					opacity: 1;
+                &.has-editor {
+                    opacity: 1;
 
-					@include after {
-						content: '';
-						position: absolute;
-						top: 100%;
-						right: 0;
-						left: 0;
-						height: 0.25em;
-						background-color: rgba($black, 0.125);
-					}
-				}
+                    @include after {
+                        content: '';
+                        position: absolute;
+                        top: 100%;
+                        right: 0;
+                        left: 0;
+                        height: 0.25em;
+                        background-color: rgba($black, 0.125);
+                    }
+                }
 
-				.cell-editor {
-					&[type=number]::-webkit-inner-spin-button, 
-					&[type=number]::-webkit-outer-spin-button { 
-						-webkit-appearance: none; 
-					}
-				}
+                .cell-editor {
+                    &[type=number]::-webkit-inner-spin-button, 
+                    &[type=number]::-webkit-outer-spin-button { 
+                        -webkit-appearance: none; 
+                    }
+                }
 
-				select.cell-editor {
-					-webkit-appearance: none;
-					-moz-appearance: none;
-					-ms-appearance: none;
-					appearance: none;
-					cursor: pointer;
-				}
+                select.cell-editor {
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    -ms-appearance: none;
+                    appearance: none;
+                    cursor: pointer;
+                }
 
-				&.date .cell-editor {
-					text-align-last: right;
-				}
-			}
-		}
+                &.date .cell-editor {
+                    text-align-last: right;
+                }
+            }
+        }
 
-		+ .editor, &.always-edit {
-			td {
-				position: relative;
-				vertical-align: top;
-				background: inherit;
-				cursor: default;
+        + .editor, &.always-edit {
+            td {
+                position: relative;
+                vertical-align: top;
+                background: inherit;
+                cursor: default;
 
-				.cell-editor {
-					top: 0;
-					right: 0;
-					bottom: 0;
-					left: 0;
-					padding: inherit;
-					font: inherit;
-					margin: inherit;
-					background: inherit;
-					border: 0;
-					min-height: 0;
-					width: 100% !important;
-					border-radius: 0;
-					line-height: inherit;
-					overflow: hidden;
-					box-shadow: none;
-					text-align: inherit;
-				}
-			}
-		}
-		
-		&.always-edit td .cell-editor {
-			position: absolute;
-		}
+                .cell-editor {
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    padding: inherit;
+                    font: inherit;
+                    margin: inherit;
+                    background: inherit;
+                    border: 0;
+                    min-height: 0;
+                    width: 100% !important;
+                    border-radius: 0;
+                    line-height: inherit;
+                    overflow: hidden;
+                    box-shadow: none;
+                    text-align: inherit;
+                }
+            }
+        }
+        
+        &.always-edit td .cell-editor {
+            position: absolute;
+        }
 
-		&.editing {
-			display: none;
+        &.editing {
+            display: none;
 
-			+ .editor {
-				display: table-row;
+            + .editor {
+                display: table-row;
 
-				.cell-editor {
-					position: absolute;
-				}
-			}
-		}
-	}
+                .cell-editor {
+                    position: absolute;
+                }
+            }
+        }
+    }
 
-	&.always-editing {
-		tr {
-			cursor: default;
+    &.always-editing {
+        tr {
+            cursor: default;
 
-			&:hover {
-				background-color: transparent;
-			}
-		}
+            &:hover {
+                background-color: transparent;
+            }
+        }
 
-		.cell-editor {
-			position: absolute;
-		}
+        .cell-editor {
+            position: absolute;
+        }
 
-		td.text {
-			height: 5em;
-		}
-	}
+        td.text {
+            height: 5em;
+        }
+    }
 
-	tr.editable, tr.editor {
-		td {
-			white-space: nowrap;
+    tr.editable, tr.editor {
+        td {
+            white-space: nowrap;
 
-			&.date, &.datetime, &.money, &.number {
-				font-family: monospace;
-				font-size: 1.25em;
-				text-align: right;
-			}
+            &.date, &.datetime, &.money, &.number {
+                font-family: monospace;
+                font-size: 1.25em;
+                text-align: right;
+            }
 
-			&.text {
-				max-width: 20em;
-			}
-		}
-	}
+            &.text {
+                max-width: 20em;
+            }
+        }
+    }
 
-	tr.editable td.text,
-	tr.editor td.text .value {
-		overflow: hidden;
-		text-overflow: ellipsis;
-	}
-			
-	tr.editor {
-		td.text .cell-editor {
-			white-space: normal;
-			bottom: auto;
-			height: 10em;
-			z-index: 1;
-			background: inherit;
-			overflow: auto !important;
-		}
-	}
+    tr.editable td.text,
+    tr.editor td.text .value {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+            
+    tr.editor {
+        td.text .cell-editor {
+            white-space: normal;
+            bottom: auto;
+            height: 10em;
+            z-index: 1;
+            background: inherit;
+            overflow: auto !important;
+        }
+    }
 }
 
 .table-scroller {
-	overflow: auto;
-	background-color: #F8F8F8;
-	@include _(box-shadow, inset 0 0 10em 0 rgba(0,0,0,0.125));
+    overflow: auto;
+    background-color: #F8F8F8;
+    @include _(box-shadow, inset 0 0 10em 0 rgba(0,0,0,0.125));
 
-	table {
-		background-color: $white;
-		margin: 0 0 8.5em;
-	}
+    table {
+        background-color: $white;
+        margin: 0 0 8.5em;
+    }
 
-	body.expanded-element .expanded & {
-		overflow: visible;
-	}
+    body.expanded-element .expanded & {
+        overflow: visible;
+    }
 }
 
 .goes-fullscreen {
-	[data-contracts] {
-		display: none;
-	}
+    [data-contracts] {
+        display: none;
+    }
 }
 
 body.modal-open {
-	overflow: hidden;
+    overflow: hidden;
 }
 
 body.expanded-element {
-	overflow: hidden;
+    overflow: hidden;
 
-	.goes-fullscreen.expanded {
-		position: fixed;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		z-index: 1000;
-		background-color: $white;
-		overflow: auto;
-		padding: 0 1em;
+    .goes-fullscreen.expanded {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1000;
+        background-color: $white;
+        overflow: auto;
+        padding: 0 1em;
 
-		[data-expands] {
-			display: none;
-		}
+        [data-expands] {
+            display: none;
+        }
 
-		[data-contracts] {
-			display: block;
-		}
-	}
+        [data-contracts] {
+            display: block;
+        }
+    }
+}
+
+.centered {
+    text-align: center;
 }
 
 #main .columns .modal-edit {
-	display: none;
-	position: fixed;
-	top: 0;
-	right: 0;
-	left: 0;
-	bottom: 0;
-	z-index: 1001;
-	margin: 0;
-	background-color: rgba($black, 0.5);
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1001;
+    margin: 0;
+    background-color: rgba($black, 0.5);
 
-	&.open {
-		display: flex;
-	}
+    &.open {
+        display: flex;
+    }
 
-	.modal-edit-overlay {
-		position: absolute;
-		top: 0;
-		right: 0;
-		left: 0;
-		bottom: 0;
-		cursor: pointer;
-	}
+    .modal-edit-overlay {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        cursor: pointer;
+    }
 
-	table {
-		margin: 0;
-		background-color: $white;
+    table {
+        margin: 0;
+        background-color: $white;
 
-		td.empty {
-			background-color: #F8F8F8;
-			border-bottom-color: #F8F8F8;
-		}
-	}
+        td.empty {
+            background-color: #F8F8F8;
+            border-bottom-color: #F8F8F8;
+        }
+    }
 
-	thead th {
-		text-align: center;
-		font-size: 1.125em;
-		color: $white;
-		border-color: lighten($colour-1, 12.5%);
-		background-color: $colour-1;
-	}
+    thead th {
+        text-align: center;
+        font-size: 1.125em;
+        color: $white;
+        border-color: lighten($colour-1, 12.5%);
+        background-color: $colour-1;
+    }
 
-	tbody th {
-		white-space: nowrap;
-	}
+    tbody th {
+        white-space: nowrap;
+    }
 
-	.modal-edit-content {
-		position: relative;
-		min-width: 50em;
-		max-width: 75em;
-		margin: auto;
-		overflow: auto;		
-		z-index: 1002;
-		background-color: #F8F8F8;
-		flex: 1;
-	}
+    .modal-edit-content {
+        position: relative;
+        min-width: 50em;
+        max-width: 75em;
+        margin: auto;
+        overflow: auto;     
+        z-index: 1002;
+        background-color: #F8F8F8;
+        flex: 1;
+    }
 
-	.actions {
-		margin: 1em 1em 0;
-	}
+    .actions {
+        margin: 1em 1em 0;
+    }
 }
 
 .table {
-	display: table;
-	border-collapse: collapse;
+    display: table;
+    border-collapse: collapse;
 }
 
 .table-tr {
-	display: table-row;
+    display: table-row;
 }
 
 .table-th, .table-td {
-	display: table-cell;
+    display: table-cell;
 }
 
 button,
 .button {
-	@include button;
+    @include button;
     vertical-align: top;
 
-	#main &[type="submit"] {
-		background-color: $colour-5;
+    #main &[type="submit"] {
+        background-color: $colour-5;
 
-		&[value="send"] {
-			background-color: $colour-4;
-		}
-	}
+        &[value="send"] {
+            background-color: $colour-4;
+        }
+    }
 
-	&.register {
-		background-color: $colour-4;
-	}
+    &.register {
+        background-color: $colour-2;
+    }
 
-	form.logout & {
-		background-color: #666;
-	}
+    form.logout & {
+        background-color: #666;
+    }
 
-	#main &.modify {
-		background-color: $colour-5;
-	}
+    #main &.modify {
+        background-color: $colour-5;
+    }
 
-	&.delete,
-	#main &.delete {
-		background-color: $colour-4;
-	}
+    &.delete,
+    #main &.delete {
+        background-color: $red;
+    }
 
-	#main &.secondary {
-		background-color: $colour-1;
-	}
+    #main &.secondary {
+        background-color: $colour-1;
+    }
 
-	&.subdued, #main &.subdued {
-		background-color: #888;
-	}
+    &.subdued, #main &.subdued {
+        background-color: #888;
+    }
 
-	#main &.accented {
-		background-color: $colour-2;
-	}
+    #main &.accented {
+        background-color: $colour-2;
+    }
 
-	&.facebook {
-		background-color: #3A5795;
-	}
+    &.facebook {
+        background-color: #3A5795;
+    }
 
-	&.small {
-		font-size: 0.9em;
-	}
+    &.small {
+        font-size: 0.9em;
+    }
 }
 
 a.button {
-	@include after {
-		border-bottom: 1em solid transparent;
-		left: auto;
-		bottom: auto;
-		@include _(transform, none);
-	}
+    text-align: center;
+
+    @include after {
+        border-bottom: 1em solid transparent;
+        left: auto;
+        bottom: auto;
+        @include _(transform, none);
+    }
 }
 
 nav.sub-menu {
-	display: inline-block;
-	margin: 2rem 0 0;
-	text-align: center;
-	
-	a {
-	    margin: 0 1em 0.5em 0;
-		background-color: #E8E8E8;
-		color: #888;
-		display: inline-block;
-		padding: 0.25em 0.75em 0.333em;
-		font-size: 0.9em;
-		border: 1px solid #AAA;
-		border-bottom-width: 0.2em;
-		@include _(border-radius, 0.15em);
-		@include default-box-shadow(top, 2);
-		@include _(text-shadow, 0 0.05em 0.05em #FFF);
+    display: inline-block;
+    margin: 2rem 0 0;
+    text-align: center;
+    
+    a {
+        margin: 0 1em 0.5em 0;
+        background-color: $gray;
+        color: #888;
+        display: inline-block;
+        padding: 0.25em 0.75em 0.333em;
+        font-size: 0.9em;
+        border: 1px solid #AAA;
+        border-bottom-width: 0.2em;
+        @include _(border-radius, 0.15em);
+        @include default-box-shadow(top, 2);
+        @include _(text-shadow, 0 0.05em 0.05em #FFF);
 
-		&:hover, &:active, &:focus {
-			background-color: #D8D8D8;
-		}
+        &:hover, &:active, &:focus {
+            background-color: #D8D8D8;
+        }
 
-		&.current {
-			background-color: #CCC;
-			color: #666;
-			padding: 0.333em 0.75em 0.25em;
-		}
+        &.current {
+            background-color: #CCC;
+            color: #666;
+            padding: 0.333em 0.75em 0.25em;
+        }
 
-		@include after {
-			display: none;
-		}
-	}
+        @include after {
+            display: none;
+        }
+    }
 
-	@include breakpoint(medium) {
-		border: 1px solid #AAA;
-		background-color: #AAA;
-		border-bottom-width: 0.125em;
-		@include _(border-radius, 0.15em);
-		@include default-box-shadow(top, 2);
+    @include breakpoint(medium) {
+        border: 1px solid #AAA;
+        background-color: #AAA;
+        border-bottom-width: 0.125em;
+        @include _(border-radius, 0.15em);
+        @include default-box-shadow(top, 2);
 
-		a {
-			border: 0;
-			margin: 0 1px 0 0;
-			float: left;
-			@include _(border-radius, 0);
-			@include _(box-shadow, none);
+        a {
+            border: 0;
+            margin: 0 1px 0 0;
+            float: left;
+            @include _(border-radius, 0);
+            @include _(box-shadow, none);
 
-			&:last-child {
-				margin: 0;
-			}
-		}
-	}
+            &:last-child {
+                margin: 0;
+            }
+        }
+    }
 }
 
 textarea, .textarea {
-	display: block;
-	width: 100%;
-	min-height: 15em;
-	font-size: 1.25em;
-	line-height: 1.5em;
-	margin: 1em 0;
-	padding: 0.75em;
-	border: 0.1rem solid #E8E8E8;
-	outline: 0;
-	@include _(border-radius, 0.25rem);
-	color: inherit;
-	background-image: repeating-linear-gradient(135deg, rgba(#000, 0.025), rgba(#000, 0.025) 0.1em, transparent 0.1em, transparent 0.4em);
-	@include _(box-shadow, 0 0 0 0 rgba(0,0,0,0.05));
-	@include _(transition, box-shadow 200ms ease-in-out);
-	will-change: box-shadow;
+    display: block;
+    width: 100%;
+    min-height: 15em;
+    font-size: 1.25em;
+    line-height: 1.5em;
+    margin: 1em 0;
+    padding: 0.75em;
+    border: 0.1rem solid $gray;
+    outline: 0;
+    @include _(border-radius, 0.25rem);
+    color: inherit;
+    background-image: repeating-linear-gradient(135deg, rgba(#000, 0.025), rgba(#000, 0.025) 0.1em, transparent 0.1em, transparent 0.4em);
+    @include _(box-shadow, 0 0 0 0 rgba(0,0,0,0.05));
+    @include _(transition, box-shadow 200ms ease-in-out);
+    will-change: box-shadow;
 
-	&[data-edit-on="click"],
-	&[data-edit-on="focus"] {
-		cursor: text;
-	}
+    &[data-edit-on="click"],
+    &[data-edit-on="focus"] {
+        cursor: text;
+    }
 
-	&:hover, &:focus, &:active {
-		@include _(box-shadow, 0 0 0 0.3em rgba(0,0,0,0.05));
-	}
+    &:hover, &:focus, &:active {
+        @include _(box-shadow, 0 0 0 0.3em rgba(0,0,0,0.05));
+    }
 
-	&.short {
-		min-height: 10em;
-	}
+    &.short {
+        min-height: 10em;
+    }
 }
 
 .textarea, .workshop-description {
-	> :first-child {
-		margin-top: 0;
-	}
+    > :first-child {
+        margin-top: 0;
+    }
 
-	> :last-child {
-		margin-bottom: 0;
-	}
+    > :last-child {
+        margin-bottom: 0;
+    }
 
-	p {
-		font-size: 1.125em;
-	}
+    p {
+        font-size: 1.125em;
+    }
 
-	h1 {
-		font-size: 1.667em;
-	}
+    h1 {
+        font-size: 1.667em;
+    }
 
-	h2 {
-		font-size: 1.25em;
-	}
+    h2 {
+        font-size: 1.25em;
+    }
 }
 
 input {
-	&[type="text"], &[type="password"], &[type="tel"], &[type="search"], &[type="email"], &[type="url"], &[type="number"] {
-		display: block;
-		font-size: 1.25em;
-		outline: 0;
-		border: 0;
-		margin: 1em 0;
-		width: 100%;
-		padding: 0.25em 0.5em;
-		border-bottom: 0.15em solid transparent;
-	}
+    &[type="text"], &[type="password"], &[type="tel"], &[type="search"], &[type="email"], &[type="url"], &[type="number"] {
+        display: block;
+        font-size: 1.25em;
+        outline: 0;
+        border: 0;
+        margin: 1em 0;
+        width: 100%;
+        padding: 0.25em 0.5em;
+        border-bottom: 0.15em solid transparent;
+    }
 
-	&[type="number"], &[type="tel"] {
-		@include font-family(secondary);
-	}
+    &[type="number"], &[type="tel"] {
+        @include font-family(secondary);
+    }
 }
 
 .number-field,
@@ -646,71 +682,71 @@ input {
 .telephone-field,
 .password-field,
 .text-field {
-	position: relative;
-	margin-bottom: 2em;
-	color: inherit;
+    position: relative;
+    margin-bottom: 2em;
+    color: inherit;
 
-	&.empty {
-		label {
-			z-index: $zindex-base + 3;
-			@include _(transform, translateY(-100%) scale(1));
-			background-color: transparent;
-			color: #666;
-		}
-	}
+    &.empty {
+        label {
+            z-index: $zindex-base + 3;
+            @include _(transform, translateY(-100%) scale(1));
+            background-color: transparent;
+            color: #666;
+        }
+    }
 
-	&.big input {
-		@include font-family(secondary);
+    &.big input {
+        @include font-family(secondary);
 
-		.composition & {
-			margin-top: 1em;
-		}
-	}
+        .composition & {
+            margin-top: 1em;
+        }
+    }
 
-	label,
-	&.focused label {
-		position: absolute;
-		z-index: $zindex-base + 3;
-		font-size: 1em;
-		padding: 0.25em 0.667em;
-		width: auto;
-		@include _(transition, 'transform 250ms ease-in-out, color 250ms ease-in-out, background-color 250ms ease-in-out');
-		top: 100%;
-		left: 0;
-		@include _(transform, translateY(0) scale(0.75));
-		@include _(transform-origin, 0 0);
-		line-height: 1.5em;
-		background-color: transparent;
-		color: $black;
-		cursor: text;
-		will-change: transform, color, background-color;
-	}
+    label,
+    &.focused label {
+        position: absolute;
+        z-index: $zindex-base + 3;
+        font-size: 1em;
+        padding: 0.25em 0.667em;
+        width: auto;
+        @include _(transition, 'transform 250ms ease-in-out, color 250ms ease-in-out, background-color 250ms ease-in-out');
+        top: 100%;
+        left: 0;
+        @include _(transform, translateY(0) scale(0.75));
+        @include _(transform-origin, 0 0);
+        line-height: 1.5em;
+        background-color: transparent;
+        color: $black;
+        cursor: text;
+        will-change: transform, color, background-color;
+    }
 
-	input {
-		margin: 0;
-		position: relative;
-		z-index: $zindex-base + 2;
-		padding: 0.15em 0.5em;
-		background-color: #F8F8F8;
-		@include _(border-radius, 0.25rem);
-		@include _(box-shadow, 0 0 0 0 rgba(0,0,0,0.05));
-		@include _(transition, box-shadow 200ms ease-in-out);
-		background-image: repeating-linear-gradient(135deg, rgba(0, 0, 0, 0.025), rgba(0, 0, 0, 0.025) 0.1rem, transparent 0.1rem, transparent 0.4rem);
-		border: 0.1rem solid #E8E8E8;
-		will-change: box-shadow;
-	}
+    input {
+        margin: 0;
+        position: relative;
+        z-index: $zindex-base + 2;
+        padding: 0.15em 0.5em;
+        background-color: #F8F8F8;
+        @include _(border-radius, 0.25rem);
+        @include _(box-shadow, 0 0 0 0 rgba(0,0,0,0.05));
+        @include _(transition, box-shadow 200ms ease-in-out);
+        background-image: repeating-linear-gradient(135deg, rgba(0, 0, 0, 0.025), rgba(0, 0, 0, 0.025) 0.1rem, transparent 0.1rem, transparent 0.4rem);
+        border: 0.1rem solid $gray;
+        will-change: box-shadow;
+    }
 
-	&:focus, &:active, &:focus {
+    &:focus, &:active, &:focus {
 
-		label {
-			color: $black;
-		}
-	}
-	input {
-		&:focus, &:active, &:hover {
-			@include _(box-shadow, 0 0 0 0.3em rgba(0,0,0,0.05));
-		}
-	}
+        label {
+            color: $black;
+        }
+    }
+    input {
+        &:focus, &:active, &:hover {
+            @include _(box-shadow, 0 0 0 0.3em rgba(0,0,0,0.05));
+        }
+    }
 }
 .number-field,
 .email-field,
@@ -719,667 +755,931 @@ input {
 .search-field,
 .text-field,
 .text-area-field {
-	text-align: left;
+    text-align: left;
 }
 
 .telephone-field {
-	max-width: 15em;
+    max-width: 15em;
+}
+
+.file-field {
+    label {
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .file-field-selector {
+        display: block;
+        text-align: right;
+        padding: 0.5em;
+        background-color: #F8F8F8;
+        @include _(border-radius, 0.25rem);
+        @include _(box-shadow, 0 0 0 0 rgba(0,0,0,0.05));
+        @include _(transition, box-shadow 200ms ease-in-out);
+        background-image: repeating-linear-gradient(135deg, rgba(0, 0, 0, 0.025), rgba(0, 0, 0, 0.025) 0.1rem, transparent 0.1rem, transparent 0.4rem);
+        border: 0.1rem solid $gray;
+        will-change: box-shadow;
+
+        .file-field-name {
+            display: inline-block;
+            padding: 0.25em 0.5em;
+        }
+
+        .unselected {
+            color: $mid-gray;
+        }
+
+        .button {
+            vertical-align: middle;
+            margin-left: 1em;
+        }
+
+        img {
+            display: none;
+            max-width: 100%;
+            margin-bottom: 1em;
+
+            &[src] {
+                display: block;
+            }
+
+            &.changed {
+                opacity: 0.5;
+            }
+        }
+    }
+
+    label:hover, input:focus + label, input:active + label, label:focus, label:active {
+        .file-field-selector {
+            @include _(box-shadow, 0 0 0 0.3em rgba(0,0,0,0.05));
+        }
+    }
 }
 
 @include keyframes(bend) {
-	to {
-		@include _(transform, skewX(-5deg));
-	}
+    to {
+        @include _(transform, skewX(-5deg));
+    }
 }
 
 .hidden {
-	display: none !important;
+    display: none !important;
 }
 
 .field-error {
-	display: block;
-	background-color: rgba($colour-2, 0.333);
-	@include font-family(secondary);
-	padding: 0.5em 1em;
-	margin: 0 0.2em;
-	text-align: center;
-	@include default-box-shadow(top, 2);
+    display: block;
+    background-color: rgba($colour-2, 0.333);
+    @include font-family(secondary);
+    padding: 0.5em 1em;
+    margin: 0 0.2em;
+    text-align: center;
+    @include default-box-shadow(top, 2);
 }
 
 .input-field {
-	.field-error {
-		float: right;
-		@include _(transform, skewX(-15deg));
-		@include _(transform-origin, 0 100%);
-		@include _(animation, bend ease-in-out 500ms infinite alternate both);
-	}
+    .field-error {
+        float: right;
+        @include _(transform, skewX(-15deg));
+        @include _(transform-origin, 0 100%);
+        @include _(animation, bend ease-in-out 500ms infinite alternate both);
+    }
 
-	&.check-box-field {
-		&.has-error {
-			margin-top: 3em;
-		}
+    &.check-box-field {
+        &.has-error {
+            margin-top: 3em;
+        }
 
-		.field-error {
-			position: absolute;
-			bottom: 100%;
-			right: 0;
-			margin-right: 0;
-		}
-	}
+        .field-error {
+            position: absolute;
+            bottom: 100%;
+            right: 0;
+            margin-right: 0;
+        }
+    }
 
-	&.small select,
-	&.small input {
-		font-size: 1em;
-		@include font-family(secondary)
-	}
+    &.small select,
+    &.small input {
+        font-size: 1em;
+        @include font-family(secondary)
+    }
 }
 
 .input-field.other-field label {
 
-	input {
-		float: left;
-		margin: 0.33em 0;
+    input {
+        float: left;
+        margin: 0.33em 0;
 
-		&:checked {
-			+ div input {
-				z-index: $zindex-base + 2;
-				@include _(opacity, 1);
-			}
-		}
-	}
+        &:checked {
+            + div input {
+                z-index: $zindex-base + 2;
+                @include _(opacity, 1);
+            }
+        }
+    }
 
-	div {
-		float: left;
-		position: relative;
-		margin: 0 0.25em;
-		font-size: 1em;
+    div {
+        float: left;
+        position: relative;
+        margin: 0 0.25em;
+        font-size: 1em;
 
-		input {
-			//display: none;
-			@include _(opacity, 0);
-			@include _(transition, opacity 250ms ease-in-out);
-			z-index: $zindex-base;
-			position: absolute;
-			width: auto;
-			margin: 0;
-			border: 1px solid #CCC;
-			height: 1.5em;
-			left: 0;
-			top: 0;
-		}
-	}
+        input {
+            //display: none;
+            @include _(opacity, 0);
+            @include _(transition, opacity 250ms ease-in-out);
+            z-index: $zindex-base;
+            position: absolute;
+            width: auto;
+            margin: 0;
+            border: 1px solid #CCC;
+            height: 1.5em;
+            left: 0;
+            top: 0;
+        }
+    }
 }
 
 .number-field {
-	display: inline-block;
-	font-size: 1.5em;
+    display: inline-block;
+    font-size: 1.5em;
 
-	input {
-		text-align: right;
-	}
+    input {
+        text-align: right;
+    }
 }
 
 .input-field-help {
-	margin: 0.5em 1em;
-	line-height: 1.3333em;
-	font-size: 1.125em;
+    margin: 0.5em 1em;
+    line-height: 1.3333em;
+    font-size: 1.125em;
 }
 
 .check-box-field,
 .check-box-field.vertical,
 .radio-button-field {
-	@include clearfix;
-	margin-bottom: 3em;
-	position: relative;
-	@include default-box-shadow(top);
+    @include clearfix;
+    margin-bottom: 3em;
+    position: relative;
+    @include default-box-shadow(top);
 
-	td &,
-	.table-td & {
-		@include _(box-shadow, none);
-		margin: 0;
-	}
-	
-	label {
-		display: block;
-		background-color: #FFF;
-		height: 2.333em;
-		font-weight: normal;
-		font-size: 1.25em;
-		@include font-family(secondary);
-		text-align: center;
-		position: relative;
-		padding: 0.5em 0.5em 0.5em 3em;
-		cursor: pointer;
-		border: 0.1em solid;
-		border-top: 0;
-		overflow: hidden;
-		white-space: nowrap;
-		text-overflow: ellipsis;
-		@include _(transition, #{'transform, background-color 100ms, 100ms ease-in-out, ease-in-out'});
+    td &,
+    .table-td & {
+        @include _(box-shadow, none);
+        margin: 0;
+    }
+    
+    label {
+        display: block;
+        background-color: #FFF;
+        height: 2.333em;
+        font-weight: normal;
+        font-size: 1.25em;
+        @include font-family(secondary);
+        text-align: center;
+        position: relative;
+        padding: 0.5em 0.5em 0.5em 3em;
+        cursor: pointer;
+        border: 0.1em solid;
+        border-top: 0;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        @include _(transition, #{'transform, background-color 100ms, 100ms ease-in-out, ease-in-out'});
 
-		@include before-and-after {
-		 	content: '';
-		 	position: absolute;
-		 	@include _(transition, transform 200ms ease-in-out);
-		 }
+        @include before-and-after {
+            content: '';
+            position: absolute;
+            @include _(transition, transform 200ms ease-in-out);
+         }
 
-		@include before {
-			content: '';
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 2.333em;
-			height: 100%;
-			border-right: inherit;
-		}
+        @include before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 2.333em;
+            height: 100%;
+            border-right: inherit;
+        }
 
-		@include after {
-			content: '';
-			position: absolute;
-			visibility: hidden;
-			left: 0.75em;
-			top: 0.25em;
-			border: 0.2em solid #FFF;
-			width: 0.75em;
-			height: 1.5em;
-			border-width: 0 .2em 0.2em 0;
-			@include _(transform, rotate(45deg) scale(0));
-		 	@include _(transition, transform 200ms cubic-bezier(0, 0.38, 0.9, 2));
-		}
-	}
+        @include after {
+            content: '';
+            position: absolute;
+            visibility: hidden;
+            left: 0.75em;
+            top: 0.25em;
+            border: 0.2em solid #FFF;
+            width: 0.75em;
+            height: 1.5em;
+            border-width: 0 .2em 0.2em 0;
+            @include _(transform, rotate(45deg) scale(0));
+            @include _(transition, transform 200ms cubic-bezier(0, 0.38, 0.9, 2));
+        }
+    }
 
-	input:first-child + label {
-		border: 0.1em solid;
-	}
+    input:first-child + label {
+        border: 0.1em solid;
+    }
 
-	input {
-		position: fixed;
-		opacity: 0 !important;
-    	left: -100000px;
-    	z-index: -10;
+    input {
+        position: fixed;
+        opacity: 0 !important;
+        left: -100000px;
+        z-index: -10;
 
-		&:checked + label {
-			@include before {
-				background-color: $colour-5;
-			}
-			@include after {
-				visibility: visible;
-				@include _(transform, rotate(45deg) scale(1));
-			}
-		}
+        &:checked + label {
+            @include before {
+                background-color: $colour-5;
+            }
+            @include after {
+                visibility: visible;
+                @include _(transform, rotate(45deg) scale(1));
+            }
+        }
 
-		&:hover + label {
-			@include before {
-				background-color: $colour-3;
-			}
-		}
+        &:hover + label {
+            @include before {
+                background-color: $colour-3;
+            }
+        }
 
-		&[type="radio"] + label {
-			@include after {
-				content: '+';
-				border: 0;
-				font-size: 2.5em;
-				top: -0.025em;
-				left: 0.175em;
-				line-height: 1em;
-				color: #FFF;
-				height: 1em;
-				width: 1em;
-			}
-		}
-	}
+        &[type="radio"] + label {
+            @include after {
+                content: '+';
+                border: 0;
+                font-size: 2.5em;
+                top: -0.025em;
+                left: 0.175em;
+                line-height: 1em;
+                color: #FFF;
+                height: 1em;
+                width: 1em;
+            }
+        }
+    }
 
-	&.inline input[type="radio"] + label {
-		@include after {
-    		top: -0.15em;
-    		left: 0.05em;
-		}
-	}
+    &.inline input[type="radio"] + label {
+        @include after {
+            top: -0.15em;
+            left: 0.05em;
+        }
+    }
 
-	.other {
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 2.333em;
+    .other {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 2.333em;
 
-		input {
-			z-index: 1;
-			opacity: 1!important;
-			position: static;
-			margin: 0;
-			font: inherit;
-			height: 100%;
-			text-align: inherit;
-			cursor: inherit;
-		}
-	}
+        input {
+            z-index: 1;
+            opacity: 1!important;
+            position: static;
+            margin: 0;
+            font: inherit;
+            height: 100%;
+            text-align: inherit;
+            cursor: inherit;
+        }
+    }
 }
 
 .check-box-field.vertical {
-	display: block;
-	margin: 0 2em 5em;
-	font-size: 0.75em;
+    display: block;
+    margin: 0 2em 5em;
+    font-size: 0.75em;
 
-	input[type="radio"] + label {
-		@include after {
-			top: -0.15em;
-			left: 0.05em;
-		}
-	}
+    input[type="radio"] + label {
+        @include after {
+            top: -0.15em;
+            left: 0.05em;
+        }
+    }
 }
 
 .check-box-field.inline {
-	display: inline-block;
+    display: inline-block;
 
-	label {
-		min-width: 7.5em;
-	}
+    label {
+        min-width: 7.5em;
+    }
 }
 
 .check-box-field.small {
-	font-size: 0.75em;
+    font-size: 0.75em;
 
-	&.small label {
-		font-size: 1.125em;
-	}
+    &.small label {
+        font-size: 1.125em;
+    }
 }
 
 .check-box-field.big {
-	font-size: 1em;
+    font-size: 1em;
 }
 
 .radio-button-field {
-	label {
-		width: 7em;
-		height: 5em;
-	}
+    label {
+        width: 7em;
+        height: 5em;
+    }
 }
 .single-check-box-field,
 .single-radio-button-field {
-	margin-left: 1em;
+    margin-left: 1em;
 }
 
 .date-span {
-	margin-left: 1em;
+    margin-left: 1em;
 
-	label, input {
-		display: block;
-		height: 1.5em;
-		margin: 0 0.5em 1em 0;
-	}
+    label, input {
+        display: block;
+        height: 1.5em;
+        margin: 0 0.5em 1em 0;
+    }
 
-	label {
-		height: 1.5em;
-	}
+    label {
+        height: 1.5em;
+    }
 
-	input {
-		@include default-box-shadow(top);
-		background-color: $colour-1;
-		color: $white;
-		border: 0;
-		padding: 0 0.25em;
-		font-weight: normal;
-		@include font-family(secondary);
-		@include _(text-stroke, 0.5px #000);
-	}
+    input {
+        @include default-box-shadow(top);
+        background-color: $colour-1;
+        color: $white;
+        border: 0;
+        padding: 0 0.25em;
+        font-weight: normal;
+        @include font-family(secondary);
+        @include _(text-stroke, 0.5px #000);
+    }
 
-	.date-labels {
-		float: left;
-	}
+    .date-labels {
+        float: left;
+    }
 
-	.date-field {
-		overflow: auto;
-	}
+    .date-field {
+        overflow: auto;
+    }
 }
 
 .requesting {
-	opacity: 0.5;
-	-webkit-filter: blur(5px);
+    opacity: 0.5;
+    -webkit-filter: blur(5px);
 }
 
 form {
-	@include _(transition, 'opacity 250ms ease-in-out, filter 250ms ease-in-out, -webkit-filter 250ms ease-in-out');
-	
-	&.composition {
-		textarea {
-			height: 16em;
-		}
-	}
+    @include _(transition, 'opacity 250ms ease-in-out, filter 250ms ease-in-out, -webkit-filter 250ms ease-in-out');
+    
+    &.composition {
+        textarea {
+            height: 16em;
+        }
+    }
 
-	&.mini-flex-form {
-		@include _-(display, flex);
-		@include _(align-items, flex-start);
+    &.mini-flex-form {
+        @include _-(display, flex);
+        @include _(align-items, flex-start);
 
-		.input-field {
-			@include _(flex, 1);
-		}
+        .input-field {
+            @include _(flex, 1);
+        }
 
-		button, .button {
-			margin-left: 1em;
-			height: 2.6em;
-		}
-	}
+        button, .button {
+            margin-left: 1em;
+            height: 2.6em;
+        }
+    }
 
-	&.centered {
-		text-align: center;
-	}
+    button[value="upload"] {
+        display: none;
+
+        &[data-enabled="1"] {
+            display: inline-block;
+        }
+    }
+
+    #main .columns &.inline {
+        display: inline-block;
+        margin: 0;
+    }
+
+    &.right {
+        float: right;
+    }
 }
 
 #main .columns th form {
-	display: inline;
-	vertical-align: super;
-	margin: 0 0 0 0.5em;
+    display: inline;
+    vertical-align: super;
+    margin: 0 0 0 0.5em;
 
-	button {
-		float: right;
-	}
+    button {
+        float: right;
+    }
 }
 
 #main .columns th.form,
 #main .columns .table-th.form {
-	display: none;
+    display: none;
 }
 
 #main .columns td.form,
 #main .columns .table-td.form {
-	border: 0;
-	width: 1px;
-	
-	form {
-		margin: 0;
-	}
+    border: 0;
+    width: 1px;
+    
+    form {
+        margin: 0;
+    }
 
-	button {
-		display: block;
-		width: 100%;
-		white-space: nowrap;
+    button, .button {
+        display: block;
+        width: 100%;
+        white-space: nowrap;
 
-		+ button {
-			margin-top: 0.5em;
-		}
-	}
+        + button {
+            margin-top: 0.5em;
+        }
+    }
 }
 
 fieldset {
-	margin: 0;
-	padding: 0;
-	border: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
 
-	&.centered {
-		margin-top: 3em;
-		text-align: center;
-	}
+    &.centered {
+        margin-top: 3em;
+    }
 
-	&.right-help {
-		text-align: center;
+    &.right-help {
+        text-align: center;
 
-		.input-field {
-			margin: 0;
-		}
+        .input-field {
+            margin: 0;
+        }
 
-		+ .input-field-help {
-			overflow: auto;
-			margin-bottom: 2em;
-		}
-	}
+        + .input-field-help {
+            overflow: auto;
+            margin-bottom: 2em;
+        }
+    }
+
+    &.inline {
+        display: inline-block;
+    }
+
+    &.inline-label {
+        legend {
+            display: inline-block;
+        }
+    }
+
+    .field-error {
+        color: $red;
+        background-color: transparent;
+        @include _(box-shadow, none);
+    }
 }
 
 .fieldgroup {
-	@include _(align-items, flex-end);
-	@include _(flex-wrap, wrap);
-	margin: 0 0 3em 1em;
+    @include _(align-items, flex-end);
+    @include _(flex-wrap, wrap);
+    margin: 0 0 3em 1em;
 
-	> .input-field {
-		margin-right: 1em;
-		@include _(flex, 1);
-	}
+    > .input-field {
+        margin-right: 1em;
+        @include _(flex, 1);
+    }
+}
+
+#main article fieldset.translator {
+    .fieldgroup {
+        display: block;
+    
+        > .input-field {
+            flex: none;
+        }
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        clear: left;
+    }
+
+    .locale-select {
+        @include _-(display, flex);
+        @include _(flex-wrap, wrap);
+        margin: 0 0.5em;
+        text-align: center;
+        border: 0.1em solid $gray;
+        border-bottom: 0;
+        @include default-box-shadow(top, 2);
+
+        li {
+            @include _(flex, 1);
+            position: relative;
+            margin: 0;
+
+            &:hover {
+                background-color: $light-gray;
+                color: $black;
+            }
+
+            &.selected {
+                background-color: $gray;
+                z-index: 1;
+            }
+        }
+
+        a {
+            display: block;
+            @include font-family(secondary);
+            color: inherit;
+            padding: 0.25em 0.75em;
+
+            @include after {
+                display: none;
+            }
+        }
+    }
+
+    .text-editors {
+        position: relative;
+        background-color: $white;
+
+        li {
+            display: none;
+
+            &.selected {
+                display: block;
+            }
+        }
+    }
+    
+    &.multi-field-translator {
+        .text-editors {
+            border: 0.1em solid $gray;
+            padding: 1em 1em 0;
+            @include default-box-shadow(top, 2);
+        }
+    }
+
+    .textarea {
+        margin-top: 0;
+    }
 }
 
 .view-object {
-	margin-bottom: 3em;
+    margin-bottom: 3em;
 }
 
 .comments {
-	list-style: none;
+    list-style: none;
 
-	.comment {
-		position: relative;
-		border: 0.1rem solid #EEE;
-		border-radius: 0.25rem;
-		padding: 1em;
-		margin-top: 2em;
-	}
+    .comment {
+        position: relative;
+        border: 0.1rem solid $light-gray;
+        border-radius: 0.25rem;
+        padding: 1em;
+        margin-top: 2em;
+    }
 
-	.comment-body {
-		font-size: 0.9em;
-	}
+    .comment-body {
+        font-size: 0.9em;
+    }
 
-	.comment-title {
-		position: absolute;
-		top: -0.75em;
-		left: 0.5em;
-		margin: 0;
-		padding: 0 0.5em;
-		background-color: #FFF;
-	}
+    .comment-title {
+        position: absolute;
+        top: -0.75em;
+        left: 0.5em;
+        margin: 0;
+        padding: 0 0.5em;
+        background-color: #FFF;
+    }
 
-	time {
-		position: absolute;
-		top: -0.75em;
-		right: 0.75em;
-		background-color: #FFF;
-		padding: 0 0.5em;
-	}
+    time {
+        position: absolute;
+        top: -0.75em;
+        right: 0.75em;
+        background-color: #FFF;
+        padding: 0 0.5em;
+    }
 
-	.sub-comment {
-		font-size: 0.8em;
+    .sub-comment {
+        font-size: 0.8em;
 
-		.comment-title, time {
-			top: -1em;
-		}
-	}
+        .comment-title, time {
+            top: -1em;
+        }
+    }
 
-	.text-area-field {
-		overflow: hidden;
-		max-height: 0;
-		padding: 0.3em;
-		@include _(transition, max-height 150ms ease-in-out);
-	}
+    .text-area-field {
+        overflow: hidden;
+        max-height: 0;
+        padding: 0.3em;
+        @include _(transition, max-height 150ms ease-in-out);
+    }
 
-	#main .columns & form {
-		margin-top: 0;
-		button {
-			@include _(transition, background-color 150ms ease-in-out);
-			background-color: #888;
-		}
+    #main .columns & form {
+        margin-top: 0;
+        button {
+            @include _(transition, background-color 150ms ease-in-out);
+            background-color: #888;
+        }
 
-		&.open {
-			@include _(opacity, 1);
+        &.open {
+            @include _(opacity, 1);
 
-			.text-area-field {
-				max-height: 12em;  
-			}
+            .text-area-field {
+                max-height: 12em;  
+            }
 
-			button {
-				background-color: $colour-5;
-			}
-		}
-	}
+            button {
+                background-color: $colour-5;
+            }
+        }
+    }
 
-	button {
-		margin: 0;
-	}
+    button {
+        margin: 0;
+    }
 }
 
 #comments {
-	textarea {
-		font-size: 1.25em;
-		min-height: 7.5em;
-	}
+    textarea {
+        font-size: 1.25em;
+        min-height: 7.5em;
+    }
 
-	.actions {
-		margin: 0;
+    .actions {
+        margin: 0;
 
-		button {
-			margin: 0;
-		}
-	}
+        button {
+            margin: 0;
+        }
+    }
 }
 
 .flex-form, .flex-column {
-	button, .button {
-		width: 100%;
-		text-align: center;
-		
-		+ button, + .button {
-			margin-left: 0.75em;
-		}
-	}
+    button, .button {
+        width: 100%;
+        text-align: center;
+        
+        + button, + .button {
+            margin-left: 0.75em;
+        }
+    }
+
+    &.address-form {
+        .city {
+            @include _(align-self, flex-end);
+            @include font-family(secondary);
+            text-align: right;
+            margin-bottom: 2.5em;
+        }
+    }
 }
 
 .flex-inputs {
-	@include _-(display, flex);
-	@include _(align-items, flex-end);
-	@include _(flex-wrap, wrap);
-	@include _(justify-content, flex-end);
-	margin-bottom: 2em;
+    @include _-(display, flex);
+    @include _(align-items, flex-end);
+    @include _(flex-wrap, wrap);
+    @include _(justify-content, flex-end);
+    margin-bottom: 2em;
 
-	.input-field {
-		margin: 0 0.5em;
-	}
+    .input-field {
+        margin: 0 0.5em;
+    }
 
-	.stretch-item {
-		@include _(flex, 1);
-		@include _(flex-basis, 100%);
+    .stretch-item {
+        @include _(flex, 1);
+        @include _(flex-basis, 100%);
 
-		select {
-			width: 100%;
-		}
-	}
+        select {
+            width: 100%;
+        }
+    }
 }
 
 .actions {
-	text-align: center;
-	margin: 0 1em;
+    text-align: center;
+    margin: 0 1em;
 
-	button, .button {
-		margin: 0 0.25em 1em;
-	    vertical-align: middle;
-	}
+    button, .button {
+        margin: 0 0.25em 1em;
+        vertical-align: middle;
+    }
 
-	&.left {
-		text-align: left;
-	}
+    &.left {
+        text-align: left;
+    }
 
-	&.right {
-		text-align: right;
+    &.right {
+        text-align: right;
 
-		.note {
-			float: left;
-			color: $colour-1;
-			font-weight: bold;
-			font-size: 1.25em;
-		}
+        .note {
+            float: left;
+            color: $colour-1;
+            font-weight: bold;
+            font-size: 1.25em;
+        }
 
-		.left {
-			float: left;
-		}
-	}
+        .left {
+            float: left;
+        }
+    }
 
-	&.fill {
-		@include _-(display, flex);
-		@include _(flex-wrap, wrap);
+    &.small {
+        margin-top: 0;
+    }
 
-		> button, > .button {
-			flex: 1;
-			margin-bottom: 0;
-		}		
-	}
+    &.fill {
+        @include _-(display, flex);
+        @include _(flex-wrap, wrap);
 
-	.conferences-view_workshop & {
-	    margin-bottom: 5em;
-	}
+        > button, > .button {
+            flex: 1;
+            margin-bottom: 0;
+        }       
+    }
 
-	&.next-prev {
-		@include _-(display, flex);
-		@include _(flex-wrap, wrap);
-		@include _(flex-direction, row-reverse);
-		margin: 0;
-		clear: both;
+    .conferences-view_workshop & {
+        margin-bottom: 5em;
+    }
 
-		button, .button {
-			margin-bottom: 1em;
-		}
-	}
+    &.next-prev {
+        @include _-(display, flex);
+        @include _(flex-wrap, wrap);
+        @include _(flex-direction, row-reverse);
+        margin: 0;
+        clear: both;
+
+        button, .button {
+            margin-bottom: 1em;
+        }
+    }
+
+    &.figures {
+        .figure {
+            display: block;
+            margin: 0;
+            text-align: left;
+        }
+
+        a {
+            @include _-(display, flex);
+            @include _(flex-direction, column);
+            @include _(align-items, stretch);
+            color: inherit;
+            margin: 0.5em;
+            border: 0.1em solid $light-gray;
+            border-bottom: 0;
+            @include default-box-shadow(top, 2);
+            @include _(transition, box-shadow 150ms ease-in-out);
+
+            @include after {
+                display: none;
+            }
+
+            &:hover {
+                @include default-box-shadow(top, 0.75);
+            }
+        }
+
+        svg, img {
+            width: 5em;
+            height: 5em;
+            margin: 0.5em;
+            float: left;
+        }
+
+        svg {
+            fill: $black;
+            stroke: none;
+
+            &.stroked {
+                fill: none;
+                stroke: $black;
+            }
+        }
+
+        header {
+            @include font-family(secondary);
+            background-color: $black;
+            color: $white;
+            padding: 0.5em;
+            font-size: 1.125em;
+            @include _(text-stroke, 1px rgba(0, 0, 0, 0.25));
+            @include _(transition, background-color 150ms ease-in-out);
+        }
+
+        .description {
+            overflow: auto;
+            padding: 1em 0.5em;
+        }
+    }
 }
 
 .test-preview {
-	padding: 0 1em;
-	border: 0.1em solid #CCC;
-	background-color: #F8F8F8;
+    padding: 0 1em;
+    border: 0.1em solid #CCC;
+    background-color: #F8F8F8;
 
-	h4 {
-		border-bottom: 0.1rem solid #CCC;
-		padding: 1em 0 0.75em;
-		font-size: 1.5em;
-		margin: 0 0 1em 0;
-	}
+    h4 {
+        border-bottom: 0.1rem solid #CCC;
+        padding: 1em 0 0.75em;
+        font-size: 1.5em;
+        margin: 0 0 1em 0;
+    }
 
-	h5 {
-		font-size: 1.25em;
-	}
+    h5 {
+        font-size: 1.25em;
+    }
 
-	h6, p {
-		font-size: 1.125em;
-	}
+    h6, p {
+        font-size: 1.125em;
+    }
 }
 
 ul.warnings {
-	list-style: none;
-	padding: 0;
+    list-style: none;
+    padding: 0;
 }
 
-ul.warnings li,
-.warning-info {
- 	position: relative;
- 	min-height: 4em;
-	border: 0.2em solid rgba(0, 0, 0, 0.1);
-	background-color: rgba($colour-3, 0.333);
-	padding: 1em 1em 1em 4em;
-	@include font-family(secondary);
-	text-align: left;
-	margin: 1em;
-	width: auto;
-	@include default-box-shadow(top, 2);
+.warning-info,
+.info-message {
+    position: relative;
+    min-height: 4em;
+    border: 0.2em solid rgba(0, 0, 0, 0.1);
+    background-color: rgba($colour-3, 0.333);
+    padding: 1em 1em 1em 4em;
+    @include font-family(secondary);
+    text-align: left;
+    margin: 1em;
+    width: auto;
+    @include default-box-shadow(top, 2);
 
-	@include before {
-		content: '!';
-		display: block;
-		position: absolute;
-		top: 0.5em;
-		left: 0.5em;
-		width: 1.5em;
-		height: 1.5em;
-		background-color: $black;
-		color: $white;
-		text-align: center;
-		line-height: 1.5em;
-		font-size: 1.5em;
-		background-color: $colour-3;
-		@include _(border-radius, 50%);
-		@include default-box-shadow(top, 2);
-	}
+    @include before {
+        content: '!';
+        display: block;
+        position: absolute;
+        top: 0.5em;
+        left: 0.5em;
+        width: 1.5em;
+        height: 1.5em;
+        background-color: $black;
+        color: $white;
+        text-align: center;
+        line-height: 1.5em;
+        font-size: 1.5em;
+        background-color: $colour-3;
+        @include _(border-radius, 50%);
+        @include default-box-shadow(top, 2);
+    }
 
-	&.make-room {
-		margin-bottom: 2em;
-	}
+    &.make-room {
+        margin-bottom: 2em;
+    }
+}
+
+.success-info {
+    background-color: rgba($colour-5, 0.333);
+
+    @include before {
+        background-color: $colour-5;
+    }
+}
+
+.error-info {
+    background-color: rgba($red, 0.333);
+
+    @include before {
+        background-color: $red;
+    }
+}
+
+.info-messages {
+    text-align: center;
+
+    .info-message {
+        display: inline-block;
+    }
+}
+
+.current-poster {
+    img {
+        border: 0.25em solid $colour-1;
+    }
 }
 
 .warning-info {
-	display: inline-block;
-	margin: 0;
-	vertical-align: bottom;
+    display: inline-block;
+    margin: 0;
+    vertical-align: bottom;
 }
 
 ::-webkit-resizer {
@@ -1388,3075 +1688,3323 @@ ul.warnings li,
 }
 
 @include selection {
-	background-color: rgba($colour-2, 0.75);
-	color: rgba($white, 0.75);
+    background-color: rgba($colour-2, 0.75);
+    color: rgba($white, 0.75);
 }
 
 #main-nav {
-	@include font-family(secondary);
-	overflow: hidden;
+    overflow: hidden;
+    @include font-family(secondary);
 
-	.nav {
-		position: fixed;
-		z-index: 100;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		padding: 0;
-		font-size: 6vw;
-		background-color: #FFF;
-		@include _-(display, flex);
-		@include _(box-shadow, 0 0 2em -0.5em rgba(0, 0, 0, 0.5));
+    .nav {
+        position: fixed;
+        z-index: 100;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 0;
+        font-size: 6vw;
+        background-color: #FFF;
+        @include _-(display, flex);
+        @include _(box-shadow, 0 0 2em -0.5em rgba(0, 0, 0, 0.5));
 
-		a.policy {
-			background-color: $colour-5;
-			@include _(order, 1);
-		}
+        a.policy {
+            background-color: $colour-5;
+            @include _(order, 1);
+        }
 
-		a.about {
-			background-color: $colour-3;
-			@include _(order, 1);
-		}
+        a.about {
+            background-color: $colour-3;
+            @include _(order, 1);
+        }
 
-		form, .register {
-			background-color: $colour-2;
-		}
+        a.conferences {
+            background-color: $colour-2;
+            @include _(order, 1);
+        }
 
-		a, form {
-			width: 33%;
-			@include _(flex, 1);
-		}
-		
-		a, form, button {
-			text-align: center;
-			padding: 0;
-			margin: 0;
-		}
+        form, .register {
+            background-color: $colour-2;
+        }
 
-		a, button {
-			display: inline-block;
-			font-weight: normal;
-			padding: 0.5em 0;
-			color: #FFF;
-			@include _(border-radius, 0);
-			@include _(box-shadow, inset 0 0 1.5em 0.25em rgba(0, 0, 0, 0.125));
-			@include _(text-shadow, 0 0 0.25em rgba(0,0,0,0.5));
+        a, form {
+            width: 33%;
+            @include _(flex, 1);
+        }
+        
+        a, form, button {
+            text-align: center;
+            padding: 0;
+            margin: 0;
+        }
 
-			@include after {
-				display: none;
-			}
+        a, button {
+            display: inline-block;
+            font-weight: normal;
+            padding: 0.5em 0;
+            color: #FFF;
+            @include _(border-radius, 0);
+            @include _(box-shadow, inset 0 0 1.5em 0.25em rgba(0, 0, 0, 0.125));
+            @include _(text-shadow, 0 0 0.25em rgba(0,0,0,0.5));
 
-			.title {
-				font-size: 0.8em;
-			}
-		}
+            @include after {
+                display: none;
+            }
 
-		button {
-			background-color: transparent;
-			border: 0;
-			font-size: 1em;
-			width: 100%;
-			@include _(text-stroke, 0);
+            .title {
+                font-size: 0.8em;
+            }
+        }
 
-			@include before {
-				display: none;
-			}
-		}
+        button {
+            background-color: transparent;
+            border: 0;
+            font-size: 1em;
+            width: 100%;
+            @include _(text-stroke, 0);
 
-		form {
-			display: inline;
-		}
+            @include before {
+                display: none;
+            }
+        }
 
-		.strlen-12, .strlen-13 {
-			.title {
-				font-size: 0.7em;
-			}
-		}
+        form {
+            display: inline;
+        }
 
-		.strlen-14, .strlen-15 {
-			.title {
-				font-size: 0.6333em;
-			}
-		}
+        .strlen-12, .strlen-13 {
+            .title {
+                font-size: 0.7em;
+            }
+        }
 
-		body.error-locale-not-available & {
-			display: none;
-		}
-	}
+        .strlen-14, .strlen-15 {
+            .title {
+                font-size: 0.6333em;
+            }
+        }
 
-	.logo {
-		font-size: 5em;
-	}
+        body.error-locale-not-available & {
+            display: none;
+        }
+    }
+
+    .logo {
+        font-size: 5em;
+    }
+
+    .locale-nav {
+        text-align: center;
+    }
+
+    .locales {
+        list-style: none;
+        padding: 0;
+        text-transform: uppercase;
+        line-height: 1.5em;
+        font-size: 1em;
+
+        a {
+            color: inherit;
+            padding: 0 0.333em;
+
+            &:hover {
+                @include after {
+                    display: none;
+                }
+            }
+        }
+
+        li {
+            border: 0.1em solid transparent;
+            margin-bottom: 0.25em;
+            display: inline-block;
+            
+            &.current {
+                border-color: #CCC;
+                background-color: #F8F8F8;
+            }
+
+            &:hover {
+                border-color: $light-gray;
+            }
+        }
+    }
 }
 
 .clearfix {
-	@include clearfix;
+    @include clearfix;
 }
 
 .flow-steps {
-	width: 100%;
-	list-style: none;
-	text-align: center;
-	font-size: 0.85em;
-	@include font-family(secondary);
+    width: 100%;
+    list-style: none;
+    text-align: center;
+    font-size: 0.85em;
+    @include font-family(secondary);
 
-	ul {
-		@include _-(display, flex);
-		list-style: none;
-		margin: 2em 2em 5em 0;
-		padding: 0;
-	}
+    ul {
+        @include _-(display, flex);
+        list-style: none;
+        margin: 2em 2em 5em 0;
+        padding: 0;
+    }
 
-	li {
-		position: relative;
-		@include _(flex, 1);
-		padding-top: 1.5em;
+    li {
+        position: relative;
+        @include _(flex, 1);
+        padding-top: 1.5em;
 
-		@include after {
-			content: '';
-			position: absolute;
-			top: 0;
-			left: -50%;
-			width: 100%;
-			@include _(opacity, 0.5);
-			border-top: 0.25em dashed #CCC;
-		}
+        @include after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -50%;
+            width: 100%;
+            @include _(opacity, 0.5);
+            border-top: 0.25em dashed #CCC;
+        }
 
-		&:first-child {
-			@include after {
-				left: 0;
-				width: 50%;
-			}
-		}
+        &:first-child {
+            @include after {
+                left: 0;
+                width: 50%;
+            }
+        }
 
-		&.enabled {
-			@include after {
-				border-color: $colour-1;
-				border-color: rgba($colour-1, 0.5);
-			}
+        &.enabled {
+            @include after {
+                border-color: $colour-1;
+                border-color: rgba($colour-1, 0.5);
+            }
 
-			&.post {
-				@include after {
-					border-color: $colour-1;
-					border-color: rgba($colour-5, 0.5);
-				}
-			}
-		}
+            &.post {
+                @include after {
+                    border-color: $colour-1;
+                    border-color: rgba($colour-5, 0.5);
+                }
+            }
+        }
 
-		@include before {
-			content: '';
-			position: absolute;
-			background-color: #CCC;
-			@include _(box-shadow, 0 0 0.25rem #CCC);
-			font-size: 1.3em;
-			top: -0.2em;
-			width: 0.55em;
-			height: 0.55em;
-			left: 0;
-			right: 0;
-			margin: auto;
-			z-index: 1;
-			@include _(border-radius, 50%);
-		}
+        @include before {
+            content: '';
+            position: absolute;
+            background-color: #CCC;
+            @include _(box-shadow, 0 0 0.25rem #CCC);
+            font-size: 1.3em;
+            top: -0.2em;
+            width: 0.55em;
+            height: 0.55em;
+            left: 0;
+            right: 0;
+            margin: auto;
+            z-index: 1;
+            @include _(border-radius, 50%);
+        }
 
-		&.enabled {
-			@include after {
-				border-top-style: solid;
-			}
-			
-			@include before {
-				background-color: $colour-1;
-				@include _(box-shadow, 0 0 0.25rem $colour-1);
-			}
+        &.enabled {
+            @include after {
+                border-top-style: solid;
+            }
+            
+            @include before {
+                background-color: $colour-1;
+                @include _(box-shadow, 0 0 0.25rem $colour-1);
+            }
 
-			&.post {
-				@include before {
-					background-color: $colour-5;
-					@include _(box-shadow, 0 0 0.25rem $colour-5);
-				}
-			}
+            &.post {
+                @include before {
+                    background-color: $colour-5;
+                    @include _(box-shadow, 0 0 0.25rem $colour-5);
+                }
+            }
 
-			&.current {
+            &.current {
 
-				@include before {
-					top: -0.25em;
-					font-size: 3em;
-					background-color: $white;
-					border: 0.075em solid $colour-1;
-				}
+                @include before {
+                    top: -0.25em;
+                    font-size: 3em;
+                    background-color: $white;
+                    border: 0.075em solid $colour-1;
+                }
 
-				&.post {
-					@include before {
-						border-color: $colour-5;
-					}
-				}
-			}
-		}
-	}
+                &.post {
+                    @include before {
+                        border-color: $colour-5;
+                    }
+                }
+            }
+        }
+    }
 
-	.step {
-		color: #CCC;
-		position: absolute;
-		@include _(transform-origin, 10% 60%);
-		@include _(transform, rotate(45deg));
-		text-align: left;
-		top: 0.5em;
-		left: 50%;
-		line-height: 1.2em;
-	}
+    .step {
+        color: #CCC;
+        position: absolute;
+        @include _(transform-origin, 10% 60%);
+        @include _(transform, rotate(45deg));
+        text-align: left;
+        top: 0.5em;
+        left: 50%;
+        line-height: 1.2em;
+    }
 
-	a {
-		position: static;
-		color: inherit;
-		@include _(color, 0.5);
-		@include _(transition, color 150ms ease-in-out);
+    a {
+        position: static;
+        color: inherit;
+        @include _(color, 0.5);
+        @include _(transition, color 150ms ease-in-out);
 
-		@include before {
-			content: '';
-			position: absolute;
-			top: -1em;
-			right: 0;
-			bottom: 0;
-			left: 0;
-			z-index: 1;
-		}
+        @include before {
+            content: '';
+            position: absolute;
+            top: -1em;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 1;
+        }
 
-		@include after {
-			display: none;
-		}
-	}
+        @include after {
+            display: none;
+        }
+    }
 
-	.current .step {
-		//top: 1.5em;
-		@include _(transform-origin, 10% 100%);
-	}
+    .current .step {
+        //top: 1.5em;
+        @include _(transform-origin, 10% 100%);
+    }
 
-	.current .step,
-	a:hover,
-	a:focus {
-		color: $black;
-	}
+    .current .step,
+    a:hover,
+    a:focus {
+        color: $black;
+    }
 }
 
 .link-dump {
-	a {
-		margin: 0.25em;
-	}
+    a {
+        margin: 0.25em;
+    }
 }
 
 #main article #registration-admin-menu {
-	margin: 1em 0 0;
-	padding: 0;
-	list-style: none;
+    margin: 1em 0 0;
+    padding: 0;
+    list-style: none;
 
-	a {
-		display: block;
-		padding: 0.5em 0.75em;
-		border: 0.1rem solid #EEE;
-		border-top: 0;
-		border-right: 0;
+    a {
+        display: block;
+        padding: 0.5em 0.75em;
+        border: 0.1rem solid $light-gray;
+        border-top: 0;
+        border-right: 0;
 
-		@include after {
-			display: none;
-		}
+        @include after {
+            display: none;
+        }
 
-		&:hover {
-			background-color: #EEE;
-		}
-	}
+        &:hover {
+            background-color: $light-gray;
+        }
+    }
 
-	li {
-		margin: 0;
+    li {
+        margin: 0;
 
-		&.current {
-			a {
-				color: $white;
-				background-color: $colour-5;
-			}
-		}
-	}
+        &.current {
+            a {
+                color: $white;
+                background-color: $colour-5;
+            }
+        }
+    }
 }
 
 .data-set {
-	display: table-row;
+    display: table-row;
 }
 
 .data-set-key, .data-set-value {
-	display: table-cell;
-	padding: 0.25em 0.5em;
-	vertical-align: top;
-	border-bottom: 0.1rem solid #EEE;
+    display: table-cell;
+    padding: 0.25em 0.5em;
+    vertical-align: top;
+    border-bottom: 0.1rem solid $light-gray;
 }
 
 .data-set-key {
-	font-size: 1em;
-	width: 1rem;
-	white-space: nowrap;
+    font-size: 1em;
+    width: 1rem;
+    white-space: nowrap;
 }
 
 .data-set:last-child {
-	.data-set-key, .data-set-value {
-		border: 0;
-	}
+    .data-set-key, .data-set-value {
+        border: 0;
+    }
 }
 
 .details {
-	display: table;
-	width: 100%;
+    display: table;
+    width: 100%;
 
-	&.inline {
-		width: auto;
-	}
+    &.inline {
+        width: auto;
+    }
 }
 
 .space, .address {
-	.data-set-key, .data-set-value {
-		white-space: nowrap;
-	}
+    .data-set-key, .data-set-value {
+        white-space: nowrap;
+    }
 }
 
 .admin-blocks {
-	@include _-(display, inline-flex);
-	@include _(flex-wrap, wrap);
-	@include _(align-items, flex-start);
-	@include _(justify-content, flex-start);
-	list-style: none;
-	padding: 0;
+    @include _-(display, inline-flex);
+    @include _(flex-wrap, wrap);
+    @include _(align-items, flex-start);
+    @include _(justify-content, flex-start);
+    list-style: none;
+    padding: 0;
 
-	> li {
-		max-width: 25em;
-		border: 0.1rem solid #EEE;
-		padding: 1em;
-		margin: 0.25em;
-		@include _(flex, 1);
-		background-color: #F8F8F8;
-		@include default-box-shadow(top, 2);
-	}
+    > li {
+        max-width: 25em;
+        border: 0.1rem solid $light-gray;
+        padding: 1em;
+        margin: 0.25em;
+        @include _(flex, 1);
+        background-color: #F8F8F8;
+        @include default-box-shadow(top, 2);
+    }
 
-	.actions {
-		margin: 0 auto;
-	}
+    .actions {
+        margin: 0 auto;
+    }
 
-	.title {
-		margin: 0 0 1em;
-		padding: 0 0 0.5em;
-		border-bottom: 0.1rem solid #EEE;
-	}
+    .title {
+        margin: 0 0 1em;
+        padding: 0 0 0.5em;
+        border-bottom: 0.1rem solid $light-gray;
+    }
 
-	.amenities {
-		list-style: none;
-		padding: 0;
+    .amenities {
+        list-style: none;
+        padding: 0;
 
-		> li {
-			font-weight: bold;
-			white-space: nowrap;
-			display: inline-block;
-			padding: 0 0.5em;
-			line-height: 1.5em;
-			font-size: 0.8em;
-			border: 0.1rem solid #CCC;
-			background-color: #EEE;
-			@include _(border-radius, 0.125rem);
-		}
-	}
+        > li {
+            font-weight: bold;
+            white-space: nowrap;
+            display: inline-block;
+            padding: 0 0.5em;
+            line-height: 1.5em;
+            font-size: 0.8em;
+            border: 0.1rem solid #CCC;
+            background-color: $light-gray;
+            @include _(border-radius, 0.125rem);
+        }
+    }
 }
 
 #admin-housing, #admin-schedule {
-	.guests-housed {
-		margin-bottom: 1em;
-		text-align: right;
+    .guests-housed {
+        margin-bottom: 1em;
+        text-align: right;
 
-		h5 {
-			display: inline-block;
-			margin: 0;
-			padding-right: 0.5em;
-		}
+        h5 {
+            display: inline-block;
+            margin: 0;
+            padding-right: 0.5em;
+        }
 
-		.data {
-			display: inline-block;
-			font-size: 1.125em;
-		}
-	}
+        .data {
+            display: inline-block;
+            font-size: 1.125em;
+        }
+    }
 
-	#housing-table {
-		@include _(transition, opacity 1s ease-in-out);
+    #housing-table {
+        @include _(transition, opacity 1s ease-in-out);
 
-		&.loading {
-			@include _(opacity, 0.5);
-			pointer-events: none;
-		}
+        &.loading {
+            @include _(opacity, 0.5);
+            pointer-events: none;
+        }
 
-		tr.host {
-			th {
-				vertical-align: top;
-			}
+        tr.host {
+            th {
+                vertical-align: top;
+            }
 
-			.address {
-				margin-top: 1em;
-				text-align: right;
-				@include font-family(primary);
-			}
-		}
-	}
+            .address {
+                margin-top: 1em;
+                text-align: right;
+                @include font-family(primary);
+            }
+        }
+    }
 
-	.host-table {
-		tr.place-guest {
-			td {
-				background-color: lighten($colour-1, 40%);
+    .host-table {
+        tr.place-guest {
+            td {
+                background-color: lighten($colour-1, 40%);
 
-				&:hover {
-					background-color: $colour-1;
-				}
+                &:hover {
+                    background-color: $colour-1;
+                }
 
-				&.full {
-					background-color: #E8E8E8;
+                &.full {
+                    background-color: $gray;
 
-					&:hover {
-						background-color: #CCC;
-					}					
-				}
-			}
+                    &:hover {
+                        background-color: #CCC;
+                    }                   
+                }
+            }
 
-			a {
-				display: block;
-				color: $white;
-				text-align: center;
-				@include font-family(secondary);
+            a {
+                display: block;
+                color: $white;
+                text-align: center;
+                @include font-family(secondary);
 
-				@include after {
-					display: none;
-				}
-			}
-		}
+                @include after {
+                    display: none;
+                }
+            }
+        }
 
-		.remove-guest,
-		button, .button {
-			float: right;
-		}
+        .remove-guest,
+        button, .button {
+            float: right;
+        }
 
-		td {
-			vertical-align: top;
-		}
+        td {
+            vertical-align: top;
+        }
 
-		.state {
-			position: relative;
-			font-family: inherit;
+        .state {
+            position: relative;
+            font-family: inherit;
 
-			&.unhappy {
-				cursor: pointer;
-			}
+            &.unhappy {
+                cursor: pointer;
+            }
 
-			ul {
-				display: none;
-				position: absolute;
-				right: 100%;
-				top: 0;
-				background-color: $white;
-				border: 0.1em solid #CCC;
-				padding: 0.25em 0.75em 0.25em 1.5em;
-				margin: 0;
-				list-style-type: square;
-				@include default-box-shadow(top, 2);
-				z-index: 10;
-			}
+            ul {
+                display: none;
+                position: absolute;
+                right: 100%;
+                top: 0;
+                background-color: $white;
+                border: 0.1em solid #CCC;
+                padding: 0.25em 0.75em 0.25em 1.5em;
+                margin: 0;
+                list-style-type: square;
+                @include default-box-shadow(top, 2);
+                z-index: 10;
+            }
 
-			li {
-				white-space: nowrap;
-				margin: 0;
-			}
+            li {
+                white-space: nowrap;
+                margin: 0;
+            }
 
-			&:hover {
-				ul {
-					display: block;
-				}			
-			}
-		}
-	}
+            &:hover {
+                ul {
+                    display: block;
+                }           
+            }
+        }
+    }
 
-	#workshop-selector {
-		td, th {
-			white-space: nowrap;
-		}
+    #workshop-selector {
+        td, th {
+            white-space: nowrap;
+        }
 
-		td .text {
-			max-width: 50em;
-			overflow: hidden;
-			text-overflow: ellipsis;
-		}
-	}
+        td .text {
+            max-width: 50em;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
 
-	#guest-selector, #workshop-selector {
-		display: none;
-		position: fixed;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		background-color: rgba($black, 0.5);
-		cursor: pointer;
-		z-index: 1000;
+    #guest-selector, #workshop-selector {
+        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: rgba($black, 0.5);
+        cursor: pointer;
+        z-index: 1000;
 
-		&.open {
-			display: block;
-		}
+        &.open {
+            display: block;
+        }
 
-		.guest-dlg, .workshop-dlg {
-			position: absolute;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			left: 0;
-			background-color: $white;
-			width: 80%;
-			margin: auto;
-			padding: 1em;
-			height: 80%;
-			cursor: default;
-			@include default-box-shadow(top, 2);
+        .guest-dlg, .workshop-dlg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: $white;
+            width: 80%;
+            margin: auto;
+            padding: 1em;
+            height: 80%;
+            cursor: default;
+            @include default-box-shadow(top, 2);
 
-			h3 {
-				margin: 0 0 1em;
-			}
-		}
-	}
+            h3 {
+                margin: 0 0 1em;
+            }
+        }
+    }
 }
 
 @include keyframes(whiten) {
-	to { background-color: $white; }
+    to { background-color: $white; }
 }
 
 #table {
-	position: relative;
-	overflow: auto;
-	height: 80%;
-	height: calc(100% - 4em);
-	background-color: $white;
-	@include _(transition, background-color 250ms ease-in-out);
+    position: relative;
+    overflow: auto;
+    height: 80%;
+    height: calc(100% - 4em);
+    background-color: $white;
+    @include _(transition, background-color 250ms ease-in-out);
 
-	&.loading {
-		background-color: #CCC;
-		@include _(animation, whiten ease-in-out 1s infinite alternate both);
+    &.loading {
+        background-color: #CCC;
+        @include _(animation, whiten ease-in-out 1s infinite alternate both);
 
-		.host-field, table, .legend {
-			display: none;
-		}
-	}
+        .host-field, table, .legend {
+            display: none;
+        }
+    }
 
-	table {
-		margin: 0 0 2em;
-	}
+    table {
+        margin: 0 0 2em;
+    }
 
-	h4 {
-		margin: 0;
+    h4 {
+        margin: 0;
 
-		&.inline {
-			display: inline-block;
-			padding-right: 0.5em;
-		}
-	}
+        &.inline {
+            display: inline-block;
+            padding-right: 0.5em;
+        }
+    }
 
-	.plain-value {
-		font-size: 1.2em;
-	}
+    .plain-value {
+        font-size: 1.2em;
+    }
 
-	blockquote {
-		margin-top: 0;
-		font-size: 0.85em;
+    blockquote {
+        margin-top: 0;
+        font-size: 0.85em;
 
-		> :first-child {
-			margin-top: 0;
-		}
-	}
+        > :first-child {
+            margin-top: 0;
+        }
+    }
 
-	tr.selectable {
-		cursor: pointer;
+    tr.selectable {
+        cursor: pointer;
 
-		&:hover {
-			th {
-				background-color: $colour-2;
-			}
-		}
+        &:hover {
+            th {
+                background-color: $colour-2;
+            }
+        }
 
-		&.other-host, &.other-space, &.bad-match {
-			td, th {
-				opacity: 0.5;
-			}
-		}
+        &.other-host, &.other-space, &.bad-match {
+            td, th {
+                opacity: 0.5;
+            }
+        }
 
-		&.selected-space, &.other-space {
-			td {
-				background-color: lighten($colour-5, 35);
-			}
+        &.selected-space, &.other-space {
+            td {
+                background-color: lighten($colour-5, 35);
+            }
 
-			th {
-				background-color: $colour-5;
-			}
-		}
+            th {
+                background-color: $colour-5;
+            }
+        }
 
-		&.other-host {
-			td {
-				background-color: lighten($colour-1, 40%);
-			}
+        &.other-host {
+            td {
+                background-color: lighten($colour-1, 40%);
+            }
 
-			th {
-				background-color: $colour-1;
-			}
-		}
+            th {
+                background-color: $colour-1;
+            }
+        }
 
-		&:hover {
-			td {
-				opacity: 1;
-				background-color: lighten($colour-2, 25%);
-			}
-		}
-	}
+        &:hover {
+            td {
+                opacity: 1;
+                background-color: lighten($colour-2, 25%);
+            }
+        }
+    }
 
-	.legend ul {
-		@include _-(display, flex);
-		list-style: none;
-		padding: 0;
+    .legend ul {
+        @include _-(display, flex);
+        list-style: none;
+        padding: 0;
 
-		li {
-			@include _(flex, 1);
-			text-align: center;
-			margin-bottom: 0.5em;
-			padding: 0.125em 0.5em;
-			margin: 0.1em;
-			border: 0.1em solid #EEE;
-			background-color: #F8F8F8;
-			@include font-family(secondary);
+        li {
+            @include _(flex, 1);
+            text-align: center;
+            margin-bottom: 0.5em;
+            padding: 0.125em 0.5em;
+            margin: 0.1em;
+            border: 0.1em solid $light-gray;
+            background-color: #F8F8F8;
+            @include font-family(secondary);
 
-			&.other-host, &.other-space, &.bad-match {
-				opacity: 0.5;
-			}
+            &.other-host, &.other-space, &.bad-match {
+                opacity: 0.5;
+            }
 
-			&.selected-space, &.other-space {
-				background-color: $colour-5;
-			}
+            &.selected-space, &.other-space {
+                background-color: $colour-5;
+            }
 
-			&.other-host {
-				background-color: $colour-1;
-			}
-		}
-	}
+            &.other-host {
+                background-color: $colour-1;
+            }
+        }
+    }
 
-	.p {
-		max-height: 4em;
-		overflow: auto;
-	}
+    .p {
+        max-height: 4em;
+        overflow: auto;
+    }
 }
 
 #admin-housing {
-	#table table {
-		min-width: 100em;
-	}
+    #table table {
+        min-width: 100em;
+    }
 
-	#hosts {
-		background-color: $white;
+    #hosts {
+        background-color: $white;
 
-		ul {
-			list-style: none;
-			padding: 0;
-		}
+        ul {
+            list-style: none;
+            padding: 0;
+        }
 
-		.host {
-			padding: 0.5em;
-			border: 0.1em solid #EEE;
-			background-color: #F8F8F8;
+        .host {
+            padding: 0.5em;
+            border: 0.1em solid $light-gray;
+            background-color: #F8F8F8;
 
-			&.status-good {
-				background-color: rgba($colour-5, 0.1);
-			}
+            &.status-good {
+                background-color: rgba($colour-5, 0.1);
+            }
 
-			&.status-warning {
-				background-color: rgba($colour-3, 0.1);
-			}
+            &.status-warning {
+                background-color: rgba($colour-3, 0.1);
+            }
 
-			&.status-error {
-				background-color: rgba($colour-2, 0.1);
-			}
-		}
+            &.status-error {
+                background-color: rgba($colour-2, 0.1);
+            }
+        }
 
-		h4 {
-			margin: 0 0.5em 0 0;
-			float: left;
-		}
+        h4 {
+            margin: 0 0.5em 0 0;
+            float: left;
+        }
 
-		h5 {
-			margin: 1em 0 0;
-		}
+        h5 {
+            margin: 1em 0 0;
+        }
 
-		.email {
-			color: #888;
+        .email {
+            color: #888;
 
-			@include before {
-				content: '(';
-			}
+            @include before {
+                content: '(';
+            }
 
-			@include after {
-				content: ')';
-			}
-		}
+            @include after {
+                content: ')';
+            }
+        }
 
-		.guests {
-			clear: left;
-			@include _-(display, flex);
-		}
+        .guests {
+            clear: left;
+            @include _-(display, flex);
+        }
 
-		.space {
-			@include _(flex, 1);
-		}
+        .space {
+            @include _(flex, 1);
+        }
 
-		.place-guest {
-			background-color: $colour-5;
-			
-			&.booked {
-				background-color: $colour-4;
-			}
-			
-			&.unwanted {
-				background-color: #888;
-			}
-			
-			&.overbooked {
-				background-color: $colour-2;
-			}
-		}
+        .place-guest {
+            background-color: $colour-5;
+            
+            &.booked {
+                background-color: $colour-4;
+            }
+            
+            &.unwanted {
+                background-color: #888;
+            }
+            
+            &.overbooked {
+                background-color: $colour-2;
+            }
+        }
 
-		.warning, .error {
-			display: inline-block;
-			font-style: italic;
-			padding: 0 0.5em;
-			margin-left: 0.5em;
-			border: 0.1em solid rgba($black, 0.25);
-			@include _(border-radius, 0.125em);
-			@include _(transform, skewX(-15deg));
-			@include _(transform-origin, 0 100%);
-			@include _(animation, bend ease-in-out 500ms infinite alternate both);
-		}
+        .warning, .error {
+            display: inline-block;
+            font-style: italic;
+            padding: 0 0.5em;
+            margin-left: 0.5em;
+            border: 0.1em solid rgba($black, 0.25);
+            @include _(border-radius, 0.125em);
+            @include _(transform, skewX(-15deg));
+            @include _(transform-origin, 0 100%);
+            @include _(animation, bend ease-in-out 500ms infinite alternate both);
+        }
 
-		.warning {
-			background-color: lighten($colour-3, 25%);
-		}
+        .warning {
+            background-color: lighten($colour-3, 25%);
+        }
 
-		.error {
-			background-color: lighten($colour-2, 25%);
-		}
-	}
+        .error {
+            background-color: lighten($colour-2, 25%);
+        }
+    }
 
-	#guests {
-		.guests {
-			@include _-(display, flex);
-			//@include _(align-items, flex-start);
-			@include _(flex-wrap, wrap);
-			list-style: none;
-			padding: 0;
-		}
+    #guests {
+        .guests {
+            @include _-(display, flex);
+            //@include _(align-items, flex-start);
+            @include _(flex-wrap, wrap);
+            list-style: none;
+            padding: 0;
+        }
 
-		.guest {
-			flex: 1;
-			margin: 0.5em;
-			border: 0.1rem solid #EEE;
-			background-color: #F8F8F8;
-			padding: 0.5em;
-		}
-		
-		h4 {
-			margin: 0 0 0.5em;
-		}
+        .guest {
+            flex: 1;
+            margin: 0.5em;
+            border: 0.1rem solid $light-gray;
+            background-color: #F8F8F8;
+            padding: 0.5em;
+        }
+        
+        h4 {
+            margin: 0 0 0.5em;
+        }
 
-		.set-host {
-			width: 100%;
-		}
-	}
+        .set-host {
+            width: 100%;
+        }
+    }
 }
 
 #admin-workshop_times {
-	.workshop-blocks {
-		td, th {
-			vertical-align: top;
-		}
-	}
+    .workshop-blocks {
+        margin: 0 auto;
 
-	.table-tr.new {
-		.table-th {
-			background-color: transparent;
-			border: 0;
-		}
+        td, th {
+            vertical-align: top;
+        }
+    }
 
-		.table-td {
-			background-color: transparent;
-			border: 0;
-		}
-	}
+    .table-tr.new {
+        .table-th {
+            background-color: transparent;
+            border: 0;
+        }
+
+        .table-td {
+            background-color: transparent;
+            border: 0;
+        }
+    }
 }
 
 .details.org-members {
-	padding: 1em;
-	border: 0.1rem solid #EEE;
-	border-bottom: 0;
+    padding: 1em;
+    border: 0.1rem solid $light-gray;
+    border-bottom: 0;
 }
 
 #schedule-preview {
-	overflow: auto;
+    overflow: auto;
 }
 
 table.schedule {
-	width: 100%;
-	margin: 0 0 1em;
+    width: 100%;
+    margin: 0 0 1em;
 
-	tbody {
-		border: 0.1rem solid #EEE;
-	}
+    tbody {
+        border: 0.1rem solid $light-gray;
+    }
 
-	&.locations-1 td.workshop.filled {
-		width: 100%;
-	}
+    &.locations-1 td.workshop.filled {
+        width: 100%;
+    }
 
-	&.locations-2 td.workshop.filled {
-		width: 50%;
-	}
+    &.locations-2 td.workshop.filled {
+        width: 50%;
+    }
 
-	&.locations-3 td.workshop.filled {
-		width: 33.333%;
-	}
+    &.locations-3 td.workshop.filled {
+        width: 33.333%;
+    }
 
-	&.locations-4 td.workshop.filled {
-		width: 25%;
-	}
+    &.locations-4 td.workshop.filled {
+        width: 25%;
+    }
 
-	&.locations-5 td.workshop.filled {
-		width: 20%;
-	}
+    &.locations-5 td.workshop.filled {
+        width: 20%;
+    }
 
-	&.locations-6 td.workshop.filled {
-		width: 16.66667%;
-	}
-	td {
-		text-align: center;
-		border: 0;
-		background-color: #F8F8F8;
+    &.locations-6 td.workshop.filled {
+        width: 16.66667%;
+    }
+    td {
+        text-align: center;
+        border: 0;
+        background-color: #F8F8F8;
 
-		&.workshop {
+        &.workshop {
 
-			&.filled {
-				background-color: lighten($colour-1, 25%);
-				border: 0.1rem solid #EEE;
-			}
+            &.filled {
+                background-color: lighten($colour-1, 25%);
+                border: 0.1rem solid $light-gray;
+            }
 
-			&.open {
-				#admin-schedule & {
-					background-color: lighten($colour-1, 40%);
-					cursor: pointer;
-					white-space: nowrap;
-					border: 0.1rem solid #EEE;
+            &.open {
+                #admin-schedule & {
+                    background-color: lighten($colour-1, 40%);
+                    cursor: pointer;
+                    white-space: nowrap;
+                    border: 0.1rem solid $light-gray;
 
-					&:hover {
-						background-color: lighten($colour-1, 25%);
-					}
-				}
-			}
-		}
+                    &:hover {
+                        background-color: lighten($colour-1, 25%);
+                    }
+                }
+            }
+        }
 
-		&.event {
-			background-color: lighten($colour-2, 25%);
-			border: 0.1rem solid #EEE;
-		}
+        &.event {
+            background-color: lighten($colour-2, 25%);
+            border: 0.1rem solid $light-gray;
+        }
 
-		&.meal {
-			background-color: lighten($colour-3, 25%);
-			border: 0.1rem solid #EEE;
-		}
+        &.meal {
+            background-color: lighten($colour-3, 25%);
+            border: 0.1rem solid $light-gray;
+        }
 
-		.title {
-			@include font-family(secondary);
-		}
+        .title {
+            @include font-family(secondary);
+        }
 
-		.event-detail-link {
-			display: inline-block;
-			display: inline-flex;
-			position: relative;
-			height: 100%;
-			width: 100%;
-			color: inherit;
-			align-items: center;
+        .event-detail-link {
+            display: inline-block;
+            display: inline-flex;
+            position: relative;
+            height: 100%;
+            width: 100%;
+            color: inherit;
+            align-items: center;
 
-			@include after {
-				display: none;
-			}
+            @include after {
+                display: none;
+            }
 
-			.details {
-				flex: 1;
-			}
-		}
+            .details {
+                flex: 1;
+            }
+        }
 
-		.status {
-			display: inline-block;
-			text-align: left;
-			float: right;
-			font-size: 0.9em;
-			margin-top: 0.5em;
-		}
+        .status {
+            display: inline-block;
+            text-align: left;
+            float: right;
+            font-size: 0.9em;
+            margin-top: 0.5em;
+        }
 
-		.conflict-score {
-			text-align: right;
+        .conflict-score {
+            text-align: right;
 
-			.title {
-				@include font-family(secondary);
-			}
-		}
+            .title {
+                @include font-family(secondary);
+            }
+        }
 
-		.errors {
-			position: relative;
-			border-top: 0.1rem solid #666;
-			margin-top: 0.5em;
-			padding-top: 0.25em;
+        .errors {
+            position: relative;
+            border-top: 0.1rem solid #666;
+            margin-top: 0.5em;
+            padding-top: 0.25em;
 
-			@include before {
-				content: '!';
-				display: inline-block;
-				position: absolute;
-				z-index: 1;
-				top: 0;
-				left: -1.2em;
-				width: 1em;
-				color: $white;
-				@include font-family(secondary);
-			}
+            @include before {
+                content: '!';
+                display: inline-block;
+                position: absolute;
+                z-index: 1;
+                top: 0;
+                left: -1.2em;
+                width: 1em;
+                color: $white;
+                @include font-family(secondary);
+            }
 
-			@include after {
-				content: '';
-				position: absolute;
-				top: 0.1em;
-				left: -1.333em;
-				width: 0;
-				height: 0;
-				font-size: 1.25em;
-				border: 0.5em solid;
-				border-left-color: transparent;
-				border-right-color: transparent;
-				border-width: 0 0.5em 0.75em;
-				color: darken($colour-2, 25%);
-			}
-		}
+            @include after {
+                content: '';
+                position: absolute;
+                top: 0.1em;
+                left: -1.333em;
+                width: 0;
+                height: 0;
+                font-size: 1.25em;
+                border: 0.5em solid;
+                border-left-color: transparent;
+                border-right-color: transparent;
+                border-width: 0 0.5em 0.75em;
+                color: darken($colour-2, 25%);
+            }
+        }
 
-		#main .columns & form {
-			margin-top: 0;
-			
-			button {
-				margin-top: 0.5em;
-				float: left;
-				z-index: 1;
-			}
-		}
-	}
+        #main .columns & form {
+            margin-top: 0;
+            
+            button {
+                margin-top: 0.5em;
+                float: left;
+                z-index: 1;
+            }
+        }
+    }
 }
 
 body.home table.schedule td .event-detail-link:hover {
-	outline: 0.33rem solid #02CA9E;
-	outline-offset: 0.25rem;
-	z-index: 1;
+    outline: 0.33rem solid #02CA9E;
+    outline-offset: 0.25rem;
+    z-index: 1;
 }
 
 .event-dlg {
-	@include _-(flex, 0);
-	position: relative;
-	z-index: 1000;
-	background-color: $white;
-	text-align: left;
-	padding: 2em 2em 0.5em;
-	min-width: 100%;
-	max-height: 100%;
-	overflow: auto;
-	margin: auto;
-	@include _(opacity, 0);
-	@include _(transition, opacity 150ms ease-in-out);
-	@include default-box-shadow(top, 2);
+    @include _-(flex, 0);
+    position: relative;
+    z-index: 1000;
+    background-color: $white;
+    text-align: left;
+    padding: 2em 2em 0.5em;
+    min-width: 100%;
+    max-height: 100%;
+    overflow: auto;
+    margin: auto;
+    @include _(opacity, 0);
+    @include _(transition, opacity 150ms ease-in-out);
+    @include default-box-shadow(top, 2);
 
-	.actions {
-		margin: 2em 0 0;
-	}
+    .actions {
+        margin: 2em 0 0;
+    }
 
-	&.open {
-		@include _(opacity, 1);
-	}
+    &.open {
+        @include _(opacity, 1);
+    }
 }
 
 .event-details {
-	.title {
-		margin: 0 0 0.5em;
-	}
+    .title {
+        margin: 0 0 0.5em;
+    }
 
-	.address {
-		text-align: center;
-	}
+    .address {
+        text-align: center;
+    }
 }
 
 #admin-schedule {
-	.workshops-to-schedule {
-		@include _-(display, flex);
-		@include _(flex-wrap, wrap);
-		list-style: none;
-		padding: 0;
+    .workshops-to-schedule {
+        @include _-(display, flex);
+        @include _(flex-wrap, wrap);
+        list-style: none;
+        padding: 0;
 
-		li {
-			@include _(flex, 1);
-			@include _(flex-basis, 48%);
-			margin: 1%;
-			@include _(transition, background-color 250ms ease-in-out);
-			background-color: #EEE;
+        li {
+            @include _(flex, 1);
+            @include _(flex-basis, 48%);
+            margin: 1%;
+            @include _(transition, background-color 250ms ease-in-out);
+            background-color: $light-gray;
 
-			.title {
-				@include _(transition, background-color 250ms ease-in-out);
-			}
+            .title {
+                @include _(transition, background-color 250ms ease-in-out);
+            }
 
-			&.booked {
-				background-color: lighten($colour-1, 40%);
+            &.booked {
+                background-color: lighten($colour-1, 40%);
 
-				.not-booked-only {
-					display: none;
-				}
+                .not-booked-only {
+                    display: none;
+                }
 
-				.data-set-key, .data-set-value {
-					border-bottom-color: #888;
-				}
-			}
+                .data-set-key, .data-set-value {
+                    border-bottom-color: #888;
+                }
+            }
 
-			&.not-booked {
+            &.not-booked {
 
-				.booked-only {
-					display: none;
-				}
-			}
+                .booked-only {
+                    display: none;
+                }
+            }
 
-			.field-error {
-				background-color: lighten($colour-2, 22.5%);
-				margin: 0;
-			}
+            .field-error {
+                background-color: lighten($colour-2, 22.5%);
+                margin: 0;
+            }
 
-			.already-booked {
-				overflow: hidden;
-				max-height: 0;
+            .already-booked {
+                overflow: hidden;
+                max-height: 0;
 
-				&.is-true {
-					max-height: 3em;
-					@include _(transition, max-height 150ms ease-in-out);
-				}
-			}
+                &.is-true {
+                    max-height: 3em;
+                    @include _(transition, max-height 150ms ease-in-out);
+                }
+            }
 
-			.workshop-description {
-				max-height: none;
-			}
+            .workshop-description {
+                max-height: none;
+            }
 
-			.details {
-				margin: 0 5% 1em;
-				width: 90%;
-			}
+            .details {
+                margin: 0 5% 1em;
+                width: 90%;
+            }
 
-			.title {
-				margin: 0 0 0.5em;
-				padding: 0.5em;
-				background-color: $black;
-				color: $white;
-			}
+            .title {
+                margin: 0 0 0.5em;
+                padding: 0.5em;
+                background-color: $black;
+                color: $white;
+            }
 
-			.drop-downs {
-				padding: 0 1em 1em;
+            .drop-downs {
+                padding: 0 1em 1em;
 
-				select {
-					width: 100%;
-				}
-			}
+                select {
+                    width: 100%;
+                }
+            }
 
-			.actions {
-				margin: 0;
-				padding: 0 0.5em;
-			}
-		}
+            .actions {
+                margin: 0;
+                padding: 0 0.5em;
+            }
+        }
 
-		#main .columns & form {
-			margin: 0;
-		}
-	}
+        #main .columns & form {
+            margin: 0;
+        }
+    }
 }
 
 #main {
-	position: relative;
-	background-color: $white;
-	padding-bottom: rems(2);
-	@include _(flex, 1);
+    position: relative;
+    background-color: $white;
+    padding-bottom: rems(2);
+    @include _(flex, 1);
 
-	article {
-		padding: rems(2.5) 0;
-		margin: 0 1em;
+    article {
+        padding: rems(2.5) 0;
+        margin: 0 1em;
 
-		&.supplementary {
-			margin: rems(1) 7.5%;
-			overflow: hidden;
-			@include _(border-radius, 0.33em);
-			border: 0.1rem solid #DDD;
-			background-color: #F7F7F7;
-			@include default-box-shadow(top, 2);
-		}
+        &.supplementary {
+            margin: rems(1) 7.5%;
+            overflow: hidden;
+            @include _(border-radius, 0.33em);
+            border: 0.1rem solid #DDD;
+            background-color: #F7F7F7;
+            @include default-box-shadow(top, 2);
+        }
 
-		ul {
-			font-size: 1.125em;
-			line-height: 1.5em;
-		}
+        ul {
+            font-size: 1.125em;
+            line-height: 1.5em;
+        }
 
-		li {
-			margin-bottom: 0.5em;
-		}
-	}
+        li {
+            margin-bottom: 0.5em;
+        }
+    }
 
-	.featured-image-container {
-		@include _-(display, flex);
-		@include _(flex-wrap, wrap);
+    .featured-image-container {
+        @include _-(display, flex);
+        @include _(flex-wrap, wrap);
 
-		figure {
-			@include _(order, 1);
-			width: 100%;
-			height: 12em;
-			margin: 0;
-			background-size: cover;
-			background-position: center;
-			background-repeat: no-repeat;
-		}
-		
-		ul {
-			clear: left;
-		}
-	}
+        figure {
+            @include _(order, 1);
+            width: 100%;
+            height: 12em;
+            margin: 0;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
+        ul {
+            clear: left;
+        }
+    }
 }
 
 a.logo {
-	display: inline-block;
-	font-size: rems(5);
-	text-decoration: none;
-	padding: 0.1em;
-	border: 0;
-	float: left;
-	overflow: auto;
-	@include clearfix;
+    display: inline-block;
+    font-size: rems(5);
+    text-decoration: none;
+    padding: 0.1em;
+    border: 0;
+    float: left;
+    overflow: auto;
+    @include clearfix;
 
-	&:hover,
-	&:active,
-	&:focus {
-		@include after {
-			display: none;
-		}
-	}
+    &:hover,
+    &:active,
+    &:focus {
+        @include after {
+            display: none;
+        }
+    }
 }
 
 @if capable_of(svg) {
 
-	@include keyframes(active-logo) {
-		0% { fill: $colour-1; }
-		15% { fill: $colour-5; }
-		30% { fill: $colour-3; }
-		45% { fill: $colour-4; }
-		60% { fill: $colour-2; }
-	}
+    @include keyframes(active-logo) {
+        0% { fill: $colour-1; }
+        15% { fill: $colour-5; }
+        30% { fill: $colour-3; }
+        45% { fill: $colour-4; }
+        60% { fill: $colour-2; }
+    }
 
-	@include keyframes(banner-load) {
-		0% { fill: #888; }
-	}
+    @include keyframes(banner-load) {
+        0% { fill: #888; }
+    }
 
-	svg.bb-icon-logo {
-		fill: $colour-1;
-	}
-	svg.bb-icon-logo-text {
-		fill: $black;
-	}
+    svg.bb-icon-logo {
+        fill: $colour-1;
+    }
+    svg.bb-icon-logo-text {
+        fill: $black;
+    }
 
-	.logo:hover svg.bb-icon-logo {
-		@include _(animation, active-logo 4s infinite);
-	}
+    .logo:hover svg.bb-icon-logo {
+        @include _(animation, active-logo 4s infinite);
+    }
 }
 
 .logo .icons {
-	display: inline-block;
-	height: 1em;
-	width: 1em;
-	float: left;
+    display: inline-block;
+    height: 1em;
+    width: 1em;
+    float: left;
 }
 
 #banner {
-	clear: left;
-	float: none;
-	margin: 1em auto 0;
-	text-align: center;
+    clear: left;
+    float: none;
+    margin: 1em auto 0;
+    text-align: center;
 
-	body.home & {
-		max-width: 40em;
-	}
+    figure {
+        position: relative;
+        width: 100%;
+        max-width: rems(60);
+        margin: 0;
+    }
 
-	figure {
-		position: relative;
-		width: 100%;
-		max-width: rems(60);
-		margin: 0;
-	}
+    img {
+        width: 100%;
+    }
+}
 
-	img {
-		width: 100%;
-	}
+.conference-banner {
+    text-align: center;
 
-	.title {
-		font-size: 5vw;
-		margin: 1em auto 2em;
+    .title {
+        font-size: 5vw;
+        margin: 1em auto 2em;
 
-		h1, h2 {
-			margin: 0;
-		}
+        h1, h2 {
+            margin: 0;
+        }
 
-		h2 {
-			font-size: 1.15em;
-		}
-	}
+        h2 {
+            font-size: 1.15em;
+        }
+    }
 
-	.secondary {
-		font-size: 0.85em;
-		line-height: 2em;
-	}
+    .secondary {
+        font-size: 0.85em;
+        line-height: 2em;
+    }
+}
+
+.conference-details {
+    .links {
+        text-align: center;
+        font-size: 1.25em;
+        margin-bottom: 2em;
+
+        .button {
+            margin: 0 0.25em;
+        }
+    }
 }
 
 $header-tilt: 8deg;
 
 #header-title {
-	font-size: 2.25vw;
-	background-size: cover;
-	background-position: 50% 20%;
-	background-repeat: no-repeat;
-	background-color: $colour-1;
-	color: #EEE;
-	overflow: hidden;
-	position: relative;
-	z-index: $zindex-base;
+    font-size: 2.25vw;
+    background-size: cover;
+    background-position: 50% 20%;
+    background-repeat: no-repeat;
+    background-color: $colour-1;
+    color: $light-gray;
+    overflow: hidden;
+    position: relative;
+    z-index: $zindex-base;
 
-	.row, .columns {
-		position: static;
-	}
+    .row, .columns {
+        position: static;
+    }
 
-	rect {
-		fill: $colour-1;
-	}
+    rect {
+        fill: $colour-1;
+    }
 
-	svg {
-		.colour-1 { fill: $colour-1; }
-		.colour-2 { fill: $colour-2; }
-		.colour-3 { fill: $colour-3; }
-		.colour-4 { fill: $colour-4; }
-		.colour-5 { fill: $colour-5; }
-	}
+    .cover {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: $zindex-base;
+        background-size: inherit;
+        background-position: inherit;
+    }
 
-	.cover {
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		z-index: $zindex-base;
-		background-size: inherit;
-		background-position: inherit;
-	}
+    @if capable_of(css-mixblendmode) {
+        position: relative;
 
-	@if capable_of(css-mixblendmode) {
-		position: relative;
+        .cover {
+            -webkit-filter: saturate(25%);
+            filter: saturate(25%);
+            @include _(mix-blend-mode, multiply);
+        }
+    }
+    
+    &.no-image,
+    &.short {
+        h1 {
+            text-align: center;
+            font-size: 3.5em;
+            margin: 1.75em 0 .75em;
+            position: relative;
+            z-index: $zindex-base + 2;
+            @include _(text-shadow, 0 0 0.15em #000);
+        }
+    }
 
-		.cover {
-			-webkit-filter: saturate(25%);
-			filter: saturate(25%);
-			@include _(mix-blend-mode, multiply);
-		}
-	}
-	
-	&.no-image,
-	&.short {
-		h1 {
-			text-align: center;
-			font-size: 3.5em;
-			margin: 1.75em 0 .75em;
-			position: relative;
-			z-index: $zindex-base + 2;
-			@include _(text-shadow, 0 0 0.15em #000);
-		}
-	}
+    &.map {
+        background-position: 0 0;
+        background-repeat: repeat;
+        background-size: 30px 30px;
+        @include _(animation, barberpole 500ms linear infinite);
+        background-image: linear-gradient(
+            45deg, 
+            rgba($white, 0.1) 25%, 
+            transparent 25%, 
+            transparent 50%, 
+            rgba($white, 0.1) 50%, 
+            rgba($white, 0.1) 75%, 
+            transparent 75%, 
+            transparent
+        );
 
-	svg {
-		display: none;
-		position: absolute;
-		width: 100%;
-		height: 100%;
-	}
+        svg {
+            vertical-align: middle;
+            background-color: transparent;
+            @include _(transition, background-color 1s ease-in-out);
 
-	.title {
-		position: relative;
-		padding: 1%;
-		overflow: hidden;
-		text-align: center;
-		@include _(text-shadow, 0 0.2em 0.5em rgba(32, 32, 32, 0.5))
-	}
+            &.loaded {
+                background-color: $colour-1;
+            }
+        }
 
-	.background {
-		position: absolute;
-		@include _(transform, rotate($header-tilt));
-		color: $colour-1;
-		@include _(opacity, 0.65);
-		margin: -4% -2%;
-		@if capable_of(calc) {
-			font-size: calc(5vw + #{rems(7)});
-		} @else {
-			font-size: rems(11);
-		}
-		display: none;
-	}
+        .country {
+            fill: $colour-5;
+            stroke: rgba($black, 0.02);
+            stroke-width: 1px;
+        }
 
-	.details {
-		position: relative;
-		display: inline-block;
-		color: $white;
-		@include _(text-shadow, 0 0.2em 0.5em rgba(32, 32, 32, 0.75));
-	}
+        .cities {
+            fill: $colour-4;
+            opacity: 0.75;
 
-	.primary {
-		font-size: 2.5em;
-		margin: 0;
-	}
+            .city {
+                opacity: 0.9;
+                cursor: pointer;
+                @include _(animation, fade-out ease-in-out 3s infinite alternate both);
 
-	.secondary {
-		font-size: 1.5em;
-	}
+                &:hover {
+                    fill: $colour-3;
+                    stroke: rgba($white, 0.125);
+                    stroke-width: 6px;
+                }
+            }
 
-	body.error-locale-not-available & {
-		background-color: $colour-5;
-	}
+            &.annual-conferences {
+                fill: $colour-2;
+            }
+        }
 
-	body.error-500 & {
-		background-position: 50% 50%;
-		background-color: $colour-2;
-	}
+        #tooltip {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            opacity: 0;
+            background-color: rgba($black, 0.25);
+            padding: 0.5em 0;
+            pointer-events: none;
+            text-shadow: 0 0 0.5em $black;
+            @include _(transition, opacity 250ms ease-in-out);
 
-	body.error-403 & {
-		background-position: 50% 33%;
-	}
+            &.open {
+                opacity: 1;
+            }
+
+            h3 {
+                margin: 0;
+                padding-right: 0.5em;
+            }
+
+            .conference-details {
+                margin: 0.25em 0;
+                
+                div {
+                    display: inline-block;
+
+                    @include after {
+                        content: '|';
+                        margin: 0 0.75em;
+                    }
+
+                    &:last-child {
+                        @include after {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .title {
+        position: relative;
+        padding: 1%;
+        overflow: hidden;
+        text-align: center;
+        @include _(text-shadow, 0 0.2em 0.5em rgba(32, 32, 32, 0.5))
+    }
+
+    .background {
+        position: absolute;
+        @include _(transform, rotate($header-tilt));
+        color: $colour-1;
+        @include _(opacity, 0.65);
+        margin: -4% -2%;
+        @if capable_of(calc) {
+            font-size: calc(5vw + #{rems(7)});
+        } @else {
+            font-size: rems(11);
+        }
+        display: none;
+    }
+
+    .details {
+        position: relative;
+        display: inline-block;
+        color: $white;
+        @include _(text-shadow, 0 0.2em 0.5em rgba(32, 32, 32, 0.75));
+    }
+
+    .primary {
+        font-size: 2.5em;
+        margin: 0;
+    }
+
+    .secondary {
+        font-size: 1.5em;
+    }
+
+    body.error-locale-not-available & {
+        background-color: $colour-5;
+    }
+
+    body.error-500 & {
+        background-position: 50% 50%;
+        background-color: $colour-2;
+    }
+
+    body.error-403 & {
+        background-position: 50% 33%;
+    }
+
+    body.admin & {
+        background-color: $colour-4;
+    }
+
+    body.banner-bottom & {
+        background-position: center bottom;
+    }
 }
 
 #footer {
-	padding: 1em;
-	
-	footer {
-		@include _-(display, flex);
-		@include _(flex-flow, row wrap);
-		@include _(align-items, flex-end);
-		font-size: 4.1vw;
-	}
+    padding: 1em;
+    
+    footer {
+        @include _-(display, flex);
+        @include _(flex-flow, row wrap);
+        @include _(align-items, flex-end);
+        font-size: 4.1vw;
+    }
 
-	.site-info, .user-controls, .external {
-		width: 100%;
-		text-align: center;
+    .site-info, .user-controls, .external {
+        width: 100%;
+        text-align: center;
 
-		a {
-			text-align: right;
-			white-space: nowrap;
-			color: #666;
-		}
-	}
+        a {
+            text-align: right;
+            white-space: nowrap;
+            color: #666;
+        }
+    }
 
-	.external {
-		margin-bottom: 1em;
-	}
+    .external {
+        margin-bottom: 1em;
+    }
 
-	.my-account {
-		margin-right: 0.5em;
-	}
+    .my-account {
+        margin-right: 0.5em;
+    }
 
-	.logout {
-		margin-left: 0.5em;
-	}
+    .logout {
+        margin-left: 0.5em;
+    }
 
-	.contact-us {
-		line-height: 2.5em;
-	}
+    .contact-us {
+        line-height: 2.5em;
+    }
 
-	.facebook {
-		a {
-			&:hover, &:active, &:focus {
-				svg {
-					fill: #3B579D;
-				}
-			}
-		}
-	}
+    .facebook {
+        a {
+            &:hover, &:active, &:focus {
+                svg {
+                    fill: #3B579D;
+                }
+            }
+        }
+    }
 
-	.github, .facebook {
-		display: inline-block;
-		margin: 0.5em;
+    .github, .facebook {
+        display: inline-block;
+        margin: 0.5em;
 
-		a {
-			@include after {
-				display: none;
-			}
-			svg {
-				@include _(transition, fill 250ms ease-in-out);
-			}
-		}
+        a {
+            @include after {
+                display: none;
+            }
+            svg {
+                @include _(transition, fill 250ms ease-in-out);
+            }
+        }
 
-		.icons {
-			width: 1.5em;
-			height: 1.5em;
-			fill: $black;
-			vertical-align: middle;
-		}
-	}
+        .icons {
+            width: 1.5em;
+            height: 1.5em;
+            fill: $black;
+            vertical-align: middle;
+        }
+    }
 
-	.github {
-		a {
-			@include after {
-				display: none;
-			}
-		}
+    .github {
+        a {
+            @include after {
+                display: none;
+            }
+        }
 
-		&:hover .icons {
-			fill: #4183C4;
-		}
-	}
+        &:hover .icons {
+            fill: #4183C4;
+        }
+    }
 
-	ul.locales {
-		@include _(flex, 1);
-		@include _(flex-basis, 100%);
-		padding: 0;
-		margin: 1em 0;
-		list-style: none;
-		text-align: center;
-	}
+    ul.locales {
+        @include _(flex, 1);
+        @include _(flex-basis, 100%);
+        padding: 0;
+        margin: 1em 0;
+        list-style: none;
+        text-align: center;
+    }
 
-	body.error-locale-not-available & {
-		.github, .facebook, .locales {
-			visibility: hidden;
-		}
-	}
+    body.error-locale-not-available & {
+        .github, .facebook, .locales {
+            visibility: hidden;
+        }
+    }
 }
 
 body.error-locale-not-available {
-	.locales {
-		list-style: none;
-		padding: 0;
-		text-align: center;
+    .locales {
+        list-style: none;
+        padding: 0;
+        text-align: center;
 
-		li {
-			margin-bottom: 1em;
-		}
-	}
+        li {
+            margin-bottom: 1em;
+        }
+    }
 }
 
 body {
-	#primary-content {
-		@include _(transition, 'filter 250ms ease-in-out, -webkit-filter 250ms ease-in-out');
-		display: -webkit-flex;
-		flex-direction: column;
-		min-height: 100vh;
-		overflow: hidden;
-	}
+    #primary-content {
+        @include _(transition, 'filter 250ms ease-in-out, -webkit-filter 250ms ease-in-out');
+        display: -webkit-flex;
+        flex-direction: column;
+        min-height: 100vh;
+        overflow: hidden;
+    }
 
-	&.has-overlay {
-		overflow: hidden;
+    &.has-overlay {
+        overflow: hidden;
 
-		#primary-content {
-			-webkit-filter: blur(5px);
-			@include _(filter, blur(5px));
-		}
+        #primary-content {
+            -webkit-filter: blur(5px);
+            @include _(filter, blur(5px));
+        }
 
-		#overlay {
-			position: fixed;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			left: 0;
-			cursor: pointer;
-			z-index: 1000;
-		}
-	}
+        #overlay {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            cursor: pointer;
+            z-index: 1000;
+        }
+    }
 }
 
 #content-overlay {
-	display: none;
+    display: none;
 
-	body.has-overlay & {
-		display: block;
-	}
+    body.has-overlay & {
+        display: block;
+    }
 
-	body.has-overlay.is-event-dlg & {
-		position: fixed;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		@include _-(display, flex);
-	}
+    body.has-overlay.is-event-dlg & {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        @include _-(display, flex);
+    }
 
-	.dlg {
-		@include before {
-			content: '';
-			position: fixed;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			left: 0;
-			background-color: rgba($black, 0);
-			@include _(transition, background-color 250ms ease-in-out);
-		}
-		
-		&.open {
-			@include before {
-				background-color: rgba($black, 0.5);
-			}
+    .dlg {
+        @include before {
+            content: '';
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: rgba($black, 0);
+            @include _(transition, background-color 250ms ease-in-out);
+        }
+        
+        &.open {
+            @include before {
+                background-color: rgba($black, 0.5);
+            }
 
-			.dlg-content {
-				@include _(transform, rotateZ(0deg));
-			}
-		}
-	}
+            .dlg-content {
+                @include _(transform, rotateZ(0deg));
+            }
+        }
+    }
 
-	.dlg-content {
-		position: fixed;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		max-width: 50rem;
-		max-height: 100%;
-		font-size: 0.9em;
-		overflow-y: auto;
-		margin: auto;
-		z-index: 1001;
-		background-color: $white;
-		text-align: center;
-		@include _(transition, transform 500ms ease-in-out);
-		@include _(transform, rotateX(-90deg));
-		@include _(transform-origin, center 250%);
-	}
+    .dlg-content {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        max-width: 50rem;
+        max-height: 100%;
+        font-size: 0.9em;
+        overflow-y: auto;
+        margin: auto;
+        z-index: 1001;
+        background-color: $white;
+        text-align: center;
+        @include _(transition, transform 500ms ease-in-out);
+        @include _(transform, rotateX(-90deg));
+        @include _(transform-origin, center 250%);
+    }
 
-	.dlg {
-		.title {
-			padding: 0.5em;
-			background-color: $colour-5;
-			color: $white;
-			@include _(text-stroke, 1px rgba(0, 0, 0, 0.25));
-		}
-	}
+    .dlg {
+        .title {
+            padding: 0.5em;
+            background-color: $colour-5;
+            color: $white;
+            @include _(text-stroke, 1px rgba(0, 0, 0, 0.25));
+        }
+    }
 
-	button, .button {
-		margin: 0 0.25em 0.5em;
-	}
+    button, .button {
+        margin: 0 0.25em 0.5em;
+    }
 
-	.dlg-inner {
-		padding: 0 2em 2em;
-	}
+    .dlg-inner {
+        padding: 0 2em 2em;
+    }
 
-	.message {
-		margin-bottom: 2em;
-	}
+    .message {
+        margin-bottom: 2em;
+    }
 
-	#info-dlg .title {
-		background-color: $colour-1;
-		font-size: 1.5em;
-		text-align: left;
-	}
+    #info-dlg .title {
+        background-color: $colour-1;
+        font-size: 1.5em;
+        text-align: left;
+    }
 
-	#info-dlg .message {
-		text-align: left;
+    #info-dlg .message {
+        text-align: left;
 
-		p, h4 {
-			font-size: 0.8em;
-		}
+        p, h4 {
+            font-size: 0.8em;
+        }
 
-		h3 {
-			font-size: 1em;
-		}
+        h3 {
+            font-size: 1em;
+        }
 
-		h5 {
-			font-size: 0.667em;
-		}
+        h5 {
+            font-size: 0.667em;
+        }
 
-		h6 {
-			font-size: 0.8em;
-		}
-	}
+        h6 {
+            font-size: 0.8em;
+        }
+    }
 
-	#login-dlg .title {
-		font-size: 2em;
-		margin-bottom: 1em;
-	}
+    #login-dlg .title {
+        font-size: 2em;
+        margin-bottom: 1em;
+    }
 
-	#contact-dlg {
-		.title {
-			background-color: $colour-4;
-		}
+    #contact-dlg {
+        .title {
+            background-color: $colour-4;
+        }
 
-		.email-field {
-			margin-top: 2em;
-		}
+        .email-field {
+            margin-top: 2em;
+        }
 
-		textarea {
-			min-height: 7.5em;
-		}
-	}
+        textarea {
+            min-height: 7.5em;
+        }
+    }
 }
 
 @include keyframes(fade-out) {
-	to {
-		@include _(opacity, 0.25);
-	}
+    to {
+        @include _(opacity, 0.6667);
+    }
 }
 
 @include keyframes(colour-out) {
-	to {
-		background-color: transparent;
-	}
+    to {
+        background-color: transparent;
+    }
+}
+
+@include keyframes(barberpole) {
+  to   { background-position: 60px 30px; }
 }
 
 html :focus {
-	outline: 0;
+    outline: 0;
 }
 
 @mixin header-colour($page, $colour) {
-	body.#{$page} {
-		#header-title {
-			background-color: $colour;
-
-			rect {
-				fill: $colour;
-			}
-		}
-	}
+    body.#{$page} {
+        #header-title {
+            background-color: $colour;
+        }
+    }
 }
 
 @include header-colour(about, $colour-3);
 @include header-colour(policy, $colour-5);
+// @include header-colour(conferences, $colour-2);
 
 #bike_small + label {
-	padding: 0.5em 2.5em;
+    padding: 0.5em 2.5em;
 }
 
 #bike_medium + label {
-	padding: 0.5em 1.5em;
+    padding: 0.5em 1.5em;
 }
 
 #main .graded-options {
-	text-align: center;
+    text-align: center;
 
-	button {
-		background-color: $colour-4;
-		width: 6em;
-		font-size: 1.5em;
-		margin: 0.25em;
+    button {
+        background-color: $colour-4;
+        width: 6em;
+        font-size: 1.5em;
+        margin: 0.25em;
 
-		&.option-1 {
-			background-color: $colour-3;
-		}
+        &.option-1 {
+            background-color: $colour-3;
+        }
 
-		&:last-child {
-			background-color: $colour-5;
-		}
-	}
+        &:last-child {
+            background-color: $colour-5;
+        }
+    }
 
-	&.option-count-4 button.option-3,
-	&.option-count-5 button.option-4 {
-		background-color: mix($colour-3, $colour-5);
-	}
-	
-	&.option-count-5 {
-		button.option-2 {
-			background-color: mix($colour-3, $colour-4);
-		}
-	}
+    &.option-count-4 button.option-3,
+    &.option-count-5 button.option-4 {
+        background-color: mix($colour-3, $colour-5);
+    }
+    
+    &.option-count-5 {
+        button.option-2 {
+            background-color: mix($colour-3, $colour-4);
+        }
+    }
 }
 
 #main .skip {
-	button {
-		background-color: #888;
-	}
+    button {
+        background-color: #888;
+    }
 }
 
 #main form.custom-payment {
 
-	input[type="number"] {
-		width: 4em;
-		margin-right: 0.5em;
-	}
+    input[type="number"] {
+        width: 4em;
+        margin-right: 0.5em;
+    }
 
-	button {
-		background-color: $colour-1;
-	}
+    button {
+        background-color: $colour-1;
+    }
 
-	.currency {
-		color: #888;
-		font-size: 1.5em;
-	}
+    .currency {
+        color: #888;
+        font-size: 1.5em;
+    }
 
-	.number-field {
-		margin-bottom: 0;
-	}
+    .number-field {
+        margin-bottom: 0;
+    }
 }
 
 #main ul.workshops {
-	list-style: none;
-	padding: 0;// 1em;
-	text-align: center;
-	@include default-box-shadow(top, 2, true);
-	background-color: #F8F8F8;
+    list-style: none;
+    padding: 0;// 1em;
+    text-align: center;
+    @include default-box-shadow(top, 2, true);
+    background-color: #F8F8F8;
 
-	li {
-		display: inline-block;
-		margin: 0.5em;
-		vertical-align: middle;
+    li {
+        display: inline-block;
+        margin: 0.5em;
+        vertical-align: middle;
 
-		@include before {
-			content: '';
-			display: none;
-			position: fixed;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			left: 0;
-			background-color: #000;
-			z-index: 99;
-			@include _(opacity, 0.5);
-		}
+        @include before {
+            content: '';
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: #000;
+            z-index: 99;
+            @include _(opacity, 0.5);
+        }
 
-		&.view {
-			@include before {
-				display: block;
-			}
-			
-			.info {
-				left: 0;
-				right: 0;
-				top: 50%;
-				@include _(transform, translateY(-50%) scale(1));
+        &.view {
+            @include before {
+                display: block;
+            }
+            
+            .info {
+                left: 0;
+                right: 0;
+                top: 50%;
+                @include _(transform, translateY(-50%) scale(1));
 
-				@include breakpoint(large) {
-					left: 19rem;
-				}
-			}
-		}
-	}
+                @include breakpoint(large) {
+                    left: 19rem;
+                }
+            }
+        }
+    }
 
-	h4, h5 {
-		color: $white;
-		background-color: $colour-1;
-		@include _(text-stroke, 1px rgba(0, 0, 0, 0.25));
-	}
+    h4, h5 {
+        color: $white;
+        background-color: $colour-1;
+        @include _(text-stroke, 1px rgba(0, 0, 0, 0.25));
+    }
 
-	h4 {
-		max-width: 10em;
-		cursor: pointer;
-		margin: 0;
-		padding: 1em;
-		position: relative;
-		@include default-box-shadow(top);
-		@include _(transition, transform 100ms ease-in-out);
+    h4 {
+        max-width: 10em;
+        cursor: pointer;
+        margin: 0;
+        padding: 1em;
+        position: relative;
+        @include default-box-shadow(top);
+        @include _(transition, transform 100ms ease-in-out);
 
-		&:hover {
-			z-index: $zindex-base + 3;
-			@include _(transform, scale(1.25));
-		}
-	}
+        &:hover {
+            z-index: $zindex-base + 3;
+            @include _(transform, scale(1.25));
+        }
+    }
 
-	h5 {
-		font-size: 1.5em;
-		margin: 0;
-		padding: 0.5em 1em;
+    h5 {
+        font-size: 1.5em;
+        margin: 0;
+        padding: 0.5em 1em;
 
-		+ p {
-			margin-top: 0;
-		}
-	}
+        + p {
+            margin-top: 0;
+        }
+    }
 
-	p {
-		padding: 1em;
-		max-height: 50vh;
-		overflow-y: auto;
-	}
+    p {
+        padding: 1em;
+        max-height: 50vh;
+        overflow-y: auto;
+    }
 
-	form {
-		text-align: center;
-	}
+    form {
+        text-align: center;
+    }
 
-	button {
-		margin: 1em 0.5em;
-	}
+    button {
+        margin: 1em 0.5em;
+    }
 
-	[contenteditable] {
-		outline: none;
-	}
+    [contenteditable] {
+        outline: none;
+    }
 
-	.info {
-		position: fixed;
-		background-color: $white;
-		color: $black;
-		left: auto;
-		right: auto;
-		top: auto;
-		z-index: 100;
-		max-width: 40em;
-		max-height: 40em;
-		margin: auto;
-		text-align: left;
-		@include _(transition, all 250ms ease-in-out);
-		@include _(transform, translateY(0) scale(0));
-		@include default-box-shadow(top);
-	}
+    .info {
+        position: fixed;
+        background-color: $white;
+        color: $black;
+        left: auto;
+        right: auto;
+        top: auto;
+        z-index: 100;
+        max-width: 40em;
+        max-height: 40em;
+        margin: auto;
+        text-align: left;
+        @include _(transition, all 250ms ease-in-out);
+        @include _(transform, translateY(0) scale(0));
+        @include default-box-shadow(top);
+    }
 
-	[value="delete"] {
-		background-color: $colour-2;
-	}
+    [value="delete"] {
+        background-color: $colour-2;
+    }
 
-	[value="cancel"] {
-		background-color: $colour-4;
-	}
+    [value="cancel"] {
+        background-color: $colour-4;
+    }
 }
 
 .conferences-register .policy-agreement {
-	padding: 0.25em 1em;
-	margin: 0 0 3em;
-	border: 0.1em solid #DDD;
-	@include _(border-radius, 0.25em);
-	@include default-box-shadow(top, 2);
+    padding: 0.25em 1em;
+    margin: 0 0 3em;
+    border: 0.1em solid #DDD;
+    @include _(border-radius, 0.25em);
+    @include default-box-shadow(top, 2);
 }
 
 body.policy .policy-agreement ul {
-	padding: 0 1.5em 0;
+    padding: 0 1.5em 0;
 }
 
 .stats {
-	list-style: none;
+    list-style: none;
 
-	h3 {
-		display: inline-block;
-	}
+    h3 {
+        display: inline-block;
+    }
 
-	.stat {
-		position: relative;
-		padding: 0 0.25em;
-		margin: 0.5em;
-		font-size: 2em;
-		display: inline-block;
-		color: $white;
-		background-color: $colour-1;
-		@include default-box-shadow(top, 2);
-		@include _(text-stroke, 1px rgba(0, 0, 0, 0.25));
+    .stat {
+        position: relative;
+        padding: 0 0.25em;
+        margin: 0.5em;
+        font-size: 2em;
+        display: inline-block;
+        color: $white;
+        background-color: $colour-1;
+        @include default-box-shadow(top, 2);
+        @include _(text-stroke, 1px rgba(0, 0, 0, 0.25));
 
-		&.important {
-			width: 2em;
-			height: 2em;
-			line-height: 2em;
-			text-align: center;
-			@include _(border-radius, 50%);
-		}
-	}
+        &.important {
+            width: 2em;
+            height: 2em;
+            line-height: 2em;
+            text-align: center;
+            @include _(border-radius, 50%);
+        }
+    }
 
-	.money .stat {
-		background-color: $colour-5;
-	}
+    .money .stat {
+        background-color: $colour-5;
+    }
 
-	.percent {
-		font-size: 1.5em;
-	}
+    .percent {
+        font-size: 1.5em;
+    }
 
-	.value {
-		position: relative;
-		z-index: $zindex-base + 2;
-	}
+    .value {
+        position: relative;
+        z-index: $zindex-base + 2;
+    }
 
-	.stat-with-label {
-		display: inline-block;
-		text-align: center;
-		vertical-align: middle;
-		background-color: $colour-3;
-		margin: 0.5em;
-		@include default-box-shadow(top, 2);
+    .stat-with-label {
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+        background-color: $colour-3;
+        margin: 0.5em;
+        @include default-box-shadow(top, 2);
 
-		.stat {
-			margin-top: 0.25em;
-		}
-	}
+        .stat {
+            margin-top: 0.25em;
+        }
+    }
 
-	.label {
-		padding: 0.5em 0.5em 0;
-		font-weight: bold;
-	}
+    .label {
+        padding: 0.5em 0.5em 0;
+        font-weight: bold;
+    }
 
-	.breakdown {
-		text-align: center;
-	}
+    .breakdown {
+        text-align: center;
+    }
 }
 
 .email-preview {
-	max-width: 40rem;
-	margin: 2em auto 0;
-	padding: 0.25em 1em;
-	background-color: #F8F8F8;
-	@include default-box-shadow(top, 2, true);
+    max-width: 40rem;
+    margin: 2em auto 0;
+    padding: 0.25em 1em;
+    background-color: #F8F8F8;
+    @include default-box-shadow(top, 2, true);
 }
 
 .facilitators {
-	display: inline-block;
+    display: inline-block;
 
-	.facilitator {
-		margin: 0 0 0.5em 0.5em;
-		padding: 1.5em 0.5em 0.5em;
-		border-top: 0.1em solid #CCC;
+    .facilitator {
+        margin: 0 0 0.5em 0.5em;
+        padding: 1.5em 0.5em 0.5em;
+        border-top: 0.1em solid #CCC;
 
-		&:first-child {
-			border: 0;
-			padding-top: 0;
-		}
-	}
+        &:first-child {
+            border: 0;
+            padding-top: 0;
+        }
+    }
 
-	.name {
-		position: relative;
-		font-weight: bold;
-	}
+    .name {
+        position: relative;
+        font-weight: bold;
+    }
 
-	.details {
-		margin-top: 0.5em;
-	}
+    .details {
+        margin-top: 0.5em;
+    }
 
-	.email {
-		margin-bottom: 0.5em;
-	}
+    .email {
+        margin-bottom: 0.5em;
+    }
 
-	.name, .role {
-		display: inline;
-	}
+    .name, .role {
+        display: inline;
+    }
 
-	.role {
-		color: #666;
-		white-space: nowrap;
+    .role {
+        color: #666;
+        white-space: nowrap;
 
-		@include before {
-			content: '(';
-		}
+        @include before {
+            content: '(';
+        }
 
-		@include after {
-			content: ')';
-		}
+        @include after {
+            content: ')';
+        }
 
-		&:last-child {
-			@include after {
-				content: ')';
-			}
-		}
-	}
+        &:last-child {
+            @include after {
+                content: ')';
+            }
+        }
+    }
 }
 
 .workshop-previews {
-	position: relative;
-	list-style: none;
-	padding: 0;
+    position: relative;
+    list-style: none;
+    padding: 0;
 
-	p {
-		padding: 0 1rem 0.5rem;
-		font-size: 1em;
-		color: $black;
-	}
+    p {
+        padding: 0 1rem 0.5rem;
+        font-size: 1em;
+        color: $black;
+    }
 
-	h4 {
-		color: $white;
-		background-color: $colour-1;
-		padding: 0.5em 1em;
-		margin: 0;
-		@include _(text-stroke, 1px rgba(0, 0, 0, 0.25));
-	}
+    h4 {
+        color: $white;
+        background-color: $colour-1;
+        padding: 0.5em 1em;
+        margin: 0;
+        @include _(text-stroke, 1px rgba(0, 0, 0, 0.25));
+    }
 
-	a {
-		display: block;
-		max-height: 10em;
-		overflow: hidden;
-		margin: 0.5em 0;
-		@include default-box-shadow(top, 2);
-		@include _(transition, transform 150ms ease-in-out);
+    a {
+        display: block;
+        max-height: 10em;
+        overflow: hidden;
+        margin: 0.5em 0;
+        @include default-box-shadow(top, 2);
+        @include _(transition, transform 150ms ease-in-out);
 
-		&:hover, &:focus, &:active {
-			z-index: $zindex-base + 2;
-			@include _(transform, scale(1.1));
-		}
+        &:hover, &:focus, &:active {
+            z-index: $zindex-base + 2;
+            @include _(transform, scale(1.1));
+        }
 
-		@include before {
-			content: '';
-			position: absolute;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			left: 0;
-			z-index: $zindex-base + 2;
-			cursor: pointer;
-			@include _(box-shadow, inset 0em -2em 2em -1em $white);
-		}
+        @include before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: $zindex-base + 2;
+            cursor: pointer;
+            @include _(box-shadow, inset 0em -2em 2em -1em $white);
+        }
 
-		@include after {
-			 display: none;
-		}
-	}
+        @include after {
+            display: none;
+        }
+    }
 }
 
 .translated-content.block {
-	display: inherit;
+    display: inherit;
+}
+
+.list-view {
+    ul {
+        list-style: none;
+
+        &.break {
+            border-top: 0.25em solid $light-gray;
+            margin-top: 2em;
+            padding-top: 1em;
+        }
+    }
+
+    li {
+        box-shadow: 0 0.15em 0 -0.1em $light-gray;
+
+        &:last-child {
+            box-shadow: 0 0.333em 0 -0.1em $light-gray;
+        }
+        
+        > div {
+            vertical-align: top;
+            padding: 2em 0;
+
+            h3, p:first-child {
+                margin-top: 0;
+            }
+
+            &:first-child {
+                padding-right: 1em;
+            }
+        }
+    }
+
+    .info {
+        
+        .title {
+            margin: 0 0 0.5em;
+        }
+
+        .conference-details {
+            margin-bottom: 1em;
+        }
+    }
+
+    .img {
+        text-align: center;
+
+        img {
+            max-width: 100%;
+        }
+    }
+
+    .actions {
+        margin-top: 1em;
+    }
 }
 
 html[data-lingua-franca-example="html"] {
-	$caption-height: 4rem;
-	@include _(transform, translateY($caption-height));
+    $caption-height: 4rem;
+    @include _(transform, translateY($caption-height));
 
-	#lingua-franca-window-caption {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: $caption-height;
-		background-color: #CCC;
-		z-index: 1000;
-		font-size: 1rem;
-		@include _(transform, translateY($caption-height * -1));
+    #lingua-franca-window-caption {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: $caption-height;
+        background-color: #CCC;
+        z-index: 1000;
+        font-size: 1rem;
+        @include _(transform, translateY($caption-height * -1));
 
-		.window-tab {
-			height: 1.75rem;
-			position: relative;
-			background-color: #EEE;
-			float: left;
-			padding: 0.25em 2em 0 1em;
-			margin: 0.25em 1em;
-			@include _(border-radius, 0.5em 0.5em 0 0);
-			color: #444;
-			@include font-family(secondary);
+        .window-tab {
+            height: 1.75rem;
+            position: relative;
+            background-color: $light-gray;
+            float: left;
+            padding: 0.25em 2em 0 1em;
+            margin: 0.25em 1em;
+            @include _(border-radius, 0.5em 0.5em 0 0);
+            color: #444;
+            @include font-family(secondary);
 
-			@include after {
-				content: '×';
-				position: absolute;
-				right: 0.5em;
-				top: 0.25em;
-			}
-		}
+            @include after {
+                content: '×';
+                position: absolute;
+                right: 0.5em;
+                top: 0.25em;
+            }
+        }
 
-		i {
-			font-style: normal;
-		}
+        i {
+            font-style: normal;
+        }
 
-		.window-minimize,
-		.window-maximize {
-			@include after {
-				content: '';
-				position: absolute;
-				top: 0.75em;
-				right: 2em;
-				border-style: solid;
-				border-width: 0 0.5em 0.5em 0.5em;
-				border-left-color: transparent;
-				border-right-color: transparent;
-			}
-		}
-		
-		.window-minimize {
-			@include after {
-				right: 3.5em;
-				border-top-width: 0.5em;
-				border-bottom-width: 0;
-			}
-		}
+        .window-minimize,
+        .window-maximize {
+            @include after {
+                content: '';
+                position: absolute;
+                top: 0.75em;
+                right: 2em;
+                border-style: solid;
+                border-width: 0 0.5em 0.5em 0.5em;
+                border-left-color: transparent;
+                border-right-color: transparent;
+            }
+        }
+        
+        .window-minimize {
+            @include after {
+                right: 3.5em;
+                border-top-width: 0.5em;
+                border-bottom-width: 0;
+            }
+        }
 
-		.window-close {
-			@include after {
-				content: '×';
-				position: absolute;
-				right: 0.25em;
-				top: 0.1em;
-				font-size: 1.75em;
-				line-height: 1em;
-			}
-		}
+        .window-close {
+            @include after {
+                content: '×';
+                position: absolute;
+                right: 0.25em;
+                top: 0.1em;
+                font-size: 1.75em;
+                line-height: 1em;
+            }
+        }
 
-		.window-url-bar {
-			position: absolute;
-			top: $caption-height / 2;
-			left: 0;
-			width: 100%;
-			height: $caption-height / 2;
-			background-color: #EEE;
+        .window-url-bar {
+            position: absolute;
+            top: $caption-height / 2;
+            left: 0;
+            width: 100%;
+            height: $caption-height / 2;
+            background-color: $light-gray;
 
-			.url-bar {
-				position: absolute;
-				top: 0.25rem;
-				left: 3.5rem;
-				bottom: 0.25rem;
-				right: 0.25rem;
-				background-color: #FFF;
-				border: 1px solid #CCC;
-				padding: 0 0.25rem;
-				font-size: 0.8em;
-				line-height: 1.75em;
-			}
-		}
+            .url-bar {
+                position: absolute;
+                top: 0.25rem;
+                left: 3.5rem;
+                bottom: 0.25rem;
+                right: 0.25rem;
+                background-color: #FFF;
+                border: 1px solid #CCC;
+                padding: 0 0.25rem;
+                font-size: 0.8em;
+                line-height: 1.75em;
+            }
+        }
 
-		.window-back,
-		.window-forward {
-			@include after {
-				content: '';
-				position: absolute;
-				left: 0.5em;
-				top: 0.5em;
-				border-style: solid;
-				border-width: 0.5em 0.75em 0.5em 0;
-				border-top-color: transparent;
-				border-bottom-color: transparent;
-				color: #666;
-			}
-		}
+        .window-back,
+        .window-forward {
+            @include after {
+                content: '';
+                position: absolute;
+                left: 0.5em;
+                top: 0.5em;
+                border-style: solid;
+                border-width: 0.5em 0.75em 0.5em 0;
+                border-top-color: transparent;
+                border-bottom-color: transparent;
+                color: #666;
+            }
+        }
 
-		.window-forward {
-			@include after {
-				left: 2em;
-				border-right-width: 0;
-				border-left-width: 0.75em;
-			}
-		}
-	}
+        .window-forward {
+            @include after {
+                left: 2em;
+                border-right-width: 0;
+                border-left-width: 0.75em;
+            }
+        }
+    }
 
-	@include translation-pointer;
+    @include translation-pointer;
 }
 
 .workshop-notes {
-	p {
-		font-size: 1em;
-	}
+    p {
+        font-size: 1em;
+    }
 }
 
 .major-group {
-	border-bottom: 0.333em solid #EEE;
-	padding-bottom: 2em;
-	margin-bottom: 1em;
+    border-bottom: 0.333em solid $light-gray;
+    padding-bottom: 2em;
+    margin-bottom: 1em;
 
-	&:last-child {
-		border-bottom: 0;
-	}
+    &:last-child {
+        border-bottom: 0;
+    }
 }
 
 #main .workshop-list {
-	list-style: none;
-	padding: 0;
+    list-style: none;
+    padding: 0;
 
-	.workshop-description {
-		font-size: 0.9em;
-		max-height: 20em;
-		padding: 1em;
-		overflow: hidden;
-	}
+    .workshop-description {
+        font-size: 0.9em;
+        max-height: 20em;
+        padding: 1em;
+        overflow: hidden;
+    }
 
-	> li {
-		position: relative;
-		margin-bottom: 1em;
-		border-bottom: 0.1rem solid #EEE;
+    > li {
+        position: relative;
+        margin-bottom: 1em;
+        border-bottom: 0.1rem solid $light-gray;
 
-		ul {
-			padding-left: 2.5em;
-			margin-bottom: 1.5em;
-		}
+        ul {
+            padding-left: 2.5em;
+            margin-bottom: 1.5em;
+        }
 
-		li {
-			border: 0;
-		}
+        li {
+            border: 0;
+        }
 
-		&:last-child {
-			border: 0;
-		}
-	}
+        &:last-child {
+            border: 0;
+        }
+    }
 
-	.actions {
-		position: relative;
-		margin: 0;
-		@include _(box-shadow, 0 -1em 1em $white);
-	}
+    .actions {
+        position: relative;
+        margin: 0;
+        @include _(box-shadow, 0 -1em 1em $white);
+    }
 
-	.title {
-		margin: 0;
-	}
+    .title {
+        margin: 0;
+    }
 
-	p {
-		font-size: 1em;
-	}
+    p {
+        font-size: 1em;
+    }
 
-	h5, h6 {
-		margin: 1em 0 0;
-	}
+    h5, h6 {
+        margin: 1em 0 0;
+    }
 }
 
 .interest-button {
-	button {
-		margin: 0 0 0 1em;
-		font-size: 0.8em;
-		padding-top: 0.333em;
-		padding-bottom: 0.333em;
-		background-color: $colour-5;
-	}
+    button {
+        margin: 0 0 0 1em;
+        font-size: 0.8em;
+        padding-top: 0.333em;
+        padding-bottom: 0.333em;
+        background-color: $colour-5;
+    }
 }
 
 #main .workshop-interest, .workshop-interest {
-	text-align: right;
+    text-align: right;
 
-	form {
-		display: inline;
-	}
+    form {
+        display: inline;
+    }
 
-	button {
-		font-size: 0.9em;
-		margin: 1em;
-		background-color: $colour-5;
-		vertical-align: middle;
+    button {
+        font-size: 0.9em;
+        margin: 1em;
+        background-color: $colour-5;
+        vertical-align: middle;
 
-		&.delete {
-			background-color: $colour-4;			
-		}
-	}
+        &.delete {
+            background-color: $colour-4;            
+        }
+    }
 }
 
 .original-text {
-	margin: 0 0 1em 1em;
+    margin: 0 0 1em 1em;
 
-	.value {
-		border: 0.1em solid #DDD;
-		padding: 1em;
-		margin: 1em 0 3em 0;
-		background-color: #F8F8F8;
-		@include _(border-radius, 0.25em);
-	}
-	
-	h4, h5, h6 {
-		margin: 0;
-	}
+    .value {
+        border: 0.1em solid #DDD;
+        padding: 1em;
+        margin: 1em 0 3em 0;
+        background-color: #F8F8F8;
+        @include _(border-radius, 0.25em);
+    }
+    
+    h4, h5, h6 {
+        margin: 0;
+    }
 
-	h5 {
-		font-size: 1em;
-	}
+    h5 {
+        font-size: 1em;
+    }
 
-	h6 {
-		font-size: 0.9em;
-	}
+    h6 {
+        font-size: 0.9em;
+    }
 
-	p {
-		margin: 0.5em 0;
-		font-size: 0.9em;
-	}
+    p {
+        margin: 0.5em 0;
+        font-size: 0.9em;
+    }
 }
 
 .facilitator .button {
-	font-size: 0.9em;
-	vertical-align: -0.75em;
+    font-size: 0.9em;
+    vertical-align: -0.75em;
 }
 
 #main .facilitators .actions {
-	margin: 0;
+    margin: 0;
 }
 
 #main form.add-facilitator {
-	button {
-		height: 2.4em;
-		font-size: 0.9em;
-	}
+    button {
+        height: 2.4em;
+        font-size: 0.9em;
+    }
 }
 
 .conferences-edit_schedule {
-	#main {
-		.location {
-			padding-top: 0.25em;
-		}
-		.errors {
-			padding: 0.25em;
-			background-color: $colour-2;
-			color: $white;
-			@include _(text-stroke, 0.5px #000);
-		}
-		.conflict-score {
-			padding: 0.25em;
-			background-color: $colour-3;
-			color: $black;
-		}
-		.all-workshops, .all-events {
-			list-style: none;
-			padding: 0;
+    #main {
+        .location {
+            padding-top: 0.25em;
+        }
+        .errors {
+            padding: 0.25em;
+            background-color: $colour-2;
+            color: $white;
+            @include _(text-stroke, 0.5px #000);
+        }
+        .conflict-score {
+            padding: 0.25em;
+            background-color: $colour-3;
+            color: $black;
+        }
+        .all-workshops, .all-events {
+            list-style: none;
+            padding: 0;
 
-			li {
-				margin: 0.5em;
-				padding: 0.5em;
-				border: 1px solid #CCC;
-				background-color: lighten($colour-1, 35);
-				@include default-box-shadow(top, 2);
+            li {
+                margin: 0.5em;
+                padding: 0.5em;
+                border: 1px solid #CCC;
+                background-color: lighten($colour-1, 35);
+                @include default-box-shadow(top, 2);
 
-				&.error {
-					outline: 0.2em solid $colour-2;
-					outline-offset: -0.2em;
-				}
-			}
+                &.error {
+                    outline: 0.2em solid $colour-2;
+                    outline-offset: -0.2em;
+                }
+            }
 
-			h3 {
-				margin: 0;
-			}
+            h3 {
+                margin: 0;
+            }
 
-			.workshop-interest {
-				color: #888;
-				text-align: left;
-				margin: 0.25em 0;
-			}
+            .workshop-interest {
+                color: #888;
+                text-align: left;
+                margin: 0.25em 0;
+            }
 
-			.error-description {
-				background-color: $colour-2;
-				color: $white;
-				padding: 0.5em;
-				margin-top: 0.5em;
-			}
+            .error-description {
+                background-color: $colour-2;
+                color: $white;
+                padding: 0.5em;
+                margin-top: 0.5em;
+            }
 
-			.warnings {
-				background-color: $colour-3;
-				color: $black;
-				padding: 0.5em;
-				margin-top: 0.5em;
-				list-style: none;
+            .warnings {
+                background-color: $colour-3;
+                color: $black;
+                padding: 0.5em;
+                margin-top: 0.5em;
+                list-style: none;
 
-				li {
-					padding: 0;
-					margin: 0;
-					background-color: transparent;
-					@include _(box-shadow, none);
-				}
-			}
-		}
-		.day_parts {
-			list-style: none;
+                li {
+                    padding: 0;
+                    margin: 0;
+                    background-color: transparent;
+                    @include _(box-shadow, none);
+                }
+            }
+        }
+        .day_parts {
+            list-style: none;
 
-			h4 {
-				display: inline-block;
-				min-width: 12.5em;
-				margin: 0.25em 0;
-			}
+            h4 {
+                display: inline-block;
+                min-width: 12.5em;
+                margin: 0.25em 0;
+            }
 
-			select, .select {
-				float: right;
-				min-width: 5em;
-			}
+            select, .select {
+                float: right;
+                min-width: 5em;
+            }
 
-			.select {
-				padding-left: 0.25em;
-			}
-		}
-		.actions {
-			margin: 2em;
-		}
-		.unsaved {
-			@include font-family(secondary);
-			background-color: lighten($colour-3, 25);
-			margin: 0 5em 2em;
-			padding: 0.5em;
-		}
-		.all-events {
-			li {
-				background-color: lighten($colour-5, 35);
-				
-				&.meal {
-					background-color: lighten($colour-3, 25);
-				}
-			}
+            .select {
+                padding-left: 0.25em;
+            }
+        }
+        .actions {
+            margin: 2em;
+        }
+        .unsaved {
+            @include font-family(secondary);
+            background-color: lighten($colour-3, 25);
+            margin: 0 5em 2em;
+            padding: 0.5em;
+        }
+        .all-events {
+            li {
+                background-color: lighten($colour-5, 35);
+                
+                &.meal {
+                    background-color: lighten($colour-3, 25);
+                }
+            }
 
-			h3 {
-				margin-bottom: 0.5em;
-			}
-		}
-	}
+            h3 {
+                margin-bottom: 0.5em;
+            }
+        }
+    }
 }
 
 .conferences-schedule {
-	.actions {
-		margin: 2em;
-	}
-	
-	ul.events, ul.locations {
-		list-style: none;
+    .actions {
+        margin: 2em;
+    }
+    
+    ul.events, ul.locations {
+        list-style: none;
 
-		.button {
-			float: left;
-			font-size: 1em;
-			margin-bottom: 0.5em;
-			margin-right: 0.5em;
-		}
+        .button {
+            float: left;
+            font-size: 1em;
+            margin-bottom: 0.5em;
+            margin-right: 0.5em;
+        }
 
-		h3 {
-			display: inline-block;
-			margin: 0.25em 0 0;
-		}
+        h3 {
+            display: inline-block;
+            margin: 0.25em 0 0;
+        }
 
-		li {
-			clear: both;
-		}
-	}
+        li {
+            clear: both;
+        }
+    }
 }
 
 .select-field {
-	line-height: 1.75em;
-	position: relative;
+    line-height: 1.75em;
+    position: relative;
 
-	select {
-		display: block;
-		width: 100%;
-		height: 1.75em;
-		font-family: inherit;
-		font-size: 1.5em;
-		padding: 0 0.5em;
-		border: 0.1em solid;
-		cursor: pointer;
-		@include default-box-shadow(top, 1.5, false);
+    select {
+        display: block;
+        width: 100%;
+        height: 1.75em;
+        font-family: inherit;
+        font-size: 1.5em;
+        padding: 0 0.5em;
+        border: 0.1em solid;
+        cursor: pointer;
+        @include default-box-shadow(top, 1.5, false);
 
-		td &,
-		.table-td & {
-			@include _(box-shadow, none);
-		}
-	}
+        td &,
+        .table-td & {
+            @include _(box-shadow, none);
+        }
+    }
 
-	@if capable_of(pointer-events) {
-		label {
-			@include after {
-				content: '';
-				position: absolute;
-				display: block;
-				border: 0.1em solid;
-				width: 1.75em;
-				height: 1.75em;
-				background-color: $colour-5;
-				font-size: 1.5em;
-				z-index: 1;
-				right: 0em;
-				bottom: 0em;
-				pointer-events: none;
-			}
+    @if capable_of(pointer-events) {
+        label {
+            @include after {
+                content: '';
+                position: absolute;
+                display: block;
+                border: 0.1em solid;
+                width: 1.75em;
+                height: 1.75em;
+                background-color: $colour-5;
+                font-size: 1.5em;
+                z-index: 1;
+                right: 0em;
+                bottom: 0em;
+                pointer-events: none;
+            }
 
-			@include before {
-				content: '';
-				position: absolute;
-				display: block;
-				@include _(transform, rotate(-45deg));
-				border: 0 solid $white;
-				border-width: 0 0 0.25em 0.25em;
-				width: 1em;
-				height: 1em;
-				right: 0.75em;
-				bottom: 1em;
-				z-index: 2;
-				pointer-events: none;
-			}
-		}
+            @include before {
+                content: '';
+                position: absolute;
+                display: block;
+                @include _(transform, rotate(-45deg));
+                border: 0 solid $white;
+                border-width: 0 0 0.25em 0.25em;
+                width: 1em;
+                height: 1em;
+                right: 0.75em;
+                bottom: 1em;
+                z-index: 2;
+                pointer-events: none;
+            }
+        }
 
-		&:hover label {
-			@include after {
-				background-color: $colour-3;
-			}
-		}
+        &:hover label {
+            @include after {
+                background-color: $colour-3;
+            }
+        }
 
-		select {
-			padding-right: 2.25em;
-			-webkit-appearance: none;
-			@include _(appearance, none);
-		}
+        select {
+            padding-right: 2.25em;
+            -webkit-appearance: none;
+            @include _(appearance, none);
+        }
 
-		&.small label {
-			@include after {
-				font-size: 1em;
-			}
+        &.small label {
+            @include after {
+                font-size: 1em;
+            }
 
-			@include before {
-				font-size: 0.725em;
-			}			
-		}
-	}
+            @include before {
+                font-size: 0.725em;
+            }           
+        }
+    }
 
-	&.full select {
-		width: 100%;
-		margin-bottom: 2em;
-	}
+    &.full select {
+        width: 100%;
+        margin-bottom: 2em;
+    }
 
-	&.inline-label {
-		display: inline-block;
+    &.inline-label {
+        display: inline-block;
 
-		label {
-			float: left;
-			margin-right: 0.5em;
-		}
-	}
+        label {
+            float: left;
+            margin-right: 0.5em;
+        }
+    }
 }
 
 .toggleable {
-	@include _(transition, 'transform 250ms ease-in-out, max-height 250ms ease-in-out, visibility 0s linear 250ms');
-	@include _(transform, scaleY(0));
-	@include _(transform-origin, 0 0);
-	max-height: 0;
-	visibility: hidden;
+    @include _(transition, 'transform 250ms ease-in-out, max-height 250ms ease-in-out, visibility 0s linear 250ms');
+    @include _(transform, scaleY(0));
+    @include _(transform-origin, 0 0);
+    max-height: 0;
+    visibility: hidden;
 
-	&.open {
-	@include _(transition, 'transform 250ms ease-in-out, max-height 250ms ease-in-out');
-		max-height: 100em;
-		visibility: visible;
-		@include _(transform, scaleX(1));
-	}
+    &.open {
+    @include _(transition, 'transform 250ms ease-in-out, max-height 250ms ease-in-out');
+        max-height: 100em;
+        visibility: visible;
+        @include _(transform, scaleX(1));
+    }
 }
 
 .on-top-only, .on-top-controls {
-	display: none !important;
+    display: none !important;
 }
 
 html[data-ontop] {
-	body {
-		overflow: hidden;
-	}
+    body {
+        overflow: hidden;
+    }
 
-	.on-top-target {
-		position: fixed;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		padding: 1em;
-		margin: 0 !important;
-		z-index: 100;
-		overflow: auto;
-	}
+    .on-top-target {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: 1em;
+        margin: 0 !important;
+        z-index: 100;
+        overflow: auto;
+    }
 
-	.on-top-control {
-		position: fixed;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		z-index: 101;
-		margin: 0 !important;
-		padding: 1em;
-		background-color: #F8F8F8;
-		@include default-box-shadow(bottom, 2);
-	}
+    .on-top-control {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 101;
+        margin: 0 !important;
+        padding: 1em;
+        background-color: #F8F8F8;
+        @include default-box-shadow(bottom, 2);
+    }
 
-	.on-top-controls {
-		overflow: auto;
+    .on-top-controls {
+        overflow: auto;
 
-		.on-top-close {
-			float: right;
-			background-color: $colour-4;
-		}
-	}
+        .on-top-close {
+            float: right;
+            background-color: $colour-4;
+        }
+    }
 
-	.on-top-only, .on-top-controls {
-		display: inherit !important;
+    .on-top-only, .on-top-controls {
+        display: inherit !important;
 
-		&.space {
-			display: block !important;
-		}
-	}
+        &.space {
+            display: block !important;
+        }
+    }
 
-	.not-on-top {
-		display: none !important;
-	}
+    .not-on-top {
+        display: none !important;
+    }
 }
 
 @include breakpoint(medium) {
-	:focus,
-	input[type="submit"]:focus,
-	.check-box-field input:focus + label,
-	.radio-button-field input:focus + label,
-	.select-field select:focus,
-	.workshop-link:focus .title,
-	#main-nav .nav a:focus .title {
-		html[data-input="kb"] & {
-			outline: 0.25rem solid rgba($colour-2, 0.5);
-			outline-offset: 0.2rem;
-			z-index: 1;
-		}
-	}
-
-	html[data-input="kb"] {
-		#main-nav .logo:focus {
-			outline-offset: -0.2em;
-		}
-
-		.workshop-link:focus,
-		#main-nav .nav a:focus {
-			outline: none;
-		}
-	}
-
-	body {
-		padding-bottom: 0;
-	}
-
-	h2 {
-		font-size: 2.25em;
-	}
-
-	h3 {
-		font-size: 1.75em;
-	}
-
-	p {
-		font-size: 1.25em;
-	}
-
-	fieldset {
-		&.right-help {
-			float: left;
-			text-align: left;
-			margin-right: 1.5em;
-		}
-	}
-
-	form {
-		&.flex-form {
-			@include _-(display, flex);
-			@include _(align-items, flex-start);
-
-			.input-field {
-				@include _(flex, 1);
-			}
-
-			button, .button {
-				margin-left: 1em;
-				height: 2.6em;
-			}
-		}
-	}
-
-	.input-field {
-		&.big select,
-		&.big input {
-			font-size: 2em;
-		}
-	}
-
-	.flex-column {
-		@include _-(display, flex);
-		@include _(align-items, flex-start);
-		margin-top: 1em;
-
-		p:first-child {
-			margin-top: 0;
-		}
-
-		.stretch-item {
-			@include _(flex, 1);
-			margin-right: 1em;
-		}
-	}
-
-	.flex-form, .flex-column {
-		button, .button {
-			width: auto;
-		}
-	}
-
-	.flex-inputs {
-		.stretch-item {
-			@include _(flex, 1);
-			@include _(flex-basis, auto);
-		}
-	}
-
-	#main-nav {
-		.logo {
-			margin-top: 0.25em;
-			font-size: 4.25em;
-		}
-
-		.nav {
-			position: static;
-			font-size: 1.8em;
-			display: block;
-			text-align: right;
-			background-color: transparent;
-			@include _(box-shadow, none);
-
-			form {
-				background-color: transparent;
-			}
-		}
-
-		.nav a, .nav button {
-			width: auto;
-			min-width: 3.5em;
-			overflow: visible;
-			margin-left: 0.725em;
-			line-height: 3em;
-			padding: 0 0 1em;
-			color: $black;
-			@include _(box-shadow, none);
-			@include _(text-shadow, none);
-
-			@include before-and-after {
-				content: '';
-				display: block;
-				position: absolute;
-				background-color: rgba(0, 0, 0, 0.33);
-				z-index: -1;
-				margin: 0;
-				border: 0;
-				font-size: 1em;
-				left: -0.51em;
-				right: -0.51em;
-				top: 0;
-				height: 0;
-				width: auto;
-				@include _(opacity, 1);
-				@include _(transition, height 150ms ease-in-out);
-				@include _(transform, rotate(-20deg) scaleX(0.94) scaleY(1.5) translate(-0.5em, -0.5em));
-				@include _(transform-origin, 0 0);
-			}
-
-			@include after {
-				height: 3em;
-				@include _(opacity, 0.1);
-			}
-			@include before {
-			    box-shadow: 0 0 2em -0.5em rgba(#000, 0.75);
-				@include _(opacity, 0.33);
-			}
-
-			&.current {
-				z-index: 2;
-
-				@include before {
-					height: 3em;
-					@include _(opacity, 0.67);
-				}				
-			}
-
-			&:hover {
-				@include before {
-					height: 3em;
-				}
-			}
-		}
-
-		.nav a {
-			&[class] {
-				background-color: transparent;
-			}
-
-			&.policy {
-				@include before-and-after {
-					background-color: $colour-5;
-				}
-			}
-
-			&.about {
-				@include before-and-after {
-					background-color: $colour-3;
-				}
-			}
-		}
-
-		.nav a.register, .nav button {
-			@include before-and-after {
-				background-color: $colour-2;
-			}
-			&:focus, &:active {
-				@include _(transform, none);
-			}
-		}
-	}
-
-	#banner {
-		margin: 3em auto;
-
-		figure {
-			min-height: 40em;
-			margin: rems(-20) auto rems(2);
-		}
-
-		.title {
-			font-size: 1.9em;
-			margin: 3em 0 1em;
-		}
-
-		img {
-			@include _(box-shadow, 0 0 2em -0.5em rgba(0, 0, 0, 0.5));
-		}
-	}
-
-	#registration-admin-menu {
-		a {
-			margin: 0;
-		}
-	}
-
-	ul.warnings {
-		li {
-			margin: 1em 4em;
-		}
-	}
-
-	.warning-info {
-		margin-left: 1em;
-	}
-
-	.workshop-list {
-		padding: 0 2em;
-	}
-
-	.event-dlg {
-		min-width: 75%;
-	}
-
-	#main {
-		clear: right;
-
-		article {
-			padding: rems(2.5) 7.5%;
-		}
-
-		.columns {
-			form {
-				margin-top: 2em;
-			}
-		}
-
-		.featured-image-container {
-			display: block;
-
-			figure {
-				float: left;
-				width: 33%;
-				margin: 0 1.5em 1em -1.5em;
-			}
-		}
-	}
-
-	#header-title {
-		min-height: rems(35);
-		font-size: 1em;
-
-		&.short {
-			font-size: 2em;
-			min-height: rems(15);
-
-			h1 {
-				position: absolute;
-				bottom: 0;
-				text-align: left;
-				font-size: 2em;
-			}
-
-			@include before {
-				content: '';
-				position: absolute;
-				top: 0;
-				right: 0;
-				bottom: 0;
-				left: 0;
-				z-index: $zindex-base + 2;
-				@include _(box-shadow, inset 0 -13rem 3em -4rem rgba(0, 0, 0, 0.8));
-				@include _(transition, opacity 250ms ease-in-out);
-			}
-		}
-
-		&.no-image {
-			min-height: 0;
-			font-size: 1em;
-		}
-
-		svg {
-			display: block;
-		}
-
-		svg rect {
-			@include _(animation, banner-load 1s ease-in-out);
-		}
-
-		.title {
-			text-align: left;
-			width: 110%;
-			background-color: rgba($white, 0.5);
-			@include _(transform, rotate(-$header-tilt) translate3d(0, 0, 0));
-			@include _(transform-origin, 0 100%);
-		}
-
-		.details {
-			text-align: right;
-			color: #000;
-		}
-
-		.background {
-			display: block;
-		}
-		
-		.primary {
-			padding: 12% 0 0 0.25em;
-		}
-	}
-
-	#footer {
-		footer {
-			font-size: 1em;
-		}
-
-		.github {
-			@include _(flex, none);
-			@include _(flex-basis, auto);
-			margin: 0 1em;
-		}
-		.facebook, .external {
-			margin: 0;
-		}
-
-		.site-info {
-			width: auto;
-			text-align: right;
-		}
-
-		.site-info, .user-controls, .external {
-			width: auto;
-		}
-
-		ul.locales {
-			@include _(flex, none);
-			@include _(flex-basis, auto);
-			@include _(flex-grow, 1);
-			margin: 0 0 0 2em;
-			text-align: left;
-		}
-	}
-
-	.check-box-field,
-	.radio-button-field {
-		@include _-(display, flex);
-
-		label {
-			@include _(flex, 1);
-			border: 0.1em solid;
-			border-left: 0;
-			text-align: left;
-		}
-
-		input:first-child + label {
-			border: 0.1em solid;
-		}
-
-		&.inline {
-			label {
-				float: left;
-			}
-
-			&.vertical {
-				label {
-					float: none;
-				}
-			}
-
-			input[type="radio"] + label {
-				@include after {
-					top: -0.025em;
-					left: 0.175em;
-				}
-			}
-		}
-	}
-
-	.fieldgroup {
-		@include _-(display, flex);
-		@include _-(display, inline-flex);
-	}
-
-	.select-field {
-		select {
-			width: auto;
-		}
-	}
-
-	.admin-blocks {
-		> li {
-			@include _(flex, none);
-			min-width: 12em;
-		}
-	}
-
-	.flow-steps {
-		ul {
-			margin: 2em 0 1em 0;
-		}
-
-		.step {
-			position: static;
-			text-align: center;
-			white-space: normal;
-			@include _(transform, none);
-		}
-	}
+    :focus,
+    input[type="submit"]:focus,
+    .check-box-field input:focus + label,
+    .radio-button-field input:focus + label,
+    .select-field select:focus,
+    .workshop-link:focus .title,
+    #main-nav .nav a:focus .title {
+        html[data-input="kb"] & {
+            outline: 0.25rem solid rgba($colour-2, 0.5);
+            outline-offset: 0.2rem;
+            z-index: 1;
+        }
+    }
+
+    html[data-input="kb"] {
+        #main-nav .logo:focus {
+            outline-offset: -0.2em;
+        }
+
+        .workshop-link:focus,
+        #main-nav .nav a:focus {
+            outline: none;
+        }
+    }
+
+    body {
+        padding-bottom: 0;
+    }
+
+    h2 {
+        font-size: 2.25em;
+
+        &.floating {
+            float: left;
+        }
+    }
+
+    h3, legend {
+        font-size: 1.75em;
+    }
+
+    p {
+        font-size: 1.25em;
+    }
+
+    fieldset {
+        &.right-help {
+            float: left;
+            text-align: left;
+            margin-right: 1.5em;
+        }
+    }
+
+    form {
+        &.flex-form {
+            @include _-(display, flex);
+            @include _(align-items, flex-start);
+
+            .input-field {
+                @include _(flex, 1);
+            }
+
+            button, .button {
+                margin-left: 1em;
+                height: 2.6em;
+            }
+        }
+    }
+
+    .input-field {
+        &.big select,
+        &.big input {
+            font-size: 2em;
+        }
+    }
+
+    .flex-column {
+        @include _-(display, flex);
+        @include _(align-items, flex-start);
+        margin-top: 1em;
+
+        p:first-child {
+            margin-top: 0;
+        }
+
+        .stretch-item {
+            @include _(flex, 1);
+            margin-right: 1em;
+        }
+
+        .select-field ~ .number-field,
+        .select-field ~ .email-field,
+        .select-field ~ .search-field,
+        .select-field ~ .telephone-field,
+        .select-field ~ .password-field,
+        .select-field ~ .text-field {
+            margin-top: 1em;
+        }
+    }
+
+    .flex-form, .flex-column {
+        button, .button {
+            width: auto;
+        }
+    }
+
+    .flex-inputs {
+        .stretch-item {
+            @include _(flex, 1);
+            @include _(flex-basis, auto);
+        }
+    }
+
+    nav.sub-nav {
+        float: right;
+    }
+
+    #main-nav {
+        .logo {
+            margin-top: 0;
+            padding-top: 0.1em;
+            font-size: 4.25em;
+        }
+
+        .nav {
+            position: static;
+            font-size: 1.75em;
+            display: block;
+            text-align: center;
+            background-color: transparent;
+            @include _(box-shadow, none);
+
+            form {
+                background-color: transparent;
+            }
+        }
+
+        .nav a {
+            &[class] {
+                width: auto;
+                overflow: visible;
+                margin-left: 0.725em;
+                padding: 0.25em 0.5em;
+                @include _(box-shadow, none);
+                @include _(text-shadow, none);
+                background-color: transparent;
+                @include _(transform, 'translateY(0)');
+                @include _(transition, transform 150ms ease-in-out);
+            }
+
+            @include before {
+                content: '';
+                position: absolute;
+                top: -0.375em;
+                left: 0;
+                width: 100%;
+                height: 0.5em;
+                background-color: currentColor;
+            }
+
+            .title {
+                position: relative;
+                color: $black;
+            }
+
+            &.policy {
+                color: $colour-5;
+            }
+
+            &.about {
+                color: $colour-3;
+            }
+
+            &.conferences {
+                color: $colour-2;
+            }
+
+            &:hover {
+                @include _(transform, 'translateY(0.25em)');
+            }
+
+            &.current {
+                @include _(transform, 'translateY(0.333em)');
+
+                @include before {
+                    height: 0.5em;
+                    border-bottom: 0.2em solid rgba($white, 0.25);
+                }
+            }
+        }
+
+        // .nav a.register, .nav button {
+        //     @include before-and-after {
+        //         background-color: $colour-2;
+        //     }
+        //     &:focus, &:active {
+        //         @include _(transform, none);
+        //     }
+        // }
+    }
+
+    #banner {
+        margin: 3em auto;
+
+        figure {
+            min-height: 40em;
+            margin: rems(-20) auto rems(2);
+        }
+    }
+    
+    .conference-banner {
+        .title {
+            font-size: 1.9em;
+            margin: 0 0 1em;
+        }
+
+        img {
+            max-height: 62em;
+            max-width: 100%;
+            margin-bottom: 5.5em;
+            @include _(box-shadow, 0 0 2em -0.5em rgba(0, 0, 0, 0.5));
+        }
+    }
+
+    #registration-admin-menu {
+        a {
+            margin: 0;
+        }
+    }
+
+    ul.warnings {
+        li {
+            margin: 1em 4em;
+        }
+    }
+
+    .warning-info {
+        margin-left: 1em;
+    }
+
+    .list-view {
+        ul {
+            display: table;
+            width: 100%;
+        }
+
+        li {
+            display: table-row;
+        }
+
+        .info, .img {
+            display: table-cell;
+        }
+    }
+
+    .workshop-list {
+        padding: 0 2em;
+    }
+
+    .event-dlg {
+        min-width: 75%;
+    }
+
+    #main {
+        clear: right;
+
+        article {
+            padding: rems(2.5) 7.5%;
+        }
+
+        .columns {
+            form {
+                margin-top: 2em;
+            }
+        }
+
+        .featured-image-container {
+            display: block;
+
+            figure {
+                float: left;
+                width: 33%;
+                margin: 0 1.5em 1em -1.5em;
+            }
+        }
+    }
+
+    #header-title {
+        min-height: rems(35);
+        font-size: 1em;
+
+        h1 {
+            margin: 0.67em 0 0.5em;
+        }
+
+        .row {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        &.short {
+            font-size: 2em;
+            min-height: rems(15);
+
+            h1 {
+                position: absolute;
+                bottom: 0;
+                text-align: left;
+                font-size: 2em;
+            }
+
+            @include before {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                z-index: $zindex-base + 2;
+                @include _(box-shadow, inset 0 -13rem 3em -4rem rgba(0, 0, 0, 0.8));
+                @include _(transition, opacity 250ms ease-in-out);
+            }
+        }
+
+        &.map {
+            min-height: 0;
+        }
+
+        &.no-image {
+            min-height: 0;
+            font-size: 1em;
+        }
+
+        svg {
+            display: block;
+        }
+
+        svg rect {
+            @include _(animation, banner-load 1s ease-in-out);
+        }
+
+        .title {
+            text-align: left;
+            width: 110%;
+            background-color: rgba($white, 0.5);
+            @include _(transform, rotate(-$header-tilt) translate3d(0, 0, 0));
+            @include _(transform-origin, 0 100%);
+        }
+
+        .details {
+            text-align: right;
+            color: #000;
+        }
+
+        .background {
+            display: block;
+        }
+        
+        .primary {
+            padding: 12% 0 0 0.25em;
+        }
+    }
+
+    #footer {
+        footer {
+            font-size: 1em;
+        }
+
+        .github {
+            @include _(flex, none);
+            @include _(flex-basis, auto);
+            margin: 0 1em;
+        }
+        .facebook, .external {
+            margin: 0;
+        }
+
+        .site-info {
+            width: auto;
+            text-align: right;
+        }
+
+        .site-info, .user-controls, .external {
+            width: auto;
+        }
+
+        ul.locales {
+            @include _(flex, none);
+            @include _(flex-basis, auto);
+            @include _(flex-grow, 1);
+            margin: 0 0 0 2em;
+            text-align: left;
+        }
+    }
+
+    .check-box-field,
+    .radio-button-field {
+        @include _-(display, flex);
+
+        label {
+            @include _(flex, 1);
+            border: 0.1em solid;
+            border-left: 0;
+            text-align: left;
+        }
+
+        input:first-child + label {
+            border: 0.1em solid;
+        }
+
+        &.inline {
+            label {
+                float: left;
+            }
+
+            &.vertical {
+                label {
+                    float: none;
+                }
+            }
+
+            input[type="radio"] + label {
+                @include after {
+                    top: -0.025em;
+                    left: 0.175em;
+                }
+            }
+        }
+    }
+
+    .fieldgroup {
+        @include _-(display, flex);
+        @include _-(display, inline-flex);
+    }
+
+    .select-field {
+        select {
+            width: auto;
+            min-width: 100%;
+        }
+    }
+
+    .admin-blocks {
+        > li {
+            @include _(flex, none);
+            min-width: 12em;
+        }
+    }
+
+    .flow-steps {
+        ul {
+            margin: 2em 0 1em 0;
+        }
+
+        .step {
+            position: static;
+            text-align: center;
+            white-space: normal;
+            @include _(transform, none);
+        }
+    }
 }
 
 @include breakpoint(large) {
-	#main-nav {
-		.nav {
-			font-size: 1.9em;
-			margin-top: 0;
-		}
-	}
+    // #main-nav {
+    //     .nav {
+    //         font-size: 1.9em;
+    //         margin-top: 0;
+    //     }
+    // }
 
-	#banner {
-		body.fixed-banner & {
-			position: fixed;
-			top: 0;
-			right: 0;
-			left: $sidebar-width;
-			z-index: $zindex-base + 2;
-		}
+    #banner {
+        body.fixed-banner & {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: $sidebar-width;
+            z-index: $zindex-base + 2;
+        }
 
-		figure {
-			width: 90%;
-		}
-	}
-	
-	#main {
-		padding-left: $sidebar-width;
-	}
+        figure {
+            width: 90%;
+        }
+    }
+    
+    #main {
+        padding-left: $sidebar-width;
+    }
 
-	#header-title {
-		&.no-image {
-			min-height: 0;
-		}
-		&.short {
-			min-height: rems(25);
-		}
-		&.no-image,
-		&.short {
-			h1 {
-				text-align: left;
-				margin: 0.67em 0;
-			}
-		}
-	}
+    #header-title {
+        &.no-image {
+            min-height: 0;
+        }
+        &.short {
+            min-height: rems(25);
+        }
+        &.no-image,
+        &.short {
+            h1 {
+                text-align: left;
+                margin: 0.67em 0;
+            }
+        }
 
-	#main-nav .logo {
-		font-size: 5em;
-	}
+        &.map {
+            svg {
+                height: 35em;
+            }
+        }
+    }
 
-	a.logo {
-		display: block;
-		float: none;
-		padding: 0.2em;
-	}
+    #main-nav .logo {
+        font-size: 5em;
+    }
 
-	.actions {
-		margin: 4em 2em 0 0;
-	}
-	
-	#footer {
-		overflow: visible;
-		padding: 0;
-		width: 100%;
-		margin-bottom: 2.5em;
+    a.logo {
+        display: block;
+        float: none;
+        padding: 0.2em;
+    }
 
-		footer {
-			max-width: $row-width;
-			margin: 0 auto;
-		}
-	}
+    .actions {
+        margin: 4em 2em 0 0;
+    }
+    
+    #footer {
+        overflow: visible;
+        padding: 0;
+        width: 100%;
+        margin-bottom: 2.5em;
+
+        footer {
+            max-width: $row-width;
+            margin: 0 auto;
+        }
+    }
+}
+
+@include breakpoint(small, medium) {
+    #main-nav .columns.medium-3 {
+        width: auto;
+    }
 }
