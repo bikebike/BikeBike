@@ -586,14 +586,16 @@ class ApplicationController < LinguaFrancaApplicationController
     end
 
     @events.each do | event |
-      day = event.start_time.midnight.to_date
-      time = event.start_time.hour.to_f + (event.start_time.min / 60.0)
-      @schedule[day] ||= {}
-      @schedule[day][:times] ||= {}
-      @schedule[day][:times][time] ||= {}
-      @schedule[day][:times][time][:type] = :event
-      @schedule[day][:times][time][:length] = (event.end_time - event.start_time) / 3600.0
-      @schedule[day][:times][time][:item] = event
+      if event.present? && event.start_time.present? && event.end_time.present?
+        day = event.start_time.midnight.to_date
+        time = event.start_time.hour.to_f + (event.start_time.min / 60.0)
+        @schedule[day] ||= {}
+        @schedule[day][:times] ||= {}
+        @schedule[day][:times][time] ||= {}
+        @schedule[day][:times][time][:type] = :event
+        @schedule[day][:times][time][:length] = (event.end_time - event.start_time) / 3600.0
+        @schedule[day][:times][time][:item] = event
+      end
     end
 
     @schedule = @schedule.sort.to_h

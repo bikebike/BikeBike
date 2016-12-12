@@ -1,6 +1,6 @@
 = render :partial => 'application/header', :locals => {:image_file => 'parts.jpg'}
 = row do
-	= columns(medium: 12) do
-		%p= _'error.500.description', :p
-		= render 'contact', cancel_btn: false, contact_reason: :website
-		
+  = columns(medium: 12) do
+    %p= _'error.500.description', :p
+    = render 'contact', cancel_btn: false, contact_reason: :website
+    

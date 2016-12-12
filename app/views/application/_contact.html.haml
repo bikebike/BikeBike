@@ -1,14 +1,14 @@
 - contact_reason ||= nil
 - locale ||= nil
 = form_tag (locale.present? ? contact_send_url : url_for_locale(locale, contact_send_path)), class: 'contact-form' do
-	= emailfield :email, nil, big: true, required: true unless logged_in?
-	- if contact_reason.present?
-		= hidden_field_tag :reason, contact_reason
-	- else
-		= contact_reason_select
-	= textfield :subject, nil, required: true, big: true
-	= textarea :message, nil, required: true, plain: true
-	.actions
-		= button_tag :send, value: :send
-		- if cancel_btn
-			%button.close.subdued=_'forms.actions.generic.cancel'
+  = emailfield :email, nil, big: true, required: true unless logged_in?
+  - if contact_reason.present?
+    = hidden_field_tag :reason, contact_reason
+  - else
+    = contact_reason_select
+  = textfield :subject, nil, required: true, big: true
+  = textarea :message, nil, required: true, plain: true
+  .actions
+    = button_tag :send, value: :send
+    - if cancel_btn
+      %button.close.subdued=_'forms.actions.generic.cancel'
