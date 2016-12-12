@@ -21,3 +21,25 @@ task regenerate_images: :environment do
     end
   end
 end
+
+task update_cities: :environment do
+  Location.all.each do |l|
+    city = City.search(([l.city, l.territory, l.country] - [nil, '']).join(', '))
+    l.city_id = city.id
+    l.save!
+  end
+
+  City.all.each do |c|
+    location = Geocoder.search(c.address, language: 'en').first
+    c.place_id = location.data['place_id']
+    c.save!
+  end
+end
+
+task update_cities_es: :environment do
+  City.all.each do |c|
+    city = c.get_translation(:es)
+    c.set_column_for_locale(:city, :es, city, 0) unless city.blank? || city == c.get_column_for_locale(:city, :es)
+    c.save!
+  end
+end
