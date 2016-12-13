@@ -19,7 +19,8 @@ class City < ActiveRecord::Base
     location = Geocoder.search(address, language: locale.to_s).first
 
     location.data['address_components'].each do | component |
-      if component['types'].first == 'locality'
+      # city is usually labelled a 'locality' but sometimes this is missing and only 'colloquial_area' is present
+      if component['types'].first == 'locality' || component['types'].first == 'colloquial_area'
         return component['short_name']
       end
     end
@@ -29,8 +30,11 @@ class City < ActiveRecord::Base
 
   def translate_city(locale)
     translation = get_translation(locale)
-    set_column_for_locale(:city, locale, translation)
-    save!
+    
+    if translation.present?
+      set_column_for_locale(:city, locale, translation)
+      save!
+    end
     
     return translation
   end
@@ -53,6 +57,7 @@ class City < ActiveRecord::Base
     # otherwise build a new city
     component_alises = {
       'locality' => :city,
+      'colloquial_area' => :city,
       'administrative_area_level_1' => :territory,
       'country' => :country
     }
