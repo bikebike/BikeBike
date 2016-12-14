@@ -14,7 +14,7 @@ class CityCache < ActiveRecord::Base
   end
   
   private
-    def normalize_string(str)
+    def self.normalize_string(str)
       # remove accents, unnecessary whitespace, punctuation, and lowcase tje string
       I18n.transliterate(str).gsub(/[^\w\s]/, '').gsub(/\s\s+/, ' ').strip.downcase
     end
