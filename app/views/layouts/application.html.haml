@@ -20,6 +20,8 @@
       %meta{property: 'og:image', content: og_image}
     %meta{name: "theme-color", content: @theme_colour}
     = yield :head
+    = javascript_include_tag 'https://rawgit.com/niklasvh/html2canvas/master/dist/html2canvas.js'
+    = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/amcharts/3.13.0/exporting/canvg.js'
 
   %body{ class: page_style }
     #primary-content

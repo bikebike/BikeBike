@@ -12,6 +12,7 @@ html, body {
 }
 
 body {
+    background-color: $white;
     padding-bottom: 20vw;
 }
 
@@ -1807,6 +1808,7 @@ ul.warnings {
         a {
             color: inherit;
             padding: 0 0.333em;
+            display: inline-block;
 
             &:hover {
                 @include after {
@@ -2946,6 +2948,9 @@ a.logo {
 
 .conference-banner {
     text-align: center;
+    padding: 0;
+    margin: 0 -1em 2em;
+    width: auto;
 
     .title {
         font-size: 5vw;
@@ -2963,6 +2968,10 @@ a.logo {
     .secondary {
         font-size: 0.85em;
         line-height: 2em;
+    }
+
+    img {
+        max-width: 100%;
     }
 }
 
@@ -4653,15 +4662,6 @@ html[data-ontop] {
                 }
             }
         }
-
-        // .nav a.register, .nav button {
-        //     @include before-and-after {
-        //         background-color: $colour-2;
-        //     }
-        //     &:focus, &:active {
-        //         @include _(transform, none);
-        //     }
-        // }
     }
 
     #banner {
@@ -4674,6 +4674,9 @@ html[data-ontop] {
     }
     
     .conference-banner {
+        margin: 0 auto;
+        width: 100%;
+
         .title {
             font-size: 1.9em;
             margin: 0 0 1em;
