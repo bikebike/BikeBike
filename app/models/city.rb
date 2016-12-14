@@ -64,75 +64,90 @@ class City < ActiveRecord::Base
     # see if the city is already present in our database
     city = City.find_by_place_id(location.data['place_id'])
 
-    # return the city if we found it in the db already
-    if city.present?
-      CityCache.cache(str, city.id)
-      return city
-    end
+    # if we didn't find a match by place id, collect the city, territory, and country from the result
+    unless city.present?
+      # google nsames things differently than we do, we'll look for these itesm
+      component_alises = {
+        'locality' => :city,
+        'administrative_area_level_1' => :territory,
+        'country' => :country
+      }
+      
+      # and populate this map to eventually create the city if we need to
+      city_data = {
+          locale: :en,
+          latitude: location.data['geometry']['location']['lat'],
+          longitude: location.data['geometry']['location']['lng'],
+          place_id: location.data['place_id']
+        }
 
-    # otherwise build a new city
-    component_alises = {
-      'locality' => :city,
-      'administrative_area_level_1' => :territory,
-      'country' => :country
-    }
-    city_data = {
-      locale: :en,
-      latitude: location.data['geometry']['location']['lat'],
-      longitude: location.data['geometry']['location']['lng'],
-      place_id: location.data['place_id']
-    }
+      # these things are definitely not cities, make sure we don't think they're one
+      not_a_city = [
+          'administrative_area_level_1',
+          'country',
+          'street_address',
+          'street_number',
+          'postal_code',
+          'postal_code_prefix',
+          'route',
+          'intersection',
+          'premise',
+          'subpremise',
+          'natural_feature',
+          'airport',
+          'park',
+          'point_of_interest',
+          'bus_station',
+          'train_station',
+          'transit_station',
+          'room',
+          'post_box',
+          'parking',
+          'establishment',
+          'floor'
+        ]
 
-    # these things are definitely not cities, make sure we don't think they're one
-    not_a_city = [
-        'administrative_area_level_1',
-        'country',
-        'street_address',
-        'street_number',
-        'postal_code',
-        'postal_code_prefix',
-        'route',
-        'intersection',
-        'premise',
-        'subpremise',
-        'natural_feature',
-        'airport',
-        'park',
-        'point_of_interest',
-        'bus_station',
-        'train_station',
-        'transit_station',
-        'room',
-        'post_box',
-        'parking',
-        'establishment',
-        'floor'
-      ]
+      searched_component = nil
+      location.data['address_components'].each do | component |
+        property = component_alises[component['types'].first]
+        city_data[property] = component['short_name'] if property.present?
 
-    searched_component = nil
-    location.data['address_components'].each do | component |
-      property = component_alises[component['types'].first]
-      city_data[property] = component['short_name'] if property.present?
+        # ideally we will find the component that is labeled a locality but
+        # if that fails we will select what was searched for, hopefully they searched for a city
+        # and not an address or country
+        # some places are not labeled 'locality', search for 'Halifax NS' for example and you will
+        # get 'administrative_area_level_2' since Halifax is a municipality
+        if component['types'] == location.data['types'] && !not_a_city.include?(component['types'].first)
+          searched_component = component['short_name']
+        end
+      end
 
-      # ideally we will find the component that is labeled a locality but
-      # if that fails we will select what was searched for, hopefully they searched for a city
-      # and not an address or country
-      # some places are not labeled 'locality', search for 'Halifax NS' for example and you will
-      # get 'administrative_area_level_2' since Halifax is a municipality
-      if component['types'] == location.data['types'] && !not_a_city.include?(component['types'].first)
-        searched_component = component['short_name']
+      # fall back to the searched component 
+      city_data[:city] ||= searched_component
+
+      # we need to have the city and country at least
+      return false unless city_data[:city].present? && city_data[:country].present?
+
+      # one last attempt to make sure we don't already have a record of this city
+      city = City.where(city: city_data[:city], territory: city_data[:territory], country: city_data[:country]).first
+
+      # only if we still can't find the city, then save it as a new one
+      unless city.present?
+        city = City.new(city_data)
+        # if we found exactly what we were looking for, keep these location details
+        # otherwise we may have searched for 'The Bronx' and set the sity the 'New York' but these details will be about The Bronx
+        # so if we try to show New York on a map it will always point to The Bronx, not very fair to those from Staten Island
+        unless city_data[:city] == searched_component
+          new_location = Geocoder.search(str, language: 'en').first
+          city.latitude = new_location.data['geometry']['location']['lat']
+          city.longitude = new_location.data['geometry']['location']['lng']
+          city.place_id = new_location.data['place_id']
+        end
+        
+        # and create the new city
+        city.save!
       end
     end
-
-    # fall back to the searched component 
-    city_data[:city] ||= searched_component
-
-    # we need to have the city and country at least
-    return false unless city_data[:city].present? && city_data[:country].present?
-
-    # save the new city
-    city = City.new(city_data)
-    city.save!
 
     # save this to our cache
     CityCache.cache(str, city.id)
