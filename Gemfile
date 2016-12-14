@@ -65,7 +65,7 @@ group :development do
 	gem 'capistrano-faster-assets', '~> 1.0'
 
 	gem 'eventmachine', :github => 'krzcho/eventmachine', :branch => 'master'
-	gem 'thin', :github => 'krzcho/thin', :branch => 'master'
+	gem 'thin'# , :github => 'krzcho/thin', :branch => 'master'
 end
 
 group :test do
