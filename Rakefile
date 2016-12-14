@@ -37,8 +37,8 @@ task update_cities: :environment do
     end
   end
 
-  unless c.place_id.present?
-    City.all.each do |c|
+  City.all.each do |c|
+    unless c.place_id.present?
       location = Geocoder.search(c.address, language: 'en').first
       c.place_id = location.data['place_id']
       c.save!

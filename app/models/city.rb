@@ -66,7 +66,7 @@ class City < ActiveRecord::Base
 
     # return the city if we found it in the db already
     if city.present?
-      CityCache.create(city_id: city.id, search: str)
+      CityCache.cache(str, city.id)
       return city
     end
 
@@ -119,7 +119,7 @@ class City < ActiveRecord::Base
       # and not an address or country
       # some places are not labeled 'locality', search for 'Halifax NS' for example and you will
       # get 'administrative_area_level_2' since Halifax is a municipality
-      if component['types'] == location.data['types'] && not_a_city.include?(component['types'].first)
+      if component['types'] == location.data['types'] && !not_a_city.include?(component['types'].first)
         searched_component = component['short_name']
       end
     end
@@ -135,7 +135,7 @@ class City < ActiveRecord::Base
     city.save!
 
     # save this to our cache
-    CityCache.create(city_id: city.id, search: str)
+    CityCache.cache(str, city.id)
 
     # and return it
     return city
