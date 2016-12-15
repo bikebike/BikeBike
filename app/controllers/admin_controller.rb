@@ -11,6 +11,7 @@ class AdminController < ApplicationController
     return do_404 unless logged_in? && current_user.administrator?
     @this_conference = Conference.find_by!(slug: params[:slug])
     @page_title = 'articles.conferences.headings.edit'
+    @main_title_vars = { vars: { title: @this_conference.title } }
     render 'new'
   end
 

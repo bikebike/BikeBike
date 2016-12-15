@@ -932,6 +932,7 @@ en:
       headings:
         conferences: National and Regional Conferences
         Conference_List: Conferences
+        edit: Edit Conference
         types:
           future: Upcoming conferences
           passed: Passed conferences
@@ -1357,6 +1358,10 @@ en:
   forms:
     labels:
       generic:
+        type: Type
+        year: Year
+        is_public: Public
+        is_featured: Featured
         start_date: Start Date
         end_date: End Date
         search: Search
