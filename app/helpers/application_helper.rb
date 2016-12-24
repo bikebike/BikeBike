@@ -1313,7 +1313,7 @@ module ApplicationHelper
       field_options.each do | name, __options |
         _options = __options.deep_dup
         # add the field
-        value = object.is_a?(Hash) ? object[locale.to_sym] : object.get_column_for_locale!(name, locale)
+        value = object.is_a?(Hash) ? object[locale.to_sym] : object.get_column_for_locale!(name, locale, false)
 
         # use the default value if we need to
         if _options[:default].present? && value.blank?
@@ -1368,7 +1368,7 @@ module ApplicationHelper
         class: class_name, data: { locale: locale }).html_safe
       
       # add the field
-      value = object.is_a?(Hash) ? object[locale.to_sym] : object.get_column_for_locale!(name, locale)
+      value = object.is_a?(Hash) ? object[locale.to_sym] : object.get_column_for_locale!(name, locale, false)
 
       # use the default value if we need to
       if options[:default].present? && value.blank?
@@ -1412,11 +1412,11 @@ module ApplicationHelper
     if options[:label] == false
       label_id = options[:labelledby]
     elsif options[:label].present?
-      html += label_tag(id, nil, id: label_id) do
+      html += label_tag([name, id], nil, id: label_id) do
         _(options[:label], :t, vars: options[:vars] || {})
       end
     else
-      html += label_tag(id, nil, id: label_id)
+      html += label_tag([name, id], nil, id: label_id)
     end
 
     if options[:help].present?

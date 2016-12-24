@@ -772,7 +772,7 @@ class ConferenceAdministrationController < ApplicationController
 
     def admin_update_description
       params[:info].each do | locale, value |
-        @this_conference.set_column_for_locale(:info, locale, value)
+        @this_conference.set_column_for_locale(:info, locale, html_value(value))
       end
       @this_conference.save
       set_success_message @admin_step
@@ -793,7 +793,7 @@ class ConferenceAdministrationController < ApplicationController
     def admin_update_payment_message
       begin
         params[:payment_message].each do | locale, value |
-          @this_conference.set_column_for_locale(:payment_message, locale, value)
+          @this_conference.set_column_for_locale(:payment_message, locale, html_value(value))
         end
         @this_conference.save
         set_success_message @admin_step
@@ -1096,10 +1096,6 @@ class ConferenceAdministrationController < ApplicationController
         else
           event = Event.new(conference_id: @this_conference.id, locale: I18n.locale)
         end
-
-        # save title and info
-        event.title = LinguaFranca::ActiveRecord::UntranslatedValue.new(params[:title]) unless event.title! == params[:title]
-        event.info = LinguaFranca::ActiveRecord::UntranslatedValue.new(params[:info]) unless event.info! == params[:info]
         
         # save schedule data
         event.event_location_id = params[:event_location]
@@ -1107,8 +1103,11 @@ class ConferenceAdministrationController < ApplicationController
         event.end_time = event.start_time + params[:time_span].to_f.hours
 
         # save translations
-        (params[:info_translations] || {}).each do | locale, value |
-          event.set_column_for_locale(:title, locale, value, current_user.id) unless value = event._title(locale)
+        (params[:info] || {}).each do | locale, value |
+          event.set_column_for_locale(:title, locale, html_value(value), current_user.id) unless value = event._title(locale)
+        end
+
+        (params[:title] || {}).each do | locale, value |
           event.set_column_for_locale(:info, locale, value, current_user.id) unless value = event._info(locale)
         end
 

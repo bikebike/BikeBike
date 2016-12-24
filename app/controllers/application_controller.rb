@@ -740,4 +740,9 @@ class ApplicationController < LinguaFrancaApplicationController
         @registration.city = last_registration_data.city if last_registration_data.city.present?
       end
     end
+
+    # Set empty HTML values to nil, sometimes we will get values such as '<p> </p>' in rich edits, this will help to make sure they are actually empty
+    def html_value(value)
+      return value.present? && ActionView::Base.full_sanitizer.sanitize(value).strip.present? ? value : nil
+    end
 end
