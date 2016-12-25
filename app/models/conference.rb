@@ -17,7 +17,7 @@ class Conference < ActiveRecord::Base
 
   accepts_nested_attributes_for :conference_host_organizations, reject_if: proc {|u| u[:organization_id].blank?}, allow_destroy: true
 
-    before_create :make_slug
+  before_create :make_slug, :make_title
 
   def to_param
     slug
@@ -97,6 +97,18 @@ class Conference < ActiveRecord::Base
       )
   end
 
+  def make_title(reset = false)
+    if reset
+      self.title = nil
+    end
+
+    self.title ||= Conference.generate_title(
+        conferencetype || :annual,
+        conference_year,
+        city_name.gsub(/\s/, '')
+      )
+  end
+
   def city_name
     return city.city if city.present?
     return location.present? ? location.city : nil
@@ -117,20 +129,24 @@ class Conference < ActiveRecord::Base
 
   def self.conference_types
     {
-      annual: '%{city}%{year}',
-      n:      'North%{year}',
-      s:      'South%{year}',
-      e:      'East%{year}',
-      w:      'West%{year}',
-      ne:     'Northeast%{year}',
-      nw:     'Northwest%{year}',
-      se:     'Southeast%{year}',
-      sw:     'Southwest%{year}'
+      annual: { slug: '%{city}%{year}',   title: 'Bike!Bike! %{year}'},
+      n:      { slug: 'North%{year}',     title: 'Bike!Bike! North %{year}'},
+      s:      { slug: 'South%{year}',     title: 'Bike!Bike! South %{year}'},
+      e:      { slug: 'East%{year}',      title: 'Bike!Bike! East %{year}'},
+      w:      { slug: 'West%{year}',      title: 'Bike!Bike! West %{year}'},
+      ne:     { slug: 'Northeast%{year}', title: 'Bike!Bike! Northeast %{year}'},
+      nw:     { slug: 'Northwest%{year}', title: 'Bike!Bike! Northwest %{year}'},
+      se:     { slug: 'Southeast%{year}', title: 'Bike!Bike! Southeast %{year}'},
+      sw:     { slug: 'Southwest%{year}', title: 'Bike!Bike! Southwest %{year}'}
     }
   end
 
   def self.generate_slug(type, year, city)
-    Conference.conference_types[(type || :annual).to_sym].gsub('%{city}', city).gsub('%{year}', year.to_s)
+    Conference.conference_types[(type || :annual).to_sym][:slug].gsub('%{city}', city).gsub('%{year}', year.to_s)
+  end
+
+  def self.generate_title(type, year, city)
+    Conference.conference_types[(type || :annual).to_sym][:title].gsub('%{city}', city).gsub('%{year}', year.to_s)
   end
 
 end
