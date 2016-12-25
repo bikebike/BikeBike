@@ -933,6 +933,9 @@ en:
         conferences: National and Regional Conferences
         Conference_List: Conferences
         edit: Edit Conference
+        new: New Conference
+        edit_conference: Edit %{title}
+        new_conference: Create a new conference
         types:
           future: Upcoming conferences
           passed: Passed conferences

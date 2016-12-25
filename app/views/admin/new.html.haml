@@ -5,7 +5,7 @@
   = row do
     = form_tag save_conference_path, class: 'composition' do
       = columns(medium: 12) do
-        %h2=_@page_title, :t
+        %h2=_"articles.conferences.headings.#{@this_conference.id.present? ? 'edit' : 'new'}_conference", :t, vars: { title: @this_conference.title }
         = hidden_field_tag :id, @this_conference.id if @this_conference.id.present?
 
       = columns(medium: 12) do

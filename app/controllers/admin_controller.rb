@@ -4,7 +4,7 @@ class AdminController < ApplicationController
   def new
     return do_404 unless logged_in? && current_user.administrator?
     @this_conference = Conference.new
-    @page_title = 'articles.conferences.headings.new'
+    @main_title = @page_title = 'articles.conferences.headings.new'
   end
 
   def edit
