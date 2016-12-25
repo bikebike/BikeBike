@@ -34,4 +34,18 @@ class AdminController < ApplicationController
 
     redirect_to conference_url(conference.slug)
   end
+
+  rescue_from ActiveRecord::PremissionDenied do |exception|
+    if logged_in?
+      redirect_to :register
+    else
+      @register_template = :confirm_email
+      @page_title = "articles.conference_registration.headings.#{@this_conference.registration_status == :open ? '': 'Pre_'}Registration_Details"
+      render :register
+    end
+  end
+
+  rescue_from ActiveRecord::RecordNotFound do |exception|
+    do_404
+  end
 end

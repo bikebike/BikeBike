@@ -306,8 +306,8 @@ class ConferencesController < ApplicationController
 
   end
 
-  helper_method :registration_steps
-  helper_method :current_registration_steps
+  # helper_method :registration_steps
+  # helper_method :current_registration_steps
   helper_method :registration_complete?
 
   def registration_steps(conference = nil)
@@ -360,36 +360,6 @@ class ConferencesController < ApplicationController
     return true
   end
 
-  def current_registration_steps(registration = @registration)
-    return nil unless registration.present?
-
-    steps = registration_steps(registration.conference)
-    current_steps = []
-    disable_steps = false
-    completed_steps = registration.steps_completed || []
-    registration_complete = registration_complete?(registration)
-    steps.each do | step |
-      # disable the step if we've already found an incomplete step
-      enabled = !disable_steps || registration_complete
-      # record whether or not we've found an incomplete step
-      disable_steps ||= !completed_steps.include?(step.to_s)
-
-      current_steps << {
-        name:    step,
-        enabled: enabled
-      }
-    end
-    return current_steps
-  end
-
-  def current_step(registration = @registration)
-    completed_steps = registration.steps_completed || []
-    (registration_steps(registration.conference) || []).each do | step |
-      return step unless completed_steps.include?(step.to_s)
-    end
-    return registration_steps(registration.conference).last
-  end
-
   rescue_from ActiveRecord::PremissionDenied do |exception|
     if logged_in?
       redirect_to :register
@@ -398,6 +368,10 @@ class ConferencesController < ApplicationController
       @page_title = "articles.conference_registration.headings.#{@this_conference.registration_status == :open ? '': 'Pre_'}Registration_Details"
       render :register
     end
+  end
+
+  rescue_from ActiveRecord::RecordNotFound do |exception|
+    do_404
   end
 
   private

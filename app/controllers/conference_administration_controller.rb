@@ -77,6 +77,10 @@ class ConferenceAdministrationController < ApplicationController
     end
   end
 
+  rescue_from ActiveRecord::RecordNotFound do |exception|
+    do_404
+  end
+
   private
     # Administration form pages
     def administrate_administrators
