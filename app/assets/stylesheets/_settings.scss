@@ -20,6 +20,12 @@ $mid-gray: #888;
 // $red: #B24C63;
 $red: #FF5A5F;
 
+$blue: $colour-1;
+$pink: $colour-2;
+$yellow: $colour-3;
+$orange: $colour-4;
+$green: $colour-5;
+
 $link-colour: darken($colour-1, 13%);
 
 @mixin default-box-shadow($direction: top, $distance: 1, $inset: false, $additional-shadow: false) {

@@ -67,7 +67,7 @@ BikeBike::Application.routes.draw do
   get   '/humans.txt' => 'application#humans', as: :humans_txt
 
   # Error pages
-  post  '/js_error' => 'application#js_error'
+  match '/js_error' => 'application#js_error', via: [:get, :post]
   get   '/error_403' => 'application#do_403' unless Rails.env.production?
   get   '/error_404' => 'application#error_404' unless Rails.env.production?
   get   '/error_500' => 'application#error_500' unless Rails.env.production?

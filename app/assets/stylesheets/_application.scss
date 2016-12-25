@@ -3863,6 +3863,7 @@ body.policy .policy-agreement ul {
 .list-view {
     ul {
         list-style: none;
+        padding: 0;
 
         &.break {
             border-top: 0.25em solid $light-gray;
@@ -4714,10 +4715,18 @@ html[data-ontop] {
 
         li {
             display: table-row;
+
+            &.not-public {
+                background-color: lighten($yellow, 33%);
+            }
         }
 
         .info, .img {
             display: table-cell;
+        }
+
+        .info {
+            padding-left: 1em;
         }
     }
 
