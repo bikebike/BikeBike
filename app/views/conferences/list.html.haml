@@ -18,23 +18,24 @@
   = row do
     = columns(medium: 12, id: :conferences, class: 'list-view') do
       - @conference_list.each do | type, list |
-        %h3=_"articles.conferences.headings.types.#{type.to_s}", :t
-        %ul
-          - list.each do | conference |
-            %li.conference{id: "conference-#{conference.id}", data: {a: conference.city.latitude, o: conference.city.longitude, y: conference.year, t: conference.conferencetype}, class: conference.is_public ? nil : 'not-public'}
-              .info
-                %h4.title= conference.title
-                .conference-details
-                  .location=location(conference.city)
-                  - if conference.start_date.present? && conference.end_date.present?
-                    .date= date_span(conference.start_date.to_date, conference.end_date.to_date)
-                .actions
-                  = link_to (_'articles.workshops.info.read_more'), conference_path(conference.slug), class: ['button', 'conference-link', 'small']
-                  - if logged_in?
-                    - if conference.host? current_user
-                      = link_to (_'forms.actions.generic.administrate'), administrate_conference_path(conference.slug), class: [:button, :modify, :small]
-                    - if current_user.administrator?
-                      = link_to (_'forms.actions.generic.edit'), edit_conference_path(conference.slug), class: [:button, :subdued, :small]
-              - if conference.poster.present?
-                .img
-                  %img{src: conference.poster.preview.url}
+        - if list.present?
+          %h3=_"articles.conferences.headings.types.#{type.to_s}", :t
+          %ul
+            - list.each do | conference |
+              %li.conference{id: "conference-#{conference.id}", data: {a: conference.city.latitude, o: conference.city.longitude, y: conference.year, t: conference.conferencetype}, class: conference.is_public ? nil : 'not-public'}
+                .info
+                  %h4.title= conference.title
+                  .conference-details
+                    .location=location(conference.city)
+                    - if conference.start_date.present? && conference.end_date.present?
+                      .date= date_span(conference.start_date.to_date, conference.end_date.to_date)
+                  .actions
+                    = link_to (_'articles.workshops.info.read_more'), conference_path(conference.slug), class: ['button', 'conference-link', 'small']
+                    - if logged_in?
+                      - if conference.host? current_user
+                        = link_to (_'forms.actions.generic.administrate'), administrate_conference_path(conference.slug), class: [:button, :modify, :small]
+                      - if current_user.administrator?
+                        = link_to (_'forms.actions.generic.edit'), edit_conference_path(conference.slug), class: [:button, :subdued, :small]
+                - if conference.poster.present?
+                  .img
+                    %img{src: conference.poster.preview.url}
