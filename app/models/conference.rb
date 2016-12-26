@@ -76,6 +76,10 @@ class Conference < ActiveRecord::Base
     registration_status == :open
   end
 
+  def can_register?
+    registration_status == :open || registration_status == :pre
+  end
+
   def registration_status
     s = read_attribute(:registration_status)
     s.present? ? s.to_sym : nil

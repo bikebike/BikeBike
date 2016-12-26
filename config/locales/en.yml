@@ -1150,6 +1150,8 @@ en:
         Workshops_You_Have_Requested: Workshops you have Requested to Facilitate
         Pre_Registration_Details: Pre-Registration is now open!
         Registration_Details: Registration is now open!
+        Pre_Register: Pre-Register for %{title}
+        Register: Register for %{title}
         Verify_Account: Verify your account
         Hosting: Hosting
         can_provide_housing: Can you provide housing to attendees visiting the city?

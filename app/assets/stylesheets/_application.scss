@@ -1536,7 +1536,7 @@ fieldset {
             @include _(flex-direction, column);
             @include _(align-items, stretch);
             color: inherit;
-            margin: 0.5em;
+            margin: 0.5em 0;
             border: 0.1em solid $light-gray;
             border-bottom: 0;
             @include default-box-shadow(top, 2);
@@ -1552,10 +1552,9 @@ fieldset {
         }
 
         svg, img {
-            width: 5em;
             height: 5em;
-            margin: 0.5em;
-            float: left;
+            width: 100%;
+            margin: 1em 0 0;
         }
 
         svg {
@@ -3881,7 +3880,6 @@ body.policy .policy-agreement ul {
         
         > div {
             vertical-align: top;
-            padding: 2em 0;
 
             h3, p:first-child {
                 margin-top: 0;
@@ -3913,7 +3911,7 @@ body.policy .policy-agreement ul {
     }
 
     .actions {
-        margin-top: 1em;
+        margin: 1em 0;
     }
 }
 
@@ -4726,7 +4724,7 @@ html[data-ontop] {
         }
 
         .info {
-            padding-left: 1em;
+            padding: 2em 1em 2em 0;
         }
     }
 
@@ -4936,6 +4934,20 @@ html[data-ontop] {
             text-align: center;
             white-space: normal;
             @include _(transform, none);
+        }
+    }
+
+    .actions {
+        &.figures {
+            .figure {
+                margin: 0 0 1em;
+            }
+            
+            svg, img {
+                width: 5em;
+                margin: 0.5em;
+                float: left;
+            }
         }
     }
 }

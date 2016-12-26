@@ -354,11 +354,15 @@ class WorkshopsController < ApplicationController
   end
 
   rescue_from ActiveRecord::PremissionDenied do |exception|
-    if logged_in?
+    if !@this_conference.can_register?
+      do_404
+    elsif logged_in?
       redirect_to 'conferences/register'
     else
       @register_template = :confirm_email
       @page_title = "articles.conference_registration.headings.#{@this_conference.registration_status == :open ? '': 'Pre_'}Registration_Details"
+      @main_title = "articles.conference_registration.headings.#{@this_conference.registration_status == :open ? '': 'Pre_'}Register"
+      @main_title_vars = { vars: { title: @this_conference.title } }
       render 'conferences/register'
     end
   end
