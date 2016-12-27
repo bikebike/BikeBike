@@ -150,8 +150,7 @@ class ApplicationController < LinguaFrancaApplicationController
 
     begin
       # log the error
-      logger.info exception.to_s
-      logger.info exception.backtrace.join("\n")
+      logger.info "Javascript exception: #{params[:message]}"
 
       UserMailer.send_mail(:error_report) do 
         [
@@ -164,8 +163,8 @@ class ApplicationController < LinguaFrancaApplicationController
           current_user,
           Time.now.strftime("%d/%m/%Y %H:%M")
         ]
-      end if Rails.env.preview? || Rails.env.production?
-    rescue exception2
+      end# if Rails.env.preview? || Rails.env.production?
+    rescue Exception => exception2
       logger.info exception2.to_s
       logger.info exception2.backtrace.join("\n")
     end
@@ -484,7 +483,7 @@ class ApplicationController < LinguaFrancaApplicationController
           Time.now.strftime("%d/%m/%Y %H:%M")
         ]
       end if Rails.env.preview? || Rails.env.production?
-    rescue exception2
+    rescue Exception => exception2
       logger.info exception2.to_s
       logger.info exception2.backtrace.join("\n")
     end
