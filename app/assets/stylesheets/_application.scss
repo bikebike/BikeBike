@@ -3059,6 +3059,7 @@ $header-tilt: 8deg;
         svg {
             vertical-align: middle;
             background-color: transparent;
+            width: 100%;
             @include _(transition, background-color 1s ease-in-out);
 
             &.loaded {

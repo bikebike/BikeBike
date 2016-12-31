@@ -70,7 +70,7 @@
       var annualConferences = container.append('g').attr('filter', 'url(#svg-gooey-filter)').attr('class', 'cities annual-conferences');
 
       function mouseover(e) {
-        c = document.getElementById('conference-' + event.target.getAttribute('data-c'));
+        c = document.getElementById('conference-' + d3.event.target.getAttribute('data-c'));
         tooltip.innerHTML = '<h3>' + c.querySelector('.title').innerHTML + '</h3>' +
                             '<div class="conference-details">' + c.querySelector('.conference-details').innerHTML + '</div>';
         tooltip.className = 'open';
@@ -81,7 +81,7 @@
       }
 
       function click(e) {
-        l = document.querySelector('#conference-' + event.target.getAttribute('data-c') + ' .conference-link');
+        l = document.querySelector('#conference-' + d3.event.target.getAttribute('data-c') + ' .conference-link');
         window.location.href = l.getAttribute('href');
       }
 
