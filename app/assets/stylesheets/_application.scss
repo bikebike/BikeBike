@@ -4723,6 +4723,10 @@ html[data-ontop] {
         .info, .img {
             display: table-cell;
         }
+        
+        .img {
+            padding: 2em 0 1em;
+        }
 
         .info {
             padding: 2em 1em 2em 0;
