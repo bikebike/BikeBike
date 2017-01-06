@@ -15,6 +15,8 @@ class ConferencesController < ApplicationController
 
   def view
     set_conference
+    do_403 unless @this_conference.is_public || @this_conference.host?(current_user)
+
     @workshops = Workshop.where(:conference_id => @conference.id)
 
     if @this_conference.workshop_schedule_published
