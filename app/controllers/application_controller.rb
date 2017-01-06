@@ -326,7 +326,7 @@ class ApplicationController < LinguaFrancaApplicationController
     return do_403 unless logged_in?
     current_user.firstname = params[:name]
     current_user.lastname = nil
-    current_user.languages = params[:languages].keys
+    current_user.languages = (params[:languages] || { I18n.locale.to_s => true }).keys
     current_user.is_subscribed = params[:email_subscribe].present?
     current_user.save
     redirect_to settings_path
