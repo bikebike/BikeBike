@@ -1799,7 +1799,7 @@ module ApplicationHelper
 
   def companion(registration)
     if registration.housing_data.present? && registration.housing_data['companions'].present? && registration.housing_data['companions'].first.present?
-      companion_user = User.find_by_email(registration.housing_data['companions'].first)
+      companion_user = User.find_user(registration.housing_data['companions'].first)
 
       if companion_user.present?
         cr = ConferenceRegistration.where(user_id: companion_user.id).order(created_at: :desc).limit(1).first

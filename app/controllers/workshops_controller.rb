@@ -297,11 +297,11 @@ class WorkshopsController < ApplicationController
     set_conference
     set_conference_registration!
 
-    user = User.find_by_email(params[:email])
+    user = User.find_user(params[:email])
 
     # create the user if they don't exist and send them a link to register
     unless user
-      user = User.create(email: params[:email])
+      user = User.create(email: params[:email], locale: I18n.locale)
       generate_confirmation(user, register_path(@this_conference.slug))
     end
 

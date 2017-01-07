@@ -631,11 +631,11 @@ class ConferenceAdministrationController < ApplicationController
 
             companions = data['companions'] || []
             companions.each do | companion |
-              user = User.find_by_email(companion)
+              user = User.find_user(companion)
               if user.present?
                 reg = ConferenceRegistration.find_by(
-                    :user_id => user.id,
-                    :conference_id => @this_conference.id
+                    user_id: user.id,
+                    conference_id: @this_conference.id
                   )
                 if reg.present? && @guests[reg.id].present?
                   housing_data = reg.housing_data || {}
@@ -846,7 +846,7 @@ class ConferenceAdministrationController < ApplicationController
         if params[:button] == 'save'
           return do_404 unless params[:email].present? && params[:name].present?
 
-          user = User.find_by_email(params[:email]) || User.create(email: params[:email])
+          user = User.get(params[:email])
           user.firstname = params[:name]
           user.save!
           registration = ConferenceRegistration.new(

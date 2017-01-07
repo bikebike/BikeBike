@@ -11,7 +11,7 @@
           %h3=_'articles.user_settings.headings.Your_Conferences'
           .link-dump
             - @conferences.each do | conference |
-              = link_to (_!conference.title), administration_step_path(conference.slug, :edit), class: :button
+              = link_to (_!conference.title), administrate_conference_path(conference.slug), class: :button
 
         = form_tag update_settings_path do
           = textfield :name, current_user.name, required: true, heading: 'articles.conference_registration.headings.name', big: true

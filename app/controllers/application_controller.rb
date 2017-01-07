@@ -248,7 +248,7 @@ class ApplicationController < LinguaFrancaApplicationController
 
   def generate_confirmation(user, url, expiry = nil)
     if user.is_a? String
-      user = User.find_by_email(user)
+      user = User.find_user(user)
 
       # if the user doesn't exist, just show them a 403
       do_403 unless user.present?
@@ -338,15 +338,11 @@ class ApplicationController < LinguaFrancaApplicationController
       # see if we've already sent the confirmation email and are just confirming
       #  the email address
       if params[:token]
-        user = User.find_by_email(params[:email])
+        user = User.find_user(params[:email])
         confirm(user)
         return
       end
-      user = User.find_by_email(params[:email])
-
-      unless user.present?
-        user = User.create(:email => params[:email], locale: I18n.locale)
-      end
+      user = User.get(params[:email])
 
       # generate the confirmation, send the email and show the 403
       referrer = params[:dest] || (request.present? && request.referer.present? ? request.referer.gsub(/^.*?\/\/.*?\//, '/') : settings_path)

@@ -370,7 +370,7 @@ Then (/^in th(e|at) email I should see (.+)$/) do |a, value|
 end
 
 Then(/^(I )?confirm my account$/) do | a |
-	@my_account = User.find_by(:email => @last_email_entered)
+	@my_account = User.find_user(@last_email_entered)
 	@confirmation = EmailConfirmation.where(["user_id = ?", @my_account.id]).order("created_at DESC").first
 	visit "/confirm/#{@confirmation.token}"
 end
@@ -458,7 +458,7 @@ Then (/^my registration (should( not)? be|is( not)?) (confirmed|completed?|paid)
 end
 
 Then (/^I am( not)? a user$/) do |state|
-	User.find_by(:email => @last_email_entered).
+	User.find_user(@last_email_entered).
 		send(state =~ / not/ ? 'should_not' : 'should', be)
 end
 
@@ -481,7 +481,7 @@ Then (/^I am( not)? a member of (.+)$/) do |state, org_name|
 end
 
 Then (/^My (.+) should(not )? be (.+)$/) do |field, state, value|
-	User.find_by(:email => @last_email_entered).
+	User.find_user(@last_email_entered).
 		send(field.gsub(/\s/, '_')).
 		send(state =~ / not/ ? 'should_not' : 'should', eq(value))
 end

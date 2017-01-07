@@ -172,7 +172,7 @@ class ConferencesController < ApplicationController
           }
         when :questions
           # create the companion's user account and send a registration link unless they have already registered
-          generate_confirmation(User.create(email: params[:companion]), register_path(@this_conference.slug)) if params[:companion].present? && User.find_by_email(params[:companion]).nil?
+          generate_confirmation(User.create(email: params[:companion]), register_path(@this_conference.slug)) if params[:companion].present? && User.find_user(params[:companion]).nil?
           
           @registration.housing = params[:housing]
           @registration.arrival = params[:arrival]

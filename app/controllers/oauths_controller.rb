@@ -23,14 +23,13 @@ class OauthsController < ApplicationController
     # otherwise find the user by email
     unless user.present?
       # only look if the email address is present
-      user = User.find_by_email(email) if email.present?
+      user = User.find_user(email) if email.present?
     end
 
     # create the user if the email is not recognized
     if user.nil?
       if email.present?
-        user = User.new(email: email, firstname: user_info['name'], fb_id: fb_id)
-        user.save!
+        user = User.create(email: email, firstname: user_info['name'], fb_id: fb_id, locale: I18n.locale)
       else
         session[:oauth_update_user_info] = user_info
         return redirect_to oauth_update_path
@@ -62,7 +61,7 @@ class OauthsController < ApplicationController
       return redirect_to oauth_update_path
     end
     
-    user = User.find_by_email(params[:email])
+    user = User.find_user(params[:email])
 
     if user.present?
       flash[:error] = :exists

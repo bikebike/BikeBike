@@ -15,10 +15,12 @@ class User < ActiveRecord::Base
 
   before_update do |user|
     user.locale ||= I18n.locale
+    user.email.downcase!
   end
 
   before_save do |user|
     user.locale ||= I18n.locale
+    user.email.downcase!
   end
 
   def can_translate?(to_locale = nil, from_locale = nil)
@@ -50,11 +52,10 @@ class User < ActiveRecord::Base
   end
 
   def self.get(email)
-    user = where(email: email).first
+    user = find_user(email)
 
     unless user
-      user = new(email: email)
-      user.save!
+      user = create(email: email, locale: I18n.locale)
     end
 
     return user
