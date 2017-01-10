@@ -2,7 +2,7 @@
 - if @warnings.present?
   = row class: 'warnings', tag: :ul do
     - @warnings.each do | warning |
-      = columns tag: :li do
+      = columns tag: :li, class: 'warning-info' do
         = warning
 %article
   = row do
