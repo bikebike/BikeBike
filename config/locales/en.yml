@@ -1364,6 +1364,7 @@ en:
   forms:
     labels:
       generic:
+        hosting_dates: When will you be in town?
         type: Type
         year: Year
         is_public: Public

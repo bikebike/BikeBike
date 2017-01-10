@@ -996,6 +996,7 @@ es:
   forms:
     labels:
       generic:
+        hosting_dates: ¿Cuándo estarás en la ciudad?
         title: Título de la taller
         info: Descripción
         allergies: Alérgicx

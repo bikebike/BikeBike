@@ -239,7 +239,7 @@ module ApplicationHelper
   def registration_steps(conference = @conference)
     {
       pre: [:policy, :contact_info, :workshops],
-      open: [:policy, :contact_info, :questions, :payment, :workshops]
+      open: [:policy, :contact_info, :questions, :hosting, :payment, :workshops]
     }[@this_conference.registration_status]
   end
 

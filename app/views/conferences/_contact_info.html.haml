@@ -2,7 +2,7 @@
   %p=_'articles.conference_registration.paragraphs.Contact_Info', :s, 2
   = form_tag register_path(@this_conference.slug) do
     = textfield :name, @name, required: true, heading: 'articles.conference_registration.headings.name', big: true
-    = textfield :location, (params[:location] || @registration.city || location(lookup_ip_location)), required: true, heading: 'articles.conference_registration.headings.location'
+    = textfield :location, (params[:location] || location(@registration.city ||lookup_ip_location)), required: true, heading: 'articles.conference_registration.headings.location'
     = checkboxes :languages, User.AVAILABLE_LANGUAGES, (current_user.languages || [I18n.locale]).map(&:to_sym), 'languages', heading: 'articles.conference_registration.headings.languages'
     .actions.next-prev
       = button_tag (params[:step] == :save ? :save : :next), value: :contact_info

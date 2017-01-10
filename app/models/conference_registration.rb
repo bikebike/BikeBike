@@ -29,6 +29,10 @@ class ConferenceRegistration < ActiveRecord::Base
     [:vegan, :smoking, :pets, :quiet]
   end
 
+  def city
+    city_id.present? ? City.find(city_id) : nil
+  end
+
   def status(was = false)
     return :unregistered if user.nil? || user.firstname.blank? || self.send(was ? :city_was : :city).blank?
     return :registered if self.send(was ? :housing_was : :housing).present? || (self.send(was ? :can_provide_housing_was : :can_provide_housing) && (self.send(was ? :housing_data_was : :housing_data) || {})['availability'].present?)

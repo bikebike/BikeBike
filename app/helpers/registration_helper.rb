@@ -7,6 +7,13 @@ module RegistrationHelper
     disable_steps = false
     completed_steps = registration.steps_completed || []
     registration_complete = registration_complete?(registration)
+
+    if registration.city_id == registration.conference.city_id
+      steps -= [:questions]
+    else
+      steps -= [:hosting]
+    end
+    
     steps.each do | step |
       # disable the step if we've already found an incomplete step
       enabled = !disable_steps || registration_complete

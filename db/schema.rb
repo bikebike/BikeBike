@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161211065022) do
+ActiveRecord::Schema.define(version: 20170110061048) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "applications", force: :cascade do |t|
+    t.string   "slug"
+    t.string   "name"
+    t.string   "path"
+    t.string   "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "authentications", force: :cascade do |t|
     t.integer  "user_id",    null: false
@@ -120,6 +129,7 @@ ActiveRecord::Schema.define(version: 20161211065022) do
     t.json     "steps_completed"
     t.boolean  "can_provide_housing"
     t.json     "housing_data"
+    t.integer  "city_id"
   end
 
   create_table "conference_types", force: :cascade do |t|
