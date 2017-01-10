@@ -5,4 +5,4 @@
 - else
   %p=_'email.registration.paragraph.confirmed', :vars => {:conference_title => @conference.title}
 
-  %p=_'email.general.paragraph.see_you', :vars => {:conference_location => @conference.location.city}
+  %p=_'email.general.paragraph.see_you', :vars => {:conference_location => @conference.city_name}

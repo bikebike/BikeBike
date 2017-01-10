@@ -32,7 +32,7 @@ class ConferencesController < ApplicationController
       
       if @this_conference.host? current_user
         @links ||= []
-        @links = [:administrate]
+        @links = [:administrate, :register]
       end
     end
   end
@@ -233,14 +233,14 @@ class ConferencesController < ApplicationController
     steps ||= registration_steps
 
     # make sure we're on a valid step
-    @register_template ||= (params[:step] || current_step).to_sym
+    @register_template ||= (params[:step] || view_context.current_step).to_sym
 
     if logged_in? && @register_template != :paypal_confirm
       # if we're logged in
       if !steps.include?(@register_template)
         # and we are not viewing a valid step
         return redirect_to register_path(@this_conference.slug)
-      elsif @register_template != current_step && !registration_complete? && !@registration.steps_completed.include?(@register_template.to_s)
+      elsif @register_template != view_context.current_step && !registration_complete? && !@registration.steps_completed.include?(@register_template.to_s)
         # or the step hasn't been reached, registration is not yet complete, and we're not viewing the latest incomplete step
         return redirect_to register_path(@this_conference.slug)
       end

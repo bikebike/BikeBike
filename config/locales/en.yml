@@ -1156,6 +1156,7 @@ en:
         Hosting: Hosting
         can_provide_housing: Can you provide housing to attendees visiting the city?
         questions: Your Visit
+        basic_info: Your Visit
         host:
           considerations: Special Considerations
           space: Available Space

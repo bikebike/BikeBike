@@ -2977,11 +2977,15 @@ a.logo {
 .conference-details {
     .links {
         text-align: center;
-        font-size: 1.25em;
         margin-bottom: 2em;
 
         .button {
             margin: 0 0.25em 0.5em;
+            vertical-align: middle;
+        }
+
+        .register {
+            font-size: 1.5em;
         }
     }
 }
@@ -3881,6 +3885,7 @@ body.policy .policy-agreement ul {
         
         > div {
             vertical-align: top;
+            margin-top: 2em;
 
             h3, p:first-child {
                 margin-top: 0;
