@@ -30,9 +30,19 @@ module RegistrationHelper
 
   def current_step(registration = @registration)
     completed_steps = registration.steps_completed || []
-    (registration_steps(registration.conference) || []).each do | step |
-      return step unless completed_steps.include?(step.to_s)
+    last_step = nil
+    (current_registration_steps(registration) || []).each do | step |
+      # return the last enabled step if this one is disabled
+      return last_step unless step[:enabled]
+
+      # save the last step
+      last_step = step[:name]
+
+      # return this step if it hasn't been completed yet
+      return last_step unless completed_steps.include?(last_step.to_s)
     end
+
+    # if all else fails, return the first step
     return registration_steps(registration.conference).last
   end
 end
