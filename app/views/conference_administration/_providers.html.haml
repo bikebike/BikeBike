@@ -1,2 +1,10 @@
-= columns(medium: 12) do
-  TO COME
+= admin_update_form do
+  = columns(medium: 12) do
+    %h3=_'articles.admin.housing.headings.provider_distance', :t
+    %p=_'articles.admin.housing.descriptions.provider_distance', :p, vars: { city: @this_conference.city_name }
+  = columns(medium: 12, class: 'flex-column') do
+    = numberfield :distance_number, @conditions['distance']['number'], step: 1, min: 0, stretch: true, label: false
+    = selectfield :distance_unit, @conditions['distance']['unit'], [:km, :mi], label: false, inline: true
+  = columns(medium: 12) do
+    .actions.right
+      = button_tag :save, value: :save_distance

@@ -2191,6 +2191,24 @@ module ApplicationHelper
     }
   end
 
+  def potential_provider(registration)
+    return false unless registration.present? && registration.city.present? && registration.conference.present?
+    conditions = registration.conference.provider_conditions ||
+                 Conference.default_provider_conditions
+    return city_distance_less_than(registration.conference.city, registration.city,
+                                   (conditions['distance']['number'] || '0').to_i,
+                                   conditions['distance']['unit'])
+  end
+
+  def city_distance_less_than(city1, city2, max_distance, unit)
+    return false if city1.nil? || city2.nil?
+    return true if city1.id == city2.id
+    return false if max_distance < 1
+    return Geocoder::Calculations.distance_between(
+      [city1.latitude, city1.longitude], [city2.latitude, city2.longitude],
+      units: unit.to_sym) < max_distance
+  end
+
   private
     def _original_content(value, lang)
       content_tag(:div, (

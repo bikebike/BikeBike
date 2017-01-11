@@ -8,7 +8,7 @@ module RegistrationHelper
     completed_steps = registration.steps_completed || []
     registration_complete = registration_complete?(registration)
 
-    if registration.city_id == registration.conference.city_id
+    if potential_provider(registration)
       steps -= [:questions]
     else
       steps -= [:hosting]

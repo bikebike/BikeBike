@@ -58,7 +58,7 @@ class ConferencesController < ApplicationController
 
     steps = nil
     return do_404 unless registration_steps.present?
-    
+
     @register_template = :administration if params[:admin_step].present?
 
     @errors = {}
@@ -330,7 +330,7 @@ class ConferencesController < ApplicationController
     steps -= [:questions] unless status == :open
     steps -= [:payment] unless status == :open && conference.paypal_email_address.present? && conference.paypal_username.present? && conference.paypal_password.present? && conference.paypal_signature.present?
     if @registration.present?
-      if @registration.city_id == conference.city_id
+      if view_context.potential_provider(@registration)
         steps -= [:questions]
         
         # if this is a housing provider that is not attending the conference, remove these steps

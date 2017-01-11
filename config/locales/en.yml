@@ -243,6 +243,7 @@ en:
         org_member_removed: User removed from organization
         administrator_added: Administrator added to conference
         administrator_removed: Administrator removed from conference
+        distance_saved: Provider options updated
   helpers:
     select:
       prompt: Please select
@@ -999,8 +1000,10 @@ en:
           arrival_departure: In City
           providers: Housing Providers
           housing: Arrange Housing
+          provider_distance: Distance from host city
         descriptions:
           providers: Although most housing providers shuold be encouraged to supply their own details through the registration process, you can add and edit housing provider details manually here.
+          provider_distance: Any registrant who enters their location in the same city as the conference will get a housing provider form during registration instead of a guest form. If you want to consider surrounding cities as well, enter the distance from %{city} that you wish to be included as providers. Cities are measured from center to center.
           housing: Pair each housing provider with a list of guests.
       locations:
         heading: Locations

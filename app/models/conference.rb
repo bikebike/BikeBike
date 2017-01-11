@@ -153,4 +153,8 @@ class Conference < ActiveRecord::Base
     Conference.conference_types[(type || :annual).to_sym][:title].gsub('%{city}', city).gsub('%{year}', year.to_s)
   end
 
+  def self.default_provider_conditions
+    { 'distance' => { 'number' => 0, 'unit' => 'mi' }}
+  end
+
 end

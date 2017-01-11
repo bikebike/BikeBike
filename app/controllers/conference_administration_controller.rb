@@ -106,6 +106,8 @@ class ConferenceAdministrationController < ApplicationController
     end
 
     def administrate_providers
+      @conditions = Conference.default_provider_conditions.deep_merge(
+        @this_conference.provider_conditions || {})
     end
 
     def administrate_payment_message
@@ -1188,6 +1190,23 @@ class ConferenceAdministrationController < ApplicationController
       when 'publish'
         @this_conference.workshop_schedule_published = !@this_conference.workshop_schedule_published
         @this_conference.save
+        return false
+      end
+
+      do_404
+      return false
+    end
+
+    def admin_update_providers
+      case params[:button]
+      when 'save_distance'
+        @this_conference.provider_conditions ||= Conference.default_provider_conditions
+        @this_conference.provider_conditions['distance'] = {
+          'number' => params[:distance_number],
+          'unit' => params[:distance_unit]
+        }
+        @this_conference.save
+        set_success_message :distance_saved
         return false
       end
 
