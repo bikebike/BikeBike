@@ -1367,6 +1367,7 @@ en:
   forms:
     labels:
       generic:
+        space: Available Space
         hosting_dates: When will you be in town?
         type: Type
         year: Year
@@ -1499,6 +1500,9 @@ en:
           nw: 'Northwest'
           se: 'Southeast'
           sw: 'Southwest'
+      distance_unit:
+        km: km
+        mi: mi
     confirmations:
       delete: Are you sure you want to delete?
   page_titles:
