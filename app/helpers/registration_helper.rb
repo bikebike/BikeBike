@@ -6,7 +6,7 @@ module RegistrationHelper
     current_steps = []
     disable_steps = false
     completed_steps = registration.steps_completed || []
-    registration_complete = registration_complete?(registration)
+    # registration_complete = registration_complete?(registration)
 
     if potential_provider(registration)
       steps -= [:questions]
@@ -16,9 +16,9 @@ module RegistrationHelper
     
     steps.each do | step |
       # disable the step if we've already found an incomplete step
-      enabled = !disable_steps || registration_complete
+      enabled = !disable_steps# || registration_complete
       # record whether or not we've found an incomplete step
-      disable_steps ||= !completed_steps.include?(step.to_s)
+      disable_steps ||= !completed_steps.include?(step.to_s) && ![:payment, :workshops].include?(step)
 
       current_steps << {
         name:    step,
