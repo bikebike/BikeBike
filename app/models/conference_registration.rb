@@ -34,10 +34,16 @@ class ConferenceRegistration < ActiveRecord::Base
   end
 
   def status(was = false)
-    return :unregistered if user.nil?
-    steps = ((was ? steps_completed_was : steps_completed) || []).map(&:to_sym)
-    return :registered if steps.include?(:hosting) || steps.include?(:questions)
-    return :preregistered if steps.include?(:contact_info)
+    # our user hasn't registered if their user doesn't exist or they haven't entered a city
+    return :unregistered if user.nil? || check(:city, was).blank?
+
+    # registration completes once a guest has entered a housing preference or
+    #   a housing provider has opted in or out of providing housing
+    return :preregistered unless
+      check(:housing, was).present? || !check(:can_provide_housing, was).nil?
+
+    # they must be registered
+    return :registered
   end
 
   around_update :check_status
@@ -59,5 +65,10 @@ class ConferenceRegistration < ActiveRecord::Base
         end
       end
     end
+  end
+
+private
+  def check(field, was)
+    send("#{field}#{was ? '_was' : ''}")
   end
 end
