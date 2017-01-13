@@ -867,7 +867,12 @@ class ConferenceAdministrationController < ApplicationController
         params.each do | key, value |
           case key.to_sym
           when :city
-            registration.city = value.present? ? view_context.location(Geocoder.search(value, language: @this_conference.locale).first, @this_conference.locale) : nil
+            if value.present?
+              city = City.search(value)
+              if city.present?
+                registration.city_id = city.id
+              end
+            end
           when :housing, :bike, :food, :allergies, :other
             registration.send("#{key.to_s}=", value)
           when :registration_fees_paid

@@ -50,6 +50,14 @@ class City < ActiveRecord::Base
     return translation
   end
 
+  def to_s
+    ([
+      city,
+      territory.present? && country.present? ? I18n.t("geography.subregions.#{country}.#{territory}") : '',
+      country.present? ? I18n.t("geography.countries.#{country}") : ''
+      ] - ['', nil]).join(', ')
+  end
+
   def self.search(str)
     cache = CityCache.search(str)
 
@@ -66,7 +74,7 @@ class City < ActiveRecord::Base
 
     # if we didn't find a match by place id, collect the city, territory, and country from the result
     unless city.present?
-      # google nsames things differently than we do, we'll look for these itesm
+      # google names things differently than we do, we'll look for these items
       component_alises = {
         'locality' => :city,
         'administrative_area_level_1' => :territory,

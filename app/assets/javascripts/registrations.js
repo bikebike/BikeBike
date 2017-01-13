@@ -69,9 +69,9 @@
 	}
 
 	function editTableCell(cell) {
-		if (selectorMatches(cell, 'tr[data-key].editable td')) {
+		if (cell && selectorMatches(cell, 'tr[data-key].editable td')) {
 			editTableRow(cell.parentElement, cell);
-		} else if (!selectorMatches(cell, 'tr[data-key].editable + tr, tr[data-key].editable + tr *')) {
+		} else if (!cell || !selectorMatches(cell, 'tr[data-key].editable + tr, tr[data-key].editable + tr *')) {
 			var currentRow = document.querySelector('tr[data-key].editable.editing');
 			if (currentRow) {
 				saveRow(currentRow);
@@ -130,6 +130,10 @@
 	} else {
 		document.addEventListener("focus", function (event) { editTableCell(event.target); }, true);
 	}
+
+	window.onbeforeunload = function() {
+		editTableCell();
+	};
 
 	searchControl.addEventListener('keyup', filterTable);
 	searchControl.addEventListener('search', filterTable);
