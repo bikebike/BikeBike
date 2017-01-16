@@ -1,15 +1,15 @@
 (function() {
-    window.onerror = function(message, url, lineNumber) {  
+    window.onerror = function(message, url, lineNumber) {
         //save error and send to server for example.
         var request = new XMLHttpRequest();
-        request.open('POST', '/js_error', true);
-        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-        request.send(
+        var data =
             'message=' + encodeURI(message) +
             '&url=' + encodeURI(url) +
             '&lineNumber=' + encodeURI(lineNumber) +
-            '&location=' + encodeURI(window.location.href)
-        );
+            '&location=' + encodeURI(window.location.href);
+        request.open('GET', '/js_error?' + data, true);
+        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+        request.send();
         return false;
     };
     window.forEach = function(a, f) { Array.prototype.forEach.call(a, f) };
