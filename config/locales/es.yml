@@ -753,6 +753,8 @@ es:
         conferences: Bike!Bike! conferencias se llevan a cabo nacionalmente una vez al año en una ciudad diferente en América del Norte; Las conferencias regionales pueden celebrarse en cualquier lugar y en cualquier momento.
     conference_registration:
       headings:
+        Pre_Register: Pre-Register for %{title}
+        Register: Register for %{title}
         Workshops_Looking_For_Facilitators: Talleres que necesitan facilitadorxs
         Add_Workshop: Proponer un taller
         workshops: Talleres
