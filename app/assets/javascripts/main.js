@@ -67,8 +67,8 @@
             if (msg) {
                 dlg.querySelector('.message').innerHTML = msg.innerHTML
             }
-            if (link.dataset.infoTitle) {
-                dlg.querySelector('.title').innerHTML = decodeURI(link.dataset.infoTitle);
+            if (link.getAttribute('data-infoTitle')) {
+                dlg.querySelector('.title').innerHTML = decodeURI(link.getAttribute('data-infoTitle'));
             }
             confirmBtn = dlg.querySelector('.confirm');
             if (confirmBtn) {
@@ -133,7 +133,7 @@
     
     var htmlNode = document.documentElement;
     document.addEventListener('keydown', function(event) {
-        if (htmlNode.dataset.input != 'kb' &&
+        if (htmlNode.getAttribute('data-input') != 'kb' &&
                 ((["input", "textarea", "select", "option"].indexOf(event.target.nodeName.toLowerCase()) < 0 &&
                 !event.target.attributes.contenteditable) || event.key == "Tab")) {
             htmlNode.setAttribute('data-input', 'kb');
@@ -141,7 +141,7 @@
     });
     
     document.addEventListener('mousemove', function(event) {
-        if (htmlNode.dataset.input != 'mouse' && (event.movementX || event.movementY)) {
+        if (htmlNode.getAttribute('data-input') != 'mouse' && (event.movementX || event.movementY)) {
             htmlNode.setAttribute('data-input', 'mouse');
         }
     });
