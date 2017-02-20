@@ -991,7 +991,8 @@ module ApplicationHelper
   def administration_sub_steps
     {
       location_edit: :locations,
-      event_edit: :events
+      event_edit: :events,
+      broadcast_sent: :broadcast
     }
   end
 

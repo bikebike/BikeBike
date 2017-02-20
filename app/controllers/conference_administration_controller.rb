@@ -62,7 +62,10 @@ class ConferenceAdministrationController < ApplicationController
     set_flash_messages
 
     # redirect to the step unless the method handled redirection itself
-    unless self.send(method_name)
+    case self.send(method_name)
+    when true
+      administration_step(@admin_step)
+    when false
       redirect_to administration_step_path(@this_conference.slug, @admin_step)
     end
   end
@@ -100,6 +103,9 @@ class ConferenceAdministrationController < ApplicationController
     end
 
     def administrate_broadcast
+      if @this_conference.start_date.blank? || @this_conference.end_date.blank?
+        @warning_message = :no_date_warning
+      end
     end
 
     def administrate_broadcast_sent
@@ -120,6 +126,9 @@ class ConferenceAdministrationController < ApplicationController
     end
 
     def administrate_registration_status
+      if @this_conference.start_date.blank? || @this_conference.end_date.blank?
+        @warning_message = :no_date_warning
+      end
     end
 
     def administrate_organizations
@@ -165,6 +174,11 @@ class ConferenceAdministrationController < ApplicationController
     end
 
     def administrate_registrations
+      if @this_conference.start_date.blank? || @this_conference.end_date.blank?
+        @warning_message = :no_date_warning
+        return
+      end
+
       get_stats(!request.format.xlsx?)
 
       if request.format.xlsx?
@@ -200,6 +214,11 @@ class ConferenceAdministrationController < ApplicationController
     end
 
     def administrate_stats
+      if @this_conference.start_date.blank? || @this_conference.end_date.blank?
+        @warning_message = :no_date_warning
+        return
+      end
+
       get_stats(!request.format.xlsx?)
 
       if request.format.xlsx?
@@ -736,7 +755,7 @@ class ConferenceAdministrationController < ApplicationController
         end
       else
         do_404
-        return true
+        return nil
       end
 
       return false
@@ -945,7 +964,7 @@ class ConferenceAdministrationController < ApplicationController
         do_404
       end
 
-      return true
+      return nil
     end
 
     def admin_update_housing
@@ -985,7 +1004,7 @@ class ConferenceAdministrationController < ApplicationController
         do_404
       end
 
-      return true
+      return nil
     end
 
     def admin_update_broadcast
@@ -1007,7 +1026,7 @@ class ConferenceAdministrationController < ApplicationController
           end
         end
         redirect_to administration_step_path(@this_conference.slug, :broadcast_sent)
-        return true
+        return nil
       elsif params[:button] == 'preview'
         @send_to_count = view_context.broadcast_to(@send_to).size
         @broadcast_step = :preview
@@ -1024,7 +1043,7 @@ class ConferenceAdministrationController < ApplicationController
         end
         @send_to_count = view_context.broadcast_to(@send_to).size
       end
-      return false
+      return true
     end
 
     def admin_update_locations
@@ -1087,14 +1106,14 @@ class ConferenceAdministrationController < ApplicationController
       end
 
       do_404
-      return true
+      return nil
     end
 
     def admin_update_events
       case params[:button]
       when 'edit'
         redirect_to edit_event_path(@this_conference.slug, params[:id])
-        return true
+        return nil
       when 'save'
         if params[:id].present?
           event = Event.find_by!(conference_id: @this_conference.id, id: params[:id])
@@ -1124,7 +1143,7 @@ class ConferenceAdministrationController < ApplicationController
       end
 
       do_404
-      return true
+      return nil
     end
 
     def admin_update_workshop_times
@@ -1141,7 +1160,7 @@ class ConferenceAdministrationController < ApplicationController
       end
 
       do_404
-      return true
+      return nil
     end
 
     def admin_update_schedule
@@ -1155,7 +1174,6 @@ class ConferenceAdministrationController < ApplicationController
         @entire_page = false
         get_scheule_data
         render partial: 'schedule'
-        return true
       when 'get-workshop-list'
         get_scheule_data(true)
         
@@ -1171,7 +1189,6 @@ class ConferenceAdministrationController < ApplicationController
         end
 
         render partial: 'select_workshop_table'
-        return true
       when 'set-workshop'
         workshop = Workshop.find_by!(conference_id: @this_conference.id, id: params[:workshop].to_i)
         workshop.event_location_id = params[:location]
@@ -1183,11 +1200,11 @@ class ConferenceAdministrationController < ApplicationController
         get_scheule_data
         
         render partial: 'schedule'
-        return true
+      else
+        do_404
       end
 
-      do_404
-      return true
+      return nil
     end
 
     def admin_update_schedule

@@ -78,11 +78,15 @@ class ApplicationController < LinguaFrancaApplicationController
   end
 
   def home
-    @workshops = Workshop.where(:conference_id => @conference.id)
+    @workshops = []
 
-    if @conference.workshop_schedule_published
-      @event_dlg = true
-      get_scheule_data(false)
+    if @conference.present?
+      @workshops = Workshop.where(conference_id: @conference.id)
+
+      if @conference.workshop_schedule_published
+        @event_dlg = true
+        get_scheule_data(false)
+      end
     end
   end
 

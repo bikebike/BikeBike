@@ -5,15 +5,18 @@ gem 'pg'
 gem 'rake', '11.1.2'
 gem 'ruby_dep', '1.3.1' # Lock at 1.3.1 since 1.4 requires ruby 2.5. We should unlock once we upgrade the ruby version on our server
 
+# gem 'bcrypt-ruby', '3.0.0', require: 'bcrypt'
+# gem 'bcrypt', '3.1.9'
+# gem 'bcrypt', require: :ruby
 gem 'rack-mini-profiler'
 
 gem 'haml'
 gem 'nokogiri', '~> 1.6.8.rc2'
 
 if Dir.exists?('../lingua_franca')
-	gem 'lingua_franca', :path => '../lingua_franca'
+  gem 'lingua_franca', :path => '../lingua_franca'
 else
-	gem 'lingua_franca', :git => 'git://github.com/lingua-franca/lingua_franca.git'
+  gem 'lingua_franca', :git => 'git://github.com/lingua-franca/lingua_franca.git'
 end
 
 gem 'tzinfo-data'
@@ -21,15 +24,15 @@ gem 'sass'
 gem 'sass-rails'
 
 if Dir.exists?('../bumbleberry')
-	gem 'bumbleberry', :path => "../bumbleberry"
+  gem 'bumbleberry', :path => "../bumbleberry"
 else
-	gem 'bumbleberry', :git => 'git://github.com/bumbleberry/bumbleberry.git'
+  gem 'bumbleberry', :git => 'git://github.com/bumbleberry/bumbleberry.git'
 end
 
 if Dir.exists?('../paypal-express')
-	gem 'paypal-express', :path => "../paypal-express"
+  gem 'paypal-express', :path => "../paypal-express"
 else
-	gem 'paypal-express', :git => 'git://github.com/bikebike/paypal-express.git'
+  gem 'paypal-express', :git => 'git://github.com/bikebike/paypal-express.git'
 end
 
 gem 'uglifier', '>= 1.3.0'
@@ -51,52 +54,52 @@ gem 'launchy'
 gem 'to_spreadsheet', :git => 'git://github.com/glebm/to_spreadsheet.git'
 
 group :test do
-	gem 'rspec'
-	gem 'rspec-rails'
+  gem 'rspec'
+  gem 'rspec-rails'
 end
 
 group :development do
- 	gem 'better_errors'
- 	gem 'binding_of_caller'
- 	gem 'meta_request'
-	
-	gem 'capistrano', '~> 3.1'
-	gem 'capistrano-rails', '~> 1.1'
-	gem 'capistrano-faster-assets', '~> 1.0'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'meta_request'
+  
+  gem 'capistrano', '~> 3.1'
+  gem 'capistrano-rails', '~> 1.1'
+  gem 'capistrano-faster-assets', '~> 1.0'
 
-	gem 'eventmachine', :github => 'krzcho/eventmachine', :branch => 'master'
-	gem 'thin'# , :github => 'krzcho/thin', :branch => 'master'
+  gem 'eventmachine', :github => 'krzcho/eventmachine', :branch => 'master'
+  gem 'thin'# , :github => 'krzcho/thin', :branch => 'master'
 end
 
 group :test do
-	gem 'gherkin3', '>= 3.1.0'
-	gem 'cucumber'
-	gem 'cucumber-core'
-	gem 'cucumber-rails'
+  gem 'gherkin3', '>= 3.1.0'
+  gem 'cucumber'
+  gem 'cucumber-core'
+  gem 'cucumber-rails'
 
-	gem 'poltergeist'
-	gem 'guard-rspec'
-	gem 'factory_girl_rails'
-	gem 'coveralls', require: false
-	gem 'selenium-webdriver'
-	gem 'simplecov', require: false
-	gem 'webmock', require: false
-	gem 'database_cleaner'
-	gem 'mocha'
-end
-
-group :staging, :production, :preview do
-	gem 'rails_12factor'
+  gem 'poltergeist'
+  gem 'guard-rspec'
+  gem 'factory_girl_rails'
+  gem 'coveralls', require: false
+  gem 'selenium-webdriver'
+  gem 'simplecov', require: false
+  gem 'webmock', require: false
+  gem 'database_cleaner'
+  gem 'mocha'
 end
 
 group :production, :preview do
-	gem 'unicorn'
-	gem 'daemon-spawn'
-	gem 'daemons'
+  gem 'rails_12factor'
+  gem 'daemon-spawn'
+  gem 'daemons'
+  
+  platforms :ruby do
+    gem 'unicorn'
+  end
 end
 
 platforms 'mswin', 'mingw' do
-	group :test do
-		gem 'wdm', '>= 0.1.0'
-	end
+  group :test do
+    gem 'wdm', '>= 0.1.0'
+  end
 end

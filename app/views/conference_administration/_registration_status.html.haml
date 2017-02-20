@@ -1,5 +1,9 @@
-= columns(medium: 12) do
-  = form_tag administration_update_path(@this_conference.slug, @admin_step) do
-    = selectfield :registration_status, @this_conference.registration_status || 'closed', registration_status_options_list, inline_label: true
-    .actions.left
-      = button_tag :save, value: :save
+- if @warning_message
+  = columns(medium: 12) do
+    .warning-info=_"articles.admin.registrations.#{@warning_message}"
+- else
+  = columns(medium: 12) do
+    = form_tag administration_update_path(@this_conference.slug, @admin_step) do
+      = selectfield :registration_status, @this_conference.registration_status || 'closed', registration_status_options_list, inline_label: true
+      .actions.left
+        = button_tag :save, value: :save

@@ -1,17 +1,21 @@
-- add_inline_script :registrations
-= columns(medium: 12) do
-  .goes-fullscreen#registrations-table
-    .flex-column
-      = searchfield :search, nil, big: true, stretch: true
-      %a.button{data: { expands: 'registrations-table' }}='expand'
-      %a.button.delete{data: { contracts: 'registrations-table' }}='close'
-      %a.button.modify{data: { 'opens-modal': 'new-registration' }}='+'
-    .table-scroller
-      = html_table @excel_data, registrations_table_options
-    = admin_update_form id: 'new-registration', class: 'modal-edit' do
-      .modal-edit-overlay{data: { 'closes-modal': 'new-registration' }}
-      .modal-edit-content
-        = html_edit_table @excel_data, registrations_edit_table_options
-        .actions.right
-          %a.button.subdued{data: { 'closes-modal': 'new-registration' }}='Cancel'
-          = button_tag :save, value: :save, class: :modify
+- if @warning_message
+  = columns(medium: 12) do
+    .warning-info=_"articles.admin.registrations.#{@warning_message}"
+- else
+  - add_inline_script :registrations
+  = columns(medium: 12) do
+    .goes-fullscreen#registrations-table
+      .flex-column
+        = searchfield :search, nil, big: true, stretch: true
+        %a.button{data: { expands: 'registrations-table' }}='expand'
+        %a.button.delete{data: { contracts: 'registrations-table' }}='close'
+        %a.button.modify{data: { 'opens-modal': 'new-registration' }}='+'
+      .table-scroller
+        = html_table @excel_data, registrations_table_options
+      = admin_update_form id: 'new-registration', class: 'modal-edit' do
+        .modal-edit-overlay{data: { 'closes-modal': 'new-registration' }}
+        .modal-edit-content
+          = html_edit_table @excel_data, registrations_edit_table_options
+          .actions.right
+            %a.button.subdued{data: { 'closes-modal': 'new-registration' }}='Cancel'
+            = button_tag :save, value: :save, class: :modify

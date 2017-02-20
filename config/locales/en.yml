@@ -961,6 +961,8 @@ en:
           completed_registrations: Number of registrations
           incomplete_registrations: Incomplete registrations
           Registrations: Registrations
+      registrations:
+        no_date_warning: Before users can register, you must first set your conference start and end dates.
       meals:
         description: On this page you can schedule the meals that you will be serving.
         no_locations_warning: Before you can add meals, you must first add locations.
@@ -1054,12 +1056,14 @@ en:
           stats: Statistics
           registrations: Modify Registrations
           broadcast: Contact Users
+          broadcast_sent: You email has been dispatched
         description: Open or close registration, view registration statistics, modify information subbmitted by registratnts and contact users.
         descriptions:
           registration_status: Open or close registration to your conference.
           stats: View a breakdown of statictics, how many users have registered, how much money have been collected, etc.
           registrations: View and edit all data collected through the registration process.
           broadcast: Send emails to targeted subsets of users.
+          broadcast_sent: Your email has been queued to send, depending on the number of users you have sent to, it may take several hours to send to everyone.
       broadcast:
         heading: Broadcast
         description: The broadcast tool is used to contact users through email. You can send messages en masse to select groups of users.
