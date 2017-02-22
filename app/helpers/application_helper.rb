@@ -1560,6 +1560,7 @@ module ApplicationHelper
   def textfield(name, value, options = {})
     html = ''
     id = unique_id(name)
+    html_name = name.to_s + (options[:index] ? "[#{options[:index]}]" : '')
     description_id = nil
     
     if options[:heading].present?
@@ -1635,14 +1636,14 @@ module ApplicationHelper
       if options[:required] && options[:options].first.present? && options[:options].first.last.present?
         option_list = ('<option value="">&nbsp;</option>' + option_list).html_safe
       end
-      html += select_tag(name, option_list, input_options)
+      html += select_tag(html_name, option_list, input_options)
     when :file
       add_inline_script :filefield
       input_options[:tabindex] = '-1'
-      html += off_screen(file_field_tag name, input_options)
+      html += off_screen(file_field_tag html_name, input_options)
     else
       input_options[:autocomplete] = 'off' if options[:type] == :search
-      html += send("#{(options[:type] || :text).to_s}_field_tag", name, value, input_options)
+      html += send("#{(options[:type] || :text).to_s}_field_tag", html_name, value, input_options)
     end
 
     if options[:after].present?
