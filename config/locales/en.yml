@@ -202,6 +202,9 @@ en:
         error_removing_org_member: Error removing user from organization
         error_adding_administrator: Error adding administrator
         error_removing_administrator: Error removing administrator
+        save_block_time_required: Time is required
+        save_block_time_span_required: Length is required
+        save_block_days_required: Please select at least one day
     template:
       body: 'There were problems with the following fields:'
       header:
@@ -244,6 +247,10 @@ en:
         administrator_added: Administrator added to conference
         administrator_removed: Administrator removed from conference
         distance_saved: Provider options updated
+        block_saved: Workshop time has been saved
+        block_deleted: Workshop time has been deleted
+        schedule_published: Your schedule has been published and should be visible on your conference page
+        schedule_unpublished: Your schedule has been un-published and should no longer be visible to users
   helpers:
     select:
       prompt: Please select

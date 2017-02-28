@@ -21,7 +21,7 @@
         - if conference.workshop_schedule_published
           - add_inline_script :home_schedule
           %h3=_'articles.workshops.headings.Schedule'
-          = render 'conferences/admin/schedule'
+          = render 'conference_administration/schedule'
         - else
           %h3=_'articles.workshops.headings.Proposed_Workshops'
           %p=_'articles.workshops.paragraphs.Proposed_Workshops'

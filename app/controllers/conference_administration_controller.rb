@@ -1149,18 +1149,43 @@ class ConferenceAdministrationController < ApplicationController
     def admin_update_workshop_times
       case params[:button]
       when 'save_block'
+        empty_param = empty_params(:time, :time_span, :days)
+        if empty_param.present?
+          set_error_message "save_block_#{empty_param}_required".to_sym
+        else
+          @this_conference.workshop_blocks ||= []
+          @this_conference.workshop_blocks[params[:workshop_block].to_i] = {
+            'time' => params[:time],
+            'length' => params[:time_span],
+            'days' => params[:days].keys
+          }
+          @this_conference.save
+          set_success_message :block_saved
+        end
+        return false
+      when 'delete_block'
         @this_conference.workshop_blocks ||= []
-        @this_conference.workshop_blocks[params[:workshop_block].to_i] = {
-          'time' => params[:time],
-          'length' => params[:time_span],
-          'days' => params[:days].keys
-        }
+        @this_conference.workshop_blocks.delete_at(params[:workshop_block].to_i)
         @this_conference.save
+        set_success_message :block_deleted
         return false
       end
 
       do_404
       return nil
+    end
+
+    def admin_update_publish_schedule
+      case params[:button]
+      when 'publish'
+        @this_conference.workshop_schedule_published = !@this_conference.workshop_schedule_published
+        @this_conference.save
+        set_success_message "schedule_#{@this_conference.workshop_schedule_published ? '' : 'un'}published".to_sym
+        return false
+      end
+
+      do_404
+      return false
     end
 
     def admin_update_schedule
@@ -1207,18 +1232,6 @@ class ConferenceAdministrationController < ApplicationController
       return nil
     end
 
-    def admin_update_schedule
-      case params[:button]
-      when 'publish'
-        @this_conference.workshop_schedule_published = !@this_conference.workshop_schedule_published
-        @this_conference.save
-        return false
-      end
-
-      do_404
-      return false
-    end
-
     def admin_update_providers
       case params[:button]
       when 'save_distance'
@@ -1242,5 +1255,9 @@ class ConferenceAdministrationController < ApplicationController
         return key unless hash[key].present?
       end
       return nil
+    end
+
+    def empty_params(*args)
+      get_empty(params, args)
     end
 end
