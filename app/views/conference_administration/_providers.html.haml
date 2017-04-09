@@ -7,4 +7,4 @@
     = selectfield :distance_unit, @conditions['distance']['unit'], [:km, :mi], label: false, inline: true
   = columns(medium: 12) do
     .actions.right
-      = button_tag :save, value: :save_distance
+      = button :save, value: :save_distance

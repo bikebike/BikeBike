@@ -19,7 +19,7 @@
           = radiobuttons :preferred_language, I18n.backend.enabled_locales, current_user.locale || I18n.locale, 'languages', heading: 'articles.conference_registration.headings.preferred_language'
           = checkbox :email_subscribe, current_user.is_subscribed != false, 'articles.user_settings.email_subscribe', heading: 'articles.user_settings.headings.email_subscribe', help: 'articles.user_settings.paragraphs.email_subscribe', inline: true, right_help: true
           .actions
-            = button_tag :save, value: :save
+            = button :save, value: :save
       - else
         %h2=_'forms.actions.generic.login'
         = render 'login'

@@ -1,10 +1,10 @@
 = render :partial => 'application/header', :locals => {:image_file => @banner_image || 'grafitti.jpg'}
 %article
-	= row do
-		= columns do
-			- if @sent
-				%h2=_'articles.contact.headings.sent', :t
-				%p=_'articles.contact.paragraphs.sent', :p
-			- else
-				%h2=_'articles.contact.headings.contact'
-				= render 'contact', cancel_btn: false
+  = row do
+    = columns do
+      - if @sent
+        %h2=_'articles.contact.headings.sent', :t
+        %p=_'articles.contact.paragraphs.sent', :p
+      - else
+        %h2=_'articles.contact.headings.contact'
+        = render 'contact', cancel_btn: false

@@ -2,6 +2,7 @@ require 'geocoder/calculations'
 require 'rest_client'
 
 class ConferencesController < ApplicationController
+
   def list
     @page_title = 'articles.conferences.headings.Conference_List'
     @conference_list = { future: [], passed: [] }
@@ -17,7 +18,7 @@ class ConferencesController < ApplicationController
     set_conference
     do_403 unless @this_conference.is_public || @this_conference.host?(current_user)
 
-    @workshops = Workshop.where(:conference_id => @conference.id)
+    @workshops = Workshop.where(:conference_id => @this_conference.id)
 
     if @this_conference.workshop_schedule_published
       @event_dlg = true
@@ -59,7 +60,7 @@ class ConferencesController < ApplicationController
     steps = nil
     return do_404 unless registration_steps.present?
 
-    @register_template = :administration if params[:admin_step].present?
+    # @register_template = :administration if params[:admin_step].present?
 
     @errors = {}
     @warnings = []
@@ -72,8 +73,19 @@ class ConferencesController < ApplicationController
         @register_template = steps[steps.find_index($1.to_sym) - 1]
       elsif form_step == :paypal_confirm
         if @registration.present? && @registration.payment_confirmation_token == params[:confirmation_token]
-          @amount = PayPal!.details(params[:token]).amount.total
-          @registration.payment_info = {:payer_id => params[:PayerID], :token => params[:token], :amount => @amount}.to_yaml
+          if Rails.env.test?
+            @amount = params[:amount].to_f
+            info = YAML.load(@registration.payment_info)
+            info[:amount] = @amount
+            @registration.payment_info = info.to_yaml
+          else
+            @amount = PayPal!.details(params[:token]).amount.total
+            @registration.payment_info = {
+                payer_id: params[:PayerID],
+                token:    params[:token],
+                amount:   @amount
+              }.to_yaml
+          end
 
           @amount = (@amount * 100).to_i.to_s.gsub(/^(.*)(\d\d)$/, '\1.\2')
 
@@ -86,7 +98,7 @@ class ConferencesController < ApplicationController
         info = YAML.load(@registration.payment_info)
         @amount = nil
         status = nil
-        if ENV['RAILS_ENV'] == 'test'
+        if Rails.env.test?
           status = info[:status]
           @amount = info[:amount]
         else
@@ -114,7 +126,7 @@ class ConferencesController < ApplicationController
 
         case form_step
         when :confirm_email
-          return do_confirm
+          return confirm_email(params[:email], params[:token], register_path(@this_conference.slug))
         when :contact_info
           if params[:name].present? && params[:name].gsub(/[\s\W]/, '').present?
             current_user.firstname = params[:name].squish
@@ -188,18 +200,23 @@ class ConferencesController < ApplicationController
           amount = params[:amount].to_f
 
           if amount > 0
-            @registration.payment_confirmation_token = ENV['RAILS_ENV'] == 'test' ? 'token' : Digest::SHA256.hexdigest(rand(Time.now.to_f * 1000000).to_i.to_s)
-            @registration.save
-            
-            host = "#{request.protocol}#{request.host_with_port}"
-            response = PayPal!.setup(
-              PayPalRequest(amount),
-              register_paypal_confirm_url(@this_conference.slug, :paypal_confirm, @registration.payment_confirmation_token),
-              register_paypal_confirm_url(@this_conference.slug, :paypal_cancel, @registration.payment_confirmation_token),
-              noshipping: true,
-              version: 204
-            )
-            if ENV['RAILS_ENV'] != 'test'
+            # we can't really test paypal integration in our tests, so we'll fake it instead
+            if Rails.env.test?
+              @registration.payment_confirmation_token = 'token'
+              @registration.payment_info = {amount: amount}.to_yaml
+              @registration.save!
+              redirect_to 'https://www.paypal.com'
+            else
+              @registration.payment_confirmation_token = Digest::SHA256.hexdigest(rand(Time.now.to_f * 1000000).to_i.to_s)
+              @registration.save!
+              pp = PayPal!
+              response = pp.setup(
+                PayPalRequest(amount),
+                register_paypal_confirm_url(@this_conference.slug, :paypal_confirm, @registration.payment_confirmation_token),
+                register_paypal_confirm_url(@this_conference.slug, :paypal_cancel, @registration.payment_confirmation_token),
+                noshipping: true,
+                version: 204
+              )
               redirect_to response.redirect_uri
             end
             return
@@ -219,7 +236,7 @@ class ConferencesController < ApplicationController
               # this step is only completed if a payment has been made
               if form_step != :payment || (@registration.registration_fees_paid || 0) > 0
                 @registration.steps_completed ||= []
-                @registration.steps_completed << form_step
+                @registration.steps_completed << form_step.to_s
                 @registration.steps_completed.uniq!
               end
             end
@@ -334,17 +351,13 @@ class ConferencesController < ApplicationController
         steps -= [:questions]
         
         # if this is a housing provider that is not attending the conference, remove these steps
-        if @registration.is_attending == 'n'
-          steps -= [:payment, :workshops]
-        end
+        steps -= [:payment, :workshops] if @registration.is_attending == 'n'
       else
         steps -= [:hosting]
       end
     else
       steps -= [:hosting, :questions]
     end
-
-    steps += [:administration] if conference.host?(current_user)
 
     return steps
   end
@@ -394,11 +407,11 @@ class ConferencesController < ApplicationController
 
     def PayPalRequest(amount)
       Paypal::Payment::Request.new(
-        :currency_code => 'USD',   # if nil, PayPal use USD as default
-        :description   => 'Conference Registration',    # item description
-        :quantity      => 1,      # item quantity
-        :amount        => amount.to_f,   # item value
-        :custom_fields => {
+        currency_code: 'USD',                     # if nil, PayPal use USD as default
+        description:   'Conference Registration', # item description
+        quantity:      1,                         # item quantity
+        amount:        amount.to_f,               # item value
+        custom_fields: {
           CARTBORDERCOLOR: "00ADEF",
           LOGOIMG: "https://en.bikebike.org/assets/bblogo-paypal.png"
         }

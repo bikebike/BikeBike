@@ -11,4 +11,4 @@
     = emailfield :companion, (@registration.housing_data['companions'] || [nil]).first, heading: 'articles.conference_registration.headings.companion', help: 'articles.conference_registration.paragraphs.companion', big: true
     = textfield :allergies, @registration.allergies, heading: 'articles.conference_registration.headings.allergies'
     = textarea :other, @registration.other, plain: true, heading: 'articles.conference_registration.headings.other'
-    = button_tag :register, :value => :questions
+    = button :register, value: :questions

@@ -1,13 +1,13 @@
 = columns(medium: 12) do
-	%p=_"articles.conference_registration.paragraphs.#{@this_conference.registration_status == :open ? '': 'Pre_'}Registration_Details"
-	%h3=_'articles.conference_registration.headings.Verify_Account'
-	%p=_'articles.conference_registration.paragraphs.Verify_Account'
+  %p=_"articles.conference_registration.paragraphs.#{@this_conference.registration_status == :open ? '': 'Pre_'}Registration_Details"
+  %h3=_'articles.conference_registration.headings.Verify_Account'
+  %p=_'articles.conference_registration.paragraphs.Verify_Account'
 
-	= form_tag register_path(@this_conference.slug), class: 'flex-form' do
-		.email-field.input-field.big
-			= email_field_tag :email, nil, required: true
-			= label_tag :email
-		= button_tag :continue, :value => :confirm_email
+  = form_tag register_path(@this_conference.slug), class: 'flex-form' do
+    .email-field.input-field.big
+      = email_field_tag :email, nil, required: true
+      = label_tag :email
+    = button :continue, value: :confirm_email
 = columns(medium: 12, class: 'flex-column') do
-	%p.stretch-item=_'articles.conference_registration.paragraphs.facebook_sign_in'
-	= link_to (_'forms.actions.generic.facebook_sign_in','Facebook Sign In'), auth_at_provider_path(:provider => :facebook), class: [:button, :facebook]
+  %p.stretch-item=_'articles.conference_registration.paragraphs.facebook_sign_in'
+  = link_to (_'forms.actions.generic.facebook_sign_in','Facebook Sign In'), auth_at_provider_path(:provider => :facebook), class: [:button, :facebook]

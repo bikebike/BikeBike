@@ -1,22 +1,22 @@
 = columns(medium: 12, class: 'major-group') do
-	- if @my_workshops.present?
-		%h3=_'articles.conference_registration.headings.Your_Workshops'
-		%p=_'articles.conference_registration.paragraphs.Your_Workshops', :p
-		= render 'workshops/workshop_previews', :workshops => @my_workshops
-	- else
-		%p=_'articles.conference_registration.paragraphs.Create_Workshop', :p
-	= link_to (_'articles.conference_registration.headings.Add_Workshop'), create_workshop_path(@this_conference.slug), class: :button
+  - if @my_workshops.present?
+    %h3=_'articles.conference_registration.headings.Your_Workshops'
+    %p=_'articles.conference_registration.paragraphs.Your_Workshops', :p
+    = render 'workshops/workshop_previews', :workshops => @my_workshops
+  - else
+    %p=_'articles.conference_registration.paragraphs.Create_Workshop', :p
+  = link_to (_'articles.conference_registration.headings.Add_Workshop'), create_workshop_path(@this_conference.slug), class: :button
 - if @requested_workshops.present?
-	= columns(medium: 12, class: 'major-group') do
-		%h3=_'articles.conference_registration.headings.Workshops_You_Have_Requested'
-		%p=_'articles.conference_registration.paragraphs.Workshops_You_Have_Requested', :p
-		= render 'workshops/workshop_previews', :workshops => @requested_workshops
+  = columns(medium: 12, class: 'major-group') do
+    %h3=_'articles.conference_registration.headings.Workshops_You_Have_Requested'
+    %p=_'articles.conference_registration.paragraphs.Workshops_You_Have_Requested', :p
+    = render 'workshops/workshop_previews', :workshops => @requested_workshops
 - if @workshops_in_need.present?
-	= columns(medium: 12, class: 'major-group') do
-		%h3=_'articles.conference_registration.headings.Workshops_Looking_For_Facilitators'
-		%p=_'articles.conference_registration.paragraphs.Workshops_Looking_For_Facilitators', :p
-		= render 'workshops/workshop_previews', :workshops => @workshops_in_need
+  = columns(medium: 12, class: 'major-group') do
+    %h3=_'articles.conference_registration.headings.Workshops_Looking_For_Facilitators'
+    %p=_'articles.conference_registration.paragraphs.Workshops_Looking_For_Facilitators', :p
+    = render 'workshops/workshop_previews', :workshops => @workshops_in_need
 - if @workshops.present?
-	= columns(medium: 12, class: 'major-group') do
-		%h3=_'articles.conference_registration.headings.All_Workshops'
-		= render 'workshops/workshop_previews', :workshops => @workshops
+  = columns(medium: 12, class: 'major-group') do
+    %h3=_'articles.conference_registration.headings.All_Workshops'
+    = render 'workshops/workshop_previews', :workshops => @workshops

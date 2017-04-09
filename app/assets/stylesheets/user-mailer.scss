@@ -1,268 +1,268 @@
 @import "settings";
 
 body {
-	width: 100% !important;
-	-webkit-text-size-adjust: 100%;
-	-ms-text-size-adjust: 100%;
-	margin: 1em;
-	padding: 0;
+    width: 100% !important;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    margin: 1em;
+    padding: 0;
 }
 
 .ExternalClass {
-	width: 100%;
-	line-height: 100%;
+    width: 100%;
+    line-height: 100%;
 
-	p, span, font, td, div {
-		line-height: 100%;
-	}
+    p, span, font, td, div {
+        line-height: 100%;
+    }
 }
 
 #backgroundTable {
-	margin: 0;
-	padding: 0;
-	width: 100% !important;
-	max-width: 100% !important;
-	line-height: 100% !important;
+    margin: 0;
+    padding: 0;
+    width: 100% !important;
+    max-width: 100% !important;
+    line-height: 100% !important;
 }
 
 img {
-	outline: none;
-	text-decoration: none;
-	-ms-interpolation-mode: bicubic;
+    outline: none;
+    text-decoration: none;
+    -ms-interpolation-mode: bicubic;
 
-	a & {
-		border: none;
-	}
+    a & {
+        border: none;
+    }
 }
 
 .image_fix {
-	display: block;
-	max-width: 100%;
+    display: block;
+    max-width: 100%;
 }
 
 a {
-	color: $colour-1;
-	
-	#outlook & {
-		padding: 0;
-	}
+    color: $colour-1;
+    
+    #outlook & {
+        padding: 0;
+    }
 
-	&:link { color: $colour-1; }
-	&:visited { color: $colour-1; }
-	&:hover { color: $colour-5; }
-	
-	@media only screen and (max-device-width: 480px) {
-		&[href^="tel"], &[href^="sms"] {
-			text-decoration: none;
-			color: $black;
-			pointer-events: none;
-			cursor: default;
-		}
+    &:link { color: $colour-1; }
+    &:visited { color: $colour-1; }
+    &:hover { color: $colour-5; }
+    
+    @media only screen and (max-device-width: 480px) {
+        &[href^="tel"], &[href^="sms"] {
+            text-decoration: none;
+            color: $black;
+            pointer-events: none;
+            cursor: default;
+        }
 
-		.mobile_link &[href^="tel"], .mobile_link &[href^="sms"] {
-			text-decoration: default;
-			color: $colour-1 !important;
-			pointer-events: auto;
-			cursor: default;
-		}
-	}
+        .mobile_link &[href^="tel"], .mobile_link &[href^="sms"] {
+            text-decoration: default;
+            color: $colour-1 !important;
+            pointer-events: auto;
+            cursor: default;
+        }
+    }
 }
 
 p {
-	color: $black !important;
-	font-size: 1.5em;
+    color: $black !important;
+    font-size: 1.5em;
 }
 
 p, blockquote {
-	margin: 1em;
-	line-height: 1.3333em;
+    margin: 1em;
+    line-height: 1.3333em;
 }
 
 blockquote {
-	font-size: 1em;
+    font-size: 1em;
 }
 
 h1 {
-	font-size: 2.5em;
-	line-height: 1.25em;
-	padding: 1em 0;
-	
-	&:first-child {
-		padding-top: 0;
-	}
+    font-size: 2.5em;
+    line-height: 1.25em;
+    padding: 1em 0;
+    
+    &:first-child {
+        padding-top: 0;
+    }
 }
 
 h2 {
-	font-size: 1.8em;
-	line-height: 1.25em;
-	padding-bottom: 1em;
+    font-size: 1.8em;
+    line-height: 1.25em;
+    padding-bottom: 1em;
 }
 
 blockquote {
-	font-style: italic;
-	margin-bottom: 2em;
-	color: #666 !important;
-	border: 0.1em solid #CCC;
-	padding: 1em;
-	border-style: none none solid solid;
-	background-color: #F8F8F8;
+    font-style: italic;
+    margin-bottom: 2em;
+    color: #666 !important;
+    border: 0.1em solid #CCC;
+    padding: 1em;
+    border-style: none none solid solid;
+    background-color: #F8F8F8;
 }
 
 h1, h2, h3, h4, h5, h6 {
-	color: $black !important;
-	
-	a {
-		color: $colour-1 !important;
-		
-		&:active {
-			color: $colour-4 !important;
-		}
-		
-		&:visited {
-			color: $colour-2 !important;
-		}
-	}
+    color: $black !important;
+    
+    a {
+        color: $colour-1 !important;
+        
+        &:active {
+            color: $colour-4 !important;
+        }
+        
+        &:visited {
+            color: $colour-2 !important;
+        }
+    }
 
 }
 
 table {
-	border-collapse: collapse;
-	max-width: 512px;
-	min-width: 280px;
-	mso-table-lspace: 0pt;
-	mso-table-rspace: 0pt;
-	
-	td {
-		border-collapse: collapse;
-	}
+    border-collapse: collapse;
+    max-width: 512px;
+    min-width: 280px;
+    mso-table-lspace: 0pt;
+    mso-table-rspace: 0pt;
+    
+    td {
+        border-collapse: collapse;
+    }
 
-	th {
-		text-align: left;
-	}
+    th {
+        text-align: left;
+    }
 }
 
 table#bb_full_width,
 table#ecxbb_full_width {
-	&, table {
-		max-width: none;
-		width: 100%;
-	}
+    &, table {
+        max-width: none;
+        width: 100%;
+    }
 }
 
 .error-report {
-	width: 100%;
-	max-width: 100%;
-	border: 0.15em solid #CCC;
-	background-color: #EEE;
-	font-size: 1.25em;
-	margin-bottom: 2em;
+    width: 100%;
+    max-width: 100%;
+    border: 0.15em solid #CCC;
+    background-color: #EEE;
+    font-size: 1.25em;
+    margin-bottom: 2em;
 
-	th {
-		background-color: #CCC;
-	}
+    th {
+        background-color: #CCC;
+    }
 
-	td, th {
-		padding: 0.25em 0.5em;
-		
-		&:last-child {
-			border-left: 0.15em solid #CCC;
-			min-width: 40em;
-		}
-	}
+    td, th {
+        padding: 0.25em 0.5em;
+        
+        &:last-child {
+            border-left: 0.15em solid #CCC;
+            min-width: 40em;
+        }
+    }
 
-	td:last-child {
-		font-family: monospace;
-		word-break: break-word;
-		background-color: #FFF;
-		font-size: 0.75em;
-	}
+    td:last-child {
+        font-family: monospace;
+        word-break: break-word;
+        background-color: #FFF;
+        font-size: 0.75em;
+    }
 }
 
 code {
-	color: #C33;
-	font-size: 0.9em;
+    color: #C33;
+    font-size: 0.9em;
 }
 
 pre {
-	font-size: 1.5em;
-	padding: 1em;
-	background-color: #333;
-	color: antiquewhite;
-	word-break: break-word;
+    font-size: 1.5em;
+    padding: 1em;
+    background-color: #333;
+    color: antiquewhite;
+    word-break: break-word;
 }
 
 .diff, .ecxdiff {
-	margin: 1em 0 5em 1em;
-	overflow: auto;
+    margin: 1em 0 5em 1em;
+    overflow: auto;
 
-	ul {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-		position: relative;
-	}
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        position: relative;
+    }
 
-	li {
-		width: 40%;
-		display: inline-block;
-		padding: 0.5em;
-		margin: 0;
-		border-bottom: 1px solid #DDD;
-		//white-space: nowrap;
+    li {
+        width: 40%;
+        display: inline-block;
+        padding: 0.5em;
+        margin: 0;
+        border-bottom: 1px solid #DDD;
+        //white-space: nowrap;
 
-		&:nth-child(odd) {
-			margin-right: -3px;
-			float: left;
-			clear: left;
-		}
+        &:nth-child(odd) {
+            margin-right: -3px;
+            float: left;
+            clear: left;
+        }
 
-		ins {
-			color: #080;//lighten($colour-3, 33%);
-		}
+        ins {
+            color: #080;//lighten($colour-3, 33%);
+        }
 
-		del {
-			color: #800;
-		}
-	}
+        del {
+            color: #800;
+        }
+    }
 }
 
 // Buttons
 h3 {
-	b {
-		padding: 10px 20px;
-		line-height: 50px;
-		
-		a, a:visited {
-			color: #FFF !important;
-			background-color: $colour-5;
-			text-decoration: none !important;
-			border-radius: 4px;
-			padding: 10px 15px;
-			margin-left: 20px;
-			border-bottom: 3px solid darken($colour-5, 10%);
-			-webkit-box-shadow: 0 0.5em 1.5em -0.75em #000;
-			box-shadow: 0 0.5em 1.5em -0.75em #000;
-			cursor: pointer !important;
-		}
+    b {
+        padding: 10px 20px;
+        line-height: 50px;
+        
+        a, a:visited {
+            color: #FFF !important;
+            background-color: $colour-5;
+            text-decoration: none !important;
+            border-radius: 4px;
+            padding: 10px 15px;
+            margin-left: 20px;
+            border-bottom: 3px solid darken($colour-5, 10%);
+            -webkit-box-shadow: 0 0.5em 1.5em -0.75em #000;
+            box-shadow: 0 0.5em 1.5em -0.75em #000;
+            cursor: pointer !important;
+        }
 
-		a:hover {
-			background-color: darken($colour-5, 10%);
-		}
-	}
+        a:hover {
+            background-color: darken($colour-5, 10%);
+        }
+    }
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-	a[href^="tel"], a[href^="sms"] {
-		text-decoration: none;
-		color: $colour-1;
-		pointer-events: none;
-		cursor: default;
+    a[href^="tel"], a[href^="sms"] {
+        text-decoration: none;
+        color: $colour-1;
+        pointer-events: none;
+        cursor: default;
 
-		.mobile_link & {
-			text-decoration: default;
-			color: $colour-1 !important;
-			pointer-events: auto;
-			cursor: default;
-		}
-	}
+        .mobile_link & {
+            text-decoration: default;
+            color: $colour-1 !important;
+            pointer-events: auto;
+            cursor: default;
+        }
+    }
 }

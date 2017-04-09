@@ -4,8 +4,6 @@
       = columns(medium: 3) do
         - protect do
           = link_to home_path, :class => 'logo' do
-            -#= svg_sprite('icons', "bb-icon-logo", "Logo")
-            -#= svg_sprite('icons', "bb-icon-logo-text", "Logo Text")
             = svg 'logo', (_!'Bike Bike')
             = svg 'logo-text', (_!'Bike Bike')
             = off_screen _!'Bike Bike'
@@ -22,6 +20,6 @@
                 - locale_translation = language_name(locale, true)
                 - translation_text = (_'translate.content.change_locale', "Read in #{locale_translation}", vars: {language: locale_translation}, locale: locale)
                 %a{href: url, lang: locale, title: translation_text}
-                  %span{aria: {hidden: true}}=locale
+                  %span{aria: {hidden: true}}=_!locale
                   = off_screen translation_text
     

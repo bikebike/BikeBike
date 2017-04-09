@@ -9,6 +9,6 @@
   = textfield :subject, nil, required: true, big: true
   = textarea :message, nil, required: true, plain: true
   .actions
-    = button_tag :send, value: :send
+    = button :send, value: :send
     - if cancel_btn
       %button.close.subdued=_'forms.actions.generic.cancel'

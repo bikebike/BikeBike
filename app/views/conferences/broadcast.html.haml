@@ -19,17 +19,17 @@
           - else
             .text-field.input-field.big
               = label_tag :subject
-              = text_field_tag :subject, @subject, :required => true
+              = text_field_tag :subject, @subject, required: true
             .select-field.input-field
               = label_tag :content
-              = text_area_tag :content, @content, :required => true
+              = text_area_tag :content, @content, required: true
           .actions.right
             - if @email_sent == :test
-              .note=_('articles.conference_registration.notes.Test_Email_Sent',"An email was sent to #{current_user.email}", vars: {:email_address => current_user.email})
+              .note=_('articles.conference_registration.notes.Test_Email_Sent',"An email was sent to #{current_user.email}", vars: {email_address: current_user.email})
             - if @email_sent == :preview # let the user send the 
-              = button_tag :edit, :value => :edit
-              = button_tag :send, :value => :send
+              = button :edit, value: :edit
+              = button :send, value: :send
             - else
-              = button_tag :preview, :value => :preview 
-            = button_tag :test, :value => :test
+              = button :preview, value: :preview 
+            = button :test, value: :test
 

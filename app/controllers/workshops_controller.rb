@@ -1,10 +1,10 @@
-
 class WorkshopsController < ApplicationController
+
   def workshops
     set_conference
     set_conference_registration!
-    @workshops = Workshop.where(:conference_id => @this_conference.id)
-    @my_workshops = Workshop.joins(:workshop_facilitators).where(:workshop_facilitators => {:user_id => current_user.id}, :conference_id => @this_conference.id)
+    @workshops = Workshop.where(conference_id: @this_conference.id)
+    @my_workshops = @workshops.select { |w| w.active_facilitator?(current_user) }
     render 'workshops/index'
   end
 
@@ -58,7 +58,7 @@ class WorkshopsController < ApplicationController
 
     @is_translating ||= false
     if @is_translating
-      return do_404 if @translation.to_s == @workshop.locale.to_s || !I18n.backend.enabled_locales.include?(@translation.to_s)
+      return do_404 unless @translation.to_s != @workshop.locale.to_s && LinguaFranca.locale_enabled?(@translation.to_sym)
       return do_403 unless @workshop.can_translate?(current_user, @translation)
 
       @title = @workshop._title(@translation)

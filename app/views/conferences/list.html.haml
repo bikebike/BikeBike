@@ -24,7 +24,7 @@
             - list.each do | conference |
               %li.conference{id: "conference-#{conference.id}", data: {a: conference.city.latitude, o: conference.city.longitude, y: conference.year, t: conference.conferencetype}, class: conference.is_public ? nil : 'not-public'}
                 .info
-                  %h4.title= conference.title
+                  %h4.title= _!conference.title
                   .conference-details
                     .location=location(conference.city)
                     - if conference.start_date.present? && conference.end_date.present?

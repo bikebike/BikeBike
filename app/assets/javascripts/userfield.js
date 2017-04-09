@@ -21,6 +21,7 @@
             var field = fields[i];
             var input = field.getElementsByTagName('input')[0];
             var name = field.getElementsByClassName('user-name')[0];
+            
         }
     }, false);
 })();

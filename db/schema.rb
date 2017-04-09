@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170111172147) do
+ActiveRecord::Schema.define(version: 20170325181748) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,8 +21,9 @@ ActiveRecord::Schema.define(version: 20170111172147) do
     t.string   "name"
     t.string   "path"
     t.string   "url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "description"
   end
 
   create_table "authentications", force: :cascade do |t|
@@ -309,6 +310,18 @@ ActiveRecord::Schema.define(version: 20170111172147) do
     t.string   "status"
   end
 
+  create_table "page_comments", force: :cascade do |t|
+    t.text     "comment"
+    t.string   "group"
+    t.string   "page"
+    t.integer  "index"
+    t.string   "variant"
+    t.integer  "user_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "application_id"
+  end
+
   create_table "registration_form_fields", force: :cascade do |t|
     t.string   "title"
     t.text     "help"
@@ -371,7 +384,7 @@ ActiveRecord::Schema.define(version: 20170111172147) do
     t.string   "activation_state"
     t.string   "activation_token"
     t.datetime "activation_token_expires_at"
-    t.integer  "failed_logins_count",                       default: 0
+    t.integer  "failed_logins_count",                        default: 0
     t.datetime "lock_expires_at"
     t.string   "unlock_token"
     t.string   "avatar"
@@ -383,7 +396,10 @@ ActiveRecord::Schema.define(version: 20170111172147) do
     t.json     "languages"
     t.string   "locale"
     t.boolean  "is_subscribed"
-    t.integer  "fb_id",                           limit: 8
+    t.integer  "fb_id",                            limit: 8
+    t.boolean  "has_workbench_access"
+    t.datetime "workbench_access_request_date"
+    t.text     "workbench_access_request_message"
   end
 
   add_index "users", ["activation_token"], name: "index_users_on_activation_token", using: :btree

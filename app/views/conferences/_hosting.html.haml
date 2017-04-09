@@ -16,5 +16,5 @@
       = checkboxes :considerations, ConferenceRegistration.all_considerations, @hosting_data['considerations'], 'articles.conference_registration.host.considerations', heading: 'articles.conference_registration.headings.host.considerations', help: 'articles.conference_registration.paragraphs.host.considerations', vertical: true
       = textarea :notes, @hosting_data['notes'], help: 'articles.conference_registration.paragraphs.host.notes', edit_on: :focus
     .actions.next-prev
-      = button_tag (params[:step] == :save ? :save : :next), value: :hosting
-      = button_tag :previous, value: :prev_contact_info, class: :subdued, formnovalidate: true
+      = button (params[:step] == :save ? :save : :next), value: :hosting
+      = button :previous, value: :prev_contact_info, class: :subdued, formnovalidate: true

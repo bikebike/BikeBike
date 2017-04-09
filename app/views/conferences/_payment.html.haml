@@ -9,21 +9,22 @@
   - else
     %p=@this_conference.payment_message || (_'articles.conference_registration.paragraphs.Payment', :p)
 = columns(large: 9, push: 1) do
+  = show_errors :payment
   = form_tag register_path(@this_conference.slug), class: :payment do
     = hidden_field_tag :button, :payment
     - payment_amounts = @this_conference.payment_amounts.present? ? @this_conference.payment_amounts : Conference.default_payment_amounts
     .graded-options{class: "option-count-#{payment_amounts.size}"}
       - payment_amounts.each_with_index do | amount, i |
-        = button_tag :amount_25, name: :amount, value: amount.to_f.to_s, class: "option-#{i + 1}" do
+        = button :amount_25, name: :amount, value: amount.to_f.to_s, class: "option-#{i + 1}" do
           =_! (number_to_currency amount, unit: '$')
   = form_tag register_path(@this_conference.slug), class: ['custom-payment', :centered] do
-    %span.currency=_!'$'
+    %span.currency=_!'$' # TODO: this needs to be localized
     = numberfield :amount, nil, required: true, step: 0.01, min: 0.00, label: false
-    = button_tag :custom_amount, value: :payment
+    = button :custom_amount, value: :payment
     %p=_'articles.conference_registration.paragraphs.currency','(amounts are in $USD)'
   = form_tag register_path(@this_conference.slug), class: :payment do
     = hidden_field_tag :button, :payment
     .actions.skip
-      = button_tag :skip, name: :amount, value: '0.0'
+      = button :skip, name: :amount, value: '0.0'
 
 = columns(large: 2)

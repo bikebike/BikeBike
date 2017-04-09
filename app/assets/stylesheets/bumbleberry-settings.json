@@ -1,103 +1,105 @@
 {
-    "stylesheets": ["application", "editor"],
-    "precompile": {
-        "test": {
-            "chrome": ["51"]
-        },
-        "development": {
-            "and_chr": ["55"],
-            "chrome": ["55"],
-            "edge": ["13"],
-            "firefox": ["50"],
-            "ie": ["11"],
-            "ios_saf": ["8", "9"]
-        }
+  "stylesheets": ["application", "editor"],
+  "precompile": {
+    "test": {
+      "safari": ["5"],
+      "chrome": ["55"]
     },
-    "background-color": "#FFFEFE",
-    "breakpoint-unit": "px",
-    "unresponsive-width": 1000,
-    "row-width": 1000,
-    "total-columns": 12,
-    "platforms": {
-        "mobile": {
-            "range": [0,700]
-        },
-        "desktop": {
-            "range": [0,0]
-        }
-    },
-    "breakpoints": {
-        "small": {
-            "range": [0],
-            "grid": "y",
-            "offset": "n",
-            "reset-order": "n"
-        },
-        "medium": {
-            "range": [680],
-            "grid": "y",
-            "offset": "n",
-            "reset-order": "n"
-        },
-        "large": {
-            "range": [1024],
-            "grid": "y",
-            "offset": "n",
-            "reset-order": "n"
-        },
-        "small-only": {
-            "range": [0,319],
-            "grid": "n",
-            "offset": "n",
-            "reset-order": "n"
-        },
-        "medium-only": {
-            "range": [320,1023],
-            "grid": "n",
-            "offset": "n",
-            "reset-order": "n"
-        }
-    },
-    "grid-push": [1, 2],
-    "grid-pull": [1, 2],
-    "font-loading-method": "http2",
-    "fonts": {
-        "primary": {
-            "name": "Sanchez Light",
-            "location": "Sanchez",
-            "svg_id": "wf",
-            "ttf_type": "ttf",
-            "fallback": ["Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", "sans-serif"]
-        },
-        "secondary": {
-            "name": "AlteHaasGroteskBold",
-            "location": "AlteHaasGroteskBold",
-            "svg_id": "alte_haas_groteskbold",
-            "ttf_type": "ttf",
-            "fallback": ["Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", "sans-serif"]
-        },
-        "monospace": {
-            "name": "NotCourierSans",
-            "location": "NotCourierSans",
-            "svg_id": "notcouriersans",
-            "ttf_type": "ttf",
-            "fallback": ["Courier New", "monospace"],
-            "auto_load": "n"
-        },
-        "monospace-bold": {
-            "name": "NotCourierSans",
-            "location": "NotCourierSans-Bold",
-            "svg_id": "notcouriersansbold",
-            "ttf_type": "ttf",
-            "fallback": ["Courier New", "monospace"],
-            "auto_load": "n",
-            "weight": "bold"
-        }
-    },
-    "sprites": {
-        "icons": {
-            "bb-icon-logo": [0, 0, "182px", "149px"],
-            "bb-icon-logo-text": ["182px", 0, "136px", "149px"]
-        }
+    "development": {
+      "safari": ["5"],
+      "and_chr": ["56"],
+      "chrome": ["56"],
+      "edge": ["13"],
+      "firefox": ["50"],
+      "ie": ["11"],
+      "ios_saf": ["8", "9"]
     }
+  },
+  "background-color": "#FFFEFE",
+  "breakpoint-unit": "px",
+  "unresponsive-width": 1000,
+  "row-width": 1000,
+  "total-columns": 12,
+  "platforms": {
+    "mobile": {
+      "range": [0,700]
+    },
+    "desktop": {
+      "range": [0,0]
+    }
+  },
+  "breakpoints": {
+    "small": {
+      "range": [0],
+      "grid": "y",
+      "offset": "n",
+      "reset-order": "n"
+    },
+    "medium": {
+      "range": [680],
+      "grid": "y",
+      "offset": "n",
+      "reset-order": "n"
+    },
+    "large": {
+      "range": [1024],
+      "grid": "y",
+      "offset": "n",
+      "reset-order": "n"
+    },
+    "small-only": {
+      "range": [0,319],
+      "grid": "n",
+      "offset": "n",
+      "reset-order": "n"
+    },
+    "medium-only": {
+      "range": [320,1023],
+      "grid": "n",
+      "offset": "n",
+      "reset-order": "n"
+    }
+  },
+  "grid-push": [1, 2],
+  "grid-pull": [1, 2],
+  "font-loading-method": "http2",
+  "fonts": {
+    "primary": {
+      "name": "Sanchez Light",
+      "location": "Sanchez",
+      "svg_id": "wf",
+      "ttf_type": "ttf",
+      "fallback": ["Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", "sans-serif"]
+    },
+    "secondary": {
+      "name": "AlteHaasGroteskBold",
+      "location": "AlteHaasGroteskBold",
+      "svg_id": "alte_haas_groteskbold",
+      "ttf_type": "ttf",
+      "fallback": ["Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", "sans-serif"]
+    },
+    "monospace": {
+      "name": "NotCourierSans",
+      "location": "NotCourierSans",
+      "svg_id": "notcouriersans",
+      "ttf_type": "ttf",
+      "fallback": ["Courier New", "monospace"],
+      "auto_load": "n"
+    },
+    "monospace-bold": {
+      "name": "NotCourierSans",
+      "location": "NotCourierSans-Bold",
+      "svg_id": "notcouriersansbold",
+      "ttf_type": "ttf",
+      "fallback": ["Courier New", "monospace"],
+      "auto_load": "n",
+      "weight": "bold"
+    }
+  },
+  "sprites": {
+    "icons": {
+      "bb-icon-logo": [0, 0, "182px", "149px"],
+      "bb-icon-logo-text": ["182px", 0, "136px", "149px"]
+    }
+  }
 }

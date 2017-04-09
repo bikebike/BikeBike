@@ -150,3 +150,8 @@ On hold until our design team determines a director for our identity.
 ## Testing Practices ##
 
 Our focus will be on integration testing using Capybara. While testing the app records all translations that it finds, whether or not they exist, and which pages that they were found on.
+
+## Attribution ##
+
+### Icons ###
+

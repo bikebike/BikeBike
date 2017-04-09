@@ -37,5 +37,5 @@
         = length_select @length, small: true
       = translate_fields @event, { title: { type: :textfield, big: true, label: 'forms.labels.generic.title' }, info: { type: :textarea, label: 'forms.labels.generic.info', edit_on: :focus } }
       .actions.next-prev
-        = button_tag :save, value: :save
-        = button_tag :cancel, value: :cancel, class: :subdued, formnovalidate: true if @event.id.present?
+        = button :save, value: :save
+        = button :cancel, value: :cancel, class: :subdued, formnovalidate: true if @event.id.present?

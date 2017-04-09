@@ -68,7 +68,7 @@
               = form_tag do_confirm_path, class: 'flex-form' do
                 = hidden_field_tag :dest, settings_path
                 = emailfield :email, nil, big: true
-                = button_tag :continue, :value => :confirm_email
+                = button :continue, value: :confirm_email
               .flex-form
                 = link_to (_'forms.actions.generic.facebook_sign_in','Facebook Sign In'), auth_at_provider_path(provider: :facebook, dest: settings_path), class: [:button, :facebook]
                 %button.close.subdued=_'forms.actions.generic.cancel'
