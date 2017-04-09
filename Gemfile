@@ -40,13 +40,13 @@ end
 if Dir.exists?('../bikecollectives_core')
   gem 'bikecollectives_core', path: '../bikecollectives_core'
 else
-  gem 'bikecollectives_core', git: 'https://github.com/bikebike/bikecollectives_core.git', branch: '2017'
+  gem 'bikecollectives_core', git: 'https://github.com/bikebike/bikecollectives_core.git'
 end
 
 if Dir.exists?('../bumbleberry')
   gem 'bumbleberry', path: '../bumbleberry'
 else
-  gem 'bumbleberry', git: 'https://github.com/bumbleberry/bumbleberry.git'
+  gem 'bumbleberry', git: 'https://github.com/bumbleberry/bumbleberry.git', branch: '2017'
 end
 
 
