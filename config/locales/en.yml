@@ -1229,3 +1229,6 @@ en:
         request_reply_instructions: You can also reply directly to this email to ask
           follow-up questions.
         view_workshop: 'View the workshop here: '
+  translate:
+    content:
+      change_locale: "Read in %{language}"
