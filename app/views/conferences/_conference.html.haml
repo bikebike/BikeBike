@@ -1,18 +1,17 @@
 - links ||= [ :register ]
 - sections ||= [ :info ]
+= row(tag: :header) do
+  = columns(class: 'conference-banner') do
+    .title
+      %h1=_!conference.title
+      .details
+        %h2.primary=location(conference.city || conference.location) if conference.city_name.present?
+        - if conference.start_date.present? && conference.end_date.present?
+          .secondary
+            = date_span(conference.start_date.to_date, conference.end_date.to_date)
+    - if conference.poster.present?
+      %img{src: conference.poster.full.url, role: :presentation, alt: (_'images.conference.poster', vars: { conference_title: conference.title })}
 %article
-  = row(tag: :header) do
-    = columns(class: 'conference-banner') do
-      .title
-        %h1=_!conference.title
-        .details
-          %h2.primary=location(conference.city || conference.location) if conference.city_name.present?
-          - if conference.start_date.present? && conference.end_date.present?
-            .secondary
-              = date_span(conference.start_date.to_date, conference.end_date.to_date)
-      - if conference.poster.present?
-        %img{src: conference.poster.full.url || image_path('default_poster.jpg'), role: :presentation, alt: (_'images.conference.poster', vars: { conference_title: conference.title })}
-
   = row(class: 'conference-details') do
     = columns(medium: 10, push: {medium: 1}) do
       %h2=_!conference.title if conference.poster.present?
@@ -25,9 +24,9 @@
         - else
           %h3=_'articles.workshops.headings.Proposed_Workshops'
           %p=_'articles.workshops.paragraphs.Proposed_Workshops'
-          = render 'workshops/workshop_previews', :workshops => (conference.workshops.sort { |a, b| a.title.downcase <=> b.title.downcase })
+          = render 'workshops/workshop_previews', workshops: (conference.workshops.sort { |a, b| a.title.downcase <=> b.title.downcase })
       .links
-        = (link_to (_'forms.actions.generic.register'), register_path(conference.slug), class: [:button, :register]) if links.include?(:register) && conference.registration_status == :open
+        = (link_to (_'forms.actions.generic.register'), register_path(conference.slug), class: [:button, :register]) if links.include?(:register) && conference.can_register?
         = (link_to (_'articles.workshops.info.read_more'), conference_path(conference.slug), class: :button) if links.include?(:read_more)
         = (link_to (_'forms.actions.generic.administrate'), administrate_conference_path(conference.slug), class: [:button]) if links.include?(:administrate)
         = (link_to (_'forms.actions.generic.edit'), edit_conference_path(conference.slug), class: [:button, :subdued]) if links.include?(:edit)

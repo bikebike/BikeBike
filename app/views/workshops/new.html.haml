@@ -36,6 +36,6 @@
           = textarea :notes, @workshop.notes, warning: 'articles.workshops.paragraphs.notes'
       = columns(medium: 12) do
         .actions.next-prev
-          = button_tag :save, value: :save
-          = button_tag :cancel, value: :cancel, class: :subdued, formnovalidate: true
+          = button :save, value: :save
+          = button :cancel, value: :cancel, class: :subdued, formnovalidate: true
 

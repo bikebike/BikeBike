@@ -1,46 +1,46 @@
-%h1 From
+%h1=_!('From')
 %table.error-report
   %tr
-    %th Key
-    %th Value
+    %th=_!'Key'
+    %th=_!'Value'
   %tr
-    %td User ID
-    %td=@from.is_a?(User) ? @from.id : ''
+    %td=_!'User ID'
+    %td=_!(@from.is_a?(User) ? @from.id : '')
   %tr
-    %td User Name
-    %td=@from.is_a?(User) ? @from.name : ''
+    %td=_!'User Name'
+    %td=_!(@from.is_a?(User) ? @from.name : '')
   %tr
-    %td User Email
-    %td=@from.is_a?(User) ? @from.email : @from
+    %td=_!'User Email'
+    %td=_!(@from.is_a?(User) ? @from.email : @from)
   %tr
-    %td IP Address
-    %td=@request['remote_ip']
+    %td=_!'IP Address'
+    %td=_!@request['remote_ip']
   %tr
-    %td UUID
-    %td=@request['uuid']
+    %td=_!'UUID'
+    %td=_!@request['uuid']
   %tr
-    %td URL
-    %td=@request['original_url'] 
+    %td=_!'URL'
+    %td=_!@request['original_url'] 
 
-%h1 Message
-%blockquote=markdown(@message)
+%h1=_!'Message'
+%blockquote=_!markdown(@message)
 
-%h1 Params
+%h1=_!'Params'
 %table.error-report
   %tr
-    %th Key
-    %th Value
+    %th=_!'Key'
+    %th=_!'Value'
   - @params.each do | key, value |
     %tr
-      %td=key
-      %td=value
+      %td=_!key
+      %td=_!value
 
-%h1 Request Environment
+%h1=_!'Request Environment'
 %table.error-report
   %tr
-    %th Key
-    %th Value
+    %th=_!'Key'
+    %th=_!'Value'
   - @request['env'].each do | key, value |
     %tr
-      %td=key
-      %td=value
+      %td=_!key
+      %td=_!value

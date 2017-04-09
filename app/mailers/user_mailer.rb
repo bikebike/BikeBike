@@ -1,12 +1,12 @@
 require 'diffy'
 
 class UserMailer < ActionMailer::Base
-  add_template_helper(ApplicationHelper)
   include LinguaFrancaHelper
+  add_template_helper(ApplicationHelper)
 
   before_filter :set_host
 
-  default from: "Bike!Bike! <noreply@bikebike.org>"
+  default from: "Bike!Bike! <godwin@bikebike.org>"
 
   def email_confirmation(confirmation)
     @confirmation = EmailConfirmation.find(confirmation) if confirmation.present?

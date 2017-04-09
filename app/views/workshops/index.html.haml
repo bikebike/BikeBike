@@ -1,4 +1,4 @@
-= render 'conferences/page_header', :page_key => 'Workshops'
+= render 'conferences/page_header', page_key: 'Workshops'
 
 %article
   = row do
@@ -10,9 +10,10 @@
   = row do
     = columns(medium: 12) do
       %h3=_'articles.workshops.headings.Your_Workshops'
-      = render 'workshops/workshop_previews', :workshops => @my_workshops
+      = render 'workshops/workshop_previews', workshops: @my_workshops
       = link_to (_'actions.workshops.create','New Workshop'), create_workshop_path(@this_conference.slug), class: [:button, :modify] if @conference.registration_open
   = row do
     = columns(medium: 12) do
-      %h3=_'articles.workshops.headings.All_Workshops'
-      = render 'workshops/workshop_previews', :workshops => @workshops
+      %h3=_'articles.conference_registration.headings.All_Workshops'
+      -#%h3 All Workshops weather you like it or not
+      = render 'workshops/workshop_previews', workshops: @workshops

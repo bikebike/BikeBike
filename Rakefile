@@ -1,5 +1,8 @@
 # Add your own tasks in files placed in lib/tasks ending in .rake,
 # for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
+require 'rubygems'
+require 'cucumber'
+require 'cucumber/rake/task'
 
 require File.expand_path('../config/application', __FILE__)
 
@@ -60,4 +63,32 @@ task update_cities_fr: :environment do
     c.set_column_for_locale(:city, :fr, city, 0) unless city.blank? || city == c.get_column_for_locale(:city, :fr)
     c.save!
   end
+end
+
+task :i18n do
+  LinguaFranca.test LinguaFranca::TestModes::RECORD do
+    Rake::Task[:cucumber].execute
+  end
+end
+
+task :css do
+  ENV['CSS_TEST'] = '1'
+  Rake::Task[:cucumber].execute
+  ENV['CSS_TEST'] = nil
+end
+
+task :a11y do
+  ENV['TEST_A11Y'] = '1'
+  Rake::Task[:cucumber].execute
+  ENV['TEST_A11Y'] = nil
+end
+
+task "cucumber:debug" do
+  ENV['TEST_DEBUG'] = '1'
+  Rake::Task[:cucumber].execute
+  ENV['TEST_DEBUG'] = nil
+end
+
+Cucumber::Rake::Task.new(:cucumber) do |t|
+  t.cucumber_opts = "features --format pretty"
 end

@@ -1,5 +1,6 @@
 - content_for :og_image do
-  = (@conference.present? ? @conference.poster.full.url : nil) || image_path('default_poster.jpg')
-- if @conferences.present?
+  - if @conference.present?
+    = @conference.poster.full.url || image_path('default_poster.jpg')
+- if @conferences
   - @conferences.each do | conference |
-    = render 'conferences/conference', conference: conference, links: [ :read_more, :register ]
+    = render 'conferences/conference', conference: conference, links: [ :read_more, :register ], sections: @conference.front_page_details

@@ -19,12 +19,12 @@
         = (hidden_field_tag :location_id, @location.id) if @location
         .actions
           - if @this_conference.workshop_schedule_published
-            = button_tag :Unpublish, :value => :unpublish, :class => 'delete'
+            = button :Unpublish, value: :unpublish, class: 'delete'
           - elsif @error_count < 1
-            = button_tag :Publish, :value => :publish
-          = button_tag :Preview, :value => :preview, :class => 'secondary'
+            = button :Publish, value: :publish
+          = button :Preview, value: :preview, class: 'secondary'
           - unless @this_conference.workshop_schedule_published && @error_count > 0
-            = button_tag :save, :value => :save
+            = button :save, value: :save
         - unless @saved
           .unsaved=_'errors.schedule.unsaved','Your changes will not be saved until you press Save or Publish'
     = row do

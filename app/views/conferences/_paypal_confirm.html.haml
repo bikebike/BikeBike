@@ -1,5 +1,5 @@
 = columns(medium: 12) do
-	%h3=_'articles.conference_registration.headings.payment_confirm'
-	%p=_'articles.conference_registration.paragraphs.payment_confirm', vars: {:amount => @amount}
-	= form_tag register_path(@this_conference.slug), :class => :payment do
-		.actions= button_tag :confirm_amount, :value => :paypal_confirmed
+  %h3=_'articles.conference_registration.headings.payment_confirm'
+  %p=_'articles.conference_registration.paragraphs.payment_confirm', vars: {:amount => @amount}
+  = form_tag register_path(@this_conference.slug), :class => :payment do
+    .actions= button :confirm_amount, :value => :paypal_confirmed

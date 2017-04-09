@@ -47,10 +47,6 @@ rerun.txt
 pickle-email-*.html
 .project
 
-# Ignore Gemfile.lock so that we always get the most up to date gems
-# We'll be testing in 'preview' to avoid clashes 
-Gemfile.lock
-
 # Ignore Redis' dataset snapshot
 dump.rdb
 

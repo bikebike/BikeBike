@@ -20,8 +20,25 @@
           = button_with_confirmation :send, (_'modals.admin.broadcast.confirm', vars: { number: "<strong>#{(@send_to_count || 0)}</strong>".html_safe }), value: :send, class: :delete if @broadcast_step == :test
           = button_tag :edit, value: :edit
       - else
+<<<<<<< HEAD
         = selectfield :send_to, nil, broadcast_options, full: true
         = textfield :subject, @subject, required: true, big: true
         = textarea :body, @body, lang: @this_conference.locale, edit_on: :focus
         .actions.right
           = button_tag :preview, value: :preview
+=======
+        .warning-info.make-room= _'articles.conference_registration.paragraphs.admin.broadcast.preview', vars: { send_to_count: "<strong>#{(@send_to_count || 0)}</strong>".html_safe }
+      .test-preview
+        %h3=@subject
+        = richtext @body, 4
+      .actions.right
+        = button :test, value: :test, class: :secondary if @broadcast_step == :preview
+        = button_with_confirmation :send, (_'modals.admin.broadcast.confirm', vars: { number: "<strong>#{(@send_to_count || 0)}</strong>".html_safe }), value: :send, class: :delete if @broadcast_step == :test
+        = button :edit, value: :edit
+    - else
+      = selectfield :send_to, nil, broadcast_options, full: true
+      = textfield :subject, @subject, required: true, big: true
+      = textarea :body, @body, lang: @this_conference.locale, edit_on: :focus
+      .actions.right
+        = button :preview, value: :preview
+>>>>>>> d1db46f... 2017 refactor

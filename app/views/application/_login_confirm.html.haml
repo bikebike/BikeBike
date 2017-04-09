@@ -4,4 +4,4 @@
 		= form_tag :do_confirm, :authenticity_token => false, class: 'flex-form' do
 			= emailfield :email, nil, required: true, big: true
 			= hidden_field_tag :token, @confirmation.token
-			= button_tag :login
+			= button :login

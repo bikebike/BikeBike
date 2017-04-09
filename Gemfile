@@ -5,58 +5,42 @@ gem 'pg'
 gem 'rake', '11.1.2'
 gem 'ruby_dep', '1.3.1' # Lock at 1.3.1 since 1.4 requires ruby 2.5. We should unlock once we upgrade the ruby version on our server
 
-# gem 'bcrypt-ruby', '3.0.0', require: 'bcrypt'
-# gem 'bcrypt', '3.1.9'
-# gem 'bcrypt', require: :ruby
 gem 'rack-mini-profiler'
 
 gem 'haml'
-gem 'nokogiri', '~> 1.6.8.rc2'
+gem 'nokogiri'
 
-if Dir.exists?('../lingua_franca')
-  gem 'lingua_franca', :path => '../lingua_franca'
-else
-  gem 'lingua_franca', :git => 'git://github.com/lingua-franca/lingua_franca.git'
-end
-
-gem 'tzinfo-data'
 gem 'sass'
 gem 'sass-rails'
-
-if Dir.exists?('../bumbleberry')
-  gem 'bumbleberry', :path => "../bumbleberry"
-else
-  gem 'bumbleberry', :git => 'git://github.com/bumbleberry/bumbleberry.git'
-end
-
-if Dir.exists?('../paypal-express')
-  gem 'paypal-express', :path => "../paypal-express"
-else
-  gem 'paypal-express', :git => 'git://github.com/bikebike/paypal-express.git'
-end
-
 gem 'uglifier', '>= 1.3.0'
-gem 'sorcery', '>= 0.8.1'
-gem 'oauth2', '~> 0.8.0'
+# replace this once these changes are merged in sorcery
+gem 'sorcery', git: 'https://github.com/tg90nor/sorcery.git', branch: 'make-facebook-provider-use-json-token-parser'
 gem 'carrierwave'
 gem 'carrierwave-imageoptimizer'
 gem 'mini_magick'
-gem 'geocoder'
-gem 'paper_trail', '~> 3.0.5'
-gem 'sitemap_generator'
 gem 'activerecord-session_store'
-gem 'sass-json-vars'
 gem 'premailer-rails'
-gem 'redcarpet'
 gem 'sidekiq'
 gem 'letter_opener'
 gem 'launchy'
-gem 'to_spreadsheet', :git => 'git://github.com/glebm/to_spreadsheet.git'
 
-group :test do
-  gem 'rspec'
-  gem 'rspec-rails'
-end
+# Bike Collectives gems, when developing locally execute:
+#   bundle config local.bikecollectives_core ../bikecollectives_core
+#   bundle config local.bumbleberry ../bumbleberry
+#   bundle config local.lingua_franca ../lingua_franca
+#   bundle config local.marmara ../marmara
+gem 'bikecollectives_core', git: 'https://github.com/bikebike/bikecollectives_core.git', branch: 'master'
+gem 'bumbleberry', git: 'https://github.com/bumbleberry/bumbleberry.git', branch: '2017'
+gem 'lingua_franca', git: 'https://github.com/lingua-franca/lingua_franca.git', branch: '2017'
+gem 'marmara', git: 'https://github.com/lingua-franca/marmara.git', branch: 'master'
+
+# Bike!Bike! specific stuff
+gem 'ianfleeton-paypal-express', require: 'paypal/express'
+gem 'geocoder'
+gem 'sitemap_generator'
+gem 'sass-json-vars'
+gem 'redcarpet'
+gem 'to_spreadsheet', git: 'https://github.com/glebm/to_spreadsheet.git'
 
 group :development do
   gem 'better_errors'
@@ -67,17 +51,23 @@ group :development do
   gem 'capistrano-rails', '~> 1.1'
   gem 'capistrano-faster-assets', '~> 1.0'
 
-  gem 'eventmachine', :github => 'krzcho/eventmachine', :branch => 'master'
-  gem 'thin'# , :github => 'krzcho/thin', :branch => 'master'
+  gem 'eventmachine', git: 'https://github.com/krzcho/eventmachine', :branch => 'master'
+  gem 'thin'
+  gem 'rubocop', require: false
+  gem 'haml-lint', require: false
 end
 
 group :test do
+  gem 'rspec'
+  gem 'rspec-rails'
   gem 'gherkin3', '>= 3.1.0'
   gem 'cucumber'
   gem 'cucumber-core'
-  gem 'cucumber-rails'
+  gem 'cucumber-rails', require: false
+  gem 'guard-cucumber'
 
   gem 'poltergeist'
+  gem 'capybara-email'
   gem 'guard-rspec'
   gem 'factory_girl_rails'
   gem 'coveralls', require: false
@@ -90,16 +80,22 @@ end
 
 group :production, :preview do
   gem 'rails_12factor'
+end
+
+group :production, :preview do
+  platforms :ruby do
+    gem 'unicorn', require: false
+  end
+
   gem 'daemon-spawn'
   gem 'daemons'
-  
-  platforms :ruby do
-    gem 'unicorn'
-  end
 end
 
 platforms 'mswin', 'mingw' do
+  gem 'tzinfo-data'
+  
   group :test do
     gem 'wdm', '>= 0.1.0'
+      gem 'win32console', require: false
   end
 end

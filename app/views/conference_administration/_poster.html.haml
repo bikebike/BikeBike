@@ -2,4 +2,4 @@
   = form_tag administration_update_path(@this_conference.slug, :poster), multipart: true do
     = filefield :poster, @this_conference.poster, required: true, label: false, preview: true
     .actions.left
-      = button_tag :upload, value: :upload, id: 'upload-file'
+      = button :upload, value: :upload, id: 'upload-file'

@@ -3,12 +3,10 @@
     .facebook
       =_'links.footer.help_text.facebook', 'Join our facebook group' do |title|
         %a{href: 'https://www.facebook.com/groups/648758205249998/', target: :_blank, title: title}
-          -#= svg_sprite 'icons', 'bb-icon-fb', 'facebook logo'
           = svg 'facebook', 'facebook logo'
     .github
       =_'links.footer.text.Help_contribute' do |title|
         %a{href: 'https://github.com/bikebike/BikeBike', target: :_blank, title: title}
-          -#= svg_sprite 'icons', 'bb-icon-github', 'github logo'
           = svg 'github', 'github logo'
   .user-controls
     - if logged_in?
@@ -18,11 +16,6 @@
     - else
       = signin_link
   %ul.locales
-  -#  - @alt_lang_urls.each do |locale, url|
-  -#    %li
-  -#      - locale_translation = language_name(locale, true)
-  -#      %a{href: url, lang: locale}
-  -#        =_'translate.content.change_locale', "Read in #{locale_translation}", vars: {language: locale_translation}, locale: locale if locale != I18n.locale.to_s
   .site-info
     .contact-us=link_to (_'links.footer.help_text.contact'), contact_path, id: 'contact-link'
     .copy

@@ -19,6 +19,6 @@
         = checkbox :is_featured, @this_conference.id.present? && @this_conference.is_featured != false, 'forms.labels.generic.is_featured'
       = columns(medium: 12) do
         .actions.next-prev
-          = button_tag :save, value: :save
+          = button :save, value: :save
           - if @this_conference.id.present?
             = button_with_confirmation :delete, value: :delete, class: 'delete'

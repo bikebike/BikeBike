@@ -6,4 +6,4 @@
 			%p=_'articles.conference_registration.paragraphs.provide_email', :p			
 			= form_tag oauth_save_path, class: 'flex-form' do
 				= emailfield :email, nil, required: true, big: true
-				= button_tag :save, value: :save
+				= button :save, value: :save

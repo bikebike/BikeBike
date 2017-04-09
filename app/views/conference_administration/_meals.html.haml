@@ -20,7 +20,7 @@
             %td.form
               = admin_update_form do
                 = hidden_field_tag :meal, time
-                = button_tag :delete, value: :delete, class: [:small, :delete]
+                = button :delete, value: :delete, class: [:small, :delete]
     = admin_update_form do
       %h3=_'articles.admin.locations.headings.add_meal', :t
       .flex-inputs
@@ -30,6 +30,6 @@
       = textfield :title, nil, required: true, big: true, help: 'articles.admin.locations.paragraphs.meal_title'
       = textfield :info, nil, help: 'articles.admin.locations.paragraphs.meal_info'
       .actions.next-prev
-        = button_tag :add_meal, value: :add_meal
+        = button :add_meal, value: :add_meal
   - else
     .warning-info=_'articles.admin.meals.no_locations_warning'

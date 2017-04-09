@@ -6,22 +6,22 @@
     - else
       - add_inline_script :schedule if @entire_page
       #schedule-preview
-        - @schedule.each do | day, data |
-          %h4=date(day, :weekday)
+        - @schedule.each do |day, data|
+          %h4=date(day, :weekday).html_safe
           %table.schedule{class: [data[:locations].present? ? 'has-locations' : 'no-locations', "locations-#{data[:num_locations]}"]}
             - if data[:locations].present? && data[:locations].values.first != :add
               %thead
                 %tr
                   %th.corner
-                  - data[:locations].each do | id, location |
-                    %th=location.is_a?(Symbol) ? '' : location.title
+                  - data[:locations].each do |id, location|
+                    %th=location.is_a?(Symbol) ? '' : _!(location.title)
             %tbody
-              - data[:times].each do | time, time_data |
+              - data[:times].each do |time, time_data|
                 %tr
                   - rowspan = (time_data[:length] * 2).to_i
-                  %th=time(time)
+                  %th=time(time).html_safe
                   - if time_data[:type] == :workshop
-                    - data[:locations].each do | id, location |
+                    - data[:locations].each do |id, location|
                       - if time_data[:item][:workshops][id].present?
                         - workshop = time_data[:item][:workshops][id][:workshop]
                         - status = time_data[:item][:workshops][id][:status]
@@ -31,11 +31,11 @@
                         - if workshop.present? && workshop.event_location.present?
                           = link_to view_workshop_path(@conference.slug, workshop.id), class: 'event-detail-link' do
                             .details
-                              .title=workshop.title
+                              .title=_!workshop.title
                           %template.event-details{data: { href: view_workshop_path(@conference.slug, workshop.id) }}
-                            %h1.title=workshop.title
+                            %h1.title=_!workshop.title
                             %p.address
-                              = workshop.event_location.title + _!(': ')
+                              = _!("#{workshop.event_location.title}:")
                               = location_link workshop.event_location
                             .workshop-description= richtext workshop.info, 1
                           - if @can_edit
@@ -46,10 +46,10 @@
                                   %span.value="#{status[:conflict_score]} / #{workshop.interested.size}"
                                 - if status[:errors].present?
                                   .errors
-                                    - status[:errors].each do | error |
+                                    - status[:errors].each do |error|
                                       .error=_"errors.messages.schedule.#{error[:name].to_s}", vars: error[:i18nVars]
                               = hidden_field_tag :id, workshop.id
-                              = button_tag :deschedule, value: :deschedule_workshop, class: [:delete, :small]
+                              = button :deschedule, value: :deschedule_workshop, class: [:delete, :small]
                         - elsif @can_edit
                           .title="Block #{time_data[:item][:block] + 1}"
                   - elsif time_data[:type] != :nil
@@ -60,23 +60,23 @@
                           - if location.present?
                             %a.event-detail-link
                               .details
-                                .title= time_data[:item]['title']
-                                .location= location.title
+                                .title=_!(time_data[:item]['title'])
+                                .location=_!location.title
                             %template.event-details
-                              %h1.title=time_data[:item]['title']
+                              %h1.title=_!(time_data[:item]['title'])
                               %p.address
-                                = location.title + _!(': ')
+                                = _!("#{location.title}:")
                                 = location_link location
                         - when :event
                           - if time_data[:item].event_location.present?
                             %a.event-detail-link
                               .details
-                                .title= time_data[:item][:title]
-                                .location= time_data[:item].event_location.title
+                                .title=_!(time_data[:item][:title]) if time_data[:item][:title]
+                                .location=_!(time_data[:item].event_location.title)
                             %template.event-details
-                              %h1.title=time_data[:item][:title]
+                              %h1.title=_!(time_data[:item][:title]) if time_data[:item][:title]
                               %p.address
-                                = time_data[:item].event_location.title + _!(': ')
+                                = _!("#{time_data[:item].event_location.title}:")
                                 = location_link time_data[:item].event_location
                               = richtext time_data[:item][:info], 1
       - if @entire_page

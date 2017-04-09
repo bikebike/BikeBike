@@ -1,388 +1,630 @@
 ---
 en:
-  date:
-    abbr_day_names:
-    - Sun
-    - Mon
-    - Tue
-    - Wed
-    - Thu
-    - Fri
-    - Sat
-    abbr_month_names:
-    - 
-    - Jan
-    - Feb
-    - Mar
-    - Apr
-    - May
-    - Jun
-    - Jul
-    - Aug
-    - Sep
-    - Oct
-    - Nov
-    - Dec
-    day_names:
-    - Sunday
-    - Monday
-    - Tuesday
-    - Wednesday
-    - Thursday
-    - Friday
-    - Saturday
-    formats:
-      default: "%Y-%m-%d"
-      long: "%B %d, %Y"
-      short: "%b %d"
-      weekday: "%A"
-      span_same_month_date_1: "%B %e"
-      span_same_month_date_2: "%e, %Y"
-      span_same_year_date_1: "%B %e"
-      span_same_year_date_2: "%B %e, %Y"
-      span_different_year_date_1: "%B %e, %Y"
-      span_different_year_date_2: "%B %e, %Y"
-    month_names:
-    - 
-    - January
-    - February
-    - March
-    - April
-    - May
-    - June
-    - July
-    - August
-    - September
-    - October
-    - November
-    - December
-    order:
-    - year
-    - month
-    - day
-    date_span: "%{date_1} – %{date_2}"
-  datetime:
-    distance_in_words:
-      about_x_hours:
-        one: about 1 hour
-        other: about %{count} hours
-      about_x_months:
-        one: about 1 month
-        other: about %{count} months
-      about_x_years:
-        one: about 1 year
-        other: about %{count} years
-      almost_x_years:
-        one: almost 1 year
-        other: almost %{count} years
-      half_a_minute: half a minute
-      less_than_x_minutes:
-        one: less than a minute
-        other: less than %{count} minutes
-      less_than_x_seconds:
-        one: less than 1 second
-        other: less than %{count} seconds
-      over_x_years:
-        one: over 1 year
-        other: over %{count} years
-      x_days:
-        one: 1 day
-        other: "%{count} days"
-      x_hours:
-        one: 1 hour
-        other: "%{count} hours"
-      x_minutes:
-        one: 1 minute
-        other: "%{count} minutes"
-      x_months:
-        one: 1 month
-        other: "%{count} months"
-      x_seconds:
-        one: 1 second
-        other: "%{count} seconds"
-      x_and_y: "%{x} %{y}"
-      time_ago: "%{time} ago"
-    prompts:
-      day: Day
-      hour: Hour
-      minute: Minute
-      month: Month
-      second: Seconds
-      year: Year
-  errors:
-    format: "%{attribute} %{message}"
-    messages:
-      accepted: must be accepted
-      blank: can't be blank
-      present: must be blank
-      confirmation: doesn't match %{attribute}
-      empty: can't be empty
-      equal_to: must be equal to %{count}
-      even: must be even
-      exclusion: is reserved
-      greater_than: must be greater than %{count}
-      greater_than_or_equal_to: must be greater than or equal to %{count}
-      inclusion: is not included in the list
-      invalid: is invalid
-      less_than: must be less than %{count}
-      less_than_or_equal_to: must be less than or equal to %{count}
-      not_a_number: is not a number
-      not_an_integer: must be an integer
-      odd: must be odd
-      record_invalid: 'Validation failed: %{errors}'
-      restrict_dependent_destroy:
-        one: Cannot delete record because a dependent %{record} exists
-        many: Cannot delete record because dependent %{record} exist
-      taken: has already been taken
-      too_long:
-        one: is too long (maximum is 1 character)
-        other: is too long (maximum is %{count} characters)
-      too_short:
-        one: is too short (minimum is 1 character)
-        other: is too short (minimum is %{count} characters)
-      wrong_length:
-        one: is the wrong length (should be 1 character)
-        other: is the wrong length (should be %{count} characters)
-      other_than: must be other than %{count}
-      carrierwave_processing_error: failed to be processed
-      carrierwave_integrity_error: is not of an allowed file type
-      carrierwave_download_error: could not be downloaded
-      extension_white_list_error: 'You are not allowed to upload %{extension} files,
-        allowed types: %{allowed_types}'
-      extension_black_list_error: 'You are not allowed to upload %{extension} files,
-        prohibited types: %{prohibited_types}'
-      rmagick_processing_error: 'Failed to manipulate with rmagick, maybe it is not
-        an image? Original Error: %{e}'
-      mime_types_processing_error: 'Failed to process file with MIME::Types, maybe
-        not valid content-type? Original Error: %{e}'
-      mini_magick_processing_error: 'Failed to manipulate with MiniMagick, maybe it
-        is not an image? Original Error: %{e}'
-      fields:
-        payment:
-          incomplete: Your payment was not completed.
-        location:
-          empty: 'Please enter your location'
-          unknown: 'Please include your city or town, we could not find a locality from "%{value}"'
-        name:
-          empty: 'Please enter a valid name'
-        address:
-          empty: 'Please enter an address'
-        space:
-          empty: 'Please select a space'
-        email:
-          exists: An account with this email address already exists
-        start_date:
-          start_date_after_end_date: Start date must be before end date
-          error: Error setting start date
-        end_date:
-          error: Error setting end date
-      housing:
-        space:
-          companions: This host wishes to be housed with %{name}
-      admin:
-        administrators: Error updating organizations
-        dates: Error updating dates
-        description: Error saving your conference description
-        poster: An error occurred uploading your conference poster
-        payment_message: An error occurred saving your the payment message 
-        suggested_amounts: An error occurred saving your payment amounts
-        paypal: An error occurred saving your paypal details
-        registration_status: An error occurred updating your conference registration status
-        registrations: Error updaing registration
-        broadcast: Error sending your message
-        providers: Error saving housing provider
-        housing: Error
-        locations: Error saving your location
-        meals: Error saving your meal
-        events: Error saving your event
-        workshop_times: Error saving your workshop time
-        schedule: Error
-        publish_schedule: An error occurred while publishing your schedule
-        error_adding_org_member: Error adding user to organization
-        error_removing_org_member: Error removing user from organization
-        error_adding_administrator: Error adding administrator
-        error_removing_administrator: Error removing administrator
-        save_block_time_required: Time is required
-        save_block_time_span_required: Length is required
-        save_block_days_required: Please select at least one day
-    template:
-      body: 'There were problems with the following fields:'
-      header:
-        one: 1 error prohibited this %{model} from being saved
-        other: "%{count} errors prohibited this %{model} from being saved"
-  warnings:
-    messages:
-      location_corrected: Your location was corrected from "%{original}" to "%{corrected}". If this doesn't reflect your intended location, you can change this again in the contact info step.
-      housing:
-        space:
-          overbooked: This space is overbooked
-          companions: This guest wishes to be housed with %{name}
-          space: This guest wishes to be housed in a %{expected}
-          dates: This guest's arrival or departure dates conflict with the host's availability dates
-  success:
-    messages:
-      admin:
-        administrators: Organizations updated 
-        dates: Conference dates updated successfully
-        description: Conference description updated successfully
-        poster: Conference poster uploaded
-        payment_message: Your payment message has been updated
-        suggested_amounts: Your suggested payment amounts have been updated
-        paypal: Your paypal information has been updated
-        registration_status: Your conference registration status has been updated
-        stats: ''
-        registrations: Registration updated
-        broadcast: Message sent
-        providers: Provider updated
-        housing: Housing updated
-        locations: Location saved
-        meals: Meal saved
-        events: Event saved
-        workshop_times: Workshop times saved
-        schedule: Schedule updated
-        publish_schedule: Your schedule has been published
-        unpublish_schedule: Your schedule has been un-published
-        org_member_added: User added to organization
-        org_member_removed: User removed from organization
-        administrator_added: Administrator added to conference
-        administrator_removed: Administrator removed from conference
-        distance_saved: Provider options updated
-        block_saved: Workshop time has been saved
-        block_deleted: Workshop time has been deleted
-        schedule_published: Your schedule has been published and should be visible on your conference page
-        schedule_unpublished: Your schedule has been un-published and should no longer be visible to users
-  helpers:
-    select:
-      prompt: Please select
-    submit:
-      create: Create %{model}
-      submit: Save %{model}
-      update: Update %{model}
-  number:
-    currency:
-      format:
-        delimiter: ","
-        format: "%u%n"
-        precision: 2
-        separator: "."
-        significant: false
-        strip_insignificant_zeros: false
-        unit: "$"
-    format:
-      delimiter: ","
-      precision: 3
-      separator: "."
-      significant: false
-      strip_insignificant_zeros: false
-    human:
-      decimal_units:
-        format: "%n %u"
-        units:
-          billion: Billion
-          million: Million
-          quadrillion: Quadrillion
-          thousand: Thousand
-          trillion: Trillion
-          unit: ''
-      format:
-        delimiter: ''
-        precision: 3
-        significant: true
-        strip_insignificant_zeros: true
-      storage_units:
-        format: "%n %u"
-        units:
-          byte:
-            one: Byte
-            other: Bytes
-          gb: GB
-          kb: KB
-          mb: MB
-          tb: TB
-    percentage:
-      format:
-        delimiter: ''
-        format: "%n%"
-    precision:
-      format:
-        delimiter: ''
-  support:
-    array:
-      last_word_connector: ", and "
-      two_words_connector: " and "
-      words_connector: ", "
-  time:
-    am: am
-    formats:
-      default: "%a, %d %b %Y %H:%M"
-      long: "%l%P, %B %e, %Y"
-      short: "%l:%M%P"
-    pm: pm
   languages:
+    aa: Afar
+    ab: Abkhazian
+    ace: Achinese
+    ach: Acoli
+    ada: Adangme
+    ady: Adyghe
+    ae: Avestan
+    aeb: Tunisian Arabic
     af: Afrikaans
+    afh: Afrihili
+    agq: Aghem
+    ain: Ainu
+    ak: Akan
+    akk: Akkadian
+    akz: Alabama
+    ale: Aleut
+    aln: Gheg Albanian
+    alt: Southern Altai
+    am: Amharic
+    an: Aragonese
+    ang: Old English
+    anp: Angika
     ar: Arabic
+    ar-001: Modern Standard Arabic
+    arc: Aramaic
+    arn: Mapuche
+    aro: Araona
+    arp: Arapaho
+    arq: Algerian Arabic
+    ars: Najdi Arabic
+    arw: Arawak
+    ary: Moroccan Arabic
+    arz: Egyptian Arabic
+    as: Assamese
+    asa: Asu
+    ase: American Sign Language
+    ast: Asturian
+    av: Avaric
+    avk: Kotava
+    awa: Awadhi
+    ay: Aymara
     az: Azerbaijani
+    az-alt-short: Azeri
+    ba: Bashkir
+    bal: Baluchi
+    ban: Balinese
+    bar: Bavarian
+    bas: Basaa
+    bax: Bamun
+    bbc: Batak Toba
+    bbj: Ghomala
+    be: Belarusian
+    bej: Beja
+    bem: Bemba
+    bew: Betawi
+    bez: Bena
+    bfd: Bafut
+    bfq: Badaga
     bg: Bulgarian
-    bn: Bengali
+    bgn: Western Balochi
+    bho: Bhojpuri
+    bi: Bislama
+    bik: Bikol
+    bin: Bini
+    bjn: Banjar
+    bkm: Kom
+    bla: Siksika
+    bm: Bambara
+    bn: Bangla
+    bo: Tibetan
+    bpy: Bishnupriya
+    bqi: Bakhtiari
+    br: Breton
+    bra: Braj
+    brh: Brahui
+    brx: Bodo
     bs: Bosnian
+    bss: Akoose
+    bua: Buriat
+    bug: Buginese
+    bum: Bulu
+    byn: Blin
+    byv: Medumba
     ca: Catalan
+    cad: Caddo
+    car: Carib
+    cay: Cayuga
+    cch: Atsam
+    ce: Chechen
+    ceb: Cebuano
+    cgg: Chiga
+    ch: Chamorro
+    chb: Chibcha
+    chg: Chagatai
+    chk: Chuukese
+    chm: Mari
+    chn: Chinook Jargon
+    cho: Choctaw
+    chp: Chipewyan
+    chr: Cherokee
+    chy: Cheyenne
+    ckb: Central Kurdish
+    co: Corsican
+    cop: Coptic
+    cps: Capiznon
+    cr: Cree
+    crh: Crimean Turkish
+    crs: Seselwa Creole French
     cs: Czech
+    csb: Kashubian
+    cu: Church Slavic
+    cv: Chuvash
     cy: Welsh
     da: Danish
+    dak: Dakota
+    dar: Dargwa
+    dav: Taita
     de: German
+    de-AT: Austrian German
+    de-CH: Swiss High German
+    del: Delaware
+    den: Slave
+    dgr: Dogrib
+    din: Dinka
+    dje: Zarma
+    doi: Dogri
+    dsb: Lower Sorbian
+    dtp: Central Dusun
+    dua: Duala
+    dum: Middle Dutch
+    dv: Divehi
+    dyo: Jola-Fonyi
+    dyu: Dyula
+    dz: Dzongkha
+    dzg: Dazaga
+    ebu: Embu
+    ee: Ewe
+    efi: Efik
+    egl: Emilian
+    egy: Ancient Egyptian
+    eka: Ekajuk
     el: Greek
+    elx: Elamite
     en: English
+    en-AU: Australian English
+    en-CA: Canadian English
+    en-GB: British English
+    en-GB-alt-short: UK English
+    en-US: American English
+    en-US-alt-short: US English
+    enm: Middle English
     eo: Esperanto
     es: Spanish
+    es-419: Latin American Spanish
+    es-ES: European Spanish
+    es-MX: Mexican Spanish
+    esu: Central Yupik
     et: Estonian
     eu: Basque
+    ewo: Ewondo
+    ext: Extremaduran
     fa: Persian
+    fa-AF: Dari
+    fan: Fang
+    fat: Fanti
+    ff: Fulah
     fi: Finnish
+    fil: Filipino
+    fit: Tornedalen Finnish
+    fj: Fijian
+    fo: Faroese
+    fon: Fon
     fr: French
+    fr-CA: Canadian French
+    fr-CH: Swiss French
+    frc: Cajun French
+    frm: Middle French
+    fro: Old French
+    frp: Arpitan
+    frr: Northern Frisian
+    frs: Eastern Frisian
+    fur: Friulian
+    fy: Western Frisian
+    ga: Irish
+    gaa: Ga
+    gag: Gagauz
+    gan: Gan Chinese
+    gay: Gayo
+    gba: Gbaya
+    gbz: Zoroastrian Dari
+    gd: Scottish Gaelic
+    gez: Geez
+    gil: Gilbertese
     gl: Galician
+    glk: Gilaki
+    gmh: Middle High German
+    gn: Guarani
+    goh: Old High German
+    gom: Goan Konkani
+    gon: Gondi
+    gor: Gorontalo
+    got: Gothic
+    grb: Grebo
+    grc: Ancient Greek
+    gsw: Swiss German
+    gu: Gujarati
+    guc: Wayuu
+    gur: Frafra
+    guz: Gusii
+    gv: Manx
+    gwi: Gwichʼin
+    ha: Hausa
+    hai: Haida
+    hak: Hakka Chinese
+    haw: Hawaiian
     he: Hebrew
     hi: Hindi
+    hif: Fiji Hindi
+    hil: Hiligaynon
+    hit: Hittite
+    hmn: Hmong
+    ho: Hiri Motu
     hr: Croatian
+    hsb: Upper Sorbian
+    hsn: Xiang Chinese
+    ht: Haitian Creole
     hu: Hungarian
+    hup: Hupa
+    hy: Armenian
+    hz: Herero
+    ia: Interlingua
+    iba: Iban
+    ibb: Ibibio
     id: Indonesian
+    ie: Interlingue
+    ig: Igbo
+    ii: Sichuan Yi
+    ik: Inupiaq
+    ilo: Iloko
+    inh: Ingush
+    io: Ido
     is: Icelandic
     it: Italian
+    iu: Inuktitut
+    izh: Ingrian
     ja: Japanese
+    jam: Jamaican Creole English
+    jbo: Lojban
+    jgo: Ngomba
+    jmc: Machame
+    jpr: Judeo-Persian
+    jrb: Judeo-Arabic
+    jut: Jutish
+    jv: Javanese
+    ka: Georgian
+    kaa: Kara-Kalpak
+    kab: Kabyle
+    kac: Kachin
+    kaj: Jju
+    kam: Kamba
+    kaw: Kawi
+    kbd: Kabardian
+    kbl: Kanembu
+    kcg: Tyap
+    kde: Makonde
+    kea: Kabuverdianu
+    ken: Kenyang
+    kfo: Koro
+    kg: Kongo
+    kgp: Kaingang
+    kha: Khasi
+    kho: Khotanese
+    khq: Koyra Chiini
+    khw: Khowar
+    ki: Kikuyu
+    kiu: Kirmanjki
+    kj: Kuanyama
+    kk: Kazakh
+    kkj: Kako
+    kl: Kalaallisut
+    kln: Kalenjin
     km: Khmer
+    kmb: Kimbundu
     kn: Kannada
     ko: Korean
+    koi: Komi-Permyak
+    kok: Konkani
+    kos: Kosraean
+    kpe: Kpelle
+    kr: Kanuri
+    krc: Karachay-Balkar
+    kri: Krio
+    krj: Kinaray-a
+    krl: Karelian
+    kru: Kurukh
+    ks: Kashmiri
+    ksb: Shambala
+    ksf: Bafia
+    ksh: Colognian
+    ku: Kurdish
+    kum: Kumyk
+    kut: Kutenai
+    kv: Komi
+    kw: Cornish
+    ky: Kyrgyz
+    ky-alt-variant: Kirghiz
+    la: Latin
+    lad: Ladino
+    lag: Langi
+    lah: Lahnda
+    lam: Lamba
+    lb: Luxembourgish
+    lez: Lezghian
+    lfn: Lingua Franca Nova
+    lg: Ganda
+    li: Limburgish
+    lij: Ligurian
+    liv: Livonian
+    lkt: Lakota
+    lmo: Lombard
+    ln: Lingala
     lo: Lao
+    lol: Mongo
+    loz: Lozi
+    lrc: Northern Luri
     lt: Lithuanian
+    ltg: Latgalian
+    lu: Luba-Katanga
+    lua: Luba-Lulua
+    lui: Luiseno
+    lun: Lunda
+    luo: Luo
+    lus: Mizo
+    luy: Luyia
     lv: Latvian
+    lzh: Literary Chinese
+    lzz: Laz
+    mad: Madurese
+    maf: Mafa
+    mag: Magahi
+    mai: Maithili
+    mak: Makasar
+    man: Mandingo
+    mas: Masai
+    mde: Maba
+    mdf: Moksha
+    mdr: Mandar
+    men: Mende
+    mer: Meru
+    mfe: Morisyen
+    mg: Malagasy
+    mga: Middle Irish
+    mgh: Makhuwa-Meetto
+    mgo: Metaʼ
+    mh: Marshallese
+    mi: Maori
+    mic: Mi'kmaq
+    min: Minangkabau
     mk: Macedonian
+    ml: Malayalam
     mn: Mongolian
+    mnc: Manchu
+    mni: Manipuri
+    moh: Mohawk
+    mos: Mossi
+    mr: Marathi
+    mrj: Western Mari
     ms: Malay
+    mt: Maltese
+    mua: Mundang
+    mul: Multiple languages
+    mus: Creek
+    mwl: Mirandese
+    mwr: Marwari
+    mwv: Mentawai
+    my: Burmese
+    my-alt-variant: Myanmar Language
+    mye: Myene
+    myv: Erzya
+    mzn: Mazanderani
+    na: Nauru
+    nan: Min Nan Chinese
+    nap: Neapolitan
+    naq: Nama
     nb: Norwegian Bokmål
+    nd: North Ndebele
+    nds: Low German
+    nds-NL: Low Saxon
     ne: Nepali
+    new: Newari
+    ng: Ndonga
+    nia: Nias
+    niu: Niuean
+    njo: Ao Naga
     nl: Dutch
+    nl-BE: Flemish
+    nmg: Kwasio
     nn: Norwegian Nynorsk
-    or: Oriya
+    nnh: Ngiemboon
+    'no': Norwegian
+    nog: Nogai
+    non: Old Norse
+    nov: Novial
+    nqo: N’Ko
+    nr: South Ndebele
+    nso: Northern Sotho
+    nus: Nuer
+    nv: Navajo
+    nwc: Classical Newari
+    ny: Nyanja
+    nym: Nyamwezi
+    nyn: Nyankole
+    nyo: Nyoro
+    nzi: Nzima
+    oc: Occitan
+    oj: Ojibwa
+    om: Oromo
+    or: Odia
+    os: Ossetic
+    osa: Osage
+    ota: Ottoman Turkish
+    pa: Punjabi
+    pag: Pangasinan
+    pal: Pahlavi
+    pam: Pampanga
+    pap: Papiamento
+    pau: Palauan
+    pcd: Picard
+    pcm: Nigerian Pidgin
+    pdc: Pennsylvania German
+    pdt: Plautdietsch
+    peo: Old Persian
+    pfl: Palatine German
+    phn: Phoenician
+    pi: Pali
     pl: Polish
+    pms: Piedmontese
+    pnt: Pontic
+    pon: Pohnpeian
+    prg: Prussian
+    pro: Old Provençal
+    ps: Pashto
+    ps-alt-variant: Pushto
     pt: Portuguese
+    pt-BR: Brazilian Portuguese
+    pt-PT: European Portuguese
+    qu: Quechua
+    quc: Kʼicheʼ
+    qug: Chimborazo Highland Quichua
+    raj: Rajasthani
+    rap: Rapanui
+    rar: Rarotongan
+    rgn: Romagnol
+    rif: Riffian
     rm: Romansh
+    rn: Rundi
     ro: Romanian
+    ro-MD: Moldavian
+    rof: Rombo
+    rom: Romany
+    root: Root
+    rtm: Rotuman
     ru: Russian
+    rue: Rusyn
+    rug: Roviana
+    rup: Aromanian
+    rw: Kinyarwanda
+    rwk: Rwa
+    sa: Sanskrit
+    sad: Sandawe
+    sah: Sakha
+    sam: Samaritan Aramaic
+    saq: Samburu
+    sas: Sasak
+    sat: Santali
+    saz: Saurashtra
+    sba: Ngambay
+    sbp: Sangu
+    sc: Sardinian
+    scn: Sicilian
+    sco: Scots
+    sd: Sindhi
+    sdc: Sassarese Sardinian
+    sdh: Southern Kurdish
+    se: Northern Sami
+    see: Seneca
+    seh: Sena
+    sei: Seri
+    sel: Selkup
+    ses: Koyraboro Senni
+    sg: Sango
+    sga: Old Irish
+    sgs: Samogitian
+    sh: Serbo-Croatian
+    shi: Tachelhit
+    shn: Shan
+    shu: Chadian Arabic
+    si: Sinhala
+    sid: Sidamo
     sk: Slovak
     sl: Slovenian
+    sli: Lower Silesian
+    sly: Selayar
+    sm: Samoan
+    sma: Southern Sami
+    smj: Lule Sami
+    smn: Inari Sami
+    sms: Skolt Sami
+    sn: Shona
+    snk: Soninke
+    so: Somali
+    sog: Sogdien
+    sq: Albanian
     sr: Serbian
+    srn: Sranan Tongo
+    srr: Serer
+    ss: Swati
+    ssy: Saho
+    st: Southern Sotho
+    stq: Saterland Frisian
+    su: Sundanese
+    suk: Sukuma
+    sus: Susu
+    sux: Sumerian
     sv: Swedish
     sw: Swahili
+    sw-CD: Congo Swahili
+    swb: Comorian
+    syc: Classical Syriac
+    syr: Syriac
+    szl: Silesian
     ta: Tamil
+    tcy: Tulu
+    te: Telugu
+    tem: Timne
+    teo: Teso
+    ter: Tereno
+    tet: Tetum
+    tg: Tajik
     th: Thai
+    ti: Tigrinya
+    tig: Tigre
+    tiv: Tiv
+    tk: Turkmen
+    tkl: Tokelau
+    tkr: Tsakhur
     tl: Tagalog
+    tlh: Klingon
+    tli: Tlingit
+    tly: Talysh
+    tmh: Tamashek
+    tn: Tswana
+    to: Tongan
+    tog: Nyasa Tonga
+    tpi: Tok Pisin
     tr: Turkish
+    tru: Turoyo
+    trv: Taroko
+    ts: Tsonga
+    tsd: Tsakonian
+    tsi: Tsimshian
+    tt: Tatar
+    ttt: Muslim Tat
+    tum: Tumbuka
+    tvl: Tuvalu
+    tw: Twi
+    twq: Tasawaq
+    ty: Tahitian
+    tyv: Tuvinian
+    tzm: Central Atlas Tamazight
+    udm: Udmurt
+    ug: Uyghur
+    ug-alt-variant: Uighur
+    uga: Ugaritic
     uk: Ukrainian
+    umb: Umbundu
+    und: Unknown language
     ur: Urdu
     uz: Uzbek
+    vai: Vai
+    ve: Venda
+    vec: Venetian
+    vep: Veps
     vi: Vietnamese
+    vls: West Flemish
+    vmf: Main-Franconian
+    vo: Volapük
+    vot: Votic
+    vro: Võro
+    vun: Vunjo
+    wa: Walloon
+    wae: Walser
+    wal: Wolaytta
+    war: Waray
+    was: Washo
+    wbp: Warlpiri
     wo: Wolof
-    be: Belarusian
-    tt: Tatar
+    wuu: Wu Chinese
+    xal: Kalmyk
+    xh: Xhosa
+    xmf: Mingrelian
+    xog: Soga
+    yao: Yao
+    yap: Yapese
+    yav: Yangben
+    ybb: Yemba
+    yi: Yiddish
+    yo: Yoruba
+    yrl: Nheengatu
+    yue: Cantonese
+    za: Zhuang
+    zap: Zapotec
+    zbl: Blissymbols
+    zea: Zeelandic
+    zen: Zenaga
+    zgh: Standard Moroccan Tamazight
+    zh: Chinese
+    zh-alt-long: Mandarin Chinese
+    zh-Hans: Simplified Chinese
+    zh-Hant: Traditional Chinese
+    zu: Zulu
+    zun: Zuni
+    zxx: No linguistic content
+    zza: Zaza
   geography:
     countries:
       AD: Andorra
@@ -440,7 +682,7 @@ en:
       CW: Curacao
       CX: Christmas Island
       CY: Cyprus
-      CZ: Czech Republic
+      CZ: Czechia
       DE: Germany
       DJ: Djibouti
       DK: Denmark
@@ -638,10 +880,33 @@ en:
     subregions:
       AR:
         BA: Buenos Aires
+        CF: Buenos Aires F.D.
+        CT: Catamarca
+        CC: Chaco
+        CH: Chubut
+        CD: Cordoba
+        CR: Corrientes
+        ER: Entre Rios
+        FO: Formosa
+        JY: Jujuy
+        LP: La Pampa
+        LR: La Rioja
+        MZ: Mendoza
+        MN: Misiones
+        NQ: Neuquen
+        RN: Rio Negro
+        SA: Salta
+        SJ: San Juan
+        SL: San Luis
+        SC: Santa Cruz
+        SF: Santa Fe
+        SE: Santiago del Estero
+        TF: Tierra del Fuego
+        TM: Tucuman
       AT:
         Bgld: Burgenland
       AU:
-        ACT: Australian Capital Territory
+        ACT: ACT
         NSW: New South Wales
         NT: Northern Territory
         QLD: Queensland
@@ -663,8 +928,8 @@ en:
         MT: Mato Grosso
         MS: Mato Grosso do Sul
         MG: Minas Gerais
-        PB: Paraiba
         PR: Paraná
+        PB: Paraíba
         PA: Pará
         PE: Pernambuco
         PI: Piauí
@@ -698,24 +963,28 @@ en:
       DE:
         HH: Hamburg
         NRW: North Rhine-Westphalia
+      ET:
+        SNNPR: SNNPR
+      FR:
+        ACAL: Grand-Est
       IT:
         FVG: Friuli Venezia Giulia
       MX:
         Ags: Aguascalientes
         BCS: Baja California Sur
-        CAM: Campeche
+        Camps: Campeche
         CHP: Chiapas
         CH: Chihuahua
         COA: Coahuila
         COL: Colima
-        DUR: Durango
+        Dgo: Durango
         BCN: Estado de Baja California
         MEX: Estado de México
         GUA: Guanajuato
         GRO: Guerrero
         Hgo: Hidalgo
         JAL: Jalisco
-        Mich: Michoacán
+        MIC: Michoacán
         MOR: Morelos
         NAY: Nayarit
         NL: Nuevo León
@@ -727,13 +996,19 @@ en:
         SIN: Sinaloa
         SON: Sonora
         TAB: Tabasco
-        TAM: Tamaulipas
-        Tlax: Tlaxcala
+        Tamps: Tamaulipas
+        TLA: Tlaxcala
         VER: Veracruz
         YUC: Yucatán
         ZAC: Zacatecas
-        Jal: Jalisco
-        DIF: Distrito Federal
+        CAM: Campeche
+        DUR: Durango
+        Gto: Guanajuato
+        NLE: Nuevo León
+        Qro: Querétaro
+        QRoo: Quintana Roo
+        TAM: Tamaulipas
+        Tlax: Tlaxcala
       MY:
         JHR: Johor
         KDH: Kedah
@@ -751,18 +1026,34 @@ en:
         SRW: Sarawak
         SGR: Selangor
         TRG: Terengganu
+      NG:
+        FCTA: FCT
       NI:
         RAAN: North Atlantic Autonomous Region (RAAN)
       NL:
-        GLD: Provincie Gelderland
+        fr: Friesland
+        gr: Groningen
+        lb: Limburg
+        nb: North Brabant
+        nh: North Holland
+        dr: Provincie Drenthe
+        fl: Provincie Flevoland
+        gd: Provincie Gelderland
+        ov: Provincie Overijssel
+        ut: Provincie Utrecht
+        zl: Provincie Zeeland
+        zh: South Holland
       PH:
-        ARMM: Autonomous Region in Muslim Mindanao
+        ARMM: ARMM
+      PK:
+        FATA: FATA
+      RU:
+        MO: Moscow Oblast
       US:
         AL: Alabama
         AK: Alaska
         AZ: Arizona
         AR: Arkansas
-        Calif: California
         CA: California
         CO: Colorado
         CT: Connecticut
@@ -810,134 +1101,272 @@ en:
         WV: West Virginia
         WI: Wisconsin
         WY: Wyoming
+        Calif: California
     formats:
-        city_region_country: '%{city}, %{region}, %{country}'
-        city_country: '%{city}, %{country}'
-        city_region: '%{city}, %{region}'
-        region_country: '%{region}, %{country}'
-  activerecord:
-    errors:
-      messages:
-        record_invalid: 'Validation failed: %{errors}'
-        restrict_dependent_destroy:
-          one: Cannot delete record because a dependent %{record} exists
-          many: Cannot delete record because dependent %{record} exist
-  translate:
-    pages:
-      Locale_Translations: "%{language} Translations"
-      Enabled_Locales: Enabled Locales
-      Incomplete_Locales: Incomplete Locales
-      Other_Locales: Other Locales
-      pages: 'Pages:'
-      context_title: 'Context:'
-      context:
-        one: "%{context}"
-        other: "%{context} (× %{count})"
-      contexts:
-        character: character
-        sentence: sentence
-        title: title
-        paragraph: paragraph
-        language: language
-        geography: geography
-        other: other
-      pluraliztion_rules:
-        zero: none
-        one: singular
-        two: two
-        few: few
-        many: many
-        other: plural
-      pluraliztion_same_as_other: Same as other
-      no_value: Undefined
-      default_value: Default
-      variables: Variables
-      uses_default_value: This translation will use the plural version for the number
-        0
-      uses_custom_value: This translation has been overridden, normally the number
-        0 is treated as a plural in English
-      use_default_value: Use the default value
-      use_custom_value: Use a custom value
-      explain_zero_fallback: This translation will use the plural version for the number 0
-      History: History
-      Locale_Translation: "%{language} Translation"
-      Save: Save
-    content:
-      needs_translations: This page contains untranslated content
-      requires_translation: This %{model} is in %{language}.
-      translation_out_of_date: Translated content on this page may no longer be accurate
-      translation_last_modified: The text in the original language was last modified on %{date}
-      translate_now: Translate it now
-      can_you_help: Can you translate from %{language_a} to %{language_b}?
-      un_translated: Untranslated content
-      outdated_translation: Outdated content
-      not_translation: Not a translation
-      Translation_of: Translation of
-    volunteer:
-      become_a_volunteer: Become a volunteer translator
-      volunteer: Can you help us translate it?
-    site:
-      locale_is_available: "%{site_name} is available in %{language}."
-      go_to_locale: See the %{language} site now
-      locale_not_available: Sorry, %{site_name} is not currently available in %{language}.
-      locale_needs_help: Can you help us translate the site into %{language}?
-    translation_pages:
-      Locale_Translations: "%{language} Translations"
-      Enabled_Locales: Enabled Locales
-      Incomplete_Locales: Incomplete Locales
-      Other_Locales: Other Locales
-      pages: 'Pages:'
-      context_title: 'Context:'
-      context:
-        one: "%{context}"
-        other: "%{context} (× %{count})"
-      contexts:
-        character: character
-        sentence: sentence
-        title: title
-        paragraph: paragraph
-        language: language
-        geography: geography
-        other: other
-      pluraliztion_rules:
-        zero: none
-        one: singular
-        two: two
-        few: few
-        many: many
-        other: plural
-      pluraliztion_same_as_other: Same as other
-      no_value: Undefined
-      default_value: Default
-      variables: Variables
-      uses_default_value: This translation will use the plural version for the number 0
-      uses_custom_value: This translation has been overridden, normally the number 0 is treated as a plural in English
-      use_default_value: Use the default value
-      use_custom_value: Use a custom value
+      city_region_country: "%{city}, %{region}, %{country}"
+      city_country: "%{city}, %{country}"
+      city_region: "%{city}, %{region}"
+      region_country: "%{region}, %{country}"
+  date:
+    formats:
+      default: "%Y-%m-%d"
+      long: "%B %d, %Y"
+      short: "%b %d"
+      weekday: "%A"
+      span_same_month_date_1: "%B %e"
+      span_same_month_date_2: "%e, %Y"
+      span_same_year_date_1: "%B %e"
+      span_same_year_date_2: "%B %e, %Y"
+      span_different_year_date_1: "%B %e, %Y"
+      span_different_year_date_2: "%B %e, %Y"
+    date_span: "%{date_1} – %{date_2}"
+  time:
+    am: am
+    formats:
+      default: "%a, %d %b %Y %H:%M"
+      long: "%l%P, %B %e, %Y"
+      short: "%l %M %P"
+    pm: pm
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: about 1 hour
+        other: about %{count} hours
+      about_x_months:
+        one: about 1 month
+        other: about %{count} months
+      about_x_years:
+        one: about 1 year
+        other: about %{count} years
+      almost_x_years:
+        one: almost 1 year
+        other: almost %{count} years
+      half_a_minute: half a minute
+      less_than_x_minutes:
+        one: less than a minute
+        other: less than %{count} minutes
+      less_than_x_seconds:
+        one: less than 1 second
+        other: less than %{count} seconds
+      over_x_years:
+        one: over 1 year
+        other: over %{count} years
+      x_days:
+        one: 1 day
+        other: "%{count} days"
+      x_hours:
+        one: 1 hour
+        other: "%{count} hours"
+      x_minutes:
+        one: 1 minute
+        other: "%{count} minutes"
+      x_months:
+        one: 1 month
+        other: "%{count} months"
+      x_seconds:
+        one: 1 second
+        other: "%{count} seconds"
+      x_and_y: "%{x} %{y}"
+      time_ago: "%{time} ago"
+  string_formats:
+    data_with_supplementary_value: "%{value} (%{supplementary_value})"
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      accepted: must be accepted
+      blank: can't be blank
+      present: must be blank
+      confirmation: doesn't match %{attribute}
+      empty: can't be empty
+      equal_to: must be equal to %{count}
+      even: must be even
+      exclusion: is reserved
+      greater_than: must be greater than %{count}
+      greater_than_or_equal_to: must be greater than or equal to %{count}
+      inclusion: is not included in the list
+      invalid: is invalid
+      less_than: must be less than %{count}
+      less_than_or_equal_to: must be less than or equal to %{count}
+      not_a_number: is not a number
+      not_an_integer: must be an integer
+      odd: must be odd
+      record_invalid: 'Validation failed: %{errors}'
+      restrict_dependent_destroy:
+        one: Cannot delete record because a dependent %{record} exists
+        many: Cannot delete record because dependent %{record} exist
+      taken: has already been taken
+      too_long:
+        one: is too long (maximum is 1 character)
+        other: is too long (maximum is %{count} characters)
+      too_short:
+        one: is too short (minimum is 1 character)
+        other: is too short (minimum is %{count} characters)
+      wrong_length:
+        one: is the wrong length (should be 1 character)
+        other: is the wrong length (should be %{count} characters)
+      other_than: must be other than %{count}
+      carrierwave_processing_error: failed to be processed
+      carrierwave_integrity_error: is not of an allowed file type
+      carrierwave_download_error: could not be downloaded
+      extension_white_list_error: 'You are not allowed to upload %{extension} files,
+        allowed types: %{allowed_types}'
+      extension_black_list_error: 'You are not allowed to upload %{extension} files,
+        prohibited types: %{prohibited_types}'
+      rmagick_processing_error: 'Failed to manipulate with rmagick, maybe it is not
+        an image? Original Error: %{e}'
+      mime_types_processing_error: 'Failed to process file with MIME::Types, maybe
+        not valid content-type? Original Error: %{e}'
+      mini_magick_processing_error: 'Failed to manipulate with MiniMagick, maybe it
+        is not an image? Original Error: %{e}'
+      fields:
+        payment:
+          incomplete: Your payment was not completed.
+        location:
+          empty: Please enter your location
+          unknown: Please include your city or town, we could not find a locality
+            from "%{value}"
+        name:
+          empty: Please enter a valid name
+        address:
+          empty: Please enter an address
+        space:
+          empty: Please select a space
+        email:
+          exists: An account with this email address already exists
+        start_date:
+          start_date_after_end_date: Start date must be before end date
+          error: Error setting start date
+        end_date:
+          error: Error setting end date
+      housing:
+        space:
+          companions: This host wishes to be housed with %{name}
+      admin:
+        administrators: Error updating organizations
+        dates: Error updating dates
+        description: Error saving your conference description
+        group_ride: Error saving your group ride info
+        housing_info: Error saving Housing info
+        workshop_info: Error saving Workshop info
+        schedule_info: Error saving Schedule info
+        travel_info: Error saving Travel info
+        city_info: Error saving City info
+        what_to_bring: Error saving What to Bring
+        volunteering_info: Error saving Volunteering info
+        additional_details: Error saving Additional details
+        poster: An error occurred uploading your conference poster
+        payment_message: An error occurred saving your the payment message
+        suggested_amounts: An error occurred saving your payment amounts
+        paypal: An error occurred saving your paypal details
+        registration_status: An error occurred updating your conference registration
+          status
+        registrations: Error updaing registration
+        broadcast: Error sending your message
+        providers: Error saving housing provider
+        housing: Error
+        locations: Error saving your location
+        meals: Error saving your meal
+        events: Error saving your event
+        workshop_times: Error saving your workshop time
+        schedule: Error
+        publish_schedule: An error occurred while publishing your schedule
+        error_adding_org_member: Error adding user to organization
+        error_removing_org_member: Error removing user from organization
+        error_adding_administrator: Error adding administrator
+        error_removing_administrator: Error removing administrator
+    template:
+      body: 'There were problems with the following fields:'
+      header:
+        one: 1 error prohibited this %{model} from being saved
+        other: "%{count} errors prohibited this %{model} from being saved"
+  warnings:
+    messages:
+      location_corrected: Your location was corrected from "%{original}" to "%{corrected}".
+        If this doesn't reflect your intended location, you can change this again
+        in the contact info step.
+      housing:
+        space:
+          overbooked: This space is overbooked
+          companions: This guest wishes to be housed with %{name}
+          space: This guest wishes to be housed in a %{expected}
+          dates: This guest's arrival or departure dates conflict with the host's
+            availability dates
+  success:
+    messages:
+      admin:
+        administrators: Organizations updated
+        dates: Conference dates updated successfully
+        description: Conference description updated successfully
+        poster: Conference poster uploaded
+        group_ride: Group ride info saved
+        housing_info: Housing info saved
+        workshop_info: Workshop info saved
+        schedule_info: Schedule info saved
+        travel_info: Travel info saved
+        city_info: City info saved
+        what_to_bring: What to Bring saved
+        volunteering_info: Volunteering info saved
+        additional_details: Additional details saved
+        payment_message: Your payment message has been updated
+        suggested_amounts: Your suggested payment amounts have been updated
+        paypal: Your paypal information has been updated
+        registration_status: Your conference registration status has been updated
+        stats: ''
+        registrations: Registration updated
+        broadcast: Message sent
+        providers: Provider updated
+        housing: Housing updated
+        locations: Location saved
+        meals: Meal saved
+        events: Event saved
+        workshop_times: Workshop times saved
+        schedule: Schedule updated
+        publish_schedule: Your schedule has been published
+        unpublish_schedule: Your schedule has been un-published
+        org_member_added: User added to organization
+        org_member_removed: User removed from organization
+        administrator_added: Administrator added to conference
+        administrator_removed: Administrator removed from conference
+        distance_saved: Provider options updated
   conference:
     actions:
       Register: Register
   modals:
     confirm: Please Confirm
-    yes_button: 'Yes' 
+    yes_button: 'Yes'
     no_button: 'No'
     done_button: Close
     info: More Info
     workshops:
       facilitators:
-        confirm_remove: Are you sure you would like to remove %{user_name} as a facilitator of this workshop?
-        confirm_remove_self: Are you sure you would like to remove yourself as a facilitator of this workshop?
-        confirm_cancel_request: Are you sure you would like to cancel your request to become a facilitator of this workshop?
-        confirm_transfer_ownership: By transferring ownership, you will lose administrative capabilities such as deletion and approving new facilitators. Are you sure you want to transfer ownership to %{user_name}?
-    admin: 
-      broadcast: 
-        confirm: You are about to send this email to %{number} people. Are you sure you want to continue?
-      generic: 
-        delete: 
+        confirm_remove: Are you sure you would like to remove %{user_name} as a facilitator
+          of this workshop?
+        confirm_remove_self: Are you sure you would like to remove yourself as a facilitator
+          of this workshop?
+        confirm_cancel_request: Are you sure you would like to cancel your request
+          to become a facilitator of this workshop?
+        confirm_transfer_ownership: By transferring ownership, you will lose administrative
+          capabilities such as deletion and approving new facilitators. Are you sure
+          you want to transfer ownership to %{user_name}?
+    admin:
+      broadcast:
+        confirm: You are about to send this email to %{number} people. Are you sure
+          you want to continue?
+      generic:
+        delete:
           confirm: You are about to delete ‘%{title}’. Are you sure you want to continue?
   articles:
     conferences:
       headings:
+        workshop_info: Workshops and Discussions
+        housing_info: Housing Accommodations
+        group_ride_info: Group Ride
+        payment_message: Registration
+        schedule_info: Schedule
+        travel_info: Getting To %{city}
+        city_info: About %{city}
+        what_to_bring: What to Bring
+        volunteering_info: Volunteering
         conferences: National and Regional Conferences
         Conference_List: Conferences
         edit: Edit Conference
@@ -948,16 +1377,21 @@ en:
           future: Upcoming conferences
           passed: Passed conferences
       paragraphs:
-        conferences: Bike!Bike! conferences are held nationally once a year in a different city in North America; regional conferences can be held anywhere, anytime.
+        conferences: Bike!Bike! conferences are held nationally once a year in a different
+          city in North America; regional conferences can be held anywhere, anytime.
     admin:
       headings:
         back: Back to Administration
       paragraphs:
-        administration: From this dashboard you can configure your conference details, open registration, view statictics, compile your workshop scheulde, and more.
+        administration: From this dashboard you can configure your conference details,
+          open registration, view statictics, compile your workshop scheulde, and
+          more.
       stats:
-        description: On this page you can view a breakdown of the registration process so far as well as download more detailed data in spreadsheets.
+        description: On this page you can view a breakdown of the registration process
+          so far as well as download more detailed data in spreadsheets.
         headings:
           bikes: Bikes
+          past_stats: Statistics from Previous Bike!Bike!s
           donation_count: Number of donations
           donation_total: Total donated
           food:
@@ -968,14 +1402,14 @@ en:
           completed_registrations: Number of registrations
           incomplete_registrations: Incomplete registrations
           Registrations: Registrations
-      registrations:
-        no_date_warning: Before users can register, you must first set your conference start and end dates.
       meals:
         description: On this page you can schedule the meals that you will be serving.
         no_locations_warning: Before you can add meals, you must first add locations.
         heading: Meals
       events:
-        description: On this page you can schedule events. Events are any type of event that isn't a meal or a workshop. You can scheulde group meetings, parties, or group ride for example.
+        description: On this page you can schedule events. Events are any type of
+          event that isn't a meal or a workshop. You can scheulde group meetings,
+          parties, or group ride for example.
         no_locations_warning: Before you can add events, you must first add locations.
         heading: Events
         headings:
@@ -983,12 +1417,18 @@ en:
           meals: Meals
           events: Events
         descriptions:
-          locations: Create the list of locations that you will be using for events, meals, and workshops.
-          meals: List the meals that you will be providing, the meals will be added to your schedule
-          events: Create event details. These events should be any type of event other than meals and workshops such as meeting, rides, and parties. The events will be added to your schedule.
+          locations: Create the list of locations that you will be using for events,
+            meals, and workshops.
+          meals: List the meals that you will be providing, the meals will be added
+            to your schedule
+          events: Create event details. These events should be any type of event other
+            than meals and workshops such as meeting, rides, and parties. The events
+            will be added to your schedule.
       schedule:
-        description: On this page you can schedule workshops and publish your schedule to the front page.
-        no_locations_warning: Before you can schedule workshops, you must first add locations.
+        description: On this page you can schedule workshops and publish your schedule
+          to the front page.
+        no_locations_warning: Before you can schedule workshops, you must first add
+          locations.
         heading: Schedule
         headings:
           workshop_times: Workshop Times
@@ -997,26 +1437,39 @@ en:
         descriptions:
           workshop_times: Set up blocks of time each day when workshops will be held.
           schedule: Set a time and location for all proposed workshops.
-          publish_schedule: Once you have finalized your schedule, make it public here.
+          publish_schedule: Once you have finalized your schedule, make it public
+            here.
       housing:
-        description: Arrange housing for registratnts visiting your city. Pair each registratnt who has asked for housing with a registratnt that has volunteered to house guests base on their individual needs and wants.
+        description: Arrange housing for registratnts visiting your city. Pair each
+          registratnt who has asked for housing with a registratnt that has volunteered
+          to house guests base on their individual needs and wants.
         heading: Housing
         headings:
           hosts: Hosts
           guests: Guests
           email: Email
-          housing: Preference
+          housing: Arrange Housing
           arrival_departure: In City
           providers: Housing Providers
-          housing: Arrange Housing
           provider_distance: Distance from host city
         descriptions:
-          providers: Although most housing providers shuold be encouraged to supply their own details through the registration process, you can add and edit housing provider details manually here.
-          provider_distance: Any registrant who enters their location in the same city as the conference will get a housing provider form during registration instead of a guest form. If you want to consider surrounding cities as well, enter the distance from %{city} that you wish to be included as providers. Cities are measured from center to center.
-          housing: Pair each housing provider with a list of guests.
+          providers: Although most housing providers should be encouraged to supply
+            their own details through the registration process, you can add and edit
+            housing provider details manually here.
+          provider_distance: Any registrant who enters their location in the same
+            city as the conference will get a housing provider form during registration
+            instead of a guest form. If you want to consider surrounding cities as
+            well, enter the distance from %{city} that you wish to be included as
+            providers. Cities are measured from center to center.
+          housing: Pair each housing provider with a list of guests. Try to match
+            guests with hosts and other guests who are good matches and respect their
+            requests, but also keep in mind that we cannot always respect all requests
+            and part of the Bike!Bike! experience is getting to know new people.
       locations:
         heading: Locations
-        description: Locations are used to schedule workshops, events, and meals. Once your schedule is published, users will be able to see the name and address and be given a link to a map so that they can find their way.
+        description: Locations are used to schedule workshops, events, and meals.
+          Once your schedule is published, users will be able to see the name and
+          address and be given a link to a map so that they can find their way.
         headings:
           add_event: Add Event
           add_location: Add Location
@@ -1025,37 +1478,88 @@ en:
           edit_event: Edit Event
           edit_location: Edit Location
         paragraphs:
-          title: Give your location a title, for example "The Bike Kitchen" or "Smith Park"
+          title: Give your location a title, for example "The Bike Kitchen" or "Smith
+            Park"
           meal_title: Give your meal a title, for example "Breakfast"
           meal_info: Describe your meal. This will only be visible to conference hosts.
-          address: Enter the street address (without the city) of the location 
-          space: The space type will help you to schedule workshops. If workshops will occur in this space, select "Meeting Room", "Repair Space", or "Outdoor Space" as you feel this space best matches. Otherwise select event space.
-          amenities: Amenities match up to workshop needs. Selecting the amenities will help you match up a workshop with this location when a facilitator has requested a specific amenity.
+          address: Enter the street address (without the city) of the location
+          space: The space type will help you to schedule workshops. If workshops
+            will occur in this space, select "Meeting Room", "Repair Space", or "Outdoor
+            Space" as you feel this space best matches. Otherwise select event space.
+          amenities: Amenities match up to workshop needs. Selecting the amenities
+            will help you match up a workshop with this location when a facilitator
+            has requested a specific amenity.
       edit:
-        description: Edit basic info about your conference. Here you can open or close registration, edit what shows up on the front page, set up your payment details, and add members to your organization so that they can access these pages too.
+        description: Edit basic info about your conference. Here you can open or close
+          registration, edit what shows up on the front page, set up your payment
+          details, and add members to your organization so that they can access these
+          pages too.
         headings:
           host_organizations: Host Organizations
           members: Organization Members
           paypal_info: PayPal Info
         paragraphs:
-          paypal_info: PayPal info is used for donations and fee payments. You must enter all fields to enable online fee payments, see the <a href="https://developer.paypal.com/docs/classic/api/apiCredentials/#creating-an-api-signature" target="_blank">PayPal API credential guide</a> for more information.
+          paypal_info: PayPal info is used for donations and fee payments. You must
+            enter all fields to enable online fee payments, see the <a href="https://developer.paypal.com/docs/classic/api/apiCredentials/#creating-an-api-signature"
+            target="_blank">PayPal API credential guide</a> for more information.
       info:
         heading: Basic Info
         headings:
           dates: Conference Dates
           administrators: Administrators and Organizations
-          description: Description
           poster: Poster
           Host_Organizations: Host Organizations
           External_Administrators: External Administrators
-        description: These are the basic details about your conference that you will likely want to configure before enabling your conference. One ready, contact the site administrator to make the conference public.
+        description: These are the basic details about your conference that you will
+          likely want to configure before enabling your conference. One ready, contact
+          the site administrator to make the conference public.
         descriptions:
           dates: Set your conference start and end dates
-          description: Modify the text that is displayed on the front page
           poster: Upload your conference poster
-          administrators: Set the conference host organizations and other members who have access to these administration tools
-          Host_Organizations: Select all organizations from known organizations in %{city_name} that will be helping to host your conference. All members of each organization will be granted access to these administration tools, if you require administrators that are not members of an organization, you can add them below. If an organization is not listed here, please contact a site administrator.
-          External_Administrators: Users from outside of organizations in your city can be granted administration privledges here.
+          administrators: Set the conference host organizations and other members
+            who have access to these administration tools
+          Host_Organizations: Select all organizations from known organizations in
+            %{city_name} that will be helping to host your conference. All members
+            of each organization will be granted access to these administration tools,
+            if you require administrators that are not members of an organization,
+            you can add them below. If an organization is not listed here, please
+            contact a site administrator.
+          External_Administrators: Users from outside of organizations in your city
+            can be granted administration privledges here.
+      copy:
+        heading: Site Copy
+        description: Copy that is displayed in the front page, the details page, emails,
+          and throughout registration.
+        headings:
+          description: Description
+          group_ride: Group Ride
+          payment_message: Payment Message
+          housing_info: Housing Info
+          workshop_info: Workshop Info
+          schedule_info: Schedule Details
+          city_info: City Details
+          travel_info: Travel Info
+          what_to_bring: What to bring
+          volunteering_info: Volunteering info
+          additional_details: Additional Details
+        descriptions:
+          description: Modify the text that is displayed on the front page
+          group_ride: Will you be having a group ride before or after the conference?
+            Describe it here.
+          payment_message: Set the message that is displayed on the registration fee
+          housing_info: Let visitors know what to expect for housing
+          workshop_info: Let attendees know how workshops will work this year
+          schedule_info: Summarize your overall schedule of events, workshops, and
+            rides
+          travel_info: Let visitors know how to get to your city and what international
+            visitors may need to be prepared for
+          city_info: Describe your city, talk about things like saftey, laws, weather,
+            and culture
+          what_to_bring: Let visitors know what to bring
+          volunteering_info: Let potential volunteers know what they can do and how
+            they can help out
+          additional_details: Add any additional information not covered by other
+            copy
       registration:
         heading: Registration
         headings:
@@ -1063,64 +1567,195 @@ en:
           stats: Statistics
           registrations: Modify Registrations
           broadcast: Contact Users
-          broadcast_sent: You email has been dispatched
-        description: Open or close registration, view registration statistics, modify information subbmitted by registratnts and contact users.
+        description: Open or close registration, view registration statistics, modify
+          information subbmitted by registratnts and contact users.
         descriptions:
           registration_status: Open or close registration to your conference.
-          stats: View a breakdown of statictics, how many users have registered, how much money have been collected, etc.
-          registrations: View and edit all data collected through the registration process.
+          stats: View a breakdown of statictics, how many users have registered, how
+            much money have been collected, etc.
+          registrations: View and edit all data collected through the registration
+            process.
           broadcast: Send emails to targeted subsets of users.
-          broadcast_sent: Your email has been queued to send, depending on the number of users you have sent to, it may take several hours to send to everyone.
       broadcast:
         heading: Broadcast
-        description: The broadcast tool is used to contact users through email. You can send messages en masse to select groups of users.
+        description: The broadcast tool is used to contact users through email. You
+          can send messages en masse to select groups of users.
       broadcast_sent:
         description: Your message has been sent.
       workshop_times:
         heading: Workshop Times
-        description: Before you scheulde workshops, you must first create blocks of time when the workshops will be.
+        description: Before you scheulde workshops, you must first create blocks of
+          time when the workshops will be.
       payment:
         heading: Payment
-        description: If you wish to collect dontaions and registration fees, you will need to confgure your payment details
+        description: If you wish to collect dontaions and registration fees, you will
+          need to confgure your payment details
         headings:
-          payment_message: Payment Message
           suggested_amounts: Suggested Payment Amounts
           paypal: PayPal Info
         descriptions:
-          payment_message: Set the message that is displayed on the registration fee page. A default message will be supplied but if you wish to communicate how funds will be used you may want to set a personal message.
-          suggested_amounts: Enter up to five suggested payment amounts. Users will still be able to select any amount including none but these amounts will show up as easy to select buttons on the 'Donations' page.
-          paypal:
-            To enable PayPal payments, you will need to supply information on your organization's PayPal account
+          suggested_amounts: Enter up to five suggested payment amounts. Users will
+            still be able to select any amount including none but these amounts will
+            show up as easy to select buttons on the 'Donations' page.
+          paypal: To enable PayPal payments, you will need to supply information on
+            your organization's PayPal account
     contact:
       headings:
         contact: Send us a question or a complement
         reason: What are you contacting us about?
         sent: Thank you for contacting us
       paragraphs:
-        sent: Thanks for reaching out. We will respond to you by email as soon we are able.
+        sent: Thanks for reaching out. We will respond to you by email as soon we
+          are able.
     policy:
       headings:
         The_Agreement: The Agreement
         How: How is it enforced?
         Why: Why have a Safer Space Agreement?
       paragraphs:
-        How: The host city has the responsibility of mediating safer space issues. They will decide what constitutes a warning and what constitutes expulsion from the conference.
-        Why: In order to set a common ground, we state our shared beliefs and desires for the space which is Bike!Bike!. We rally around these ideas for inspiration and to ensure that if there is behaviour which does not make us feel safe, we have something to point to. By agreeing to a commitment of mutual respect, we hope that if conflict does arise, we will remember what we have agreed to, and act accordingly.
+        How: The host city has the responsibility of mediating safer space issues.
+          They will decide what constitutes a warning and what constitutes expulsion
+          from the conference.
+        Why: In order to set a common ground, we state our shared beliefs and desires
+          for the space which is Bike!Bike!. We rally around these ideas for inspiration
+          and to ensure that if there is behaviour which does not make us feel safe,
+          we have something to point to. By agreeing to a commitment of mutual respect,
+          we hope that if conflict does arise, we will remember what we have agreed
+          to, and act accordingly.
       term:
-        accessible: We commit to making spaces as accessible as possible; physically, socially, and personally.
-        commitment: We enter with a commitment to mutual respect, mutual aid, anti-oppression advocacy, conflict resolution, anti-violence, and community building.
+        accessible: We commit to making spaces as accessible as possible; physically,
+          socially, and personally.
+        commitment: We enter with a commitment to mutual respect, mutual aid, anti-oppression
+          advocacy, conflict resolution, anti-violence, and community building.
         empowerment: We support the empowerment of each person and group.
-        hearing: We commit to hearing each other and creating opportunities for all voices to be heard.
-        intent: We accept a shared responsibility to hold ourselves and one another accountable for these agreements’ intent.
-        learning: We promote inclusive learning spaces and questions in the spirit of personal growth.
-        respect: We respect everyone's names, gender pronouns, expressed identities and experiences.
+        hearing: We commit to hearing each other and creating opportunities for all
+          voices to be heard.
+        intent: We accept a shared responsibility to hold ourselves and one another
+          accountable for these agreements’ intent.
+        learning: We promote inclusive learning spaces and questions in the spirit
+          of personal growth.
+        respect: We respect everyone's names, gender pronouns, expressed identities
+          and experiences.
         spaces: We respect each others bodies and spaces.
         open_minds: We encourage open minds and open hearts.
         peaceful: We are peaceful and honest.
     conference_registration:
+      complete:
+        payment_processed: Thank you for your payment! Your registration is now complete.
+        companion_registered: Your companion has completed their registration. We
+          will do our best to keep you together.
+        registration_complete: Thank you, your registration is now complete
+      error:
+        generic: An unexpected error occurred
+        payment_cancelled: Your payment was cancelled
+        payment_error: An error occurred processing your payment
+        arrival_date_required: Select a date
+        departure_date_required: Select a date
+        phone_required: A valid phone number is required
+        bed_space_required: Enter the amount of bed or couch space you have to offer
+        floor_space_required: Enter the amount of floor space you have to offer
+        tent_space_required: Enter the amount of tent space you have to offer
+        info_required: Provide your guests with information about you and your home
+        policy_required: Read each statement carefully and check the box once to signify
+          that you aggree to uphold the agreement.
+        name_required: Provide us with a name that you identify with
+        language_required: Select at least one language that you can speak
+        location_required: Enter a location
+        city_not_found: We could not find a city or town that matches your query.
+        org_name_required: Enter the name of your organization
+        address_required: Enter an address
+        email_required: An email address is required
+        org_email_matches_personal_email: This email address matches your personal
+          email address. We ask that you enter your organization's email address instead.
+        mailing_address_required: Enter your organization's mailing address
+        end_date_before_start: You have selected an end date that is before your start
+          date
+        departure_date_before_arrival: You have selected a departure date that is
+          before your arrival
+        companion_email_required: Enter an email address
+        companion_already_has_companion: This person already has a companion.
+        amount_required: Enter a positive amount
+        payment_denied: Your payment was denied. Please check your account and try
+          again.
+      warning:
+        payment_pending: Thank you! Your payment is currently pending.
+        companion_unregistered: Your companion has not yet registerred. Please ensure
+          that they do to guarantee you are housed together.
+      step_names:
+        group_ride: Group ride?
+        hosting_other: Other
+        hosting_info: House Info
+        hosting_end_date: End Date
+        hosting_start_date: Start Date
+        hosting_space_tent: Tent Space
+        hosting_space_floor: Floor Space
+        hosting_space_beds: Bed/Couch Space
+        hosting_phone: Phone
+        hosting_address: Address
+        hosting_attending: Attending?
+        hosting_check: Host?
+        payment_form: Registration payment amount
+        org_select: Organization
+        payment_type: Registration fee method
+        housing_other: Other
+        housing_food: Eating habits
+        housing_bike: Bike?
+        housing_companion_email: Companion
+        housing_type: Housing
+        housing_departure_date: Departure Date
+        housing_arrival_date: Arrival Date
+        org_create_mailing_address: Organization Mailing Address
+        org_create_email: Organization Email
+        org_create_address: Organization Address
+        org_create_name: Organization Name
+        org_location_confirm: Confirm your location
+        org_location: Location
+        org_non_member_interest: Conference interest
+        org_member: Organization Member
+        policy: Policy
+        other: Other
+        name: Name
+        languages: Languages spoken
       headings:
+        pronoun: Pronoun (he/she/they)
+        Back_to: 'Back to:'
+        group_ride: Do you plan to attend the group ride?
+        hosting_other: Information for organizers
+        hosting_info: House Info and Rules
+        hosting_end_date: Housing End Date
+        hosting_start_date: Housing Start Date
+        hosting_space_tent: Tent Space
+        hosting_space_floor: Floor Space
+        hosting_space_beds: Bed and Couch Space
+        hosting_phone: What is your phone number?
+        hosting_address: What is your address?
+        hosting_attending: Are you attending the conference?
+        hosting_check: Are you willing to be a housing provider?
+        review: Review
+        confirm_payment: Confirm Registration Payment
+        payment_form: Registration Fee Amount
+        org_select: Which organization are you a member of?
+        payment_type: Registration Fee Method
+        housing_other: Other considerations
+        housing_allergies: Do you have any allergies?
+        housing_food: What are your eating habits?
+        housing_bike: Would you like to borrow a bike?
+        housing_companion_email: Companion Email
+        housing_companion_check: Housing Companion
+        housing_type: Housing
+        housing_departure_date: Departure Date
+        housing_arrival_date: Arrival Date
+        org_create_mailing_address: Organization Mailing Address
+        org_create_email: Organization Email
+        org_create_address: Organization Address
+        org_create_name: Organization Name
+        org_location_confirm: Confirm your location
+        org_location: In which city or town is your organization based?
+        your_location: In which city or town are you based?
+        org_member: Do you participate in a community bicycle project?
+        org_non_member_interest: Why are you interested in attending Bike!Bike!?
         Administration: Administration
-        Conference_Administration: '%{title} Administration'
+        Conference_Administration: "%{title} Administration"
         administration: Administration
         Policy_Agreement: Safer Space Agreement
         policy: Policy
@@ -1149,6 +1784,7 @@ en:
         Workshops: Workshops
         workshops: Workshops
         Your_Workshops: Your Workshops
+        Workshops_that_you_would_like_to_attend: Workshops that you would like to_attend
         payment_confirm: Please confirm your payment
         Preview: Preview
         city: City
@@ -1180,64 +1816,268 @@ en:
         admin:
           edit:
             info: Info
+            group_ride: Group ride description
+            housing_info: Housing info
+            workshop_info: Workshop info
+            schedule_info: Schedule summary
+            travel_info: Travel info
+            city_info: City info
+            what_to_bring: What to bring
+            volunteering_info: Volunteering info
+            additional_details: Additional details
         companion: Companion
       paragraphs:
-        provide_email: Bike!Bike! uses email to communicate between you and your conference hosts, however your Facebook account does not provide us an email address. Before proceeding, you must provide us an email address.
-        Policy_Agreement: Ensuring that all attendees feel welcome, safe, and respected at all times is especially important to us all. Please ensure that you have fully read and understand our safer spaces policy below, if you have any questions or concerns you can reach out to the organizers at any time.
-        Confirm_Agreement: By clicking the "I Agree" button, you are pledging to do your best to uphold Bike!Bike!'s safer space agreement. Thank you!
-        Registration_Info: Please fill in this registration form to help us prepare for your arrival to %{city}. If you wish to ask questions or tell us information we did not ask, please fill in the preferences field at the bottom of the page or use the contact us link.
-        Payment: Thank you for completing your registration. We'll see you at Bike!Bike! Payment is by donation and can be done now or upon arrival but to help us fund the conference, we ask that you pay the registration donation as soon as you can.
+        pronoun: It is important that communications with you and about you are as
+          respectful as possible. If you do not provide a pronoun organizers may assume
+          he, she, or they based on your name or visual identity.
+        pronoun_optional: Providing your pronoun is optional
+        group_ride: There will be a group ride after or before the conference. Do
+          you plan to join us for the ride?
+        registration_cancelled: You have cancelled your registration. If you reconsider,
+          please re-open your registration using the button below but keep in mind
+          that you may lose out of your housing or bike if you wait too long.
+        hosting_other: Please enter any information you would like organizers to consider
+          when selecting guests for you. If you have restrictions on guests that you
+          would like to stay at your home, or if you have pets or other factors that
+          might cause guests to be uncomfortable or not able to stay at your home,
+          please list them here.
+        hosting_info: Please fill out your house rules, contact instructions, and
+          any other pertinent information about your home or neighbourhood. Your summary
+          will only be visible to conference organizers and your guests.
+        hosting_end_date: What is the latest date that you are willing to have guests
+          stay at you home?
+        hosting_start_date: What is the earliest date that you are willing to have
+          guests stay at you home?
+        hosting_space_tent: Are you willing to have guests stay in tents in your yard?
+        hosting_space_floor: Please let us know how many people you are willing to
+          have sleep on your floor?
+        hosting_space_beds: Please let us know how many people you can provide beds
+          or couches?
+        hosting_phone: Please provide a phone number where guests can contact you.
+          You can provide details on how you expect guests to contact you in your
+          house rules.
+        hosting_address: We will need to share your address with guests so that they
+          can find your home. International visitors may also need to provide border
+          security with the address where they are staying.
+        hosting_attending: Are you also planning to attend conference workshops and
+          events?
+        hosting_check: We are looking for volunteers in %{city} who can house guests
+          between %{date_span} on beds, couches, or floors, or in a backyard tent
+          space. We will ask you to provide your home location, phone number, and
+          house rules for guests. We will do our best to match up guests with criteria
+          that you give us.
+        currency_details: When you arrive, please make your payment in %{currency}.
+        confirm_payment: Thank you, please confirm your payment of %{amount} %{currency}.
+        review: Your registration is complete, please review and modify your data
+          as necessary.
+        payment_form: Please select one of the predefined options below or enter a
+          custom amount.
+        org_select: Please select the organization that you participate in. This information
+          will be used to help us contact and invite your organization next year and
+          to populate the list of known organizations that will be displayed on bikecollectives.org.
+          If you are involved with multiple oganizations, please select one for now,
+          you will be able to add more organizations at a later date.
+        payment_type: If you can, please pay now via PayPal. We collect the registration
+          fee as a donation. Your donation pays for spaces, food, equipment, and much
+          more. Paying now enables us to prepare for the conference without paying
+          out of our own pockets. Otherwise, please pledge to pay on arrival. Your
+          pledge will help us make a rough plan for what we can and cannot afford.
+          Thank you.
+        housing_other: Do you have any special needs or considerations that we should
+          know about for your stay such as allergies, disabilities, or a need for
+          child care? Letting us know in advance will help us determine the best place
+          for you to stay and make any necessary preparations for the conference itself.
+        housing_allergies: Let us know if you have any allergies that we should be
+          made aware of.
+        housing_food: Please let us know your eating habits by selecting the option
+          that best describes the type of food that you eat. We will use this to decide
+          the best types of meals to prepare and how much food we will need.
+        housing_bike: In order for us to get an idea of how many bikes we will need
+          to prepare, please let us know if you would like to borrow a bike from us.
+        housing_companion_email: What is your companion's email address?
+        housing_companion_check: Are you coming with a significant other or someone
+          who you absolutely must be housed with? Please note, your companion must
+          also register if you want to be housed together.
+        housing_type: Do you need a place to stay in %{city}? We will do our best
+          to place you with a local host and other vistors that best match your needs.
+        housing_departure_date: When will you be leaving %{city}? If you wish to stay
+          in town longer and need housing or a bike after %{max_date}, please select
+          this date on the calendar below and contact us after you complete your registration.
+          We cannot guarantee that we can accommodate you but we will do our best.
+        housing_arrival_date: When will you be arriving in %{city}? If you will be
+          in town and need housing or a bike before %{min_date}, please select this
+          date on the calendar below and contact us after you complete your registration.
+          We cannot guarantee that we can accommodate you but we will do our best.
+        org_create_mailing_address: Please provide the organization's mailing address
+          so that we can send your organization a personal invite and poster for next
+          year's Bike!Bike!.
+        org_create_email: In order to contact your organization next year, please
+          provide a general email address. We will not send you regular emails. We
+          may email you if there is a conference in your area or to confirm that your
+          organization is still in existance. Please do not provide a personal email
+          address.
+        org_create_address: Please enter the street address of your organization in
+          %{city}, do not enter the state, province, or country. If your organization
+          is not in %{city}, please go back and change your location.
+        org_create_name: What is the name of your organization?
+        org_location_confirm: Did you mean %{city}?
+        languages: Knowing how many people speak each language will help us to plan
+          translations better for workshops, events, and announcements. If you are
+          bilingual, you will also be given access to tools to help translate content.
+          We may ask for additional help if needed, but you are under no obligation
+          to volunteer.
+        name: How would you like to be addressed at the conference and on this site?
+        org_non_member_interest: Everyone is welcome to attend Bike!Bike!. We would
+          like to get a better understanding of what has attracted you to attend this
+          year.
+        org_member: Do you volunteer or work for an organization that puts bicycle
+          education, access, or advocacy above profits? If so we would like to know
+          a few details about it.
+        provide_email: Bike!Bike! uses email to communicate between you and your conference
+          hosts, however your Facebook account does not provide us an email address.
+          Before proceeding, you must provide us an email address.
+        policy: Ensuring that all attendees feel welcome, safe, and respected at all
+          times is especially important to us all. Please ensure that you have fully
+          read and understand our safer spaces policy below. If you have any questions
+          or concerns you can reach out to the organizers at any time.
+        Confirm_Agreement: By clicking the "I Agree" button, you are pledging to do
+          your best to uphold Bike!Bike!'s safer space agreement. Thank you!
+        Registration_Info: Please fill in this registration form to help us prepare
+          for your arrival to %{city}. If you wish to ask questions or tell us information
+          we did not ask, please fill in the preferences field at the bottom of the
+          page or use the contact us link.
+        Payment: Thank you for completing your registration. We'll see you at Bike!Bike!
+          Payment is by donation and can be done now or upon arrival. To help us fund
+          the conference, we ask that you pay the registration donation as soon as
+          you can. Thank you.
         Payment_Made: You have made a payment of %{fees_paid}.
-        Payment_Add: Thank you! You may add to this amount if you wish by making another payment below.
+        Payment_Add: Thank you! You may add to this amount if you wish by making another
+          payment below.
         currency: "(amounts are in USD)"
-        email_confirm: Go to your inbox! You should see an email from Bike!Bike! in just a few moments. There will be a link in the email for you to click on. Check your spam box if you do not see it. If you encounter any problems, please contact us.
-        confirm_email_address: We ask that you first confirm your email address, once your email address is confirmed you will be able to complete registration, add workshops and pay your registration donation fee. If you have already registered, you can re-confirm you e-mail address to modify your your registration details.
-        Workshops: Workshops are organized and run by attendees, they can be about anything that might concern community bicycle projects and can be in any format including presentations, hands-on workshops, discussion groups, and bicycle rides. If you would like to host you own workshop you can click on the "create workshop" button.
-        Stats: Check Out who's coming and what they've paid so far. See at a glance how much accommodation is needed and what people prefer to eat.
+        email_confirm: Go to your inbox! You should see an email from Bike!Bike! in
+          just a few moments. There will be a link in the email for you to click on.
+          Check your spam box if you do not see it. If you encounter any problems,
+          please contact us.
+        confirm_email_address: We ask that you first confirm your email address, once
+          your email address is confirmed you will be able to complete registration,
+          add workshops and pay your registration donation fee. If you have already
+          registered, you can re-confirm you e-mail address to modify your your registration
+          details.
+        Workshops: Workshops are organized and run by attendees, they can be about
+          anything that might concern community bicycle projects and can be in any
+          format including presentations, hands-on workshops, discussion groups, and
+          bicycle rides. If you would like to host you own workshop you can click
+          on the "create workshop" button.
+        Stats: Check Out who's coming and what they've paid so far. See at a glance
+          how much accommodation is needed and what people prefer to eat.
         done: Thank you for registering for Bike!Bike!
-        Email_Participants: This page is used to contact all participants. Text can be entered as [Markdown](http://daringfireball.net/projects/markdown/basics). Pressing 'test' will send the email only to you, make sure you do this and use caution in general before pressing 'send'
+        Email_Participants: This page is used to contact all participants. Text can
+          be entered as [Markdown](http://daringfireball.net/projects/markdown/basics).
+          Pressing 'test' will send the email only to you, make sure you do this and
+          use caution in general before pressing 'send'
         payment_confirm: You are about to confirm your payment of $%{amount} for registration.
         participants_emailed: Your email has been sent to all participants of %{conference_title}.
-        workshops: You can now take a look at proposed workshops and even propose one yourself if you like.
+        workshops: You can now take a look at proposed workshops and even propose
+          one yourself if you like.
         Contact_Info: Please let us know a little bit about you.
-        Create_Workshop: At Bike!Bike! anyone can lead a workshop or just propose and idea that someone else can volunteer to lead. If, where, and when the workshop will be scheduled will ultimately be decided by the conference organizers.
-        Workshops_Looking_For_Facilitators: Would you like to lend a hand facilitating a workshop proposed by someone else? Below is a list of workshops that are actively looking for volunteers, if you are interested in helping out you can make a facilitation request.
-        Your_Workshops: The following is a list of all the workshops that you are facilitating.
-        Workshops_You_Have_Requested: The following is a list of all the workshops that you have requested to facilitate.
-        Pre_Registration_Details: By completing the pre-registration process you are letting us know that you are interested in coming, it allows us to contact you when we have news, and lets us better plan by knowing who might be coming. Once registration is fully open, we will need to ask a few more questions and you can confirm whether or not you will actually be coming.
-        Registration_Details: By completing the registration process you are confirming with us that you are coming, it allows us to contact you when we have news, and lets us better plan by knowing how many people will hosted. Once registered you will be given access to facilitate your own workshop and view details on existing workshops. If you are already registered or have pre-registered, you can use this form sign in and access or update your details.
-        Verify_Account: In order to confirm that you are a real person and that we will be able to contact you later, please verify your email address. We will send you an email that will allow you to continue with the registration process.
-        facebook_sign_in: Alternatively you can sign in using your Facebook account and skip waiting for us to send you an email.
-        can_provide_housing: Hosting visiting conference attendees is an important part of Bike!Bike!, it allows many people who would not normally be able to afford the cost of accommodations the chance to come to the conference and lets attendees really get to know our city and its residents. You will need to grant access to your home to guests overnight keeping in mind that events can sometimes go late into the evening. If your home will not be accessible during the day you should make sure to clearly communicate this with your guests.
-        not_attending: If you are only providing housing and would not like to receive further updates about the conference, check this box.
+        Create_Workshop: At Bike!Bike! anyone can lead a workshop or just propose
+          an idea that someone else can volunteer to lead. If, where, and when the
+          workshop will be scheduled will ultimately be decided by the conference
+          organizers.
+        Workshops_Looking_For_Facilitators: Would you like to lend a hand facilitating
+          a workshop proposed by someone else? Below is a list of workshops that are
+          actively looking for volunteers, if you are interested in helping out you
+          can make a facilitation request.
+        Your_Workshops: The following is a list of all the workshops that you are
+          facilitating.
+        Workshops_You_Have_Requested: The following is a list of all the workshops
+          that you have requested to facilitate.
+        Pre_Registration_Details: By completing the pre-registration process you are
+          letting us know that you are interested in coming, it allows us to contact
+          you when we have news, and lets us better plan by knowing who might be coming.
+          Once registration is fully open, we will need to ask a few more questions
+          and you can confirm whether or not you will actually be coming.
+        Registration_Details: By completing the registration process, you are confirming
+          with us that you are coming. It allows us to contact you when we have news,
+          and lets us better plan by knowing how many people will be hosted. Once
+          registered you will be given access to facilitate your own workshop and
+          view details on existing workshops. If you are already registered or have
+          pre-registered, you can use this form to sign in and access or update your
+          details.
+        Verify_Account: In order to confirm that you are a real person and that we
+          will be able to contact you later, please verify your email address. We
+          will send you an email that will allow you to continue with the registration
+          process.
+        facebook_sign_in: Alternatively you can sign in using your Facebook account
+          and skip waiting for us to send you an email.
+        can_provide_housing: Hosting visiting conference attendees is an important
+          part of Bike!Bike!. It allows many people who cannot afford the cost of
+          accommodations the opportunity to come to the conference, and lets attendees
+          really get to know our city and its residents. You will need to grant access
+          to your home to guests overnight keeping in mind that events can sometimes
+          go late into the evening. If your home will not be accessible during the
+          day, you should make sure to clearly communicate this with your guests.
+        not_attending: If you are only providing housing and would not like to receive
+          further updates about the conference, check this box.
         host:
-          address: Your address and phone number will be shared with your guests and conference organizers.
+          address: Your address and phone number will be shared with your guests and
+            conference organizers.
           space: How much space do you have to share?
-          availability: The most common arrival and departure dates for attendees are the first and last day of the conference but people often arrive earlier or later. When will your space be available?
-          considerations: Organizers will do their best to match up hosts and guests, what considerations should organizers keep in mind when selecting guests to stay in your home?
-          notes: Leave a message for organizers to take into consideration when selecting guests for your household.
+          availability: The most common arrival and departure dates for attendees
+            are the first and last day of the conference but people often arrive earlier
+            or later. When will your space be available?
+          considerations: Organizers will do their best to match up hosts and guests.
+            What considerations should organizers keep in mind when selecting guests
+            to stay in your home?
+          notes: Leave a message for organizers to take into consideration when selecting
+            guests for your household.
         admin:
           edit:
             info: This is the copy that is displayed on the front page of the site.
+            group_ride: Describe your group ride. This info may be used on the conference
+              description, emails, or on the registration form.
+            housing_info: Describe what visitors should expect for housing this year
+            workshop_info: Describe how workshops will be run this year and what facilitators
+              should expect
+            schedule_info: Describe your schedule over the conference
+            travel_info: Let visitors know what to expect travelling to your city
+            city_info: Let visitors knw about your city, its culture, climate, crime,
+              and any other details that should know about
+            what_to_bring: List what you expect visitors to bring. Common items include
+              a bike helmet, lock, and eating utensils
+            volunteering_info: Let interested volunteers know how they can volunteer
+              and what tey can do
+            additional_details: Let visitors know any additional information about
+              your conference
           schedule:
-            published: Your scheulde is currently published and viewable on the front-page. Un-publishing the schedule will remove it from the front-page and show a list of proposed workshops instead.
-            un_published: Your schedule is not yet published. Publishing the schedule will replace the list of proposed workshops on the front-page with the schedule as it is shown below.
+            published: Your scheulde is currently published and viewable on the front-page.
+              Un-publishing the schedule will remove it from the front-page and show
+              a list of proposed workshops instead.
+            un_published: Your schedule is not yet published. Publishing the schedule
+              will replace the list of proposed workshops on the front-page with the
+              schedule as it is shown below.
           broadcast:
-            test: Please take a look at this preview to ensure that you want to send this email. Clicking ‘Test’ will send the email only to you. Only after that then the email will be set to %{send_to_count} people. 
-            preview: Clicking ‘Send’ will send this message to %{send_to_count} people. Please confirm that you have verified that the test email sent to you is what you want to be sent.
+            test: Please take a look at this preview to ensure that you want to send
+              this email. Clicking ‘Test’ will send the email only to you. Only after
+              that then the email will be set to %{send_to_count} people.
+            preview: Clicking ‘Send’ will send this message to %{send_to_count} people.
+              Please confirm that you have verified that the test email sent to you
+              is what you want to be sent.
           events:
             info: Describe your event for anyone attending the conference.
           payment:
             message: This is the text that will be displayed on the 'Donation' page.
-        companion: Is there someone who you would like us to ensure that you are housed with?
-        arrival_and_departure: If you don't need housing, just tell us how long you plan to hang out with Bike!Bike!
+        companion: Is there someone who you would like us to ensure that you are housed
+          with?
+        arrival_and_departure: If you don't need housing, just tell us how long you
+          plan to hang out with Bike!Bike!
       host:
         considerations:
           vegan: Vegan or vegetarian only
           smoking: Smoking is permitted
           quiet: Quiet household
           pets: House has dogs or cats
-      can_provide_housing: I can provide housing
+      can_provide_housing: I can provide housing.
       not_attending: I will not be attending the conference
       questions:
         bike:
@@ -1245,7 +2085,7 @@ en:
           medium: Medium
           none: None
           small: Small
-          'yes': 'Yes' 
+          'yes': 'Yes'
           'no': 'No'
         food:
           meat: Omnivore
@@ -1281,20 +2121,43 @@ en:
         is_attending: Attending?
     about_bikebike:
       paragraphs:
-        bicycle_project_paragraph: 'From collectives that use the bicycle as an excuse to change society, economy and the environment. Non-profit groups that have a community bike shops, cooperatives and other projects that promote the use of the bicycle and that come together to turn their communities into a place where riding is easier, more inclusive, safer and more fun. The list below uses the criteria found in the old Bicycle Organization Organization Project for what constitutes a community bike shop. The bike project need not meet all these criteria. Rather, it is a general list of qualities which are common among many bicycle projects.'
-        Who_is_Invited: You don’t have to be an expert or belong to a huge group, you just need to be willing to share what you know about organization, mechanics, social impact, addressing inequality, and increasing accessibility to cycling in your community.
-        Types_of_Workshops: Workshops are organized and run by attendees, they can be about anything that might concern community bicycle projects and can be in any format including presentations, hands-on workshops, discussion groups, and bicycle rides. If you would like to host your own workshop you can enter details after registering. What ends up in the final schedule and when they happen are decided on by the conference hosts.
-        Amenities: Traditionally conference hosts arrange shared accommodations, one to two meals a day, and bicycles will be available for registered attendees. However you should check the conference details on the current conference. More information on how you can arrange your own accommodation and other recommended places to visit should also be provided to you by the hosts on the conference page or in hard copy upon arrival.
+        bicycle_project_paragraph: Community bicycle projects do many different things.
+          Some use bicycles to change society, the economy, or the environment. Some
+          have community bike shops. Some promote bicyle use and making their communities
+          into places where riding is easier, more inclusive, safer, and more fun.
+          The list below uses the criteria found in the old Bicycle Organization Organization
+          Project for what constitutes a community bike shop. The bike project need
+          not meet all these criteria. Rather, it is a general list of qualities which
+          are common among many bicycle projects.
+        Who_is_Invited: You don’t have to be an expert or belong to a huge group,
+          you just need to be willing to share what you know about organization, mechanics,
+          social impact, addressing inequality, and increasing accessibility to cycling
+          in your community.
+        Types_of_Workshops: Workshops are organized and run by attendees. They can
+          be about anything that might concern community bicycle projects and can
+          be in any format including presentations, hands-on workshops, discussion
+          groups, and bicycle rides. If you would like to host your own workshop,
+          you can enter details after registering. What ends up in the final schedule
+          and when they happen are decided on by the conference hosts.
+        Amenities: Traditionally conference hosts arrange shared accommodations, one
+          to two meals a day, and bicycles will be available for registered attendees.
+          However you should check the conference details on the current conference.
+          More information on how you can arrange your own accommodation and recommended
+          places to visit should also be provided to you by the hosts on the conference
+          page or upon arrival.
         Volunteer: Yes. Please!
-        What_is_BikeBike: Bike!Bike! is an international, annual gathering organized by and for community bicycle projects. The conference is a space for participants from shops and related advocacy groups to converge in a different city each year over a 4 day period to have workshops and strengthen our social network.
+        What_is_BikeBike: Bike!Bike! is an international, annual gathering organized
+          by and for community bicycle projects. The conference is a space for participants
+          from shops and related advocacy groups to converge in a different city each
+          year over a 4 day period to have workshops and strengthen our social network.
       term:
         non_profit: Bike shops that are accessible to people without money
         recycle_parts: Non-profit bicycle organizations
         education: Shops that have an educational focus, teaching others how to fix
           bikes
         volunteer_run: 'Shops that are volunteer run '
-        export_bikes: Organizations that ship bikes to communities in other countries.
-        low_cost: Shops that provide free or low-cost services to the community.
+        export_bikes: Organizations that ship bikes to communities in other countries
+        low_cost: Shops that provide free or low-cost services to the community
         no_money: Organizations that recycle bicycles and parts
       headings:
         bicycle_project: What is a community bicycle project?
@@ -1326,27 +2189,59 @@ en:
         notes: Notes
         Workshops: Workshops
         Your_Workshops: Your Workshops
+        Workshops_that_you_would_like_to_attend: Workshops that you would like to
+          attend
         facilitate: Request to Facilitate ‘%{workshop_title}’
         add_facilitator: Add a facilitator
         needs_facilitators: Looking for help?
         Comments: Comments
         Schedule: Schedule
       paragraphs:
+        Workshops_that_you_would_like_to_attend: Add workshops to your schedule by
+          pressing the "+1" button beside a workshop. This will help you keep track
+          of the wokshops that you would like to attend and help organizers to create
+          a better schedule.
         Proposed_Workshops: Would you like to facilitate your own workshop? Simply
           register and visit the workshops page. If you have already registered you
           can access the page by restarting the registration process.
         info: Describe your workshop in detail. Select text to apply formatting.
-        space: What kind of space do you need for your workshop?
-        theme: Which of the themes below best match your workshop? This will help hosts to avoid scheduling conflicts. Select other if none of the options match in any way.
-        Delete_Workshop: Deleting a workshop cannot be undone, are you sure that you want to proceed?
-        new_workshop: 'Workshops in the past have tended to fit into a few broad categories: structural/organizational (how to start a shop, how to register a non-profit, consensus decision making, etc,) mechanical (how to weld two tandems to a tall bike, building 3-speed hubs out of fishing tackle and old socks, etc,) anti-oppression (safe spaces, women’s workshops, etc,) and recreational (touring tips, yoga for cyclists, etc.) This year we would like to try a panel, a forum, or other types of settings that you think might facilitate learning – be inventive, let us know what you want to see!'
-        Workshops: Do you have an exciting skill to share with us?  Want to chat about creating safe community spaces?  Want to make sure we fit a good bike ride into the weekend?  Propose a workshop!  Don’t worry if you’re not an expert, we want to hear about everyone’s experience within the many configurations of community shops we’re coming from.
+        space: What kind of space do you need for your workshop??
+        theme: Which of the themes below best match your workshop? This will help
+          hosts to avoid scheduling conflicts. Select other if none of the options
+          match in any way.
+        Delete_Workshop: Deleting a workshop cannot be undone, are you sure that you
+          want to proceed?
+        new_workshop: 'Workshops in the past have tended to fit into a few broad categories:
+          structural/organizational (how to start a shop, how to register a non-profit,
+          consensus decision making, etc,) mechanical (how to weld two tandems to
+          a tall bike, building 3-speed hubs out of fishing tackle and old socks,
+          etc,) anti-oppression (safe spaces, women’s workshops, etc,) and recreational
+          (touring tips, yoga for cyclists, etc.) This year we would like to try a
+          panel, a forum, or other types of settings that you think might facilitate
+          learning – be inventive, let us know what you want to see!'
+        Workshops: Do you have an exciting skill to share with us?  Want to chat about
+          creating safe community spaces?  Want to make sure we fit a good bike ride
+          into the weekend?  Propose a workshop!  Don’t worry if you’re not an expert,
+          we want to hear about everyone’s experience within the many configurations
+          of community shops we’re coming from.
         notes: Notes are only viewable by conference hosts and workshop facilitators
-        facilitate_request: Please tell the current workshop facilitators who you are, why you want to help facilitate the workshop, and how you think you will help make the workshop better. All of the current facilitators will be emailed and they may ask more questions before approving or denying your request. Please note that this will reveal your email address to the facilitators.
-        facilitate_request_sent: Your request has been sent. You will receive an email once your request is approved or denied or if the current facilitators have any questions.
-        languages: What language will the workshop be presented in? Will there be translations or translators available?
-        needs: If you need any of the following the conference organizers will do their best to make sure you have them. If you have any other requests, you can include them in the notes section.
-        needs_facilitators: Are you actively looking for help running this workshop? Anyone who is registered for the conference can request to facilitate at any time but checking this box will improve your chances of finding collaborators.
+        facilitate_request: Please tell the current workshop facilitators who you
+          are, why you want to help facilitate the workshop, and how you think you
+          will help make the workshop better. All of the current facilitators will
+          be emailed, and they may ask more questions before approving or denying
+          your request. Please note that this will reveal your email address to the
+          facilitators.
+        facilitate_request_sent: Your request has been sent. You will receive an email
+          once your request is approved or denied or if the current facilitators have
+          any questions.
+        languages: What language will the workshop be presented in? Will there be
+          translations or translators available?
+        needs: If you need any of the following, the conference organizers will do
+          their best to make sure you have them. If you have any other requests, you
+          can include them in the notes section.
+        needs_facilitators: Are you actively looking for help running this workshop?
+          Anyone who is registered for the conference can request to facilitate at
+          any time but checking this box will improve your chances of finding collaborators.
       info:
         interested_count:
           one: One person is interested in this workshop
@@ -1356,7 +2251,7 @@ en:
           one: You and one other are interested in this workshop
           other: You and %{count} others are interested in this workshop
           zero: You are interested in this workshop
-        read_more: More info
+        read_more: Details
     user_settings:
       headings:
         Your_Account: Account Settings
@@ -1364,7 +2259,9 @@ en:
         Your_Conferences: Your Conferences
       paragraphs:
         conference_registration: Looking to register or modify your current registration?
-        email_subscribe: Would you like to be notified about upcoming conferences? If you have registered for a conference we will always send you notifications and announcements until the conference.
+        email_subscribe: Would you like to be notified about upcoming conferences?
+          If you have registered for a conference we will always send you notifications
+          and announcements until the conference.
       email_subscribe: Subscribe to email announcements
   section_content:
     bikebike:
@@ -1374,10 +2271,16 @@ en:
         year over a 4 day period to have workshops and strengthen our social network.
   images:
     conference:
-      poster: '%{conference_title} poster'
+      poster: "%{conference_title} poster"
   forms:
     labels:
       generic:
+        pronoun: Pronoun
+        territory: State/Province
+        payment_type:
+          paypal: Online
+          on_arrival: In person
+          none: None
         space: Available Space
         hosting_dates: When will you be in town?
         type: Type
@@ -1427,13 +2330,14 @@ en:
           pre: Pre-Registration
         registration_status: Registration Status
         companion: Email address
-        block_number: Block 
+        block_number: Block
         days: Days
         length: Length
         workshop_block: Block
         send_to: Send To
         street_address: Street Address
         city: City
+        organization: Organization
         subregion: State / Province
         country: Country
         postal_code: Postal Code
@@ -1444,6 +2348,23 @@ en:
         no_file_selected: No file selected
     actions:
       generic:
+        reopen_registration: Re-open my registration
+        cancel_registration: Cancel my registration
+        organization_none: None of the above
+        payment_paypal: I can pay now with PayPal
+        payment_on_arrival: I can pledge to pay on arrival
+        payment_none: Not now
+        food_meat: I eat meat and dairy
+        food_vegetarian: I am vegetarian
+        food_vegan: I am vegan
+        housing_none: I don't need a place to stay
+        housing_tent: I would like a place to tent
+        housing_house: Yes, I would like to place to stay
+        'yes': 'Yes'
+        'no': 'No'
+        maybe: Maybe
+        review: Review
+        back: Back
         upload: Upload
         select_file: Select a file
         administrate: Administrate
@@ -1502,15 +2423,15 @@ en:
         all: Everyone
       conferences:
         types:
-          annual: 'Annual Bike!Bike!'
-          'n': 'North'
-          s: 'South'
-          e: 'East'
-          w: 'West'
-          ne: 'Northeast'
-          nw: 'Northwest'
-          se: 'Southeast'
-          sw: 'Southwest'
+          annual: Annual Bike!Bike!
+          n: North
+          s: South
+          e: East
+          w: West
+          ne: Northeast
+          nw: Northwest
+          se: Southeast
+          sw: Southwest
       distance_unit:
         km: km
         mi: mi
@@ -1518,7 +2439,7 @@ en:
       delete: Are you sure you want to delete?
   page_titles:
     administration:
-      Administration: '%{title} Administration'
+      Administration: "%{title} Administration"
     '403':
       Access_Denied: Access Denied
       Please_Confirm_Email: Please confirm your email
@@ -1548,10 +2469,10 @@ en:
     '404':
       Page_Not_Found: Page Not Found
       Locale_Not_Available: Locale Not Available
-    Policy: 'Policy'
-    About: 'About'
-    Register: 'Register'
-    Pre_Register: 'Pre-Register'
+    Policy: Policy
+    About: About
+    Register: Register
+    Pre_Register: Pre-Register
     '500':
       An_Error_Occurred: An Error Occurred
     user_settings:
@@ -1570,7 +2491,8 @@ en:
       Excel: Download Data in Excel Format
       Organizations_Excel: Download Organization Data
   page_descriptions:
-    home: Bike!Bike! A conference for bike collectives, co-ops, non-profit DIY bike shops
+    home: Bike!Bike! A conference for bike collectives, co-ops, non-profit DIY bike
+      shops
   donate:
     button_label: Donate
   menu:
@@ -1627,21 +2549,29 @@ en:
       Translate: Edit %{language} version
   error:
     '403':
-      description: You do not currently have sufficient permissions to access this page. If you believe this is an error, please contact us.
+      description: You do not currently have sufficient permissions to access this
+        page. If you believe this is an error, please contact us.
       title: You do not have access to this page
     '404':
-      description: The page you are looking for could not be found. If you think this was in error, please contact us.
+      description: The page you are looking for could not be found. If you think this
+        was in error, please contact us.
       title: '404: This page doesn''t exist'
-      token_not_found: Your login token was expired or not found. Please try signing in again.
+      token_not_found: Your login token was expired or not found. Please try signing
+        in again.
     locale_not_available:
-      description: This site has yet to be translated into %{language}. We are actively looking for volunteers who can translate existing copy and new copy as we add new features. If you think you can help, please contact us!
+      description: This site has yet to be translated into %{language}. We are actively
+        looking for volunteers who can translate existing copy and new copy as we
+        add new features. If you think you can help, please contact us!
       title: '404: %{language} Translations Missing'
       volunteer:
         title: Can you help us translate?
-        description: 'If you can help us translate this or any other language, please let us know by contacting us using the form below:'
+        description: 'If you can help us translate this or any other language, please
+          let us know by contacting us using the form below:'
     '500':
       title: There is a problem
-      description: 'An error has occurred, details about the error have been sent to our development team. In addition, you may contact us using the form below to let us better understand what happened and how you were affected.'
+      description: An error has occurred, details about the error have been sent to
+        our development team. In addition, you may contact us using the form below
+        to let us better understand what happened and how you were affected.
   roles:
     workshops:
       facilitator:
@@ -1674,45 +2604,74 @@ en:
   email:
     confirmation:
       paragraph:
-        please_confirm: Hello! To gain access to registration and other features of Bike!Bike!, please confirm your email address.
+        please_confirm: Hello! To gain access to registration and other features of
+          Bike!Bike!, please confirm your email address.
       link:
         please_confirm: Confirm now
     subject:
       confirm_email: Confirmation Email
       registration_confirmed: Thank you for registering for %{conference_title}
       pre_registration_confirmed: Thank you for pre-registering for %{conference_title}
-      workshop_facilitator_request: Request to facilitate ‘%{workshop_title}’ from %{requester_name}
+      workshop_facilitator_request: Request to facilitate ‘%{workshop_title}’ from
+        %{requester_name}
       workshop_request_approved: You have been added as a facilitator of ‘%{workshop_title}’
-      workshop_request_denied: Your request to facilitate ‘%{workshop_title}’ has been denied
-      workshop_translated: The %{language} translation for ‘%{workshop_title}’ has been modified
-      workshop_original_content_changed: Original content for ‘%{workshop_title}’ has been modified
+      workshop_request_denied: Your request to facilitate ‘%{workshop_title}’ has
+        been denied
+      workshop_translated: The %{language} translation for ‘%{workshop_title}’ has
+        been modified
+      workshop_original_content_changed: Original content for ‘%{workshop_title}’
+        has been modified
       workshop_comment:
-        comment: '%{user_name} commented on ‘%{workshop_title}’'
-        reply: '%{user_name} replied to your comment'
+        comment: "%{user_name} commented on ‘%{workshop_title}’"
+        reply: "%{user_name} replied to your comment"
     general:
       paragraph:
         see_you: See you in %{conference_location}!
         thank_you: Thank you %{name},
     registration:
       paragraph:
-        confirmed: You have successfully registered for %{conference_title}. You can modify your registration details, pay, or add workshops at any time by restarting the registration process. If you have yet to pay or add your workshops and plan to do so, we ask that you take care of it as soon as possible to help us prepare in advance of your arrival.
-        pre_confirmed: You have successfully pre-registered for %{conference_title}. We will let you know when registration is fully open and if there is any important news about the conference that you should know about. We encourage you to create or volunteer to facilitate workshops soon. You can do that, or change your registration details at any time by clicking on the pre-register link again.
+        confirmed: You have successfully registered for %{conference_title}. You can
+          modify your registration details, pay, or add workshops at any time by restarting
+          the registration process. If you have yet to pay or add your workshops and
+          plan to do so, we ask that you take care of it as soon as possible to help
+          us prepare in advance of your arrival.
+        pre_confirmed: You have successfully pre-registered for %{conference_title}.
+          We will let you know when registration is fully open and if there is any
+          important news about the conference that you should know about. We encourage
+          you to create or volunteer to facilitate workshops soon. You can do that,
+          or change your registration details at any time by clicking on the pre-register
+          link again.
     translations:
       headings:
         new_value: 'New Value: '
         old_value: 'Old Value: '
         diff: 'Difference: '
       paragraph:
-        workshop_translated: '%{user_name} has modified the %{language} translation for ‘%{workshop_title}’.'
-        workshop_original_content_changed: '%{user_name} has modified the original content for ‘%{workshop_title}’. Translations may need to be updated.'
+        workshop_translated: "%{user_name} has modified the %{language} translation
+          for ‘%{workshop_title}’."
+        workshop_original_content_changed: "%{user_name} has modified the original
+          content for ‘%{workshop_title}’. Translations may need to be updated."
     workshop_comment:
       paragraph:
-        user_said: '%{user_name} said: '
+        user_said: "%{user_name} said:"
     workshop:
       paragraph:
         request_approved: You have been added as a facilitator of ‘%{workshop_title}’.
-        request_denied: Your request to become a facilitator of ‘%{workshop_title}’ has been denied. If you think this was in error, you may contact the current facilitators by making another request to facilitate.
-        request_instructions: 'You can approve or deny this request on your workshop page:'
+        request_denied: Your request to become a facilitator of ‘%{workshop_title}’
+          has been denied. If you think this was in error, you may contact the current
+          facilitators by making another request to facilitate.
+        request_instructions: 'You can approve or deny this request on your workshop
+          page:'
         request_message: "%{user_name} has requested to help facilitate ‘%{workshop_title}’:"
-        request_reply_instructions: You can also reply directly to this email to ask follow-up questions.
+        request_reply_instructions: You can also reply directly to this email to ask
+          follow-up questions.
         view_workshop: 'View the workshop here: '
+  translate:
+    content:
+      change_locale: Read in %{language}
+      Translation_of: Translation of
+  number:
+    currency:
+      format:
+        format: "%u%n"
+        separator: "."

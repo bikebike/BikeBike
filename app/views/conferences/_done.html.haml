@@ -48,4 +48,4 @@
 	- if @conference.registration_open
 		= form_tag register_path(@this_conference.slug) do
 			.actions
-				= button_tag :edit_registration, :value => :register
+				= button :edit_registration, :value => :register

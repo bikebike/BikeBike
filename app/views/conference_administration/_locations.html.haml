@@ -36,7 +36,7 @@
   = columns(medium: 12) do
     .actions.next-prev
       - if @location.present?
-        = button_tag :save, value: :save
-        = button_tag :cancel, value: :cancel, class: :subdued, formnovalidate: true
+        = button :save, value: :save
+        = button :cancel, value: :cancel, class: :subdued, formnovalidate: true
       - else
-        = button_tag :create, value: :create
+        = button :create, value: :create

@@ -15,5 +15,5 @@
         .table-td=checkboxes :days, @block_days, info['days'].map(&:to_i), 'date.day_names', vertical: true, small: true
         .table-td.form
           = hidden_field_tag :workshop_block, block
-          = button_tag :delete_block, value: :delete_block, class: [:small, :delete] if block == @workshop_blocks.length - 2
-          = button_tag (is_new ? :add_block : :update_block), value: :save_block, class: [:small, :add]
+          = button :delete_block, value: :delete_block, class: [:small, :delete] if block == @workshop_blocks.length - 2
+          = button (is_new ? :add_block : :update_block), value: :save_block, class: [:small, :add]

@@ -4,7 +4,7 @@
   = admin_update_form do
     = checkboxes :organizations, (@organizations.map { |org| [org.name, org.id] }), @this_conference.organizations.map(&:id), 'test.test', vertical: true, big: true
     .actions.right.small
-      = button_tag :save, value: :set_organizations
+      = button :save, value: :set_organizations
   - @this_conference.organizations.each do | organization |
     %h4=organization.name
     - if organization.users.present?
@@ -16,11 +16,11 @@
               = admin_update_form class: [:inline, :right] do
                 = hidden_field_tag :user_id, user.id
                 = hidden_field_tag :org_id, organization.id
-                = button_tag :remove_member, value: :remove_org_member, class: [:small, :delete]
+                = button :remove_member, value: :remove_org_member, class: [:small, :delete]
     = admin_update_form class: 'mini-flex-form' do
       = hidden_field_tag :org_id, organization.id
       = emailfield :email, nil, required: true
-      = button_tag :add_member, value: :add_org_member, class: :small
+      = button :add_member, value: :add_org_member, class: :small
 
   %h3=_'articles.admin.info.headings.External_Administrators'
   %p=_'articles.admin.info.descriptions.External_Administrators'
@@ -32,10 +32,10 @@
           - unless user.id == current_user.id && !current_user.administrator?
             = admin_update_form class: [:inline, :right] do
               = hidden_field_tag :user_id, user.id
-              = button_tag :remove_member, value: :remove_administrator, class: [:small, :delete]
+              = button :remove_member, value: :remove_administrator, class: [:small, :delete]
   = admin_update_form class: 'mini-flex-form' do
     = userfield :email, nil, required: true
     -#= emailfield :email, nil, required: true
-    = button_tag :add_member, value: :add_administrator, class: :small
+    = button :add_member, value: :add_administrator, class: :small
 = columns(large: 2) do
   &nbsp;

@@ -1710,17 +1710,17 @@ ul.warnings {
 
         a.policy {
             background-color: $colour-5;
-            @include _(order, 1);
+            // @include _(order, 1);
         }
 
         a.about {
             background-color: $colour-3;
-            @include _(order, 1);
+            // @include _(order, 1);
         }
 
         a.conferences {
             background-color: $colour-2;
-            @include _(order, 1);
+            // @include _(order, 1);
         }
 
         form, .register {
@@ -1728,7 +1728,8 @@ ul.warnings {
         }
 
         a, form {
-            width: 33%;
+            width: 33.333%;
+            float: left;
             @include _(flex, 1);
         }
         
@@ -2948,12 +2949,11 @@ a.logo {
 .conference-banner {
     text-align: center;
     padding: 0;
-    margin: 0 -1em 2em;
-    width: auto;
+    margin: 0;
 
     .title {
         font-size: 5vw;
-        margin: 1em auto 2em;
+        margin: 1em auto 0;
 
         h1, h2 {
             margin: 0;
@@ -2971,6 +2971,7 @@ a.logo {
 
     img {
         max-width: 100%;
+        margin-top: 2em;
     }
 }
 
@@ -3311,8 +3312,11 @@ body.error-locale-not-available {
 body {
     #primary-content {
         @include _(transition, 'filter 250ms ease-in-out, -webkit-filter 250ms ease-in-out');
-        display: -webkit-flex;
-        flex-direction: column;
+
+        @if capable_of(flexbox, true) {
+            display: -webkit-flex;
+            flex-direction: column;
+        }
         min-height: 100vh;
         overflow: hidden;
     }
@@ -4617,6 +4621,7 @@ html[data-ontop] {
         .nav a {
             &[class] {
                 width: auto;
+                float: none;
                 overflow: visible;
                 margin-left: 0.725em;
                 padding: 0.25em 0.5em;

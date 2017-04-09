@@ -151,7 +151,7 @@ class ConferenceAdministrationController < ApplicationController
             },
           data: [],
         }
-        @organizations.each do | org |
+        @organizations.each do |org|
           if org.present?
             address = org.locations.first
             @excel_data[:data] << {
@@ -167,7 +167,7 @@ class ConferenceAdministrationController < ApplicationController
             }
           end
         end
-        return respond_to do | format |
+        return respond_to do |format|
           format.xlsx { render xlsx: :stats, filename: "organizations" }
         end
       end
@@ -183,7 +183,7 @@ class ConferenceAdministrationController < ApplicationController
 
       if request.format.xlsx?
         logger.info "Generating stats.xls"
-        return respond_to do | format |
+        return respond_to do |format|
           format.xlsx { render xlsx: :stats, filename: "stats-#{DateTime.now.strftime('%Y-%m-%d')}" }
         end
       end
@@ -194,7 +194,7 @@ class ConferenceAdministrationController < ApplicationController
       @donation_count = 0
       @donations = 0
       @food = { meat: 0, vegan: 0, vegetarian: 0, all: 0 }
-      @registrations.each do | r |
+      @registrations.each do |r|
         if view_context.registration_status(r) == :registered
           @completed_registrations += 1
 
@@ -223,7 +223,7 @@ class ConferenceAdministrationController < ApplicationController
 
       if request.format.xlsx?
         logger.info "Generating stats.xls"
-        return respond_to do | format |
+        return respond_to do |format|
           format.xlsx { render xlsx: :stats, filename: "stats-#{DateTime.now.strftime('%Y-%m-%d')}" }
         end
       else
@@ -233,7 +233,7 @@ class ConferenceAdministrationController < ApplicationController
         @donation_count = 0
         @donations = 0
         @food = { meat: 0, vegan: 0, vegetarian: 0, all: 0 }
-        @registrations.each do | r |
+        @registrations.each do |r|
           if view_context.registration_status(r) == :registered
             @completed_registrations += 1
 
@@ -275,7 +275,7 @@ class ConferenceAdministrationController < ApplicationController
             },
           data: [],
         }
-        @hosts.each do | id, host |
+        @hosts.each do |id, host|
           data = (host.housing_data || {})
           host_data = {
             name: host.user.name,
@@ -283,7 +283,7 @@ class ConferenceAdministrationController < ApplicationController
             email: host.user.email,
             phone: data['phone'],
             availability: data['availability'].present? && data['availability'][1].present? ? view_context.date_span(data['availability'][0].to_date, data['availability'][1].to_date) : '',
-            considerations: ((data['considerations'] || []).map { | consideration | view_context._"articles.conference_registration.host.considerations.#{consideration}" }).join(', '),
+            considerations: ((data['considerations'] || []).map { |consideration| view_context._"articles.conference_registration.host.considerations.#{consideration}" }).join(', '),
             empty: '',
             guests: {
               columns: [:name, :area, :email, :arrival_departure, :allergies, :food, :companion, :city],
@@ -304,8 +304,8 @@ class ConferenceAdministrationController < ApplicationController
             }
           }
 
-          @housing_data[id][:guests].each do | space, space_data |
-            space_data.each do | guest_id, guest_data |
+          @housing_data[id][:guests].each do |space, space_data|
+            space_data.each do |guest_id, guest_data|
               guest = guest_data[:guest]
               if guest.present?
                 companion = view_context.companion(guest)
@@ -326,7 +326,7 @@ class ConferenceAdministrationController < ApplicationController
 
           @excel_data[:data] << host_data
         end
-        return respond_to do | format |
+        return respond_to do |format|
           format.xlsx { render xlsx: :stats, filename: "housing" }
         end
       end
@@ -458,7 +458,7 @@ class ConferenceAdministrationController < ApplicationController
           },
         data: []
       }
-      User.AVAILABLE_LANGUAGES.each do | l |
+      User.AVAILABLE_LANGUAGES.each do |l|
         @excel_data[:keys]["language_#{l}".to_sym] = "languages.#{l.to_s}" 
       end
       ConferenceRegistration.all_spaces.each do |s|
@@ -468,7 +468,7 @@ class ConferenceAdministrationController < ApplicationController
       ConferenceRegistration.all_considerations.each do |c|
         @excel_data[:keys][c] = "articles.conference_registration.host.considerations.#{c.to_s}"
       end
-      @registrations.each do | r |
+      @registrations.each do |r|
         user = r.user_id ? User.where(id: r.user_id).first : nil
         if user.present?
           companion = view_context.companion(r)
@@ -528,7 +528,7 @@ class ConferenceAdministrationController < ApplicationController
                 last_day: availability[1].present? ? view_context.date(availability[1].to_date, :span_same_year_date_1) : ''
               }
             }
-            User.AVAILABLE_LANGUAGES.each do | l |
+            User.AVAILABLE_LANGUAGES.each do |l|
               can_speak = ((user.languages || []).include? l.to_s)
               data["language_#{l}".to_sym] = (can_speak ? (view_context._'articles.conference_registration.questions.bike.yes') : '')
               data[:raw_values]["language_#{l}".to_sym] = can_speak
@@ -573,12 +573,12 @@ class ConferenceAdministrationController < ApplicationController
           first_day: view_context.conference_days_options_list(:before),
           last_day: view_context.conference_days_options_list(:after)
         }
-        User.AVAILABLE_LANGUAGES.each do | l |
+        User.AVAILABLE_LANGUAGES.each do |l|
           @column_options["language_#{l}".to_sym] = [
               [(view_context._"articles.conference_registration.questions.bike.yes"), true]
             ]
         end
-        ConferenceRegistration.all_considerations.each do | c |
+        ConferenceRegistration.all_considerations.each do |c|
           @column_options[c.to_sym] = [
               [(view_context._"articles.conference_registration.questions.bike.yes"), true]
             ]
@@ -589,7 +589,7 @@ class ConferenceAdministrationController < ApplicationController
     def get_housing_data
       @hosts = {}
       @guests = {}
-      ConferenceRegistration.where(:conference_id => @this_conference.id).each do | registration |
+      ConferenceRegistration.where(:conference_id => @this_conference.id).each do |registration|
         if registration.can_provide_housing
           @hosts[registration.id] = registration
         elsif registration.housing.present? && registration.housing != 'none'
@@ -603,11 +603,11 @@ class ConferenceAdministrationController < ApplicationController
 
       @housing_data = {}
       @hosts_affected_by_guests = {}
-      @hosts.each do | id, host |
+      @hosts.each do |id, host|
         @hosts[id].housing_data ||= {}
         @housing_data[id] = { guests: {}, space: {} }
         @hosts[id].housing_data['space'] ||= {}
-        @hosts[id].housing_data['space'].each do | s, size |
+        @hosts[id].housing_data['space'].each do |s, size|
           size = (size || 0).to_i
           @housing_data[id][:guests][s.to_sym] = {}
           @housing_data[id][:space][s.to_sym] = size
@@ -616,7 +616,7 @@ class ConferenceAdministrationController < ApplicationController
       
       @guests_housed = 0
 
-      @guests.each do | guest_id, guest |
+      @guests.each do |guest_id, guest|
         data = guest.housing_data || {}
         @hosts_affected_by_guests[guest_id] ||= []
 
@@ -651,7 +651,7 @@ class ConferenceAdministrationController < ApplicationController
             end
 
             companions = data['companions'] || []
-            companions.each do | companion |
+            companions.each do |companion|
               user = User.find_user(companion)
               if user.present?
                 reg = ConferenceRegistration.find_by(
@@ -678,10 +678,10 @@ class ConferenceAdministrationController < ApplicationController
         end
       end
       
-      @hosts.each do | id, host |
+      @hosts.each do |id, host|
         host_data = host.housing_data
 
-        @hosts[id].housing_data['space'].each do | space, size |
+        @hosts[id].housing_data['space'].each do |space, size|
           # make sure the host isn't overbooked
           space = space.to_sym
           space_available = (size || 0).to_i
@@ -755,7 +755,7 @@ class ConferenceAdministrationController < ApplicationController
         end
       else
         do_404
-        return nil
+        return true
       end
 
       return false
@@ -790,7 +790,7 @@ class ConferenceAdministrationController < ApplicationController
     end
 
     def admin_update_description
-      params[:info].each do | locale, value |
+      params[:info].each do |locale, value|
         @this_conference.set_column_for_locale(:info, locale, html_value(value))
       end
       @this_conference.save
@@ -811,7 +811,7 @@ class ConferenceAdministrationController < ApplicationController
 
     def admin_update_payment_message
       begin
-        params[:payment_message].each do | locale, value |
+        params[:payment_message].each do |locale, value|
           @this_conference.set_column_for_locale(:payment_message, locale, html_value(value))
         end
         @this_conference.save
@@ -883,7 +883,7 @@ class ConferenceAdministrationController < ApplicationController
         end
 
         user_changed = false
-        params.each do | key, value |
+        params.each do |key, value|
           case key.to_sym
           when :city
             if value.present?
@@ -964,7 +964,7 @@ class ConferenceAdministrationController < ApplicationController
         do_404
       end
 
-      return nil
+      return true
     end
 
     def admin_update_housing
@@ -1004,7 +1004,7 @@ class ConferenceAdministrationController < ApplicationController
         do_404
       end
 
-      return nil
+      return true
     end
 
     def admin_update_broadcast
@@ -1014,36 +1014,32 @@ class ConferenceAdministrationController < ApplicationController
       @send_to = params[:send_to]
       @register_template = :administration
       if params[:button] == 'send'
-        view_context.broadcast_to(@send_to).each do | user |
-          UserMailer.send_mail :broadcast do
-            [
+        view_context.broadcast_to(@send_to).each do |user|
+          send_mail(:broadcast,
               "#{request.protocol}#{request.host_with_port}",
               @subject,
               @body,
-              user,
-              @this_conference
-            ]
-          end
+              user.id,
+              @this_conference.id
+            )
         end
         redirect_to administration_step_path(@this_conference.slug, :broadcast_sent)
-        return nil
+        return true
       elsif params[:button] == 'preview'
         @send_to_count = view_context.broadcast_to(@send_to).size
         @broadcast_step = :preview
       elsif params[:button] == 'test'
         @broadcast_step = :test
-        UserMailer.send_mail :broadcast do
-          [
+        send_mail(:broadcast,
             "#{request.protocol}#{request.host_with_port}",
             @subject,
             @body,
-            current_user,
-            @this_conference
-          ]
-        end
+            current_user.id,
+            @this_conference.id
+          )
         @send_to_count = view_context.broadcast_to(@send_to).size
       end
-      return true
+      return false
     end
 
     def admin_update_locations
@@ -1106,14 +1102,14 @@ class ConferenceAdministrationController < ApplicationController
       end
 
       do_404
-      return nil
+      return true
     end
 
     def admin_update_events
       case params[:button]
       when 'edit'
         redirect_to edit_event_path(@this_conference.slug, params[:id])
-        return nil
+        return true
       when 'save'
         if params[:id].present?
           event = Event.find_by!(conference_id: @this_conference.id, id: params[:id])
@@ -1127,11 +1123,11 @@ class ConferenceAdministrationController < ApplicationController
         event.end_time = event.start_time + params[:time_span].to_f.hours
 
         # save translations
-        (params[:info] || {}).each do | locale, value |
+        (params[:info] || {}).each do |locale, value|
           event.set_column_for_locale(:title, locale, html_value(value), current_user.id) unless value = event._title(locale)
         end
 
-        (params[:title] || {}).each do | locale, value |
+        (params[:title] || {}).each do |locale, value|
           event.set_column_for_locale(:info, locale, value, current_user.id) unless value = event._info(locale)
         end
 
@@ -1143,9 +1139,9 @@ class ConferenceAdministrationController < ApplicationController
       end
 
       do_404
-      return nil
+      return true
     end
-
+    
     def admin_update_workshop_times
       case params[:button]
       when 'save_block'
@@ -1209,7 +1205,7 @@ class ConferenceAdministrationController < ApplicationController
         @location = params[:location]
         @event_location = @location.present? && @location.to_i > 0 ? EventLocation.find(@location.to_i) : nil
 
-        @workshops.sort { |a, b| a.title.downcase <=> b.title.downcase }.each do | workshop |
+        @workshops.sort { |a, b| a.title.downcase <=> b.title.downcase }.each do |workshop|
           @ordered_workshops[workshop.id] = workshop
         end
 
@@ -1251,7 +1247,7 @@ class ConferenceAdministrationController < ApplicationController
 
     def get_empty(hash, keys)
       keys = [keys] unless keys.is_a?(Array)
-      keys.each do | key |
+      keys.each do |key|
         return key unless hash[key].present?
       end
       return nil
