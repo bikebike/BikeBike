@@ -11,14 +11,18 @@ Then /^(?:I )?(?:should )?(not )?see (?:the |an? )?'(.+)' link$/i do |no, item|
 end
 
 Then /^(?:I )?(?:should )?(?:still )?(not )?see '(.+)'$/i do |negate, item|
-  attempt_to do
-    expect(page).send(negate ? :not_to : :to, have_text(item))
+  attempt_to true do
+    attempt_to do
+      expect(page).send(negate ? :not_to : :to, have_text(item))
+    end
   end
 end
 
 Then /^(?:I )?(?:should )?(?:still )?(not )?see (?:my |the )([^']+)$/i do |negate, item|
-  attempt_to do
-    expect(page).send(negate ? :not_to : :to, have_text(TestState::Values[get_field(item)]))
+  attempt_to true do
+    attempt_to do
+      expect(page).send(negate ? :not_to : :to, have_text(TestState::Values[get_field(item)]))
+    end
   end
 end
 
@@ -114,7 +118,7 @@ Then /^(?:I )?enter (?:my |an? |some |the )?(.+?)(?: as '(.+)')?$/i do |field, v
     end
   end
 
- (TestState::Values[field] = value)
+  TestState::Values[field] = value
 
   element.set value
 

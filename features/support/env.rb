@@ -24,7 +24,7 @@ Capybara.register_driver :bb_poltergeist do |app|
   end
 
   opts = {
-    timeout: 60,
+    timeout: 10,
     window_size: [1200, 800]
   }
   Capybara::Poltergeist::Driver.new(app, opts)
@@ -50,9 +50,12 @@ Before do
 end
 
 After do |scenario|
-  sleep 1
   log_result scenario
-  LinguaFranca.screenshot_mail
+
+  if LinguaFranca.recording?
+    sleep 1
+    LinguaFranca.screenshot_mail
+  end
 
   if scenario.failed?
     if @exception

@@ -78,7 +78,4 @@ Feature: Sign In
     Then I should see 'Before proceeding, you must provide us an email address'
 
     When I enter my email address
-    And press save
-
-    Then I should see 'Mark Zuckerberg'
-    And I should see 'Sign out'
+    And click the 'Save' button

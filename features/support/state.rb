@@ -6,6 +6,7 @@ module TestState
     attr_accessor :last_organization
     attr_accessor :last_email
     attr_accessor :it
+    attr_accessor :last_page
 
     def my_account=(user)
       @my_account = user
