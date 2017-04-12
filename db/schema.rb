@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170325181748) do
+ActiveRecord::Schema.define(version: 20170401192606) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -254,6 +254,14 @@ ActiveRecord::Schema.define(version: 20170325181748) do
     t.string   "locale"
   end
 
+  create_table "locale_followers", force: :cascade do |t|
+    t.string   "locale"
+    t.integer  "user_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "application_id"
+  end
+
   create_table "locations", force: :cascade do |t|
     t.string   "title"
     t.float    "latitude"
@@ -322,6 +330,17 @@ ActiveRecord::Schema.define(version: 20170325181748) do
     t.integer  "application_id"
   end
 
+  create_table "page_followers", force: :cascade do |t|
+    t.string   "group"
+    t.string   "page"
+    t.integer  "index"
+    t.string   "variant"
+    t.integer  "user_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "application_id"
+  end
+
   create_table "registration_form_fields", force: :cascade do |t|
     t.string   "title"
     t.text     "help"
@@ -342,6 +361,14 @@ ActiveRecord::Schema.define(version: 20170325181748) do
 
   add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true, using: :btree
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
+
+  create_table "translation_followers", force: :cascade do |t|
+    t.string   "key"
+    t.integer  "user_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "application_id"
+  end
 
   create_table "translation_records", force: :cascade do |t|
     t.string  "locale"

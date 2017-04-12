@@ -1,42 +1,6 @@
 GIT
-  remote: https://github.com/glebm/to_spreadsheet.git
-  revision: 4c08455646dd18de51cc1ec05717fbb240c78a68
-  specs:
-    to_spreadsheet (1.0.6)
-      axlsx
-      chronic
-      nokogiri
-      rails
-      responders
-
-GIT
-  remote: https://github.com/ianfleeton/paypal-express
-  revision: 629749621de4c65dd6651649f98410315520fb3d
-  specs:
-    paypal-express (0.8.1)
-      activesupport (>= 2.3)
-      attr_required (>= 0.0.5)
-      rest-client
-
-GIT
-  remote: https://github.com/krzcho/eventmachine
-  revision: 651a35ee9df9826e048c3b3721e2c6b415c5a328
-  branch: master
-  specs:
-    eventmachine (1.2.1)
-
-GIT
-  remote: https://github.com/tg90nor/sorcery.git
-  revision: 79b69a87ce168c47fab76921874aa7e8cb727002
-  branch: make-facebook-provider-use-json-token-parser
-  specs:
-    sorcery (0.10.3)
-      bcrypt (~> 3.1)
-      oauth (~> 0.4, >= 0.4.4)
-      oauth2 (~> 1.0, >= 0.8.0)
-
-PATH
-  remote: ../bikecollectives_core
+  remote: https://github.com/bikebike/bikecollectives_core.git
+  revision: 3c9c6ac9fb3da839c945fd851f9ab255361ad296
   specs:
     bikecollectives_core (0.1.0)
       activerecord-session_store
@@ -56,8 +20,10 @@ PATH
       sidekiq
       uglifier (>= 1.3.0)
 
-PATH
-  remote: ../bumbleberry
+GIT
+  remote: https://github.com/bumbleberry/bumbleberry.git
+  revision: 3b990baa3b5a30dbe378144ed97f0717f910f5f8
+  branch: 2017
   specs:
     bumbleberry (0.0.1)
       blockspring
@@ -67,8 +33,37 @@ PATH
       sass-json-vars
       sass-rails
 
-PATH
-  remote: ../lingua_franca
+GIT
+  remote: https://github.com/glebm/to_spreadsheet.git
+  revision: 4c08455646dd18de51cc1ec05717fbb240c78a68
+  specs:
+    to_spreadsheet (1.0.6)
+      axlsx
+      chronic
+      nokogiri
+      rails
+      responders
+
+GIT
+  remote: https://github.com/ianfleeton/paypal-express
+  revision: e40cd3d41d1a5cdf6570332626afd9333fe576f9
+  specs:
+    paypal-express (0.8.1)
+      activesupport (>= 2.3)
+      attr_required (>= 0.0.5)
+      rest-client
+
+GIT
+  remote: https://github.com/krzcho/eventmachine
+  revision: 651a35ee9df9826e048c3b3721e2c6b415c5a328
+  branch: master
+  specs:
+    eventmachine (1.2.1)
+
+GIT
+  remote: https://github.com/lingua-franca/lingua_franca.git
+  revision: fd783d6fa288e8867c648b62e6b5e63926023440
+  branch: 2017
   specs:
     lingua_franca (0.0.1)
       diffy
@@ -79,11 +74,22 @@ PATH
       rails-i18n
       rubyzip
 
-PATH
-  remote: ../marmara
+GIT
+  remote: https://github.com/lingua-franca/marmara.git
+  revision: 76e2406fcdb793e6ca1946e5d3f9125cf0076485
   specs:
     marmara (1.0.2)
       css_parser (>= 1.5.0.pre)
+
+GIT
+  remote: https://github.com/tg90nor/sorcery.git
+  revision: 79b69a87ce168c47fab76921874aa7e8cb727002
+  branch: make-facebook-provider-use-json-token-parser
+  specs:
+    sorcery (0.10.3)
+      bcrypt (~> 3.1)
+      oauth (~> 0.4, >= 0.4.4)
+      oauth2 (~> 1.0, >= 0.8.0)
 
 GEM
   remote: http://rubygems.org/
@@ -140,8 +146,7 @@ GEM
       htmlentities (~> 4.3.1)
       nokogiri (>= 1.4.1)
       rubyzip (~> 1.0.0)
-    bcrypt (3.1.11-x64-mingw32)
-    bcrypt (3.1.11-x86-mingw32)
+    bcrypt (3.1.11)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -151,9 +156,7 @@ GEM
     blockspring (0.1.4)
       rest-client (> 1.6.7)
     builder (3.2.3)
-    cairo (1.15.5-x64-mingw32)
-      pkg-config (>= 1.1.5)
-    cairo (1.15.5-x86-mingw32)
+    cairo (1.15.5)
       pkg-config (>= 1.1.5)
     callsite (0.0.11)
     capistrano (3.8.0)
@@ -238,35 +241,23 @@ GEM
       railties (>= 3.0.0)
     faraday (0.11.0)
       multipart-post (>= 1.2, < 3)
-    ffi (1.9.18-x64-mingw32)
-    ffi (1.9.18-x86-mingw32)
+    ffi (1.9.18)
     forgery (0.6.0)
     formatador (0.2.5)
-    gdk_pixbuf2 (3.1.1-x64-mingw32)
-      gio2 (= 3.1.1)
-    gdk_pixbuf2 (3.1.1-x86-mingw32)
+    gdk_pixbuf2 (3.1.1)
       gio2 (= 3.1.1)
     geocoder (1.4.3)
     gherkin (4.1.1)
     gherkin3 (3.1.2)
-    gio2 (3.1.1-x64-mingw32)
-      glib2 (= 3.1.1)
-      gobject-introspection (= 3.1.1)
-    gio2 (3.1.1-x86-mingw32)
+    gio2 (3.1.1)
       glib2 (= 3.1.1)
       gobject-introspection (= 3.1.1)
     git-version-bump (0.15.1)
-    glib2 (3.1.1-x64-mingw32)
-      cairo (>= 1.12.8)
-      pkg-config
-    glib2 (3.1.1-x86-mingw32)
-      cairo (>= 1.12.8)
+    glib2 (3.1.1)
       pkg-config
     globalid (0.3.7)
       activesupport (>= 4.1.0)
-    gobject-introspection (3.1.1-x64-mingw32)
-      glib2 (= 3.1.1)
-    gobject-introspection (3.1.1-x86-mingw32)
+    gobject-introspection (3.1.1)
       glib2 (= 3.1.1)
     guard (2.14.1)
       formatador (>= 0.2.4)
@@ -342,9 +333,7 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (4.1.0)
     netrc (0.11.0)
-    nokogiri (1.6.8.1-x64-mingw32)
-      mini_portile2 (~> 2.1.0)
-    nokogiri (1.6.8.1-x86-mingw32)
+    nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
     notiffany (0.1.1)
       nenv (~> 0.1)
@@ -356,16 +345,9 @@ GEM
       multi_json (~> 1.3)
       multi_xml (~> 0.5)
       rack (>= 1.2, < 3)
-    pango (3.1.1-x64-mingw32)
-      cairo (>= 1.14.0)
-      glib2 (= 3.1.1)
-    pango (3.1.1-x86-mingw32)
-      cairo (>= 1.14.0)
-      glib2 (= 3.1.1)
     parser (2.4.0.0)
       ast (~> 2.2)
-    pg (0.20.0-x64-mingw32)
-    pg (0.20.0-x86-mingw32)
+    pg (0.20.0)
     pkg-config (1.1.7)
     poltergeist (1.14.0)
       capybara (~> 2.1)
@@ -436,13 +418,7 @@ GEM
     redis (3.3.3)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
-    rest-client (2.0.1-x64-mingw32)
-      ffi (~> 1.9)
-      http-cookie (>= 1.0.2, < 2.0)
-      mime-types (>= 1.16, < 4.0)
-      netrc (~> 0.8)
-    rest-client (2.0.1-x86-mingw32)
-      ffi (~> 1.9)
+    rest-client (2.0.1)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
@@ -467,14 +443,9 @@ GEM
       rspec-mocks (~> 3.5.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
-    rsvg2 (3.1.1-x64-mingw32)
+    rsvg2 (3.1.1)
       cairo (>= 1.12.8)
       gdk_pixbuf2 (= 3.1.1)
-      pango (>= 3.1.1)
-    rsvg2 (3.1.1-x86-mingw32)
-      cairo (>= 1.12.8)
-      gdk_pixbuf2 (= 3.1.1)
-      pango (>= 3.1.1)
     rubocop (0.48.1)
       parser (>= 2.3.3.1, < 3.0)
       powerpack (~> 0.1)
@@ -537,17 +508,15 @@ GEM
       thread_safe (~> 0.1)
     tzinfo-data (1.2017.2)
       tzinfo (>= 1.0.0)
-    uglifier (3.1.13)
+    uglifier (3.2.0)
       execjs (>= 0.3.0, < 3)
     unf (0.1.4)
       unf_ext
-    unf_ext (0.0.7.2-x64-mingw32)
-    unf_ext (0.0.7.2-x86-mingw32)
-    unicode-display_width (1.1.3)
+    unf_ext (0.0.7.3)
+    unicode-display_width (1.2.1)
     unicorn (5.3.0)
       kgio (~> 2.6)
       raindrops (~> 0.7)
-    wdm (0.1.1)
     webmock (2.3.2)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
@@ -556,13 +525,11 @@ GEM
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
-    win32console (1.3.2-x86-mingw32)
     xpath (2.0.0)
       nokogiri (~> 1.3)
 
 PLATFORMS
-  x64-mingw32
-  x86-mingw32
+  ruby
 
 DEPENDENCIES
   activerecord-session_store
@@ -630,4 +597,4 @@ DEPENDENCIES
   win32console
 
 BUNDLED WITH
-   1.14.4
+   1.12.3
