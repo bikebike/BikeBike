@@ -21,7 +21,8 @@ Feature: Workshops
     And check 'Meeting Room'
     And click the 'Save' button
 
-    Then I should see 'Funding'
+    Then I should be on my workshop page
+    And I should see 'Funding'
     And should see 'Projector'
     And see my title
     And see my info
@@ -55,12 +56,18 @@ Feature: Workshops
     Then I should see 'Deleting a workshop cannot be undone'
 
     When I click on the 'Cancel' button
-    Then I should see 'Tools'
+    Then I should be on my workshop page
+    And I should see 'Tools'
     And should see 'Education'
 
     When I click the 'Delete Workshop' link
     And click the 'Confirm' button
-    Then I should see 'Propose a Workshop'
+
+    Then I should be on the delete_workshop page
+    When I click the 'Confirm' button
+
+    Then I should be on my workshop page
+    And I should see 'Propose a Workshop'
     But I should not see any workshops
 
   Scenario: Users can comment on an translate their own workshops
@@ -78,19 +85,25 @@ Feature: Workshops
     When I enter my title as 'Puentes a las bicicletas'
     And enter some info
     And click the 'Save' button
-    Then my workshop title should be 'Bridges to Bicycles'
+    Then I should be on my workshop page
+    And my workshop title should be 'Bridges to Bicycles'
     And my Spanish workshop title should be 'Puentes a las bicicletas'
     And I should see 'Bridges to Bicycles'
     
     When I enter a comment
     And I click the 'Add Comment' button
-    Then I should see 'less than a minute ago'
+
+    Then I should be on my workshop page
+    And I should see 'less than a minute ago'
     And I should see my comment
 
     When I click the 'Reply' button
     And enter a reply
     And click the 'Reply' button
-    Then I should see my comment
+    
+    Then I should be on my workshop page
+    And I should see 'less than a minute ago'
+    And I should see my comment
     And see my reply
 
   Scenario: Users can add facilitators to their workshops
@@ -122,9 +135,10 @@ Feature: Workshops
     Then I should see 'Please Confirm'
     And I should see 'Yes'
     And click the 'Yes' button
+
     Then I should not see 'Please Confirm'
-    And I should not see 'new-facilitator@bikebike.org Unregistered'
-    But I should see 'Applying for 501c3 status'
+    # And I should not see 'new-facilitator@bikebike.org Unregistered'
+    # But I should see 'Applying for 501c3 status'
 
   Scenario: Users can approve and deny facilitation requests on their workshops
     Given that there is an upcoming conference
@@ -175,7 +189,8 @@ Feature: Workshops
     And see 'Are you sure you would like to remove Hadrian as a facilitator of this workshop?'
 
     When I click on the 'Yes' button
-    Then I should not see 'Hadrian'
+    Then I should be on my workshop page
+    And I should not see 'Hadrian'
     
     When I click the 'Transfer Ownership' button beside 'Saladin'
     Then I should see 'Please Confirm'
@@ -189,7 +204,8 @@ Feature: Workshops
     And see 'Are you sure you want to transfer ownership to Saladin?'
 
     When I click the 'Yes' button
-    Then I should not see 'Saladin Collaborator'
+    Then I should be on my workshop page
+    And I should not see 'Saladin Collaborator'
     But I should see 'Saladin Owner'
 
     When I click the 'Leave' button
@@ -204,7 +220,8 @@ Feature: Workshops
     And see 'Are you sure you would like to remove yourself as a facilitator of this workshop?'
 
     When I click the 'Yes' button
-    Then I should not see 'Leave'
+    Then I should be on my workshop page
+    And I should not see 'Leave'
     But I should see 'Make a facilitation request'
 
     When I click the 'Make a facilitation request' button
@@ -227,7 +244,8 @@ Feature: Workshops
     Then I should still see 'Cancel Request'
     When I click the 'Cancel Request' button again
     And click the 'Yes' button
-    Then I should not see 'Cancel Request'
+    Then I should be on my workshop page
+    And I should not see 'Cancel Request'
     But I should see 'Make a facilitation request'
 
   Scenario: Users can add interest to workshops
@@ -306,7 +324,8 @@ Feature: Workshops
     And enter a comment as 'Will you be covering Canadian contracts?'
     And click the 'Add Comment' button
 
-    Then I should see 'Will you be covering Canadian contracts?'
+    Then I should be on my workshop page
+    And I should see 'Will you be covering Canadian contracts?'
     And 'Brunhilda' should get a 'commented' email
 
     When in a new session
@@ -316,5 +335,6 @@ Feature: Workshops
     And enter a reply as 'If we can find a Canadian facilitator'
     And click the 'Reply' button
 
-    Then I should see 'If we can find a Canadian facilitator'
+    Then I should be on my workshop page
+    And I should see 'If we can find a Canadian facilitator'
     And 'Geronimo' should get a 'replied' email

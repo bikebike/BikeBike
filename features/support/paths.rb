@@ -10,6 +10,9 @@ module NavigationHelpers
       path = :view_workshop
       args << TestState.last_conference.slug
       args << TestState.last_workshop.id
+    when /^delete_workshop$/i
+      args << TestState.last_conference.slug
+      args << TestState.last_workshop.id
     when /^registration$/i
       path = :register
       args << TestState.last_conference.slug

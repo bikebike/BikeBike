@@ -53,7 +53,7 @@ def capture_html(distance_from_root = 3)
   html.gsub(/(=\"|\(['"]?)(?:#{host})?\/(assets|uploads)/, "\\1#{public_dir}\\2")
 end
 
-def attempt_to(&block)
+def attempt_to(refresh_on_fail = false, &block)
   begin
     retries ||= 0
     timeout ||= 0
@@ -61,8 +61,7 @@ def attempt_to(&block)
     yield
   rescue Exception => e
     raise e unless (retries += 1) <= 4
-    # puts "Failed: #{e}"
-    # puts "Retry ##{retries}"
+    visit TestState.last_page if TestState.last_page && refresh_on_fail
     sleep(timeout * timeout)
     retry
   end
@@ -84,7 +83,7 @@ end
 def emails_to(email_address, subject = nil)
   ActionMailer::Base.deliveries.select do |mail|
     mail.to.include?(email_address) &&
-      (subject.nil? || mail.subject.downcase =~ /#{Regexp.escape(subject.downcase)}/)
+      (subject.nil? || mail.subject.downcase.include?(subject.downcase))
   end
 end
 

@@ -23,6 +23,7 @@ Then /^(?:I )?should be on (?:the |an? | my)?(.+) page$/i do |page_name|
   sleep(1)
   attempt_to do
     path = path_to(page_name)
+    TestState.last_page = path
     path = /(https?\/\/:[^\/]+)?#{Regexp.escape(path)}\/?(\?|#|$)/ unless path.is_a?(Regexp)
     begin
       current_url.should match path
@@ -33,7 +34,6 @@ Then /^(?:I )?should be on (?:the |an? | my)?(.+) page$/i do |page_name|
           visit page.driver.network_traffic.last.url
         end
       else
-        puts "#{page.driver.network_traffic.last.method} #{page.driver.network_traffic.last.url} (#{page.driver.network_traffic.last.response_parts.first.status}) != #{path}"
         raise e
       end
     end
