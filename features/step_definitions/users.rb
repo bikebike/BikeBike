@@ -19,10 +19,8 @@ Given /^(?:I )?(?:am logged|log) in(?: as '(.+)')?$/i do |email|
     rescue Capybara::Poltergeist::TimeoutError
     end
 
-    begin
+    attempt_to true do
       expect(page).to have_link TestState.my_account.name
-    rescue
-      fail "Error logging in"
     end
   end
 end
