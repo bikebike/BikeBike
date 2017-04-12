@@ -21,8 +21,7 @@ Feature: Workshops
     And check 'Meeting Room'
     And click the 'Save' button
 
-    Then I should be on my workshop page
-    And I should see 'Funding'
+    Then I should see 'Funding'
     And should see 'Projector'
     And see my title
     And see my info
@@ -150,15 +149,13 @@ Feature: Workshops
     And I should see 'Hadrian Requested'
 
     When I click the 'Deny' button beside 'Spartacus'
-    Then I should be on my workshop page
-    And I should see 'Saladin'
+    Then I should see 'Saladin'
     And I should see 'Hadrian'
     But I should not see 'Spartacus'
     And 'Spartacus' should get a 'Your request to facilitate ‘Sturmey Archer Hub Repair’ has been denied' email
 
     When I click the 'Approve' button beside 'Saladin'
-    Then I should be on my workshop page
-    And I should see 'Saladin Collaborator'
+    Then I should see 'Saladin Collaborator'
     And 'Saladin' should get a 'You have been added as a facilitator of ‘Sturmey Archer Hub Repair’' email
 
     When I click the 'Approve' button beside 'Hadrian'

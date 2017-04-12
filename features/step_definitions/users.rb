@@ -14,7 +14,10 @@ Given /^(?:I )?(?:am logged|log) in(?: as '(.+)')?$/i do |email|
     end
 
     first(selector_for('email')).set(TestState.my_account.email)
-    first('#token + button[type="submit"]').click
+    begin
+      first('.flex-form button').click
+    rescue Capybara::Poltergeist::TimeoutError
+    end
 
     begin
       expect(page).to have_link TestState.my_account.name

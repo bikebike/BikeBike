@@ -15,7 +15,7 @@ Feature: Sign In
     And I should get a 'confirmation' email
 
     When I click on the 'Confirm' link in the email
-    Then I should be on the settings page
+    Then I should see 'Your Account'
     Then I should not see a 'My registration' link
 
   Scenario: Sign in from the settings page
@@ -30,7 +30,7 @@ Feature: Sign In
     And I should get a 'confirmation' email
 
     When I click on the 'Confirm' link in the email
-    Then I should be on the settings page
+    Then I should see 'Your Account'
 
   Scenario: Users can sign in in different sessions
     Given there is an upcoming conference in 'Brooklyn NY'
@@ -40,9 +40,7 @@ Feature: Sign In
     And I enter my email
     And press confirm_email
 
-
-    Then I should be on the do_confirm page
-    And I should get a 'confirmation' email
+    Then I should get a 'confirmation' email
     
     Then in a new session
     When I click on the 'Confirm' link in the email
@@ -51,6 +49,7 @@ Feature: Sign In
     And click the 'Sign In' button
     
     Then I should be on the settings page
+    And I should see 'Your Account'
 
   Scenario: A registration link should be accessible for registered users
     Given there is an upcoming conference in 'Brooklyn NY'
@@ -76,11 +75,10 @@ Feature: Sign In
     But my facebook account has no email address
 
     When I log in with facebook
-    Then I should be on the oauth_update page
-    And I should see 'Before proceeding, you must provide us an email address'
+    Then I should see 'Before proceeding, you must provide us an email address'
 
     When I enter my email address
     And press save
-    Then I should be on the home page
-    And I should see 'Mark Zuckerberg'
+
+    Then I should see 'Mark Zuckerberg'
     And I should see 'Sign out'
