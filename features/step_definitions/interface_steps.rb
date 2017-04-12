@@ -33,7 +33,10 @@ Then /^(?:I )?click (?:on )?(?:the )?(a )?'(.+?)'( button| link)?(?: beside '(.+
       else
         element = element_with_text(item, root_item)
       end
-      element.click
+      begin
+        element.click
+      rescue Capybara::Poltergeist::TimeoutError
+      end
     rescue Exception => e
       puts text
       raise e

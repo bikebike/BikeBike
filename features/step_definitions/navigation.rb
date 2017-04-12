@@ -20,10 +20,23 @@ Given /^(?:(?:I )?am )?on an? (.+) error page$/i do |page_name|
 end
 
 Then /^(?:I )?should be on (?:the |an? | my)?(.+) page$/i do |page_name|
+  sleep(1)
   attempt_to do
     path = path_to(page_name)
     path = /(https?\/\/:[^\/]+)?#{Regexp.escape(path)}\/?(\?|#|$)/ unless path.is_a?(Regexp)
-    current_url.should match path
+    begin
+      current_url.should match path
+    rescue Exception => e
+      # due to a bug in phantomjs 2.5-development, sometimes postbacks don't work properly, this is a workaround
+      if page.driver.network_traffic.last.url =~ path && page.driver.network_traffic.last.method =~ /^get$/i && page.driver.network_traffic.last.response_parts.present? && page.driver.network_traffic.last.response_parts.first.status == 200
+        attempt_to do
+          visit page.driver.network_traffic.last.url
+        end
+      else
+        puts "#{page.driver.network_traffic.last.method} #{page.driver.network_traffic.last.url} (#{page.driver.network_traffic.last.response_parts.first.status}) != #{path}"
+        raise e
+      end
+    end
   end
 end
 

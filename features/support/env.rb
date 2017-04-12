@@ -24,7 +24,7 @@ Capybara.register_driver :bb_poltergeist do |app|
   end
 
   opts = {
-    timeout: 10,
+    timeout: 60,
     window_size: [1200, 800]
   }
   Capybara::Poltergeist::Driver.new(app, opts)
@@ -40,8 +40,9 @@ end
 Before do
   TestState.reset!
   safari5 = "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; de-at) AppleWebKit/533.21.1 (KHTML, like Gecko) Version/5.0.5 Safari/533.21.1"
+  safari9 = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/9.3.2 Safari/537.75.14"
   chrome55 = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36"
-  ActionDispatch::Request.any_instance.stubs(:user_agent).returns(safari5)
+  ActionDispatch::Request.any_instance.stubs(:user_agent).returns(safari9)
   LinguaFranca.test_driver = page.driver
   host = "http://#{Capybara.current_session.server.host}:#{Capybara.current_session.server.port}"
   LinguaFranca.host = host
