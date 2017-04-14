@@ -17,7 +17,7 @@ before_script:
   - bundle exec rake bumbleberry:update
   - bundle exec rake assets:precompile
   - bundle exec rake db:test:prepare
-script: bundle exec rake i18n
+script: bundle exec cucumber
 env: RAILS_ENV=test
 dist: trusty
 sudo: required
