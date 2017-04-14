@@ -136,13 +136,13 @@ fr:
     dz: dzongkha
     dzg: dazaga
     ebu: embou
-    ee: éwé
-    efi: éfik
-    egl: émilien
-    egy: égyptien ancien
-    eka: ékadjouk
+    ee: "éwé"
+    efi: "éfik"
+    egl: "émilien"
+    egy: "égyptien ancien"
+    eka: "ékadjouk"
     el: grec
-    elx: élamite
+    elx: "élamite"
     en: anglais
     en-AU: anglais australien
     en-CA: anglais canadien
@@ -159,7 +159,7 @@ fr:
     esu: youpik central
     et: estonien
     eu: basque
-    ewo: éwondo
+    ewo: "éwondo"
     ext: estrémègne
     fa: persan
     fan: fang
@@ -477,7 +477,7 @@ fr:
     sbp: sangu
     sc: sarde
     scn: sicilien
-    sco: écossais
+    sco: "écossais"
     sd: sindhi
     sdc: sarde sassarais
     sdh: kurde du Sud
@@ -623,7 +623,7 @@ fr:
   geography:
     countries:
       AD: Andorre
-      AE: Émirats Arabes Unis
+      AE: "Émirats Arabes Unis"
       AF: Afghanistan
       AG: Antigua et Barbuda
       AI: Anguilla
@@ -636,7 +636,7 @@ fr:
       AT: Autriche
       AU: Australie
       AW: Aruba
-      AX: Îles Åland
+      AX: "Îles Åland"
       AZ: Azerbaïdjan
       BA: Bosnie-Herzégovine
       BB: Barbade
@@ -655,18 +655,18 @@ fr:
       BR: Brésil
       BS: Bahamas
       BT: Bhutan
-      BV: Île Bouvet
+      BV: "Île Bouvet"
       BW: Botswana
       BY: Biélorussie
       BZ: Belize
       CA: Canada
-      CC: Îles Cocos
+      CC: "Îles Cocos"
       CD: RDC
       CF: Centrafrique
       CG: Congo-Brazzaville
       CH: Suisse
       CI: Côte d'Ivoire
-      CK: Îles Cook
+      CK: "Îles Cook"
       CL: Chili
       CM: Cameroun
       CN: Chine
@@ -675,7 +675,7 @@ fr:
       CU: Cuba
       CV: Cap-Vert
       CW: Curaçao
-      CX: Île Christmas
+      CX: "Île Christmas"
       CY: Chypre
       CZ: République tchèque
       DE: Allemagne
@@ -684,18 +684,18 @@ fr:
       DM: Dominique
       DO: République Dominicaine
       DZ: Algérie
-      EC: Équateur
+      EC: "Équateur"
       EE: Estonie
-      EG: Égypte
+      EG: "Égypte"
       EH: Sahara Occidental
-      ER: Érythrée
+      ER: "Érythrée"
       ES: Espagne
-      ET: Éthiopie
+      ET: "Éthiopie"
       FI: Finlande
       FJ: Fidji
-      FK: Îles Malouines
+      FK: "Îles Malouines"
       FM: Micronésie
-      FO: Îles Féroé
+      FO: "Îles Féroé"
       FR: France
       GA: Gabon
       GB: Royaume-Uni
@@ -717,7 +717,7 @@ fr:
       GW: Guinée-Bissau
       GY: Guyana
       HK: Hong Kong
-      HM: Île Heard et îles McDonald
+      HM: "Île Heard et îles McDonald"
       HN: Honduras
       HR: Croatie
       HT: Haïti
@@ -725,7 +725,7 @@ fr:
       ID: Indonésie
       IE: Irlande
       IL: Israël
-      IM: Île de Man
+      IM: "Île de Man"
       IN: Inde
       IO: Territoire britannique de l'océan Indien
       IQ: Irak
@@ -745,7 +745,7 @@ fr:
       KP: Corée du Nord
       KR: Corée du Sud
       KW: Koweït
-      KY: Îles Caïmans
+      KY: "Îles Caïmans"
       KZ: Kazakhstan
       LA: Laos
       LB: Liban
@@ -764,13 +764,13 @@ fr:
       ME: Monténégro
       MF: Saint-Martin
       MG: Madagascar
-      MH: Îles Marshall
+      MH: "Îles Marshall"
       MK: Macédoine
       ML: Mali
       MM: Myanmar
       MN: Mongolie
       MO: Macao
-      MP: Îles Mariannes du Nord
+      MP: "Îles Mariannes du Nord"
       MQ: Martinique
       MR: Mauritanie
       MS: Montserrat
@@ -784,7 +784,7 @@ fr:
       NA: Namibie
       NC: Nouvelle-Calédonie
       NE: Niger
-      NF: Île Norfolk
+      NF: "Île Norfolk"
       NG: Nigeria
       NI: Nicaragua
       NL: Pays-Bas
@@ -815,7 +815,7 @@ fr:
       RU: Russie
       RW: Rwanda
       SA: Arabie saoudite
-      SB: Îles Salomon
+      SB: "Îles Salomon"
       SC: Seychelles
       SD: Soudan
       SE: Suède
@@ -835,7 +835,7 @@ fr:
       SX: Saint-Martin
       SY: Syrie
       SZ: Swaziland
-      TC: Îles Turques-et-Caïques
+      TC: "Îles Turques-et-Caïques"
       TD: Tchad
       TF: Terres australes françaises
       TG: République Togolaise
@@ -853,15 +853,15 @@ fr:
       TZ: Tanzanie
       UA: Ukraine
       UG: Ouganda
-      UM: Îles mineures éloignées des États-Unis
-      US: États-Unis
+      UM: "Îles mineures éloignées des États-Unis"
+      US: "États-Unis"
       UY: Uruguay
       UZ: Ouzbékistan
       VA: Vatican
       VC: Saint-Vincent-et-les Grenadines
       VE: Vénézuéla
-      VG: Îles Vierges
-      VI: Îles Vierges des États-Unis
+      VG: "Îles Vierges"
+      VI: "Îles Vierges des États-Unis"
       VN: Vietnam
       VU: Vanuatu
       WF: Wallis-et-Futuna
@@ -947,7 +947,7 @@ fr:
         NS: Nouvelle-Écosse
         NU: Nunavut
         'ON': Ontario
-        PE: Île-du-Prince-Édouard
+        PE: "Île-du-Prince-Édouard"
         QC: Québec
         SK: Saskatchewan
         YT: Yukon
@@ -965,37 +965,37 @@ fr:
       IT:
         FVG: Frioul-Vénétie julienne
       MX:
-        Ags: État d'Aguascalientes
+        Ags: "État d'Aguascalientes"
         BCS: Basse-Californie du Sud
-        CAM: État de Campeche
+        CAM: "État de Campeche"
         CHP: Chiapas
-        CH: État de Chihuahua
+        CH: "État de Chihuahua"
         COA: Coahuila
-        COL: État de Colima
-        DUR: État de Durango
+        COL: "État de Colima"
+        DUR: "État de Durango"
         BCN: Basse-Californie du Nord
         MEX: Estado de México
-        Gto: État de Guanajuato
+        Gto: "État de Guanajuato"
         GRO: Guerrero
-        Hgo: État dHidalgo
+        Hgo: "État dHidalgo"
         JAL: Jalisco
         MIC: Michoacán
         MOR: Morelos
         NAY: Nayarit
         NLE: Nuevo León
-        OAX: État de Oaxaca
-        PUE: État de Puebla
+        OAX: "État de Oaxaca"
+        PUE: "État de Puebla"
         Qro: Querétaro de Arteaga
         QRoo: Quintana Roo
-        SLP: État de San Luis Potosí
+        SLP: "État de San Luis Potosí"
         SIN: Sinaloa
         SON: Sonora
         TAB: Tabasco
         TAM: Tamaulipas
-        Tlax: État de Tlaxcala
+        Tlax: "État de Tlaxcala"
         VER: Veracruz
         YUC: Yucatán
-        ZAC: État de Zacatecas
+        ZAC: "État de Zacatecas"
       MY:
         JHR: Johor
         KDH: Kedah
@@ -1096,3 +1096,85 @@ fr:
           d’ateliers de vélos et d’organismes revendicateurs connexes de se rencontrer
           pendant quatre jours dans une différente ville à chaque année afin de suivre
           des formations et de faire du réseautage.
+        bicycle_project_paragraph: Il y a des collectifs qui utilisent le vélo comme
+          excuse pour changer la société, l’économie et l’environnement. Il y a aussi
+          des organismes à but non lucratif, des coopératives et d’autres projets
+          qui font la promotion de l’utilisation du vélo. Ce sont tous ceux et toutes
+          celles qui se rassemblent afin de transformer leur communauté pour que le
+          cyclisme devienne plus facile, plus inclusif, plus sécuritaire et plus amusant.
+          La liste de critères pour un projet de vélo est tirée de  l’ancien Bicycle
+          Organization Project. Votre projet n’a pas besoin de satisfaire tous les
+          critères. C’est plutôt une liste générale de caractéristiques communes parmi
+          les projets de vélo.
+        Who_is_Invited: Vous n’avez pas besoin d’être experte ni d’appartenir à un
+          gros organisme. Vous avez seulement qu’à avoir la volonté de partager ce
+          que vous savez au sujet de la gestion, la mécanique, l’impact social, la
+          lutte contre l’inégalité et l’accessibilité au cyclisme dans votre communauté.
+        Types_of_Workshops: 'Les formations sont organisées par les participants.es.
+          Les sujets inclus tous ce qui concerne les projets de vélo communautaires.
+          Les formations peuvent prendre toutes formes : des présentations, des ateliers
+          interactifs, des groupes de discussion ou des randonnées à vélo. Si vous
+          voulez offrir une formation, vous pouvez le faire en vous inscrivant. Ce
+          sont les hôtes du congrès qui ont le dernier mot sur les sujets et l’horaire
+          des formations.'
+        Amenities: Habituellement, les hôtes du congrès organisent de l’hébergement
+          partagés, un ou deux repas par jour et un vélo est disponible pour chaque
+          participant.e inscrit.e. Par contre, vous devriez vérifier les détails du
+          congrès, afin de confirmer les détails spécifique à celui ci. Si vous désirez
+          savoir comment vous pourrez organiser votre propre hébergement et connaître
+          d’autres endroits à visiter, il y aura plus d’information sur la page du
+          congrès ou, sinon, elle sera disponible en format papier lors de votre arrivée.
+        Volunteer: Oui, bien sûr!
+      headings:
+        What_is_BikeBike: C’est quoi Bike!Bike!?
+        bicycle_project: C’est quoi un projet de vélo communautaire?
+        Who_is_Invited: Qui est invité?
+        Types_of_Workshops: Quelles formations va-t-il y avoir?
+        Amenities: Où vais-je dormir? Que vais-je manger? Comment vais-je me déplacer?
+        Volunteer: Puis-je être bénévole?
+      term:
+        non_profit: Des ateliers de vélo qui sont accessibles aux gens qui n’ont pas
+          d’argent
+        no_money: Des organismes qui recyclent des vélos et des pièces de vélo
+        education: Des ateliers qui priorisent l’éducation; enseigner aux autres comment
+          réparer leur vélo
+        volunteer_run: Des ateliers qui sont menés par une équipe de bénévoles
+        export_bikes: Des organismes qui envoient des vélos à des communautés dans
+          d’autres pays
+        low_cost: Des ateliers qui fournissent des services gratuits ou à faible coût
+          à la communauté
+        recycle_parts: Des organismes de vélo à but non lucratif
+    conference_registration:
+      headings:
+        policy: Politique
+        Policy_Agreement: Accord d’espace positif
+    policy:
+      headings:
+        The_Agreement: L’Accord
+      term:
+        commitment: Nous sommes engagés envers le respect mutuel, l’aide mutuelle,
+          la revendication de l’anti-oppression, la résolution de conflit, la non
+          violence  et le renforcement des communautés.
+        respect: Nous respectons le nom de tous le monde, leur genre, leur pronom
+          et l’expression de  leur identité et de leurs expériences.
+        empowerment: Nous encourageons chaque personne et chaque groupe pour qu’il
+          ou elle devienne autonome.
+        accessible: 'Nous sommes engagés à assurer, autant que possible, l’accessibilité
+          à l’espace; physiquement, socialement et personnellement. '
+        peaceful: Nous sommes paisibles et honnêtes.
+        spaces: Nous respectons le corps et l’espace de chacun.e.
+        hearing: Nous sommes engagés à s’écouter l’un.e l’autre et de créer des occasions
+          pour que toutes les voix soient entendues.
+        intent: Nous acceptons une responsabilité partagée et nous sommes redevables
+          nous-mêmes ainsi que l’un.e envers l’autre afin de défendre l’intention
+          de cet accord.
+        open_minds: Nous encourageons l’esprit ouvert et le cœur ouvert.
+        learning: Dans une optique de croissance personnelle, nous faisons la promotion
+          d’espaces d’apprentissages inclusifs et nous encourageons les questions.
+  page_titles:
+    About: "À propos"
+    about:
+      About_BikeBike: Au sujet de Bike!Bike!
+    Policy: Politique
+    policy:
+      Safer_Spaces_Policy: Accord d’espace positif
