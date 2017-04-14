@@ -9,8 +9,9 @@ before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
   # consider dumping sql via db:structure:dump then loading directly into psql
   # "psql -U postgres -q -d DB_NAME -f db/structure.sql"
+  - bundle exec rake assets:precompile
   - bundle exec rake db:test:prepare
-script: bundle exec cucumber
+script: bundle exec rake i18n
 env: RAILS_ENV=test
 dist: trusty
 sudo: required
