@@ -46,4 +46,3 @@ Feature: Landing Page
     Then I should see 'Brooklyn'
     But I should not see 'Portland'
     And I should not see 'Prince Rupert'
-

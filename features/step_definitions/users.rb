@@ -14,13 +14,12 @@ Given /^(?:I )?(?:am logged|log) in(?: as '(.+)')?$/i do |email|
     end
 
     first(selector_for('email')).set(TestState.my_account.email)
-    begin
-      first('.flex-form button').click
-    rescue Capybara::Poltergeist::TimeoutError
-    end
+    first('#token + button[type="submit"]').click
 
-    attempt_to true do
+    begin
       expect(page).to have_link TestState.my_account.name
+    rescue
+      fail "Error logging in"
     end
   end
 end

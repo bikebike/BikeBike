@@ -11,18 +11,14 @@ Then /^(?:I )?(?:should )?(not )?see (?:the |an? )?'(.+)' link$/i do |no, item|
 end
 
 Then /^(?:I )?(?:should )?(?:still )?(not )?see '(.+)'$/i do |negate, item|
-  attempt_to true do
-    attempt_to do
-      expect(page).send(negate ? :not_to : :to, have_text(item))
-    end
+  attempt_to do
+    expect(page).send(negate ? :not_to : :to, have_text(item))
   end
 end
 
 Then /^(?:I )?(?:should )?(?:still )?(not )?see (?:my |the )([^']+)$/i do |negate, item|
-  attempt_to true do
-    attempt_to do
-      expect(page).send(negate ? :not_to : :to, have_text(TestState::Values[get_field(item)]))
-    end
+  attempt_to do
+    expect(page).send(negate ? :not_to : :to, have_text(TestState::Values[get_field(item)]))
   end
 end
 
@@ -37,10 +33,7 @@ Then /^(?:I )?click (?:on )?(?:the )?(a )?'(.+?)'( button| link)?(?: beside '(.+
       else
         element = element_with_text(item, root_item)
       end
-      begin
-        element.click
-      rescue Capybara::Poltergeist::TimeoutError
-      end
+      element.click
     rescue Exception => e
       puts text
       raise e
@@ -118,7 +111,7 @@ Then /^(?:I )?enter (?:my |an? |some |the )?(.+?)(?: as '(.+)')?$/i do |field, v
     end
   end
 
-  TestState::Values[field] = value
+ (TestState::Values[field] = value)
 
   element.set value
 
