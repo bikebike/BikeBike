@@ -6,7 +6,7 @@
       "chrome": ["55"]
     },
     "development": {
-      "safari": ["5"],
+      "safari": ["5", "5.1"],
       "and_chr": ["57"],
       "chrome": ["57"],
       "edge": ["13"],

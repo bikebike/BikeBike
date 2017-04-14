@@ -4859,8 +4859,10 @@ html[data-ontop] {
         }
 
         .github {
-            @include _(flex, none);
-            @include _(flex-basis, auto);
+            @if capable_of(flexbox, true) {
+                @include _(flex, none);
+                @include _(flex-basis, auto);
+            }
             margin: 0 1em;
         }
         .facebook, .external {
@@ -4882,6 +4884,19 @@ html[data-ontop] {
             @include _(flex-grow, 1);
             margin: 0 0 0 2em;
             text-align: left;
+        }
+
+        @if not capable_of(flexbox, true) {
+            margin-top: 5em;
+
+            .external {
+                float: left;
+            }
+
+            .site-info {
+                float: right;
+                margin-top: -3.5em;
+            }
         }
     }
 
