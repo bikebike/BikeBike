@@ -12,3 +12,5 @@ before_script:
   - bundle exec rake db:test:prepare
 script: bundle exec cucumber
 env: RAILS_ENV=test
+dist: trusty
+sudo: required
