@@ -288,7 +288,7 @@ Feature: Workshops
 
     When I enter my title as 'Horas de las mujeres y de los transexuales'
     And enter some info
-    And click the 'Save' button
+    And press save
 
     Then the Spanish workshop title should be 'Horas de las mujeres y de los transexuales'
     And I should see 'Women and Transgender shop hours'

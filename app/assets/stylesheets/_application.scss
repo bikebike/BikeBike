@@ -1846,7 +1846,13 @@ ul.warnings {
     @include font-family(secondary);
 
     ul {
-        @include _-(display, flex);
+        @if not capable_of(flexbox, true) {
+            display: table;
+            width: 100%;
+        }
+        @if capable_of(flexbox, true) {
+            @include _-(display, flex);
+        }
         list-style: none;
         margin: 2em 2em 5em 0;
         padding: 0;
@@ -1854,7 +1860,12 @@ ul.warnings {
 
     li {
         position: relative;
-        @include _(flex, 1);
+        @if not capable_of(flexbox, true) {
+            display: table-cell;
+        }
+        @if capable_of(flexbox, true) {
+            @include _(flex, 1);
+        }
         padding-top: 1.5em;
 
         @include after {
@@ -4891,11 +4902,12 @@ html[data-ontop] {
 
             .external {
                 float: left;
+                margin-top: 2.25em;
             }
 
-            .site-info {
-                float: right;
-                margin-top: -3.5em;
+            .user-controls {
+                float: left;
+                margin-top: 2.5em;
             }
         }
     }
