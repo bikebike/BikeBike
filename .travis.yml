@@ -11,6 +11,7 @@ before_install:
   - "phantomjs --version"
   - "gem update --system"
   - "gem --version"
+  - "gem install bundler"
 before_script:
   - cp config/database.yml.travis config/database.yml
   - psql -c 'create database travis_ci_test;' -U postgres
