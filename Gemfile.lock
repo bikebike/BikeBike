@@ -575,7 +575,7 @@ DEPENDENCIES
   meta_request
   mini_magick
   mocha
-  nokogiri (~> 1.6.8.rc2)
+  nokogiri
   paypal-express!
   pg
   poltergeist
