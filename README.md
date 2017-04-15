@@ -7,7 +7,7 @@
 
 This is the repository for the Bike!Bike! website. It can be found in development at [preview.bikebike.org](https://preview-en.bikebike.org/) and in production at [bikebike.org](https://bikebike.org/)
 
-Feel free to clone or fork the repository any time to start working on new features or fixes. To get help create an issue or contact Godwin: `goodgodwin``@``hotmail.com` any time.
+Feel free to clone or fork the repository any time to start working on new features or fixes. To get help create an issue or contact Godwin: `goodgodwin` `@` `hotmail.com` any time.
 
 ## Technologies ##
 
@@ -26,6 +26,12 @@ Feel free to clone or fork the repository any time to start working on new featu
 
 ## Internal Gems ##
 We will make a commitment to extract any functionality that makes sense to do so, into separate gems in order to share functionality with others, with our other projects (such as bikecollectives.org), and to enable easier collaboration amongst ourselves.
+
+It is recommended that you at least use also clone `bikecollectives_core` into you workspace. To override the gem location execute:
+
+```bash
+bundle config local.bikecollectives_core PATH_TO/bikecollectives_core
+```
 
 Here is a list of the gems we have created so far, if you are a collaborator on this project you may need to become a collaborator on these gems as well. Don't hesitate to make a request, it won't be denied:
 
