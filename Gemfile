@@ -8,7 +8,7 @@ gem 'ruby_dep', '1.3.1' # Lock at 1.3.1 since 1.4 requires ruby 2.5. We should u
 gem 'rack-mini-profiler'
 
 gem 'haml'
-gem 'nokogiri', '~> 1.6.8.rc2'
+gem 'nokogiri'
 
 gem 'tzinfo-data'
 gem 'sass'
