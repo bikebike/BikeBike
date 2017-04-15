@@ -25,32 +25,15 @@ gem 'sidekiq'
 gem 'letter_opener'
 gem 'launchy'
 
-if Dir.exists?('../lingua_franca')
-  gem 'lingua_franca', path: '../lingua_franca'
-else
-  gem 'lingua_franca', git: 'https://github.com/lingua-franca/lingua_franca.git', branch: '2017'
-end
-
-if Dir.exists?('../marmara')
-  gem 'marmara', path: '../marmara'
-else
-  gem 'marmara', git: 'https://github.com/lingua-franca/marmara.git'
-end
-
-if Dir.exists?('../bikecollectives_core')
-  gem 'bikecollectives_core', path: '../bikecollectives_core'
-else
-  gem 'bikecollectives_core', git: 'https://github.com/bikebike/bikecollectives_core.git'
-end
-
-if Dir.exists?('../bumbleberry')
-  gem 'bumbleberry', path: '../bumbleberry'
-else
-  gem 'bumbleberry', git: 'https://github.com/bumbleberry/bumbleberry.git', branch: '2017'
-end
-
-
-# gem 'paper_trail', '~> 3.0.5'
+# Bike Collectives gems, when developing locally execute:
+#   bundle config local.bikecollectives_core ../bikecollectives_core
+#   bundle config local.bumbleberry ../bumbleberry
+#   bundle config local.lingua_franca ../lingua_franca
+#   bundle config local.marmara ../marmara
+gem 'bikecollectives_core', git: 'https://github.com/bikebike/bikecollectives_core.git', branch: 'master'
+gem 'bumbleberry', git: 'https://github.com/bumbleberry/bumbleberry.git', branch: '2017'
+gem 'lingua_franca', git: 'https://github.com/lingua-franca/lingua_franca.git', branch: '2017'
+gem 'marmara', git: 'https://github.com/lingua-franca/marmara.git', branch: 'master'
 
 # Bike!Bike! specific stuff
 gem 'paypal-express', git: 'https://github.com/ianfleeton/paypal-express'
