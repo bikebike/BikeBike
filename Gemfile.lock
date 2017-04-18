@@ -63,7 +63,7 @@ GIT
 
 GIT
   remote: https://github.com/lingua-franca/lingua_franca.git
-  revision: 5f08b59827caf2f3e55152f65a942b92fcb3a601
+  revision: 618d704de71f50cc706c1c073a7f702765c931ac
   branch: 2017
   specs:
     lingua_franca (0.0.1)
@@ -258,8 +258,8 @@ GEM
     glib2 (3.1.1-x86-mingw32)
       cairo (>= 1.12.8)
       pkg-config
-    globalid (0.3.7)
-      activesupport (>= 4.1.0)
+    globalid (0.4.0)
+      activesupport (>= 4.2.0)
     gobject-introspection (3.1.1-x86-mingw32)
       glib2 (= 3.1.1)
     guard (2.14.1)
@@ -336,7 +336,7 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (4.1.0)
     netrc (0.11.0)
-    nokogiri (1.6.8.1-x86-mingw32)
+    nokogiri (1.7.1-x86-mingw32)
       mini_portile2 (~> 2.1.0)
     notiffany (0.1.1)
       nenv (~> 0.1)

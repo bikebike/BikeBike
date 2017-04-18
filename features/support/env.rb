@@ -11,7 +11,7 @@ DatabaseCleaner.strategy = :truncation, { except: %w[cities city_cache] }
 Capybara.register_driver :bb_poltergeist do |app|
   if ENV['CSS_TEST']
     Marmara.options = {
-        ignore: [/paypal\./],
+        ignore: [/paypal(?:objects)?/, 'assets.css'],
         rewrite: {
           from: /^.*\/(.*?)\/.*?\.css$/,
           to: '\1.css'

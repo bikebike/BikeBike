@@ -2,22 +2,30 @@
 module I18nHelper
   def url_for_locale(locale, url = nil)
     return url unless locale.present?
-
-    unless url.present?
-      new_params = params.merge({action: (params[:_original_action] || params[:action])})
-      new_params.delete(:_original_action)
-
-      if Rails.env.development? || Rails.env.test?
-        return url_for(new_params.merge({lang: locale.to_s}))
-      end
-    
-      subdomain = Rails.env.preview? ? "preview-#{locale.to_s}" : locale.to_s
-      return url_for(new_params.merge(host: "#{subdomain}.bikebike.org"))
-    end
+    url ||= current_path
 
     return url if Rails.env.development? || Rails.env.test?
     return "https://preview-#{locale.to_s}.bikebike.org#{url}" if Rails.env.preview?
     "https://#{locale.to_s}.bikebike.org#{url}"
+  end
+
+  def current_path
+    new_params = params.merge({action: (params[:_original_action] || params[:action])})
+    new_params.delete(:_original_action)
+
+    if Rails.env.development? || Rails.env.test?
+      return url_for(new_params.merge({lang: locale.to_s}))
+    end
+  
+    subdomain = Rails.env.preview? ? "preview-#{locale.to_s}" : locale.to_s
+    url_for(new_params.merge(host: "#{subdomain}.bikebike.org"))
+  end
+
+  def canonical_url
+    url = current_path
+    return url if Rails.env.development? || Rails.env.test?
+    return "https://preview.bikebike.org#{url}" if Rails.env.preview?
+    "https://bikebike.org#{url}"
   end
 
   def date(date, format = :long)

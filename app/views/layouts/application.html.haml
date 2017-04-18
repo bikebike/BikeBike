@@ -12,6 +12,7 @@
     %link{ href: asset_path(@favicon), rel: 'icon', type: 'image/x-icon' }
     - @alt_lang_urls.each do |locale, url|
       %link{ rel: :alternate, hreflang: locale, href: url }
+    %link{ href: canonical_url, rel: :canonical }
     - if content_for?(:og_image)
       - og_image = yield :og_image
       - og_image = request.base_url + og_image
@@ -80,5 +81,6 @@
             %a.more-details.button{href: '#'}=_'articles.workshops.info.read_more'
             %button.close-btn.subdued=_'forms.actions.generic.close'
     = yield :footer_scripts if content_for?(:footer_scripts)
+    = javascripts
     = inline_scripts
     = emit_js_translations

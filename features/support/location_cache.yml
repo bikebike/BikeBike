@@ -49,3 +49,455 @@ Brooklyn NY: !ruby/object:Geocoder::Result::Google
     - sublocality
     - sublocality_level_1
   cache_hit: 
+Yellowknife: !ruby/object:Geocoder::Result::Google
+  data:
+    address_components:
+    - long_name: Yellowknife
+      short_name: Yellowknife
+      types:
+      - locality
+      - political
+    - long_name: Fort Smith, Unorganized
+      short_name: Fort Smith, Unorganized
+      types:
+      - administrative_area_level_3
+      - political
+    - long_name: Fort Smith Region
+      short_name: Fort Smith Region
+      types:
+      - administrative_area_level_2
+      - political
+    - long_name: Northwest Territories
+      short_name: NT
+      types:
+      - administrative_area_level_1
+      - political
+    - long_name: Canada
+      short_name: CA
+      types:
+      - country
+      - political
+    - long_name: X0E
+      short_name: X0E
+      types:
+      - postal_code
+      - postal_code_prefix
+    formatted_address: Yellowknife, NT X0E, Canada
+    geometry:
+      bounds:
+        northeast:
+          lat: 62.5412576
+          lng: -114.299678
+        southwest:
+          lat: 62.4084661
+          lng: -114.518312
+      location:
+        lat: 62.4539717
+        lng: -114.3717886
+      location_type: APPROXIMATE
+      viewport:
+        northeast:
+          lat: 62.5412577
+          lng: -114.299678
+        southwest:
+          lat: 62.4084945
+          lng: -114.518312
+    place_id: ChIJyYJGoyzx0VMRge9xQyQ3wbQ
+    types:
+    - locality
+    - political
+  cache_hit: 
+New Orleans: !ruby/object:Geocoder::Result::Google
+  data:
+    address_components:
+    - long_name: New Orleans
+      short_name: New Orleans
+      types:
+      - locality
+      - political
+    - long_name: Orleans Parish
+      short_name: Orleans Parish
+      types:
+      - administrative_area_level_2
+      - political
+    - long_name: Louisiana
+      short_name: LA
+      types:
+      - administrative_area_level_1
+      - political
+    - long_name: United States
+      short_name: US
+      types:
+      - country
+      - political
+    formatted_address: New Orleans, LA, USA
+    geometry:
+      bounds:
+        northeast:
+          lat: 30.199332
+          lng: -89.625053
+        southwest:
+          lat: 29.8666609
+          lng: -90.14007389999999
+      location:
+        lat: 29.95106579999999
+        lng: -90.0715323
+      location_type: APPROXIMATE
+      viewport:
+        northeast:
+          lat: 30.1748625
+          lng: -89.6269311
+        southwest:
+          lat: 29.86842459999999
+          lng: -90.1380099
+    place_id: ChIJZYIRslSkIIYRtNMiXuhbBts
+    types:
+    - locality
+    - political
+  cache_hit: 
+Drumheller AB: !ruby/object:Geocoder::Result::Google
+  data:
+    address_components:
+    - long_name: Drumheller
+      short_name: Drumheller
+      types:
+      - locality
+      - political
+    - long_name: Division No. 5
+      short_name: Division No. 5
+      types:
+      - administrative_area_level_2
+      - political
+    - long_name: Alberta
+      short_name: AB
+      types:
+      - administrative_area_level_1
+      - political
+    - long_name: Canada
+      short_name: CA
+      types:
+      - country
+      - political
+    formatted_address: Drumheller, AB, Canada
+    geometry:
+      bounds:
+        northeast:
+          lat: 51.488701
+          lng: -112.4530051
+        southwest:
+          lat: 51.3208389
+          lng: -112.806076
+      location:
+        lat: 51.4651847
+        lng: -112.7105343
+      location_type: APPROXIMATE
+      viewport:
+        northeast:
+          lat: 51.488701
+          lng: -112.4530051
+        southwest:
+          lat: 51.3208389
+          lng: -112.806076
+    place_id: ChIJHx_0B4ANc1MRWZCRwItZUUw
+    types:
+    - locality
+    - political
+  cache_hit: 
+Portland OR: !ruby/object:Geocoder::Result::Google
+  data:
+    address_components:
+    - long_name: Portland
+      short_name: Portland
+      types:
+      - locality
+      - political
+    - long_name: Multnomah County
+      short_name: Multnomah County
+      types:
+      - administrative_area_level_2
+      - political
+    - long_name: Oregon
+      short_name: OR
+      types:
+      - administrative_area_level_1
+      - political
+    - long_name: United States
+      short_name: US
+      types:
+      - country
+      - political
+    formatted_address: Portland, OR, USA
+    geometry:
+      bounds:
+        northeast:
+          lat: 45.654424
+          lng: -122.4718489
+        southwest:
+          lat: 45.432393
+          lng: -122.8369952
+      location:
+        lat: 45.5230622
+        lng: -122.6764816
+      location_type: APPROXIMATE
+      viewport:
+        northeast:
+          lat: 45.6524799
+          lng: -122.4718489
+        southwest:
+          lat: 45.432393
+          lng: -122.8369952
+    place_id: ChIJJ3SpfQsLlVQRkYXR9ua5Nhw
+    types:
+    - locality
+    - political
+  cache_hit: 
+Prince Rupert BC: !ruby/object:Geocoder::Result::Google
+  data:
+    address_components:
+    - long_name: Prince Rupert
+      short_name: Prince Rupert
+      types:
+      - locality
+      - political
+    - long_name: Skeena-Queen Charlotte
+      short_name: Skeena-Queen Charlotte
+      types:
+      - administrative_area_level_2
+      - political
+    - long_name: British Columbia
+      short_name: BC
+      types:
+      - administrative_area_level_1
+      - political
+    - long_name: Canada
+      short_name: CA
+      types:
+      - country
+      - political
+    formatted_address: Prince Rupert, BC, Canada
+    geometry:
+      bounds:
+        northeast:
+          lat: 54.338083
+          lng: -130.2437961
+        southwest:
+          lat: 54.19392
+          lng: -130.3634291
+      location:
+        lat: 54.3150367
+        lng: -130.3208187
+      location_type: APPROXIMATE
+      viewport:
+        northeast:
+          lat: 54.3343706
+          lng: -130.2478032
+        southwest:
+          lat: 54.202669
+          lng: -130.3608029
+    place_id: ChIJaUV_axPVclQRElbZTQ_jB3E
+    types:
+    - locality
+    - political
+  cache_hit: 
+Regina, SK: !ruby/object:Geocoder::Result::Google
+  data:
+    address_components:
+    - long_name: Regina
+      short_name: Regina
+      types:
+      - locality
+      - political
+    - long_name: Sherwood No. 159
+      short_name: Sherwood No. 159
+      types:
+      - administrative_area_level_3
+      - political
+    - long_name: Division No. 6
+      short_name: Division No. 6
+      types:
+      - administrative_area_level_2
+      - political
+    - long_name: Saskatchewan
+      short_name: SK
+      types:
+      - administrative_area_level_1
+      - political
+    - long_name: Canada
+      short_name: CA
+      types:
+      - country
+      - political
+    formatted_address: Regina, SK, Canada
+    geometry:
+      bounds:
+        northeast:
+          lat: 50.5207396
+          lng: -104.4924259
+        southwest:
+          lat: 50.3964489
+          lng: -104.7783923
+      location:
+        lat: 50.4452112
+        lng: -104.6188944
+      location_type: APPROXIMATE
+      viewport:
+        northeast:
+          lat: 50.5207396
+          lng: -104.4924259
+        southwest:
+          lat: 50.3964489
+          lng: -104.7783923
+    place_id: ChIJ6z2l-0AeHFMRsVR7t5YySjU
+    types:
+    - locality
+    - political
+  cache_hit: 
+Edmundston, NB: !ruby/object:Geocoder::Result::Google
+  data:
+    address_components:
+    - long_name: Edmundston
+      short_name: Edmundston
+      types:
+      - locality
+      - political
+    - long_name: Madawaska County
+      short_name: Madawaska County
+      types:
+      - administrative_area_level_2
+      - political
+    - long_name: New Brunswick
+      short_name: NB
+      types:
+      - administrative_area_level_1
+      - political
+    - long_name: Canada
+      short_name: CA
+      types:
+      - country
+      - political
+    formatted_address: Edmundston, NB, Canada
+    geometry:
+      bounds:
+        northeast:
+          lat: 47.456634
+          lng: -68.14554509999999
+        southwest:
+          lat: 47.3177789
+          lng: -68.44122399999999
+      location:
+        lat: 47.3690127
+        lng: -68.32667409999999
+      location_type: APPROXIMATE
+      viewport:
+        northeast:
+          lat: 47.456634
+          lng: -68.14554509999999
+        southwest:
+          lat: 47.3183866
+          lng: -68.44122399999999
+    place_id: ChIJuQPKxpipvUwRtNjzmeech34
+    types:
+    - locality
+    - political
+  cache_hit: 
+Souris, MB: !ruby/object:Geocoder::Result::Google
+  data:
+    address_components:
+    - long_name: Souris
+      short_name: Souris
+      types:
+      - locality
+      - political
+    - long_name: Glenwood
+      short_name: Glenwood
+      types:
+      - administrative_area_level_3
+      - political
+    - long_name: Division No. 7
+      short_name: Division No. 7
+      types:
+      - administrative_area_level_2
+      - political
+    - long_name: Manitoba
+      short_name: MB
+      types:
+      - administrative_area_level_1
+      - political
+    - long_name: Canada
+      short_name: CA
+      types:
+      - country
+      - political
+    - long_name: R0K
+      short_name: R0K
+      types:
+      - postal_code
+      - postal_code_prefix
+    formatted_address: Souris, MB R0K, Canada
+    geometry:
+      bounds:
+        northeast:
+          lat: 49.6272052
+          lng: -100.2464522
+        southwest:
+          lat: 49.6061908
+          lng: -100.2774639
+      location:
+        lat: 49.6207985
+        lng: -100.2583026
+      location_type: APPROXIMATE
+      viewport:
+        northeast:
+          lat: 49.6272052
+          lng: -100.2464522
+        southwest:
+          lat: 49.6061908
+          lng: -100.2774639
+    place_id: ChIJjVrTVVh851IRLuGKzGdiUj8
+    types:
+    - locality
+    - political
+  cache_hit: 
+Eldorado, MX: !ruby/object:Geocoder::Result::Google
+  data:
+    address_components:
+    - long_name: Eldorado
+      short_name: Eldorado
+      types:
+      - locality
+      - political
+    - long_name: Sinaloa
+      short_name: Sin.
+      types:
+      - administrative_area_level_1
+      - political
+    - long_name: Mexico
+      short_name: MX
+      types:
+      - country
+      - political
+    formatted_address: Eldorado, Sin., Mexico
+    geometry:
+      bounds:
+        northeast:
+          lat: 24.3379838
+          lng: -107.3476352
+        southwest:
+          lat: 24.3108689
+          lng: -107.3831387
+      location:
+        lat: 24.3240714
+        lng: -107.3584174
+      location_type: APPROXIMATE
+      viewport:
+        northeast:
+          lat: 24.3379838
+          lng: -107.3476352
+        southwest:
+          lat: 24.3108689
+          lng: -107.3831387
+    place_id: ChIJv33Pqm0ho4YRUQ45wKAluZ4
+    types:
+    - locality
+    - political
+  cache_hit: 

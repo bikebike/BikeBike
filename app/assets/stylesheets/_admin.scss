@@ -1,0 +1,1627 @@
+$bumbleberry-no-markup: true;
+
+@import "bumbleberry";
+@import "settings";
+
+nav.sub-nav {
+    text-align: center;
+
+    ul {
+        margin: 0.85em 0;
+        list-style: none;
+        padding: 0;
+    }
+
+    li {
+        display: inline-block;
+
+        @include after {
+            content: '|';
+            margin: 0 0.5em;
+        }
+
+        &:last-child {
+            @include after {
+                display: none;
+            }
+        }
+    }
+}
+
+table, .table {
+    th, td, .table-th, .table-td {
+        &.center {
+            text-align: center;
+        }
+
+        &.big {
+            font-size: 1.5em;
+        }
+
+        &.status {
+            width: 0.1rem;
+            background-color: transparent;
+            border: 0;
+        }
+
+        &.state {
+            background-size: 1.333em;
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 1.75em;
+
+            &.happy {
+                background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 87.8 73.2'><polygon fill='#{$colour-5}' points='34.3 73.2 0 32.6 18.7 16.8 35.4 36.5 70.1 0 87.8 16.8 '/></svg>");
+            }
+
+            &.unhappy {
+                background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path xmlns="http://www.w3.org/2000/svg" d="M50 5C25.1 5 5 25.1 5 50c0 24.9 20.1 45 45 45s45-20.1 45-45C95 25.1 74.9 5 50 5zM72.5 64.3l-8.2 8.2L50 58.2 35.7 72.5l-8.2-8.2L41.8 50 27.5 35.7l8.2-8.2L50 41.8l14.3-14.3 8.2 8.2L58.2 50 72.5 64.3z" fill="#{$colour-4}"/></svg>');
+            }
+        }
+    }
+
+    td, .table-td {
+        &.inner-table {
+            padding: 0;
+
+            table {
+                margin: 0;
+                width: 100%;
+            }
+
+            tr:first-child {
+                td, th {
+                    border-top: 0;
+                }
+            }
+
+            tr:last-child {
+                td, th {
+                    border-bottom: 0;
+                }
+            }
+            
+            td, th {
+                &:first-child {
+                    border-left: 0
+                }
+
+                &:last-child {
+                    border-right: 0
+                }
+            }
+        }
+
+        &.bold {
+            @include font-family(secondary);
+        }
+    }
+
+    tbody th {
+        width: 0.1rem;
+    }
+
+    &.admin-edit {
+        width: 100%;
+    }
+
+    tr.hidden {
+        display: none;
+    }
+
+    tr[data-key] {
+        cursor: cell;
+            
+        &.editable:hover {
+            background-color: lighten($colour-2, 33%);
+        }
+
+        + .editor {
+            display: none;
+            background-color: lighten($colour-1, 50%);
+
+            td {
+                opacity: 0.5;
+
+                &.has-editor {
+                    opacity: 1;
+
+                    @include after {
+                        content: '';
+                        position: absolute;
+                        top: 100%;
+                        right: 0;
+                        left: 0;
+                        height: 0.25em;
+                        background-color: rgba($black, 0.125);
+                    }
+                }
+
+                .cell-editor {
+                    &[type=number]::-webkit-inner-spin-button, 
+                    &[type=number]::-webkit-outer-spin-button { 
+                        -webkit-appearance: none; 
+                    }
+                }
+
+                select.cell-editor {
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    -ms-appearance: none;
+                    appearance: none;
+                    cursor: pointer;
+                }
+
+                &.date .cell-editor {
+                    text-align-last: right;
+                }
+            }
+        }
+
+        + .editor, &.always-edit {
+            td {
+                position: relative;
+                vertical-align: top;
+                background: inherit;
+                cursor: default;
+
+                .cell-editor {
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    padding: inherit;
+                    font: inherit;
+                    margin: inherit;
+                    background: inherit;
+                    border: 0;
+                    min-height: 0;
+                    width: 100% !important;
+                    border-radius: 0;
+                    line-height: inherit;
+                    overflow: hidden;
+                    box-shadow: none;
+                    text-align: inherit;
+                }
+            }
+        }
+        
+        &.always-edit td .cell-editor {
+            position: absolute;
+        }
+
+        &.editing {
+            display: none;
+
+            + .editor {
+                display: table-row;
+
+                .cell-editor {
+                    position: absolute;
+                }
+            }
+        }
+    }
+
+    &.always-editing {
+        tr {
+            cursor: default;
+
+            &:hover {
+                background-color: transparent;
+            }
+        }
+
+        .cell-editor {
+            position: absolute;
+        }
+
+        td.text {
+            height: 5em;
+        }
+    }
+
+    tr.editable, tr.editor {
+        td {
+            white-space: nowrap;
+
+            &.date, &.datetime, &.money, &.number {
+                font-family: monospace;
+                font-size: 1.25em;
+                text-align: right;
+            }
+
+            &.text {
+                max-width: 20em;
+            }
+        }
+    }
+
+    tr.editable td.text,
+    tr.editor td.text .value {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+            
+    tr.editor {
+        td.text .cell-editor {
+            white-space: normal;
+            bottom: auto;
+            height: 10em;
+            z-index: 1;
+            background: inherit;
+            overflow: auto !important;
+        }
+    }
+}
+
+.table-scroller {
+    overflow: auto;
+    background-color: #F8F8F8;
+    @include _(box-shadow, inset 0 0 10em 0 rgba(0,0,0,0.125));
+
+    table {
+        background-color: $white;
+        margin: 0 0 8.5em;
+    }
+
+    body.expanded-element .expanded & {
+        overflow: visible;
+    }
+}
+
+.goes-fullscreen {
+    [data-contracts] {
+        display: none;
+    }
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+
+body.expanded-element {
+    overflow: hidden;
+
+    .goes-fullscreen.expanded {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1000;
+        background-color: $white;
+        overflow: auto;
+        padding: 0 1em;
+
+        [data-expands] {
+            display: none;
+        }
+
+        [data-contracts] {
+            display: block;
+        }
+    }
+}
+
+#main .columns .modal-edit {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1001;
+    margin: 0;
+    background-color: rgba($black, 0.5);
+
+    &.open {
+        display: flex;
+    }
+
+    .modal-edit-overlay {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        cursor: pointer;
+    }
+
+    table {
+        margin: 0;
+        background-color: $white;
+
+        td.empty {
+            background-color: #F8F8F8;
+            border-bottom-color: #F8F8F8;
+        }
+    }
+
+    thead th {
+        text-align: center;
+        font-size: 1.125em;
+        color: $white;
+        border-color: lighten($colour-1, 12.5%);
+        background-color: $colour-1;
+    }
+
+    tbody th {
+        white-space: nowrap;
+    }
+
+    .modal-edit-content {
+        position: relative;
+        min-width: 50em;
+        max-width: 75em;
+        margin: auto;
+        overflow: auto;     
+        z-index: 1002;
+        background-color: #F8F8F8;
+        flex: 1;
+    }
+
+    .actions {
+        margin: 1em 1em 0;
+    }
+}
+
+.table {
+    display: table;
+    border-collapse: collapse;
+}
+
+.table-tr {
+    display: table-row;
+}
+
+.table-th, .table-td {
+    display: table-cell;
+}
+
+/** Not sure if this is still used **/
+nav.sub-menu {
+    display: inline-block;
+    margin: 2rem 0 0;
+    text-align: center;
+    
+    a {
+        margin: 0 1em 0.5em 0;
+        background-color: $gray;
+        color: #888;
+        display: inline-block;
+        padding: 0.25em 0.75em 0.333em;
+        font-size: 0.9em;
+        border: 1px solid #AAA;
+        border-bottom-width: 0.2em;
+        @include _(border-radius, 0.15em);
+        @include default-box-shadow(top, 2);
+        @include _(text-shadow, 0 0.05em 0.05em #FFF);
+
+        &:hover, &:active, &:focus {
+            background-color: #D8D8D8;
+        }
+
+        &.current {
+            background-color: #CCC;
+            color: #666;
+            padding: 0.333em 0.75em 0.25em;
+        }
+
+        @include after {
+            display: none;
+        }
+    }
+
+    @include breakpoint(medium) {
+        border: 1px solid #AAA;
+        background-color: #AAA;
+        border-bottom-width: 0.125em;
+        @include _(border-radius, 0.15em);
+        @include default-box-shadow(top, 2);
+
+        a {
+            border: 0;
+            margin: 0 1px 0 0;
+            float: left;
+            @include _(border-radius, 0);
+            @include _(box-shadow, none);
+
+            &:last-child {
+                margin: 0;
+            }
+        }
+    }
+}
+
+.single-check-box-field,
+.single-radio-button-field {
+    margin-left: 1em;
+}
+
+.date-span {
+    margin-left: 1em;
+
+    label, input {
+        display: block;
+        height: 1.5em;
+        margin: 0 0.5em 1em 0;
+    }
+
+    label {
+        height: 1.5em;
+    }
+
+    input {
+        @include default-box-shadow(top);
+        background-color: $colour-1;
+        color: $white;
+        border: 0;
+        padding: 0 0.25em;
+        font-weight: normal;
+        @include font-family(secondary);
+        @include _(text-stroke, 0.5px #000);
+    }
+
+    .date-labels {
+        float: left;
+    }
+
+    .date-field {
+        overflow: auto;
+    }
+}
+
+#main .columns th form {
+    display: inline;
+    vertical-align: super;
+    margin: 0 0 0 0.5em;
+
+    button {
+        float: right;
+    }
+}
+
+#main .columns th.form,
+#main .columns .table-th.form {
+    display: none;
+}
+
+#main .columns td.form,
+#main .columns .table-td.form {
+    border: 0;
+    width: 1px;
+    
+    form {
+        margin: 0;
+    }
+
+    button, .button {
+        display: block;
+        width: 100%;
+        white-space: nowrap;
+
+        + button {
+            margin-top: 0.5em;
+        }
+    }
+}
+
+.flex-form, .flex-column {
+    button, .button {
+        width: 100%;
+        text-align: center;
+        
+        + button, + .button {
+            margin-left: 0.75em;
+        }
+    }
+
+    &.address-form {
+        .city {
+            @include _(align-self, flex-end);
+            @include font-family(secondary);
+            text-align: right;
+            margin-bottom: 2.5em;
+        }
+    }
+}
+
+.flex-inputs {
+    @include _-(display, flex);
+    @include _(align-items, flex-end);
+    @include _(flex-wrap, wrap);
+    @include _(justify-content, flex-end);
+    margin-bottom: 2em;
+
+    .input-field {
+        margin: 0 0.5em;
+    }
+
+    .stretch-item {
+        @include _(flex, 1);
+        @include _(flex-basis, 100%);
+
+        select {
+            width: 100%;
+        }
+    }
+}
+
+.actions {
+    &.right {
+        .note {
+            float: left;
+            color: $colour-1;
+            font-weight: bold;
+            font-size: 1.25em;
+        }
+
+        .left {
+            float: left;
+        }
+    }
+
+    &.small {
+        margin-top: 0;
+    }
+
+    &.fill {
+        @include _-(display, flex);
+        @include _(flex-wrap, wrap);
+
+        > button, > .button {
+            flex: 1;
+            margin-bottom: 0;
+        }       
+    }
+
+    &.figures {
+        .figure {
+            display: block;
+            margin: 0;
+            text-align: left;
+        }
+
+        a {
+            @include _-(display, flex);
+            @include _(flex-direction, column);
+            @include _(align-items, stretch);
+            color: inherit;
+            margin: 0.5em 0;
+            border: 0.1em solid $light-gray;
+            border-bottom: 0;
+            @include default-box-shadow(top, 2);
+            @include _(transition, box-shadow 150ms ease-in-out);
+
+            @include after {
+                display: none;
+            }
+
+            &:hover {
+                @include default-box-shadow(top, 0.75);
+            }
+        }
+
+        svg, img {
+            height: 5em;
+            width: 100%;
+            margin: 1em 0 0;
+        }
+
+        svg {
+            fill: $black;
+            stroke: none;
+
+            &.stroked {
+                fill: none;
+                stroke: $black;
+            }
+        }
+
+        header {
+            @include font-family(secondary);
+            background-color: $black;
+            color: $white;
+            padding: 0.5em;
+            font-size: 1.125em;
+            @include _(text-stroke, 1px rgba(0, 0, 0, 0.25));
+            @include _(transition, background-color 150ms ease-in-out);
+        }
+
+        .description {
+            overflow: auto;
+            padding: 1em 0.5em;
+        }
+    }
+}
+
+#main article #registration-admin-menu {
+    margin: 1em 0 0;
+    padding: 0;
+    list-style: none;
+
+    a {
+        display: block;
+        padding: 0.5em 0.75em;
+        border: 0.1rem solid $light-gray;
+        border-top: 0;
+        border-right: 0;
+
+        @include after {
+            display: none;
+        }
+
+        &:hover {
+            background-color: $light-gray;
+        }
+    }
+
+    li {
+        margin: 0;
+
+        &.current {
+            a {
+                color: $white;
+                background-color: $colour-5;
+            }
+        }
+    }
+}
+
+.data-set {
+    display: table-row;
+}
+
+.data-set-key, .data-set-value {
+    display: table-cell;
+    padding: 0.25em 0.5em;
+    vertical-align: top;
+    border-bottom: 0.1rem solid $light-gray;
+}
+
+.data-set-key {
+    font-size: 1em;
+    width: 1rem;
+    white-space: nowrap;
+}
+
+.data-set:last-child {
+    .data-set-key, .data-set-value {
+        border: 0;
+    }
+}
+
+
+.space, .address {
+    .data-set-key, .data-set-value {
+        white-space: nowrap;
+    }
+}
+
+.admin-blocks {
+    @include _-(display, inline-flex);
+    @include _(flex-wrap, wrap);
+    @include _(align-items, flex-start);
+    @include _(justify-content, flex-start);
+    list-style: none;
+    padding: 0;
+
+    > li {
+        max-width: 25em;
+        border: 0.1rem solid $light-gray;
+        padding: 1em;
+        margin: 0.25em;
+        @include _(flex, 1);
+        background-color: #F8F8F8;
+        @include default-box-shadow(top, 2);
+    }
+
+    .actions {
+        margin: 0 auto;
+    }
+
+    .title {
+        margin: 0 0 1em;
+        padding: 0 0 0.5em;
+        border-bottom: 0.1rem solid $light-gray;
+    }
+
+    .amenities {
+        list-style: none;
+        padding: 0;
+
+        > li {
+            font-weight: bold;
+            white-space: nowrap;
+            display: inline-block;
+            padding: 0 0.5em;
+            line-height: 1.5em;
+            font-size: 0.8em;
+            border: 0.1rem solid #CCC;
+            background-color: $light-gray;
+            @include _(border-radius, 0.125rem);
+        }
+    }
+}
+
+#admin-housing, #admin-schedule {
+    .guests-housed {
+        margin-bottom: 1em;
+        text-align: right;
+
+        h5 {
+            display: inline-block;
+            margin: 0;
+            padding-right: 0.5em;
+        }
+
+        .data {
+            display: inline-block;
+            font-size: 1.125em;
+        }
+    }
+
+    #housing-table {
+        @include _(transition, opacity 1s ease-in-out);
+
+        &.loading {
+            @include _(opacity, 0.5);
+            pointer-events: none;
+        }
+
+        tr.host {
+            th {
+                vertical-align: top;
+            }
+
+            .address {
+                margin-top: 1em;
+                text-align: right;
+                @include font-family(primary);
+            }
+        }
+    }
+
+    .host-table {
+        tr.place-guest {
+            td {
+                background-color: lighten($colour-1, 40%);
+
+                &:hover {
+                    background-color: $colour-1;
+                }
+
+                &.full {
+                    background-color: $gray;
+
+                    &:hover {
+                        background-color: #CCC;
+                    }                   
+                }
+            }
+
+            a {
+                display: block;
+                color: $white;
+                text-align: center;
+                @include font-family(secondary);
+
+                @include after {
+                    display: none;
+                }
+            }
+        }
+
+        .remove-guest,
+        button, .button {
+            float: right;
+        }
+
+        td {
+            vertical-align: top;
+        }
+
+        .state {
+            position: relative;
+            font-family: inherit;
+
+            &.unhappy {
+                cursor: pointer;
+            }
+
+            ul {
+                display: none;
+                position: absolute;
+                right: 100%;
+                top: 0;
+                background-color: $white;
+                border: 0.1em solid #CCC;
+                padding: 0.25em 0.75em 0.25em 1.5em;
+                margin: 0;
+                list-style-type: square;
+                @include default-box-shadow(top, 2);
+                z-index: 10;
+            }
+
+            li {
+                white-space: nowrap;
+                margin: 0;
+            }
+
+            &:hover {
+                ul {
+                    display: block;
+                }           
+            }
+        }
+    }
+
+    #workshop-selector {
+        td, th {
+            white-space: nowrap;
+        }
+
+        td .text {
+            max-width: 50em;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+
+    #guest-selector, #workshop-selector {
+        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: rgba($black, 0.5);
+        cursor: pointer;
+        z-index: 1000;
+
+        &.open {
+            display: block;
+        }
+
+        .guest-dlg, .workshop-dlg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: $white;
+            width: 80%;
+            margin: auto;
+            padding: 1em;
+            height: 80%;
+            cursor: default;
+            @include default-box-shadow(top, 2);
+
+            h3 {
+                margin: 0 0 1em;
+            }
+        }
+    }
+}
+
+
+#table {
+    position: relative;
+    overflow: auto;
+    height: 80%;
+    height: calc(100% - 4em);
+    background-color: $white;
+    @include _(transition, background-color 250ms ease-in-out);
+
+    &.loading {
+        background-color: #CCC;
+        @include _(animation, whiten ease-in-out 1s infinite alternate both);
+
+        .host-field, table, .legend {
+            display: none;
+        }
+    }
+
+    table {
+        margin: 0 0 2em;
+    }
+
+    h4 {
+        margin: 0;
+
+        &.inline {
+            display: inline-block;
+            padding-right: 0.5em;
+        }
+    }
+
+    .plain-value {
+        font-size: 1.2em;
+    }
+
+    blockquote {
+        margin-top: 0;
+        font-size: 0.85em;
+
+        > :first-child {
+            margin-top: 0;
+        }
+    }
+
+    tr.selectable {
+        cursor: pointer;
+
+        &:hover {
+            th {
+                background-color: $colour-2;
+            }
+        }
+
+        &.other-host, &.other-space, &.bad-match {
+            td, th {
+                opacity: 0.5;
+            }
+        }
+
+        &.selected-space, &.other-space {
+            td {
+                background-color: lighten($colour-5, 35);
+            }
+
+            th {
+                background-color: $colour-5;
+            }
+        }
+
+        &.other-host {
+            td {
+                background-color: lighten($colour-1, 40%);
+            }
+
+            th {
+                background-color: $colour-1;
+            }
+        }
+
+        &:hover {
+            td {
+                opacity: 1;
+                background-color: lighten($colour-2, 25%);
+            }
+        }
+    }
+
+    .legend ul {
+        @include _-(display, flex);
+        list-style: none;
+        padding: 0;
+
+        li {
+            @include _(flex, 1);
+            text-align: center;
+            margin-bottom: 0.5em;
+            padding: 0.125em 0.5em;
+            margin: 0.1em;
+            border: 0.1em solid $light-gray;
+            background-color: #F8F8F8;
+            @include font-family(secondary);
+
+            &.other-host, &.other-space, &.bad-match {
+                opacity: 0.5;
+            }
+
+            &.selected-space, &.other-space {
+                background-color: $colour-5;
+            }
+
+            &.other-host {
+                background-color: $colour-1;
+            }
+        }
+    }
+
+    .p {
+        max-height: 4em;
+        overflow: auto;
+    }
+}
+
+#admin-housing {
+    #table table {
+        min-width: 100em;
+    }
+
+    #hosts {
+        background-color: $white;
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .host {
+            padding: 0.5em;
+            border: 0.1em solid $light-gray;
+            background-color: #F8F8F8;
+
+            &.status-good {
+                background-color: rgba($colour-5, 0.1);
+            }
+
+            &.status-warning {
+                background-color: rgba($colour-3, 0.1);
+            }
+
+            &.status-error {
+                background-color: rgba($colour-2, 0.1);
+            }
+        }
+
+        h4 {
+            margin: 0 0.5em 0 0;
+            float: left;
+        }
+
+        h5 {
+            margin: 1em 0 0;
+        }
+
+        .email {
+            color: #888;
+
+            @include before {
+                content: '(';
+            }
+
+            @include after {
+                content: ')';
+            }
+        }
+
+        .guests {
+            clear: left;
+            @include _-(display, flex);
+        }
+
+        .space {
+            @include _(flex, 1);
+        }
+
+        .place-guest {
+            background-color: $colour-5;
+            
+            &.booked {
+                background-color: $colour-4;
+            }
+            
+            &.unwanted {
+                background-color: #888;
+            }
+            
+            &.overbooked {
+                background-color: $colour-2;
+            }
+        }
+
+        .warning, .error {
+            display: inline-block;
+            font-style: italic;
+            padding: 0 0.5em;
+            margin-left: 0.5em;
+            border: 0.1em solid rgba($black, 0.25);
+            @include _(border-radius, 0.125em);
+            @include _(transform, skewX(-15deg));
+            @include _(transform-origin, 0 100%);
+            @include _(animation, bend ease-in-out 500ms infinite alternate both);
+        }
+
+        .warning {
+            background-color: lighten($colour-3, 25%);
+        }
+
+        .error {
+            background-color: lighten($colour-2, 25%);
+        }
+    }
+
+    #guests {
+        .guests {
+            @include _-(display, flex);
+            //@include _(align-items, flex-start);
+            @include _(flex-wrap, wrap);
+            list-style: none;
+            padding: 0;
+        }
+
+        .guest {
+            flex: 1;
+            margin: 0.5em;
+            border: 0.1rem solid $light-gray;
+            background-color: #F8F8F8;
+            padding: 0.5em;
+        }
+        
+        h4 {
+            margin: 0 0 0.5em;
+        }
+
+        .set-host {
+            width: 100%;
+        }
+    }
+}
+
+#admin-workshop_times {
+    .workshop-blocks {
+        margin: 0 auto;
+
+        td, th {
+            vertical-align: top;
+        }
+    }
+
+    .table-tr.new {
+        .table-th {
+            background-color: transparent;
+            border: 0;
+        }
+
+        .table-td {
+            background-color: transparent;
+            border: 0;
+        }
+    }
+}
+
+.details.org-members {
+    padding: 1em;
+    border: 0.1rem solid $light-gray;
+    border-bottom: 0;
+}
+
+
+#admin-schedule {
+    .workshops-to-schedule {
+        @include _-(display, flex);
+        @include _(flex-wrap, wrap);
+        list-style: none;
+        padding: 0;
+
+        li {
+            @include _(flex, 1);
+            @include _(flex-basis, 48%);
+            margin: 1%;
+            @include _(transition, background-color 250ms ease-in-out);
+            background-color: $light-gray;
+
+            .title {
+                @include _(transition, background-color 250ms ease-in-out);
+            }
+
+            &.booked {
+                background-color: lighten($colour-1, 40%);
+
+                .not-booked-only {
+                    display: none;
+                }
+
+                .data-set-key, .data-set-value {
+                    border-bottom-color: #888;
+                }
+            }
+
+            &.not-booked {
+
+                .booked-only {
+                    display: none;
+                }
+            }
+
+            .field-error {
+                background-color: lighten($colour-2, 22.5%);
+                margin: 0;
+            }
+
+            .already-booked {
+                overflow: hidden;
+                max-height: 0;
+
+                &.is-true {
+                    max-height: 3em;
+                    @include _(transition, max-height 150ms ease-in-out);
+                }
+            }
+
+            .workshop-description {
+                max-height: none;
+            }
+
+            .details {
+                margin: 0 5% 1em;
+                width: 90%;
+            }
+
+            .title {
+                margin: 0 0 0.5em;
+                padding: 0.5em;
+                background-color: $black;
+                color: $white;
+            }
+
+            .drop-downs {
+                padding: 0 1em 1em;
+
+                select {
+                    width: 100%;
+                }
+            }
+
+            .actions {
+                margin: 0;
+                padding: 0 0.5em;
+            }
+        }
+
+        #main .columns & form {
+            margin: 0;
+        }
+    }
+}
+
+.stats {
+    list-style: none;
+
+    h3 {
+        display: inline-block;
+    }
+
+    .stat {
+        position: relative;
+        padding: 0 0.25em;
+        margin: 0.5em;
+        font-size: 2em;
+        display: inline-block;
+        color: $white;
+        background-color: $colour-1;
+        @include default-box-shadow(top, 2);
+        @include _(text-stroke, 1px rgba(0, 0, 0, 0.25));
+
+        &.important {
+            width: 2em;
+            height: 2em;
+            line-height: 2em;
+            text-align: center;
+            @include _(border-radius, 50%);
+        }
+    }
+
+    .money .stat {
+        background-color: $colour-5;
+    }
+
+    .percent {
+        font-size: 1.5em;
+    }
+
+    .value {
+        position: relative;
+        z-index: $zindex-base + 2;
+    }
+
+    .stat-with-label {
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+        background-color: $colour-3;
+        margin: 0.5em;
+        @include default-box-shadow(top, 2);
+
+        .stat {
+            margin-top: 0.25em;
+        }
+    }
+
+    .label {
+        padding: 0.5em 0.5em 0;
+        font-weight: bold;
+    }
+
+    .breakdown {
+        text-align: center;
+    }
+}
+
+.email-preview {
+    max-width: 40rem;
+    margin: 2em auto 0;
+    padding: 0.25em 1em;
+    background-color: #F8F8F8;
+    @include default-box-shadow(top, 2, true);
+}
+
+.workshop-previews {
+    position: relative;
+    list-style: none;
+    padding: 0;
+
+    p {
+        padding: 0 1rem 0.5rem;
+        font-size: 1em;
+        color: $black;
+    }
+
+    h4 {
+        color: $white;
+        background-color: $colour-1;
+        padding: 0.5em 1em;
+        margin: 0;
+        @include _(text-stroke, 1px rgba(0, 0, 0, 0.25));
+    }
+
+    a {
+        display: block;
+        max-height: 10em;
+        overflow: hidden;
+        margin: 0.5em 0;
+        @include default-box-shadow(top, 2);
+        @include _(transition, transform 150ms ease-in-out);
+
+        &:hover, &:focus, &:active {
+            z-index: $zindex-base + 2;
+            @include _(transform, scale(1.1));
+        }
+
+        @include before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: $zindex-base + 2;
+            cursor: pointer;
+            @include _(box-shadow, inset 0em -2em 2em -1em $white);
+        }
+
+        @include after {
+            display: none;
+        }
+    }
+}
+
+
+.conferences-edit_schedule {
+    #main {
+        .location {
+            padding-top: 0.25em;
+        }
+        .errors {
+            padding: 0.25em;
+            background-color: $colour-2;
+            color: $white;
+            @include _(text-stroke, 0.5px #000);
+        }
+        .conflict-score {
+            padding: 0.25em;
+            background-color: $colour-3;
+            color: $black;
+        }
+        .all-workshops, .all-events {
+            list-style: none;
+            padding: 0;
+
+            li {
+                margin: 0.5em;
+                padding: 0.5em;
+                border: 1px solid #CCC;
+                background-color: lighten($colour-1, 35);
+                @include default-box-shadow(top, 2);
+
+                &.error {
+                    outline: 0.2em solid $colour-2;
+                    outline-offset: -0.2em;
+                }
+            }
+
+            h3 {
+                margin: 0;
+            }
+
+            .workshop-interest {
+                color: #888;
+                text-align: left;
+                margin: 0.25em 0;
+            }
+
+            .error-description {
+                background-color: $colour-2;
+                color: $white;
+                padding: 0.5em;
+                margin-top: 0.5em;
+            }
+
+            .warnings {
+                background-color: $colour-3;
+                color: $black;
+                padding: 0.5em;
+                margin-top: 0.5em;
+                list-style: none;
+
+                li {
+                    padding: 0;
+                    margin: 0;
+                    background-color: transparent;
+                    @include _(box-shadow, none);
+                }
+            }
+        }
+        .day_parts {
+            list-style: none;
+
+            h4 {
+                display: inline-block;
+                min-width: 12.5em;
+                margin: 0.25em 0;
+            }
+
+            select, .select {
+                float: right;
+                min-width: 5em;
+            }
+
+            .select {
+                padding-left: 0.25em;
+            }
+        }
+        .actions {
+            margin: 2em;
+        }
+        .unsaved {
+            @include font-family(secondary);
+            background-color: lighten($colour-3, 25);
+            margin: 0 5em 2em;
+            padding: 0.5em;
+        }
+        .all-events {
+            li {
+                background-color: lighten($colour-5, 35);
+                
+                &.meal {
+                    background-color: lighten($colour-3, 25);
+                }
+            }
+
+            h3 {
+                margin-bottom: 0.5em;
+            }
+        }
+    }
+}
+
+.conferences-schedule {
+    .actions {
+        margin: 2em;
+    }
+    
+    ul.events, ul.locations {
+        list-style: none;
+
+        .button {
+            float: left;
+            font-size: 1em;
+            margin-bottom: 0.5em;
+            margin-right: 0.5em;
+        }
+
+        h3 {
+            display: inline-block;
+            margin: 0.25em 0 0;
+        }
+
+        li {
+            clear: both;
+        }
+    }
+}
+
+.on-top-only, .on-top-controls {
+    display: none !important;
+}
+
+html[data-ontop] {
+    body {
+        overflow: hidden;
+    }
+
+    .on-top-target {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: 1em;
+        margin: 0 !important;
+        z-index: 100;
+        overflow: auto;
+    }
+
+    .on-top-control {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 101;
+        margin: 0 !important;
+        padding: 1em;
+        background-color: #F8F8F8;
+        @include default-box-shadow(bottom, 2);
+    }
+
+    .on-top-controls {
+        overflow: auto;
+
+        .on-top-close {
+            float: right;
+            background-color: $colour-4;
+        }
+    }
+
+    .on-top-only, .on-top-controls {
+        display: inherit !important;
+
+        &.space {
+            display: block !important;
+        }
+    }
+
+    .not-on-top {
+        display: none !important;
+    }
+}
+
+@include breakpoint(medium) {
+    nav.sub-nav {
+        float: right;
+    }
+
+    #registration-admin-menu {
+        a {
+            margin: 0;
+        }
+    }
+
+    .admin-blocks {
+        > li {
+            @include _(flex, none);
+            min-width: 12em;
+        }
+    }
+
+    .actions {
+        &.figures {
+            .figure {
+                margin: 0 0 1em;
+            }
+            
+            svg, img {
+                width: 5em;
+                margin: 0.5em;
+                float: left;
+            }
+        }
+    }
+
+    .flex-inputs {
+        .stretch-item {
+            @include _(flex, 1);
+            @include _(flex-basis, auto);
+        }
+    }
+
+    .flex-form, .flex-column {
+        button, .button {
+            width: auto;
+        }
+    }
+}

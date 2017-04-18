@@ -88,6 +88,7 @@ Then /^(?:I )?enter (?:my |an? |some |the )?(.+?)(?: as '(.+)')?$/i do |field, v
 
   sel = selector_for(field)
   element = first(sel, visible: true) || first(sel, visible: false)
+  element = element.first('[contenteditable]') if element.tag_name.to_s.downcase == 'div'
 
   unless value.present?
     value = case field
