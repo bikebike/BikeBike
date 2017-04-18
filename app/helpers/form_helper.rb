@@ -150,24 +150,24 @@ module FormHelper
     html_name = name.to_s + (options[:index] ? "[#{options[:index]}]" : '')
     if options[:plain]
       html += (text_area_tag html_name, value,
-        id: id,
-        lang: options[:lang],
-        aria: aria,
-        class: css_class
+          id: id,
+          lang: options[:lang],
+          aria: aria,
+          class: css_class
         )
     else
-      html += content_tag(:div, value.present? ? value.html_safe : '',
+      html += content_tag(:div,
+        content_tag(:div, (value || '').html_safe, class: :editor).html_safe,
           id: id,
-          data: { name: html_name, 'edit-on': options[:edit_on] || :load },
+          data: { name: html_name },
           lang: options[:lang],
           aria: aria,
           tabindex: 0,
           class: [:textarea] + css_class
         )
 
-      add_stylesheet :editor
-      add_inline_script :pen
-      add_inline_script :markdown
+      add_stylesheet 'quill.css'
+      add_javascript :quill
       add_inline_script :editor
     end
 

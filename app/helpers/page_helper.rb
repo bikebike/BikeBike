@@ -24,8 +24,8 @@ module PageHelper
   end
 
   def add_stylesheet(sheet)
-    @stylesheets ||= []
-    @stylesheets << sheet unless @stylesheets.include?(sheet)
+    @stylesheets ||= Set.new
+    @stylesheets << sheet
   end
 
   def stylesheets
@@ -35,22 +35,35 @@ module PageHelper
     end
     (@stylesheets || []).each do |css|
       Rack::MiniProfiler.step("inject_css #{css}") do
-        html += inject_css! css.to_s
+        if css =~ /\.css$/
+          html += stylesheet_link_tag css
+        else
+          html += inject_css! css.to_s
+        end
       end
     end
     html += stylesheet_link_tag 'i18n-debug' if request.params['i18nDebug']
     return html.html_safe
   end
 
+  def add_javascript(script)
+    @javascripts ||= Set.new
+    @javascripts << script
+  end
+
+  def javascripts
+    (@javascripts || []).map { |js| javascript_include_tag js.to_s }.join.html_safe
+  end
+
   def add_inline_script(script)
-    @_inline_scripts ||= []
+    @_inline_scripts ||= Set.new
     script = Rails.application.assets.find_asset("#{script.to_s}.js").to_s
-    @_inline_scripts << script unless @_inline_scripts.include?(script)
+    @_inline_scripts << script
   end
 
   def inline_scripts
     return '' unless @_inline_scripts.present?
-    "<script>#{@_inline_scripts.join("\n")}</script>".html_safe
+    javascript_tag @_inline_scripts.to_a.join("\n").html_safe
   end
 
   def dom_ready(&block)

@@ -10,7 +10,6 @@ gem 'rack-mini-profiler'
 gem 'haml'
 gem 'nokogiri'
 
-gem 'tzinfo-data'
 gem 'sass'
 gem 'sass-rails'
 gem 'uglifier', '>= 1.3.0'
@@ -53,7 +52,7 @@ group :development do
   gem 'capistrano-faster-assets', '~> 1.0'
 
   gem 'eventmachine', git: 'https://github.com/krzcho/eventmachine', :branch => 'master'
-  gem 'thin'# , :github => 'krzcho/thin', :branch => 'master'
+  gem 'thin'
   gem 'rubocop', require: false
   gem 'haml-lint', require: false
 end
@@ -69,7 +68,6 @@ group :test do
 
   gem 'poltergeist'
   gem 'capybara-email'
-  # gem 'capybara-webkit'
   gem 'guard-rspec'
   gem 'factory_girl_rails'
   gem 'coveralls', require: false
@@ -80,7 +78,7 @@ group :test do
   gem 'mocha'
 end
 
-group :staging, :production, :preview do
+group :production, :preview do
   gem 'rails_12factor'
 end
 
@@ -91,8 +89,10 @@ group :production, :preview do
 end
 
 platforms 'mswin', 'mingw' do
+  gem 'tzinfo-data'
+  
   group :test do
     gem 'wdm', '>= 0.1.0'
-    gem 'win32console', require: false
+      gem 'win32console', require: false
   end
 end

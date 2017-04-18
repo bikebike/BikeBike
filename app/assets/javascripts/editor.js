@@ -1,42 +1,21 @@
 (function() {
     var pens = {};
 
-    Array.prototype.forEach.call(document.querySelectorAll('.textarea'), function(editor) {
-        var event= editor.dataset.editOn;
-        if (event == 'load') {
-            startEditing(editor);
-        } else {
-            editor.addEventListener(event, function() {
-                if (editor.getAttribute('contenteditable') !== 'true') {
-                    startEditing(editor);
-                    // for content editable, we need to refocus to show the caret
-                    editor.blur(); 
-                    editor.focus();
-                }
-            });
-        }
+    Array.prototype.forEach.call(document.querySelectorAll('.textarea .editor'), function(editor) {
+        startEditing(editor);
     });
 
     function startEditing(editor) {
         var name = editor.dataset.name;
-        pens[name] = new Pen({
-            editor: editor,
-            class: 'pen',
-            textarea: '<textarea name="' + name + '"></textarea>',
-            list: ['p', 'h1', 'h2', 'blockquote', 'insertorderedlist', 'insertunorderedlist', 'bold', 'italic', 'underline', 'strikethrough', 'createlink', 'insertimage'],
-            title: {
-                'p': 'Paragraph',
-                'h1': 'Major Heading',
-                'h2': 'Minor Heading',
-                'blockquote': 'Quotation',
-                'insertorderedlist': 'Ordered List',
-                'insertunorderedlist': 'Unordered List',
-                'bold': 'Bold',
-                'italic': 'Italic',
-                'underline': 'Underline',
-                'strikethrough': 'Strikethrough',
-                'createlink': 'Link',
-                'insertimage': 'Image'
+        pens[name] = new Quill(editor, {
+            theme: 'snow',
+            modules: {
+                toolbar: [
+                    [{ 'header': [1, 2, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{ 'script': 'sub'}, { 'script': 'super' }],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }, 'blockquote']
+                ]
             }
         });
         return pens[name];
@@ -57,7 +36,7 @@
                     textarea.style.display = 'none';
                     form.appendChild(textarea);
                 }
-                textarea.value = editor.innerHTML;
+                textarea.value = editor.getElementsByClassName('ql-editor')[0].innerHTML;
                 if (pens[name]) {
                     pens[name].destroy();
                 }

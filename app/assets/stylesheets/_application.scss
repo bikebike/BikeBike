@@ -1,4 +1,13 @@
-$bug-list: ("search-element-appearance": ()); 
+$bug-list: (
+    "search-element-appearance": (),
+    "abbr-title-border-missing": false,
+    "dfn-not-italic": false,
+    "small-size-not-80-percent": false,
+    "hr-height-is-messed": false,
+    "pre-overflow-not-auto": false,
+    "code-font-not-ems-and-not-monospace": false
+);
+$markup-settings: ("audio": false);
 
 @import "bumbleberry";
 @import "settings";
@@ -29,10 +38,6 @@ h2 {
 h3, legend {
     font-size: 4.5vw;
     margin: 0.75em 0;
-}
-
-h3.subtitle {
-    font-size: 1.5em;
 }
 
 h4 {
@@ -83,31 +88,6 @@ a {
             border-bottom: 0.1em solid;
             opacity: 1;
             @include _(transform, scaleX(1));
-        }
-    }
-}
-
-nav.sub-nav {
-    text-align: center;
-
-    ul {
-        margin: 0.85em 0;
-        list-style: none;
-        padding: 0;
-    }
-
-    li {
-        display: inline-block;
-
-        @include after {
-            content: '|';
-            margin: 0 0.5em;
-        }
-
-        &:last-child {
-            @include after {
-                display: none;
-            }
         }
     }
 }
@@ -521,10 +501,6 @@ button,
         background-color: $red;
     }
 
-    #main &.secondary {
-        background-color: $colour-1;
-    }
-
     &.subdued, #main &.subdued {
         background-color: #888;
     }
@@ -610,28 +586,36 @@ nav.sub-menu {
 textarea, .textarea {
     display: block;
     width: 100%;
-    min-height: 15em;
-    font-size: 1.25em;
-    line-height: 1.5em;
     margin: 1em 0;
-    padding: 0.75em;
     border: 0.1rem solid $gray;
-    outline: 0;
     @include _(border-radius, 0.25rem);
-    color: inherit;
-    background-image: repeating-linear-gradient(135deg, rgba(#000, 0.025), rgba(#000, 0.025) 0.1em, transparent 0.1em, transparent 0.4em);
     @include _(box-shadow, 0 0 0 0 rgba(0,0,0,0.05));
     @include _(transition, box-shadow 200ms ease-in-out);
     will-change: box-shadow;
 
-    &[data-edit-on="click"],
-    &[data-edit-on="focus"] {
-        cursor: text;
-    }
-
     &:hover, &:focus, &:active {
         @include _(box-shadow, 0 0 0 0.3em rgba(0,0,0,0.05));
     }
+}
+
+.ql-toolbar button {
+    @include _(box-shadow, none);
+}
+
+.textarea {
+    .ql-editor p, .ql-editor ol, .ql-editor ul, .ql-editor pre, .ql-editor blockquote, .ql-editor h1, .ql-editor h2, .ql-editor h3, .ql-editor h4, .ql-editor h5, .ql-editor h6 {
+        margin-bottom: 1em;
+    }
+}
+
+textarea, .textarea .ql-editor {
+    background-image: repeating-linear-gradient(135deg, rgba(#000, 0.025), rgba(#000, 0.025) 0.1em, transparent 0.1em, transparent 0.4em);
+    min-height: 15em;
+    font-size: 1.25em;
+    line-height: 1.5em;
+    padding: 0.75em;
+    outline: 0;
+    color: inherit;
 
     &.short {
         min-height: 10em;
@@ -749,6 +733,7 @@ input {
         }
     }
 }
+
 .number-field,
 .email-field,
 .password-field,
@@ -1078,50 +1063,6 @@ input {
 
 .check-box-field.big {
     font-size: 1em;
-}
-
-.radio-button-field {
-    label {
-        width: 7em;
-        height: 5em;
-    }
-}
-.single-check-box-field,
-.single-radio-button-field {
-    margin-left: 1em;
-}
-
-.date-span {
-    margin-left: 1em;
-
-    label, input {
-        display: block;
-        height: 1.5em;
-        margin: 0 0.5em 1em 0;
-    }
-
-    label {
-        height: 1.5em;
-    }
-
-    input {
-        @include default-box-shadow(top);
-        background-color: $colour-1;
-        color: $white;
-        border: 0;
-        padding: 0 0.25em;
-        font-weight: normal;
-        @include font-family(secondary);
-        @include _(text-stroke, 0.5px #000);
-    }
-
-    .date-labels {
-        float: left;
-    }
-
-    .date-field {
-        overflow: auto;
-    }
 }
 
 .requesting {
@@ -1466,145 +1407,6 @@ fieldset {
     }
 }
 
-.actions {
-    text-align: center;
-    margin: 0 1em;
-
-    button, .button {
-        margin: 0 0.25em 1em;
-        vertical-align: middle;
-    }
-
-    &.left {
-        text-align: left;
-    }
-
-    &.right {
-        text-align: right;
-
-        .note {
-            float: left;
-            color: $colour-1;
-            font-weight: bold;
-            font-size: 1.25em;
-        }
-
-        .left {
-            float: left;
-        }
-    }
-
-    &.small {
-        margin-top: 0;
-    }
-
-    &.fill {
-        @include _-(display, flex);
-        @include _(flex-wrap, wrap);
-
-        > button, > .button {
-            flex: 1;
-            margin-bottom: 0;
-        }       
-    }
-
-    .conferences-view_workshop & {
-        margin-bottom: 5em;
-    }
-
-    &.next-prev {
-        @include _-(display, flex);
-        @include _(flex-wrap, wrap);
-        @include _(flex-direction, row-reverse);
-        margin: 0;
-        clear: both;
-
-        button, .button {
-            margin-bottom: 1em;
-        }
-    }
-
-    &.figures {
-        .figure {
-            display: block;
-            margin: 0;
-            text-align: left;
-        }
-
-        a {
-            @include _-(display, flex);
-            @include _(flex-direction, column);
-            @include _(align-items, stretch);
-            color: inherit;
-            margin: 0.5em 0;
-            border: 0.1em solid $light-gray;
-            border-bottom: 0;
-            @include default-box-shadow(top, 2);
-            @include _(transition, box-shadow 150ms ease-in-out);
-
-            @include after {
-                display: none;
-            }
-
-            &:hover {
-                @include default-box-shadow(top, 0.75);
-            }
-        }
-
-        svg, img {
-            height: 5em;
-            width: 100%;
-            margin: 1em 0 0;
-        }
-
-        svg {
-            fill: $black;
-            stroke: none;
-
-            &.stroked {
-                fill: none;
-                stroke: $black;
-            }
-        }
-
-        header {
-            @include font-family(secondary);
-            background-color: $black;
-            color: $white;
-            padding: 0.5em;
-            font-size: 1.125em;
-            @include _(text-stroke, 1px rgba(0, 0, 0, 0.25));
-            @include _(transition, background-color 150ms ease-in-out);
-        }
-
-        .description {
-            overflow: auto;
-            padding: 1em 0.5em;
-        }
-    }
-}
-
-.test-preview {
-    padding: 0 1em;
-    border: 0.1em solid #CCC;
-    background-color: #F8F8F8;
-
-    h4 {
-        border-bottom: 0.1rem solid #CCC;
-        padding: 1em 0 0.75em;
-        font-size: 1.5em;
-        margin: 0 0 1em 0;
-    }
-
-    h5 {
-        font-size: 1.25em;
-    }
-
-    h6, p {
-        font-size: 1.125em;
-    }
-}
-
 ul.warnings {
     list-style: none;
     padding: 0;
@@ -1670,12 +1472,6 @@ ul.warnings {
     }
 }
 
-.current-poster {
-    img {
-        border: 0.25em solid $colour-1;
-    }
-}
-
 .warning-info {
     display: inline-block;
     margin: 0;
@@ -1710,37 +1506,24 @@ ul.warnings {
 
         a.policy {
             background-color: $colour-5;
-            // @include _(order, 1);
         }
 
         a.about {
             background-color: $colour-3;
-            // @include _(order, 1);
         }
 
         a.conferences {
             background-color: $colour-2;
-            // @include _(order, 1);
         }
 
-        form, .register {
-            background-color: $colour-2;
-        }
-
-        a, form {
+        a {
+            display: inline-block;
             width: 33.333%;
             float: left;
             @include _(flex, 1);
-        }
-        
-        a, form, button {
             text-align: center;
             padding: 0;
             margin: 0;
-        }
-
-        a, button {
-            display: inline-block;
             font-weight: normal;
             padding: 0.5em 0;
             color: #FFF;
@@ -1754,34 +1537,6 @@ ul.warnings {
 
             .title {
                 font-size: 0.8em;
-            }
-        }
-
-        button {
-            background-color: transparent;
-            border: 0;
-            font-size: 1em;
-            width: 100%;
-            @include _(text-stroke, 0);
-
-            @include before {
-                display: none;
-            }
-        }
-
-        form {
-            display: inline;
-        }
-
-        .strlen-12, .strlen-13 {
-            .title {
-                font-size: 0.7em;
-            }
-        }
-
-        .strlen-14, .strlen-15 {
-            .title {
-                font-size: 0.6333em;
             }
         }
 
@@ -1983,7 +1738,6 @@ ul.warnings {
     }
 
     .current .step {
-        //top: 1.5em;
         @include _(transform-origin, 10% 100%);
     }
 
@@ -2000,552 +1754,12 @@ ul.warnings {
     }
 }
 
-#main article #registration-admin-menu {
-    margin: 1em 0 0;
-    padding: 0;
-    list-style: none;
-
-    a {
-        display: block;
-        padding: 0.5em 0.75em;
-        border: 0.1rem solid $light-gray;
-        border-top: 0;
-        border-right: 0;
-
-        @include after {
-            display: none;
-        }
-
-        &:hover {
-            background-color: $light-gray;
-        }
-    }
-
-    li {
-        margin: 0;
-
-        &.current {
-            a {
-                color: $white;
-                background-color: $colour-5;
-            }
-        }
-    }
-}
-
-.data-set {
-    display: table-row;
-}
-
-.data-set-key, .data-set-value {
-    display: table-cell;
-    padding: 0.25em 0.5em;
-    vertical-align: top;
-    border-bottom: 0.1rem solid $light-gray;
-}
-
-.data-set-key {
-    font-size: 1em;
-    width: 1rem;
-    white-space: nowrap;
-}
-
-.data-set:last-child {
-    .data-set-key, .data-set-value {
-        border: 0;
-    }
-}
-
 .details {
     display: table;
     width: 100%;
 
     &.inline {
         width: auto;
-    }
-}
-
-.space, .address {
-    .data-set-key, .data-set-value {
-        white-space: nowrap;
-    }
-}
-
-.admin-blocks {
-    @include _-(display, inline-flex);
-    @include _(flex-wrap, wrap);
-    @include _(align-items, flex-start);
-    @include _(justify-content, flex-start);
-    list-style: none;
-    padding: 0;
-
-    > li {
-        max-width: 25em;
-        border: 0.1rem solid $light-gray;
-        padding: 1em;
-        margin: 0.25em;
-        @include _(flex, 1);
-        background-color: #F8F8F8;
-        @include default-box-shadow(top, 2);
-    }
-
-    .actions {
-        margin: 0 auto;
-    }
-
-    .title {
-        margin: 0 0 1em;
-        padding: 0 0 0.5em;
-        border-bottom: 0.1rem solid $light-gray;
-    }
-
-    .amenities {
-        list-style: none;
-        padding: 0;
-
-        > li {
-            font-weight: bold;
-            white-space: nowrap;
-            display: inline-block;
-            padding: 0 0.5em;
-            line-height: 1.5em;
-            font-size: 0.8em;
-            border: 0.1rem solid #CCC;
-            background-color: $light-gray;
-            @include _(border-radius, 0.125rem);
-        }
-    }
-}
-
-#admin-housing, #admin-schedule {
-    .guests-housed {
-        margin-bottom: 1em;
-        text-align: right;
-
-        h5 {
-            display: inline-block;
-            margin: 0;
-            padding-right: 0.5em;
-        }
-
-        .data {
-            display: inline-block;
-            font-size: 1.125em;
-        }
-    }
-
-    #housing-table {
-        @include _(transition, opacity 1s ease-in-out);
-
-        &.loading {
-            @include _(opacity, 0.5);
-            pointer-events: none;
-        }
-
-        tr.host {
-            th {
-                vertical-align: top;
-            }
-
-            .address {
-                margin-top: 1em;
-                text-align: right;
-                @include font-family(primary);
-            }
-        }
-    }
-
-    .host-table {
-        tr.place-guest {
-            td {
-                background-color: lighten($colour-1, 40%);
-
-                &:hover {
-                    background-color: $colour-1;
-                }
-
-                &.full {
-                    background-color: $gray;
-
-                    &:hover {
-                        background-color: #CCC;
-                    }                   
-                }
-            }
-
-            a {
-                display: block;
-                color: $white;
-                text-align: center;
-                @include font-family(secondary);
-
-                @include after {
-                    display: none;
-                }
-            }
-        }
-
-        .remove-guest,
-        button, .button {
-            float: right;
-        }
-
-        td {
-            vertical-align: top;
-        }
-
-        .state {
-            position: relative;
-            font-family: inherit;
-
-            &.unhappy {
-                cursor: pointer;
-            }
-
-            ul {
-                display: none;
-                position: absolute;
-                right: 100%;
-                top: 0;
-                background-color: $white;
-                border: 0.1em solid #CCC;
-                padding: 0.25em 0.75em 0.25em 1.5em;
-                margin: 0;
-                list-style-type: square;
-                @include default-box-shadow(top, 2);
-                z-index: 10;
-            }
-
-            li {
-                white-space: nowrap;
-                margin: 0;
-            }
-
-            &:hover {
-                ul {
-                    display: block;
-                }           
-            }
-        }
-    }
-
-    #workshop-selector {
-        td, th {
-            white-space: nowrap;
-        }
-
-        td .text {
-            max-width: 50em;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-    }
-
-    #guest-selector, #workshop-selector {
-        display: none;
-        position: fixed;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        background-color: rgba($black, 0.5);
-        cursor: pointer;
-        z-index: 1000;
-
-        &.open {
-            display: block;
-        }
-
-        .guest-dlg, .workshop-dlg {
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            background-color: $white;
-            width: 80%;
-            margin: auto;
-            padding: 1em;
-            height: 80%;
-            cursor: default;
-            @include default-box-shadow(top, 2);
-
-            h3 {
-                margin: 0 0 1em;
-            }
-        }
-    }
-}
-
-@include keyframes(whiten) {
-    to { background-color: $white; }
-}
-
-#table {
-    position: relative;
-    overflow: auto;
-    height: 80%;
-    height: calc(100% - 4em);
-    background-color: $white;
-    @include _(transition, background-color 250ms ease-in-out);
-
-    &.loading {
-        background-color: #CCC;
-        @include _(animation, whiten ease-in-out 1s infinite alternate both);
-
-        .host-field, table, .legend {
-            display: none;
-        }
-    }
-
-    table {
-        margin: 0 0 2em;
-    }
-
-    h4 {
-        margin: 0;
-
-        &.inline {
-            display: inline-block;
-            padding-right: 0.5em;
-        }
-    }
-
-    .plain-value {
-        font-size: 1.2em;
-    }
-
-    blockquote {
-        margin-top: 0;
-        font-size: 0.85em;
-
-        > :first-child {
-            margin-top: 0;
-        }
-    }
-
-    tr.selectable {
-        cursor: pointer;
-
-        &:hover {
-            th {
-                background-color: $colour-2;
-            }
-        }
-
-        &.other-host, &.other-space, &.bad-match {
-            td, th {
-                opacity: 0.5;
-            }
-        }
-
-        &.selected-space, &.other-space {
-            td {
-                background-color: lighten($colour-5, 35);
-            }
-
-            th {
-                background-color: $colour-5;
-            }
-        }
-
-        &.other-host {
-            td {
-                background-color: lighten($colour-1, 40%);
-            }
-
-            th {
-                background-color: $colour-1;
-            }
-        }
-
-        &:hover {
-            td {
-                opacity: 1;
-                background-color: lighten($colour-2, 25%);
-            }
-        }
-    }
-
-    .legend ul {
-        @include _-(display, flex);
-        list-style: none;
-        padding: 0;
-
-        li {
-            @include _(flex, 1);
-            text-align: center;
-            margin-bottom: 0.5em;
-            padding: 0.125em 0.5em;
-            margin: 0.1em;
-            border: 0.1em solid $light-gray;
-            background-color: #F8F8F8;
-            @include font-family(secondary);
-
-            &.other-host, &.other-space, &.bad-match {
-                opacity: 0.5;
-            }
-
-            &.selected-space, &.other-space {
-                background-color: $colour-5;
-            }
-
-            &.other-host {
-                background-color: $colour-1;
-            }
-        }
-    }
-
-    .p {
-        max-height: 4em;
-        overflow: auto;
-    }
-}
-
-#admin-housing {
-    #table table {
-        min-width: 100em;
-    }
-
-    #hosts {
-        background-color: $white;
-
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .host {
-            padding: 0.5em;
-            border: 0.1em solid $light-gray;
-            background-color: #F8F8F8;
-
-            &.status-good {
-                background-color: rgba($colour-5, 0.1);
-            }
-
-            &.status-warning {
-                background-color: rgba($colour-3, 0.1);
-            }
-
-            &.status-error {
-                background-color: rgba($colour-2, 0.1);
-            }
-        }
-
-        h4 {
-            margin: 0 0.5em 0 0;
-            float: left;
-        }
-
-        h5 {
-            margin: 1em 0 0;
-        }
-
-        .email {
-            color: #888;
-
-            @include before {
-                content: '(';
-            }
-
-            @include after {
-                content: ')';
-            }
-        }
-
-        .guests {
-            clear: left;
-            @include _-(display, flex);
-        }
-
-        .space {
-            @include _(flex, 1);
-        }
-
-        .place-guest {
-            background-color: $colour-5;
-            
-            &.booked {
-                background-color: $colour-4;
-            }
-            
-            &.unwanted {
-                background-color: #888;
-            }
-            
-            &.overbooked {
-                background-color: $colour-2;
-            }
-        }
-
-        .warning, .error {
-            display: inline-block;
-            font-style: italic;
-            padding: 0 0.5em;
-            margin-left: 0.5em;
-            border: 0.1em solid rgba($black, 0.25);
-            @include _(border-radius, 0.125em);
-            @include _(transform, skewX(-15deg));
-            @include _(transform-origin, 0 100%);
-            @include _(animation, bend ease-in-out 500ms infinite alternate both);
-        }
-
-        .warning {
-            background-color: lighten($colour-3, 25%);
-        }
-
-        .error {
-            background-color: lighten($colour-2, 25%);
-        }
-    }
-
-    #guests {
-        .guests {
-            @include _-(display, flex);
-            //@include _(align-items, flex-start);
-            @include _(flex-wrap, wrap);
-            list-style: none;
-            padding: 0;
-        }
-
-        .guest {
-            flex: 1;
-            margin: 0.5em;
-            border: 0.1rem solid $light-gray;
-            background-color: #F8F8F8;
-            padding: 0.5em;
-        }
-        
-        h4 {
-            margin: 0 0 0.5em;
-        }
-
-        .set-host {
-            width: 100%;
-        }
-    }
-}
-
-#admin-workshop_times {
-    .workshop-blocks {
-        margin: 0 auto;
-
-        td, th {
-            vertical-align: top;
-        }
-    }
-
-    .table-tr.new {
-        .table-th {
-            background-color: transparent;
-            border: 0;
-        }
-
-        .table-td {
-            background-color: transparent;
-            border: 0;
-        }
     }
 }
 
@@ -2750,94 +1964,6 @@ body.home table.schedule td .event-detail-link:hover {
     }
 }
 
-#admin-schedule {
-    .workshops-to-schedule {
-        @include _-(display, flex);
-        @include _(flex-wrap, wrap);
-        list-style: none;
-        padding: 0;
-
-        li {
-            @include _(flex, 1);
-            @include _(flex-basis, 48%);
-            margin: 1%;
-            @include _(transition, background-color 250ms ease-in-out);
-            background-color: $light-gray;
-
-            .title {
-                @include _(transition, background-color 250ms ease-in-out);
-            }
-
-            &.booked {
-                background-color: lighten($colour-1, 40%);
-
-                .not-booked-only {
-                    display: none;
-                }
-
-                .data-set-key, .data-set-value {
-                    border-bottom-color: #888;
-                }
-            }
-
-            &.not-booked {
-
-                .booked-only {
-                    display: none;
-                }
-            }
-
-            .field-error {
-                background-color: lighten($colour-2, 22.5%);
-                margin: 0;
-            }
-
-            .already-booked {
-                overflow: hidden;
-                max-height: 0;
-
-                &.is-true {
-                    max-height: 3em;
-                    @include _(transition, max-height 150ms ease-in-out);
-                }
-            }
-
-            .workshop-description {
-                max-height: none;
-            }
-
-            .details {
-                margin: 0 5% 1em;
-                width: 90%;
-            }
-
-            .title {
-                margin: 0 0 0.5em;
-                padding: 0.5em;
-                background-color: $black;
-                color: $white;
-            }
-
-            .drop-downs {
-                padding: 0 1em 1em;
-
-                select {
-                    width: 100%;
-                }
-            }
-
-            .actions {
-                margin: 0;
-                padding: 0 0.5em;
-            }
-        }
-
-        #main .columns & form {
-            margin: 0;
-        }
-    }
-}
-
 #main {
     position: relative;
     background-color: $white;
@@ -2847,15 +1973,6 @@ body.home table.schedule td .event-detail-link:hover {
     article {
         padding: rems(2.5) 0;
         margin: 0 1em;
-
-        &.supplementary {
-            margin: rems(1) 7.5%;
-            overflow: hidden;
-            @include _(border-radius, 0.33em);
-            border: 0.1rem solid #DDD;
-            background-color: #F7F7F7;
-            @include default-box-shadow(top, 2);
-        }
 
         ul {
             font-size: 1.125em;
@@ -2914,10 +2031,6 @@ a.logo {
         30% { fill: $colour-3; }
         45% { fill: $colour-4; }
         60% { fill: $colour-2; }
-    }
-
-    @include keyframes(banner-load) {
-        0% { fill: #888; }
     }
 
     svg.bb-icon-logo {
@@ -3482,12 +2595,6 @@ body {
     }
 }
 
-@include keyframes(colour-out) {
-    to {
-        background-color: transparent;
-    }
-}
-
 @include keyframes(barberpole) {
   to   { background-position: 60px 30px; }
 }
@@ -3506,15 +2613,6 @@ html :focus {
 
 @include header-colour(about, $colour-3);
 @include header-colour(policy, $colour-5);
-// @include header-colour(conferences, $colour-2);
-
-#bike_small + label {
-    padding: 0.5em 2.5em;
-}
-
-#bike_medium + label {
-    padding: 0.5em 1.5em;
-}
 
 #main .graded-options {
     text-align: center;
@@ -3573,124 +2671,6 @@ html :focus {
     }
 }
 
-#main ul.workshops {
-    list-style: none;
-    padding: 0;// 1em;
-    text-align: center;
-    @include default-box-shadow(top, 2, true);
-    background-color: #F8F8F8;
-
-    li {
-        display: inline-block;
-        margin: 0.5em;
-        vertical-align: middle;
-
-        @include before {
-            content: '';
-            display: none;
-            position: fixed;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            background-color: #000;
-            z-index: 99;
-            @include _(opacity, 0.5);
-        }
-
-        &.view {
-            @include before {
-                display: block;
-            }
-            
-            .info {
-                left: 0;
-                right: 0;
-                top: 50%;
-                @include _(transform, translateY(-50%) scale(1));
-
-                @include breakpoint(large) {
-                    left: 19rem;
-                }
-            }
-        }
-    }
-
-    h4, h5 {
-        color: $white;
-        background-color: $colour-1;
-        @include _(text-stroke, 1px rgba(0, 0, 0, 0.25));
-    }
-
-    h4 {
-        max-width: 10em;
-        cursor: pointer;
-        margin: 0;
-        padding: 1em;
-        position: relative;
-        @include default-box-shadow(top);
-        @include _(transition, transform 100ms ease-in-out);
-
-        &:hover {
-            z-index: $zindex-base + 3;
-            @include _(transform, scale(1.25));
-        }
-    }
-
-    h5 {
-        font-size: 1.5em;
-        margin: 0;
-        padding: 0.5em 1em;
-
-        + p {
-            margin-top: 0;
-        }
-    }
-
-    p {
-        padding: 1em;
-        max-height: 50vh;
-        overflow-y: auto;
-    }
-
-    form {
-        text-align: center;
-    }
-
-    button {
-        margin: 1em 0.5em;
-    }
-
-    [contenteditable] {
-        outline: none;
-    }
-
-    .info {
-        position: fixed;
-        background-color: $white;
-        color: $black;
-        left: auto;
-        right: auto;
-        top: auto;
-        z-index: 100;
-        max-width: 40em;
-        max-height: 40em;
-        margin: auto;
-        text-align: left;
-        @include _(transition, all 250ms ease-in-out);
-        @include _(transform, translateY(0) scale(0));
-        @include default-box-shadow(top);
-    }
-
-    [value="delete"] {
-        background-color: $colour-2;
-    }
-
-    [value="cancel"] {
-        background-color: $colour-4;
-    }
-}
-
 .conferences-register .policy-agreement {
     padding: 0.25em 1em;
     margin: 0 0 3em;
@@ -3701,77 +2681,6 @@ html :focus {
 
 body.policy .policy-agreement ul {
     padding: 0 1.5em 0;
-}
-
-.stats {
-    list-style: none;
-
-    h3 {
-        display: inline-block;
-    }
-
-    .stat {
-        position: relative;
-        padding: 0 0.25em;
-        margin: 0.5em;
-        font-size: 2em;
-        display: inline-block;
-        color: $white;
-        background-color: $colour-1;
-        @include default-box-shadow(top, 2);
-        @include _(text-stroke, 1px rgba(0, 0, 0, 0.25));
-
-        &.important {
-            width: 2em;
-            height: 2em;
-            line-height: 2em;
-            text-align: center;
-            @include _(border-radius, 50%);
-        }
-    }
-
-    .money .stat {
-        background-color: $colour-5;
-    }
-
-    .percent {
-        font-size: 1.5em;
-    }
-
-    .value {
-        position: relative;
-        z-index: $zindex-base + 2;
-    }
-
-    .stat-with-label {
-        display: inline-block;
-        text-align: center;
-        vertical-align: middle;
-        background-color: $colour-3;
-        margin: 0.5em;
-        @include default-box-shadow(top, 2);
-
-        .stat {
-            margin-top: 0.25em;
-        }
-    }
-
-    .label {
-        padding: 0.5em 0.5em 0;
-        font-weight: bold;
-    }
-
-    .breakdown {
-        text-align: center;
-    }
-}
-
-.email-preview {
-    max-width: 40rem;
-    margin: 2em auto 0;
-    padding: 0.25em 1em;
-    background-color: #F8F8F8;
-    @include default-box-shadow(top, 2, true);
 }
 
 .facilitators {
@@ -3823,60 +2732,6 @@ body.policy .policy-agreement ul {
             }
         }
     }
-}
-
-.workshop-previews {
-    position: relative;
-    list-style: none;
-    padding: 0;
-
-    p {
-        padding: 0 1rem 0.5rem;
-        font-size: 1em;
-        color: $black;
-    }
-
-    h4 {
-        color: $white;
-        background-color: $colour-1;
-        padding: 0.5em 1em;
-        margin: 0;
-        @include _(text-stroke, 1px rgba(0, 0, 0, 0.25));
-    }
-
-    a {
-        display: block;
-        max-height: 10em;
-        overflow: hidden;
-        margin: 0.5em 0;
-        @include default-box-shadow(top, 2);
-        @include _(transition, transform 150ms ease-in-out);
-
-        &:hover, &:focus, &:active {
-            z-index: $zindex-base + 2;
-            @include _(transform, scale(1.1));
-        }
-
-        @include before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            z-index: $zindex-base + 2;
-            cursor: pointer;
-            @include _(box-shadow, inset 0em -2em 2em -1em $white);
-        }
-
-        @include after {
-            display: none;
-        }
-    }
-}
-
-.translated-content.block {
-    display: inherit;
 }
 
 .list-view {
@@ -3934,126 +2789,6 @@ body.policy .policy-agreement ul {
     .actions {
         margin: 1em 0;
     }
-}
-
-html[data-lingua-franca-example="html"] {
-    $caption-height: 4rem;
-    @include _(transform, translateY($caption-height));
-
-    #lingua-franca-window-caption {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: $caption-height;
-        background-color: #CCC;
-        z-index: 1000;
-        font-size: 1rem;
-        @include _(transform, translateY($caption-height * -1));
-
-        .window-tab {
-            height: 1.75rem;
-            position: relative;
-            background-color: $light-gray;
-            float: left;
-            padding: 0.25em 2em 0 1em;
-            margin: 0.25em 1em;
-            @include _(border-radius, 0.5em 0.5em 0 0);
-            color: #444;
-            @include font-family(secondary);
-
-            @include after {
-                content: '×';
-                position: absolute;
-                right: 0.5em;
-                top: 0.25em;
-            }
-        }
-
-        i {
-            font-style: normal;
-        }
-
-        .window-minimize,
-        .window-maximize {
-            @include after {
-                content: '';
-                position: absolute;
-                top: 0.75em;
-                right: 2em;
-                border-style: solid;
-                border-width: 0 0.5em 0.5em 0.5em;
-                border-left-color: transparent;
-                border-right-color: transparent;
-            }
-        }
-        
-        .window-minimize {
-            @include after {
-                right: 3.5em;
-                border-top-width: 0.5em;
-                border-bottom-width: 0;
-            }
-        }
-
-        .window-close {
-            @include after {
-                content: '×';
-                position: absolute;
-                right: 0.25em;
-                top: 0.1em;
-                font-size: 1.75em;
-                line-height: 1em;
-            }
-        }
-
-        .window-url-bar {
-            position: absolute;
-            top: $caption-height / 2;
-            left: 0;
-            width: 100%;
-            height: $caption-height / 2;
-            background-color: $light-gray;
-
-            .url-bar {
-                position: absolute;
-                top: 0.25rem;
-                left: 3.5rem;
-                bottom: 0.25rem;
-                right: 0.25rem;
-                background-color: #FFF;
-                border: 1px solid #CCC;
-                padding: 0 0.25rem;
-                font-size: 0.8em;
-                line-height: 1.75em;
-            }
-        }
-
-        .window-back,
-        .window-forward {
-            @include after {
-                content: '';
-                position: absolute;
-                left: 0.5em;
-                top: 0.5em;
-                border-style: solid;
-                border-width: 0.5em 0.75em 0.5em 0;
-                border-top-color: transparent;
-                border-bottom-color: transparent;
-                color: #666;
-            }
-        }
-
-        .window-forward {
-            @include after {
-                left: 2em;
-                border-right-width: 0;
-                border-left-width: 0.75em;
-            }
-        }
-    }
-
-    @include translation-pointer;
 }
 
 .workshop-notes {
@@ -4184,148 +2919,10 @@ html[data-lingua-franca-example="html"] {
     vertical-align: -0.75em;
 }
 
-#main .facilitators .actions {
-    margin: 0;
-}
-
 #main form.add-facilitator {
     button {
         height: 2.4em;
         font-size: 0.9em;
-    }
-}
-
-.conferences-edit_schedule {
-    #main {
-        .location {
-            padding-top: 0.25em;
-        }
-        .errors {
-            padding: 0.25em;
-            background-color: $colour-2;
-            color: $white;
-            @include _(text-stroke, 0.5px #000);
-        }
-        .conflict-score {
-            padding: 0.25em;
-            background-color: $colour-3;
-            color: $black;
-        }
-        .all-workshops, .all-events {
-            list-style: none;
-            padding: 0;
-
-            li {
-                margin: 0.5em;
-                padding: 0.5em;
-                border: 1px solid #CCC;
-                background-color: lighten($colour-1, 35);
-                @include default-box-shadow(top, 2);
-
-                &.error {
-                    outline: 0.2em solid $colour-2;
-                    outline-offset: -0.2em;
-                }
-            }
-
-            h3 {
-                margin: 0;
-            }
-
-            .workshop-interest {
-                color: #888;
-                text-align: left;
-                margin: 0.25em 0;
-            }
-
-            .error-description {
-                background-color: $colour-2;
-                color: $white;
-                padding: 0.5em;
-                margin-top: 0.5em;
-            }
-
-            .warnings {
-                background-color: $colour-3;
-                color: $black;
-                padding: 0.5em;
-                margin-top: 0.5em;
-                list-style: none;
-
-                li {
-                    padding: 0;
-                    margin: 0;
-                    background-color: transparent;
-                    @include _(box-shadow, none);
-                }
-            }
-        }
-        .day_parts {
-            list-style: none;
-
-            h4 {
-                display: inline-block;
-                min-width: 12.5em;
-                margin: 0.25em 0;
-            }
-
-            select, .select {
-                float: right;
-                min-width: 5em;
-            }
-
-            .select {
-                padding-left: 0.25em;
-            }
-        }
-        .actions {
-            margin: 2em;
-        }
-        .unsaved {
-            @include font-family(secondary);
-            background-color: lighten($colour-3, 25);
-            margin: 0 5em 2em;
-            padding: 0.5em;
-        }
-        .all-events {
-            li {
-                background-color: lighten($colour-5, 35);
-                
-                &.meal {
-                    background-color: lighten($colour-3, 25);
-                }
-            }
-
-            h3 {
-                margin-bottom: 0.5em;
-            }
-        }
-    }
-}
-
-.conferences-schedule {
-    .actions {
-        margin: 2em;
-    }
-    
-    ul.events, ul.locations {
-        list-style: none;
-
-        .button {
-            float: left;
-            font-size: 1em;
-            margin-bottom: 0.5em;
-            margin-right: 0.5em;
-        }
-
-        h3 {
-            display: inline-block;
-            margin: 0.25em 0 0;
-        }
-
-        li {
-            clear: both;
-        }
     }
 }
 
@@ -4436,61 +3033,6 @@ html[data-lingua-franca-example="html"] {
     }
 }
 
-.on-top-only, .on-top-controls {
-    display: none !important;
-}
-
-html[data-ontop] {
-    body {
-        overflow: hidden;
-    }
-
-    .on-top-target {
-        position: fixed;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        padding: 1em;
-        margin: 0 !important;
-        z-index: 100;
-        overflow: auto;
-    }
-
-    .on-top-control {
-        position: fixed;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        z-index: 101;
-        margin: 0 !important;
-        padding: 1em;
-        background-color: #F8F8F8;
-        @include default-box-shadow(bottom, 2);
-    }
-
-    .on-top-controls {
-        overflow: auto;
-
-        .on-top-close {
-            float: right;
-            background-color: $colour-4;
-        }
-    }
-
-    .on-top-only, .on-top-controls {
-        display: inherit !important;
-
-        &.space {
-            display: block !important;
-        }
-    }
-
-    .not-on-top {
-        display: none !important;
-    }
-}
-
 @include breakpoint(medium) {
     :focus,
     input[type="submit"]:focus,
@@ -4523,10 +3065,6 @@ html[data-ontop] {
 
     h2 {
         font-size: 2.25em;
-
-        &.floating {
-            float: left;
-        }
     }
 
     h3, legend {
@@ -4598,17 +3136,6 @@ html[data-ontop] {
         }
     }
 
-    .flex-inputs {
-        .stretch-item {
-            @include _(flex, 1);
-            @include _(flex-basis, auto);
-        }
-    }
-
-    nav.sub-nav {
-        float: right;
-    }
-
     #main-nav {
         .logo {
             margin-top: 0;
@@ -4623,10 +3150,6 @@ html[data-ontop] {
             text-align: center;
             background-color: transparent;
             @include _(box-shadow, none);
-
-            form {
-                background-color: transparent;
-            }
         }
 
         .nav a {
@@ -4684,15 +3207,6 @@ html[data-ontop] {
             }
         }
     }
-
-    #banner {
-        margin: 3em auto;
-
-        figure {
-            min-height: 40em;
-            margin: rems(-20) auto rems(2);
-        }
-    }
     
     .conference-banner {
         margin: 0 auto;
@@ -4708,12 +3222,6 @@ html[data-ontop] {
             max-width: 100%;
             margin-bottom: 5.5em;
             @include _(box-shadow, 0 0 2em -0.5em rgba(0, 0, 0, 0.5));
-        }
-    }
-
-    #registration-admin-menu {
-        a {
-            margin: 0;
         }
     }
 
@@ -4959,13 +3467,6 @@ html[data-ontop] {
         }
     }
 
-    .admin-blocks {
-        > li {
-            @include _(flex, none);
-            min-width: 12em;
-        }
-    }
-
     .flow-steps {
         ul {
             margin: 2em 0 1em 0;
@@ -4978,44 +3479,9 @@ html[data-ontop] {
             @include _(transform, none);
         }
     }
-
-    .actions {
-        &.figures {
-            .figure {
-                margin: 0 0 1em;
-            }
-            
-            svg, img {
-                width: 5em;
-                margin: 0.5em;
-                float: left;
-            }
-        }
-    }
 }
 
 @include breakpoint(large) {
-    // #main-nav {
-    //     .nav {
-    //         font-size: 1.9em;
-    //         margin-top: 0;
-    //     }
-    // }
-
-    #banner {
-        body.fixed-banner & {
-            position: fixed;
-            top: 0;
-            right: 0;
-            left: $sidebar-width;
-            z-index: $zindex-base + 2;
-        }
-
-        figure {
-            width: 90%;
-        }
-    }
-    
     #main {
         padding-left: $sidebar-width;
     }

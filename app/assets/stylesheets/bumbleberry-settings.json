@@ -1,5 +1,5 @@
 {
-  "stylesheets": ["application", "editor"],
+  "stylesheets": ["application", "editor", "admin"],
   "precompile": {
     "test": {
       "safari": ["5"],

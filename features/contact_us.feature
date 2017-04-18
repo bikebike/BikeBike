@@ -13,7 +13,7 @@ Feature: Contact Us
     And select 'Something about the website'
     And enter a subject as 'My Contact Subject'
     And enter a message as 'My contact message'
-    And press 'Send'
+    And press send
 
     Then I should be on the contact_sent page
     And I should see 'Thank you for contacting us'
@@ -31,7 +31,7 @@ Feature: Contact Us
     And select 'Something about the website'
     And enter a subject as 'My Contact Subject'
     And enter a message as 'My contact message'
-    And press 'Send'
+    And press send
 
     Then I should be on the contact_sent page
     And I should see 'Thank you for contacting us'

@@ -1,4 +1,5 @@
 - body_class 'banner-bottom' unless @this_conference.poster.present?
+- add_stylesheet :admin
 - content_for :banner do
   = render :partial => 'application/header', :locals  => { page_group: :administration, page_key: 'Administration', image_file: @this_conference.poster_url || 'admin.jpg'}
 

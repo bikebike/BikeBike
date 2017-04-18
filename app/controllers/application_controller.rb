@@ -41,11 +41,11 @@ class ApplicationController < BaseController
     @conference = @conferences.first
 
     # add some style sheets
-    @stylesheets ||= Array.new
+    @stylesheets ||= Set.new
     # add the translations stylesheet if translating
     @stylesheets << params[:controller] if params[:controller] == 'translations'
 
-    @_inline_scripts ||= []
+    @_inline_scripts ||= Set.new
     @_inline_scripts << Rails.application.assets.find_asset('main.js').to_s
 
     ActionMailer::Base.default_url_options = {
