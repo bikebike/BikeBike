@@ -7,7 +7,7 @@
       - add_inline_script :schedule if @entire_page
       #schedule-preview
         - @schedule.each do |day, data|
-          %h4=date(day, :weekday)
+          %h4=date(day, :weekday).html_safe
           %table.schedule{class: [data[:locations].present? ? 'has-locations' : 'no-locations', "locations-#{data[:num_locations]}"]}
             - if data[:locations].present? && data[:locations].values.first != :add
               %thead
@@ -19,7 +19,7 @@
               - data[:times].each do |time, time_data|
                 %tr
                   - rowspan = (time_data[:length] * 2).to_i
-                  %th=time(time)
+                  %th=time(time).html_safe
                   - if time_data[:type] == :workshop
                     - data[:locations].each do |id, location|
                       - if time_data[:item][:workshops][id].present?
