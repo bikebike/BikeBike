@@ -1779,6 +1779,11 @@ table.schedule {
 
     tbody {
         border: 0.1rem solid $light-gray;
+
+        th {
+            white-space: nowrap;
+            text-align: right;
+        }
     }
 
     &.locations-1 td.workshop.filled {
@@ -1804,6 +1809,7 @@ table.schedule {
     &.locations-6 td.workshop.filled {
         width: 16.66667%;
     }
+
     td {
         text-align: center;
         border: 0;
