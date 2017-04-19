@@ -54,13 +54,15 @@ def capture_html(distance_from_root = 3)
 end
 
 def attempt_to(refresh_on_fail = false, &block)
+  exception = nil
   begin
     retries ||= 0
     timeout ||= 0
     timeout += 1
     yield
   rescue Exception => e
-    raise e unless (retries += 1) <= 4
+    exception ||= e
+    raise exception unless (retries += 1) <= 4
     visit TestState.last_page if TestState.last_page && refresh_on_fail
     sleep(timeout * timeout)
     retry
