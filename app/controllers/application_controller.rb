@@ -3,7 +3,7 @@ class ApplicationController < BaseController
 
   before_filter :capture_page_info
 
-  helper_method :protect
+  helper_method :protect, :policies
 
   # @@test_host
   # @@test_location
@@ -14,22 +14,22 @@ class ApplicationController < BaseController
 
   def capture_page_info
     # capture request info in case an error occurs
-    if request.method == "GET" && (params[:controller] != 'application' || params[:action] != 'contact')
-      session[:last_request]
-      request_info = {
-        'params' => params,
-        'request' => {
-          'remote_ip'    => request.remote_ip,
-          'uuid'         => request.uuid,
-          'original_url' => request.original_url,
-          'env'          => Hash.new
-        }
-      }
-      request.env.each do |key, value|
-        request_info['request']['env'][key.to_s] = value.to_s
-      end
-      session['request_info'] = request_info
-    end
+    # if request.method == "GET" && (params[:controller] != 'application' || params[:action] != 'contact')
+    #   session[:last_request]
+    #   request_info = {
+    #     'params' => params,
+    #     'request' => {
+    #       'remote_ip'    => request.remote_ip,
+    #       'uuid'         => request.uuid,
+    #       'original_url' => request.original_url,
+    #       'env'          => Hash.new
+    #     }
+    #   }
+    #   request.env.each do |key, value|
+    #     request_info['request']['env'][key.to_s] = value.to_s
+    #   end
+    #   # session['request_info'] = request_info
+    # end
 
     # get the current conferences and set them globally
     status_hierarchy = {
@@ -57,7 +57,7 @@ class ApplicationController < BaseController
       }
 
     @alt_lang_urls = {}
-    I18n.backend.enabled_locales.each do |locale|
+    I18n.backend.enabled_locales.sort.each do |locale|
       locale = locale.to_s
       @alt_lang_urls[locale] = view_context.url_for_locale(locale) # don't show the current locale
     end
@@ -82,18 +82,6 @@ class ApplicationController < BaseController
     @is_policy_page = true
   end
 
-  # def self.set_host(host)
-  #   @@test_host = host
-  # end
-
-  # def self.set_location(location)
-  #   @@test_location = location
-  # end
-
-  # def self.get_location()
-  #   @@test_location
-  # end
-
   def js_error
     # send and email if this is production
     report = "A JavaScript error has occurred on <code>#{params[:location]}</code>"
@@ -108,14 +96,14 @@ class ApplicationController < BaseController
       logger.info "A JavaScript error has occurred on #{params[:location]}:#{params[:lineNumber]}: #{params[:message]}"
 
       if Rails.env.preview? || Rails.env.production?
-        requestHash = {
-          'remote_ip'    => arg.remote_ip,
-          'uuid'         => arg.uuid,
-          'original_url' => arg.original_url,
+        request_info = {
+          'remote_ip'    => request.remote_ip,
+          'uuid'         => request.uuid,
+          'original_url' => request.original_url,
           'env'          => Hash.new
         }
-        request.env.each do | key, value |
-          requestHash['env'][key.to_s] = value.to_s
+        request.env.each do |key, value|
+          request_info['env'][key.to_s] = value.to_s
         end
 
         send_mail(:error_report,
@@ -123,7 +111,7 @@ class ApplicationController < BaseController
             report,
             params[:message],
             nil,
-            requestHash,
+            request_info,
             params,
             current_user,
             Time.now.strftime("%d/%m/%Y %H:%M")
@@ -164,6 +152,15 @@ class ApplicationController < BaseController
     @page_title = 'page_titles.404.Locale_Not_Available'
     @main_title_vars = { vars: { language: view_context.language_name(locale) } }
     @main_title = 'error.locale_not_available.title'
+    
+    unless @alt_lang_urls.present?
+      @alt_lang_urls = {}
+      I18n.backend.enabled_locales.sort.each do |locale|
+        locale = locale.to_s
+        @alt_lang_urls[locale] = view_context.url_for_locale(locale) # don't show the current locale
+      end
+    end
+    
     render 'application/locale_not_available', status: 404
   end
 
@@ -184,21 +181,21 @@ class ApplicationController < BaseController
     # send and email if this is production
     if Rails.env.preview? || Rails.env.production?
       suppress(Exception) do
-        requestHash = {
-          'remote_ip'    => arg.remote_ip,
-          'uuid'         => arg.uuid,
-          'original_url' => arg.original_url,
+        request_info = {
+          'remote_ip'    => request.remote_ip,
+          'uuid'         => request.uuid,
+          'original_url' => request.original_url,
           'env'          => Hash.new
         }
-        request.env.each do | key, value |
-          requestHash['env'][key.to_s] = value.to_s
+        request.env.each do |key, value|
+          request_info['env'][key.to_s] = value.to_s
         end
         send_mail(:error_report,
             "An error has occurred in #{Rails.env}",
             nil,
             exception.to_s,
             exception.backtrace.join("\n"),
-            requestHash,
+            request_info,
             params,
             current_user,
             Time.now.strftime("%d/%m/%Y %H:%M")
@@ -234,6 +231,16 @@ class ApplicationController < BaseController
       end
     end
 
+    request_info = {
+        'remote_ip'    => request.remote_ip,
+        'uuid'         => request.uuid,
+        'original_url' => request.original_url,
+        'env'          => Hash.new
+      }
+    request.env.each do |key, value|
+      request_info['env'][key.to_s] = value.to_s
+    end
+
     send_mail(:contact,
         current_user || params[:email],
         params[:subject],
@@ -241,13 +248,12 @@ class ApplicationController < BaseController
         email_list
       )
 
-    request_info = session['request_info'] || { 'request' => request, 'params' => params }
     send_mail(:contact_details,
         current_user || params[:email],
         params[:subject],
         params[:message],
-        request_info['request'],
-        request_info['params']
+        request_info,
+        params
       )
 
     redirect_to contact_sent_path
@@ -351,21 +357,21 @@ class ApplicationController < BaseController
     # send an email if this is production
     if Rails.env.preview? || Rails.env.production?
       begin
-        requestHash = {
-          'remote_ip'    => arg.remote_ip,
-          'uuid'         => arg.uuid,
-          'original_url' => arg.original_url,
+        request_info = {
+          'remote_ip'    => request.remote_ip,
+          'uuid'         => request.uuid,
+          'original_url' => request.original_url,
           'env'          => Hash.new
         }
-        request.env.each do | key, value |
-          requestHash['env'][key.to_s] = value.to_s
+        request.env.each do |key, value|
+          request_info['env'][key.to_s] = value.to_s
         end
         send_mail(:error_report,
             "A missing translation found in #{Rails.env}",
             "<p>A translation for <code>#{key}</code> in <code>#{locale.to_s}</code> was found. The text that was rendered to the user was:</p><blockquote>#{str || 'nil'}</blockquote>",
             exception.to_s,
             nil,
-            requestHash,
+            request_info,
             params,
             current_user.id,
             Time.now.strftime("%d/%m/%Y %H:%M")
@@ -645,5 +651,20 @@ class ApplicationController < BaseController
       else
         UserMailer.send(*args).deliver_now
       end
+    end
+
+    def policies
+      [
+        :commitment,
+        :respect,
+        :empowerment,
+        :accessible,
+        :peaceful,
+        :spaces,
+        :hearing,
+        :intent,
+        :open_minds,
+        :learning
+      ]
     end
 end

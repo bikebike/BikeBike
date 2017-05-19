@@ -217,11 +217,7 @@ class WorkshopsController < ApplicationController
     # create the request by making the user a facilitator but making their role 'requested'
     WorkshopFacilitator.create(user_id: current_user.id, workshop_id: workshop.id, role: :requested)
 
-    UserMailer.send_mail :workshop_facilitator_request do
-      {
-        :args => [ workshop, current_user, params[:message] ]
-      }
-    end
+    UserMailer.workshop_facilitator_request(workshop.id, current_user.id, params[:message]).deliver_later
 
     redirect_to sent_facilitate_workshop_url(@this_conference.slug, workshop.id)
   end
@@ -254,18 +250,18 @@ class WorkshopsController < ApplicationController
             workshop.id, user_id)
         f.role = :collaborator
         f.save
-        UserMailer.send_mail :workshop_facilitator_request_approved, user.locale do
-          [ workshop, user ]
+        LinguaFranca.with_locale(user.locale) do
+          UserMailer.workshop_facilitator_request_approved(workshop.id, user.id).deliver_later
         end
-        return redirect_to view_workshop_url(@this_conference.slug, workshop.id)    
+        return redirect_to view_workshop_url(@this_conference.slug, workshop.id)
       end
     when :deny
       if workshop.active_facilitator?(current_user) && workshop.requested_collaborator?(User.find(user_id))
         WorkshopFacilitator.delete_all(
           :workshop_id => workshop.id,
           :user_id => user_id)
-        UserMailer.send_mail :workshop_facilitator_request_denied, user.locale do
-          [ workshop, user ]
+        LinguaFranca.with_locale user.locale do
+          UserMailer.workshop_facilitator_request_denied(workshop.id, user.id).deliver_later
         end
         return redirect_to view_workshop_url(@this_conference.slug, workshop.id)    
       end
@@ -312,8 +308,8 @@ class WorkshopsController < ApplicationController
     unless workshop.facilitator?(user)
       WorkshopFacilitator.create(user_id: user.id, workshop_id: workshop.id, role: :collaborator)
       
-      UserMailer.send_mail :workshop_facilitator_request_approved, user.locale do
-        [ workshop, user ]
+      LinguaFranca.with_locale user.locale do
+        UserMailer.workshop_facilitator_request_approved(workshop.id, user.id).deliver_later
       end
     end
 
@@ -332,8 +328,8 @@ class WorkshopsController < ApplicationController
       new_comment = comment.add_comment(current_user, params[:reply])
 
       unless comment.user.id == current_user.id
-        UserMailer.send_mail :workshop_comment, comment.user.locale do
-          [ workshop, new_comment, comment.user ]
+        LinguaFranca.with_locale comment.user.locale do
+          UserMailer.workshop_comment(workshop.id, new_comment.id, comment.user.id).deliver_later
         end
       end
     elsif params[:button] = 'add_comment'
@@ -341,8 +337,8 @@ class WorkshopsController < ApplicationController
 
       workshop.active_facilitators.each do | u |
         unless u.id == current_user.id
-          UserMailer.send_mail :workshop_comment, u.locale do
-            [ workshop, new_comment, u ]
+          LinguaFranca.with_locale u.locale do
+            UserMailer.workshop_comment(workshop.id, new_comment.id, u.id).deliver_later
           end
         end
       end

@@ -70,6 +70,17 @@ class ConferenceAdministrationController < ApplicationController
     end
   end
 
+  def previous_stats
+    set_conference
+    conference = Conference.find_by_slug(params[:conference_slug])
+    return do_403 unless conference.is_public
+    get_stats(false, nil, conference)
+    logger.info "Generating #{conference.slug}.xls"
+    return respond_to do |format|
+      format.xlsx { render xlsx: '../conferences/stats', filename: "stats-#{conference.slug}" }
+    end
+  end
+
   rescue_from ActiveRecord::PremissionDenied do |exception|
     do_403
   end
@@ -99,6 +110,9 @@ class ConferenceAdministrationController < ApplicationController
     def administrate_description
     end
 
+    def administrate_group_ride
+    end
+
     def administrate_poster
     end
 
@@ -117,6 +131,30 @@ class ConferenceAdministrationController < ApplicationController
     end
 
     def administrate_payment_message
+    end
+
+    def administrate_housing_info
+    end
+
+    def administrate_workshop_info
+    end
+
+    def administrate_schedule_info
+    end
+
+    def administrate_travel_info
+    end
+
+    def administrate_city_info
+    end
+
+    def administrate_what_to_bring
+    end
+
+    def administrate_volunteering_info
+    end
+
+    def administrate_additional_details
     end
 
     def administrate_suggested_amounts
@@ -168,7 +206,7 @@ class ConferenceAdministrationController < ApplicationController
           end
         end
         return respond_to do |format|
-          format.xlsx { render xlsx: :stats, filename: "organizations" }
+          format.xlsx { render xlsx: '../conferences/stats', filename: "organizations" }
         end
       end
     end
@@ -184,7 +222,7 @@ class ConferenceAdministrationController < ApplicationController
       if request.format.xlsx?
         logger.info "Generating stats.xls"
         return respond_to do |format|
-          format.xlsx { render xlsx: :stats, filename: "stats-#{DateTime.now.strftime('%Y-%m-%d')}" }
+          format.xlsx { render xlsx: '../conferences/stats', filename: "stats-#{DateTime.now.strftime('%Y-%m-%d')}" }
         end
       end
 
@@ -224,7 +262,7 @@ class ConferenceAdministrationController < ApplicationController
       if request.format.xlsx?
         logger.info "Generating stats.xls"
         return respond_to do |format|
-          format.xlsx { render xlsx: :stats, filename: "stats-#{DateTime.now.strftime('%Y-%m-%d')}" }
+          format.xlsx { render xlsx: '../conferences/stats', filename: "stats-#{DateTime.now.strftime('%Y-%m-%d')}" }
         end
       else
         @registration_count = @registrations.size
@@ -249,6 +287,11 @@ class ConferenceAdministrationController < ApplicationController
               @donations += r.registration_fees_paid
             end
           end
+        end
+
+        @past_conferences = []
+        Conference.all.order("start_date DESC").each do |conference|
+          @past_conferences << conference if conference.is_public && @this_conference.id != conference.id
         end
       end
     end
@@ -327,7 +370,7 @@ class ConferenceAdministrationController < ApplicationController
           @excel_data[:data] << host_data
         end
         return respond_to do |format|
-          format.xlsx { render xlsx: :stats, filename: "housing" }
+          format.xlsx { render xlsx: '../conferences/stats', filename: "housing" }
         end
       end
     end
@@ -379,8 +422,8 @@ class ConferenceAdministrationController < ApplicationController
     def administrate_publish_schedule
     end
 
-    def get_stats(html_format = false, id = nil)
-      @registrations = ConferenceRegistration.where(:conference_id => @this_conference.id).sort { |a,b| (a.user.present? ? (a.user.firstname || '') : '').downcase <=> (b.user.present? ? (b.user.firstname || '') : '').downcase }
+    def get_stats(html_format = false, id = nil, conference = @this_conference)
+      @registrations = ConferenceRegistration.where(conference_id: conference.id).sort { |a,b| (a.user.present? ? (a.user.firstname || '') : '').downcase <=> (b.user.present? ? (b.user.firstname || '') : '').downcase }
       @excel_data = {
         columns: [
             :name,
@@ -402,7 +445,6 @@ class ConferenceAdministrationController < ApplicationController
             :food,
             :companion,
             :companion_email,
-            :allergies,
             :other,
             :can_provide_housing,
             :first_day,
@@ -421,7 +463,6 @@ class ConferenceAdministrationController < ApplicationController
             arrival: [:date, :day],
             departure: [:date, :day],
             registration_fees_paid: :money,
-            allergies: :text,
             other: :text,
             first_day: [:date, :day],
             last_day: [:date, :day],
@@ -443,7 +484,6 @@ class ConferenceAdministrationController < ApplicationController
             food: 'forms.labels.generic.food',
             companion: 'articles.conference_registration.terms.companion',
             companion_email: 'articles.conference_registration.terms.companion_email',
-            allergies: 'forms.labels.generic.allergies',
             registration_fees_paid: 'articles.conference_registration.headings.fees_paid',
             other: 'forms.labels.generic.other_notes',
             can_provide_housing: 'articles.conference_registration.can_provide_housing',
@@ -458,6 +498,11 @@ class ConferenceAdministrationController < ApplicationController
           },
         data: []
       }
+
+      if conference.id != @this_conference.id
+        @excel_data[:columns] -= [:name, :email]
+      end
+
       User.AVAILABLE_LANGUAGES.each do |l|
         @excel_data[:keys]["language_#{l}".to_sym] = "languages.#{l.to_s}" 
       end
@@ -497,10 +542,9 @@ class ConferenceAdministrationController < ApplicationController
               bike: r.bike.present? ? (view_context._"articles.conference_registration.questions.bike.#{r.bike}") : '',
               food: r.food.present? ? (view_context._"articles.conference_registration.questions.food.#{r.food}") : '',
               companion: companion,
-              companion_email: (housing_data['companions'] || ['']).first,
-              allergies: r.allergies,
+              companion_email: (housing_data['companion'] || { 'email' => ''})['email'],
               registration_fees_paid: r.registration_fees_paid,
-              other: r.other,
+              other: r.allergies.present? ? "#{r.allergies}\n\n#{r.other}" : r.other,
               can_provide_housing: r.can_provide_housing ? (view_context._'articles.conference_registration.questions.bike.yes') : '',
               first_day: availability[0].present? ? availability[0].strftime("%F %T") : '',
               last_day: availability[1].present? ? availability[1].strftime("%F %T") : '',
@@ -650,12 +694,16 @@ class ConferenceAdministrationController < ApplicationController
               @housing_data[host_id][:guest_data][guest_id][:warnings][:space] = { actual: (view_context._"forms.labels.generic.#{space.to_s}"), expected: (view_context._"articles.conference_registration.questions.housing.#{guest.housing}")}
             end
 
-            companions = data['companions'] || []
-            companions.each do |companion|
-              user = User.find_user(companion)
-              if user.present?
+            if data['companion'].present?
+              companion = if data['companion']['id'].present?
+                            User.find(data['companion']['id'])
+                          else
+                            User.find_user(data['companion']['email'])
+                          end
+
+              if companion.present?
                 reg = ConferenceRegistration.find_by(
-                    user_id: user.id,
+                    user_id: companion.id,
                     conference_id: @this_conference.id
                   )
                 if reg.present? && @guests[reg.id].present?
@@ -798,6 +846,87 @@ class ConferenceAdministrationController < ApplicationController
       return false
     end
 
+    def admin_update_group_ride
+      params[:group_ride_info].each do |locale, value|
+        @this_conference.set_column_for_locale(:group_ride_info, locale, html_value(value))
+      end
+      @this_conference.save
+      set_success_message @admin_step
+      return false
+    end
+
+    def admin_update_housing_info
+      params[:housing_info].each do |locale, value|
+        @this_conference.set_column_for_locale(:housing_info, locale, html_value(value))
+      end
+      @this_conference.save
+      set_success_message @admin_step
+      return false
+    end
+
+    def admin_update_workshop_info
+      params[:workshop_info].each do |locale, value|
+        @this_conference.set_column_for_locale(:workshop_info, locale, html_value(value))
+      end
+      @this_conference.save
+      set_success_message @admin_step
+      return false
+    end
+
+    def admin_update_schedule_info
+      params[:schedule_info].each do |locale, value|
+        @this_conference.set_column_for_locale(:schedule_info, locale, html_value(value))
+      end
+      @this_conference.save
+      set_success_message @admin_step
+      return false
+    end
+
+    def admin_update_travel_info
+      params[:travel_info].each do |locale, value|
+        @this_conference.set_column_for_locale(:travel_info, locale, html_value(value))
+      end
+      @this_conference.save
+      set_success_message @admin_step
+      return false
+    end
+
+    def admin_update_city_info
+      params[:city_info].each do |locale, value|
+        @this_conference.set_column_for_locale(:city_info, locale, html_value(value))
+      end
+      @this_conference.save
+      set_success_message @admin_step
+      return false
+    end
+
+    def admin_update_what_to_bring
+      params[:what_to_bring].each do |locale, value|
+        @this_conference.set_column_for_locale(:what_to_bring, locale, html_value(value))
+      end
+      @this_conference.save
+      set_success_message @admin_step
+      return false
+    end
+
+    def admin_update_volunteering_info
+      params[:volunteering_info].each do |locale, value|
+        @this_conference.set_column_for_locale(:volunteering_info, locale, html_value(value))
+      end
+      @this_conference.save
+      set_success_message @admin_step
+      return false
+    end
+
+    def admin_update_additional_details
+      params[:additional_details].each do |locale, value|
+        @this_conference.set_column_for_locale(:additional_details, locale, html_value(value))
+      end
+      @this_conference.save
+      set_success_message @admin_step
+      return false
+    end
+
     def admin_update_poster
       begin
         @this_conference.poster = params[:poster]
@@ -902,7 +1031,9 @@ class ConferenceAdministrationController < ApplicationController
             registration.send("#{key.to_s}=", value.present? ? Date.parse(value) : nil)
           when :companion_email
             registration.housing_data ||= {}
-            registration.housing_data['companions'] = [value]
+            registration.housing_data['companion'] ||= {}
+            registration.housing_data['companion']['email'] = value
+            registration.housing_data['companion']['id'] = User.find_user(value)
           when :preferred_language
             registration.user.locale = value
             user_changed = true
@@ -1004,7 +1135,7 @@ class ConferenceAdministrationController < ApplicationController
         do_404
       end
 
-      return true
+      return nil
     end
 
     def admin_update_broadcast
