@@ -1022,6 +1022,7 @@ class ConferenceAdministrationController < ApplicationController
               user.id,
               @this_conference.id
             ).deliver_later
+        end
         redirect_to administration_step_path(@this_conference.slug, :broadcast_sent)
         return true
       elsif params[:button] == 'preview'
