@@ -35,7 +35,7 @@ gem 'lingua_franca', git: 'https://github.com/lingua-franca/lingua_franca.git', 
 gem 'marmara', git: 'https://github.com/lingua-franca/marmara.git', branch: 'master'
 
 # Bike!Bike! specific stuff
-gem 'paypal-express', git: 'https://github.com/ianfleeton/paypal-express'
+gem 'ianfleeton-paypal-express', require: 'paypal/express'
 gem 'geocoder'
 gem 'sitemap_generator'
 gem 'sass-json-vars'
@@ -83,7 +83,10 @@ group :production, :preview do
 end
 
 group :production, :preview do
-  gem 'unicorn', require: false
+  platforms :ruby do
+    gem 'unicorn', require: false
+  end
+
   gem 'daemon-spawn'
   gem 'daemons'
 end

@@ -103,18 +103,28 @@ class ApplicationController < BaseController
       # log the error
       logger.info "A JavaScript error has occurred on #{params[:location]}:#{params[:lineNumber]}: #{params[:message]}"
 
-      UserMailer.send_mail(:error_report) do 
-        [
-          "A JavaScript error has occurred",
-          report,
-          params[:message],
-          nil,
-          request,
-          params,
-          current_user,
-          Time.now.strftime("%d/%m/%Y %H:%M")
-        ]
-      end if Rails.env.preview? || Rails.env.production?
+      if Rails.env.preview? || Rails.env.production?
+        requestHash = {
+          'remote_ip'    => arg.remote_ip,
+          'uuid'         => arg.uuid,
+          'original_url' => arg.original_url,
+          'env'          => Hash.new
+        }
+        request.env.each do | key, value |
+          requestHash['env'][key.to_s] = value.to_s
+        end
+
+        UserMailer.error_report(
+            "A JavaScript error has occurred",
+            report,
+            params[:message],
+            nil,
+            requestHash,
+            params,
+            current_user,
+            Time.now.strftime("%d/%m/%Y %H:%M")
+        ).deliver_later!
+      end
     rescue Exception => exception2
       logger.info exception2.to_s
       logger.info exception2.backtrace.join("\n")
@@ -168,19 +178,28 @@ class ApplicationController < BaseController
     logger.info exception.backtrace.join("\n")
 
     # send and email if this is production
-    suppress(Exception) do
-      UserMailer.send_mail(:error_report) do 
-        [
-          "An error has occurred in #{Rails.env}",
-          nil,
-          exception.to_s,
-          exception.backtrace.join("\n"),
-          request,
-          params,
-          current_user,
-          Time.now.strftime("%d/%m/%Y %H:%M")
-        ]
-      end if Rails.env.preview? || Rails.env.production?
+    if Rails.env.preview? || Rails.env.production?
+      suppress(Exception) do
+        requestHash = {
+          'remote_ip'    => arg.remote_ip,
+          'uuid'         => arg.uuid,
+          'original_url' => arg.original_url,
+          'env'          => Hash.new
+        }
+        request.env.each do | key, value |
+          requestHash['env'][key.to_s] = value.to_s
+        end
+        UserMailer.error_report(
+            "An error has occurred in #{Rails.env}",
+            nil,
+            exception.to_s,
+            exception.backtrace.join("\n"),
+            requestHash,
+            params,
+            current_user,
+            Time.now.strftime("%d/%m/%Y %H:%M")
+        ).deliver_later!
+      end
     end
 
     # raise the error if we are in development so that we can debug it
@@ -211,25 +230,21 @@ class ApplicationController < BaseController
       end
     end
 
-    UserMailer.send_mail(:contact) do 
-      [
+    UserMailer.contact(
         current_user || params[:email],
         params[:subject],
         params[:message],
         email_list
-      ]
-    end
+      ).deliver_later
 
     request_info = session['request_info'] || { 'request' => request, 'params' => params }
-    UserMailer.send_mail(:contact_details) do 
-      [
+    UserMailer.contact_details(
         current_user || params[:email],
         params[:subject],
         params[:message],
         request_info['request'],
         request_info['params']
-      ]
-    end
+      ).deliver_later
 
     redirect_to contact_sent_path
   end
@@ -303,8 +318,8 @@ class ApplicationController < BaseController
     if object.respond_to?(:get_translators)
       object.get_translators(data, locale).each do |id, user|
         if user.id != current_user.id && user.id != translator_id
-          UserMailer.send_mail mailer, user.locale do
-            { :args => [object, data, locale, user, translator] }
+          LinguaFranca.with_locale user.locale do
+            UserMailer.send(mailer, object.id, data, locale, user.id, translator.id).deliver_later
           end
         end
       end
@@ -317,8 +332,8 @@ class ApplicationController < BaseController
     if object.respond_to?(:get_translators)
       object.get_translators(data).each do |id, user|
         if user.id != current_user.id
-          UserMailer.send_mail mailer, user.locale do
-            { :args => [object, data, user, current_user] }
+          LinguaFranca.with_locale user.locale do
+            UserMailer.send(mailer, object.id, data, user.id, current_user.id)
           end
         end
       end
@@ -329,23 +344,32 @@ class ApplicationController < BaseController
     # log it
     logger.info "Missing translation found for: #{key}"
 
-    # send and email if this is production
-    begin
-      UserMailer.send_mail(:error_report) do 
-        [
-          "A missing translation found in #{Rails.env}",
-          "<p>A translation for <code>#{key}</code> in <code>#{locale.to_s}</code> was found. The text that was rendered to the user was:</p><blockquote>#{str || 'nil'}</blockquote>",
-          exception.to_s,
-          nil,
-          request,
-          params,
-          current_user,
-          Time.now.strftime("%d/%m/%Y %H:%M")
-        ]
-      end if Rails.env.preview? || Rails.env.production?
-    rescue Exception => exception2
-      logger.info exception2.to_s
-      logger.info exception2.backtrace.join("\n")
+    # send an email if this is production
+    if Rails.env.preview? || Rails.env.production?
+      begin
+        requestHash = {
+          'remote_ip'    => arg.remote_ip,
+          'uuid'         => arg.uuid,
+          'original_url' => arg.original_url,
+          'env'          => Hash.new
+        }
+        request.env.each do | key, value |
+          requestHash['env'][key.to_s] = value.to_s
+        end
+        UserMailer.error_report(
+            "A missing translation found in #{Rails.env}",
+            "<p>A translation for <code>#{key}</code> in <code>#{locale.to_s}</code> was found. The text that was rendered to the user was:</p><blockquote>#{str || 'nil'}</blockquote>",
+            exception.to_s,
+            nil,
+            requestHash,
+            params,
+            current_user.id,
+            Time.now.strftime("%d/%m/%Y %H:%M")
+        ).deliver_later!
+      rescue Exception => exception2
+        logger.info exception2.to_s
+        logger.info exception2.backtrace.join("\n")
+      end
     end
   end
 
@@ -608,6 +632,6 @@ class ApplicationController < BaseController
 
     # send the confirmation email and make sure it get sent as quickly as possible
     def send_confirmation(confirmation)
-      UserMailer.send_mail(:email_confirmation) { confirmation }
+      UserMailer.email_confirmation(confirmation.id).deliver_now
     end
 end

@@ -251,6 +251,54 @@ Portland OR: !ruby/object:Geocoder::Result::Google
     - locality
     - political
   cache_hit: 
+Prince Rupert BC: !ruby/object:Geocoder::Result::Google
+  data:
+    address_components:
+    - long_name: Prince Rupert
+      short_name: Prince Rupert
+      types:
+      - locality
+      - political
+    - long_name: Skeena-Queen Charlotte
+      short_name: Skeena-Queen Charlotte
+      types:
+      - administrative_area_level_2
+      - political
+    - long_name: British Columbia
+      short_name: BC
+      types:
+      - administrative_area_level_1
+      - political
+    - long_name: Canada
+      short_name: CA
+      types:
+      - country
+      - political
+    formatted_address: Prince Rupert, BC, Canada
+    geometry:
+      bounds:
+        northeast:
+          lat: 54.338083
+          lng: -130.2437961
+        southwest:
+          lat: 54.19392
+          lng: -130.3634291
+      location:
+        lat: 54.3150367
+        lng: -130.3208187
+      location_type: APPROXIMATE
+      viewport:
+        northeast:
+          lat: 54.3343706
+          lng: -130.2478032
+        southwest:
+          lat: 54.202669
+          lng: -130.3608029
+    place_id: ChIJaUV_axPVclQRElbZTQ_jB3E
+    types:
+    - locality
+    - political
+  cache_hit: 
 Regina, SK: !ruby/object:Geocoder::Result::Google
   data:
     address_components:
@@ -449,54 +497,6 @@ Eldorado, MX: !ruby/object:Geocoder::Result::Google
           lat: 24.3108689
           lng: -107.3831387
     place_id: ChIJv33Pqm0ho4YRUQ45wKAluZ4
-    types:
-    - locality
-    - political
-  cache_hit: 
-Prince Rupert BC: !ruby/object:Geocoder::Result::Google
-  data:
-    address_components:
-    - long_name: Prince Rupert
-      short_name: Prince Rupert
-      types:
-      - locality
-      - political
-    - long_name: Skeena-Queen Charlotte
-      short_name: Skeena-Queen Charlotte
-      types:
-      - administrative_area_level_2
-      - political
-    - long_name: British Columbia
-      short_name: BC
-      types:
-      - administrative_area_level_1
-      - political
-    - long_name: Canada
-      short_name: CA
-      types:
-      - country
-      - political
-    formatted_address: Prince Rupert, BC, Canada
-    geometry:
-      bounds:
-        northeast:
-          lat: 54.338083
-          lng: -130.2437961
-        southwest:
-          lat: 54.19392
-          lng: -130.3634291
-      location:
-        lat: 54.3150367
-        lng: -130.3208187
-      location_type: APPROXIMATE
-      viewport:
-        northeast:
-          lat: 54.3343706
-          lng: -130.2478032
-        southwest:
-          lat: 54.202669
-          lng: -130.3608029
-    place_id: ChIJaUV_axPVclQRElbZTQ_jB3E
     types:
     - locality
     - political
