@@ -8,6 +8,10 @@ class ApplicationController < BaseController
   @@test_host
   @@test_location
 
+  def default_url_options
+    { host: "#{request.protocol}#{request.host_with_port}" }
+  end
+
   def capture_page_info
     # capture request info in case an error occurs
     if request.method == "GET" && (params[:controller] != 'application' || params[:action] != 'contact')
@@ -225,7 +229,7 @@ class ApplicationController < BaseController
 
       @conference.organizations.each do |org|
         org.users.each do |user|
-          email_list << user.named_email
+          # email_list << user.named_email
         end
       end
     end

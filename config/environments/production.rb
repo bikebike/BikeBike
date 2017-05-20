@@ -88,14 +88,14 @@ BikeBike::Application.configure do
 
 	config.action_mailer.delivery_method = :smtp
 	config.action_mailer.smtp_settings = {
-		:address => 'mail.bikebike.org',
-		:domain => 'preview.bikebike.org',
+		:address => 'smtp.gmail.com',
+		:domain => 'bikebike.org',
 		:port => 587,
 		:authentication => :plain,
 		:enable_starttls_auto => true,
 		:openssl_verify_mode  => 'none',
-		:user_name => 'info@preview.bikebike.org',
-		:password => 'test'
+		:user_name => '',
+		:password => ''
 	}
 	config.action_mailer.raise_delivery_errors = true
 	config.action_mailer.perform_deliveries = true

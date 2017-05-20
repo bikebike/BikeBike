@@ -1205,7 +1205,7 @@ fieldset {
         }
     }
 
-    ul {
+    .locale-select, .text-editors {
         list-style: none;
         padding: 0;
         margin: 0;
@@ -1253,7 +1253,7 @@ fieldset {
         position: relative;
         background-color: $white;
 
-        li {
+        li[data-locale] {
             display: none;
 
             &.selected {
