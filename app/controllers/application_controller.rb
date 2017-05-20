@@ -12,6 +12,10 @@ class ApplicationController < BaseController
     { host: "#{request.protocol}#{request.host_with_port}", trailing_slash: true }
   end
 
+  def default_url_options
+    { host: "#{request.protocol}#{request.host_with_port}" }
+  end
+
   def capture_page_info
     # capture request info in case an error occurs
     # if request.method == "GET" && (params[:controller] != 'application' || params[:action] != 'contact')
