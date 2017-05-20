@@ -12,6 +12,7 @@
             modules: {
                 toolbar: [
                     [{ 'header': [1, 2, false] }],
+                    ['link', 'image'],
                     ['bold', 'italic', 'underline', 'strike'],
                     [{ 'script': 'sub'}, { 'script': 'super' }],
                     [{ 'list': 'ordered'}, { 'list': 'bullet' }, 'blockquote']
