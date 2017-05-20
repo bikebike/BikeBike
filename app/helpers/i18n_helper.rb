@@ -13,9 +13,12 @@ module I18nHelper
     new_params = params.merge({action: (params[:_original_action] || params[:action])})
     new_params.delete(:_original_action)
 
-    if relative || Rails.env.development? || Rails.env.test?
+    if Rails.env.development? || Rails.env.test?
       return url_for(new_params.merge({lang: locale.to_s}))
     end
+
+    # return now if this is a relative path, don't add the host
+    return url_for(new_params) if relative
   
     subdomain = Rails.env.preview? ? "preview-#{locale.to_s}" : locale.to_s
     url_for(new_params.merge(host: "#{subdomain}.bikebike.org"))
