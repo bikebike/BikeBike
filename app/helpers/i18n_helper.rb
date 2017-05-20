@@ -2,18 +2,18 @@
 module I18nHelper
   def url_for_locale(locale, url = nil)
     return url unless locale.present?
-    url ||= current_path
+    url ||= current_path(true)
 
     return url if Rails.env.development? || Rails.env.test?
     return "https://preview-#{locale.to_s}.bikebike.org#{url}" if Rails.env.preview?
     "https://#{locale.to_s}.bikebike.org#{url}"
   end
 
-  def current_path
+  def current_path(relative = false)
     new_params = params.merge({action: (params[:_original_action] || params[:action])})
     new_params.delete(:_original_action)
 
-    if Rails.env.development? || Rails.env.test?
+    if relative || Rails.env.development? || Rails.env.test?
       return url_for(new_params.merge({lang: locale.to_s}))
     end
   
