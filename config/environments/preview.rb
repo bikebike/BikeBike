@@ -1,4 +1,5 @@
 BikeBike::Application.configure do
+  config.app_config = config_for(:app_config)
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
@@ -87,13 +88,14 @@ BikeBike::Application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :address => 'smtp.gmail.com',
-    :domain => 'localhost:3000',
-    :port => 587,
-    :authentication => :plain,
-    :enable_starttls_auto => true,
-    :user_name => ENV['MAILER_USER'],
-    :password => ENV['MAILER_PASSWORD']
+    address: 'smtp.gmail.com',
+    domain: 'bikebike.org',
+    port: 587,
+    authentication: :plain,
+    enable_starttls_auto: true,
+    openssl_verify_mode: 'none',
+    user_name: 'info@bikebike.org',
+    password: config.app_config['email_password']
   }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true
@@ -101,4 +103,6 @@ BikeBike::Application.configure do
   I18n.config.language_detection_method = I18n::Config::DETECT_LANGUAGE_FROM_SUBDOMAIN
   I18n.config.subdomain_format = 'preview-%'
   I18n.config.host_locale_regex = /^preview\-([a-z]{2})\.[^\.]+\..*$/
+  config.action_controller.default_url_options = { host: 'https://bikebike.org', trailing_slash: true }
+  Sidekiq::Extensions.enable_delay!
 end

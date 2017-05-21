@@ -167,6 +167,14 @@ class UserMailer < ActionMailer::Base
     mail to: 'goodgodwin@hotmail.com', subject: @subject
   end
 
+  def self.send_mail(*args)
+    if Rails.env.preview? || Rails.env.production?
+      delay(Rails.env).send(*args)
+    else
+      send(*args).deliver_now
+    end
+  end
+
   private
   def set_host(*args)
     if Rails.env.production?

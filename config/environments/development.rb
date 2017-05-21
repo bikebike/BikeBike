@@ -58,4 +58,5 @@ BikeBike::Application.configure do
   config.action_mailer.delivery_method = :letter_opener
 
   Paypal.sandbox!
+  config.action_controller.default_url_options = { trailing_slash: true }
 end
