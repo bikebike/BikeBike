@@ -1015,13 +1015,13 @@ class ConferenceAdministrationController < ApplicationController
       @register_template = :administration
       if params[:button] == 'send'
         view_context.broadcast_to(@send_to).each do |user|
-          UserMailer.broadcast(
+          UserMailer.send_mail(:broadcast,
               "#{request.protocol}#{request.host_with_port}",
               @subject,
               @body,
               user.id,
               @this_conference.id
-            ).deliver_later
+            )
         end
         redirect_to administration_step_path(@this_conference.slug, :broadcast_sent)
         return true
@@ -1030,13 +1030,13 @@ class ConferenceAdministrationController < ApplicationController
         @broadcast_step = :preview
       elsif params[:button] == 'test'
         @broadcast_step = :test
-        UserMailer.broadcast(
+        UserMailer.send_mail(:broadcast,
             "#{request.protocol}#{request.host_with_port}",
             @subject,
             @body,
             current_user.id,
             @this_conference.id
-          ).deliver_later
+          )
         @send_to_count = view_context.broadcast_to(@send_to).size
       end
       return false

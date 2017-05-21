@@ -5,11 +5,11 @@ class ApplicationController < BaseController
 
   helper_method :protect
 
-  @@test_host
-  @@test_location
+  # @@test_host
+  # @@test_location
 
   def default_url_options
-    { host: "#{request.protocol}#{request.host_with_port}" }
+    { host: "#{request.protocol}#{request.host_with_port}", trailing_slash: true }
   end
 
   def capture_page_info
@@ -82,17 +82,17 @@ class ApplicationController < BaseController
     @is_policy_page = true
   end
 
-  def self.set_host(host)
-    @@test_host = host
-  end
+  # def self.set_host(host)
+  #   @@test_host = host
+  # end
 
-  def self.set_location(location)
-    @@test_location = location
-  end
+  # def self.set_location(location)
+  #   @@test_location = location
+  # end
 
-  def self.get_location()
-    @@test_location
-  end
+  # def self.get_location()
+  #   @@test_location
+  # end
 
   def js_error
     # send and email if this is production
@@ -118,7 +118,7 @@ class ApplicationController < BaseController
           requestHash['env'][key.to_s] = value.to_s
         end
 
-        UserMailer.error_report(
+        UserMailer.send_mail(:error_report,
             "A JavaScript error has occurred",
             report,
             params[:message],
@@ -127,7 +127,7 @@ class ApplicationController < BaseController
             params,
             current_user,
             Time.now.strftime("%d/%m/%Y %H:%M")
-        ).deliver_later!
+        )
       end
     rescue Exception => exception2
       logger.info exception2.to_s
@@ -193,7 +193,7 @@ class ApplicationController < BaseController
         request.env.each do | key, value |
           requestHash['env'][key.to_s] = value.to_s
         end
-        UserMailer.error_report(
+        UserMailer.send_mail(:error_report,
             "An error has occurred in #{Rails.env}",
             nil,
             exception.to_s,
@@ -202,7 +202,7 @@ class ApplicationController < BaseController
             params,
             current_user,
             Time.now.strftime("%d/%m/%Y %H:%M")
-        ).deliver_later!
+        )
       end
     end
 
@@ -234,21 +234,21 @@ class ApplicationController < BaseController
       end
     end
 
-    UserMailer.contact(
+    UserMailer.send_mail(:contact,
         current_user || params[:email],
         params[:subject],
         params[:message],
         email_list
-      ).deliver_later
+      )
 
     request_info = session['request_info'] || { 'request' => request, 'params' => params }
-    UserMailer.contact_details(
+    UserMailer.send_mail(:contact_details,
         current_user || params[:email],
         params[:subject],
         params[:message],
         request_info['request'],
         request_info['params']
-      ).deliver_later
+      )
 
     redirect_to contact_sent_path
   end
@@ -323,7 +323,7 @@ class ApplicationController < BaseController
       object.get_translators(data, locale).each do |id, user|
         if user.id != current_user.id && user.id != translator_id
           LinguaFranca.with_locale user.locale do
-            UserMailer.send(mailer, object.id, data, locale, user.id, translator.id).deliver_later
+            UserMailer.send_mail(:send, mailer, object.id, data, locale, user.id, translator.id)
           end
         end
       end
@@ -337,7 +337,7 @@ class ApplicationController < BaseController
       object.get_translators(data).each do |id, user|
         if user.id != current_user.id
           LinguaFranca.with_locale user.locale do
-            UserMailer.send(mailer, object.id, data, user.id, current_user.id)
+            UserMailer.send_mail(:send, mailer, object.id, data, user.id, current_user.id)
           end
         end
       end
@@ -360,7 +360,7 @@ class ApplicationController < BaseController
         request.env.each do | key, value |
           requestHash['env'][key.to_s] = value.to_s
         end
-        UserMailer.error_report(
+        UserMailer.send_mail(:error_report,
             "A missing translation found in #{Rails.env}",
             "<p>A translation for <code>#{key}</code> in <code>#{locale.to_s}</code> was found. The text that was rendered to the user was:</p><blockquote>#{str || 'nil'}</blockquote>",
             exception.to_s,
@@ -369,7 +369,7 @@ class ApplicationController < BaseController
             params,
             current_user.id,
             Time.now.strftime("%d/%m/%Y %H:%M")
-        ).deliver_later!
+        )
       rescue Exception => exception2
         logger.info exception2.to_s
         logger.info exception2.backtrace.join("\n")
@@ -636,6 +636,6 @@ class ApplicationController < BaseController
 
     # send the confirmation email and make sure it get sent as quickly as possible
     def send_confirmation(confirmation)
-      UserMailer.email_confirmation(confirmation.id).deliver_now
+      UserMailer.send_mail(:email_confirmation, confirmation.id)
     end
 end
