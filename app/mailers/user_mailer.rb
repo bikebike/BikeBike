@@ -169,7 +169,7 @@ class UserMailer < ActionMailer::Base
 
   def self.send_mail(*args)
     if Rails.env.preview? || Rails.env.production?
-      delay(Rails.env).send(*args)
+      delay(queue: Rails.env.to_s).send(*args)
     else
       send(*args).deliver_now
     end
