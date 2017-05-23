@@ -118,7 +118,7 @@ class ApplicationController < BaseController
           requestHash['env'][key.to_s] = value.to_s
         end
 
-        UserMailer.send_mail(:error_report,
+        send_mail(:error_report,
             "A JavaScript error has occurred",
             report,
             params[:message],
@@ -193,7 +193,7 @@ class ApplicationController < BaseController
         request.env.each do | key, value |
           requestHash['env'][key.to_s] = value.to_s
         end
-        UserMailer.send_mail(:error_report,
+        send_mail(:error_report,
             "An error has occurred in #{Rails.env}",
             nil,
             exception.to_s,
@@ -234,7 +234,7 @@ class ApplicationController < BaseController
       end
     end
 
-    UserMailer.send_mail(:contact,
+    send_mail(:contact,
         current_user || params[:email],
         params[:subject],
         params[:message],
@@ -242,7 +242,7 @@ class ApplicationController < BaseController
       )
 
     request_info = session['request_info'] || { 'request' => request, 'params' => params }
-    UserMailer.send_mail(:contact_details,
+    send_mail(:contact_details,
         current_user || params[:email],
         params[:subject],
         params[:message],
@@ -323,7 +323,7 @@ class ApplicationController < BaseController
       object.get_translators(data, locale).each do |id, user|
         if user.id != current_user.id && user.id != translator_id
           LinguaFranca.with_locale user.locale do
-            UserMailer.send_mail(:send, mailer, object.id, data, locale, user.id, translator.id)
+            send_mail(:send, mailer, object.id, data, locale, user.id, translator.id)
           end
         end
       end
@@ -337,7 +337,7 @@ class ApplicationController < BaseController
       object.get_translators(data).each do |id, user|
         if user.id != current_user.id
           LinguaFranca.with_locale user.locale do
-            UserMailer.send_mail(:send, mailer, object.id, data, user.id, current_user.id)
+            send_mail(:send, mailer, object.id, data, user.id, current_user.id)
           end
         end
       end
@@ -360,7 +360,7 @@ class ApplicationController < BaseController
         request.env.each do | key, value |
           requestHash['env'][key.to_s] = value.to_s
         end
-        UserMailer.send_mail(:error_report,
+        send_mail(:error_report,
             "A missing translation found in #{Rails.env}",
             "<p>A translation for <code>#{key}</code> in <code>#{locale.to_s}</code> was found. The text that was rendered to the user was:</p><blockquote>#{str || 'nil'}</blockquote>",
             exception.to_s,
@@ -636,6 +636,14 @@ class ApplicationController < BaseController
 
     # send the confirmation email and make sure it get sent as quickly as possible
     def send_confirmation(confirmation)
-      UserMailer.send_mail(:email_confirmation, confirmation.id)
+      send_mail(:email_confirmation, confirmation.id)
+    end
+
+    def send_mail(*args)
+      if Rails.env.preview? || Rails.env.production?
+        UserMailer.delay(queue: Rails.env.to_s).send(*args)
+      else
+        UserMailer.send(*args).deliver_now
+      end
     end
 end

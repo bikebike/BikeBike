@@ -1015,7 +1015,7 @@ class ConferenceAdministrationController < ApplicationController
       @register_template = :administration
       if params[:button] == 'send'
         view_context.broadcast_to(@send_to).each do |user|
-          UserMailer.send_mail(:broadcast,
+          send_mail(:broadcast,
               "#{request.protocol}#{request.host_with_port}",
               @subject,
               @body,
@@ -1030,7 +1030,7 @@ class ConferenceAdministrationController < ApplicationController
         @broadcast_step = :preview
       elsif params[:button] == 'test'
         @broadcast_step = :test
-        UserMailer.send_mail(:broadcast,
+        send_mail(:broadcast,
             "#{request.protocol}#{request.host_with_port}",
             @subject,
             @body,
