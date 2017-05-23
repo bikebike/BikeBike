@@ -176,5 +176,6 @@ class UserMailer < ActionMailer::Base
     else
       @host = UserMailer.default_url_options[:host]
     end
+    default_url_options[:host] = @host
   end
 end
