@@ -1,0 +1,10 @@
+= registration_step_header
+= row do
+  = columns(medium: 12) do
+    = save_registration_step do
+      .registration-step-options
+        .options
+          - [:yes, :no].each do |option|
+            - class_name = [:unstyled]
+            - class_name << :selected if @org_member == (option == :yes)
+            = button option, value: option, class: class_name

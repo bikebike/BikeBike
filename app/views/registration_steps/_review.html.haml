@@ -1,0 +1,44 @@
+= registration_step_header
+= row do
+  = columns(medium: 12) do
+    = save_registration_step do
+      - if @is_attending
+        %table#review
+          - @step_data.each do |step, data|
+            - unless data[:type] == :none
+              %tr
+                %th
+                  =_"articles.conference_registration.step_names.#{step}"
+                  = button :edit, name: :edit_step, value: step, class: [:unstyled, :edit]
+                %td
+                  - case data[:type]
+                    - when :bool
+                      =_"forms.actions.generic.#{data[:value] ? 'yes' : 'no'}"
+                    - when :list
+                      = data[:value].map { |item| _"#{data[:key]}.#{item}" }.join(_!(", "))
+                    - when :currency
+                      = (number_to_currency data[:value].to_f, unit: '$')
+                      =_!(data[:currency].to_s).html_safe
+                    - when :date
+                      = date(data[:value].to_date, :long)
+                    - when :enum
+                      =_("#{data[:key] || ('forms.labels.generic.' + step.to_s + '.')}#{data[:value]}")
+                    - when :html
+                      .scroller= richtext(data[:value].html_safe)
+                    - else
+                      = data[:value]
+      - else
+        %p.centered=_'articles.conference_registration.paragraphs.registration_cancelled', :p
+      - if @allow_cancel_attendance
+        .actions.centered
+          = button :cancel_registration, value: :cancel_registration, class: :red
+      - if @allow_reopen_attendance
+        .actions.centered
+          = button :reopen_registration, value: :reopen_registration
+= row do
+  = columns(medium: 12) do
+    %h3=_'articles.workshops.headings.Workshops', :t
+    %p=_'articles.conference_registration.paragraphs.workshops', :p
+    .actions.centered
+      = link_to (_'articles.conference_registration.actions.View_Workshops'), workshops_path(@this_conference), class: :button
+      = link_to (_'actions.workshops.create'), create_workshop_path(@this_conference), class: [:button, :modify]

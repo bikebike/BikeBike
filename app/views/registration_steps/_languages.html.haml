@@ -1,0 +1,5 @@
+= registration_step_header
+= row do
+  = columns(medium: 12) do
+    = save_registration_step do
+      = checkboxes :languages, ConferenceRegistration.all_languages, @languages, 'languages', heading: 'articles.conference_registration.headings.languages'

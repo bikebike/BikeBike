@@ -1,6 +1,4 @@
-= render 'conferences/page_header', :page_key => 'Conference_Registration'
-
-= registration_step_menu
+= render 'conferences/page_header', page_key: 'Conference_Registration'
 
 %article
   = render 'workshops/show', :workshop => @workshop, :translations_available_for_editing => @translations_available_for_editing, :preview => false

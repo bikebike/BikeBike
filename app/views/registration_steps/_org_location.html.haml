@@ -1,0 +1,7 @@
+= row do
+  = columns(medium: 12) do
+    = registration_step_header_title(@step_name)
+= row do
+  = columns(medium: 12) do
+    = save_registration_step do
+      = textfield :location, @location, required: true, big: true

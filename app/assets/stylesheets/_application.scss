@@ -197,6 +197,18 @@ table, .table {
         width: 0.1rem;
     }
 
+    &#review tbody th {
+        width: auto;
+        vertical-align: top;
+    }
+
+    &#review .scroller {
+        font-size: 0.75em;
+        max-width: 50em;
+        max-height: 25em;
+        overflow: auto;
+    }
+
     &.admin-edit {
         width: 100%;
     }
@@ -525,7 +537,7 @@ button,
         font-size: 0.9em;
     }
 
-    &.unstyled {
+    #main &.unstyled {
         height: 4em;
         margin: 0;
         padding: 0;
@@ -535,10 +547,25 @@ button,
         color: $black;
         @include _(box-shadow, none);
         @include _(text-stroke, 0);
+
+        &.secondary {
+            opacity: 0.5;
+        }
+
+        &.edit {
+            height: 1.5em;
+            border: 0.1em solid;
+            padding: 0.125em 0.5em;
+            background-color: $light-gray;
+            margin-left: 1em;
+            font-size: 1em;
+            line-height: 1em;
+            float: right;
+        }
     }
 }
 
-table.calendar {
+#main table.calendar {
     width: 100%;
     table-layout: fixed;
     margin: 0;
@@ -568,6 +595,8 @@ table.calendar {
 }
 
 #main .actions {
+    margin-top: 4em;
+
     &.center {
         text-align: center;
     }
@@ -584,6 +613,15 @@ table.calendar {
         float: left;
         background-color: $mid-gray;
     }
+
+    button[value="review"] {
+        float: right;
+        background-color: $blue;
+    }
+
+    button[value="cancel"], button.red {
+        background-color: $red;
+    }
 }
 
 #main {
@@ -598,7 +636,6 @@ table.calendar {
             background-color: $white;
 
             &.selected {
-                // background-color: rgba($colour-1, 0.25);
                 box-shadow: 0 0 0 0.25em rgba($colour-2, 0.5);
             }
         }
@@ -611,12 +648,56 @@ table.calendar {
 
         .options {
             display: table-row;
+
+            + fieldset {
+                margin: 2em 0;
+            }
         }
 
         button {
             display: table-cell;
             margin: 0 0.5em;
             height: 3em;
+
+            &:first-child {
+                margin-left: 0;
+            }
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+
+        .check-box-field {
+            box-shadow: none;
+            margin: 0;
+            font-size: 0.9em;
+        }
+
+        .custom-option {
+            text-align: right;
+            border: 0.1rem solid $black;
+            background-color: $white;
+
+            input {
+                display: table-cell;
+                width: 10em;
+                height: 3em;
+                margin: 0;
+                font-family: inherit;
+                border: 0;
+                border-right: 0;
+                text-align: center;
+                background-color: transparent;
+            }
+
+            button {
+                width: 50%;
+                margin: 0;
+                border: 0;
+                border-left: inherit;
+                background-color: lighten($colour-1, 25%);
+            }
         }
     }
 
@@ -639,7 +720,7 @@ table.calendar {
     text-align: center;
     margin-bottom: 1em;
 
-    &.error, &.complete {
+    &.error, &.complete, &.warning {
         display: block;
     }
 
@@ -655,6 +736,16 @@ table.calendar {
     &.error .message {
         border-color: $red;
         background-color: rgba($red, 0.25);
+    }
+
+    &.complete .message {
+        border-color: $green;
+        background-color: rgba($green, 0.25);
+    }
+
+    &.warning .message {
+        border-color: $yellow;
+        background-color: rgba($yellow, 0.25);
     }
 }
 
@@ -891,6 +982,10 @@ input {
 .text-field,
 .text-area-field {
     text-align: left;
+}
+
+.text-area-field {
+    clear: both;
 }
 
 .telephone-field {
@@ -2774,9 +2869,9 @@ html :focus {
 
     button {
         background-color: $colour-4;
-        width: 6em;
-        font-size: 1.5em;
-        margin: 0.25em;
+        @include font-family(secondary);
+        margin-top: 1em;
+        margin-bottom: 1em;
 
         &.option-1 {
             background-color: $colour-3;
@@ -3028,7 +3123,7 @@ body.policy .policy-agreement ul {
 
     .actions {
         position: relative;
-        margin: 0;
+        margin: 0 0 1em;
         @include _(box-shadow, 0 -1em 1em $white);
     }
 

@@ -78,12 +78,16 @@ module RegistrationHelper
     end.html_safe
   end
 
-  def registration_step_header_title(step = @step, vars = nil)
+  def registration_step_header_title_string(step = @step, vars = nil)
     if step.is_a?(Hash)
       vars = step
       step = @step
     end
-    content_tag(:h2, (_"articles.conference_registration.headings.#{@step}", :t, 2, vars: vars || {})).html_safe
+    _("articles.conference_registration.headings.#{step}", :t, 2, vars: vars || {})
+  end
+
+  def registration_step_header_title(step = @step, vars = nil)
+    content_tag(:h2, registration_step_header_title_string(step, vars)).html_safe
   end
 
   def registration_step_header_description(step = @step, vars = nil)
@@ -91,20 +95,30 @@ module RegistrationHelper
       vars = step
       step = @step
     end
-    content_tag(:p, (_"articles.conference_registration.paragraphs.#{@step}", :p, 2, vars: vars || {})).html_safe
+    content_tag(:p, (_"articles.conference_registration.paragraphs.#{step}", :p, 2, vars: vars || {})).html_safe
   end
 
-  def save_registration_step(conference = @this_conference, step = @step, &block)
+  def save_registration_step(conference = @this_conference, step = @step, registration = nil, &block)
+    registration ||= ConferenceRegistration.find_by(user_id: current_user.id, conference_id: conference.id)
+
     buttons = [:back]
     case step.to_sym
     when :policy
       buttons = [:agree]
-    when :name, :languages, :org_location, :org_create_name, :org_create_address, :org_create_email, :org_create_mailing_address, :housing_companion_email, :housing_companion_invite, :housing_allergies, :housing_other
+    when :name, :languages, :org_location, :org_create_name, :org_create_address, :org_create_email, :org_create_mailing_address,
+         :housing_companion_email, :housing_companion_invite, :housing_allergies, :housing_other, :org_non_member_interest,
+         :hosting_address, :hosting_phone, :hosting_space_beds, :hosting_space_floor, :hosting_info, :hosting_other
       buttons = [:next, :back]
     when :org_location_confirm
       buttons = [:yes, :back]
+    when :confirm_payment
+      buttons = [:confirm, :cancel]
     when :review
       buttons = nil
+    end
+
+    if buttons.present? && registration.present? && registration.registration_complete?
+      buttons << :review
     end
 
     content = block.present? ? capture(&block) : ''

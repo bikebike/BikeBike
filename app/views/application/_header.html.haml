@@ -15,6 +15,6 @@
         = I18n.t(@page_title || "page_titles.#{page_group.to_s}.#{page_key.to_s}", @page_title_vars)
       = row do
         = columns do
-          %h1=_(@main_title || "page_titles.#{page_group.to_s}.#{page_key.to_s}", :t, @main_title_vars || (@page_title_vars.present? && @page_title.blank? ? { vars: @page_title_vars } : nil))
+          %h1=@main_title_t || _(@main_title || "page_titles.#{page_group.to_s}.#{page_key.to_s}", :t, @main_title_vars || (@page_title_vars.present? && @page_title.blank? ? { vars: @page_title_vars } : nil))
   - content_for :og_image do
     = image

@@ -1570,7 +1570,89 @@ en:
         open_minds: We encourage open minds and open hearts.
         peaceful: We are peaceful and honest.
     conference_registration:
+      complete:
+        payment_processed: Thank you for your payment!
+      error:
+        payment_cancelled: Your payment was cancelled
+        payment_error: An error occurred processing your payment
+        arrival_date_required: Please select a date
+        departure_date_required: Please select a date
+        phone_required: A valid phone number is required
+        bed_space_required: Please enter the amount of bed or couch space you have to offer
+        bed_floor_required: Please enter the amount of floor space you have to offer
+        bed_tent_required: Please enter the amount of tent space you have to offer
+        info_required: Please provide your guets with information about you and your home
+      warning:
+        payment_pending: Thank you! Your payment is currently pending.
+      step_names:
+        hosting_other: Other
+        hosting_info: House Info
+        hosting_end_date: End Date
+        hosting_start_date: Start Date
+        hosting_space_tent: Tent Space
+        hosting_space_floor: Floor Space
+        hosting_space_beds: Bed/Couch Space
+        hosting_phone: Phone
+        hosting_address: Address
+        hosting_attending: Attending?
+        hosting_check: Host?
+        payment_form: Registration payment amount
+        org_select: Organization
+        payment_type: Registration fee method
+        housing_other: Other
+        housing_food: Eating habits
+        housing_bike: Bike?
+        housing_companion_email: Companion
+        housing_type: Housing
+        housing_departure_date: Departure Date
+        housing_arrival_date: Arrival Date
+        org_create_mailing_address: Organization Mailing Address
+        org_create_email: Organization Email
+        org_create_address: Organization Address
+        org_create_name: Organization Name
+        org_location_confirm: Confirm your location
+        org_location: Location
+        org_non_member_interest: Conference interest
+        org_member: Organization Member
+        policy: Policy
+        other: Other
+        name: Name
+        languages: Languages spoken
       headings:
+        hosting_other: Information for organizers
+        hosting_info: House Info and Rules
+        hosting_end_date: Housing End Date
+        hosting_start_date: Housing Start Date
+        hosting_space_tent: Tent Space
+        hosting_space_floor: Floor Space
+        hosting_space_beds: Bed and Couch Space
+        hosting_phone: What is your phone number?
+        hosting_address: What is your address?
+        hosting_attending: Are you attending the conference?
+        hosting_check: Are you willing to be a housing provider?
+        review: Review
+        confirm_payment: Confirm Registration Payment
+        payment_form: Registration Fee Amount
+        org_select: Which organization are you a member of?
+        payment_type: Registration Fee Method
+        housing_other: Anything else?
+        housing_allergies: Do you have any allergies?
+        housing_food: What are your eating habits?
+        housing_bike: Would you like to borrow a bike?
+        housing_companion_email: Companion Email
+        housing_companion_check: Housing Companion
+        housing_type: Housing
+        housing_departure_date: Departure Date
+        housing_arrival_date: Arrival Date
+        org_create_mailing_address: Organization Mailing Address
+        org_create_email: Organization Email
+        org_create_address: Organization Address
+        org_create_name: Organization Name
+        org_location_confirm: Confirm your location
+        org_location: In which city or town is your organization based?
+        your_location: In which city or town are you based?
+        org_member: Are you representing a bicycle collective?
+        org_non_member_interest: Why are you interested in attending Bike!Bike!?
         Administration: Administration
         Conference_Administration: "%{title} Administration"
         administration: Administration
@@ -1634,10 +1716,46 @@ en:
             info: Info
         companion: Companion
       paragraphs:
+        registration_cancelled: You have cancelled your registration. If you reconsider, please re-open your registration using the button below but keep in mind that you may lose out of your housing or bike if you wait too long.
+        hosting_other: Please enter ay information you would like organizers to consider when selecting guests. If you have restrictions on guests that you would lke to stay at your home or if you have pets or other factors that might cause guests to be uncomfortable or not able to stay at your home, please list them here.
+        hosting_info: Please fill out your house rules, contact instructions, and any other pertinent information about your home or neighbourhood. Your summary will only be visible to conference organizers and your guests.
+        hosting_end_date: What is the latest date that you are will to have guests stay at you home?
+        hosting_start_date: What is the earliest date that you are will to have guests stay at you home?
+        hosting_space_tent: Are you willing to have guests stay in tents in your yard?
+        hosting_space_floor: Please let us know how many people you are willing to support on your floor?
+        hosting_space_beds: Please let us know how many people you can support on beds or couches?
+        hosting_phone: Please provide a phone number where guests can contact you, details on how you expect guests to contact you can be provided in your house rules.
+        hosting_address: We will need to share your address with guests so that they can find your home. International visitors may also need to provide border security with the address where they are staying.
+        hosting_attending: Are you also planning to attend conference workshops and events?
+        hosting_check: We are looking for volunteers in %{city} who can house guests between %{date_span} in beds, couches, floors, or backyard tent space. We will ask you to provide your home location, phone number and house rules with guests. We will do our best to match up guests the criteria that you give us.
+        currency_details: When you arrive, please make your payment in %{currency}.
+        confirm_payment: Thank you, please confirm your payment of %{amount} %{currency}.
+        review: Your registration is complete, please review and modify your data as necessary.
+        payment_form: Please select one of the predefined options below or enter a custom amount.
+        org_select: Please select the organization tat you will be representing. This information will be used to help us contact and invite your organization next year and to populate the list of known organizations that will be displayed on bikecollectives.org. If you are involved with multiple oganizations, please select one for now, you will be able to add more organizations at a later date.
+        payment_type: Registration is by donation but it enables us to pay for spaces, food, equipment, and more. If you can, paying now via PayPal enables us to prepare for the conference without risk of paying out of pocket. Otherwise, pleging to pay on arrival will help us to get a rough idea of what we can and cannot afford.
+        housing_other: Is there anything else that you would like to let us know?
+        housing_allergies: Let us know if you have any allergies that we should be made aware of.
+        housing_food: Please let us know your eating habits by selecting the option that best describes te type of food tat you eat. We will use this to decide the best types of meals to prepare and how much food we will need.
+        housing_bike: In order for us to get an idea of how many bikes we will need to prepare, please let us know if you would like to borrow a bike from us.
+        housing_companion_email: What is your companion's email address?
+        housing_companion_check: Are you coming with a significant other or someone who you absolutely must be housed with? Please note, your companion must also register if you want to be housed together.
+        housing_type: Do you need a place to stay in %{city}? We will do our best to place you with a local host and other vistors that best match your needs.
+        housing_departure_date: When will you be leaving %{city}? If you wish to stay in town longer and need housing or a bike after %{max_date}, please select this date on the calendar below and contact us after you complete your registration. We cannot guarantee that we can accommodate you but we will do our best.
+        housing_arrival_date: When will you be arriving in %{city}? If you will be in town and need housing or a bike before %{min_date}, please select this date on the calendar below and contact us after you complete your registration. We cannot guarantee that we can accommodate you but we will do our best.
+        org_create_mailing_address: Please provide your mailing address so that we can send your organization a personal invite and poster to next year's Bike!Bike!.
+        org_create_email: In order to contact your organization next year, please provide a general email address. We will not send you regular emails, we may email you if there is a conference in your area or to confirm that your organization is still in existance. Please do not provide a personal email address.
+        org_create_address: Please enter the street address of your organization in %{city}, do not enter the state, province, or country. If your organization is not in %{city}, please go back and change your location.
+        org_create_name: What is the name or your organization?
+        org_location_confirm: Did you mean %{city}?
+        languages: Knowing how many people speak each language will help us to plan translations better for workshops, events, and announcements. If you are bilingual you will also be given access to tools to help translate content and we may ask for additional help if needed, you are under no obligation to volunteer.
+        name: How would you like to be addressed at the conference and on this site?
+        org_non_member_interest: Everyone is welcome to attend Bike!Bike! but since most attendees work or volunteer with a bicycle collective, we would like to get a better understanding of what has attracted you to attend this year.
+        org_member: Do you volunteer or work for an organization that puts bicycle education, access, or advocacy above profits? If so we would like to know a few details about it.
         provide_email: Bike!Bike! uses email to communicate between you and your conference
           hosts, however your Facebook account does not provide us an email address.
           Before proceeding, you must provide us an email address.
-        Policy_Agreement: Ensuring that all attendees feel welcome, safe, and respected
+        policy: Ensuring that all attendees feel welcome, safe, and respected
           at all times is especially important to us all. Please ensure that you have
           fully read and understand our safer spaces policy below, if you have any
           questions or concerns you can reach out to the organizers at any time.
@@ -1955,6 +2073,10 @@ en:
   forms:
     labels:
       generic:
+        payment_type:
+          paypal: Online
+          on_arrival: In person
+          none: None
         space: Available Space
         hosting_dates: When will you be in town?
         type: Type
@@ -2021,6 +2143,22 @@ en:
         no_file_selected: No file selected
     actions:
       generic:
+        reopen_registration: Re-open my registration
+        cancel_registration: Cancel my registration
+        organization_none: None of the above
+        payment_paypal: I can pay now with PayPal
+        payment_on_arrival: I can pledge to pay on arrival
+        payment_none: Not now
+        food_meat: I eat meat and dairy
+        food_vegetarian: I am a vegetarian
+        food_vegan: I am a vegan
+        housing_none: I don't need a place to stay
+        housing_tent: I would like a place to tent
+        housing_house: Yes, I would like to place to stay
+        'yes': 'Yes'
+        'no': 'No'
+        review: Complete
+        back: Back
         upload: Upload
         select_file: Select a file
         administrate: Administrate

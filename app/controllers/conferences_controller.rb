@@ -48,32 +48,54 @@ class ConferencesController < ApplicationController
     if logged_in?
       if request.post?
         # update this step
-        result = update_registration_step(params[:step].to_sym, @this_conference, current_user, params)
+        result = if params[:step].to_sym == :confirm_payment
+                   request_data = paypal_payment_request_data(@this_conference, current_user)
+                   paypal_confirm_request = paypal_payment_request(request_data[:amount], request_data[:currency])
+                   update_registration_step!(:payment_form, @this_conference, current_user, params) do
+                     paypal_payment_complete(paypal_confirm_request, @this_conference, current_user, params)
+                   end
+                 else
+                   update_registration_step(params[:step].to_sym, @this_conference, current_user, params)
+                 end
 
         # set the message if we got one
         @update_status = result[:status]
         @update_message = result[:message]
 
         # pass any data on to the view
-        (result[:data] || {}).each do |key, value|
-          instance_variable_set("@#{key}", value) unless instance_variable_defined?("@#{key}")
-        end
+        data_to_instance_variables(result[:data])
 
-        if result[:exception].present? && Rails.env.development?
-          raise result[:exception]
+        raise result[:exception] if result[:exception].present? && Rails.env.development?
+
+        if @update_status == :paypal_redirect
+          pp_response = @request.setup(
+            paypal_payment_request(@amount, @currency),
+            register_url(@this_conference.slug, @confirm_args),
+            register_url(@this_conference.slug, @cancel_args),
+            noshipping: true,
+            version: 204
+          )
+          return redirect_to pp_response.redirect_uri
         end
       end
+
+      view_context.add_stylesheet 'quill.css'
+      view_context.add_javascript :quill
+      view_context.add_inline_script :editor
 
       # get the current step
       @step = current_registration_step(@this_conference, current_user)
 
+      if @step == :payment_form && params[:token].present?
+        result = paypal_payment_confirm(@this_conference, current_user, params)
+        data_to_instance_variables(result)
+        @confirm_payment = true
+      end
+
       # set up the next step
       result = registration_step(@step, @this_conference, current_user)
-
       # pass any data on to the view
-      (result || {}).each do |key, value|
-        instance_variable_set("@#{key}", value) unless instance_variable_defined?("@#{key}")
-      end
+      data_to_instance_variables(result)
     end
 
     if request.xhr?
@@ -442,26 +464,29 @@ class ConferencesController < ApplicationController
     do_404
   end
 
-  private
+private
 
-    def PayPal!
-      Paypal::Express::Request.new(
-        username:  @this_conference.paypal_username,
-        password:  @this_conference.paypal_password,
-        signature: @this_conference.paypal_signature
-      )
-    end
+  def send_registration_confirmation_email(registration)
+    send_mail(:registration_confirmation, registration.id)
+  end
 
-    def PayPalRequest(amount)
-      Paypal::Payment::Request.new(
-        currency_code: 'USD',                     # if nil, PayPal use USD as default
-        description:   'Conference Registration', # item description
-        quantity:      1,                         # item quantity
-        amount:        amount.to_f,               # item value
-        custom_fields: {
-          CARTBORDERCOLOR: "00ADEF",
-          LOGOIMG: "https://en.bikebike.org/assets/bblogo-paypal.png"
-        }
-      )
+  def paypal_payment_request(amount, currency)
+    Paypal::Payment::Request.new(
+      currency_code: currency.to_s,
+      description:   'Bike!Bike! Registration',
+      quantity:      1,
+      amount:        amount.to_f,
+      custom_fields: {
+        CARTBORDERCOLOR: "00ADEF",
+        LOGOIMG: "https://en.bikebike.org/assets/bblogo-paypal.png"
+      }
+    )
+  end
+
+  def data_to_instance_variables(data)
+    return unless data
+    data.each do |key, value|
+      instance_variable_set("@#{key}", value) unless instance_variable_defined?("@#{key}")
     end
+  end
 end

@@ -1,0 +1,9 @@
+= registration_step_header(description: { city: @city.city })
+= row do
+  = columns(medium: 12) do
+    = save_registration_step do
+      = textfield :address, @address, required: true, big: true
+      .multi-field
+        = textfield :city, @city.city, readonly: true
+        = textfield :territory, @city.translate_territory, readonly: true
+        = textfield :country, @city.translate_country, readonly: true

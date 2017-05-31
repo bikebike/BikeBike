@@ -151,7 +151,10 @@
         errorField.focus();
     }
     
-    window.initNodeFunctions = [ function(node) {
+    if (!window.initNodeFunctions) {
+        window.initNodeFunctions = [];
+    }
+    window.initNodeFunctions.push(function(node) {
         forEachElement('.number-field,.email-field,.text-field,.password-field,.search-field', function(field) {
             var input = field.querySelector('input');
             var positionLabel = function(input) {
@@ -169,6 +172,7 @@
                 field.classList.add('focused');
             });
         }, node || document);
+
         forEachElement('form.js-xhr', function(form) {
             if (form.addEventListener) {
                 forEachElement('button', function(button) {
@@ -178,12 +182,23 @@
                     });
                 }, form);
                 form.addEventListener('submit', function(event) {
+                    var btnvalue = form.getAttribute('data-button-value');
+                    var btnname = form.getAttribute('data-button-name');
+                    if (btnvalue) {
+                        var btn = form.querySelector('button[name="' + btnname + '"][value="' + btnvalue + '"]');
+                        if (btn && btn.getAttribute('data-no-xhr') === '1') {
+                            return;
+                        }
+                    }
                     event.preventDefault();
+                    
                     form.classList.add('requesting');
+                    if (typeof window.editorEndEdit === "function") {
+                        window.editorEndEdit(form);
+                    }
                     var data = new FormData(form);
-                    var button = form.getAttribute('data-button-value');
-                    if (button) {
-                        data.append(form.getAttribute('data-button-name'), button);
+                    if (btnname) {
+                        data.append(btnname, btnvalue);
                     }
                     var request = new XMLHttpRequest();
                     request.onreadystatechange = function() {
@@ -239,7 +254,7 @@
                 }
             });
         });
-    } ];
+    });
     window.initNode = function(node) {
         forEach(initNodeFunctions, function(fn) {
             fn(node);

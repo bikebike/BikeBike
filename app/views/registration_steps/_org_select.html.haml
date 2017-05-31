@@ -1,0 +1,11 @@
+= registration_step_header
+= row do
+  = columns(medium: 12) do
+    = save_registration_step do
+      .vertical-registration-step-options
+        .options
+          - @organizations.each do |org|
+            - class_name = [:unstyled]
+            - class_name << :selected if @organization.present? && org.id == @organization.id
+            = button org.name, value: org.id, name: :org_id, class: class_name
+          = button :organization_none, value: :create, class: [:unstyled, :secondary]

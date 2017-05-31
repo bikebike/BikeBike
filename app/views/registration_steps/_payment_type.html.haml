@@ -1,0 +1,10 @@
+= registration_step_header
+= row do
+  = columns(medium: 12) do
+    = save_registration_step do
+      .vertical-registration-step-options
+        .options
+          - @payment_methods.each do |option|
+            - class_name = [:unstyled]
+            - class_name << :selected if @payment_method.present? && @payment_method.to_sym == option
+            = button "payment_#{option}".to_sym, value: option, class: class_name

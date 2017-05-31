@@ -1,0 +1,21 @@
+- if @confirm_payment
+  = registration_step_header(:confirm_payment, description: { amount: (number_to_currency @confirm_amount, unit: '$'), currency: @confirm_currency })
+  = row do
+    = columns(medium: 12) do
+      = save_registration_step(@this_conference, :confirm_payment)
+- else
+  = registration_step_header
+  = row do
+    = columns(medium: 12) do
+      - unless @currencies.present? && @currencies.length > 1
+        %p.center=_"articles.conference_registration.paragraphs.currency_details", :p, vars: { currency: (_"currencies.#{(@currencies || [@currency]).first}.displayName-count-other") }
+      = save_registration_step do
+        .registration-step-options
+          - if @currencies.present? && @currencies.length > 1
+            = radiobuttons :currency, (@currencies.map { |c| [(_"currencies.#{c}.displayName-count-other"), c] }), @currency
+          .options.graded-options{class: "option-count-#{@amounts.size}"}
+            - @amounts.each_with_index do |option, i|
+              = button (number_to_currency option, unit: '$'), value: option, name: :value, class: [:unstyled, "option-#{i + 1}"], data: { noxhr: 1 }
+          .custom-option
+            = number_field_tag :custom_value, 50.0, step: 0.05, min: 0.05
+            = button :custom_amount, name: :custom_amount, value: :custom, class: :unstyled, data: { noxhr: 1 }

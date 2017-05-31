@@ -32,7 +32,7 @@ module I18nHelper
   end
 
   def date(date, format = :long)
-    I18n.l(date.is_a?(String) ? Date.parse(date) : date, :format => format)
+    I18n.l(date.is_a?(String) ? Date.parse(date) : date, format: format)
   end
 
   def time(time, format = :short)
@@ -54,7 +54,7 @@ module I18nHelper
     end
     d1 = I18n.l(date1.to_date, format: "span_#{key}_date_1".to_sym)
     d2 = I18n.l(date2.to_date, format: "span_#{key}_date_2".to_sym)
-    _('date.date_span', vars: {:date_1 => d1, :date_2 => d2})
+    _('date.date_span', vars: { date_1: d1, date_2: d2 })
   end
 
   def time_length(length)

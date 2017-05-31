@@ -1,0 +1,10 @@
+= registration_step_header
+= row do
+  = columns(medium: 12) do
+    = save_registration_step do
+      .registration-step-options
+        .options
+          - @bike_options.each do |option|
+            - class_name = [:unstyled]
+            - class_name << :selected if @bike.present? && @bike.to_sym == option
+            = button option, value: option, class: class_name

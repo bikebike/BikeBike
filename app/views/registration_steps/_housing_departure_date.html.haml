@@ -1,0 +1,5 @@
+= registration_step_header(description: { city: @city.city, max_date: date(@max_date, :span_same_year_date_1) })
+= row do
+  = columns(medium: 12) do
+    = save_registration_step do
+      = calendar_day_select :date, @date, (@min_date..@max_date), (@conference_start_date..@conference_end_date)

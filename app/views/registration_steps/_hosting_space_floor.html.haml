@@ -1,0 +1,5 @@
+= registration_step_header
+= row do
+  = columns(medium: 12, class: :centered) do
+    = save_registration_step do
+      = numberfield :floor_space, @floor_space, required: true, step: 1, min: 0

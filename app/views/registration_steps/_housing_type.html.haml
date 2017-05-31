@@ -1,0 +1,10 @@
+= registration_step_header(description: { city: @city.city })
+= row do
+  = columns(medium: 12) do
+    = save_registration_step do
+      .vertical-registration-step-options
+        .options
+          - @housing_types.each do |type|
+            - class_name = [:unstyled]
+            - class_name << :selected if type == @housing
+            = button "housing_#{type}".to_sym, value: type, class: class_name

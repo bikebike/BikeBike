@@ -379,7 +379,7 @@ module FormHelper
     return html.html_safe
   end
 
-  def radiobuttons(name, boxes, value, label_key, options = {})
+  def radiobuttons(name, boxes, value, label_key = '', options = {})
     checkboxes(name, boxes, [value], label_key, options.merge({radiobuttons: true}))
   end
 
@@ -404,7 +404,7 @@ module FormHelper
     return new_id
   end
 
-  def checkboxes(name, boxes, values, label_key, options = {})
+  def checkboxes(name, boxes, values, label_key = '', options = {})
     html = ''
     boxes.map! { |box| box.is_a?(String) ? box.to_sym : box }
     values.map! { |value| value.is_a?(String) ? value.to_sym : value } if values.is_a?(Array)

@@ -1,0 +1,10 @@
+= registration_step_header
+= row do
+  = columns(medium: 12) do
+    = save_registration_step do
+      .vertical-registration-step-options
+        .options
+          - @food_options.each do |option|
+            - class_name = [:unstyled]
+            - class_name << :selected if @food.present? && @food.to_sym == option
+            = button "food_#{option}".to_sym, value: option, class: class_name

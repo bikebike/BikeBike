@@ -1,0 +1,5 @@
+= registration_step_header
+= row do
+  = columns(medium: 12) do
+    = save_registration_step do
+      = textarea :mailing_address, @address, required: true, plain: true, short: true
