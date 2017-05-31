@@ -1,7 +1,9 @@
 require 'geocoder/calculations'
 require 'rest_client'
+require 'registration_controller_helper'
 
 class ConferencesController < ApplicationController
+  include RegistrationControllerHelper
 
   def list
     @page_title = 'articles.conferences.headings.Conference_List'
@@ -39,6 +41,51 @@ class ConferencesController < ApplicationController
   end
 
   def register
+    set_conference
+    do_403 unless @this_conference.is_public || @this_conference.host?(current_user)
+    do_403 unless @this_conference.registration_open
+
+    if logged_in?
+      if request.post?
+        # update this step
+        result = update_registration_step(params[:step].to_sym, @this_conference, current_user, params)
+
+        # set the message if we got one
+        @update_status = result[:status]
+        @update_message = result[:message]
+
+        # pass any data on to the view
+        (result[:data] || {}).each do |key, value|
+          instance_variable_set("@#{key}", value) unless instance_variable_defined?("@#{key}")
+        end
+
+        if result[:exception].present? && Rails.env.development?
+          raise result[:exception]
+        end
+      end
+
+      # get the current step
+      @step = current_registration_step(@this_conference, current_user)
+
+      # set up the next step
+      result = registration_step(@step, @this_conference, current_user)
+
+      # pass any data on to the view
+      (result || {}).each do |key, value|
+        instance_variable_set("@#{key}", value) unless instance_variable_defined?("@#{key}")
+      end
+    end
+
+    if request.xhr?
+      render json: [{
+          globalSelector: '#step-content',
+          html: render_to_string(partial: "registration_steps/#{@step}"),
+          scrollTo: '#action-message .message, #step-content'
+        }]
+    end
+  end
+
+  def old_register
     set_conference
 
     @register_template = nil
@@ -124,7 +171,7 @@ class ConferencesController < ApplicationController
         @page_title = 'articles.conference_registration.headings.Payment'
       else
 
-        case form_step
+      case form_step
         when :confirm_email
           return confirm_email(params[:email], params[:token], register_path(@this_conference.slug))
         when :contact_info

@@ -11,7 +11,7 @@ module FormHelper
     # set the selected locale
     selected_locale = (options[:locale] || object.locale || I18n.locale).to_sym
 
-    I18n.backend.enabled_locales.each do | locale |
+    I18n.backend.enabled_locales.each do |locale|
       # ses if this should b the selected field
       class_name = selected_locale == locale.to_sym ? 'selected' : nil
 
@@ -21,7 +21,7 @@ module FormHelper
         class: class_name, data: { locale: locale }).html_safe
 
       fields = ''
-      field_options.each do | name, __options |
+      field_options.each do |name, __options|
         _options = __options.deep_dup
         # add the field
         value = object.is_a?(Hash) ? object[locale.to_sym] : object.get_column_for_locale!(name, locale, false)
@@ -69,7 +69,7 @@ module FormHelper
     # set the selected locale
     selected_locale = (options[:locale] || object.locale || I18n.locale).to_sym
 
-    I18n.backend.enabled_locales.each do | locale |
+    I18n.backend.enabled_locales.each do |locale|
       # ses if this should b the selected field
       class_name = selected_locale == locale.to_sym ? 'selected' : nil
 
@@ -227,7 +227,7 @@ module FormHelper
     unless select_options.first.is_a?(Array)
       so = select_options
       select_options = []
-      so.each do | opt |
+      so.each do |opt|
         select_options << [ I18n.t("forms.options.#{name.to_s}.#{opt.to_s}"), opt]
       end
     end
@@ -315,7 +315,8 @@ module FormHelper
 
     input_options = {
         id: id,
-        required: options[:required],
+        required: Rails.env.test? || Rails.env.development? ? false : options[:required],
+        readonly: options[:readonly] == true ? :readonly : nil,
         lang: options[:lang],
         min: options[:min],
         max: options[:max],
@@ -431,7 +432,7 @@ module FormHelper
     is_single = !values.is_a?(Array)
     if boxes.length > 0
       if boxes.first.is_a?(Array)
-        labels = boxes.map(&:first) 
+        labels = boxes.map(&:first) unless label_key == false
         boxes = boxes.map(&:last)
       end
     elsif !boxes.first.is_a?(Integer)
@@ -458,17 +459,21 @@ module FormHelper
       # we only need the required attribute on one element
       required = false
 
-      if labels.present?
-        label = labels[i]
-      elsif is_single
-        label = _(label_key.to_s)
-      elsif box.is_a?(Integer)
-        label = I18n.t(label_key.to_s)[box]
+      if label_key == false
+        boxes_html += label_tag(id, '')
       else
-        label = _("#{label_key.to_s}.#{box}")
+        if labels.present?
+          label = labels[i]
+        elsif is_single
+          label = _(label_key.to_s)
+        elsif box.is_a?(Integer)
+          label = I18n.t(label_key.to_s)[box]
+        else
+          label = _("#{label_key.to_s}.#{box}")
+        end
+            
+        boxes_html += label_tag(id, label)
       end
-          
-      boxes_html += label_tag(id, label)
     end
 
     if options[:other].present? && !is_single
@@ -519,6 +524,50 @@ module FormHelper
     button_tag(value, options, &block)
   end
 
+  def calendar_day_select(name, value, date_range, highlight_range = nil)
+    months = {}
+    date_range.to_a.each do |d|
+      unless months[d.month].present?
+        months[d.month] = [nil] * d.wday
+      end
+      months[d.month] << d
+    end
+
+    rows = []
+    empty_cell = content_tag(:td, '').html_safe
+    month_names = I18n.t('date.month_names')
+    day_names = content_tag(:tr, I18n.t('date.abbr_day_names').map { |day| content_tag(:th, day).html_safe }.join.html_safe).html_safe
+
+    months.each do |month, days|
+      rows << content_tag(:tr, content_tag(:th, month_names[month], colspan: 7).html_safe, class: 'month').html_safe
+      rows << day_names
+      weekdays = []
+      days.each do |date|
+        if date.nil?
+          weekdays << empty_cell
+        else
+          class_name = ['unstyled']
+          if value == date
+            class_name << 'selected'
+          end
+          if highlight_range.present? && highlight_range.include?(date)
+            class_name << 'during-conference'
+          end
+          weekdays << content_tag(:td,
+              content_tag(:button, date.day.to_s, name: :date, value: date.to_s, class: class_name).html_safe
+            ).html_safe
+        end
+        if date.present? && date.wday >= 6
+          rows << content_tag(:tr, weekdays.join.html_safe).html_safe if weekdays.present?
+          weekdays = []
+        end
+      end
+      weekdays += [empty_cell] * (7 - weekdays.length)
+      rows << content_tag(:tr, weekdays.join.html_safe).html_safe if weekdays.present?
+    end
+    return content_tag(:table, rows.join.html_safe, class: :calendar).html_safe
+  end
+
   def conference_days_options(conference = nil)
     conference ||= @this_conference || @conference
     return [] unless conference
@@ -558,7 +607,7 @@ module FormHelper
     return [] unless conference
 
     options = Array.new
-    [:closed, :pre, :open].each do | opt |
+    [:closed, :pre, :open].each do |opt|
       options << [(_"forms.labels.generic.registration_statuses.#{opt}"), opt]
     end
 
@@ -601,7 +650,7 @@ module FormHelper
 
   def contact_reason_select
     reasons = []
-    [:website, :conference].each do | reason |
+    [:website, :conference].each do |reason|
       reasons << [ _("forms.labels.generic.reasons.#{reason.to_s}"), reason ]
     end
     [['Something about the website', :website]]
@@ -610,8 +659,8 @@ module FormHelper
 
   def block_select(value = nil, args = {})
     blocks = {}
-    @workshop_blocks.each_with_index do | info, block |
-      info['days'].each do | day |
+    @workshop_blocks.each_with_index do |info, block|
+      info['days'].each do |day|
         blocks[(day.to_i * 10) + block] = [ "#{(I18n.t 'date.day_names')[day.to_i]} Block #{block + 1}", "#{day}:#{block}" ]
       end
     end
@@ -621,7 +670,7 @@ module FormHelper
   def location_select(value = nil, args = {})
     locations = []
     if @this_conference.event_locations.present?
-      @this_conference.event_locations.each do | location |
+      @this_conference.event_locations.each do |location|
         locations << [ location.title, location.id ] unless ((args[:invalid_locations] || []).include? location.id)
       end
     end
@@ -640,7 +689,7 @@ module FormHelper
 
   def host_options_list(hosts)
     options = [[nil, nil]]
-    hosts.each do | id, registration |
+    hosts.each do |id, registration|
       options << [registration.user.name, id]
     end
     return options
@@ -654,7 +703,7 @@ module FormHelper
     post_registration_steps = ''
     post_registration = false
 
-    steps.each do | step |
+    steps.each do |step|
       text = _"articles.conference_registration.headings.#{step[:name].to_s}"
       
       if step[:name] == :workshops

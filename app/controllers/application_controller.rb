@@ -3,7 +3,7 @@ class ApplicationController < BaseController
 
   before_filter :capture_page_info
 
-  helper_method :protect
+  helper_method :protect, :policies
 
   # @@test_host
   # @@test_location
@@ -645,5 +645,20 @@ class ApplicationController < BaseController
       else
         UserMailer.send(*args).deliver_now
       end
+    end
+
+    def policies
+      [
+        :commitment,
+        :respect,
+        :empowerment,
+        :accessible,
+        :peaceful,
+        :spaces,
+        :hearing,
+        :intent,
+        :open_minds,
+        :learning
+      ]
     end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170401192606) do
+ActiveRecord::Schema.define(version: 20170422222529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,7 +110,7 @@ ActiveRecord::Schema.define(version: 20170401192606) do
     t.boolean  "is_participant"
     t.boolean  "is_volunteer"
     t.string   "confirmation_token"
-    t.binary   "data"
+    t.binary   "data_old"
     t.string   "email"
     t.boolean  "complete"
     t.boolean  "completed"
@@ -131,6 +131,7 @@ ActiveRecord::Schema.define(version: 20170401192606) do
     t.boolean  "can_provide_housing"
     t.json     "housing_data"
     t.integer  "city_id"
+    t.json     "data"
   end
 
   create_table "conference_types", force: :cascade do |t|
@@ -316,6 +317,7 @@ ActiveRecord::Schema.define(version: 20170401192606) do
     t.integer  "organization_status_id"
     t.integer  "cover_attribution_user_id"
     t.string   "status"
+    t.string   "mailing_address"
   end
 
   create_table "page_comments", force: :cascade do |t|

@@ -58,6 +58,14 @@ legend {
 
 p {
     font-size: 4vw;
+
+    &.center {
+        text-align: center;
+    }
+}
+
+u {
+    @include _(text-decoration-color, rgba($black, 0.5));
 }
 
 a {
@@ -140,7 +148,7 @@ table, .table {
     }
 
     th, .table-th {
-        background-color: #F8F8F8;
+        background-color: $extra-light-gray;
 
         &.corner {
             background-color: transparent;
@@ -345,7 +353,7 @@ table, .table {
 
 .table-scroller {
     overflow: auto;
-    background-color: #F8F8F8;
+    background-color: $extra-light-gray;
     @include _(box-shadow, inset 0 0 10em 0 rgba(0,0,0,0.125));
 
     table {
@@ -425,8 +433,8 @@ body.expanded-element {
         background-color: $white;
 
         td.empty {
-            background-color: #F8F8F8;
-            border-bottom-color: #F8F8F8;
+            background-color: $extra-light-gray;
+            border-bottom-color: $extra-light-gray;
         }
     }
 
@@ -449,7 +457,7 @@ body.expanded-element {
         margin: auto;
         overflow: auto;     
         z-index: 1002;
-        background-color: #F8F8F8;
+        background-color: $extra-light-gray;
         flex: 1;
     }
 
@@ -515,6 +523,138 @@ button,
 
     &.small {
         font-size: 0.9em;
+    }
+
+    &.unstyled {
+        height: 4em;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        font-family: inherit;
+        color: $black;
+        @include _(box-shadow, none);
+        @include _(text-stroke, 0);
+    }
+}
+
+table.calendar {
+    width: 100%;
+    table-layout: fixed;
+    margin: 0;
+
+    button {
+        width: 100%;
+        background-color: $white;
+
+        &.during-conference {
+            background-color: rgba($colour-1, 0.25);
+        }
+
+        &.selected {
+            border: 0.25em solid rgba($colour-2, 0.5);
+        }
+    }
+
+    td {
+        padding: 0;
+        background-color: $extra-light-gray;
+    }
+
+    tr.month th {
+        background-color: rgba($colour-5, 0.25);
+        font-size: 1.5em;
+    }
+}
+
+#main .actions {
+    &.center {
+        text-align: center;
+    }
+
+    .buttons {
+        display: inline-block;
+
+        button {
+            margin: 0 0.333em;
+        }
+    }
+
+    button[value="back"] {
+        float: left;
+        background-color: $mid-gray;
+    }
+}
+
+#main {
+    .registration-step-options,
+    .vertical-registration-step-options {
+        text-align: center;
+
+        button {
+            display: block;
+            padding: 0 2em;
+            border: 0.05em solid $black;
+            background-color: $white;
+
+            &.selected {
+                // background-color: rgba($colour-1, 0.25);
+                box-shadow: 0 0 0 0.25em rgba($colour-2, 0.5);
+            }
+        }
+    }
+
+    .registration-step-options {
+        display: table;
+        table-layout: fixed;
+        margin: 0 auto;
+
+        .options {
+            display: table-row;
+        }
+
+        button {
+            display: table-cell;
+            margin: 0 0.5em;
+            height: 3em;
+        }
+    }
+
+    .vertical-registration-step-options {
+        text-align: center;
+
+        .options {
+            display: inline-block;
+        }
+
+        button {
+            width: 100%;
+            margin: 0.5em auto;
+        }
+    }
+}
+
+#action-message {
+    display: none;
+    text-align: center;
+    margin-bottom: 1em;
+
+    &.error, &.complete {
+        display: block;
+    }
+
+    .message {
+        display: inline-block;
+        @include font-family(secondary);
+        font-size: 1.25em;
+        padding: 1em 2em;
+        border: 0.25rem solid $blue;
+        background-color: rgba($blue, 0.25);
+    }
+
+    &.error .message {
+        border-color: $red;
+        background-color: rgba($red, 0.25);
     }
 }
 
@@ -661,6 +801,10 @@ input {
     }
 }
 
+.multi-field {
+    margin-bottom: 4em;
+}
+
 .number-field,
 .email-field,
 .search-field,
@@ -712,7 +856,7 @@ input {
         position: relative;
         z-index: $zindex-base + 2;
         padding: 0.15em 0.5em;
-        background-color: #F8F8F8;
+        background-color: $extra-light-gray;
         @include _(border-radius, 0.25rem);
         @include _(box-shadow, 0 0 0 0 rgba(0,0,0,0.05));
         @include _(transition, box-shadow 200ms ease-in-out);
@@ -730,6 +874,11 @@ input {
     input {
         &:focus, &:active, &:hover {
             @include _(box-shadow, 0 0 0 0.3em rgba(0,0,0,0.05));
+        }
+
+        &[readonly] {
+            @include _(box-shadow, none);
+            @include _(opacity, 0.75);
         }
     }
 }
@@ -758,7 +907,7 @@ input {
         display: block;
         text-align: right;
         padding: 0.5em;
-        background-color: #F8F8F8;
+        background-color: $extra-light-gray;
         @include _(border-radius, 0.25rem);
         @include _(box-shadow, 0 0 0 0 rgba(0,0,0,0.05));
         @include _(transition, box-shadow 200ms ease-in-out);
@@ -1579,7 +1728,7 @@ ul.warnings {
             
             &.current {
                 border-color: #CCC;
-                background-color: #F8F8F8;
+                background-color: $extra-light-gray;
             }
 
             &:hover {
@@ -1813,7 +1962,7 @@ table.schedule {
     td {
         text-align: center;
         border: 0;
-        background-color: #F8F8F8;
+        background-color: $extra-light-gray;
 
         &.workshop {
 
@@ -2677,12 +2826,46 @@ html :focus {
     }
 }
 
-.conferences-register .policy-agreement {
-    padding: 0.25em 1em;
-    margin: 0 0 3em;
-    border: 0.1em solid #DDD;
-    @include _(border-radius, 0.25em);
-    @include default-box-shadow(top, 2);
+.conferences-register #main article .policy-agreement {
+    ul {
+        padding: 0;
+        list-style: none;
+    }
+
+    .term {
+        display: block;
+        font-style: italic;
+        overflow: auto;
+        padding: 0.5em;
+        border-bottom: 0.1em solid rgba(51, 51, 51, 0.125);
+        font-family: inherit;
+    }
+
+    li {
+        margin-bottom: 0;
+
+        &:last-child .term {
+            border: 0;
+        }
+    }
+
+    input {
+        width: 1.1em;
+        height: 1.1em;
+        margin-top: 0.75em;
+        margin-left: 0.5em;
+        float: right;
+        cursor: pointer;
+
+        &:hover + .term {
+            background-color: rgba($colour-3, 0.25);
+        }
+
+        &:checked + .term {
+            font-style: normal;
+            background-color: rgba($colour-5, 0.125);
+        }
+    }
 }
 
 body.policy .policy-agreement ul {
@@ -2898,7 +3081,7 @@ body.policy .policy-agreement ul {
         border: 0.1em solid #DDD;
         padding: 1em;
         margin: 1em 0 3em 0;
-        background-color: #F8F8F8;
+        background-color: $extra-light-gray;
         @include _(border-radius, 0.25em);
     }
     
@@ -3112,6 +3295,20 @@ body.policy .policy-agreement ul {
         }
     }
 
+    .multi-field {
+        display: table;
+        width: 100%;
+
+        .input-field {
+            display: table-cell;
+            padding-right: 1em;
+
+            &:last-child {
+                padding-right: 0;
+            }
+        }
+    }
+
     .flex-column {
         @include _-(display, flex);
         @include _(align-items, flex-start);
@@ -3298,6 +3495,12 @@ body.policy .policy-agreement ul {
                 margin: 0 1.5em 1em -1.5em;
             }
         }
+    }
+
+    .conferences-register #main article .policy-agreement .term {
+        // make it a little more difficult for desktop users
+        // to help ensure they read each point
+        pointer-events: none;
     }
 
     #header-title {

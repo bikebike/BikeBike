@@ -171,10 +171,20 @@
         }, node || document);
         forEachElement('form.js-xhr', function(form) {
             if (form.addEventListener) {
+                forEachElement('button', function(button) {
+                    button.addEventListener('click', function(event) {
+                        form.setAttribute('data-button-name', button.name);
+                        form.setAttribute('data-button-value', button.value);
+                    });
+                }, form);
                 form.addEventListener('submit', function(event) {
                     event.preventDefault();
                     form.classList.add('requesting');
                     var data = new FormData(form);
+                    var button = form.getAttribute('data-button-value');
+                    if (button) {
+                        data.append(form.getAttribute('data-button-name'), button);
+                    }
                     var request = new XMLHttpRequest();
                     request.onreadystatechange = function() {
                         if (request.readyState == 4) {
@@ -196,6 +206,12 @@
                                     }
                                     if (response[i].className) {
                                         element.className = response[i].className;
+                                    }
+                                    if (response[i].scrollTo) {
+                                        var scrollTo = document.querySelector(response[i].scrollTo);
+                                        if (scrollTo) {
+                                            scrollTo.scrollIntoView();
+                                        }
                                     }
                                 }
                             }

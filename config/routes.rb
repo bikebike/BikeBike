@@ -14,10 +14,11 @@ BikeBike::Application.routes.draw do
   
       # Registration
       scope :register do
-        root 'conferences#register', as: :register, via: :all
+        root 'conferences#register', as: :register, via: [:get, :post]
+        # post 'update' => 'conferences#registration_update', as: :registration_update
         
         get ':step' => 'conferences#register', as: :register_step
-        get ':button/:confirmation_token' => 'conferences#register', as: :register_paypal_confirm
+        # get ':button/:confirmation_token' => 'conferences#register', as: :register_paypal_confirm
       end
       
       # Administration

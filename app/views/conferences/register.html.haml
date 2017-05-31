@@ -1,12 +1,13 @@
 = render :partial => 'conferences/page_header', :locals => {:page_key => 'Conference_Registration'}
 - if @warnings.present?
   = row class: 'warnings', tag: :ul do
-    - @warnings.each do | warning |
+    - @warnings.each do |warning|
       = columns tag: :li, class: 'warning-info' do
         = warning
 %article
-  = row do
-    = columns(medium: 12) do
-      %h2=_(@page_title)
-      = registration_step_menu
-    = render "conferences/#{@register_template}"
+  - if logged_in?
+    #step-content= render "registration_steps/#{@step}"
+  - else
+    = row do
+      = columns(medium: 12) do
+        = render "application/login"
