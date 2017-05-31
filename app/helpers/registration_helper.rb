@@ -129,15 +129,22 @@ module RegistrationHelper
       end
     end
 
+    message = if @update_message.present? && @update_status.present?
+                columns(medium: 12, class: @update_status, id: 'action-message') do
+                  content_tag(:div, (_"articles.conference_registration.#{@update_status}.#{@update_message}", :s), class: :message).html_safe
+                end
+              else
+                ''
+              end
+    actions = columns(medium: 12, class: [:actions, :center]) do
+                content_tag(:div, actions.html_safe, class: :buttons).html_safe
+              end
+
     form_tag(register_path(conference.slug), class: 'js-xhr') do
-      (@update_message.present? && @update_status.present? ? columns(medium: 12, class: @update_status, id: 'action-message') do
-        content_tag(:div, (_"articles.conference_registration.#{@update_status}.#{@update_message}", :s), class: :message).html_safe
-      end : '').html_safe +
+      message.html_safe +
       content.html_safe +
       (hidden_field_tag :step, step).html_safe +
-      columns(medium: 12, class: [:actions, :center]) do
-        content_tag(:div, actions.html_safe, class: :buttons).html_safe
-      end.html_safe
+      actions.html_safe
     end.html_safe
   end
 end
