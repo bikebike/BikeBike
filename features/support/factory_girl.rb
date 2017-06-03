@@ -95,6 +95,22 @@ def create_registration(user = TestState.my_account)
   registration.housing = TestState::Sample[:conference_registration].all_housing_options
   registration.bike = TestState::Sample[:conference_registration].all_bike_options
   registration.food = TestState::Sample[:conference_registration].all_food_options
+  registration.data = {
+    'payment_method' => 'none',
+    'email_sent' => true,
+    'city_id' => 11,
+    'new_org' => {
+      'id' => 8,
+      'email' => 'example@bikebike.org',
+      'mailing_address' => "120 Assomption Blvd\r\nEdmundston, New Brunswick\r\nCanada E3V 2X4",
+      'name' => 'Bike Pulp',
+      'address' => '120 Assomption Blvd'
+    },
+    'current_step' => 'review',
+    'is_org_member' => true,
+    'group_ride' => true
+  }
+  registration.housing_data = { 'other' => '', 'companion' => false }
   registration.save!
 
   if user == TestState.my_account
@@ -110,36 +126,12 @@ def create_org(name = nil, location = nil)
   org = FactoryGirl.create(:org)
   found_location = nil
   if location.present?
-    cache_file = File.join(File.dirname(__FILE__), 'location_cache.yml')
-    cache = {}
-    if File.exists?(cache_file)
-      begin
-        cache = YAML.load_file(cache_file)
-      rescue
-        # get rid of the cache if there's an error
-      end
-    end
-    l = cache[location]
-    if l.nil?
-      l = Geocoder.search(location).first
-      cache[location] = l
-      File.open(cache_file, 'w') { |f| f.write cache.to_yaml }
-    end
-    begin
-      found_location = Location.new(city: l.city, territory: l.province_code, country: l.country_code, latitude: l.latitude, longitude: l.longitude)
-    rescue; end
-    if found_location.nil?
-      # let it though, we might be offline
-      org.save!
-      return org
-    end
+    found_location = Location.create(city_id: City.search(location).id)
+    org.locations << found_location
   end
   if name.present?
     org.name = name
     org.slug = org.generate_slug(name, found_location)
-  end
-  if found_location.present?
-    org.locations << found_location
   end
   org.save!
   org

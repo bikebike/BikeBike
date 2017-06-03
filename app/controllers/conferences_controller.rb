@@ -79,14 +79,10 @@ class ConferencesController < ApplicationController
         end
       end
 
-      view_context.add_stylesheet 'quill.css'
-      view_context.add_javascript :quill
-      view_context.add_inline_script :editor
-
       # get the current step
       @step = current_registration_step(@this_conference, current_user)
 
-      if @step == :payment_form && params[:token].present?
+      if @step == :payment_form && (params[:token].present? || @test_token.present?)
         result = paypal_payment_confirm(@this_conference, current_user, params)
         data_to_instance_variables(result)
         @confirm_payment = true
@@ -101,7 +97,7 @@ class ConferencesController < ApplicationController
     if request.xhr?
       render json: [{
           globalSelector: '#step-content',
-          html: render_to_string(partial: "registration_steps/#{@step}"),
+          html: view_context.step_message + render_to_string(partial: "registration_steps/#{@step}"),
           scrollTo: '#action-message .message, #step-content'
         }]
     end

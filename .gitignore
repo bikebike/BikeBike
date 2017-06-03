@@ -70,6 +70,7 @@ brakeman.html
 /app/assets/stylesheets/web-fonts/*
 /app/assets/stylesheets/translations/*
 /app/assets/stylesheets/editor/*
+/app/assets/stylesheets/admin/*
 
 # Ignore test artifacts
 /config/locales/data/html_records/*

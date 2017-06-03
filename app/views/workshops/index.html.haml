@@ -3,6 +3,11 @@
 %article
   = row do
     = columns(medium: 12) do
+      .back-to=_'articles.conference_registration.headings.Back_to'
+      %ul.menu
+        %li=link_to (_'articles.conference_registration.headings.Your_Registration'), :register
+  = row do
+    = columns(medium: 12) do
       %h2=_'articles.workshops.headings.Workshops'
   = row do
     = columns(medium: 12) do

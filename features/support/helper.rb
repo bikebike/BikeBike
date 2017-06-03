@@ -120,7 +120,7 @@ end
 def email_address(user)
   case user
   when /(I|me)/
-    TestState.last_email_entered || TestState.my_account.email
+    TestState.my_account.present? ? TestState.my_account.email : TestState.last_email_entered
   when /^(?:the )?site administrator$/i
     'goodgodwin@hotmail.com'
   when /^'(.+)'$/
@@ -149,9 +149,9 @@ end
 def get_user(username)
   return create_user unless username.present?
 
-  TestState::Users[username] = create_user({
+  TestState::Users[username] ||= create_user({
       (username =~ /^[^\s]+@[^\s]+\.[^\s]+$/ ? :email : :firstname) => username
-    }) unless TestState::Users[username].present?
+    })
 
   return TestState::Users[username]
 end

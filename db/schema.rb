@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170422222529) do
+ActiveRecord::Schema.define(version: 20170602051457) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -183,6 +183,7 @@ ActiveRecord::Schema.define(version: 20170422222529) do
     t.boolean  "is_public"
     t.boolean  "is_featured"
     t.json     "provider_conditions"
+    t.text     "group_ride_info"
   end
 
   create_table "delayed_jobs", force: :cascade do |t|

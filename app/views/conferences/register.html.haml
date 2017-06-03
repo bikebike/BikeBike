@@ -6,8 +6,20 @@
         = warning
 %article
   - if logged_in?
-    #step-content= render "registration_steps/#{@step}"
+    - add_stylesheet 'quill.css'
+    - add_javascript :quill
+    - add_inline_script :editor
+    #step-content
+      = step_message
+      = render "registration_steps/#{@step}"
   - else
+    = row do
+      = columns(medium: 12) do
+        %h2=_'articles.conference_registration.headings.Registration_Details'
+        %p= _'articles.conference_registration.paragraphs.Registration_Details'
+        %h3=_'articles.conference_registration.headings.Verify_Account'
+        %p=_'articles.conference_registration.paragraphs.Verify_Account'
+
     = row do
       = columns(medium: 12) do
         = render "application/login"

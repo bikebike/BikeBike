@@ -715,10 +715,39 @@ button,
     }
 }
 
+ul.menu {
+    list-style: none;
+    margin-top: 0;
+    padding-left: 0;
+
+    li {
+        display: inline;
+        padding: 0;
+
+        @include after {
+            content: '|';
+            margin: 0 0.333em 0 0.5em;
+        }
+
+        &:last-child {
+            @include after {
+                display: none;
+            }
+        }
+    }
+}
+
+.back-to {
+    float: left;
+    margin-right: 0.5em;
+    font-size: 1.2em;
+    @include font-family(secondary);
+}
+
 #action-message {
     display: none;
     text-align: center;
-    margin-bottom: 1em;
+    margin-bottom: 3em;
 
     &.error, &.complete, &.warning {
         display: block;

@@ -3,8 +3,26 @@ Given /^(?:I am |'(.+)' is )?registered(?: for the conference)?$/i do |username|
   create_registration(username.present? ? get_user(username) : TestState.my_account)
 end
 
+Given /^(.+) and (.+) are companions$/i do |user1, user2|
+  u1 = get_user(user1.gsub(/'/, ''))
+  u2 = get_user(user2.gsub(/'/, ''))
+  registration1 = ConferenceRegistration.find_by(user_id: u1.id, conference_id: TestState.last_conference.id)
+  registration1.housing_data['companion'] = { 'id' => u2.id }
+  registration1.save
+
+  registration2 = ConferenceRegistration.find_by(user_id: u2.id, conference_id: TestState.last_conference.id)
+  registration2.housing_data['companion'] = { 'id' => u1.id }
+  registration2.save
+end
+
 Given /^(?:I )?have paid( \$?\d+|\$?\d+\.\d+)? for registration$/i do |amount|
   TestState.my_registration.registration_fees_paid = amount ? amount.to_f : 50.0
+  TestState.my_registration.save!
+end
+
+Given /^my payment status will be '(Completed|Pending|Denied|Error)'$/i do |status|
+  TestState.my_registration.data ||= {}
+  TestState.my_registration.data['payment_status'] = status
   TestState.my_registration.save!
 end
 

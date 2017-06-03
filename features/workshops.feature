@@ -4,12 +4,14 @@ Feature: Workshops
     And registration is open
     And I am logged in
     And registered for the conference
-    And on the registration page 
+    And on the registration page
 
-    Then I should see 'Propose a Workshop'
+    Then I should see 'New Workshop'
+    And should see 'View Workshops'
+    Then I should see 'New Workshop'
     But I should not see any workshops
 
-    When I click on 'Propose a Workshop'
+    When I click on 'New Workshop'
     Then I should see 'Create a Workshop'
     And see 'Describe your workshop in detail'
 
@@ -46,7 +48,7 @@ Feature: Workshops
     And should see 'Education'
 
     When I click the 'Workshops' link
-    Then I should see a workshop
+    Then I should see two workshops
 
     When I click on the 'More info' link
     Then I should see 'Tools'
@@ -61,7 +63,7 @@ Feature: Workshops
 
     When I click the 'Delete Workshop' link
     And click the 'Confirm' button
-    Then I should see 'Propose a Workshop'
+    Then I should see 'New Workshop'
     But I should not see any workshops
 
   Scenario: Users can comment on an translate their own workshops

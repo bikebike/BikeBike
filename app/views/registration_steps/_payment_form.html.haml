@@ -15,7 +15,10 @@
             = radiobuttons :currency, (@currencies.map { |c| [(_"currencies.#{c}.displayName-count-other"), c] }), @currency
           .options.graded-options{class: "option-count-#{@amounts.size}"}
             - @amounts.each_with_index do |option, i|
-              = button (number_to_currency option, unit: '$'), value: option, name: :value, class: [:unstyled, "option-#{i + 1}"], data: { noxhr: 1 }
+              = button (number_to_currency option, unit: '$'), value: option, name: :value, class: [:unstyled, "option-#{i + 1}"]
           .custom-option
+            -# if Rails.env.test?
+            =# text_field_tag :custom_value, nil
+            -# else
             = number_field_tag :custom_value, 50.0, step: 0.05, min: 0.05
-            = button :custom_amount, name: :custom_amount, value: :custom, class: :unstyled, data: { noxhr: 1 }
+            = button :custom_amount, name: :custom_amount, value: :custom, class: :unstyled

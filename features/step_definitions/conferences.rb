@@ -16,6 +16,10 @@ Given /^(?:(?:that )?there is )?an? (upcoming|past)( regional)? conference(?: in
   TestState.last_conference.save!
 end
 
+Given /^there is an organization named '(.+)' in (.+)$/ do |org_name, location|
+  TestState.last_organization = create_org(org_name, location)
+end
+
 Given /^(?:the conference |it )has no (poster|date)$/i do |field|
   if field == 'date'
     TestState.last_conference.start_date = nil
@@ -33,7 +37,7 @@ Given /^(?:the conference |it )?is not (featured|public)$/i do |field|
 end
 
 Given /^the conference accepts housing providers that live within (\d+)(mi|km)$/i do |number, unit|
-  TestState.last_conference.provider_conditions = {'distance' => {'number' => number.to_i, 'unit' => unit}}
+  TestState.last_conference.provider_conditions = { 'distance' => {'number' => number.to_i, 'unit' => unit } }
   TestState.last_conference.save!
 end
 

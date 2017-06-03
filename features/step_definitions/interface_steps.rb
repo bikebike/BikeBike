@@ -64,6 +64,10 @@ Then /^(?:I )?(un)?check '(.+)'$/i do |uncheck, text|
   end
 end
 
+Then /^(?:I )?(un)?check ([^']+)$/i do |uncheck, name|
+  find("input[type=\"checkbox\"][name$=\"[#{name.gsub(/\s/, '_')}]\"]").click
+end
+
 Then /^(?:my )?'(.+)' should (not )?be checked$/i do |text, negate|
   label = find('.check-box-field label', text: text)
   find("##{label[:for]}", visible: false).send(negate ? :should_not : :should, be_checked)
@@ -74,8 +78,8 @@ Then /^(?:I )?(?:select|choose|want) (?:an? |the )?'(.+?)'$/i do |value|
   option.first(:xpath, './/..').set(option.value)
 end
 
-Then /^(?:I )?fill in (.+?) with '(.+)'$/i do |field, value|
-  field = field.gsub(/^\s*(my|the)\s*(.+)$/, '\2')
+Then /^(?:I )?fill in (.+?) with '(.*)'$/i do |field, value|
+  field = field.gsub(/^\s*(my|the)?\s*(.+)$/, '\2').gsub(/\s/, '_')
   find(selector_for(field)).set value
 
   if /email/ =~ field && !(/organization/ =~ field)
@@ -88,7 +92,12 @@ Then /^(?:I )?enter (?:my |an? |some |the )?(.+?)(?: as '(.+)')?$/i do |field, v
 
   sel = selector_for(field)
   element = first(sel, visible: true) || first(sel, visible: false)
-  element = element.first('[contenteditable]') if element.tag_name.to_s.downcase == 'div'
+  
+  html = false
+  if element.tag_name.to_s.downcase == 'div'
+    element = element.first('[contenteditable]')
+    html = true
+  end
 
   unless value.present?
     value = case field
@@ -102,11 +111,11 @@ Then /^(?:I )?enter (?:my |an? |some |the )?(.+?)(?: as '(.+)')?$/i do |field, v
     when 'subject', 'title'
       Forgery::LoremIpsum.sentence(random: true).gsub(/\.$/, '').titlecase
     when /(comment|reply)/
-      Forgery::LoremIpsum.paragraphs(2, sentences: 6, random: true)
+      Forgery::LoremIpsum.paragraphs(2, sentences: 6, random: true, html: html)
     when 'message'
-      Forgery::LoremIpsum.paragraphs(2, sentences: 6, random: true)
+      Forgery::LoremIpsum.paragraphs(2, sentences: 6, random: true, html: html)
     when 'info'
-      Forgery::LoremIpsum.paragraphs(rand(1..4), sentences: rand(3..8), random: true)
+      Forgery::LoremIpsum.paragraphs(rand(1..4), sentences: rand(3..8), random: true, html: html)
     else
       fail "Unknown selector '#{field}'"
     end

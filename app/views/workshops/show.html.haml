@@ -1,7 +1,13 @@
 = render 'conferences/page_header', page_key: 'Conference_Registration'
 
 %article
-  = render 'workshops/show', :workshop => @workshop, :translations_available_for_editing => @translations_available_for_editing, :preview => false
+  = row do
+    = columns(medium: 12) do
+      .back-to=_'articles.conference_registration.headings.Back_to'
+      %ul.menu
+        %li=link_to (_'articles.conference_registration.headings.Workshops'), :workshops
+        %li=link_to (_'articles.conference_registration.headings.Your_Registration'), :register
+  = render 'workshops/show', workshop: @workshop, translations_available_for_editing: @translations_available_for_editing, preview: false
   = row do
     = columns(medium: 12) do
       .actions.next-prev

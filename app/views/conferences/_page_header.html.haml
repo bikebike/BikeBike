@@ -1,3 +1,2 @@
-- @main_title_t ||= (@this_conference.title)
--# @page_title ||= (@this_conference.title)
+- @main_title_t ||= _!(@this_conference.title)
 = render partial: 'application/header', locals: { page_group: :conferences, page_key: page_key, image_file: @this_conference.poster_url }
