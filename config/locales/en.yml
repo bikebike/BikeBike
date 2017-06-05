@@ -1234,6 +1234,7 @@ en:
         administrators: Error updating organizations
         dates: Error updating dates
         description: Error saving your conference description
+        group_ride: Error saving your group ride info
         poster: An error occurred uploading your conference poster
         payment_message: An error occurred saving your the payment message
         suggested_amounts: An error occurred saving your payment amounts
@@ -1278,6 +1279,7 @@ en:
         dates: Conference dates updated successfully
         description: Conference description updated successfully
         poster: Conference poster uploaded
+        group_ride: Group ride info saved
         payment_message: Your payment message has been updated
         suggested_amounts: Your suggested payment amounts have been updated
         paypal: Your paypal information has been updated
@@ -1467,6 +1469,7 @@ en:
           administrators: Administrators and Organizations
           description: Description
           poster: Poster
+          group_ride: Group Ride
           Host_Organizations: Host Organizations
           External_Administrators: External Administrators
         description: These are the basic details about your conference that you will
@@ -1476,6 +1479,7 @@ en:
           dates: Set your conference start and end dates
           description: Modify the text that is displayed on the front page
           poster: Upload your conference poster
+          group_ride: Will you be having a group ride before or after the conference? Describe it here.
           administrators: Set the conference host organizations and other members
             who have access to these administration tools
           Host_Organizations: Select all organizations from known organizations in
@@ -1736,6 +1740,7 @@ en:
         admin:
           edit:
             info: Info
+            group_ride: Group ride description
         companion: Companion
       paragraphs:
         group_ride: There will be a group ride before the conference, do you plan to attend?
@@ -1876,6 +1881,7 @@ en:
         admin:
           edit:
             info: This is the copy that is displayed on the front page of the site.
+            group_ride: Describe your group ride. This info may be used on the conference description, emails, or on the registration form.
           schedule:
             published: Your scheulde is currently published and viewable on the front-page.
               Un-publishing the schedule will remove it from the front-page and show
@@ -2072,7 +2078,7 @@ en:
           one: You and one other are interested in this workshop
           other: You and %{count} others are interested in this workshop
           zero: You are interested in this workshop
-        read_more: More info
+        read_more: Details
     user_settings:
       headings:
         Your_Account: Account Settings
@@ -2182,7 +2188,7 @@ en:
         'yes': 'Yes'
         'no': 'No'
         maybe: Maybe
-        review: Complete
+        review: Review
         back: Back
         upload: Upload
         select_file: Select a file

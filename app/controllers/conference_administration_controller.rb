@@ -99,6 +99,9 @@ class ConferenceAdministrationController < ApplicationController
     def administrate_description
     end
 
+    def administrate_group_ride
+    end
+
     def administrate_poster
     end
 
@@ -792,6 +795,15 @@ class ConferenceAdministrationController < ApplicationController
     def admin_update_description
       params[:info].each do |locale, value|
         @this_conference.set_column_for_locale(:info, locale, html_value(value))
+      end
+      @this_conference.save
+      set_success_message @admin_step
+      return false
+    end
+
+    def admin_update_group_ride
+      params[:group_ride_info].each do |locale, value|
+        @this_conference.set_column_for_locale(:group_ride_info, locale, html_value(value))
       end
       @this_conference.save
       set_success_message @admin_step

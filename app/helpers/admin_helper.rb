@@ -2,7 +2,7 @@ module AdminHelper
 
   def administration_steps
     {
-      info: [:administrators, :dates, :description, :poster],
+      info: [:administrators, :dates, :description, :poster, :group_ride],
       payment: [:payment_message, :suggested_amounts, :paypal],
       registration: [:registration_status, :stats, :registrations, :broadcast],
       housing: [:providers, :housing],

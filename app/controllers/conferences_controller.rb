@@ -98,7 +98,8 @@ class ConferencesController < ApplicationController
       render json: [{
           globalSelector: '#step-content',
           html: view_context.step_message + render_to_string(partial: "registration_steps/#{@step}"),
-          scrollTo: '#action-message .message, #step-content'
+          scrollTo: '#action-message .message, #step-content',
+          focus: 'input:not([type="hidden"]), textarea, button.selected'
         }]
     end
   end

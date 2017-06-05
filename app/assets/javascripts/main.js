@@ -228,6 +228,17 @@
                                             scrollTo.scrollIntoView();
                                         }
                                     }
+                                    if (response[i].focus) {
+                                        var focusOn = document.querySelector(response[i].focus);
+                                        if (focusOn) {
+                                            if (typeof focusOn.select === "function" && focusOn.value.length) {
+                                                if (focusOn.type == "text" || focusOn.type == "email" || focusOn.type == "phone" || focusOn.tagName == "TEXTAREA") {
+                                                    focusOn.select();
+                                                }
+                                            }
+                                            focusOn.focus();
+                                        }
+                                    }
                                 }
                             }
                         }

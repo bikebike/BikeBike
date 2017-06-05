@@ -24,6 +24,8 @@ $green: $colour-5;
 
 $link-colour: darken($colour-1, 13%);
 
+$selected-colour: rgba($blue, 0.5);
+
 @mixin default-box-shadow($direction: top, $distance: 1, $inset: false, $additional-shadow: false) {
     @if capable_of(box-shadow) {
         $offset: 0.2em;
