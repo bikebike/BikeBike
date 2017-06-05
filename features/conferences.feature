@@ -60,7 +60,7 @@ Feature: Conferences
     Then I should see 'Brooklyn'
     But I should not see 'Yellowknife'
     And not see 'New Orleans'
-    And not see 'More info'
+    And not see 'Details'
     And not see a 'Register' link
     And I should not see an 'Administrate' link
     And I should not see an 'Edit' link
@@ -75,7 +75,7 @@ Feature: Conferences
     Then I should see 'Brooklyn'
     But I should not see 'Yellowknife'
     And not see 'New Orleans'
-    And not see 'More info'
+    And not see 'Details'
     But I should see a 'Register' link
     And I should not see an 'Administrate' link
     And I should not see an 'Edit' link

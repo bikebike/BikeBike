@@ -50,7 +50,7 @@ Feature: Workshops
     When I click the 'Workshops' link
     Then I should see two workshops
 
-    When I click on the 'More info' link
+    When I click on the 'Details' link
     Then I should see 'Tools'
     And should see 'Education'
 

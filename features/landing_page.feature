@@ -6,14 +6,14 @@ Feature: Landing Page
     Given there is an upcoming conference in 'Brooklyn NY'
     And I am on the landing page
 
-    Then I should see a 'More info' link
+    Then I should see a 'Details' link
 
   Scenario: A registration link is displayed when registration is open
     Given there is an upcoming conference in 'Brooklyn NY'
     And Registration is open
     And I am on the landing page
     
-    Then I should see a 'More info' link
+    Then I should see a 'Details' link
     And see a 'Register' link
     And see 'Brooklyn'
 
