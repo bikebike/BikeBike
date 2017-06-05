@@ -67,28 +67,83 @@ end
 
 task :i18n do
   LinguaFranca.test LinguaFranca::TestModes::RECORD do
-    Rake::Task[:cucumber].execute
+    Rake::Task['cucumber:run'].execute
   end
 end
 
 task :css do
   ENV['CSS_TEST'] = '1'
-  Rake::Task[:cucumber].execute
+  Rake::Task['cucumber:run'].execute
   ENV['CSS_TEST'] = nil
 end
 
 task :a11y do
   ENV['TEST_A11Y'] = '1'
-  Rake::Task[:cucumber].execute
+  Rake::Task['cucumber:run'].execute
   ENV['TEST_A11Y'] = nil
 end
 
 task "cucumber:debug" do
   ENV['TEST_DEBUG'] = '1'
-  Rake::Task[:cucumber].execute
+  Rake::Task['cucumber:run'].execute
   ENV['TEST_DEBUG'] = nil
 end
 
-Cucumber::Rake::Task.new(:cucumber) do |t|
-  t.cucumber_opts = "features --format pretty"
+# Cucumber::Rake::Task.new(:cucumber) do |t|
+#   t.cucumber_opts = "features --format pretty"
+# end
+
+namespace :cucumber do
+  directory 'tmp'
+  @rerun_file = 'tmp/rerun.txt'
+
+  Cucumber::Rake::Task.new(:all) do |task|
+    task.cucumber_opts = "features --format pretty --format rerun --out tmp/rerun.txt"
+  end
+
+  desc 'Run cucumber features'
+  task run: :tmp do
+    retry_on_failure do
+      run_features
+    end
+    clean_up
+    exit @exit_status
+  end
+
+  def retry_on_failure
+    rm_rf @rerun_file
+    @retries = 0
+    begin
+      @exit_status = 0
+      yield
+    rescue SystemExit => e
+      @exit_status = e.status
+      if retry?(exception: e)
+        @retries += 1
+        retry
+      end
+    end
+  end
+
+  def run_features
+    if File.exists? @rerun_file
+      Cucumber::Rake::Task::ForkedCucumberRunner.new(['lib'], Cucumber::BINARY, [
+          'features',
+          '--format', 'pretty',
+          '@tmp/rerun.txt',
+          '--format', 'rerun',
+          '--out', 'tmp/rerun.txt'
+        ], true, []).run
+    else
+      Rake::Task['cucumber:all'].invoke
+    end
+  end
+
+  def retry?(exception: nil)
+    @retries < 2 && !exception.success?
+  end
+
+  def clean_up
+    rm_rf @rerun_file.pathmap("%d")
+  end
 end

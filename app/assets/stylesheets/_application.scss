@@ -66,6 +66,7 @@ p {
 
 u {
     @include _(text-decoration-color, rgba($black, 0.5));
+    text-decoration-skip: ink;
 }
 
 a {
@@ -197,16 +198,20 @@ table, .table {
         width: 0.1rem;
     }
 
-    &#review tbody th {
-        width: auto;
-        vertical-align: top;
-    }
+    &#review {
+        margin: 0 auto;
 
-    &#review .scroller {
-        font-size: 0.75em;
-        max-width: 50em;
-        max-height: 25em;
-        overflow: auto;
+        .table-th {
+            width: auto;
+            vertical-align: top;
+        }
+
+        .scroller {
+            font-size: 0.75em;
+            max-width: 50em;
+            max-height: 25em;
+            overflow: auto;
+        }
     }
 
     &.admin-edit {
@@ -491,6 +496,23 @@ body.expanded-element {
     display: table-cell;
 }
 
+.responsive-table {
+    display: block;
+
+    .table-td {
+        padding: 1em;
+    }
+
+    .table-tr, .table-th, .table-td {
+        display: block;
+        overflow: auto;
+    }
+
+    .table-tr {
+        margin-bottom: 1em;
+    }
+}
+
 button,
 .button {
     @include button;
@@ -572,6 +594,7 @@ button,
 
     button {
         width: 100%;
+        height: 10vw;
         background-color: $white;
 
         &.during-conference {
@@ -579,7 +602,7 @@ button,
         }
 
         &.selected {
-            border: 0.25em solid rgba($colour-2, 0.5);
+            border: 0.25em solid $selected-colour;
         }
     }
 
@@ -596,21 +619,26 @@ button,
 
 #main .actions {
     margin-top: 4em;
-
+    
     &.center {
         text-align: center;
     }
 
     .buttons {
         display: inline-block;
+        display: flex;
+        text-align: right;
+        justify-content: center;
+        flex-wrap: wrap;
 
-        button {
-            margin: 0 0.333em;
+        button, .button {
+            margin: 0.333em;
         }
     }
 
     button[value="back"] {
         float: left;
+        order: -1;
         background-color: $mid-gray;
     }
 
@@ -631,41 +659,29 @@ button,
 
         button {
             display: block;
+            width: 100%;
             padding: 0 2em;
             border: 0.05em solid $black;
             background-color: $white;
 
             &.selected {
-                box-shadow: 0 0 0 0.25em rgba($colour-2, 0.5);
+                box-shadow: 0 0 0 0.25em $selected-colour;
             }
         }
     }
 
     .registration-step-options {
-        display: table;
-        table-layout: fixed;
         margin: 0 auto;
 
         .options {
-            display: table-row;
-
             + fieldset {
                 margin: 2em 0;
             }
         }
 
         button {
-            display: table-cell;
-            margin: 0 0.5em;
+            margin: 0.5em auto;
             height: 3em;
-
-            &:first-child {
-                margin-left: 0;
-            }
-
-            &:last-child {
-                margin-right: 0;
-            }
         }
 
         .check-box-field {
@@ -680,8 +696,7 @@ button,
             background-color: $white;
 
             input {
-                display: table-cell;
-                width: 10em;
+                width: 100%;
                 height: 3em;
                 margin: 0;
                 font-family: inherit;
@@ -692,10 +707,10 @@ button,
             }
 
             button {
-                width: 50%;
+                width: 100%;
                 margin: 0;
                 border: 0;
-                border-left: inherit;
+                border-top: inherit;
                 background-color: lighten($colour-1, 25%);
             }
         }
@@ -742,6 +757,12 @@ ul.menu {
     margin-right: 0.5em;
     font-size: 1.2em;
     @include font-family(secondary);
+}
+
+#step-content {
+    form {
+        margin-top: 1em;
+    }
 }
 
 #action-message {
@@ -1268,8 +1289,8 @@ input {
                 content: '+';
                 border: 0;
                 font-size: 2.5em;
-                top: -0.025em;
-                left: 0.175em;
+                top: -0.125em;
+                left: 0.075em;
                 line-height: 1em;
                 color: #FFF;
                 height: 1em;
@@ -1645,7 +1666,7 @@ fieldset {
         text-align: center;
         
         + button, + .button {
-            margin-left: 0.75em;
+            margin-top: 0.75em;
         }
     }
 
@@ -3408,6 +3429,11 @@ body.policy .policy-agreement ul {
             button, .button {
                 margin-left: 1em;
                 height: 2.6em;
+        
+                + button, + .button {
+                    margin-top: 0;
+                    margin-left: 0.75em;
+                }
             }
         }
     }
@@ -3768,6 +3794,13 @@ body.policy .policy-agreement ul {
             border: 0.1em solid;
         }
 
+        input[type="radio"] + label {
+            @include after {
+                top: -0.025em;
+                left: 0.175em;
+            }
+        }
+
         &.inline {
             label {
                 float: left;
@@ -3812,7 +3845,71 @@ body.policy .policy-agreement ul {
             @include _(transform, none);
         }
     }
-}
+
+    #main table.calendar {
+        button {
+            height: 4em;
+        }
+    }
+
+    #main .registration-step-options {
+        display: table;
+        table-layout: fixed;
+
+        .options {
+            display: table-row;
+        }
+
+        button {
+            display: table-cell;
+            margin: 0 0.5em;
+            width: auto;
+
+            &:first-child {
+                margin-left: 0;
+            }
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+
+        fieldset {
+            margin-bottom: 3em;
+        }
+
+        .custom-option {
+            margin-top: 1em;
+
+            input {
+                display: table-cell;
+                width: 10em;
+            }
+
+            button {
+                width: 50%;
+                border-top: 0;
+                border-left: inherit;
+            }
+        }
+    }
+
+    .responsive-table {
+        display: table;
+
+        .table-tr {
+            display: table-row;
+        }
+
+        .table-td {
+            padding: 0.25em 0.5em;
+        }
+
+        .table-th, .table-td {
+            display: table-cell;
+        }
+    }
+} // medium
 
 @include breakpoint(large) {
     #main {
@@ -3864,6 +3961,12 @@ body.policy .policy-agreement ul {
         footer {
             max-width: $row-width;
             margin: 0 auto;
+        }
+    }
+
+    #main table.calendar {
+        button {
+            height: 5em;
         }
     }
 }

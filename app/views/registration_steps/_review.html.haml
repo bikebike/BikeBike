@@ -3,24 +3,24 @@
   = columns(medium: 12) do
     = save_registration_step do
       - if @is_attending
-        %table#review
+        .table.responsive-table#review
           - @step_data.each do |step, data|
             - unless data[:type] == :none
-              %tr
-                %th
+              .table-tr
+                .table-th
                   =_"articles.conference_registration.step_names.#{step}"
                   = button :edit, name: :edit_step, value: step, class: [:unstyled, :edit]
-                %td
+                .table-td
                   - case data[:type]
                     - when :bool
                       =_"forms.actions.generic.#{data[:value] ? 'yes' : 'no'}"
                     - when :list
-                      = data[:value].map { |item| _"#{data[:key]}.#{item}" }.join(_!(", "))
+                      = data[:value].map { |item| _"#{data[:key]}.#{item}" }.join(_!(", ")).html_safe
                     - when :currency
                       = (number_to_currency data[:value].to_f, unit: '$')
                       =_!(data[:currency].to_s).html_safe
                     - when :date
-                      = date(data[:value].to_date, :long)
+                      = date(data[:value].to_date, :long).html_safe
                     - when :enum
                       =_("#{data[:key] || ('forms.labels.generic.' + step.to_s + '.')}#{data[:value]}")
                     - when :html
@@ -29,7 +29,7 @@
                       - if data[:key].present?
                         =_"#{data[:key]}.#{data[:value]}"
                       - else
-                        = data[:value]
+                        = data[:value].to_s.html_safe
       - else
         %p.centered=_'articles.conference_registration.paragraphs.registration_cancelled', :p
       - if @allow_cancel_attendance
@@ -43,5 +43,6 @@
     %h3=_'articles.workshops.headings.Workshops', :t
     %p=_'articles.conference_registration.paragraphs.workshops', :p
     .actions.centered
-      = link_to (_'articles.conference_registration.actions.View_Workshops'), workshops_path(@this_conference), class: :button
-      = link_to (_'actions.workshops.create'), create_workshop_path(@this_conference), class: [:button, :modify]
+      .buttons
+        = link_to (_'articles.conference_registration.actions.View_Workshops'), workshops_path(@this_conference), class: :button
+        = link_to (_'actions.workshops.create'), create_workshop_path(@this_conference), class: [:button, :modify]

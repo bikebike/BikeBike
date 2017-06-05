@@ -7,8 +7,8 @@
         %ul
           - policies.each do |term|
             %li
-              - id = "policies[#{term}]"
-              = check_box_tag(id, 1, (@accepted_policies || {}).include?(term))
+              - id = "policies_#{term}"
+              = check_box_tag("policies[#{term}]", 1, (@accepted_policies || {}).include?(term), id: id)
               %label.term{for: id}=_"articles.policy.term.#{term.to_s}", :s, 2
     = columns(medium: 12) do
       %p=_'articles.conference_registration.paragraphs.Confirm_Agreement', :p

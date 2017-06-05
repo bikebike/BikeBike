@@ -1,0 +1,6 @@
+---
+:logfile: log/sidekiq.log
+:pidfile: /home/unicorn/sidekiq_production.pid
+:concurrency: 15
+:queues:
+  - production

@@ -2,7 +2,7 @@
   = columns(medium: 12) do
     = registration_step_header_title
     - if @info.present?
-      = @info
+      = @info.html_safe
     - else
       = registration_step_header_description
 = row do
