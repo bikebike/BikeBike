@@ -35,7 +35,6 @@ Then /^(?:I )?click (?:on )?(?:the )?(a )?'(.+?)'( button| link)?(?: beside '(.+
       end
       element.click
     rescue Exception => e
-      puts text
       raise e
     end
     sleep(1) # let any aimations or page loads to complete

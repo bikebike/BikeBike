@@ -89,61 +89,35 @@ task "cucumber:debug" do
   ENV['TEST_DEBUG'] = nil
 end
 
-# Cucumber::Rake::Task.new(:cucumber) do |t|
-#   t.cucumber_opts = "features --format pretty"
-# end
-
 namespace :cucumber do
-  directory 'tmp'
-  @rerun_file = 'tmp/rerun.txt'
+ 
+  FAILING_CUCUMBER_SCENARIOS_FILENAME = 'log/rerun.txt'
 
-  Cucumber::Rake::Task.new(:all) do |task|
-    task.cucumber_opts = "features --format pretty --format rerun --out tmp/rerun.txt"
+  Cucumber::Rake::Task.new(:start) do |task|
+    task.cucumber_opts = "features --format pretty -f rerun --out #{FAILING_CUCUMBER_SCENARIOS_FILENAME}"
   end
 
-  desc 'Run cucumber features'
-  task run: :tmp do
-    retry_on_failure do
-      run_features
-    end
-    clean_up
-    exit @exit_status
+  Cucumber::Rake::Task.new(:retry) do |task|
+    task.cucumber_opts = "@#{FAILING_CUCUMBER_SCENARIOS_FILENAME}"
   end
-
-  def retry_on_failure
-    rm_rf @rerun_file
-    @retries = 0
+ 
+  task :run do
+    exception = nil
     begin
-      @exit_status = 0
-      yield
-    rescue SystemExit => e
-      @exit_status = e.status
-      if retry?(exception: e)
-        @retries += 1
-        retry
+      result = Rake::Task['cucumber:start'].execute
+    rescue Exception => e
+      begin
+        puts "\nRetrying failed scenarios...\n"
+        Rake::Task['cucumber:retry'].execute
+      rescue Exception => e2
+        exception = e2
       end
     end
-  end
 
-  def run_features
-    if File.exists? @rerun_file
-      Cucumber::Rake::Task::ForkedCucumberRunner.new(['lib'], Cucumber::BINARY, [
-          'features',
-          '--format', 'pretty',
-          '@tmp/rerun.txt',
-          '--format', 'rerun',
-          '--out', 'tmp/rerun.txt'
-        ], true, []).run
-    else
-      Rake::Task['cucumber:all'].invoke
+    if File.exists?("#{FAILING_CUCUMBER_SCENARIOS_FILENAME}")
+      File.delete("#{FAILING_CUCUMBER_SCENARIOS_FILENAME}")
     end
-  end
 
-  def retry?(exception: nil)
-    @retries < 2 && !exception.success?
-  end
-
-  def clean_up
-    rm_rf @rerun_file.pathmap("%d")
+    raise exception unless exception.nil?
   end
 end

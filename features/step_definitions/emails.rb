@@ -6,18 +6,20 @@ Then /^(.*) should get (.+) '(.+)' emails?$/i do |to, amount, subject|
   address = email_address(to)
 
   attempt_to do
-    emails = emails_to(address, subject)
+    attempt_to do
+      emails = emails_to(address, subject)
 
-    unless emails.length == (str_to_num(amount))
-      email_log = []
-      ActionMailer::Base.deliveries.each do |mail|
-        email_log << "\t#{mail.to.join(', ')}: #{mail.subject}"
+      unless emails.length == (str_to_num(amount))
+        email_log = []
+        ActionMailer::Base.deliveries.each do |mail|
+          email_log << "\t#{mail.to.join(', ')}: #{mail.subject}"
+        end
+        total_emails = ActionMailer::Base.deliveries.length
+        fail "Failed to find #{amount} email#{amount == 1 ? '' : 's'} to #{address} with #{subject} in the subject amoung #{total_emails} total email#{total_emails == 1 ? '' : 's'}:\n#{email_log.join("\n")}"
       end
-      total_emails = ActionMailer::Base.deliveries.length
-      fail "Failed to find #{amount} email#{amount == 1 ? '' : 's'} to #{address} with #{subject} in the subject amoung #{total_emails} total email#{total_emails == 1 ? '' : 's'}:\n#{email_log.join("\n")}"
-    end
 
-    TestState.last_email = emails.first
+      TestState.last_email = emails.first
+    end
   end
 end
 

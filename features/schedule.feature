@@ -57,7 +57,7 @@ Feature: Conference Schedule
     When I click on 'Reaching New Immigrants' link
     Then I should see 'The Shop'
     And see '1027 Flatbush Ave'
-    And see 'More info'
+    And see 'Details'
     And see 'Close'
 
     When I click on the 'Close' button
