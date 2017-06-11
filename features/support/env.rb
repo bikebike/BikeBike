@@ -69,12 +69,32 @@ After do
   DatabaseCleaner.clean
 end
 
-AfterStep do
+def step_wait_time(keyword)
+  # give additional wait time to Given and When steps 
+
+  if keyword == 'And' || keyword == 'But'
+    keyword = @_last_keyword
+  end
+  
+  @_last_keyword = keyword
+
+  case keyword
+  when 'Given'
+    return 1 
+  when 'When'
+    return 3
+  end
+
+  return 0.5
+end
+
+AfterStep do |scenario, step|
   # capture used selectors to generate css coverage
-  Marmara.record(page) if Marmara.recording?
+  Marmara.record(step.source.last.keyword) if Marmara.recording?
 
   # take some extra time between steps if we're recording
-  sleep(0.5) if LinguaFranca.recording?
+  keyword = step.source.last.keyword.strip
+  sleep(step_wait_time(keyword)) if LinguaFranca.recording?
 end
 
 Cucumber::Rails::Database.javascript_strategy = :transaction
@@ -84,5 +104,4 @@ Geocoder.configure(timeout: 60)
 
 at_exit do
   Marmara.stop_recording if Marmara.recording?
-  # LinguaFranca.capture_translations if LinguaFranca.recording?
 end

@@ -11,7 +11,7 @@
         %span.interest-text=interest_text(workshop)
     = richtext workshop.info
     - if preview.blank? && translations_available_for_editing
-      .actions
+      .actions.center
         - translations_available_for_editing.each do |locale|
           = link_to (_'actions.workshops.Translate', "Translate into #{language_name(locale)}", :vars => {:language => language_name(locale)}), translate_workshop_url(workshop.conference.slug, workshop.id, locale), :class => [:button, :translate]
   = columns(medium: 6) do

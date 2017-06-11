@@ -162,5 +162,6 @@ Then /^(?:my |the )([A-Z][a-z]+ )?(workshop|conference|user|conference registrat
   object = TestState.send("last_#{type.gsub(' ', '_')}")
   attribute = attribute.gsub(' ', '_').downcase
   actual_value = locale ? object.get_column_for_locale!(attribute, get_locale(locale)) : object.send(attribute)
+  actual_value = ActionView::Base.full_sanitizer.sanitize(actual_value)
   expect(actual_value).send(negate ? :not_to : :to, (be == value))
 end

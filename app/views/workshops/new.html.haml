@@ -33,7 +33,7 @@
         = columns(medium: 12) do
           = textarea :notes, @workshop.notes, warning: 'articles.workshops.paragraphs.notes'
       = columns(medium: 12) do
-        .actions.next-prev
+        .actions.center
           = button :save, value: :save
           = button :cancel, value: :cancel, class: :subdued, formnovalidate: true
 

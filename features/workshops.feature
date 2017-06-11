@@ -48,7 +48,7 @@ Feature: Workshops
     And should see 'Education'
 
     When I click the 'Workshops' link
-    Then I should see two workshops
+    Then I should see one workshop
 
     When I click on the 'Details' link
     Then I should see 'Tools'
@@ -254,9 +254,7 @@ Feature: Workshops
 
     And I am on the workshops page
 
-    Then I should see seven workshops
-    And I should see two workshops under 'Your Workshops'
-    And see five workshops under 'All Other Workshops'
+    Then I should see five workshops
     And I should see '3-Speed Hubs and the trouble with Sexism No one is interested in this workshop yet'
     And see 'Bike Polo! Mallet making and game 5 people are interested in this workshop'
     And see 'The future of Bike! Bike! 10 people are interested in this workshop'

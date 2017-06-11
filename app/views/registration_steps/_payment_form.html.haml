@@ -11,14 +11,16 @@
         %p.center=_"articles.conference_registration.paragraphs.currency_details", :p, vars: { currency: (_"currencies.#{(@currencies || [@currency]).first}.displayName-count-other") }
       = save_registration_step do
         .registration-step-options
-          - if @currencies.present? && @currencies.length > 1
-            = radiobuttons :currency, (@currencies.map { |c| [(_"currencies.#{c}.displayName-count-other"), c] }), @currency
           .options.graded-options{class: "option-count-#{@amounts.size}"}
             - @amounts.each_with_index do |option, i|
-              = button (number_to_currency option, unit: '$'), value: option, name: :value, class: [:unstyled, "option-#{i + 1}"]
+              = button "#{number_to_currency option, unit: '$'} #{_!@currency}".html_safe, value: option, name: :value, class: [:unstyled, "option-#{i + 1}"]
+          .option-space
           .custom-option
-            -# if Rails.env.test?
-            =# text_field_tag :custom_value, nil
-            -# else
             = number_field_tag :custom_value, 50.0, step: 0.05, min: 0.05
             = button :custom_amount, name: :custom_amount, value: :custom, class: :unstyled
+          - if @currencies.present? && @currencies.length > 1
+            .option-space
+            .setting-option
+              %p Change currency to:
+              - (@currencies - [@currency]).each do |c|
+                = button (_"currencies.#{c}.displayName-count-other"), name: :currency, value: c, class: :unstyled

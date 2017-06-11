@@ -22,7 +22,7 @@ module NavigationHelpers
       path = :confirm
       args << TestState.last_token
     when /^google maps$/
-      path = /^https?:\/\/www\.google\.com\/maps\/place\/.*/
+      path = /^https?:\/\/www\.google\.com\/maps\/.*/
     end
 
     if path.is_a?(Symbol)

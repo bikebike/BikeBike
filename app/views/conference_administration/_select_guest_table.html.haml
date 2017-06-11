@@ -16,23 +16,27 @@
 %table.guests.admin-edit
   %tr
     %th.corner
+    %th=_'forms.labels.generic.organization'
     %th=_'forms.labels.generic.city'
     %th=_'forms.labels.generic.housing'
     %th=_'articles.admin.housing.headings.arrival_departure'
     %th=_'articles.conference_registration.headings.companion'
     %th=_'forms.labels.generic.food'
-    %th=_'forms.labels.generic.allergies'
     %th=_'forms.labels.generic.other'
   - @guests.each do | id, registration |
     %tr.selectable{class: get_housing_match(host, registration, space).to_s.gsub('_', '-'), data: {host: host.id, guest: id, space: space}}
       %th=registration.user.name
+      %td
+        - if registration.user.organizations.present?
+          = registration.user.organizations.first.name
+        - else
+          %em None
       %td=registration.city
       %td=registration.housing.present? ? (_"articles.conference_registration.questions.housing.#{registration.housing}") : ''
       %td=date_span(registration.arrival.to_date, registration.departure.to_date)
       - companion = companion(registration)
       %td=companion.present? ? (companion.is_a?(User) ? companion.named_email : (_"articles.conference_registration.terms.registration_status.#{companion}")) : ''
       %td=registration.food.present? ? (_"articles.conference_registration.questions.food.#{registration.food}") : ''
-      %td=registration.allergies
       %td
         .p=registration.other
 

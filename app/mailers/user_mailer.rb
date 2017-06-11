@@ -11,8 +11,7 @@ class UserMailer < ActionMailer::Base
   def email_confirmation(confirmation)
     @confirmation = EmailConfirmation.find(confirmation) if confirmation.present?
     I18n.locale = @confirmation.user.locale if @confirmation.user.locale.present?
-    @subject = _'email.subject.confirm_email','Please confirm your email address'
-    mail to: @confirmation.user.named_email, subject: @subject
+    mail to: @confirmation.user.named_email, subject: clean_subject(_'email.subject.confirm_email','Please confirm your email address')
   end
 
   def registration_confirmation(registration)
@@ -20,17 +19,17 @@ class UserMailer < ActionMailer::Base
     @conference = @registration.conference
     @user = @registration.user
     I18n.locale = @user.locale if @user.locale.present?
-    @subject = @conference.registration_status.to_sym == :pre ?
+    subject = @conference.registration_status.to_sym == :pre ?
       _(
         'email.subject.pre_registration_confirmed',
         "Thank you for pre-registering for #{@conference.title}",
-        :vars => {:conference_title => @conference.title}
+        vars: {conference_title: @conference.title}
       ) : _(
         'email.subject.registration_confirmed',
         "Thank you for registering for #{@conference.title}",
-        :vars => {:conference_title => @conference.title}
+        vars: {conference_title: @conference.title}
       )
-    mail to: @user.named_email, subject: @subject
+    mail to: @user.named_email, subject: clean_subject(subject)
   end
 
   def broadcast(host, subject, content, user, conference)
@@ -39,9 +38,8 @@ class UserMailer < ActionMailer::Base
     @banner = nil
     @conference = Conference.find(conference) if conference.present?
     @user = User.find(user) if user.present?
-    @subject = "[#{@conference ? @conference.title : 'Bike!Bike!'}] #{subject}"
     if @user && @user.named_email
-      mail to: @user.named_email, subject: @subject
+      mail to: @user.named_email, subject: clean_subject("[#{@conference ? @conference.title : 'Bike!Bike!'}] #{subject}")
     end
   end
 
@@ -55,10 +53,8 @@ class UserMailer < ActionMailer::Base
     end
     @message = message
     @conference = Conference.find(@workshop.conference_id)
-    @subject = _('email.subject.workshop_facilitator_request',
-          "Request to facilitate #{@workshop.title} from #{@requester.name}",
-          :vars => {:workshop_title => @workshop.title, :requester_name => @requester.firstname})
-    mail to: addresses, reply_to: addresses + [@requester.named_email], subject: @subject
+    subject = ActionView::Base.full_sanitizer.sanitize(_('email.subject.workshop_facilitator_request', vars: { workshop_title: @workshop.title, requester_name: @requester.firstname }))
+    mail to: addresses, reply_to: addresses + [@requester.named_email], subject: clean_subject(subject)
   end
 
   def workshop_facilitator_request_approved(workshop, user)
@@ -66,10 +62,7 @@ class UserMailer < ActionMailer::Base
     @conference = Conference.find(@workshop.conference_id)
     @user = User.find(user) if user.present?
     I18n.locale = @user.locale if @user.locale.present?
-    @subject = (_'email.subject.workshop_request_approved',
-          "You have been added as a facilitator of #{@workshop.title}",
-          :vars => {:workshop_title => @workshop.title})
-    mail to: @user.named_email, subject: @subject
+    mail to: @user.named_email, subject: clean_subject(_('email.subject.workshop_request_approved', vars: { workshop_title: @workshop.title }))
   end
 
   def workshop_facilitator_request_denied(workshop, user)
@@ -77,10 +70,7 @@ class UserMailer < ActionMailer::Base
     @conference = @workshop.conference
     @user = User.find(user) if user.present?
     I18n.locale = @user.locale if @user.present? && @user.locale.present?
-    @subject = (_'email.subject.workshop_request_denied',
-          "Your request to facilitate #{@workshop.title} has been denied",
-          :vars => {:workshop_title => @workshop.title})
-    mail to: @user.named_email, subject: @subject
+    mail to: @user.named_email, subject: clean_subject(_'email.subject.workshop_request_denied', vars: { workshop_title: @workshop.title })
   end
 
   def workshop_translated(workshop, data, locale, user, translator)
@@ -91,13 +81,10 @@ class UserMailer < ActionMailer::Base
     @user = User.find(user) if user.present?
     I18n.locale = @user.locale if @user.present? && @user.locale.present?
     @translator = User.find(translator) if translator.present?
-    @subject = (_'email.subject.workshop_translated',
-          "The #{@locale_name} translation for #{@workshop.title} has been modified",
-          vars: {language: @language_name, workshop_title: @workshop.title})
 
     @wrapper_id = :full_width
 
-    mail to: @user.named_email, subject: @subject
+    mail to: @user.named_email, subject: clean_subject(_'email.subject.workshop_translated', vars: { language: @language_name, workshop_title: @workshop.title })
   end
 
   def workshop_original_content_changed(workshop, data, user, translator)
@@ -106,9 +93,6 @@ class UserMailer < ActionMailer::Base
     @user = User.find(user) if user.present?
     I18n.locale = @user.locale if @user.present? && @user.locale.present?
     @translator = User.find(translator) if translator.present?
-    @subject = (_'email.subject.workshop_original_content_changed',
-          "Original content for #{@workshop.title} has been modified",
-          vars: {workshop_title: @workshop.title})
     @data.each do |field, values|
       diff = Diffy::Diff.new(values[:old], values[:new])
       @data[field][:diff] = {
@@ -119,7 +103,7 @@ class UserMailer < ActionMailer::Base
 
     @wrapper_id = :full_width
 
-    mail to: @user.named_email, subject: @subject
+    mail to: @user.named_email, subject: clean_subject(_'email.subject.workshop_original_content_changed', vars: { workshop_title: @workshop.title })
   end
 
   def workshop_comment(workshop, comment, user)
@@ -128,17 +112,16 @@ class UserMailer < ActionMailer::Base
     @user = User.find(user) if user.present?
     I18n.locale = @user.locale if @user.present? && @user.locale.present?
 
-    if @comment.reply?
-      @subject = (_'email.subject.workshop_comment.reply', vars: { user_name: @comment.user.name })
-    else
-      @subject = (_'email.subject.workshop_comment.comment', vars: { user_name: @comment.user.name, workshop_title: @workshop.title })
-    end
+    subject = if @comment.reply?
+                (_'email.subject.workshop_comment.reply', vars: { user_name: @comment.user.name })
+              else
+                (_'email.subject.workshop_comment.comment', vars: { user_name: @comment.user.name, workshop_title: @workshop.title })
+              end
 
-    mail to: @user.named_email, subject: @subject
+    mail to: @user.named_email, subject: clean_subject(subject)
   end
 
   def error_report(subject, message, report, exception, request, params, user, time = nil)
-    @subject = subject
     @message = message
     @report = report
     @exception = exception
@@ -146,25 +129,23 @@ class UserMailer < ActionMailer::Base
     @params = params
     @time = time
     @user = User.find(user) if user.present?
-    mail to: 'goodgodwin@hotmail.com', subject: @subject
+    mail to: 'goodgodwin@hotmail.com', subject: clean_subject(subject)
   end
 
   def contact(from, subject, message, email_list)
     @message = message
-    @subject = subject
     @from = from.is_a?(Integer) ? User.find(from) : from
 
-    mail to: email_list.join(', '), subject: @subject, reply_to: @from.is_a?(User) ? @from.named_email : @from
+    mail to: email_list.join(', '), subject: clean_subject(subject), reply_to: @from.is_a?(User) ? @from.named_email : @from
   end
 
   def contact_details(from, subject, message, request, params)
     @message = message
-    @subject = "Details for: \"#{subject}\""
     @from = from.is_a?(Integer) ? User.find(from) : from
     @request = request
     @params = params
 
-    mail to: 'goodgodwin@hotmail.com', subject: @subject
+    mail to: 'goodgodwin@hotmail.com', subject: clean_subject("Details for: \"#{subject}\"")
   end
 
   private
@@ -177,5 +158,11 @@ class UserMailer < ActionMailer::Base
       @host = UserMailer.default_url_options[:host]
     end
     default_url_options[:host] = @host
+  end
+
+  def clean_subject(subject)
+    subject = ActionView::Base.full_sanitizer.sanitize(subject) unless Rails.env.test?
+    @subject = subject
+    return subject
   end
 end

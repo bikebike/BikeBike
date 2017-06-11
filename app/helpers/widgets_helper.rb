@@ -100,14 +100,14 @@ module WidgetsHelper
     id = registration.id
     html = ''
 
-    @housing_data[id][:guests].each do | area, guests |
+    @housing_data[id][:guests].each do |area, guests|
       guest_rows = ''
-      guests.each do | guest_id, guest |
+      guests.each do |guest_id, guest|
         status_html = ''
 
-        @housing_data[id][:guest_data][guest_id][:errors].each do | error, value |
+        @housing_data[id][:guest_data][guest_id][:errors].each do |error, value|
           if value.is_a?(Array)
-            value.each do | v |
+            value.each do |v|
               status_html += content_tag(:li, _("errors.messages.housing.space.#{error.to_s}", vars: v))
             end
           else
@@ -115,9 +115,9 @@ module WidgetsHelper
           end
         end
 
-        @housing_data[id][:guest_data][guest_id][:warnings].each do | error, value |
+        @housing_data[id][:guest_data][guest_id][:warnings].each do |error, value|
           if value.is_a?(Array)
-            value.each do | v |
+            value.each do |v|
               status_html += content_tag(:li, _("warnings.messages.housing.space.#{error.to_s}", v))
             end
           else
@@ -132,7 +132,7 @@ module WidgetsHelper
         guest_rows += content_tag :tr, id: "hosted-guest-#{guest_id}" do
           (content_tag :td, guest[:guest].user.name) +
           (content_tag :td do
-            (guest[:guest].city + 
+            (guest[:guest].from + 
             (content_tag :a, (_'actions.workshops.Remove'), href: '#', class: 'remove-guest', data: { guest: guest_id })).html_safe
           end) +
           (content_tag :td, status_html.html_safe, class: [:state, status_html.present? ? :unhappy : :happy])
@@ -151,7 +151,7 @@ module WidgetsHelper
 
       status_html = ''
       if @housing_data[id][:warnings].present? && @housing_data[id][:warnings][:space].present? && @housing_data[id][:warnings][:space][area].present?
-        @housing_data[id][:warnings][:space][area].each do | w |
+        @housing_data[id][:warnings][:space][area].each do |w|
           status_html += content_tag(:li, _("warnings.messages.housing.space.#{w.to_s}"))
         end
       end
@@ -179,18 +179,18 @@ module WidgetsHelper
     classes = ['host']
 
     id = registration.id
-    @housing_data[id][:guests].each do | area, guests |
+    @housing_data[id][:guests].each do |area, guests|
       max_space = @housing_data[id][:space][area] || 0
       area_name = (_"forms.labels.generic.#{area}")
       status_html = ''
       if @housing_data[id][:warnings].present? && @housing_data[id][:warnings][:space].present? && @housing_data[id][:warnings][:space][area].present?
-        @housing_data[id][:warnings][:space][area].each do | w |
+        @housing_data[id][:warnings][:space][area].each do |w|
           status_html += content_tag(:div, _("warnings.housing.space.#{w.to_s}"), class: 'warning')
         end
       end
       space_html = content_tag(:h5, area_name + _!(" (#{guests.size.to_s}/#{max_space.to_s})") + status_html.html_safe)
       guest_items = ''
-      guests.each do | guest_id, guest |
+      guests.each do |guest_id, guest|
         guest_items += content_tag(:li, guest[:guest].user.name, id: "hosted-guest-#{guest_id}")
       end
       space_html += content_tag(:ul, guest_items.html_safe)
@@ -258,8 +258,12 @@ module WidgetsHelper
   end
 
   def companion(registration)
-    if registration.housing_data.present? && registration.housing_data['companions'].present? && registration.housing_data['companions'].first.present?
-      companion_user = User.find_user(registration.housing_data['companions'].first)
+    if registration.housing_data.present? && registration.housing_data['companion'].present?
+      companion_user = if registration.housing_data['companion']['id'].present?
+                         User.find(registration.housing_data['companion']['id'])
+                       else
+                         User.find_user(registration.housing_data['companion']['email'])
+                       end
 
       if companion_user.present?
         cr = ConferenceRegistration.where(user_id: companion_user.id).order(created_at: :desc).limit(1).first

@@ -110,7 +110,6 @@ ActiveRecord::Schema.define(version: 20170609030149) do
     t.boolean  "is_participant"
     t.boolean  "is_volunteer"
     t.string   "confirmation_token"
-    t.binary   "data_old"
     t.string   "email"
     t.boolean  "complete"
     t.boolean  "completed"

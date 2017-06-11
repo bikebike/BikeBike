@@ -13,7 +13,7 @@ Feature: Registration
 
     When I enter my email address
     And press confirm email
-    Then I should see 'Confirm Email'
+    Then I should see 'Confirmation Sent'
     And I should get a 'confirmation' email
 
     When I click on the 'Confirm' link in the email
@@ -80,7 +80,7 @@ Feature: Registration
     Then I should see 'Do you plan to attend the group ride?'
 
     When I click on the 'Yes' button
-    Then I should see 'Anything else?'
+    Then I should see 'Other considerations'
 
     When I fill in other with 'Thanks!'
     And click the 'Next' button
@@ -90,7 +90,7 @@ Feature: Registration
     Then I should see 'Registration Fee Amount'
 
     When I click on the '$25.00' button
-    Then I should get a 'Thank you for registering for Bike!Bike! 2025' email
+    Then I should get a 'Thank you for registering' email
     And I should see 'Your registration is complete'
     And I should see 'Seattle'
     And see 'Bike Works'
@@ -134,7 +134,7 @@ Feature: Registration
 
     When I enter my email address
     And press confirm email
-    Then I should see 'Confirm Email'
+    Then I should see 'Confirmation Sent'
     And I should get a 'confirmation' email
 
     When I click on the 'Confirm' link in the email
@@ -196,7 +196,7 @@ Feature: Registration
     And click on 'pay now with PayPal'
     And click on the '$25.00' button
     And click the 'Confirm' button
-    Then I should get a 'Thank you for registering for Bike!Bike! 2025' email
+    Then I should get a 'Thank you for registering' email
     And I should see 'Moncton'
     And I should see 'Coopérative La Bikery Cooperative'
     And I should see 'I don't need a place to stay'
@@ -215,7 +215,7 @@ Feature: Registration
 
     When I enter my email address
     And press confirm email
-    Then I should see 'Confirm Email'
+    Then I should see 'Confirmation Sent'
     And I should get a 'confirmation' email
 
     When I click on the 'Confirm' link in the email
@@ -263,7 +263,7 @@ Feature: Registration
     And click on the 'No' button
     And click the 'Next' button
     And click on the 'Not now' button
-    Then I should get a 'Thank you for registering for Bike!Bike! 2025' email
+    Then I should get a 'Thank you for registering' email
     And I should see 'Ecum Secum'
     And I should see 'Because Reasons'
     And I should see 'I am vegetarian'
@@ -281,7 +281,7 @@ Feature: Registration
 
     When I enter my email address
     And press confirm email
-    Then I should see 'Confirm Email'
+    Then I should see 'Confirmation Sent'
     And I should get a 'confirmation' email
 
     When I click on the 'Confirm' link in the email
@@ -379,7 +379,7 @@ Feature: Registration
 
     When I enter my email address as 'me@bikebike.org'
     And press confirm email
-    Then I should see 'Confirm Email'
+    Then I should see 'Confirmation Sent'
     And I should get a 'confirmation' email
 
     When I click on the 'Confirm' link in the email
@@ -543,7 +543,7 @@ Scenario: Housing providers can enter incorrect data and fix it
 
     When I enter my email address
     And press confirm email
-    Then I should see 'Confirm Email'
+    Then I should see 'Confirmation Sent'
     And I should get a 'confirmation' email
 
     When I click on the 'Confirm' link in the email

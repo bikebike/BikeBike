@@ -18,7 +18,6 @@ BikeBike::Application.routes.draw do
         # post 'update' => 'conferences#registration_update', as: :registration_update
         
         get ':step' => 'conferences#register', as: :register_step
-        # get ':button/:confirmation_token' => 'conferences#register', as: :register_paypal_confirm
       end
       
       # Administration
@@ -26,6 +25,7 @@ BikeBike::Application.routes.draw do
         root 'conference_administration#administration', as: :administrate_conference
 
         get ':step' => 'conference_administration#administration_step', as: :administration_step
+        get 'stats/:conference_slug' => 'conference_administration#previous_stats', as: :previous_stats
         post 'update/:step' => 'conference_administration#admin_update', as: :administration_update
         get 'events/edit/:id' => 'conference_administration#edit_event', as: :edit_event
         get 'locations/edit/:id' => 'conference_administration#edit_location', as: :edit_location

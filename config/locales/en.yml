@@ -1380,6 +1380,7 @@ en:
           so far as well as download more detailed data in spreadsheets.
         headings:
           bikes: Bikes
+          past_stats: Statistics from Previous Bike!Bike!s
           donation_count: Number of donations
           donation_total: Total donated
           food:
@@ -1449,7 +1450,7 @@ en:
             instead of a guest form. If you want to consider surrounding cities as
             well, enter the distance from %{city} that you wish to be included as
             providers. Cities are measured from center to center.
-          housing: Pair each housing provider with a list of guests.
+          housing: Pair each housing provider with a list of guests. Try to match guests with hosts and other guests who are good matches and respect their requests, but also keep in mind that we cannot always respect all requests and part of the Bike!Bike! experience is getting to know new people.
       locations:
         heading: Locations
         description: Locations are used to schedule workshops, events, and meals.
@@ -1705,7 +1706,7 @@ en:
         payment_form: Registration Fee Amount
         org_select: Which organization are you a member of?
         payment_type: Registration Fee Method
-        housing_other: Anything else?
+        housing_other: Other considerations
         housing_allergies: Do you have any allergies?
         housing_food: What are your eating habits?
         housing_bike: Would you like to borrow a bike?
@@ -1753,6 +1754,7 @@ en:
         Workshops: Workshops
         workshops: Workshops
         Your_Workshops: Your Workshops
+        Workshops_that_you_would_like_to_attend: Workshops that you would like to_attend
         payment_confirm: Please confirm your payment
         Preview: Preview
         city: City
@@ -1814,7 +1816,7 @@ en:
         payment_form: Please select one of the predefined options below or enter a custom amount.
         org_select: Please select the organization that you will be representing. This information will be used to help us contact and invite your organization next year and to populate the list of known organizations that will be displayed on bikecollectives.org. If you are involved with multiple oganizations, please select one for now, you will be able to add more organizations at a later date.
         payment_type: Registration is by donation but it enables us to pay for spaces, food, equipment, and more. If you can, paying now via PayPal enables us to prepare for the conference without risk of paying out of pocket. Otherwise, pleging to pay on arrival will help us to get a rough idea of what we can and cannot afford.
-        housing_other: Is there anything else that you would like to let us know?
+        housing_other: Do you have any special needs or considerations that we should know about for your stay such as allergies, disabilities, or a need for child care? Letting us know in advance will help us determine the best place for you to stay and make any necessary preparations for te conference itself.
         housing_allergies: Let us know if you have any allergies that we should be made aware of.
         housing_food: Please let us know your eating habits by selecting the option that best describes the type of food that you eat. We will use this to decide the best types of meals to prepare and how much food we will need.
         housing_bike: In order for us to get an idea of how many bikes we will need to prepare, please let us know if you would like to borrow a bike from us.
@@ -2083,12 +2085,14 @@ en:
         notes: Notes
         Workshops: Workshops
         Your_Workshops: Your Workshops
+        Workshops_that_you_would_like_to_attend: Workshops that you would like to attend
         facilitate: Request to Facilitate ‘%{workshop_title}’
         add_facilitator: Add a facilitator
         needs_facilitators: Looking for help?
         Comments: Comments
         Schedule: Schedule
       paragraphs:
+        Workshops_that_you_would_like_to_attend: Add workshops to your schedule by pressing the "+1" button beside a workshop. This will help you keep track of the wokshops that you would like to attend and help organizers to create a better schedule.
         Proposed_Workshops: Would you like to facilitate your own workshop? Simply
           register and visit the workshops page. If you have already registered you
           can access the page by restarting the registration process.
@@ -2223,6 +2227,7 @@ en:
         send_to: Send To
         street_address: Street Address
         city: City
+        organization: Organization
         subregion: State / Province
         country: Country
         postal_code: Postal Code

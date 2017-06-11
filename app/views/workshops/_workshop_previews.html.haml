@@ -1,8 +1,9 @@
+- depth ||= 4
 %ul.workshop-list
   - workshops.sort_by{ |w| w.title.downcase }.each do |w|
     - is_interested = w.interested?(current_user)
     %li{class: [is_interested ? :interested : nil]}
-      %h4.title=_!(w.title)
+      = content_tag("h#{depth}", w.title, class: :title)
       .workshop-interest
         - if w.can_show_interest?(current_user)
           = form_tag toggle_workshop_interest_path(w.conference.slug, w.id), class: 'js-xhr' do
@@ -10,6 +11,6 @@
             %span.interest-button=interest_button(w)
         - elsif w.interested_count > 0
           %span.interest-text=interest_text(w)
-      .workshop-description=richtext w.info, 4
+      .workshop-description=richtext w.info, depth
       .actions.right
         = link_to (_'articles.workshops.info.read_more'), view_workshop_path(w.conference.slug, w.id), class: ['workshop-link', :button, :small]

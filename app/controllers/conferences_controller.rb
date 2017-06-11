@@ -8,7 +8,7 @@ class ConferencesController < ApplicationController
   def list
     @page_title = 'articles.conferences.headings.Conference_List'
     @conference_list = { future: [], passed: [] }
-    Conference.all.order("start_date DESC").each do | conference |
+    Conference.all.order("start_date DESC").each do |conference|
       if conference.is_public || conference.host?(current_user)
         @conference_list[conference.over? ? :passed : :future] << conference
       end
@@ -337,10 +337,10 @@ class ConferencesController < ApplicationController
       if @registration.housing_data.blank?
         ConferenceRegistration.where(
           conference_id: @this_conference.id, can_provide_housing: [nil, false]
-          ).where.not(housing_data: nil).each do | r |
+          ).where.not(housing_data: nil).each do |r|
           @registration.housing_data = {
               companions: [ r.user.email ]
-            } if r.housing_data['companions'].present? && r.housing_data['companions'].include?(current_user.email)
+            } if r.housing_data['companion'].present? && (r.housing_data['companion']['id'] == current_user.id || r.housing_data['companion']['email'] == current_user.email)
         end
         
         @registration.housing_data ||= { }
@@ -358,7 +358,7 @@ class ConferencesController < ApplicationController
       @workshops = Array.new
 
       # put wach workshop into the correct array
-      Workshop.where(conference_id: @this_conference.id).each do | workshop |
+      Workshop.where(conference_id: @this_conference.id).each do |workshop|
         if workshop.active_facilitator?(current_user)
           @my_workshops << workshop
         elsif workshop.requested_collaborator?(current_user)
@@ -436,7 +436,7 @@ class ConferencesController < ApplicationController
 
   def registration_complete?(registration = @registration)
     completed_steps = registration.steps_completed || []
-    required_steps(registration.conference).each do | step |
+    required_steps(registration.conference).each do |step|
       return true if step == :workshops
       return false unless completed_steps.include?(step.to_s)
     end

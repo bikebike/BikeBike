@@ -85,7 +85,7 @@ end
 def emails_to(email_address, subject = nil)
   ActionMailer::Base.deliveries.select do |mail|
     mail.to.include?(email_address) &&
-      (subject.nil? || mail.subject.downcase.include?(subject.downcase))
+      (subject.nil? || ActionView::Base.full_sanitizer.sanitize(mail.subject).downcase.include?(subject.downcase))
   end
 end
 

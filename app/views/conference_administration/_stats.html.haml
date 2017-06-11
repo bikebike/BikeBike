@@ -16,6 +16,11 @@
       = (@completed_registrations || 0) > 0 ? "#{@donation_count} (#{number_to_percentage(@donation_count / @completed_registrations.to_f * 100.0)})" : "0"
     = data_set(:h3, 'articles.admin.stats.headings.donation_total') do
       = "$#{@donations || 0.00}"
-  .actions
-    = link_to (_'links.download.Excel'), administration_step_path(@this_conference.slug, :stats, :format => :xlsx), class: [:button, :download]
-    = link_to (_'links.download.Organizations_Excel'), administration_step_path(@this_conference.slug, :organizations, :format => :xlsx), class: [:button, :download, :subdued]
+  .actions.center
+    = link_to (_'links.download.Excel'), administration_step_path(@this_conference.slug, :stats, format: :xlsx), class: [:button, :download]
+    = link_to (_'links.download.Organizations_Excel'), administration_step_path(@this_conference.slug, :organizations, format: :xlsx), class: [:button, :download, :subdued]
+= columns(medium: 12) do
+  %h3=_'articles.admin.stats.headings.past_stats'
+  %ul.actions.center
+    - @past_conferences.each do |conference|
+      = link_to conference.title, previous_stats_path(@this_conference.slug, conference.slug, format: :xlsx), class: [:button, :download]

@@ -622,6 +622,10 @@ button,
     
     &.center {
         text-align: center;
+
+        button, .button {
+            margin-left: 0.5em;
+        }
     }
 
     &.right {
@@ -653,6 +657,10 @@ button,
 
     button[value="cancel"], button.red {
         background-color: $red;
+    }
+
+    button.back {
+        background-color: $mid-gray;
     }
 }
 
@@ -694,9 +702,23 @@ button,
             font-size: 0.9em;
         }
 
+        .option-space {
+            margin: 1.5em 0;
+        }
+
+        .setting-option {
+            p {
+                display: inline-block;
+                margin: 0;
+            }
+
+            button {
+                vertical-align: middle;
+            }
+        }
+
         .custom-option {
             text-align: right;
-            border: 0.1rem solid $black;
             background-color: $white;
 
             input {
@@ -708,13 +730,15 @@ button,
                 border-right: 0;
                 text-align: center;
                 background-color: transparent;
+                border: 0.05rem solid $black;
+                border-bottom-style: none;
             }
 
             button {
                 width: 100%;
                 margin: 0;
-                border: 0;
-                border-top: inherit;
+                // border: 0;
+                // border-top: inherit;
                 background-color: lighten($colour-1, 25%);
             }
         }
@@ -3884,16 +3908,19 @@ body.policy .policy-agreement ul {
 
         .custom-option {
             margin-top: 1em;
+            display: table-row;
 
             input {
                 display: table-cell;
-                width: 10em;
+                // width: 10em;
+                width: 50%;
+                border-right-style: none;
+                border-bottom-style: solid;
             }
 
             button {
+                display: table-cell;
                 width: 50%;
-                border-top: 0;
-                border-left: inherit;
             }
         }
     }

@@ -5,7 +5,7 @@
       %h2=_'articles.workshops.headings.Delete_Workshop',"Are you sure you want to delete the workshop: <em>#{@workshop.title}</em>?", vars: {title: "<em>#{@workshop.title}</em>".html_safe}
       %p=_'articles.workshops.paragraphs.Delete_Workshop'
       = form_tag delete_workshop_path(@this_conference.slug, @workshop.id), class: 'composition' do
-        .actions
+        .actions.center
           = button :confirm, value: :confirm, class: :delete
-          = button :cancel, value: :cancel
+          = button :cancel, value: :cancel, class: :back
 

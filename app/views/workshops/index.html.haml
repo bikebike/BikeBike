@@ -12,13 +12,8 @@
   = row do
     = columns(medium: 12) do
       %p=_'articles.workshops.paragraphs.Workshops', :p
+      .actions.center
+        = link_to (_'actions.workshops.create','New Workshop'), create_workshop_path(@this_conference.slug), class: [:button, :modify] if @this_conference.registration_open
   = row do
     = columns(medium: 12) do
-      %h3=_'articles.workshops.headings.Your_Workshops'
-      = render 'workshops/workshop_previews', workshops: @my_workshops
-      = link_to (_'actions.workshops.create','New Workshop'), create_workshop_path(@this_conference.slug), class: [:button, :modify] if @conference.registration_open
-  = row do
-    = columns(medium: 12) do
-      %h3=_'articles.conference_registration.headings.All_Workshops'
-      -#%h3 All Workshops weather you like it or not
-      = render 'workshops/workshop_previews', workshops: @workshops
+      = render 'workshops/workshop_previews', workshops: @workshops, depth: 3

@@ -41,8 +41,22 @@
 = row do
   = columns(medium: 12) do
     %h3=_'articles.workshops.headings.Workshops', :t
-    %p=_'articles.conference_registration.paragraphs.workshops', :p
+    - if @this_conference.workshop_info.present?
+      = richtext @this_conference.workshop_info
+    - else
+      %p=_'articles.conference_registration.paragraphs.workshops', :p
     .actions.centered
       .buttons
         = link_to (_'articles.conference_registration.actions.View_Workshops'), workshops_path(@this_conference), class: :button
         = link_to (_'actions.workshops.create'), create_workshop_path(@this_conference), class: [:button, :modify]
+- if @my_workshops.present?
+  = row do
+    = columns(medium: 12) do
+      %h3=_'articles.workshops.headings.Your_Workshops'
+      = render 'workshops/workshop_previews', workshops: @my_workshops
+= row do
+  = columns(medium: 12) do
+    %h3=_'articles.workshops.headings.Workshops_that_you_would_like_to_attend'
+    %p=_'articles.workshops.paragraphs.Workshops_that_you_would_like_to_attend', :p
+    - if @interested_workshops.present?
+      = render 'workshops/workshop_previews', workshops: @interested_workshops
