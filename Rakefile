@@ -98,7 +98,18 @@ namespace :cucumber do
   end
 
   Cucumber::Rake::Task.new(:retry) do |task|
-    task.cucumber_opts = "@#{FAILING_CUCUMBER_SCENARIOS_FILENAME}"
+    task.cucumber_opts = "@#{FAILING_CUCUMBER_SCENARIOS_FILENAME}" # -f rerun --out #{FAILING_CUCUMBER_SCENARIOS_FILENAME}"
+  end
+
+  def cucumber_retry(retry_count)
+    begin
+      puts "\nRetrying failed scenarios...\n"
+      Rake::Task['cucumber:retry'].execute
+    rescue Exception => e
+      return cucumber_retry(retry_count - 1) if retry_count > 1
+      return e
+    end
+    return nil
   end
  
   task :run do
@@ -106,12 +117,7 @@ namespace :cucumber do
     begin
       result = Rake::Task['cucumber:start'].execute
     rescue Exception => e
-      begin
-        puts "\nRetrying failed scenarios...\n"
-        Rake::Task['cucumber:retry'].execute
-      rescue Exception => e2
-        exception = e2
-      end
+      exception = cucumber_retry(3)
     end
 
     if File.exists?("#{FAILING_CUCUMBER_SCENARIOS_FILENAME}")

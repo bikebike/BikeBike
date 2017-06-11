@@ -2,12 +2,48 @@ module AdminHelper
 
   def administration_steps
     {
-      info: [:administrators, :dates, :description, :poster, :group_ride],
-      payment: [:payment_message, :suggested_amounts, :paypal],
-      registration: [:registration_status, :stats, :registrations, :broadcast],
-      housing: [:providers, :housing],
-      events: [:locations, :meals, :events],
-      schedule: [:workshop_times, :schedule, :publish_schedule]
+      info: [
+          :administrators,
+          :dates,
+          :poster
+        ],
+      copy: [
+          :description,
+          :group_ride,
+          :housing_info,
+          :workshop_info,
+          :payment_message,
+          :schedule_info,
+          :travel_info,
+          :city_info,
+          :what_to_bring,
+          :volunteering_info,
+          :additional_details
+        ],
+      payment: [
+          :suggested_amounts,
+          :paypal
+        ],
+      registration: [
+          :registration_status,
+          :stats,
+          :registrations,
+          :broadcast
+        ],
+      housing: [
+          :providers,
+          :housing
+        ],
+      events: [
+          :locations,
+          :meals,
+          :events
+        ],
+      schedule: [
+          :workshop_times,
+          :schedule,
+          :publish_schedule
+        ]
     }
   end
 
@@ -159,5 +195,16 @@ module AdminHelper
      end
 
      return false
+  end
+
+  def copy_form(section)
+    return (columns(medium: 12) do
+      (admin_update_form do
+        (translate_textarea(section, @this_conference, label: "articles.conference_registration.headings.admin.edit.#{section}", help: "articles.conference_registration.paragraphs.admin.edit.#{section}").html_safe +
+        content_tag(:div, class: [:actions, :right]) do
+          (button :save, value: :save).html_safe
+        end).html_safe
+      end).html_safe
+    end).html_safe
   end
 end

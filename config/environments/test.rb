@@ -1,7 +1,7 @@
 require 'lingua_franca/action_mailer'
 
 BikeBike::Application.configure do
-  # ActionMailer::DeliveryMethods.add_delivery_method(:lingua_franca, LinguaFranca::TestMailer)
+  ActionMailer::Base.add_delivery_method(:lingua_franca, LinguaFranca::TestMailer)
   # Settings specified here will take precedence over those in config/application.rb.
 
   # The test environment is used exclusively to run your application's
@@ -33,16 +33,6 @@ BikeBike::Application.configure do
   # Tell Action Mailer not to deliver emails to the real world.
   # The :test delivery method accumulates sent emails in the
   # ActionMailer::Base.deliveries array.
-  config.action_mailer.smtp_settings = {
-    :address => 'mail.bikebike.org',
-    :domain => 'preview.bikebike.org',
-    :port => 587,
-    :authentication => :plain,
-    :enable_starttls_auto => true,
-    :openssl_verify_mode  => 'none',
-    :user_name => 'info@preview.bikebike.org',
-    :password => 'test'
-  }
   config.action_mailer.raise_delivery_errors = true
   # config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :lingua_franca

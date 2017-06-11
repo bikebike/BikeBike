@@ -222,12 +222,6 @@
                                     if (response[i].className) {
                                         element.className = response[i].className;
                                     }
-                                    if (response[i].scrollTo) {
-                                        var scrollTo = document.querySelector(response[i].scrollTo);
-                                        if (scrollTo) {
-                                            scrollTo.scrollIntoView();
-                                        }
-                                    }
                                     if (response[i].focus) {
                                         var focusOn = document.querySelector(response[i].focus);
                                         if (focusOn) {
@@ -237,6 +231,12 @@
                                                 }
                                             }
                                             focusOn.focus();
+                                        }
+                                    }
+                                    if (response[i].scrollTo) {
+                                        var scrollTo = document.querySelector(response[i].scrollTo);
+                                        if (scrollTo) {
+                                            scrollTo.scrollIntoView();
                                         }
                                     }
                                 }

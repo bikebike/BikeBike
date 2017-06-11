@@ -624,6 +624,10 @@ button,
         text-align: center;
     }
 
+    &.right {
+        text-align: right;
+    }
+
     .buttons {
         display: inline-block;
         display: flex;

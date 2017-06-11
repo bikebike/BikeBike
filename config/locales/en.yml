@@ -1235,6 +1235,14 @@ en:
         dates: Error updating dates
         description: Error saving your conference description
         group_ride: Error saving your group ride info
+        housing_info: Error saving Housing info
+        workshop_info: Error saving Workshop info
+        schedule_info: Error saving Schedule info
+        travel_info: Error saving Travel info
+        city_info: Error saving City info
+        what_to_bring: Error saving What to Bring
+        volunteering_info: Error saving Volunteering info
+        additional_details: Error saving Additional details
         poster: An error occurred uploading your conference poster
         payment_message: An error occurred saving your the payment message
         suggested_amounts: An error occurred saving your payment amounts
@@ -1280,6 +1288,14 @@ en:
         description: Conference description updated successfully
         poster: Conference poster uploaded
         group_ride: Group ride info saved
+        housing_info: Housing info saved
+        workshop_info: Workshop info saved
+        schedule_info: Schedule info saved
+        travel_info: Travel info saved
+        city_info: City info saved
+        what_to_bring: What to Bring saved
+        volunteering_info: Volunteering info saved
+        additional_details: Additional details saved
         payment_message: Your payment message has been updated
         suggested_amounts: Your suggested payment amounts have been updated
         paypal: Your paypal information has been updated
@@ -1331,6 +1347,15 @@ en:
   articles:
     conferences:
       headings:
+        workshop_info: Workshops and Discussions
+        housing_info: Housing Accommodations
+        group_ride_info: Group Ride
+        payment_message: Registration
+        schedule_info: Schedule
+        travel_info: Getting To %{city}
+        city_info: About %{city}
+        what_to_bring: What to Bring
+        volunteering_info: Volunteering
         conferences: National and Regional Conferences
         Conference_List: Conferences
         edit: Edit Conference
@@ -1416,7 +1441,7 @@ en:
           providers: Housing Providers
           provider_distance: Distance from host city
         descriptions:
-          providers: Although most housing providers shuold be encouraged to supply
+          providers: Although most housing providers should be encouraged to supply
             their own details through the registration process, you can add and edit
             housing provider details manually here.
           provider_distance: Any registrant who enters their location in the same
@@ -1467,9 +1492,7 @@ en:
         headings:
           dates: Conference Dates
           administrators: Administrators and Organizations
-          description: Description
           poster: Poster
-          group_ride: Group Ride
           Host_Organizations: Host Organizations
           External_Administrators: External Administrators
         description: These are the basic details about your conference that you will
@@ -1477,9 +1500,7 @@ en:
           the site administrator to make the conference public.
         descriptions:
           dates: Set your conference start and end dates
-          description: Modify the text that is displayed on the front page
           poster: Upload your conference poster
-          group_ride: Will you be having a group ride before or after the conference? Describe it here.
           administrators: Set the conference host organizations and other members
             who have access to these administration tools
           Host_Organizations: Select all organizations from known organizations in
@@ -1490,6 +1511,33 @@ en:
             contact a site administrator.
           External_Administrators: Users from outside of organizations in your city
             can be granted administration privledges here.
+      copy:
+        heading: Site Copy
+        description: Copy that is displayed in the front page, the details page, emails, and throughout registration.
+        headings:
+          description: Description
+          group_ride: Group Ride
+          payment_message: Payment Message
+          housing_info: Housing Info
+          workshop_info: Workshop Info
+          schedule_info: Schedule Details
+          city_info: City Details
+          travel_info: Travel Info
+          what_to_bring: What to bring
+          volunteering_info: Volunteering info
+          additional_details: Additional Details
+        descriptions:
+          description: Modify the text that is displayed on the front page
+          group_ride: Will you be having a group ride before or after the conference? Describe it here.
+          payment_message: Set the message that is displayed on the registration fee
+          housing_info: Let visitors know what to expect for housing
+          workshop_info: Let attendees know how workshops will work this year
+          schedule_info: Summarize your overall schedule of events, workshops, and rides
+          travel_info: Let visitors know how to get to your city and what international visitors may need to be prepared for
+          city_info: Describe your city, talk about things like saftey, laws, weather, and culture
+          what_to_bring: Let visitors know what to bring
+          volunteering_info: Let potential volunteers know what they can do and how they can help out
+          additional_details: Add any additional information not covered by other copy
       registration:
         heading: Registration
         headings:
@@ -1521,13 +1569,9 @@ en:
         description: If you wish to collect dontaions and registration fees, you will
           need to confgure your payment details
         headings:
-          payment_message: Payment Message
           suggested_amounts: Suggested Payment Amounts
           paypal: PayPal Info
         descriptions:
-          payment_message: Set the message that is displayed on the registration fee
-            page. A default message will be supplied but if you wish to communicate
-            how funds will be used you may want to set a personal message.
           suggested_amounts: Enter up to five suggested payment amounts. Users will
             still be able to select any amount including none but these amounts will
             show up as easy to select buttons on the 'Donations' page.
@@ -1741,9 +1785,17 @@ en:
           edit:
             info: Info
             group_ride: Group ride description
+            housing_info: Housing info
+            workshop_info: Workshop info
+            schedule_info: Schedule summary
+            travel_info: Travel info
+            city_info: City info
+            what_to_bring: What to bring
+            volunteering_info: Volunteering info
+            additional_details: Additional details
         companion: Companion
       paragraphs:
-        group_ride: There will be a group ride before the conference, do you plan to attend?
+        group_ride: There will be a group ride after or before the conference, do you plan to attend?
         registration_cancelled: You have cancelled your registration. If you reconsider, please re-open your registration using the button below but keep in mind that you may lose out of your housing or bike if you wait too long.
         hosting_other: Please enter any information you would like organizers to consider when selecting guests. If you have restrictions on guests that you would lke to stay at your home or if you have pets or other factors that might cause guests to be uncomfortable or not able to stay at your home, please list them here.
         hosting_info: Please fill out your house rules, contact instructions, and any other pertinent information about your home or neighbourhood. Your summary will only be visible to conference organizers and your guests.
@@ -1882,6 +1934,14 @@ en:
           edit:
             info: This is the copy that is displayed on the front page of the site.
             group_ride: Describe your group ride. This info may be used on the conference description, emails, or on the registration form.
+            housing_info: Describe what visitors should expect for housing this year
+            workshop_info: Describe how workshops will be run this year and what facilitators should expect
+            schedule_info: Describe your schedule over the conference
+            travel_info: Let visitors know what to expect travelling to your city
+            city_info: Let visitors knw about your city, its culture, climate, crime, and any other details that should know about
+            what_to_bring: List what you expect visitors to bring. Common items include a bike helmet, lock, and eating utensils
+            volunteering_info: Let interested volunteers know how they can volunteer and what tey can do
+            additional_details: Let visitors know any additional information about your conference
           schedule:
             published: Your scheulde is currently published and viewable on the front-page.
               Un-publishing the schedule will remove it from the front-page and show

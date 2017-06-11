@@ -57,7 +57,7 @@ class ApplicationController < BaseController
       }
 
     @alt_lang_urls = {}
-    I18n.backend.enabled_locales.each do |locale|
+    I18n.backend.enabled_locales.sort.each do |locale|
       locale = locale.to_s
       @alt_lang_urls[locale] = view_context.url_for_locale(locale) # don't show the current locale
     end
@@ -81,18 +81,6 @@ class ApplicationController < BaseController
   def policy
     @is_policy_page = true
   end
-
-  # def self.set_host(host)
-  #   @@test_host = host
-  # end
-
-  # def self.set_location(location)
-  #   @@test_location = location
-  # end
-
-  # def self.get_location()
-  #   @@test_location
-  # end
 
   def js_error
     # send and email if this is production

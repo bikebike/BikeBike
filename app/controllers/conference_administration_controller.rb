@@ -122,6 +122,30 @@ class ConferenceAdministrationController < ApplicationController
     def administrate_payment_message
     end
 
+    def administrate_housing_info
+    end
+
+    def administrate_workshop_info
+    end
+
+    def administrate_schedule_info
+    end
+
+    def administrate_travel_info
+    end
+
+    def administrate_city_info
+    end
+
+    def administrate_what_to_bring
+    end
+
+    def administrate_volunteering_info
+    end
+
+    def administrate_additional_details
+    end
+
     def administrate_suggested_amounts
     end
 
@@ -804,6 +828,78 @@ class ConferenceAdministrationController < ApplicationController
     def admin_update_group_ride
       params[:group_ride_info].each do |locale, value|
         @this_conference.set_column_for_locale(:group_ride_info, locale, html_value(value))
+      end
+      @this_conference.save
+      set_success_message @admin_step
+      return false
+    end
+
+    def admin_update_housing_info
+      params[:housing_info].each do |locale, value|
+        @this_conference.set_column_for_locale(:housing_info, locale, html_value(value))
+      end
+      @this_conference.save
+      set_success_message @admin_step
+      return false
+    end
+
+    def admin_update_workshop_info
+      params[:workshop_info].each do |locale, value|
+        @this_conference.set_column_for_locale(:workshop_info, locale, html_value(value))
+      end
+      @this_conference.save
+      set_success_message @admin_step
+      return false
+    end
+
+    def admin_update_schedule_info
+      params[:schedule_info].each do |locale, value|
+        @this_conference.set_column_for_locale(:schedule_info, locale, html_value(value))
+      end
+      @this_conference.save
+      set_success_message @admin_step
+      return false
+    end
+
+    def admin_update_travel_info
+      params[:travel_info].each do |locale, value|
+        @this_conference.set_column_for_locale(:travel_info, locale, html_value(value))
+      end
+      @this_conference.save
+      set_success_message @admin_step
+      return false
+    end
+
+    def admin_update_city_info
+      params[:city_info].each do |locale, value|
+        @this_conference.set_column_for_locale(:city_info, locale, html_value(value))
+      end
+      @this_conference.save
+      set_success_message @admin_step
+      return false
+    end
+
+    def admin_update_what_to_bring
+      params[:what_to_bring].each do |locale, value|
+        @this_conference.set_column_for_locale(:what_to_bring, locale, html_value(value))
+      end
+      @this_conference.save
+      set_success_message @admin_step
+      return false
+    end
+
+    def admin_update_volunteering_info
+      params[:volunteering_info].each do |locale, value|
+        @this_conference.set_column_for_locale(:volunteering_info, locale, html_value(value))
+      end
+      @this_conference.save
+      set_success_message @admin_step
+      return false
+    end
+
+    def admin_update_additional_details
+      params[:additional_details].each do |locale, value|
+        @this_conference.set_column_for_locale(:additional_details, locale, html_value(value))
       end
       @this_conference.save
       set_success_message @admin_step

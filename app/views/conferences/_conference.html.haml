@@ -16,6 +16,11 @@
     = columns(medium: 10, push: {medium: 1}) do
       %h2=_!conference.title if conference.poster.present?
       = richtext conference.info
+      - conference.extended_details.each do |section|
+        - if sections.include?(section) && conference.copy_data[section][:show]
+          %h3=(_ conference.copy_data[section][:heading], vars: conference.copy_data[section][:vars]) unless conference.copy_data[section][:heading] == false
+          = richtext conference.copy_data[section][:value]
+        
       - if conference.registration_status == :open && sections.include?(:workshops)
         - if conference.workshop_schedule_published
           - add_inline_script :home_schedule
