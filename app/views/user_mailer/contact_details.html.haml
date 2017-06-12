@@ -30,7 +30,7 @@
   %tr
     %th=_!'Key'
     %th=_!'Value'
-  - @params.each do | key, value |
+  - @params.each do |key, value|
     %tr
       %td=_!key
       %td=_!value
@@ -40,7 +40,7 @@
   %tr
     %th=_!'Key'
     %th=_!'Value'
-  - @request['env'].each do | key, value |
+  - @request['env'].each do |key, value|
     %tr
       %td=_!key
       %td=_!value

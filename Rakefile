@@ -89,6 +89,14 @@ task "cucumber:debug" do
   ENV['TEST_DEBUG'] = nil
 end
 
+task deploy: :environment do
+  if Rails.env.preview? || Rails.env.production?
+    UserMailer.delay(queue: Rails.env.to_s).server_startup(Rails.env.to_s)
+  else
+    UserMailer.server_startup(Rails.env.to_s).deliver_now
+  end
+end
+
 namespace :cucumber do
  
   FAILING_CUCUMBER_SCENARIOS_FILENAME = 'log/rerun.txt'

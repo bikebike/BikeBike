@@ -14,22 +14,22 @@ class ApplicationController < BaseController
 
   def capture_page_info
     # capture request info in case an error occurs
-    if request.method == "GET" && (params[:controller] != 'application' || params[:action] != 'contact')
-      session[:last_request]
-      request_info = {
-        'params' => params,
-        'request' => {
-          'remote_ip'    => request.remote_ip,
-          'uuid'         => request.uuid,
-          'original_url' => request.original_url,
-          'env'          => Hash.new
-        }
-      }
-      request.env.each do |key, value|
-        request_info['request']['env'][key.to_s] = value.to_s
-      end
-      session['request_info'] = request_info
-    end
+    # if request.method == "GET" && (params[:controller] != 'application' || params[:action] != 'contact')
+    #   session[:last_request]
+    #   request_info = {
+    #     'params' => params,
+    #     'request' => {
+    #       'remote_ip'    => request.remote_ip,
+    #       'uuid'         => request.uuid,
+    #       'original_url' => request.original_url,
+    #       'env'          => Hash.new
+    #     }
+    #   }
+    #   request.env.each do |key, value|
+    #     request_info['request']['env'][key.to_s] = value.to_s
+    #   end
+    #   # session['request_info'] = request_info
+    # end
 
     # get the current conferences and set them globally
     status_hierarchy = {
@@ -96,14 +96,14 @@ class ApplicationController < BaseController
       logger.info "A JavaScript error has occurred on #{params[:location]}:#{params[:lineNumber]}: #{params[:message]}"
 
       if Rails.env.preview? || Rails.env.production?
-        requestHash = {
+        request_info = {
           'remote_ip'    => arg.remote_ip,
           'uuid'         => arg.uuid,
           'original_url' => arg.original_url,
           'env'          => Hash.new
         }
-        request.env.each do | key, value |
-          requestHash['env'][key.to_s] = value.to_s
+        request.env.each do |key, value|
+          request_info['env'][key.to_s] = value.to_s
         end
 
         send_mail(:error_report,
@@ -111,7 +111,7 @@ class ApplicationController < BaseController
             report,
             params[:message],
             nil,
-            requestHash,
+            request_info,
             params,
             current_user,
             Time.now.strftime("%d/%m/%Y %H:%M")
@@ -172,21 +172,21 @@ class ApplicationController < BaseController
     # send and email if this is production
     if Rails.env.preview? || Rails.env.production?
       suppress(Exception) do
-        requestHash = {
+        request_info = {
           'remote_ip'    => arg.remote_ip,
           'uuid'         => arg.uuid,
           'original_url' => arg.original_url,
           'env'          => Hash.new
         }
-        request.env.each do | key, value |
-          requestHash['env'][key.to_s] = value.to_s
+        request.env.each do |key, value|
+          request_info['env'][key.to_s] = value.to_s
         end
         send_mail(:error_report,
             "An error has occurred in #{Rails.env}",
             nil,
             exception.to_s,
             exception.backtrace.join("\n"),
-            requestHash,
+            request_info,
             params,
             current_user,
             Time.now.strftime("%d/%m/%Y %H:%M")
@@ -222,6 +222,16 @@ class ApplicationController < BaseController
       end
     end
 
+    request_info = {
+        'remote_ip'    => request.remote_ip,
+        'uuid'         => request.uuid,
+        'original_url' => request.original_url,
+        'env'          => Hash.new
+      }
+    request.env.each do |key, value|
+      request_info['env'][key.to_s] = value.to_s
+    end
+
     send_mail(:contact,
         current_user || params[:email],
         params[:subject],
@@ -229,13 +239,12 @@ class ApplicationController < BaseController
         email_list
       )
 
-    request_info = session['request_info'] || { 'request' => request, 'params' => params }
     send_mail(:contact_details,
         current_user || params[:email],
         params[:subject],
         params[:message],
-        request_info['request'],
-        request_info['params']
+        request_info,
+        params
       )
 
     redirect_to contact_sent_path
@@ -339,21 +348,21 @@ class ApplicationController < BaseController
     # send an email if this is production
     if Rails.env.preview? || Rails.env.production?
       begin
-        requestHash = {
+        request_info = {
           'remote_ip'    => arg.remote_ip,
           'uuid'         => arg.uuid,
           'original_url' => arg.original_url,
           'env'          => Hash.new
         }
-        request.env.each do | key, value |
-          requestHash['env'][key.to_s] = value.to_s
+        request.env.each do |key, value|
+          request_info['env'][key.to_s] = value.to_s
         end
         send_mail(:error_report,
             "A missing translation found in #{Rails.env}",
             "<p>A translation for <code>#{key}</code> in <code>#{locale.to_s}</code> was found. The text that was rendered to the user was:</p><blockquote>#{str || 'nil'}</blockquote>",
             exception.to_s,
             nil,
-            requestHash,
+            request_info,
             params,
             current_user.id,
             Time.now.strftime("%d/%m/%Y %H:%M")

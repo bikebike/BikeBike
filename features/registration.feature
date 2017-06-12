@@ -13,7 +13,7 @@ Feature: Registration
 
     When I enter my email address
     And press confirm email
-    Then I should see 'Confirmation Sent'
+    Then I should see 'Check your spam box'
     And I should get a 'confirmation' email
 
     When I click on the 'Confirm' link in the email
@@ -134,7 +134,7 @@ Feature: Registration
 
     When I enter my email address
     And press confirm email
-    Then I should see 'Confirmation Sent'
+    Then I should see 'Check your spam box'
     And I should get a 'confirmation' email
 
     When I click on the 'Confirm' link in the email
@@ -215,7 +215,7 @@ Feature: Registration
 
     When I enter my email address
     And press confirm email
-    Then I should see 'Confirmation Sent'
+    Then I should see 'Check your spam box'
     And I should get a 'confirmation' email
 
     When I click on the 'Confirm' link in the email
@@ -281,7 +281,7 @@ Feature: Registration
 
     When I enter my email address
     And press confirm email
-    Then I should see 'Confirmation Sent'
+    Then I should see 'Check your spam box'
     And I should get a 'confirmation' email
 
     When I click on the 'Confirm' link in the email
@@ -379,7 +379,7 @@ Feature: Registration
 
     When I enter my email address as 'me@bikebike.org'
     And press confirm email
-    Then I should see 'Confirmation Sent'
+    Then I should see 'Check your spam box'
     And I should get a 'confirmation' email
 
     When I click on the 'Confirm' link in the email
@@ -543,7 +543,7 @@ Scenario: Housing providers can enter incorrect data and fix it
 
     When I enter my email address
     And press confirm email
-    Then I should see 'Confirmation Sent'
+    Then I should see 'Check your spam box'
     And I should get a 'confirmation' email
 
     When I click on the 'Confirm' link in the email

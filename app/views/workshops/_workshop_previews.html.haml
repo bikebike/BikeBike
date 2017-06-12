@@ -3,7 +3,7 @@
   - workshops.sort_by{ |w| w.title.downcase }.each do |w|
     - is_interested = w.interested?(current_user)
     %li{class: [is_interested ? :interested : nil]}
-      = content_tag("h#{depth}", w.title, class: :title)
+      = content_tag("h#{depth}", _!(w.title), class: :title)
       .workshop-interest
         - if w.can_show_interest?(current_user)
           = form_tag toggle_workshop_interest_path(w.conference.slug, w.id), class: 'js-xhr' do

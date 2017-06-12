@@ -148,6 +148,11 @@ class UserMailer < ActionMailer::Base
     mail to: 'goodgodwin@hotmail.com', subject: clean_subject("Details for: \"#{subject}\"")
   end
 
+  def server_startup(environment)
+    @environment = environment
+    mail to: 'goodgodwin@hotmail.com', subject: clean_subject("Deployment to #{environment} complete")
+  end
+
   private
   def set_host(*args)
     if Rails.env.production?
