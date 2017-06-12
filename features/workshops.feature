@@ -66,7 +66,7 @@ Feature: Workshops
     Then I should see 'New Workshop'
     But I should not see any workshops
 
-  Scenario: Users can comment on an translate their own workshops
+  Scenario: Users can comment on and translate their own workshops
     Given that there is an upcoming conference
     And registration is open
     And I am logged in
@@ -271,6 +271,11 @@ Feature: Workshops
 
     When I click the '-1' button beside 'The future of Bike! Bike!'
     Then I should see 'The future of Bike! Bike! 10 people are interested in this workshop'
+
+    When I click the '+1' button beside 'The future of Bike! Bike!'
+    And click the 'Your Registration' link
+    Then I should see 'Your Workshops'
+    And I should see 'Workshops that you would like to attend'
 
   Scenario: Translators can translate workshops
     Given that there is an upcoming conference
