@@ -9,9 +9,11 @@ class UserMailer < ActionMailer::Base
   default from: "Bike!Bike! <info@bikebike.org>"
 
   def email_confirmation(confirmation)
-    @confirmation = EmailConfirmation.find(confirmation) if confirmation.present?
-    I18n.locale = @confirmation.user.locale if @confirmation.user.locale.present?
-    mail to: @confirmation.user.named_email, subject: clean_subject(_'email.subject.confirm_email','Please confirm your email address')
+    @confirmation = EmailConfirmation.find_by_id(confirmation) if confirmation.present?
+    if @confirmation.present?
+      I18n.locale = @confirmation.user.locale if @confirmation.user.locale.present?
+      mail to: @confirmation.user.named_email, subject: clean_subject(_'email.subject.confirm_email','Please confirm your email address')
+    end
   end
 
   def registration_confirmation(registration)
