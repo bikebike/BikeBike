@@ -7,7 +7,7 @@
     %h3=_'articles.policy.headings.The_Agreement'
   %ul
     - policies.each do |term|
-      %li
+      %li{id: checkboxes ? nil : term, class: checkboxes ? nil : :target}
         - if checkboxes
           = check_box_tag(term, 1, false, required: true)
         .term=_"articles.policy.term.#{term.to_s}", :s, 2

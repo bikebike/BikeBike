@@ -79,3 +79,4 @@ brakeman.html
 /config/settings/local.rb
 /nbproject/private/
 /config/database.yml
+/config/app_config.yml

@@ -97,9 +97,9 @@ class ApplicationController < BaseController
 
       if Rails.env.preview? || Rails.env.production?
         request_info = {
-          'remote_ip'    => arg.remote_ip,
-          'uuid'         => arg.uuid,
-          'original_url' => arg.original_url,
+          'remote_ip'    => request.remote_ip,
+          'uuid'         => request.uuid,
+          'original_url' => request.original_url,
           'env'          => Hash.new
         }
         request.env.each do |key, value|
@@ -173,9 +173,9 @@ class ApplicationController < BaseController
     if Rails.env.preview? || Rails.env.production?
       suppress(Exception) do
         request_info = {
-          'remote_ip'    => arg.remote_ip,
-          'uuid'         => arg.uuid,
-          'original_url' => arg.original_url,
+          'remote_ip'    => request.remote_ip,
+          'uuid'         => request.uuid,
+          'original_url' => request.original_url,
           'env'          => Hash.new
         }
         request.env.each do |key, value|
@@ -349,9 +349,9 @@ class ApplicationController < BaseController
     if Rails.env.preview? || Rails.env.production?
       begin
         request_info = {
-          'remote_ip'    => arg.remote_ip,
-          'uuid'         => arg.uuid,
-          'original_url' => arg.original_url,
+          'remote_ip'    => request.remote_ip,
+          'uuid'         => request.uuid,
+          'original_url' => request.original_url,
           'env'          => Hash.new
         }
         request.env.each do |key, value|

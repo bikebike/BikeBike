@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170609030149) do
+ActiveRecord::Schema.define(version: 20170613022506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,6 +110,7 @@ ActiveRecord::Schema.define(version: 20170609030149) do
     t.boolean  "is_participant"
     t.boolean  "is_volunteer"
     t.string   "confirmation_token"
+    t.binary   "data_old"
     t.string   "email"
     t.boolean  "complete"
     t.boolean  "completed"
@@ -436,6 +437,7 @@ ActiveRecord::Schema.define(version: 20170609030149) do
     t.boolean  "has_workbench_access"
     t.datetime "workbench_access_request_date"
     t.text     "workbench_access_request_message"
+    t.string   "pronoun"
   end
 
   add_index "users", ["activation_token"], name: "index_users_on_activation_token", using: :btree

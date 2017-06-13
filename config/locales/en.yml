@@ -1159,6 +1159,8 @@ en:
         other: "%{count} seconds"
       x_and_y: "%{x} %{y}"
       time_ago: "%{time} ago"
+  string_formats:
+    data_with_supplementary_value: '%{value} (%{supplementary_value})'
   errors:
     format: "%{attribute} %{message}"
     messages:
@@ -1620,8 +1622,9 @@ en:
         peaceful: We are peaceful and honest.
     conference_registration:
       complete:
-        payment_processed: Thank you for your payment!
+        payment_processed: Thank you for your payment! Your registration is now complete
         companion_registered: Your companion has completed their registration, we will do our best to keep you together
+        registration_complete: Thank you, your registration is now complete
       error:
         generic: An unexpected error occurred
         payment_cancelled: Your payment was cancelled
@@ -1688,6 +1691,7 @@ en:
         name: Name
         languages: Languages spoken
       headings:
+        pronoun: Pronoun (he/she/they)
         Back_to: 'Back to:'
         group_ride: Do you plan to attend the group ride?
         hosting_other: Information for organizers
@@ -1797,6 +1801,8 @@ en:
             additional_details: Additional details
         companion: Companion
       paragraphs:
+        pronoun: It is important that communications with you and about you are as respectful as possible. If you do not provide a pronoun organizers may assume he, she, or they based on your name or visual identity.
+        pronoun_optional: Providing your pronoun is optional
         group_ride: There will be a group ride after or before the conference, do you plan to attend?
         registration_cancelled: You have cancelled your registration. If you reconsider, please re-open your registration using the button below but keep in mind that you may lose out of your housing or bike if you wait too long.
         hosting_other: Please enter any information you would like organizers to consider when selecting guests. If you have restrictions on guests that you would lke to stay at your home or if you have pets or other factors that might cause guests to be uncomfortable or not able to stay at your home, please list them here.
@@ -2166,6 +2172,7 @@ en:
   forms:
     labels:
       generic:
+        pronoun: Pronoun
         territory: State/Province
         payment_type:
           paypal: Online

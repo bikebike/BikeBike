@@ -65,7 +65,7 @@ class ConferencesController < ApplicationController
         # pass any data on to the view
         data_to_instance_variables(result[:data])
 
-        raise result[:exception] if result[:exception].present? && Rails.env.development?
+        handle_exception(result[:exception]) if result[:exception].present?
 
         if @update_status == :paypal_redirect
           pp_response = @request.setup(

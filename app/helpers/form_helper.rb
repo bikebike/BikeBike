@@ -285,6 +285,11 @@ module FormHelper
 
     html += show_errors name, value
 
+    if options[:warning].present?
+      description_id ||= "#{id}-desc"
+      html += content_tag(:div, _(options[:warning], :s, 2), id: description_id, class: 'warning-info')
+    end
+
     inside_label = ''
 
     if options[:type] == :file

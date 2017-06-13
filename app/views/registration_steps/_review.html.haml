@@ -26,10 +26,11 @@
                     - when :html
                       .scroller= richtext(data[:value].html_safe)
                     - else
-                      - if data[:key].present?
-                        =_"#{data[:key]}.#{data[:value]}"
+                      - value = data[:key].present? ? (_"#{data[:key]}.#{data[:value]}") : data[:value].to_s
+                      - if data[:supplementary].present?
+                        = (_'string_formats.data_with_supplementary_value', vars: { value: value, supplementary_value: data[:supplementary] }).html_safe
                       - else
-                        = data[:value].to_s.html_safe
+                        = value.html_safe
       - else
         %p.centered=_'articles.conference_registration.paragraphs.registration_cancelled', :p
       - if @allow_cancel_attendance

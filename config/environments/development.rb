@@ -33,17 +33,19 @@ BikeBike::Application.configure do
   config.assets.digest = true
   config.assets.compile = true
 
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    :address => 'mail.bikebike.org',
-    :domain => 'preview.bikebike.org',
-    :port => 587,
-    :authentication => :plain,
-    :enable_starttls_auto => true,
-    :openssl_verify_mode  => 'none',
-    :user_name => 'info@preview.bikebike.org',
-    :password => 'test'
-  }
+  # to deliver to the browser instead of email
+  config.action_mailer.delivery_method = :letter_opener
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = {
+  #   address: 'smtp.gmail.com',
+  #   domain: 'bikebike.org',
+  #   port: 587,
+  #   authentication: :plain,
+  #   enable_starttls_auto: true,
+  #   openssl_verify_mode: 'none',
+  #   user_name: 'info@bikebike.org',
+  #   password: config.app_config['email_password']
+  # }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true
 
@@ -51,11 +53,6 @@ BikeBike::Application.configure do
   # config.action_controller.perform_caching = true
 
   I18n.config.language_detection_method = I18n::Config::DETECT_LANGUAGE_FROM_URL_PARAM
-
-  # to be appraised of mailing errors
-  config.action_mailer.raise_delivery_errors = true
-  # to deliver to the browser instead of email
-  config.action_mailer.delivery_method = :letter_opener
 
   Paypal.sandbox!
   config.action_controller.default_url_options = { trailing_slash: true }

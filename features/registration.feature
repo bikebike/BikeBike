@@ -35,6 +35,7 @@ Feature: Registration
     Then I should see 'What is your name?'
 
     When I enter my name
+    And enter my pronoun as 'They'
     And click the 'Next' button
     Then I should see 'Which languages do you speak?'
 
@@ -93,6 +94,7 @@ Feature: Registration
     Then I should get a 'Thank you for registering' email
     And I should see 'Your registration is complete'
     And I should see 'Seattle'
+    And see 'They'
     And see 'Bike Works'
     And see 'Yes, I would like to place to stay'
     And see 'I eat meat and dairy'

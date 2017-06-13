@@ -1,4 +1,5 @@
 BikeBike::Application.configure do
+  config.app_config = config_for(:app_config)
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
@@ -87,14 +88,14 @@ BikeBike::Application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :address => 'smtp.gmail.com',
-    :domain => 'bikebike.org',
-    :port => 587,
-    :authentication => :plain,
-    :enable_starttls_auto => true,
-    :openssl_verify_mode  => 'none',
-    :user_name => '',
-    :password => ''
+    address: 'smtp.gmail.com',
+    domain: 'bikebike.org',
+    port: 587,
+    authentication: :plain,
+    enable_starttls_auto: true,
+    openssl_verify_mode: 'none',
+    user_name: 'info@bikebike.org',
+    password: config.app_config['email_password']
   }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true

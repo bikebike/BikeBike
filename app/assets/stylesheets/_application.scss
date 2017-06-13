@@ -62,6 +62,10 @@ p {
     &.center {
         text-align: center;
     }
+
+    &.small {
+        font-size: 3.5vw;
+    }
 }
 
 u {
@@ -99,6 +103,12 @@ a {
             @include _(transform, scaleX(1));
         }
     }
+}
+
+.target:target {
+    text-decoration: underline;
+    text-decoration-color: $yellow;
+    text-decoration-style: wavy;
 }
 
 .screen-reader-text { 
@@ -1768,6 +1778,10 @@ ul.warnings {
     &.make-room {
         margin-bottom: 2em;
     }
+
+    .text-field & {
+        margin: 0 0 1em 0;
+    }
 }
 
 .success-info {
@@ -3435,6 +3449,10 @@ body.policy .policy-agreement ul {
 
     p {
         font-size: 1.25em;
+
+        &.small {
+            font-size: 1.125em;
+        }
     }
 
     fieldset {
