@@ -152,6 +152,15 @@ class ApplicationController < BaseController
     @page_title = 'page_titles.404.Locale_Not_Available'
     @main_title_vars = { vars: { language: view_context.language_name(locale) } }
     @main_title = 'error.locale_not_available.title'
+    
+    unless @alt_lang_urls.present?
+      @alt_lang_urls = {}
+      I18n.backend.enabled_locales.sort.each do |locale|
+        locale = locale.to_s
+        @alt_lang_urls[locale] = view_context.url_for_locale(locale) # don't show the current locale
+      end
+    end
+    
     render 'application/locale_not_available', status: 404
   end
 
