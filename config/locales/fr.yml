@@ -961,41 +961,49 @@ fr:
       ET:
         SNNPR: SNNPR
       FR:
-        ACAL: Alsace-Champagne-Ardenne-Lorraine
+        ACAL: Grand-Est
       IT:
         FVG: Frioul-Vénétie julienne
       MX:
         Ags: "État d'Aguascalientes"
         BCS: Basse-Californie du Sud
-        CAM: "État de Campeche"
+        Camps: "État de Campeche"
         CHP: Chiapas
         CH: "État de Chihuahua"
         COA: Coahuila
         COL: "État de Colima"
-        DUR: "État de Durango"
+        Dgo: "État de Durango"
         BCN: Basse-Californie du Nord
         MEX: Estado de México
-        Gto: "État de Guanajuato"
+        GUA: "État de Guanajuato"
         GRO: Guerrero
         Hgo: "État dHidalgo"
         JAL: Jalisco
         MIC: Michoacán
         MOR: Morelos
         NAY: Nayarit
-        NLE: Nuevo León
+        NL: Nuevo León
         OAX: "État de Oaxaca"
         PUE: "État de Puebla"
-        Qro: Querétaro de Arteaga
-        QRoo: Quintana Roo
-        SLP: "État de San Luis Potosí"
+        QUE: Querétaro de Arteaga
+        ROO: Quintana Roo
+        SLP: San Luis Potosí
         SIN: Sinaloa
         SON: Sonora
         TAB: Tabasco
-        TAM: Tamaulipas
-        Tlax: "État de Tlaxcala"
+        Tamps: Tamaulipas
+        TLA: "État de Tlaxcala"
         VER: Veracruz
         YUC: Yucatán
         ZAC: "État de Zacatecas"
+        CAM: "État de Campeche"
+        DUR: "État de Durango"
+        Gto: "État de Guanajuato"
+        NLE: Nuevo León
+        Qro: Querétaro de Arteaga
+        QRoo: Quintana Roo
+        TAM: Tamaulipas
+        Tlax: "État de Tlaxcala"
       MY:
         JHR: Johor
         KDH: Kedah
@@ -1041,7 +1049,7 @@ fr:
         AK: Alaska
         AZ: Arizona
         AR: Arkansas
-        Calif: Californie
+        CA: Californie
         CO: Colorado
         CT: Connecticut
         DE: Delaware
@@ -1088,8 +1096,9 @@ fr:
         WV: Virginie-Occidentale
         WI: Wisconsin
         WY: Wyoming
+        Calif: Californie
     formats:
-      city_region_country: "%{city},  %{region},  %{country}"
+      city_region_country: ville, province, pays
   articles:
     about_bikebike:
       paragraphs:
@@ -1125,7 +1134,7 @@ fr:
           l’hébergement partagé, entre un et deux repas par jour, et un vélo par participant
           ou participante. Assurez-vous toutefois de consulter les renseignements
           du congrès de cette année. D’autres informations sur la façon de trouver
-          votre propre logement et sur les endroits qu’il est conseillé de visiter
+          votre propre hébergement et sur les endroits qu’il est conseillé de visiter
           devraient aussi vous être données par les organisateurs et organisatrices
           sur le site Web, ou sur papier dès votre arrivée.
         Volunteer: Oui, bien sûr!
@@ -1156,7 +1165,7 @@ fr:
         All_Workshops: Toutes les autres présentations
         Contact_Info: Coordonnées
         Enter_Your_Email: Saisissez votre adresse électronique
-        Hosting: Offre de logements
+        Hosting: Offre d’hébergement
         Payment: Frais d’inscription
         Register: S’inscrire à %{title}
         Registration_Details: Les inscriptions viennent de commencer!
@@ -1173,8 +1182,8 @@ fr:
         host:
           address: Adresse
           considerations: Besoins spécifiques
-        housing: Vous faut-il un logement?
-        hosting: Offre de logement
+        housing: Vous faut-il un hébergement?
+        hosting: Organisation
         languages: Quelles langues parlez-vous?
         location: D’où venez-vous?
         name: Quel est votre nom?
@@ -1185,6 +1194,42 @@ fr:
         preferred_language: En quelle langue préférez-vous communiquer?
         questions: Votre venue
         workshops: Présentations
+        Back_to: 'Retour vers:'
+        Your_Registration: Votre inscription.
+        group_ride: Planifiez-vous participer au voyage, suite à la conférence?
+        hosting_address: Quelle est votre adresse?
+        housing_arrival_date: Date d’arrivée
+        housing_departure_date: Date de départ
+        hosting_space_floor: Couchage au sol
+        confirm_payment: Confirmation du paiement de l’inscription
+        hosting_attending: Allez-vous assister au Congrès?
+        hosting_check: Souhaitez-vous proposer de l’hébergement?
+        hosting_other: Renseignements pour les organisateurs et les organisatrices
+        hosting_phone: Quel est votre numéro de téléphone?
+        hosting_space_beds: Lit et sofa
+        hosting_info: Infos sur l’hébergement et règles
+        hosting_space_tent: Hébergement sous tente
+        hosting_start_date: Date de début de l’hébergement
+        housing_bike: Souhaitez-vous emprunter un vélo?
+        housing_other: Autres précisions
+        housing_type: Hébergement
+        hosting_end_date: Date de fin de l’hébergement
+        housing_companion_check: Hébergement pour deux personnes
+        housing_food: Quelles sont vos habitudes alimentaires?
+        org_create_address: Adresse de l’organisme
+        org_create_email: Courriel de l’organisme
+        org_select: Avec quel organisme travaillez-vous?
+        org_member: Travaillez-vous auprès d’un collectif ou d’une association?
+        housing_companion_email: Courriel de la personne hébergée avec vous
+        org_create_mailing_address: Adresse postale de l’organisme
+        org_create_name: Nom de l’organisme
+        org_location: Dans quelle ville votre organisme est-il basé?
+        org_non_member_interest: Pourquoi le congrès Bike!Bike! vous intéresse-t-il?
+        org_location_confirm: Confirmation du lieu
+        payment_form: Montant des frais d’inscription
+        pronoun: Pronom (il/elle/autre option)
+        review: Revoir
+        your_location: Dans quelle ville êtes-vous basé(e)?
       can_provide_housing: Je peux héberger des gens.
       host:
         considerations:
@@ -1266,6 +1311,29 @@ fr:
           et aux organisatrices par courrier électronique. Si vous vous connectez
           depuis votre compte Facebook, aucune adresse de courriel ne nous est fournie.
           Veuillez donner votre adresse de courriel afin de pouvoir continuer.
+        hosting_attending: Prévoyez-vous aussi assister à une présentation ou à une
+          activité du Congrès?
+        confirm_payment: Merci. Veuillez confirmer votre paiement de %{amount} %{currency}.
+        currency_details: Dès votre arrivée, veuillez effectuer votre paiment en %{currency}.
+        group_ride: Une sortie à vélo en groupe aura lieu avant le Congrès. Souhaitez-vous
+          y participer?
+        hosting_address: Votre adresse devra être communiquée aux invité(e)s. Les
+          personnes qui viennent de l'extérieur du Canada pourraient aussi avoir à
+          donner votre adresse au moment de passer la frontière.
+        hosting_space_tent: "Êtes-vous d’accord pour héberger des invité(e)s dans
+          une tente chez vous?"
+        hosting_end_date: Jusqu’à quelle date proposez-vous de l’hébergement?
+        hosting_start_date: "À partir de quelle date proposez-vous de l’hébergement?"
+        workshops: Vous pouvez désormais visualiser les présentations proposées et
+          en proposer vous aussi.
+        review: Votre inscription est terminée. Veuillez passer en revue les renseignements
+          que vous avez donnés et les modifier au besoin.
+        registration_cancelled: Vous avez annulé votre inscription. Si vous changez
+          d’avis à nouveau,veuillez cliquer sur le boutonci-dessous,maissouvenez-vousquesi
+          vous attendez trop longtemps,votre hébergement et votre bicyclette pourraient
+          être attribués à quelqu’un d’autre.
+        pronoun_optional: Il n’y a aucune obligation de choisir un pronom.
+        pronoun: ''
       questions:
         bike:
           'no': Non
@@ -1278,6 +1346,71 @@ fr:
           none: Je m’en occuperai
           tent: 'Un endroit pour planter ma tente '
           house: Salle intérieure
+      actions:
+        View_Workshops: Voir présentations
+      complete:
+        companion_registered: Votre compagnon a terminé son enrisgistrement.Nous allons
+          faire de notre mieux pour garder ensemble.
+        payment_processed: Votre paiement est enregistré, merci.
+      error:
+        address_required: Veuillez entrer une adresse.
+        bed_space_required: Entrer le nombre de lit ou d'espace d'hébergement disponible.
+        companion_email_required: Veuillez entrer une adresse courriel.
+        email_required: Une adresse courriel est requise.
+        payment_cancelled: Votre paiement a été annulé.
+        phone_required: Un numéro de téléphone valide est requis.
+        amount_required: Veuillez entrer un montant.
+        city_not_found: Nous ne pouvons pas trouver une ville ou un village qui corresponde
+          à votre recherche.
+        companion_already_has_companion: Cette personne a déjà un compagnon.
+        departure_date_before_arrival: Vous avez sélectionné une date de départ qui
+          précède votre arrivée.
+        end_date_before_start: Vous avez sélectionné une date de début qui précèdevotredate
+          de fin.
+        floor_space_required: Veuillez entrer l'espace que vous avez à offrir.
+        info_required: Veuillez fournir des informations concernant vous et votre
+          logis, à vos invités.
+        language_required: Veuillez sélectionner au moins une langue.
+        location_required: Veuillez entrer un lieu.
+        mailing_address_required: Veuillez entrer le courriel de votre organisation.
+        name_required: Veuillez fournir un nom auquel vous vous identifiez.
+        org_email_matches_personal_email: Ce courriel correspond à votre courriel
+          personnel.Veuillez entrer le courriel de votre organisation.
+        org_name_required: Veuillez entrer le nom de votre organisation.
+        payment_denied: Votre paiement est refusé.SVP,vérifiez le montant et essayez
+          de nouveau.
+        generic: Une erreur s’est produite
+        policy_required: Lisez chaque affirmation avec attention avant de cliquer
+          sur la boîte pour signaler que vous acceptez de respecter l’Accord.
+      step_names:
+        policy: Politique
+        payment_type: Paiement des frais d’inscription
+        payment_form: Montant du paiement de l’inscription
+        group_ride: Sortie en groupe
+        hosting_address: Adresse
+        hosting_end_date: Date de fin
+        hosting_info: Précisions sur l’hébergement
+        hosting_other: Autre
+        hosting_phone: Téléphone
+        hosting_space_tent: Endroit pour camper
+        hosting_start_date: Date de début
+        housing_arrival_date: Habitudes alimentaires
+        housing_other: Autre
+        housing_type: Hébergement
+        housing_departure_date: Date de départ
+        housing_food: Habitudes alimentaires
+        name: Nom
+        org_select: Organisme/collectif
+        org_non_member_interest: Motivation pour assister au Congrès
+        org_member: Membre de l’organisation/du collectif
+        org_location: Provenance
+        languages: Langues parlées
+        housing_bike: Vélo?
+      warning:
+        payment_pending: Merci! Votre paiement est en cours.
+        companion_unregistered: Votre partenaire ne s’est pas encore inscrit ou inscrite.
+          Veuillez vous assurer qu’il ou elle le fasse pour que vous soyez hébergés
+          ensemble.
     policy:
       headings:
         The_Agreement: L’ Accord
@@ -1319,8 +1452,8 @@ fr:
       email_subscribe: Inscription aux annonces par courriel
       paragraphs:
         email_subscribe: Voulez-vous qu'on vous tienne au courant des congrès à venir?
-          Si vous y êtes inscrit(e) à un congrès, vous recevrez des avis et des nouvelles
-          qui s'y rapportent jusqu'à son commencement.
+          Si vous êtes inscrit ou inscrite à un congrès, vous recevrez des avis et
+          des nouvelles qui s'y rapportent jusqu'à son commencement.
     workshops:
       headings:
         Delete_Workshop: Supprimer la présentation
@@ -1338,6 +1471,8 @@ fr:
         notes: Remarques
         space: Lieu
         theme: Thèmes
+        Workshops_that_you_would_like_to_attend: Présentations auxquelles vous souhaitez
+          assister
       info:
         interested_count:
           one: Cette présentation intéresse une personne.
@@ -1347,7 +1482,7 @@ fr:
           zero: Cette présentation vous intéresse.
           one: Vous et une autre personne vous intéressez à cette présentation.
           other: Vous et  %{count} autres personnes vous intéressez à cette présentation.
-        read_more: Plus d'information
+        read_more: En savoir plus
       paragraphs:
         info: Décrivez votre présentation en détail. Surbrillez le texte pour pouvoir
           le formater.
@@ -1388,6 +1523,10 @@ fr:
         theme: Lequel de ces thèmes correspond le mieux à votre présentation? Veuillez
           le préciser pour nous aider à faire en sorte que les thèmes se chevauchent
           le moins possible.
+        Workshops_that_you_would_like_to_attend: Ajoutez les présentations qui vous
+          intéressent à votre calendrier en cliquant sur le bouton +1. Vous pourrez
+          ainsi garder la trace des présentations auxquelles vous voulez assister,
+          et cela nous aidera à mieux organiser l’événement.
     contact:
       headings:
         sent: Merci d'avoir communiqué avec nous.
@@ -1580,6 +1719,23 @@ fr:
         register: S’inscrire
         skip: Sauter
         administrate: Administrer
+        'no': Non
+        maybe: Peut-être
+        payment_paypal: Je peux payer à l'instant avec Paypal
+        food_vegan: Je suis végétalien
+        food_vegetarian: Je suis végétarien
+        food_meat: Je mange de la viande et des produits laitiers
+        payment_none: Pas maintenant
+        reopen_registration: Ré-ouvrir mon inscription
+        cancel_registration: Annuler mon inscription
+        back: Retour
+        'yes': Oui
+        review: Revoir
+        payment_on_arrival: Je m’engage à payer après mon arrivée
+        organization_none: Aucune
+        housing_tent: Je voudrais un emplacement pour planter ma tente
+        housing_none: Je n’ai pas besoin d’un hébergement
+        housing_house: Je désirerais un hébergement
       aria:
         remove_interest: Cliquez si la présentation ne vous intéresse plus.
         show_interest: Cliquez si cette présentation vous intéresse.
@@ -1606,8 +1762,16 @@ fr:
         reasons:
           website: Commentaire sur le site Web
           conference: Commentaire sur le Congrès
-        floor_space: Surface de plancher disponible
+        floor_space: Couchage au sol
         first_day: De
+        city: Ville
+        country: Pays
+        payment_type:
+          on_arrival: En personne
+          paypal: En ligne
+          none: Sans objet
+        territory: "État/Province"
+        pronoun: Pronom
   modals:
     no_button: Non
     yes_button: Oui
@@ -1629,7 +1793,7 @@ fr:
       theme:
         other: Autre
         funding: Financement
-        race_gender: Race, genre ou politique des classes
+        race_gender: Ethnicité, genre ou classe politique
         organization: Questions d’ordre organisationnel
         mechanics: Mécanique
         community: Approche communautaire
@@ -1694,6 +1858,7 @@ fr:
       span_same_month_date_2: "%d %B %Y "
       weekday: "%A"
       span_same_year_date_1: "%e %B"
+      span_same_year_date_2: du %d %B au %d %B %Y
   errors:
     messages:
       fields:

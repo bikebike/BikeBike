@@ -110,7 +110,6 @@ ActiveRecord::Schema.define(version: 20170613022506) do
     t.boolean  "is_participant"
     t.boolean  "is_volunteer"
     t.string   "confirmation_token"
-    t.binary   "data_old"
     t.string   "email"
     t.boolean  "complete"
     t.boolean  "completed"
@@ -381,11 +380,11 @@ ActiveRecord::Schema.define(version: 20170613022506) do
   end
 
   create_table "translation_records", force: :cascade do |t|
-    t.string  "locale"
-    t.integer "translator_id"
-    t.string  "key"
-    t.text    "value"
-    t.date    "created_at"
+    t.string   "locale"
+    t.integer  "translator_id"
+    t.string   "key"
+    t.text     "value"
+    t.datetime "created_at"
   end
 
   create_table "translations", force: :cascade do |t|

@@ -972,35 +972,43 @@ en:
       MX:
         Ags: Aguascalientes
         BCS: Baja California Sur
-        CAM: Campeche
+        Camps: Campeche
         CHP: Chiapas
         CH: Chihuahua
         COA: Coahuila
         COL: Colima
-        DUR: Durango
+        Dgo: Durango
         BCN: Estado de Baja California
         MEX: Estado de México
-        Gto: Guanajuato
+        GUA: Guanajuato
         GRO: Guerrero
         Hgo: Hidalgo
         JAL: Jalisco
         MIC: Michoacán
         MOR: Morelos
         NAY: Nayarit
-        NLE: Nuevo León
+        NL: Nuevo León
         OAX: Oaxaca
         PUE: Puebla
-        Qro: Querétaro
-        QRoo: Quintana Roo
+        QUE: Querétaro
+        ROO: Quintana Roo
         SLP: San Luis Potosí
         SIN: Sinaloa
         SON: Sonora
         TAB: Tabasco
-        TAM: Tamaulipas
-        Tlax: Tlaxcala
+        Tamps: Tamaulipas
+        TLA: Tlaxcala
         VER: Veracruz
         YUC: Yucatán
         ZAC: Zacatecas
+        CAM: Campeche
+        DUR: Durango
+        Gto: Guanajuato
+        NLE: Nuevo León
+        Qro: Querétaro
+        QRoo: Quintana Roo
+        TAM: Tamaulipas
+        Tlax: Tlaxcala
       MY:
         JHR: Johor
         KDH: Kedah
@@ -1046,7 +1054,7 @@ en:
         AK: Alaska
         AZ: Arizona
         AR: Arkansas
-        Calif: California
+        CA: California
         CO: Colorado
         CT: Connecticut
         DE: Delaware
@@ -1093,6 +1101,7 @@ en:
         WV: West Virginia
         WI: Wisconsin
         WY: Wyoming
+        Calif: California
     formats:
       city_region_country: "%{city}, %{region}, %{country}"
       city_country: "%{city}, %{country}"
@@ -1160,7 +1169,7 @@ en:
       x_and_y: "%{x} %{y}"
       time_ago: "%{time} ago"
   string_formats:
-    data_with_supplementary_value: '%{value} (%{supplementary_value})'
+    data_with_supplementary_value: "%{value} (%{supplementary_value})"
   errors:
     format: "%{attribute} %{message}"
     messages:
@@ -1452,7 +1461,10 @@ en:
             instead of a guest form. If you want to consider surrounding cities as
             well, enter the distance from %{city} that you wish to be included as
             providers. Cities are measured from center to center.
-          housing: Pair each housing provider with a list of guests. Try to match guests with hosts and other guests who are good matches and respect their requests, but also keep in mind that we cannot always respect all requests and part of the Bike!Bike! experience is getting to know new people.
+          housing: Pair each housing provider with a list of guests. Try to match
+            guests with hosts and other guests who are good matches and respect their
+            requests, but also keep in mind that we cannot always respect all requests
+            and part of the Bike!Bike! experience is getting to know new people.
       locations:
         heading: Locations
         description: Locations are used to schedule workshops, events, and meals.
@@ -1516,7 +1528,8 @@ en:
             can be granted administration privledges here.
       copy:
         heading: Site Copy
-        description: Copy that is displayed in the front page, the details page, emails, and throughout registration.
+        description: Copy that is displayed in the front page, the details page, emails,
+          and throughout registration.
         headings:
           description: Description
           group_ride: Group Ride
@@ -1531,16 +1544,22 @@ en:
           additional_details: Additional Details
         descriptions:
           description: Modify the text that is displayed on the front page
-          group_ride: Will you be having a group ride before or after the conference? Describe it here.
+          group_ride: Will you be having a group ride before or after the conference?
+            Describe it here.
           payment_message: Set the message that is displayed on the registration fee
           housing_info: Let visitors know what to expect for housing
           workshop_info: Let attendees know how workshops will work this year
-          schedule_info: Summarize your overall schedule of events, workshops, and rides
-          travel_info: Let visitors know how to get to your city and what international visitors may need to be prepared for
-          city_info: Describe your city, talk about things like saftey, laws, weather, and culture
+          schedule_info: Summarize your overall schedule of events, workshops, and
+            rides
+          travel_info: Let visitors know how to get to your city and what international
+            visitors may need to be prepared for
+          city_info: Describe your city, talk about things like saftey, laws, weather,
+            and culture
           what_to_bring: Let visitors know what to bring
-          volunteering_info: Let potential volunteers know what they can do and how they can help out
-          additional_details: Add any additional information not covered by other copy
+          volunteering_info: Let potential volunteers know what they can do and how
+            they can help out
+          additional_details: Add any additional information not covered by other
+            copy
       registration:
         heading: Registration
         headings:
@@ -1622,8 +1641,9 @@ en:
         peaceful: We are peaceful and honest.
     conference_registration:
       complete:
-        payment_processed: Thank you for your payment! Your registration is now complete
-        companion_registered: Your companion has completed their registration, we will do our best to keep you together
+        payment_processed: Thank you for your payment! Your registration is now complete.
+        companion_registered: Your companion has completed their registration. We
+          will do our best to keep you together.
         registration_complete: Thank you, your registration is now complete
       error:
         generic: An unexpected error occurred
@@ -1636,25 +1656,31 @@ en:
         floor_space_required: Enter the amount of floor space you have to offer
         tent_space_required: Enter the amount of tent space you have to offer
         info_required: Provide your guests with information about you and your home
-        policy_required: Read each statement carefully and check the box once to signify that you aggree to uphold the agreement
+        policy_required: Read each statement carefully and check the box once to signify
+          that you aggree to uphold the agreement.
         name_required: Provide us with a name that you identify with
         language_required: Select at least one language that you can speak
         location_required: Enter a location
-        city_not_found: We could not find a city or town that matches your query
+        city_not_found: We could not find a city or town that matches your query.
         org_name_required: Enter the name of your organization
         address_required: Enter an address
         email_required: An email address is required
-        org_email_matches_personal_email: This email address matches your personal email address, we ask that you enter your organization's email address instead
+        org_email_matches_personal_email: This email address matches your personal
+          email address. We ask that you enter your organization's email address instead.
         mailing_address_required: Enter your organization's mailing address
-        end_date_before_start: You have selected an end date that is before your start date
-        departure_date_before_arrival: You have selected a departure date that is before your arrival
+        end_date_before_start: You have selected an end date that is before your start
+          date
+        departure_date_before_arrival: You have selected a departure date that is
+          before your arrival
         companion_email_required: Enter an email address
-        companion_already_has_companion: This person already has a companion
+        companion_already_has_companion: This person already has a companion.
         amount_required: Enter a positive amount
-        payment_denied: Your payment was denied, please check your account and try again
+        payment_denied: Your payment was denied. Please check your account and try
+          again.
       warning:
-        payment_pending: Thank you! Your payment is currently pending
-        companion_unregistered: Your companion has not yet registerred, please ensure that they do to guarantee you are housed together
+        payment_pending: Thank you! Your payment is currently pending.
+        companion_unregistered: Your companion has not yet registerred. Please ensure
+          that they do to guarantee you are housed together.
       step_names:
         group_ride: Group ride?
         hosting_other: Other
@@ -1726,7 +1752,7 @@ en:
         org_location_confirm: Confirm your location
         org_location: In which city or town is your organization based?
         your_location: In which city or town are you based?
-        org_member: Are you representing a bicycle collective?
+        org_member: Do you participate in a community bicycle project?
         org_non_member_interest: Why are you interested in attending Bike!Bike!?
         Administration: Administration
         Conference_Administration: "%{title} Administration"
@@ -1801,52 +1827,119 @@ en:
             additional_details: Additional details
         companion: Companion
       paragraphs:
-        pronoun: It is important that communications with you and about you are as respectful as possible. If you do not provide a pronoun organizers may assume he, she, or they based on your name or visual identity.
+        pronoun: It is important that communications with you and about you are as
+          respectful as possible. If you do not provide a pronoun organizers may assume
+          he, she, or they based on your name or visual identity.
         pronoun_optional: Providing your pronoun is optional
-        group_ride: There will be a group ride after or before the conference, do you plan to attend?
-        registration_cancelled: You have cancelled your registration. If you reconsider, please re-open your registration using the button below but keep in mind that you may lose out of your housing or bike if you wait too long.
-        hosting_other: Please enter any information you would like organizers to consider when selecting guests. If you have restrictions on guests that you would lke to stay at your home or if you have pets or other factors that might cause guests to be uncomfortable or not able to stay at your home, please list them here.
-        hosting_info: Please fill out your house rules, contact instructions, and any other pertinent information about your home or neighbourhood. Your summary will only be visible to conference organizers and your guests.
-        hosting_end_date: What is the latest date that you are will to have guests stay at you home?
-        hosting_start_date: What is the earliest date that you are will to have guests stay at you home?
+        group_ride: There will be a group ride after or before the conference. Do
+          you plan to join us for the ride?
+        registration_cancelled: You have cancelled your registration. If you reconsider,
+          please re-open your registration using the button below but keep in mind
+          that you may lose out of your housing or bike if you wait too long.
+        hosting_other: Please enter any information you would like organizers to consider
+          when selecting guests for you. If you have restrictions on guests that you
+          would like to stay at your home, or if you have pets or other factors that
+          might cause guests to be uncomfortable or not able to stay at your home,
+          please list them here.
+        hosting_info: Please fill out your house rules, contact instructions, and
+          any other pertinent information about your home or neighbourhood. Your summary
+          will only be visible to conference organizers and your guests.
+        hosting_end_date: What is the latest date that you are willing to have guests
+          stay at you home?
+        hosting_start_date: What is the earliest date that you are willing to have
+          guests stay at you home?
         hosting_space_tent: Are you willing to have guests stay in tents in your yard?
-        hosting_space_floor: Please let us know how many people you are willing to support on your floor?
-        hosting_space_beds: Please let us know how many people you can support on beds or couches?
-        hosting_phone: Please provide a phone number where guests can contact you, details on how you expect guests to contact you can be provided in your house rules.
-        hosting_address: We will need to share your address with guests so that they can find your home. International visitors may also need to provide border security with the address where they are staying.
-        hosting_attending: Are you also planning to attend conference workshops and events?
-        hosting_check: We are looking for volunteers in %{city} who can house guests between %{date_span} in beds, couches, floors, or backyard tent space. We will ask you to provide your home location, phone number and house rules with guests. We will do our best to match up guests the criteria that you give us.
+        hosting_space_floor: Please let us know how many people you are willing to
+          have sleep on your floor?
+        hosting_space_beds: Please let us know how many people you can provide beds
+          or couches?
+        hosting_phone: Please provide a phone number where guests can contact you.
+          You can provide details on how you expect guests to contact you in your
+          house rules.
+        hosting_address: We will need to share your address with guests so that they
+          can find your home. International visitors may also need to provide border
+          security with the address where they are staying.
+        hosting_attending: Are you also planning to attend conference workshops and
+          events?
+        hosting_check: We are looking for volunteers in %{city} who can house guests
+          between %{date_span} on beds, couches, or floors, or in a backyard tent
+          space. We will ask you to provide your home location, phone number, and
+          house rules for guests. We will do our best to match up guests with criteria
+          that you give us.
         currency_details: When you arrive, please make your payment in %{currency}.
         confirm_payment: Thank you, please confirm your payment of %{amount} %{currency}.
-        review: Your registration is complete, please review and modify your data as necessary.
-        payment_form: Please select one of the predefined options below or enter a custom amount.
-        org_select: Please select the organization that you will be representing. This information will be used to help us contact and invite your organization next year and to populate the list of known organizations that will be displayed on bikecollectives.org. If you are involved with multiple oganizations, please select one for now, you will be able to add more organizations at a later date.
-        payment_type: Registration is by donation but it enables us to pay for spaces, food, equipment, and more. If you can, paying now via PayPal enables us to prepare for the conference without risk of paying out of pocket. Otherwise, pleging to pay on arrival will help us to get a rough idea of what we can and cannot afford.
-        housing_other: Do you have any special needs or considerations that we should know about for your stay such as allergies, disabilities, or a need for child care? Letting us know in advance will help us determine the best place for you to stay and make any necessary preparations for the conference itself.
-        housing_allergies: Let us know if you have any allergies that we should be made aware of.
-        housing_food: Please let us know your eating habits by selecting the option that best describes the type of food that you eat. We will use this to decide the best types of meals to prepare and how much food we will need.
-        housing_bike: In order for us to get an idea of how many bikes we will need to prepare, please let us know if you would like to borrow a bike from us.
+        review: Your registration is complete, please review and modify your data
+          as necessary.
+        payment_form: Please select one of the predefined options below or enter a
+          custom amount.
+        org_select: Please select the organization that you participate in. This information
+          will be used to help us contact and invite your organization next year and
+          to populate the list of known organizations that will be displayed on bikecollectives.org.
+          If you are involved with multiple oganizations, please select one for now,
+          you will be able to add more organizations at a later date.
+        payment_type: If you can, please pay now via PayPal. We collect the registration
+          fee as a donation. Your donation pays for spaces, food, equipment, and much
+          more. Paying now enables us to prepare for the conference without paying
+          out of our own pockets. Otherwise, please pledge to pay on arrival. Your
+          pledge will help us make a rough plan for what we can and cannot afford.
+          Thank you.
+        housing_other: Do you have any special needs or considerations that we should
+          know about for your stay such as allergies, disabilities, or a need for
+          child care? Letting us know in advance will help us determine the best place
+          for you to stay and make any necessary preparations for the conference itself.
+        housing_allergies: Let us know if you have any allergies that we should be
+          made aware of.
+        housing_food: Please let us know your eating habits by selecting the option
+          that best describes the type of food that you eat. We will use this to decide
+          the best types of meals to prepare and how much food we will need.
+        housing_bike: In order for us to get an idea of how many bikes we will need
+          to prepare, please let us know if you would like to borrow a bike from us.
         housing_companion_email: What is your companion's email address?
-        housing_companion_check: Are you coming with a significant other or someone who you absolutely must be housed with? Please note, your companion must also register if you want to be housed together.
-        housing_type: Do you need a place to stay in %{city}? We will do our best to place you with a local host and other vistors that best match your needs.
-        housing_departure_date: When will you be leaving %{city}? If you wish to stay in town longer and need housing or a bike after %{max_date}, please select this date on the calendar below and contact us after you complete your registration. We cannot guarantee that we can accommodate you but we will do our best.
-        housing_arrival_date: When will you be arriving in %{city}? If you will be in town and need housing or a bike before %{min_date}, please select this date on the calendar below and contact us after you complete your registration. We cannot guarantee that we can accommodate you but we will do our best.
-        org_create_mailing_address: Please provide your mailing address so that we can send your organization a personal invite and poster to next year's Bike!Bike!.
-        org_create_email: In order to contact your organization next year, please provide a general email address. We will not send you regular emails, we may email you if there is a conference in your area or to confirm that your organization is still in existance. Please do not provide a personal email address.
-        org_create_address: Please enter the street address of your organization in %{city}, do not enter the state, province, or country. If your organization is not in %{city}, please go back and change your location.
-        org_create_name: What is the name or your organization?
+        housing_companion_check: Are you coming with a significant other or someone
+          who you absolutely must be housed with? Please note, your companion must
+          also register if you want to be housed together.
+        housing_type: Do you need a place to stay in %{city}? We will do our best
+          to place you with a local host and other vistors that best match your needs.
+        housing_departure_date: When will you be leaving %{city}? If you wish to stay
+          in town longer and need housing or a bike after %{max_date}, please select
+          this date on the calendar below and contact us after you complete your registration.
+          We cannot guarantee that we can accommodate you but we will do our best.
+        housing_arrival_date: When will you be arriving in %{city}? If you will be
+          in town and need housing or a bike before %{min_date}, please select this
+          date on the calendar below and contact us after you complete your registration.
+          We cannot guarantee that we can accommodate you but we will do our best.
+        org_create_mailing_address: Please provide the organization's mailing address
+          so that we can send your organization a personal invite and poster for next
+          year's Bike!Bike!.
+        org_create_email: In order to contact your organization next year, please
+          provide a general email address. We will not send you regular emails. We
+          may email you if there is a conference in your area or to confirm that your
+          organization is still in existance. Please do not provide a personal email
+          address.
+        org_create_address: Please enter the street address of your organization in
+          %{city}, do not enter the state, province, or country. If your organization
+          is not in %{city}, please go back and change your location.
+        org_create_name: What is the name of your organization?
         org_location_confirm: Did you mean %{city}?
-        languages: Knowing how many people speak each language will help us to plan translations better for workshops, events, and announcements. If you are bilingual you will also be given access to tools to help translate content and we may ask for additional help if needed, you are under no obligation to volunteer.
+        languages: Knowing how many people speak each language will help us to plan
+          translations better for workshops, events, and announcements. If you are
+          bilingual, you will also be given access to tools to help translate content.
+          We may ask for additional help if needed, but you are under no obligation
+          to volunteer.
         name: How would you like to be addressed at the conference and on this site?
-        org_non_member_interest: Everyone is welcome to attend Bike!Bike! but since most attendees work or volunteer with a bicycle collective, we would like to get a better understanding of what has attracted you to attend this year.
-        org_member: Do you volunteer or work for an organization that puts bicycle education, access, or advocacy above profits? If so we would like to know a few details about it.
+        org_non_member_interest: Everyone is welcome to attend Bike!Bike!. We would
+          like to get a better understanding of what has attracted you to attend this
+          year.
+        org_member: Do you volunteer or work for an organization that puts bicycle
+          education, access, or advocacy above profits? If so we would like to know
+          a few details about it.
         provide_email: Bike!Bike! uses email to communicate between you and your conference
           hosts, however your Facebook account does not provide us an email address.
           Before proceeding, you must provide us an email address.
-        policy: Ensuring that all attendees feel welcome, safe, and respected
-          at all times is especially important to us all. Please ensure that you have
-          fully read and understand our safer spaces policy below, if you have any
-          questions or concerns you can reach out to the organizers at any time.
+        policy: Ensuring that all attendees feel welcome, safe, and respected at all
+          times is especially important to us all. Please ensure that you have fully
+          read and understand our safer spaces policy below. If you have any questions
+          or concerns you can reach out to the organizers at any time.
         Confirm_Agreement: By clicking the "I Agree" button, you are pledging to do
           your best to uphold Bike!Bike!'s safer space agreement. Thank you!
         Registration_Info: Please fill in this registration form to help us prepare
@@ -1854,9 +1947,9 @@ en:
           we did not ask, please fill in the preferences field at the bottom of the
           page or use the contact us link.
         Payment: Thank you for completing your registration. We'll see you at Bike!Bike!
-          Payment is by donation and can be done now or upon arrival but to help us
-          fund the conference, we ask that you pay the registration donation as soon
-          as you can.
+          Payment is by donation and can be done now or upon arrival. To help us fund
+          the conference, we ask that you pay the registration donation as soon as
+          you can. Thank you.
         Payment_Made: You have made a payment of %{fees_paid}.
         Payment_Add: Thank you! You may add to this amount if you wish by making another
           payment below.
@@ -1888,7 +1981,7 @@ en:
           one yourself if you like.
         Contact_Info: Please let us know a little bit about you.
         Create_Workshop: At Bike!Bike! anyone can lead a workshop or just propose
-          and idea that someone else can volunteer to lead. If, where, and when the
+          an idea that someone else can volunteer to lead. If, where, and when the
           workshop will be scheduled will ultimately be decided by the conference
           organizers.
         Workshops_Looking_For_Facilitators: Would you like to lend a hand facilitating
@@ -1904,12 +1997,13 @@ en:
           you when we have news, and lets us better plan by knowing who might be coming.
           Once registration is fully open, we will need to ask a few more questions
           and you can confirm whether or not you will actually be coming.
-        Registration_Details: By completing the registration process you are confirming
-          with us that you are coming, it allows us to contact you when we have news,
-          and lets us better plan by knowing how many people will hosted. Once registered
-          you will be given access to facilitate your own workshop and view details
-          on existing workshops. If you are already registered or have pre-registered,
-          you can use this form sign in and access or update your details.
+        Registration_Details: By completing the registration process, you are confirming
+          with us that you are coming. It allows us to contact you when we have news,
+          and lets us better plan by knowing how many people will be hosted. Once
+          registered you will be given access to facilitate your own workshop and
+          view details on existing workshops. If you are already registered or have
+          pre-registered, you can use this form to sign in and access or update your
+          details.
         Verify_Account: In order to confirm that you are a real person and that we
           will be able to contact you later, please verify your email address. We
           will send you an email that will allow you to continue with the registration
@@ -1917,13 +2011,12 @@ en:
         facebook_sign_in: Alternatively you can sign in using your Facebook account
           and skip waiting for us to send you an email.
         can_provide_housing: Hosting visiting conference attendees is an important
-          part of Bike!Bike!, it allows many people who would not normally be able
-          to afford the cost of accommodations the chance to come to the conference
-          and lets attendees really get to know our city and its residents. You will
-          need to grant access to your home to guests overnight keeping in mind that
-          events can sometimes go late into the evening. If your home will not be
-          accessible during the day you should make sure to clearly communicate this
-          with your guests.
+          part of Bike!Bike!. It allows many people who cannot afford the cost of
+          accommodations the opportunity to come to the conference, and lets attendees
+          really get to know our city and its residents. You will need to grant access
+          to your home to guests overnight keeping in mind that events can sometimes
+          go late into the evening. If your home will not be accessible during the
+          day, you should make sure to clearly communicate this with your guests.
         not_attending: If you are only providing housing and would not like to receive
           further updates about the conference, check this box.
         host:
@@ -1933,23 +2026,29 @@ en:
           availability: The most common arrival and departure dates for attendees
             are the first and last day of the conference but people often arrive earlier
             or later. When will your space be available?
-          considerations: Organizers will do their best to match up hosts and guests,
-            what considerations should organizers keep in mind when selecting guests
+          considerations: Organizers will do their best to match up hosts and guests.
+            What considerations should organizers keep in mind when selecting guests
             to stay in your home?
           notes: Leave a message for organizers to take into consideration when selecting
             guests for your household.
         admin:
           edit:
             info: This is the copy that is displayed on the front page of the site.
-            group_ride: Describe your group ride. This info may be used on the conference description, emails, or on the registration form.
+            group_ride: Describe your group ride. This info may be used on the conference
+              description, emails, or on the registration form.
             housing_info: Describe what visitors should expect for housing this year
-            workshop_info: Describe how workshops will be run this year and what facilitators should expect
+            workshop_info: Describe how workshops will be run this year and what facilitators
+              should expect
             schedule_info: Describe your schedule over the conference
             travel_info: Let visitors know what to expect travelling to your city
-            city_info: Let visitors knw about your city, its culture, climate, crime, and any other details that should know about
-            what_to_bring: List what you expect visitors to bring. Common items include a bike helmet, lock, and eating utensils
-            volunteering_info: Let interested volunteers know how they can volunteer and what tey can do
-            additional_details: Let visitors know any additional information about your conference
+            city_info: Let visitors knw about your city, its culture, climate, crime,
+              and any other details that should know about
+            what_to_bring: List what you expect visitors to bring. Common items include
+              a bike helmet, lock, and eating utensils
+            volunteering_info: Let interested volunteers know how they can volunteer
+              and what tey can do
+            additional_details: Let visitors know any additional information about
+              your conference
           schedule:
             published: Your scheulde is currently published and viewable on the front-page.
               Un-publishing the schedule will remove it from the front-page and show
@@ -1978,7 +2077,7 @@ en:
           smoking: Smoking is permitted
           quiet: Quiet household
           pets: House has dogs or cats
-      can_provide_housing: I can provide housing
+      can_provide_housing: I can provide housing.
       not_attending: I will not be attending the conference
       questions:
         bike:
@@ -2022,12 +2121,11 @@ en:
         is_attending: Attending?
     about_bikebike:
       paragraphs:
-        bicycle_project_paragraph: From collectives that use the bicycle as an excuse
-          to change society, economy and the environment. Non-profit groups that have
-          a community bike shops, cooperatives and other projects that promote the
-          use of the bicycle and that come together to turn their communities into
-          a place where riding is easier, more inclusive, safer and more fun. The
-          list below uses the criteria found in the old Bicycle Organization Organization
+        bicycle_project_paragraph: Community bicycle projects do many different things.
+          Some use bicycles to change society, the economy, or the environment. Some
+          have community bike shops. Some promote bicyle use and making their communities
+          into places where riding is easier, more inclusive, safer, and more fun.
+          The list below uses the criteria found in the old Bicycle Organization Organization
           Project for what constitutes a community bike shop. The bike project need
           not meet all these criteria. Rather, it is a general list of qualities which
           are common among many bicycle projects.
@@ -2035,18 +2133,18 @@ en:
           you just need to be willing to share what you know about organization, mechanics,
           social impact, addressing inequality, and increasing accessibility to cycling
           in your community.
-        Types_of_Workshops: Workshops are organized and run by attendees, they can
+        Types_of_Workshops: Workshops are organized and run by attendees. They can
           be about anything that might concern community bicycle projects and can
           be in any format including presentations, hands-on workshops, discussion
-          groups, and bicycle rides. If you would like to host your own workshop you
-          can enter details after registering. What ends up in the final schedule
+          groups, and bicycle rides. If you would like to host your own workshop,
+          you can enter details after registering. What ends up in the final schedule
           and when they happen are decided on by the conference hosts.
         Amenities: Traditionally conference hosts arrange shared accommodations, one
           to two meals a day, and bicycles will be available for registered attendees.
           However you should check the conference details on the current conference.
-          More information on how you can arrange your own accommodation and other
-          recommended places to visit should also be provided to you by the hosts
-          on the conference page or in hard copy upon arrival.
+          More information on how you can arrange your own accommodation and recommended
+          places to visit should also be provided to you by the hosts on the conference
+          page or upon arrival.
         Volunteer: Yes. Please!
         What_is_BikeBike: Bike!Bike! is an international, annual gathering organized
           by and for community bicycle projects. The conference is a space for participants
@@ -2058,8 +2156,8 @@ en:
         education: Shops that have an educational focus, teaching others how to fix
           bikes
         volunteer_run: 'Shops that are volunteer run '
-        export_bikes: Organizations that ship bikes to communities in other countries.
-        low_cost: Shops that provide free or low-cost services to the community.
+        export_bikes: Organizations that ship bikes to communities in other countries
+        low_cost: Shops that provide free or low-cost services to the community
         no_money: Organizations that recycle bicycles and parts
       headings:
         bicycle_project: What is a community bicycle project?
@@ -2091,14 +2189,18 @@ en:
         notes: Notes
         Workshops: Workshops
         Your_Workshops: Your Workshops
-        Workshops_that_you_would_like_to_attend: Workshops that you would like to attend
+        Workshops_that_you_would_like_to_attend: Workshops that you would like to
+          attend
         facilitate: Request to Facilitate ‘%{workshop_title}’
         add_facilitator: Add a facilitator
         needs_facilitators: Looking for help?
         Comments: Comments
         Schedule: Schedule
       paragraphs:
-        Workshops_that_you_would_like_to_attend: Add workshops to your schedule by pressing the "+1" button beside a workshop. This will help you keep track of the wokshops that you would like to attend and help organizers to create a better schedule.
+        Workshops_that_you_would_like_to_attend: Add workshops to your schedule by
+          pressing the "+1" button beside a workshop. This will help you keep track
+          of the wokshops that you would like to attend and help organizers to create
+          a better schedule.
         Proposed_Workshops: Would you like to facilitate your own workshop? Simply
           register and visit the workshops page. If you have already registered you
           can access the page by restarting the registration process.
@@ -2126,14 +2228,15 @@ en:
         facilitate_request: Please tell the current workshop facilitators who you
           are, why you want to help facilitate the workshop, and how you think you
           will help make the workshop better. All of the current facilitators will
-          be emailed and they may ask more questions before approving or denying your
-          request. Please note that this will reveal your email address to the facilitators.
+          be emailed, and they may ask more questions before approving or denying
+          your request. Please note that this will reveal your email address to the
+          facilitators.
         facilitate_request_sent: Your request has been sent. You will receive an email
           once your request is approved or denied or if the current facilitators have
           any questions.
         languages: What language will the workshop be presented in? Will there be
           translations or translators available?
-        needs: If you need any of the following the conference organizers will do
+        needs: If you need any of the following, the conference organizers will do
           their best to make sure you have them. If you have any other requests, you
           can include them in the notes section.
         needs_facilitators: Are you actively looking for help running this workshop?
