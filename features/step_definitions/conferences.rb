@@ -49,6 +49,12 @@ Given /^the conference accepts paypal$/i do
   TestState.last_conference.save!
 end
 
+Given /^the conference has (.+) copy$/i do |field|
+  copy = Forgery::LoremIpsum.paragraphs(rand(1..4), sentences: rand(1..3), random: true, html: html)
+  TestState.last_conference.send("#{field.gsub(/\s+/, '_')}=", copy)
+  TestState.last_conference.save!
+end
+
 Then /^I am( not)? a member of (.+)$/i do |state, org_name|
   user = nil
   should_be = !(state =~ / not/)

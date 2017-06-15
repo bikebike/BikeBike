@@ -95,7 +95,6 @@ Then /^(?:I )?enter (?:my |an? |some |the )?(.+?)(?: as '(.+)')?$/i do |field, v
   html = false
   if element.tag_name.to_s.downcase == 'div'
     element = element.first('[contenteditable]')
-    html = true
   end
 
   unless value.present?

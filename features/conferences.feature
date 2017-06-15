@@ -55,6 +55,16 @@ Feature: Conferences
     Given there is an upcoming regional conference in 'Yellowknife'
     And a past conference in 'New Orleans'
     And an upcoming conference in 'Brooklyn NY'
+    And the conference has payment message copy
+    And the conference has group ride info copy
+    And the conference has housing info copy
+    And the conference has workshop info copy
+    And the conference has schedule info copy
+    And the conference has travel info copy
+    And the conference has city info copy
+    And the conference has what to bring copy
+    And the conference has volunteering info copy
+    And the conference has additional details copy
     And I am on the conference page
 
     Then I should see 'Brooklyn'
