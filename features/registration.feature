@@ -40,7 +40,7 @@ Feature: Registration
     Then I should see 'Which languages do you speak?'
 
     When I click the 'Next' button
-    Then I should see 'Are you representing a bicycle collective?'
+    Then I should see 'Do you participate in a community bicycle project?'
 
     When I click the 'Yes' button
     Then I should see 'In which city or town is your organization based?'
@@ -162,7 +162,7 @@ Feature: Registration
     Then I should see 'Which languages do you speak?'
 
     When I click the 'Next' button
-    Then I should see 'Are you representing a bicycle collective?'
+    Then I should see 'Do you participate in a community bicycle project?'
 
     When I click the 'Yes' button
     Then I should see 'In which city or town is your organization based?'
@@ -172,7 +172,7 @@ Feature: Registration
     Then I should see 'Did you mean Moncton, New Brunswick, Canada?'
 
     When I click the 'Yes' button
-    Then I should see 'What is the name or your organization?'
+    Then I should see 'What is the name of your organization?'
 
     When I fill in the name with 'Coopérative La Bikery Cooperative'
     And click the 'Next' button
@@ -243,7 +243,7 @@ Feature: Registration
     Then I should see 'Which languages do you speak?'
 
     When I click the 'Next' button
-    Then I should see 'Are you representing a bicycle collective?'
+    Then I should see 'Do you participate in a community bicycle project?'
 
     When I click the 'No' button
     Then I should see 'In which city or town are you based?'
@@ -309,7 +309,7 @@ Feature: Registration
     Then I should see 'Which languages do you speak?'
 
     When I click the 'Next' button
-    Then I should see 'Are you representing a bicycle collective?'
+    Then I should see 'Do you participate in a community bicycle project?'
 
     When I click the 'No' button
     Then I should see 'In which city or town are you based?'
@@ -420,7 +420,7 @@ Feature: Registration
     Then I should see 'Select at least one language'
 
     When I click the 'Next' button
-    Then I should see 'Are you representing a bicycle collective?'
+    Then I should see 'Do you participate in a community bicycle project?'
 
     When I click the 'Yes' button
     Then I should see 'In which city or town is your organization based?'
@@ -438,7 +438,7 @@ Feature: Registration
     Then I should see 'Which organization are you a member of?'
 
     When I click the 'None of the above' button
-    Then I should see 'What is the name or your organization?'
+    Then I should see 'What is the name of your organization?'
 
     When I click the 'Next' button
     Then I should see 'Enter the name of your organization'
@@ -571,7 +571,7 @@ Scenario: Housing providers can enter incorrect data and fix it
     Then I should see 'Which languages do you speak?'
 
     When I click the 'Next' button
-    Then I should see 'Are you representing a bicycle collective?'
+    Then I should see 'Do you participate in a community bicycle project?'
 
     When I click the 'No' button
     Then I should see 'In which city or town are you based?'

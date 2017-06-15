@@ -133,7 +133,7 @@ module RegistrationHelper
                 content_tag(:div, actions.html_safe, class: :buttons).html_safe
               end
 
-    form_tag(register_path(conference.slug), class: @no_ajax ? nil : 'js-xhr') do
+    form_tag(register_path(conference.slug), class: (LinguaFranca.recording? || @no_ajax ? nil : 'js-xhr')) do
       content.html_safe +
       (hidden_field_tag :step, step).html_safe +
       actions.html_safe
