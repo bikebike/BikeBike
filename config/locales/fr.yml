@@ -1542,6 +1542,14 @@ fr:
           future: Congrès à venir
           passed: Congrès passés
         conferences: Congrès nationaux et régionaux
+        travel_info: Se rendre à %{city}
+        city_info: Météo et crime à %{city}
+        schedule_info: Calendrier
+        workshop_info: Présentations et discussions
+        housing_info: Hébergement
+        what_to_bring: Quoi apporter?
+        volunteering_info: Bénévolat
+        payment_message: Inscription
       paragraphs:
         conferences: Les congrès Bike!Bike! sont tenus dans une ville nord-américaine
           différente tous les ans. Les congrès régionaux ont lieu n'importe où et
@@ -1736,6 +1744,7 @@ fr:
         housing_tent: Je voudrais un emplacement pour planter ma tente
         housing_none: Je n’ai pas besoin d’un hébergement
         housing_house: Je désirerais un hébergement
+        'true': true 
       aria:
         remove_interest: Cliquez si la présentation ne vous intéresse plus.
         show_interest: Cliquez si cette présentation vous intéresse.
