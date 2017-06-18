@@ -1098,7 +1098,7 @@ fr:
         WY: Wyoming
         Calif: Californie
     formats:
-      city_region_country: ville, province, pays
+      city_region_country: "%{city}, %{region}, %{country}"
   articles:
     about_bikebike:
       paragraphs:
@@ -1970,11 +1970,11 @@ fr:
     date_span: "%{date_1} au %{date_2}"
     formats:
       span_same_month_date_1: Du %e
-      span_same_month_date_2: "%d %B %Y "
+      span_same_month_date_2: "%e %B %Y"
       weekday: "%A"
-      span_same_year_date_1: "%e %B"
-      span_same_year_date_2: du %d %B au %d %B %Y
-      long: "%d %B %Y"
+      span_same_year_date_1: Du %e %B
+      span_same_year_date_2: "%e %B %Y"
+      long: "%e %B %Y"
   errors:
     messages:
       fields:
