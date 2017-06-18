@@ -1110,7 +1110,7 @@ en:
   date:
     formats:
       default: "%Y-%m-%d"
-      long: "%B %d, %Y"
+      long: "%B %e, %Y"
       short: "%b %d"
       weekday: "%A"
       span_same_month_date_1: "%B %e"
