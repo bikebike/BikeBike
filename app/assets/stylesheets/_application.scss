@@ -530,10 +530,6 @@ button,
 
     #main &[type="submit"] {
         background-color: $colour-5;
-
-        &[value="send"] {
-            background-color: $colour-4;
-        }
     }
 
     &.register {
@@ -551,6 +547,11 @@ button,
     &.delete,
     #main &.delete {
         background-color: $red;
+    }
+
+    &.warning,
+    #main &.warning {
+        background-color: $orange;
     }
 
     &.subdued, #main &.subdued {
@@ -647,7 +648,7 @@ button,
         display: flex;
         text-align: right;
         justify-content: center;
-        flex-wrap: wrap;
+        @include _(flex-wrap, wrap);
 
         button, .button {
             margin: 0.333em;
@@ -2418,8 +2419,9 @@ a.logo {
     margin: 0;
 
     .title {
+        @include _(flex, 1);
         font-size: 5vw;
-        margin: 1em auto 0;
+        margin: 0;
 
         h1, h2 {
             margin: 0;
@@ -2438,6 +2440,19 @@ a.logo {
     img {
         max-width: 100%;
         margin-top: 2em;
+    }
+
+    figure {
+        margin: 0;
+    }
+
+    .register-link {
+        font-size: 1.25em;
+        margin: 0.5em;
+
+        .button {
+            @include _(animation, radiate 2s linear infinite alternate);
+        }
     }
 }
 
@@ -2939,6 +2954,10 @@ body {
 
 @include keyframes(barberpole) {
   to   { background-position: 60px 30px; }
+}
+
+@include keyframes(radiate) {
+  to   { background-color: $green; }
 }
 
 html :focus {
@@ -3608,6 +3627,8 @@ body.policy .policy-agreement ul {
     }
     
     .conference-banner {
+        @include _-(display, flex);
+        @include _(flex-wrap, wrap);
         margin: 0 auto;
         width: 100%;
 

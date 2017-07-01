@@ -12,6 +12,8 @@ else
   port = 8080
 end
 
+timeout 600
+
 working_directory directory
 
 # Listen on unix socket

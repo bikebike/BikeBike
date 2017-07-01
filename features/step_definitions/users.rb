@@ -67,10 +67,8 @@ end
 
 Given /^(?:I )?am an? (.+)$/i do |role|
   if role == 'conference host'
-    org = TestState.last_conference.organizations.first
-    org.users ||= Array.new
-    org.users << TestState.my_account
-    org.save
+    TestState.last_conference.administrators << TestState.my_account
+    TestState.last_conference.save!
   else
     case role
     when /(site )?admin(istrator)?/

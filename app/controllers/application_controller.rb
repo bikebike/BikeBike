@@ -96,26 +96,29 @@ class ApplicationController < BaseController
       logger.info "A JavaScript error has occurred on #{params[:location]}:#{params[:lineNumber]}: #{params[:message]}"
 
       if Rails.env.preview? || Rails.env.production?
-        request_info = {
-          'remote_ip'    => request.remote_ip,
-          'uuid'         => request.uuid,
-          'original_url' => request.original_url,
-          'env'          => Hash.new
-        }
-        request.env.each do |key, value|
-          request_info['env'][key.to_s] = value.to_s
-        end
+        # don't worry about bots
+        unless request.user_agent =~ /Googlebot/
+          request_info = {
+            'remote_ip'    => request.remote_ip,
+            'uuid'         => request.uuid,
+            'original_url' => request.original_url,
+            'env'          => Hash.new
+          }
+          request.env.each do |key, value|
+            request_info['env'][key.to_s] = value.to_s
+          end
 
-        send_mail(:error_report,
-            "A JavaScript error has occurred",
-            report,
-            params[:message],
-            nil,
-            request_info,
-            params,
-            current_user,
-            Time.now.strftime("%d/%m/%Y %H:%M")
-        )
+          send_mail(:error_report,
+              "A JavaScript error has occurred",
+              report,
+              params[:message],
+              nil,
+              request_info,
+              params,
+              current_user,
+              Time.now.strftime("%d/%m/%Y %H:%M")
+          )
+        end
       end
     rescue Exception => exception2
       logger.info exception2.to_s

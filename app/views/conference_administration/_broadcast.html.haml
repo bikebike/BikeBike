@@ -1,23 +1,26 @@
-= columns(medium: 12) do
-  = admin_update_form do
-    - if @broadcast_step == :preview || @broadcast_step == :test
-      = hidden_field_tag :subject, @subject
-      = hidden_field_tag :body, @body
-      = hidden_field_tag :send_to, @send_to
+= admin_update_form do
+  - if @broadcast_step == :preview || @broadcast_step == :test
+    = hidden_field_tag :subject, @subject
+    = hidden_field_tag :body, @body
+    = hidden_field_tag :send_to, @send_to
+    = columns(medium: 12) do
       - if @broadcast_step == :preview
-        %p= _'articles.conference_registration.paragraphs.admin.broadcast.test', vars: { send_to_count: "<strong>#{(@send_to_count || 0)}</strong>".html_safe }
+        %p= (_'articles.conference_registration.paragraphs.admin.broadcast.test', vars: { send_to_count: "<strong>#{(@send_to_count || 0)}</strong>".html_safe }).html_safe
       - else
-        .warning-info.make-room= _'articles.conference_registration.paragraphs.admin.broadcast.preview', vars: { send_to_count: "<strong>#{(@send_to_count || 0)}</strong>".html_safe }
+        .warning-info.make-room=(_'articles.conference_registration.paragraphs.admin.broadcast.preview', vars: { send_to_count: "<strong>#{(@send_to_count || 0)}</strong>".html_safe }).html_safe
+    = columns(medium: 10, push: { medium: 1 }) do
       .test-preview
         %h3=@subject
         = richtext @body, 4
-      .actions.right
-        = button :test, value: :test, class: :secondary if @broadcast_step == :preview
-        = button_with_confirmation :send, (_'modals.admin.broadcast.confirm', vars: { number: "<strong>#{(@send_to_count || 0)}</strong>".html_safe }), value: :send, class: :delete if @broadcast_step == :test
+    = columns(medium: 12) do
+      .actions.center
+        = button :test, value: :test, class: :warning if @broadcast_step == :preview
+        = button_with_confirmation :send, (_'modals.admin.broadcast.confirm', vars: { number: "<strong>#{(@send_to_count || 0)}</strong>".html_safe }).html_safe, value: :send, class: :delete if @broadcast_step == :test
         = button :edit, value: :edit
-    - else
+  - else
+    = columns(medium: 12) do
       = selectfield :send_to, nil, broadcast_options, full: true
       = textfield :subject, @subject, required: true, big: true
       = textarea :body, @body, lang: @this_conference.locale, edit_on: :focus
-      .actions.right
+      .actions.center
         = button :preview, value: :preview

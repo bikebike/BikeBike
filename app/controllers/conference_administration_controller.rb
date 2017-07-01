@@ -1095,7 +1095,7 @@ class ConferenceAdministrationController < ApplicationController
         do_404
       end
 
-      return true
+      return nil
     end
 
     def admin_update_housing
@@ -1155,7 +1155,7 @@ class ConferenceAdministrationController < ApplicationController
             )
         end
         redirect_to administration_step_path(@this_conference.slug, :broadcast_sent)
-        return true
+        return nil
       elsif params[:button] == 'preview'
         @send_to_count = view_context.broadcast_to(@send_to).size
         @broadcast_step = :preview
@@ -1170,7 +1170,7 @@ class ConferenceAdministrationController < ApplicationController
           )
         @send_to_count = view_context.broadcast_to(@send_to).size
       end
-      return false
+      return true
     end
 
     def admin_update_locations

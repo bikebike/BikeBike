@@ -1321,8 +1321,8 @@ en:
         events: Event saved
         workshop_times: Workshop times saved
         schedule: Schedule updated
-        publish_schedule: Your schedule has been published
-        unpublish_schedule: Your schedule has been un-published
+        schedule_published: Your schedule has been published
+        schedule_unpublished: Your schedule has been un-published
         org_member_added: User added to organization
         org_member_removed: User removed from organization
         administrator_added: Administrator added to conference
@@ -1384,7 +1384,7 @@ en:
         back: Back to Administration
       paragraphs:
         administration: From this dashboard you can configure your conference details,
-          open registration, view statictics, compile your workshop scheulde, and
+          open registration, view statistics, compile your workshop schedule, and
           more.
       stats:
         description: On this page you can view a breakdown of the registration process
@@ -1395,7 +1395,7 @@ en:
           donation_count: Number of donations
           donation_total: Total donated
           food:
-            meat: Onmivores
+            meat: Omnivores
             vegetarian: Vegetarians
             vegan: Vegans
           registrations: Number of registrations
@@ -1408,7 +1408,7 @@ en:
         heading: Meals
       events:
         description: On this page you can schedule events. Events are any type of
-          event that isn't a meal or a workshop. You can scheulde group meetings,
+          event that isn't a meal or a workshop. You can schedule group meetings,
           parties, or group ride for example.
         no_locations_warning: Before you can add events, you must first add locations.
         heading: Events
@@ -1440,8 +1440,8 @@ en:
           publish_schedule: Once you have finalized your schedule, make it public
             here.
       housing:
-        description: Arrange housing for registratnts visiting your city. Pair each
-          registratnt who has asked for housing with a registratnt that has volunteered
+        description: Arrange housing for registrants visiting your city. Pair each
+          registrant who has asked for housing with a registrant that has volunteered
           to house guests base on their individual needs and wants.
         heading: Housing
         headings:
@@ -1509,7 +1509,7 @@ en:
           administrators: Administrators and Organizations
           poster: Poster
           Host_Organizations: Host Organizations
-          External_Administrators: External Administrators
+          External_Administrators: Conference Administrators
         description: These are the basic details about your conference that you will
           likely want to configure before enabling your conference. One ready, contact
           the site administrator to make the conference public.
@@ -1519,13 +1519,10 @@ en:
           administrators: Set the conference host organizations and other members
             who have access to these administration tools
           Host_Organizations: Select all organizations from known organizations in
-            %{city_name} that will be helping to host your conference. All members
-            of each organization will be granted access to these administration tools,
-            if you require administrators that are not members of an organization,
-            you can add them below. If an organization is not listed here, please
+            %{city_name}. Members of your organizations do not immediately have access to the administration tools on this site
+            You will also need to add them to to the "Conference Administrators" list above. If an organization is not listed here, please
             contact a site administrator.
-          External_Administrators: Users from outside of organizations in your city
-            can be granted administration privledges here.
+          External_Administrators: Users from witin or outside of the host organizations that have administration privileges on this site.
       copy:
         heading: Site Copy
         description: Copy that is displayed in the front page, the details page, emails,
@@ -1553,7 +1550,7 @@ en:
             rides
           travel_info: Let visitors know how to get to your city and what international
             visitors may need to be prepared for
-          city_info: Describe your city, talk about things like saftey, laws, weather,
+          city_info: Describe your city, talk about things like safety, laws, weather,
             and culture
           what_to_bring: Let visitors know what to bring
           volunteering_info: Let potential volunteers know what they can do and how
@@ -1567,15 +1564,17 @@ en:
           stats: Statistics
           registrations: Modify Registrations
           broadcast: Contact Users
+          broadcast_sent: Message Sent
         description: Open or close registration, view registration statistics, modify
-          information subbmitted by registratnts and contact users.
+          information submitted by registratnts and contact users.
         descriptions:
           registration_status: Open or close registration to your conference.
-          stats: View a breakdown of statictics, how many users have registered, how
+          stats: View a breakdown of statistics, how many users have registered, how
             much money have been collected, etc.
           registrations: View and edit all data collected through the registration
             process.
           broadcast: Send emails to targeted subsets of users.
+          broadcast_sent: Your message has been sent.
       broadcast:
         heading: Broadcast
         description: The broadcast tool is used to contact users through email. You
@@ -1584,12 +1583,12 @@ en:
         description: Your message has been sent.
       workshop_times:
         heading: Workshop Times
-        description: Before you scheulde workshops, you must first create blocks of
+        description: Before you schedule workshops, you must first create blocks of
           time when the workshops will be.
       payment:
         heading: Payment
-        description: If you wish to collect dontaions and registration fees, you will
-          need to confgure your payment details
+        description: If you wish to collect donations and registration fees, you will
+          need to configure your payment details
         headings:
           suggested_amounts: Suggested Payment Amounts
           paypal: PayPal Info
@@ -1601,7 +1600,7 @@ en:
             your organization's PayPal account
     contact:
       headings:
-        contact: Send us a question or a complement
+        contact: Send us a question or a comment
         reason: What are you contacting us about?
         sent: Thank you for contacting us
       paragraphs:
@@ -1657,7 +1656,7 @@ en:
         tent_space_required: Enter the amount of tent space you have to offer
         info_required: Provide your guests with information about you and your home
         policy_required: Read each statement carefully and check the box once to signify
-          that you aggree to uphold the agreement.
+          that you agree to uphold the agreement.
         name_required: Provide us with a name that you identify with
         language_required: Select at least one language that you can speak
         location_required: Enter a location
@@ -1679,7 +1678,7 @@ en:
           again.
       warning:
         payment_pending: Thank you! Your payment is currently pending.
-        companion_unregistered: Your companion has not yet registerred. Please ensure
+        companion_unregistered: Your companion has not yet registered. Please ensure
           that they do to guarantee you are housed together.
       step_names:
         group_ride: Group ride?
@@ -1875,7 +1874,7 @@ en:
         org_select: Please select the organization that you participate in. This information
           will be used to help us contact and invite your organization next year and
           to populate the list of known organizations that will be displayed on bikecollectives.org.
-          If you are involved with multiple oganizations, please select one for now,
+          If you are involved with multiple organizations, please select one for now,
           you will be able to add more organizations at a later date.
         payment_type: If you can, please pay now via PayPal. We collect the registration
           fee as a donation. Your donation pays for spaces, food, equipment, and much
@@ -1899,7 +1898,7 @@ en:
           who you absolutely must be housed with? Please note, your companion must
           also register if you want to be housed together.
         housing_type: Do you need a place to stay in %{city}? We will do our best
-          to place you with a local host and other vistors that best match your needs.
+          to place you with a local host and other visitors that best match your needs.
         housing_departure_date: When will you be leaving %{city}? If you wish to stay
           in town longer and need housing or a bike after %{max_date}, please select
           this date on the calendar below and contact us after you complete your registration.
@@ -1914,7 +1913,7 @@ en:
         org_create_email: In order to contact your organization next year, please
           provide a general email address. We will not send you regular emails. We
           may email you if there is a conference in your area or to confirm that your
-          organization is still in existance. Please do not provide a personal email
+          organization is still in existence. Please do not provide a personal email
           address.
         org_create_address: Please enter the street address of your organization in
           %{city}, do not enter the state, province, or country. If your organization
@@ -2041,16 +2040,16 @@ en:
               should expect
             schedule_info: Describe your schedule over the conference
             travel_info: Let visitors know what to expect travelling to your city
-            city_info: Let visitors knw about your city, its culture, climate, crime,
+            city_info: Let visitors know about your city, its culture, climate, crime,
               and any other details that should know about
             what_to_bring: List what you expect visitors to bring. Common items include
               a bike helmet, lock, and eating utensils
             volunteering_info: Let interested volunteers know how they can volunteer
-              and what tey can do
+              and what they can do
             additional_details: Let visitors know any additional information about
               your conference
           schedule:
-            published: Your scheulde is currently published and viewable on the front-page.
+            published: Your schedule is currently published and viewable on the front-page.
               Un-publishing the schedule will remove it from the front-page and show
               a list of proposed workshops instead.
             un_published: Your schedule is not yet published. Publishing the schedule
@@ -2123,7 +2122,7 @@ en:
       paragraphs:
         bicycle_project_paragraph: Community bicycle projects do many different things.
           Some use bicycles to change society, the economy, or the environment. Some
-          have community bike shops. Some promote bicyle use and making their communities
+          have community bike shops. Some promote bicycle use and making their communities
           into places where riding is easier, more inclusive, safer, and more fun.
           The list below uses the criteria found in the old Bicycle Organization Organization
           Project for what constitutes a community bike shop. The bike project need
