@@ -1110,7 +1110,7 @@ en:
   date:
     formats:
       default: "%Y-%m-%d"
-      long: "%B %d, %Y"
+      long: "%B %e, %Y"
       short: "%b %d"
       weekday: "%A"
       span_same_month_date_1: "%B %e"
@@ -1364,7 +1364,7 @@ en:
         payment_message: Registration
         schedule_info: Schedule
         travel_info: Getting To %{city}
-        city_info: About %{city}
+        city_info: Weather and Crime in %{city}
         what_to_bring: What to Bring
         volunteering_info: Volunteering
         conferences: National and Regional Conferences
@@ -2070,6 +2070,8 @@ en:
           with?
         arrival_and_departure: If you don't need housing, just tell us how long you
           plan to hang out with Bike!Bike!
+        Policy_Agreement: Read each statement carefully and check the box once to
+          signify that you aggree to uphold the agreement.
       host:
         considerations:
           vegan: Vegan or vegetarian only
@@ -2407,6 +2409,7 @@ en:
         schedule_workshop: Schedule
         delete_block: Delete
         update_block: Update
+        'true': true 
       aria:
         remove_interest: Click if you are no longer interested in this workshop
         show_interest: Click if you are interested in this workshop

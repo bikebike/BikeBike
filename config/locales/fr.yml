@@ -1098,7 +1098,7 @@ fr:
         WY: Wyoming
         Calif: Californie
     formats:
-      city_region_country: ville, province, pays
+      city_region_country: "%{city}, %{region}, %{country}"
   articles:
     about_bikebike:
       paragraphs:
@@ -1108,16 +1108,16 @@ fr:
           et des groupes de soutien connexes à se rencontrer pendant quatre jours
           dans une différente ville chaque année afin de participer à des présentations
           et de faire du réseautage.
-        bicycle_project_paragraph: Il y a des collectifs qui utilisent le vélo comme
+        bicycle_project_paragraph: Il y a des associations qui utilisent le vélo comme
           vecteur de changement de la société, de l’économie et de l’environnement.
           Il y a aussi des organismes à but non lucratif, des coopératives et d’autres
           projets qui font la promotion du vélo. Ce sont tous ceux et toutes celles
           qui se rassemblent afin de transformer leur communauté pour que le cyclisme
           devienne plus facile, plus inclusif, plus sécuritaire et plus amusant. La
-          liste de critères pour un projet de vélo est tirée de  l’ancien Bicycle
-          Organization Project. Votre projet n’a pas besoin de satisfaire tous les
-          critères. C’est plutôt une liste générale de caractéristiques communes parmi
-          les projets de vélo.
+          liste de critères pour un projet de vélo est tirée de l’ancien Bicycle Organization
+          Project. Votre projet n’a pas besoin de satisfaire tous les critères. C’est
+          plutôt une liste générale de caractéristiques communes parmi les projets
+          de vélo.
         Who_is_Invited: Vous n’avez pas besoin d’être expert(e) ni d’appartenir à
           un gros organisme. Il vous suffit d’avoir la volonté de partager ce que
           vous savez au sujet de la gestion, de la mécanique, de l’impact social,
@@ -1178,12 +1178,12 @@ fr:
         can_provide_housing: Pouvez-vous loger des participants et des participantes
           qui n’habitent pas à Winnipeg?
         email_confirm: Confirmer le courriel
-        food: Que mangez-vous habituellement?
+        food: Quelles sont vos habitudes alimentaires?
         host:
           address: Adresse
           considerations: Besoins spécifiques
         housing: Vous faut-il un hébergement?
-        hosting: Organisation
+        hosting: Hébergement
         languages: Quelles langues parlez-vous?
         location: D’où venez-vous?
         name: Quel est votre nom?
@@ -1219,7 +1219,7 @@ fr:
         org_create_address: Adresse de l’organisme
         org_create_email: Courriel de l’organisme
         org_select: Avec quel organisme travaillez-vous?
-        org_member: Travaillez-vous auprès d’un collectif ou d’une association?
+        org_member: Travaillez-vous pour un organisme/atelier?
         housing_companion_email: Courriel de la personne hébergée avec vous
         org_create_mailing_address: Adresse postale de l’organisme
         org_create_name: Nom de l’organisme
@@ -1230,6 +1230,7 @@ fr:
         pronoun: Pronom (il/elle/autre option)
         review: Revoir
         your_location: Dans quelle ville êtes-vous basé(e)?
+        payment_type: Mode de paiement des frais
       can_provide_housing: Je peux héberger des gens.
       host:
         considerations:
@@ -1277,12 +1278,12 @@ fr:
             de vous attribuer un hébergement.
         payment_confirm: Vous vous apprêtez à confirmer votre paiement des frais d'inscription
           de %{amount} $.
-        Registration_Details: 'En vous inscrivant, vous confirmerz votre venue, vous
+        Registration_Details: En vous inscrivant, vous confirmez votre venue, vous
           nous autorisez à vous faire suivre des nouvelles, et vous nous aidez à mieux
           planifier l’hébergement. Une fois inscrit(e), vous pourrez enregistrer votre
           présentation et accéder aux détails portant sur d’autres présentations.
           Si vous êtes déjà inscrit(e) ou préinscrit(e), vous pouvez vous connecter
-          à partir de cette page pour accéder à votre compte et en modifier les paramètres. '
+          à partir de cette page pour accéder à votre compte et en modifier les paramètres.
         Registration_Info: 'Veuillez remplir le formulaire d''inscription afin de
           nous aider à préparer votre arrivée à %{city}. Si vous voulez poser des
           questions ou nous donner des renseignements que nous n''avons pas demandés,
@@ -1321,7 +1322,7 @@ fr:
           personnes qui viennent de l'extérieur du Canada pourraient aussi avoir à
           donner votre adresse au moment de passer la frontière.
         hosting_space_tent: "Êtes-vous d’accord pour héberger des invité(e)s dans
-          une tente chez vous?"
+          une tente, dans votre cours?"
         hosting_end_date: Jusqu’à quelle date proposez-vous de l’hébergement?
         hosting_start_date: "À partir de quelle date proposez-vous de l’hébergement?"
         workshops: Vous pouvez désormais visualiser les présentations proposées et
@@ -1333,7 +1334,104 @@ fr:
           vous attendez trop longtemps,votre hébergement et votre bicyclette pourraient
           être attribués à quelqu’un d’autre.
         pronoun_optional: Il n’y a aucune obligation de choisir un pronom.
-        pronoun: ''
+        pronoun: Il importe que lorsqu'on communique avec vous ou au sujet de vous,
+          ce soit avec respect. Si vous ne précisez pas votre pronom, les organisateurs
+          et organisatrices seront libres d'utiliser le pronom qui leur semble correspondre
+          à votre nom ou à votre apparence visuelle.
+        hosting_check: 'Nous cherchons des bénévoles de %{city} pour héberger des
+          gens (lit, sofa, au sol, tente) aux dates suivantes : %{date_span}. Nous
+          vous demanderons votre adresse, votre numéro de téléphone et vos règles
+          de conduite à l’intention des invité(e)s. Nous ferons de notre mieux pour
+          assurer la meilleure compatibilté possible entre vous et vos invité(e)s.'
+        hosting_info: Veuillez indiquer vos règles de conduite et tout autre renseignement
+          pertinent sur votre domicile ou votre quartier. Vos notes ne pourront être
+          vues que par les membres de l’organisation et vos invité(e)s.
+        hosting_other: Veuillez fournir tous les renseignements dont vous voulez qu’on
+          tienne compte au moment de sélectionner vos invité(e)s. Si vous souhaitez
+          héberger des personnes en particulier, si vous avez des animaux de compagnie
+          ou vous pensez qu’autre chose pourrait rendre le séjour de vos invité(e)s
+          difficile, voire impossible, veuillez l’écrire ci-dessous.
+        hosting_phone: Veuillez donner le numéro de téléphone auquel vos invité(e)s
+          pourront vous joindre. Vous pouvez fournir dans vos règles de conduite des
+          informations quant à la façon dont vous voulez être joint(e).
+        hosting_space_beds: Veuillez indiquer le nombre de personnes auxquelles vous
+          pouvez proposer un lit ou un sofa.
+        hosting_space_floor: Veuillez indiquer le nombre de personnes qui peuvent
+          dormir par terre chez vous.
+        housing_bike: Afin de nous aider à préparer le bon nombre de vélos nécessaires,
+          veuillez nous faire savoir si vous avez besoin d’un vélo.
+        housing_companion_email: Quelle est l'adresse courriel de votre conjoint(e)
+          ou ami(e)?
+        housing_companion_check: Allez-vous être accompagné d'un(e) conjoint(e) ou
+          d'une personne avec qui vous devez absolument être hébergé(e)? Veuillez
+          noter que cette personne doit également donner votre nom à l'inscription
+          si vous voulez être hébergé(e)s ensemble.
+        housing_arrival_date: Quand arriverez-vous à %{city}? Si vous êtes en ville
+          et que vous avez besoin d’un hébergement ou d’un vélo avant %{min_date},
+          veuillez sélectionnez vos dates dans le calendrier ci-dessous et nous contacter
+          afin de compléter votre inscription. Nous ne pouvons garantir que nous pourrons
+          vous accommoder, mais nous ferons de notre mieux.
+        housing_departure_date: Quand allez-vous quitter %{city}? Si vous voulez rester
+          plus longtemps et que vous avez besoin d'un hébergement et d'un vélo après
+          %{max_date}, veuillez sélectionner cette date dans le calendrier ci-dessous
+          et nous joindre une fois que vous avez fini de vous inscrire. Nous ne pouvons
+          vous promettre un hébergement, mais nous ferons notre possible pour vous
+          aider.
+        housing_food: Veuillez nous renseigner sur vos habitudes alimentaires en choisissant
+          l'option qui vous correspond le mieux. Cela nous aidera à préparer de meilleurs
+          repas et à prévoir des quantités de nourriture adaptées.
+        housing_other: Avez-vous des besoins spéciaux ou d'autres besoins à prendre
+          en compte, tel que des allergies, des incapacités ou du gardiennage d'enfants?
+          Veuillez le préciser ici afin de nous aider à vous trouver un hébergement
+          adapté et à organiser le congrès.
+        housing_type: Avez-vous besoin d'un hébergement à %{city}? Nous ferons notre
+          possible pour trouver des hébergements adaptés aux besoins de tous et de
+          toutes.
+        name: Comment voulez-vous qu'on s'adresse à vous pendant le congrès et sur
+          ce site?
+        languages: Le fait pour nous de savoir les langues que vous parlez nous aidera
+          à planifier la traduction pendant les présentations, les activités et les
+          annonces. Si vous êtes bilingue, on vous donnera accès à des outils qui
+          vous permettront de nous aider à faire des traductions. Il se peut que nous
+          vous demandions de l'aide supplémentaire, mais vous n'êtes pas obligé(e)
+          d'accepter.
+        payment_form: Veuillez sélectionner un des montants proposés ci-dessous ou
+          indiquer un autre montant.
+        org_non_member_interest: Tout le monde peut participer à Bike!Bike! Pour quelles
+          raisons avez-vous participé cette année?
+        org_location_confirm: Vous voulez dire, %{city}?
+        org_create_name: Quel est le nom de votre organisme ou de votre association?
+        payment_type: Si vous le pouvez, veuillez payer maintenant avec Paypal. L'argent
+          que nous recueillons est considéré comme un don, et nous permet d'offrir
+          des salles, de la nourriture, de l'équipement et bien d'autres choses. Si
+          vous effectuez votre paiement maintenant, cela nous aidera à engager des
+          dépenses pour nos préparatifs sans que nous ayons à débourser de notre poche.
+          Si vous ne payez pas maintenant, veuillez vous engager à payer après votre
+          arrivée. Cela nous aidera à planifier nos dépenses. Merci.
+        policy: Nous pensons tous et toutes qu'il est extrêmement important que tous
+          les participants et participantes se sentent bienvenus, en sécurité et respectés,
+          et ce, en tout temps. Veuillez vous assurer d'avoir bien lu et compris l'Accord
+          d'espace positif ci-dessous. Si vous avez des questions ou des préoccupations,
+          n'hésitez pas à nous joindre.
+        org_create_address: Veuillez indiquer l'adresse postale de votre organisme
+          ou association, mais n'indiquez pas l'état, la province ou le pays. Si l'adresse
+          n'est pas située à %{city}, veuillez revenir en arrière et changer le lieu.
+        org_create_mailing_address: Veuillez fournir l'adresse courriel de votre organisme
+          ou association pour que nous puissions vous envoyer une invitation personnalisée
+          à Bike!Bike! l'année prochaine, ainsi qu'une affiche.
+        org_create_email: Pour que nous puissions joindre votre organisme l'année
+          prochaine, veuillez nous donner une adresse de courriel général. Nous n'envoyons
+          pas de courriel régulièrement. Il se peut qu'on vous écrive s'il y a un
+          congrès dans votre région, ou pour nous assurer que vous êtes toujours en
+          activité. Merci de ne pas donner une adresse de courriel personnelle.
+        org_member: Est-ce que vous faites du bénévolat pour un organisme qui place
+          l'éducation, l'accessibilité et le militantisme avant le profit? Si c'est
+          le cas, nous voudrions vous poser quelques questions.
+        org_select: Veuillez choisir l'organisme pour lequel vous travaillez. Cette
+          information nous aidera à joindre et à inviter votre organisme l'année prochaine
+          et à établir une liste des organismes connus qui seront affichés sur bikecollectives.org.
+          Si vous travaillez pour des organismes différents, veuillez en indiquer
+          un pour le moment; vous pourrez ajouter les autres plus tard.
       questions:
         bike:
           'no': Non
@@ -1349,9 +1447,10 @@ fr:
       actions:
         View_Workshops: Voir présentations
       complete:
-        companion_registered: Votre compagnon a terminé son enrisgistrement.Nous allons
-          faire de notre mieux pour garder ensemble.
+        companion_registered: Votre conjoint(e) ou ami(e) a terminé son enresgistrement.Nous
+          allons faire de notre mieux pour vous garder ensemble.
         payment_processed: Votre paiement est enregistré, merci.
+        registration_complete: Merci. Votre inscription est terminée.
       error:
         address_required: Veuillez entrer une adresse.
         bed_space_required: Entrer le nombre de lit ou d'espace d'hébergement disponible.
@@ -1362,7 +1461,8 @@ fr:
         amount_required: Veuillez entrer un montant.
         city_not_found: Nous ne pouvons pas trouver une ville ou un village qui corresponde
           à votre recherche.
-        companion_already_has_companion: Cette personne a déjà un compagnon.
+        companion_already_has_companion: Cette personne est déjà inscrite avec un(e)
+          conjoint(e) ou ami(e).
         departure_date_before_arrival: Vous avez sélectionné une date de départ qui
           précède votre arrivée.
         end_date_before_start: Vous avez sélectionné une date de début qui précèdevotredate
@@ -1400,12 +1500,17 @@ fr:
         housing_departure_date: Date de départ
         housing_food: Habitudes alimentaires
         name: Nom
-        org_select: Organisme/collectif
+        org_select: Organisme/association
         org_non_member_interest: Motivation pour assister au Congrès
-        org_member: Membre de l’organisation/du collectif
+        org_member: Membre de l’organisation/de l'association
         org_location: Provenance
         languages: Langues parlées
         housing_bike: Vélo?
+        hosting_attending: Participez-vous?
+        hosting_check: Hôte?
+        hosting_space_beds: Espace de lit ou divan
+        hosting_space_floor: Couchage au plancher
+        housing_companion_email: Conjoint(e)/ami(e)
       warning:
         payment_pending: Merci! Votre paiement est en cours.
         companion_unregistered: Votre partenaire ne s’est pas encore inscrit ou inscrite.
@@ -1542,6 +1647,15 @@ fr:
           future: Congrès à venir
           passed: Congrès passés
         conferences: Congrès nationaux et régionaux
+        travel_info: Se rendre à %{city}
+        city_info: Météo et crime à %{city}
+        schedule_info: Calendrier
+        workshop_info: Présentations et discussions
+        housing_info: Hébergement
+        what_to_bring: Quoi apporter?
+        volunteering_info: Bénévolat
+        payment_message: Inscription
+        group_ride_info: Sortie à vélo en groupe
       paragraphs:
         conferences: Les congrès Bike!Bike! sont tenus dans une ville nord-américaine
           différente tous les ans. Les congrès régionaux ont lieu n'importe où et
@@ -1736,6 +1850,7 @@ fr:
         housing_tent: Je voudrais un emplacement pour planter ma tente
         housing_none: Je n’ai pas besoin d’un hébergement
         housing_house: Je désirerais un hébergement
+        'true': true 
       aria:
         remove_interest: Cliquez si la présentation ne vous intéresse plus.
         show_interest: Cliquez si cette présentation vous intéresse.
@@ -1855,10 +1970,11 @@ fr:
     date_span: "%{date_1} au %{date_2}"
     formats:
       span_same_month_date_1: Du %e
-      span_same_month_date_2: "%d %B %Y "
+      span_same_month_date_2: "%e %B %Y"
       weekday: "%A"
-      span_same_year_date_1: "%e %B"
-      span_same_year_date_2: du %d %B au %d %B %Y
+      span_same_year_date_1: Du %e %B
+      span_same_year_date_2: "%e %B %Y"
+      long: "%e %B %Y"
   errors:
     messages:
       fields:
@@ -1883,3 +1999,5 @@ fr:
   page_descriptions:
     home: Bike!Bike! est un congrès pour les associations, les coopératives et les
       ateliers de vélo à but non lucratif.
+  string_formats:
+    data_with_supplementary_value: "%{value} (%{supplementary_value})"

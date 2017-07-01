@@ -1291,6 +1291,15 @@ es:
         types:
           future: Próximas conferencias
           passed: Conferencias aprobadas
+        what_to_bring: "¿Qué traer?"
+        volunteering_info: Voluntariado
+        housing_info: Hospedaje
+        workshop_info: Talleres y Discusiones
+        schedule_info: Calendario
+        travel_info: Cómo llegar a %{city}
+        city_info: Clima y seguridad en %{city}
+        payment_message: Registro
+        group_ride_info: Paseo en Grupo
       paragraphs:
         conferences: Las conferencias de Bike!Bike! se llevan a cabo nacionalmente
           una vez al año en una ciudad diferente en América del Norte; Las conferencias
@@ -1662,6 +1671,7 @@ es:
         companion_registered: Tu acompañante ha completado el registro. Haremos lo
           posible por mantenerlxs juntxs.
         payment_processed: Gracias por tu pago. Haz concluido el registro
+        registration_complete: Gracias, su registro está completo
       error:
         address_required: Ingresa una dirección
         amount_required: Ingresa una cantidad
@@ -1999,6 +2009,7 @@ es:
         reopen_registration: Re-abrir mi registro
         review: Revisar
         'yes': Sí
+        'true': true 
       aria:
         remove_interest: Haga clic si ya no está interesadx en este taller
         show_interest: Haga clic si usted está interesadx en este taller
@@ -2259,3 +2270,5 @@ es:
         other: Otro
         race_gender: Políticas de raza, género o clase
       needs_facilitators: Se necesitan más facilitadorxs
+  string_formats:
+    data_with_supplementary_value: "%{value} (%{supplementary_value})"
