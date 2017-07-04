@@ -1341,6 +1341,7 @@ en:
     no_button: 'No'
     done_button: Close
     info: More Info
+    help: Help
     workshops:
       facilitators:
         confirm_remove: Are you sure you would like to remove %{user_name} as a facilitator
