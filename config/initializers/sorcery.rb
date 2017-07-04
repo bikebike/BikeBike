@@ -8,7 +8,7 @@ require 'openssl'
 
 OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE if Rails.env.development?
 
-Rails.application.config.sorcery.submodules = [:external]
+Rails.application.config.sorcery.submodules = [:external, :remember_me]
 
 # Here you can configure each submodule's features.
 Rails.application.config.sorcery.configure do |config|
@@ -231,7 +231,7 @@ Rails.application.config.sorcery.configure do |config|
     # How long in seconds the session length will be
     # Default: `604800`
     #
-    # user.remember_me_for =
+    user.remember_me_for = 2592000
 
 
     # -- user_activation --
