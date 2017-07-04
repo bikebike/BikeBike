@@ -6,12 +6,12 @@
       %a.button{data: { expands: 'registrations-table' }}='expand'
       %a.button.delete{data: { contracts: 'registrations-table' }}='close'
       %a.button.modify{data: { 'opens-modal': 'new-registration' }}='+'
-    .table-scroller
-      = html_table @excel_data, registrations_table_options
+    .table-scroller#registrations
+      = html_table(@excel_data, registrations_table_options)
     = admin_update_form id: 'new-registration', class: 'modal-edit' do
       .modal-edit-overlay{data: { 'closes-modal': 'new-registration' }}
       .modal-edit-content
         = html_edit_table @excel_data, registrations_edit_table_options
-        .actions.right
-          %a.button.subdued{data: { 'closes-modal': 'new-registration' }}='Cancel'
+        .actions.center
+          %a.button.subdued{data: { 'closes-modal': 'new-registration' }} Cancel
           = button :save, value: :save, class: :modify

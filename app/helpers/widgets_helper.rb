@@ -99,75 +99,86 @@ module WidgetsHelper
   def host_guests_table(registration)
     id = registration.id
     html = ''
+    first_row = true
 
     @housing_data[id][:guests].each do |area, guests|
       guest_rows = ''
-      guests.each do |guest_id, guest|
+      space_size = (@housing_data[id][:space][area] || 0)
+
+      if space_size > 0 || guests.size > 0
+        guests.each do |guest_id, guest|
+          status_html = ''
+
+          @housing_data[id][:guest_data][guest_id][:errors].each do |error, value|
+            if value.is_a?(Array)
+              value.each do |v|
+                status_html += content_tag(:li, _("errors.messages.housing.space.#{error.to_s}", vars: v))
+              end
+            else
+              status_html += content_tag(:li, _("errors.messages.housing.space.#{error.to_s}", vars: value))
+            end
+          end
+
+          @housing_data[id][:guest_data][guest_id][:warnings].each do |error, value|
+            if value.is_a?(Array)
+              value.each do |v|
+                status_html += content_tag(:li, _("warnings.messages.housing.space.#{error.to_s}", v))
+              end
+            else
+              status_html += content_tag(:li, _("warnings.messages.housing.space.#{error.to_s}", vars: value))
+            end
+          end
+
+          if status_html.present?
+            status_html = content_tag(:ul, status_html.html_safe)
+          end
+
+          guest_rows += content_tag :tr, id: "hosted-guest-#{guest_id}" do
+            (content_tag :td, guest[:guest].user.name) +
+            (content_tag :td do
+              (guest[:guest].from + 
+              (content_tag :a, (_'actions.workshops.Remove'), href: '#', class: 'remove-guest', data: { guest: guest_id })).html_safe
+            end) +
+            (content_tag :td, status_html.html_safe, class: [:state, status_html.present? ? :unhappy : :happy])
+          end
+        end
+
+        # add empty rows to represent empty guest spots
+        for i in guests.size...space_size
+          guest_rows += content_tag :tr, class: 'empty-space' do
+            (content_tag :td, '&nbsp'.html_safe, colspan: 2) +
+            (content_tag :td)
+          end
+        end
+
         status_html = ''
-
-        @housing_data[id][:guest_data][guest_id][:errors].each do |error, value|
-          if value.is_a?(Array)
-            value.each do |v|
-              status_html += content_tag(:li, _("errors.messages.housing.space.#{error.to_s}", vars: v))
-            end
-          else
-            status_html += content_tag(:li, _("errors.messages.housing.space.#{error.to_s}", vars: value))
+        if @housing_data[id][:warnings].present? && @housing_data[id][:warnings][:space].present? && @housing_data[id][:warnings][:space][area].present?
+          @housing_data[id][:warnings][:space][area].each do |w|
+            status_html += content_tag(:li, _("warnings.messages.housing.space.#{w.to_s}"))
           end
         end
-
-        @housing_data[id][:guest_data][guest_id][:warnings].each do |error, value|
-          if value.is_a?(Array)
-            value.each do |v|
-              status_html += content_tag(:li, _("warnings.messages.housing.space.#{error.to_s}", v))
-            end
-          else
-            status_html += content_tag(:li, _("warnings.messages.housing.space.#{error.to_s}", vars: value))
-          end
-        end
-
         if status_html.present?
           status_html = content_tag(:ul, status_html.html_safe)
         end
 
-        guest_rows += content_tag :tr, id: "hosted-guest-#{guest_id}" do
-          (content_tag :td, guest[:guest].user.name) +
-          (content_tag :td do
-            (guest[:guest].from + 
-            (content_tag :a, (_'actions.workshops.Remove'), href: '#', class: 'remove-guest', data: { guest: guest_id })).html_safe
-          end) +
-          (content_tag :td, status_html.html_safe, class: [:state, status_html.present? ? :unhappy : :happy])
+        unless first_row
+          html += content_tag :tr, class: :spacer do
+            content_tag :td, '', colspan: 3
+          end
         end
-      end
 
-      space_size = (@housing_data[id][:space][area] || 0)
-
-      # add empty rows to represent empty guest spots
-      for i in guests.size...space_size
-        guest_rows += content_tag :tr, class: 'empty-space' do
-          (content_tag :td, '&nbsp'.html_safe, colspan: 2) +
-          (content_tag :td)
+        html += content_tag :tr do
+          (content_tag :th, (_"forms.labels.generic.#{area}"), colspan: 2) +
+          (content_tag :th, status_html.html_safe, class: [:state, status_html.present? ? :unhappy : :happy])
         end
-      end
-
-      status_html = ''
-      if @housing_data[id][:warnings].present? && @housing_data[id][:warnings][:space].present? && @housing_data[id][:warnings][:space][area].present?
-        @housing_data[id][:warnings][:space][area].each do |w|
-          status_html += content_tag(:li, _("warnings.messages.housing.space.#{w.to_s}"))
+        html += guest_rows
+        html += content_tag :tr, class: 'place-guest' do
+          content_tag :td, class: guests.size >= space_size ? 'full' : nil, colspan: 3 do
+            content_tag :a, (_"forms.actions.generic.place_guest_in.#{area}"), class: 'select-guest button small', href: '#', data: { host: id, space: area }
+          end
         end
-      end
-      if status_html.present?
-        status_html = content_tag(:ul, status_html.html_safe)
-      end
 
-      html += content_tag :tr do
-        (content_tag :th, (_"forms.labels.generic.#{area}"), colspan: 2) +
-        (content_tag :th, status_html.html_safe, class: [:state, status_html.present? ? :unhappy : :happy])
-      end
-      html += guest_rows
-      html += content_tag :tr, class: 'place-guest' do
-        content_tag :td, class: guests.size >= space_size ? 'full' : nil, colspan: 3 do
-          content_tag :a, (_'forms.actions.generic.place_guest'), class: 'select-guest', href: '#', data: { host: id, space: area }
-        end
+        first_row = false
       end
     end
 
@@ -181,21 +192,31 @@ module WidgetsHelper
     id = registration.id
     @housing_data[id][:guests].each do |area, guests|
       max_space = @housing_data[id][:space][area] || 0
-      area_name = (_"forms.labels.generic.#{area}")
-      status_html = ''
-      if @housing_data[id][:warnings].present? && @housing_data[id][:warnings][:space].present? && @housing_data[id][:warnings][:space][area].present?
-        @housing_data[id][:warnings][:space][area].each do |w|
-          status_html += content_tag(:div, _("warnings.housing.space.#{w.to_s}"), class: 'warning')
+
+      # don't include the area if the host doesn't want anyone there
+      if max_space > 0 || guests.size > 0
+        area_name = (_"forms.labels.generic.#{area}")
+        status_html = ''
+        if @housing_data[id][:warnings].present? && @housing_data[id][:warnings][:space].present? && @housing_data[id][:warnings][:space][area].present?
+          @housing_data[id][:warnings][:space][area].each do |w|
+            status_html += content_tag(:div, _("warnings.housing.space.#{w.to_s}"), class: 'warning')
+          end
         end
+        space_html = content_tag(:h5, area_name + _!(" (#{guests.size.to_s}/#{max_space.to_s})") + status_html.html_safe)
+        guest_items = ''
+        guests.each do |guest_id, guest|
+          guest_items += content_tag(:li, guest[:guest].user.name, id: "hosted-guest-#{guest_id}")
+        end
+        space_html += content_tag(:ul, guest_items.html_safe)
+
+        # see if the space is overbooked
+        booked_state = guests.size >= max_space ? (guests.size > max_space ? :overbooked : :booked) : nil
+
+        # let space be overbooked, even bed space can be overbooked if a couple is staying in the bed
+        space_html += button :place_guest, type: :button, value: "#{area}:#{id}", class: [:small, 'place-guest', 'on-top-only', booked_state, max_space > 0 ? nil : :unwanted] 
+
+        html += content_tag(:div, space_html, class: [:space, area, max_space > 0 || guests.size > 0 ? nil : 'on-top-only'])
       end
-      space_html = content_tag(:h5, area_name + _!(" (#{guests.size.to_s}/#{max_space.to_s})") + status_html.html_safe)
-      guest_items = ''
-      guests.each do |guest_id, guest|
-        guest_items += content_tag(:li, guest[:guest].user.name, id: "hosted-guest-#{guest_id}")
-      end
-      space_html += content_tag(:ul, guest_items.html_safe)
-      space_html += button :place_guest, type: :button, value: "#{area}:#{id}", class: [:small, 'place-guest', 'on-top-only', guests.size >= max_space ? (guests.size > max_space ? :overbooked : :booked) : nil, max_space > 0 ? nil : :unwanted] 
-      html += content_tag(:div, space_html, class: [:space, area, max_space > 0 || guests.size > 0 ? nil : 'on-top-only'])
     end
 
     classes << 'status-warning' if @housing_data[id][:warnings].present?
@@ -225,6 +246,16 @@ module WidgetsHelper
     args[:data]['info-text'] = true
     content_tag(:a, args) do
       (link_text.to_s + content_tag(:template, info_text, class: 'message')).html_safe
+    end
+  end
+
+  def link_help_dlg(topic, args = {})
+    @help_dlg ||= true
+    args[:data] ||= {}
+    args[:data]['info-title'] = I18n.t("help.headings.#{topic}")
+    args[:data]['help-text'] = true
+    content_tag(:a, args) do
+      (I18n.t('help.link_text') + content_tag(:template, (render "/help/#{topic}"), class: 'message')).html_safe
     end
   end
 

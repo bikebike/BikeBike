@@ -1,11 +1,20 @@
 .guests-housed
   %h5 Guests Housed:
-  .data="#{@guests_housed} / #{@guests.size}"
+  .data{class: @guests_housed < @guests.size ? :unhappy : :happy }="#{@guests_housed} / #{@guests.size}"
+- if @guests_housed > 0
+  .guests-housed
+    %h5 Unhappy hosts and guests:
+    .data{class: @unhappy_people.size > 0 ? :unhappy : :happy }="#{@unhappy_people.size}"
 
+- first_row = true
 %table.hosts.admin-edit
-  - @hosts.each do | id, registration |
+  - @hosts.each do |id, registration|
+    - unless first_row
+      %tr.spacer
+        %td
     %tr.host
       %th
         .name=registration.user.name
         .address=registration.housing_data['address']
         %td.inner-table{colspan: 2}=host_guests_table(registration)
+    - first_row = false

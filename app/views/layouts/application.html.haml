@@ -61,6 +61,13 @@
             .dlg-inner
               %p.message=''
               %button.close=_'modals.done_button'
+      - if @help_dlg.present?
+        .dlg#help-dlg{data: { nofocus: 1 }}
+          .dlg-content
+            %h2.title=_'modals.help'
+            .dlg-inner
+              .message=''
+              %button.close=_'modals.done_button'
       - if @login_dlg.present?
         .dlg#login-dlg
           .dlg-content

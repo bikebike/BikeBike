@@ -29,6 +29,61 @@ nav.sub-nav {
 }
 
 table, .table {
+    tr.spacer td {
+        border: 0;
+        height: 0.5em;
+    }
+
+    &[data-sort-url] {
+        [data-colname] {
+            position: relative;
+            cursor: pointer;
+            white-space: nowrap;
+
+            @include after {
+                content: 'ꜜ';
+                position: absolute;
+                bottom: -1em;
+                left: 50%;
+                font-size: 1.5em;
+                opacity: 0;
+                z-index: 2;
+                margin-left: -0.25em;
+                pointer-events: none;
+                @include _(transition, opacity 150ms ease-in-out);
+            }
+
+            &:hover {
+                @include after {
+                    opacity: 1;
+                }
+            }
+        }
+
+        [data-dir] {
+            @include after {
+                opacity: 0.5;
+            }
+
+            &:hover {
+                @include after {
+                    content: 'ꜛ';
+                }
+            }
+        }
+        [data-dir="up"] {
+            @include after {
+                content: 'ꜛ';
+            }
+
+            &:hover {
+                @include after {
+                    content: 'ꜜ';
+                }
+            }
+        }
+    }
+
     th, td, .table-th, .table-td {
         &.center {
             text-align: center;
@@ -51,45 +106,50 @@ table, .table {
             width: 1.75em;
 
             &.happy {
-                background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 87.8 73.2'><polygon fill='#{$colour-5}' points='34.3 73.2 0 32.6 18.7 16.8 35.4 36.5 70.1 0 87.8 16.8 '/></svg>");
+                @include after {
+                    content: '\1F601';
+                    opacity: 0.5;
+                }
             }
 
             &.unhappy {
-                background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path xmlns="http://www.w3.org/2000/svg" d="M50 5C25.1 5 5 25.1 5 50c0 24.9 20.1 45 45 45s45-20.1 45-45C95 25.1 74.9 5 50 5zM72.5 64.3l-8.2 8.2L50 58.2 35.7 72.5l-8.2-8.2L41.8 50 27.5 35.7l8.2-8.2L50 41.8l14.3-14.3 8.2 8.2L58.2 50 72.5 64.3z" fill="#{$colour-4}"/></svg>');
+                @include after {
+                    content: '\1F621';
+                }
             }
         }
     }
 
     td, .table-td {
         &.inner-table {
-            padding: 0;
+            padding: 0.5em;
 
             table {
                 margin: 0;
                 width: 100%;
             }
 
-            tr:first-child {
-                td, th {
-                    border-top: 0;
-                }
-            }
+            // tr:first-child {
+            //     td, th {
+            //         border-top: 0;
+            //     }
+            // }
 
-            tr:last-child {
-                td, th {
-                    border-bottom: 0;
-                }
-            }
+            // tr:last-child {
+            //     td, th {
+            //         border-bottom: 0;
+            //     }
+            // }
             
-            td, th {
-                &:first-child {
-                    border-left: 0
-                }
+            // td, th {
+            //     &:first-child {
+            //         border-left: 0
+            //     }
 
-                &:last-child {
-                    border-right: 0
-                }
-            }
+            //     &:last-child {
+            //         border-right: 0
+            //     }
+            // }
         }
 
         &.bold {
@@ -359,6 +419,7 @@ body.expanded-element {
         z-index: 1002;
         background-color: #F8F8F8;
         flex: 1;
+        padding-bottom: 1em;
     }
 
     .actions {
@@ -636,6 +697,12 @@ nav.sub-menu {
     }
 }
 
+#registrations-table {
+    .button { 
+        margin-top: 0;
+    }
+}
+
 #main article #registration-admin-menu {
     margin: 1em 0 0;
     padding: 0;
@@ -745,6 +812,15 @@ nav.sub-menu {
     }
 }
 
+@include keyframes(unhappy) {
+    from {
+        @include _(transform, rotate(15deg));
+    }
+    to {
+        @include _(transform, rotate(-15deg));
+    }
+}
+
 #admin-housing, #admin-schedule {
     .guests-housed {
         margin-bottom: 1em;
@@ -759,11 +835,32 @@ nav.sub-menu {
         .data {
             display: inline-block;
             font-size: 1.125em;
+
+            @include after {
+                margin-left: 0.5em;
+                font-size: 1.5em;
+            }
+
+            &.happy {
+                @include after {
+                    content: '\1F60D';
+                }
+            }
+
+            &.unhappy {
+                @include after {
+                    content: '\1F61E';
+                }
+            }
         }
     }
 
     #housing-table {
         @include _(transition, opacity 1s ease-in-out);
+
+        table {
+            margin-left: 0;
+        }
 
         &.loading {
             @include _(opacity, 0.5);
@@ -780,6 +877,10 @@ nav.sub-menu {
                 text-align: right;
                 @include font-family(primary);
             }
+
+            .name {
+                min-width: 10em;
+            }
         }
     }
 
@@ -788,28 +889,17 @@ nav.sub-menu {
             td {
                 background-color: lighten($colour-1, 40%);
 
-                &:hover {
-                    background-color: $colour-1;
-                }
-
                 &.full {
                     background-color: $gray;
 
-                    &:hover {
-                        background-color: #CCC;
-                    }                   
+                    .button {
+                        background-color: #888;
+                    }
                 }
             }
 
-            a {
-                display: block;
-                color: $white;
-                text-align: center;
-                @include font-family(secondary);
-
-                @include after {
-                    display: none;
-                }
+            .button {
+                display: inline-block;
             }
         }
 
@@ -819,15 +909,31 @@ nav.sub-menu {
         }
 
         td {
-            vertical-align: top;
+            vertical-align: middle;
         }
 
         .state {
             position: relative;
             font-family: inherit;
+            padding: 0;
+            position: relative;
+            width: 2em;
+            height: 2em;
+
+            @include after {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                font-size: 1.5em;
+            }
 
             &.unhappy {
                 cursor: pointer;
+
+                @include after {
+                    @include _(transform-origin, bottom);
+                    @include _(animation, unhappy ease-in-out 1s infinite alternate both);
+                }
             }
 
             ul {
@@ -837,7 +943,7 @@ nav.sub-menu {
                 top: 0;
                 background-color: $white;
                 border: 0.1em solid #CCC;
-                padding: 0.25em 0.75em 0.25em 1.5em;
+                padding: 0.25em 0.75em;
                 margin: 0;
                 list-style-type: square;
                 @include default-box-shadow(top, 2);
@@ -846,7 +952,12 @@ nav.sub-menu {
 
             li {
                 white-space: nowrap;
-                margin: 0;
+                margin: 0 0 0 1em;
+
+                &:first-child:last-child {
+                    list-style: none;
+                    margin: 0;
+                }
             }
 
             &:hover {
@@ -893,25 +1004,71 @@ nav.sub-menu {
             background-color: $white;
             width: 80%;
             margin: auto;
-            padding: 1em;
             height: 80%;
             cursor: default;
             @include default-box-shadow(top, 2);
 
             h3 {
+                text-align: center;
                 margin: 0 0 1em;
+                padding: 0.5em 0.6667em;
+                color: $white;
+                background-color: $green;
+                @include _(text-stroke, 1px rgba(0, 0, 0, 0.25));
             }
         }
     }
 }
 
+.table-scroller.no-edit {
+    box-shadow: none;
+    background-color: transparent;
+
+    table {
+        margin-bottom: 0;
+    }
+}
+
+#table, #help-dlg {
+    .legend ul {
+        @include _-(display, flex);
+        list-style: none;
+        padding: 0;
+
+        li {
+            @include _(flex, 1);
+            text-align: center;
+            margin-bottom: 0.5em;
+            padding: 0.125em 0.5em;
+            margin: 0.1em;
+            border: 0.1em solid $light-gray;
+            background-color: #F8F8F8;
+            @include font-family(secondary);
+
+            &.other-host, &.other-space, &.bad-match {
+                opacity: 0.5;
+            }
+
+            &.selected-space, &.other-space {
+                background-color: $colour-5;
+            }
+
+            &.other-host {
+                background-color: $colour-1;
+            }
+        }
+    }
+}
 
 #table {
+    display: flex;
+    flex-direction: column;
     position: relative;
     overflow: auto;
     height: 80%;
-    height: calc(100% - 4em);
+    height: calc(100% - 6.5em);
     background-color: $white;
+    margin: 1em;
     @include _(transition, background-color 250ms ease-in-out);
 
     &.loading {
@@ -924,7 +1081,7 @@ nav.sub-menu {
     }
 
     table {
-        margin: 0 0 2em;
+        margin: 0 0 1em;
     }
 
     h4 {
@@ -992,45 +1149,27 @@ nav.sub-menu {
         }
     }
 
-    .legend ul {
-        @include _-(display, flex);
-        list-style: none;
-        padding: 0;
-
-        li {
-            @include _(flex, 1);
-            text-align: center;
-            margin-bottom: 0.5em;
-            padding: 0.125em 0.5em;
-            margin: 0.1em;
-            border: 0.1em solid $light-gray;
-            background-color: #F8F8F8;
-            @include font-family(secondary);
-
-            &.other-host, &.other-space, &.bad-match {
-                opacity: 0.5;
-            }
-
-            &.selected-space, &.other-space {
-                background-color: $colour-5;
-            }
-
-            &.other-host {
-                background-color: $colour-1;
-            }
-        }
-    }
-
     .p {
         max-height: 4em;
         overflow: auto;
     }
+
+    .guest-table {
+        flex: 1;
+        display: flex;
+    }
+
+    td, th {
+        white-space: nowrap;
+
+        &.break-ok {
+            white-space: normal;
+            min-width: 10em;
+        }
+    }
 }
 
 #admin-housing {
-    #table table {
-        min-width: 100em;
-    }
 
     #hosts {
         background-color: $white;

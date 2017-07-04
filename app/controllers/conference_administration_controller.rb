@@ -1,7 +1,10 @@
 require 'geocoder/calculations'
 require 'rest_client'
+require 'registration_controller_helper'
 
 class ConferenceAdministrationController < ApplicationController
+  include RegistrationControllerHelper
+
   def administration
     set_conference
     return do_403 unless @this_conference.host? current_user
@@ -224,6 +227,47 @@ class ConferenceAdministrationController < ApplicationController
         return respond_to do |format|
           format.xlsx { render xlsx: '../conferences/stats', filename: "stats-#{DateTime.now.strftime('%Y-%m-%d')}" }
         end
+      else
+        if params[:sort_column]
+          col = params[:sort_column].to_sym
+          @excel_data[:data].sort_by! do |row|
+            value = row[col]
+
+            if row[:raw_values].key?(col)
+              value = if row[:raw_values][col].is_a?(TrueClass)
+                        't'
+                      elsif row[:raw_values][col].is_a?(FalseClass)
+                        ''
+                      else
+                        row[:raw_values][col]
+                      end
+            elsif value.is_a?(City)
+              value = value.sortable_string
+            end
+
+            if value.nil?
+              case @excel_data[:column_types][col]
+              when :datetime, [:date, :day]
+                value = Date.new
+              when :money
+                value = 0
+              else
+                value = ''
+              end
+            end
+
+            value
+          end
+
+          if params[:sort_dir] == 'up'
+            @sort_dir = :up
+            @excel_data[:data].reverse!
+          end
+
+          @sort_column = col
+        else
+          @sort_column = :name
+        end
       end
 
       @registration_count = @registrations.size
@@ -248,6 +292,10 @@ class ConferenceAdministrationController < ApplicationController
             @donations += r.registration_fees_paid
           end
         end
+      end
+
+      if request.xhr?
+        render html: view_context.html_table(@excel_data, view_context.registrations_table_options)
       end
     end
 
@@ -372,6 +420,7 @@ class ConferenceAdministrationController < ApplicationController
         return respond_to do |format|
           format.xlsx { render xlsx: '../conferences/stats', filename: "housing" }
         end
+      else
       end
     end
 
@@ -428,16 +477,21 @@ class ConferenceAdministrationController < ApplicationController
         columns: [
             :name,
             :email,
+            :date,
             :status,
             :is_attending,
             :is_subscribed,
             :registration_fees_paid,
-            :date,
+            :payment_currency,
+            :payment_method,
             :city,
             :preferred_language
           ] +
           User.AVAILABLE_LANGUAGES.map { |l| "language_#{l}".to_sym } +
-          [ 
+          [
+            :group_ride,
+            :organization,
+            :org_non_member_interest,
             :arrival,
             :departure,
             :housing,
@@ -451,8 +505,7 @@ class ConferenceAdministrationController < ApplicationController
             :last_day,
             :address,
             :phone
-          ] + ConferenceRegistration.all_spaces +
-          ConferenceRegistration.all_considerations + [
+          ] + ConferenceRegistration.all_spaces + [
             :notes
           ],
         column_types: {
@@ -460,6 +513,7 @@ class ConferenceAdministrationController < ApplicationController
             date: :datetime,
             email: :email,
             companion_email: :email,
+            org_non_member_interest: :text,
             arrival: [:date, :day],
             departure: [:date, :day],
             registration_fees_paid: :money,
@@ -476,6 +530,9 @@ class ConferenceAdministrationController < ApplicationController
             is_subscribed: 'articles.user_settings.headings.email_subscribe',
             city: 'forms.labels.generic.event_location',
             date: 'articles.conference_registration.terms.Date',
+            group_ride: 'articles.conference_registration.step_names.group_ride',
+            organization: 'articles.conference_registration.step_names.org_select',
+            org_non_member_interest: 'articles.conference_registration.step_names.org_non_member_interest',
             preferred_language: 'articles.conference_registration.terms.Preferred_Languages',
             arrival: 'forms.labels.generic.arrival',
             departure: 'forms.labels.generic.departure',
@@ -485,13 +542,15 @@ class ConferenceAdministrationController < ApplicationController
             companion: 'articles.conference_registration.terms.companion',
             companion_email: 'articles.conference_registration.terms.companion_email',
             registration_fees_paid: 'articles.conference_registration.headings.fees_paid',
+            payment_currency: 'forms.labels.generic.payment_currency',
+            payment_method: 'forms.labels.generic.payment_method',
             other: 'forms.labels.generic.other_notes',
-            can_provide_housing: 'articles.conference_registration.can_provide_housing',
+            can_provide_housing: 'articles.conference_registration.housing_provider',
             first_day: 'forms.labels.generic.first_day',
             last_day: 'forms.labels.generic.last_day',
             notes: 'forms.labels.generic.notes',
             phone: 'forms.labels.generic.phone',
-            address: 'forms.labels.generic.address',
+            address: 'forms.labels.generic.address_short',
             contact_info: 'articles.conference_registration.headings.contact_info',
             questions: 'articles.conference_registration.headings.questions',
             hosting: 'articles.conference_registration.headings.hosting'
@@ -504,7 +563,7 @@ class ConferenceAdministrationController < ApplicationController
       end
 
       User.AVAILABLE_LANGUAGES.each do |l|
-        @excel_data[:keys]["language_#{l}".to_sym] = "languages.#{l.to_s}" 
+        @excel_data[:keys]["language_#{l}".to_sym] = "languages.#{l.to_s}"
       end
       ConferenceRegistration.all_spaces.each do |s|
         @excel_data[:column_types][s] = :number
@@ -517,41 +576,51 @@ class ConferenceAdministrationController < ApplicationController
         user = r.user_id ? User.where(id: r.user_id).first : nil
         if user.present?
           companion = view_context.companion(r)
-          companion = companion.is_a?(User) ? companion.name : (view_context._"articles.conference_registration.terms.registration_status.#{companion}") if companion.present?
+          companion = companion.is_a?(User) ? companion.name : I18n.t("articles.conference_registration.terms.registration_status.#{companion}") if companion.present?
           steps = r.steps_completed || []
 
           if id.nil? || id == r.id
+            registration_data = r.data || {}
             housing_data = r.housing_data || {}
             availability = housing_data['availability'] || []
             availability[0] = Date.parse(availability[0]) if availability[0].present?
             availability[1] = Date.parse(availability[1]) if availability[1].present?
+            org = r.user.organizations.first
 
             data = {
               id: r.id,
               name: user.firstname || '',
               email: user.email || '',
-              status: (view_context._"articles.conference_registration.terms.registration_status.#{view_context.registration_status(r)}"),
-              is_attending: (view_context._"articles.conference_registration.questions.bike.#{r.is_attending == 'n' ? 'no' : 'yes'}"),
-              is_subscribed: user.is_subscribed == false ? (view_context._'articles.conference_registration.questions.bike.no') : '',
+              status: I18n.t("articles.conference_registration.terms.registration_status.#{view_context.registration_status(r)}"),
+              is_attending: I18n.t("articles.conference_registration.questions.bike.#{r.is_attending == 'n' ? 'no' : 'yes'}"),
+              is_subscribed: user.is_subscribed == false ? I18n.t('articles.conference_registration.questions.bike.no') : '',
               date: r.created_at ? r.created_at.strftime("%F %T") : '',
               city: r.city || '',
               preferred_language: user.locale.present? ? (view_context.language_name user.locale) : '',
               arrival: r.arrival ? r.arrival.strftime("%F %T") : '',
               departure: r.departure ? r.departure.strftime("%F %T") : '',
-              housing: r.housing.present? ? (view_context._"articles.conference_registration.questions.housing.#{r.housing}") : '',
-              bike: r.bike.present? ? (view_context._"articles.conference_registration.questions.bike.#{r.bike}") : '',
-              food: r.food.present? ? (view_context._"articles.conference_registration.questions.food.#{r.food}") : '',
+              group_ride: registration_data['group_ride'].present? ? I18n.t("forms.actions.generic.#{registration_data['group_ride']}") : '',
+              organization: org.present? ? org.name : '',
+              org_non_member_interest: registration_data['non_member_interest'],
+              housing: r.housing.present? ? I18n.t("articles.conference_registration.questions.housing_short.#{r.housing}") : '',
+              bike: r.bike.present? ? I18n.t("articles.conference_registration.questions.bike.#{r.bike}") : '',
+              food: r.food.present? ? I18n.t("articles.conference_registration.questions.food.#{r.food}") : '',
               companion: companion,
               companion_email: (housing_data['companion'] || { 'email' => ''})['email'],
-              registration_fees_paid: r.registration_fees_paid,
-              other: r.allergies.present? ? "#{r.allergies}\n\n#{r.other}" : r.other,
-              can_provide_housing: r.can_provide_housing ? (view_context._'articles.conference_registration.questions.bike.yes') : '',
+              registration_fees_paid: registration_data['payment_amount'],
+              payment_currency: registration_data['payment_currency'],
+              payment_method: registration_data['payment_method'].present? ? I18n.t("forms.labels.generic.payment_type.#{registration_data['payment_method']}") : '',
+              other: [r.allergies, r.other, housing_data['other']].compact.join("\n\n"),
+              can_provide_housing: r.can_provide_housing.nil? ? '' : I18n.t("articles.conference_registration.questions.bike.#{r.can_provide_housing ? 'yes' : 'no'}"),
               first_day: availability[0].present? ? availability[0].strftime("%F %T") : '',
               last_day: availability[1].present? ? availability[1].strftime("%F %T") : '',
               notes: housing_data['notes'],
               address: housing_data['address'],
               phone: housing_data['phone'],
               raw_values: {
+                group_ride: registration_data['group_ride'],
+                registration_fees_paid: registration_data['payment_amount'].to_f,
+                payment_method: registration_data['payment_method'],
                 housing: r.housing,
                 bike: r.bike,
                 food: r.food,
@@ -560,12 +629,13 @@ class ConferenceAdministrationController < ApplicationController
                 preferred_language: user.locale,
                 is_attending: r.is_attending != 'n',
                 is_subscribed: user.is_subscribed,
-                can_provide_housing: r.can_provide_housing,
+                can_provide_housing: r.can_provide_housing.to_s,
                 first_day: availability[0].present? ? availability[0].to_date : nil,
                 last_day: availability[1].present? ? availability[1].to_date : nil
               },
               html_values: {
                 date: r.created_at.present? ? r.created_at.strftime("%F %T") : '',
+                registration_fees_paid: registration_data['payment_amount'].present? ? view_context.number_to_currency(registration_data['payment_amount'].to_f, unit: '$') : '',
                 arrival: r.arrival.present? ? view_context.date(r.arrival.to_date, :span_same_year_date_1) : '',
                 departure: r.departure.present? ? view_context.date(r.departure.to_date, :span_same_year_date_1) : '',
                 first_day: availability[0].present? ? view_context.date(availability[0].to_date, :span_same_year_date_1) : '',
@@ -574,17 +644,13 @@ class ConferenceAdministrationController < ApplicationController
             }
             User.AVAILABLE_LANGUAGES.each do |l|
               can_speak = ((user.languages || []).include? l.to_s)
-              data["language_#{l}".to_sym] = (can_speak ? (view_context._'articles.conference_registration.questions.bike.yes') : '')
+              data["language_#{l}".to_sym] = (can_speak ? I18n.t('articles.conference_registration.questions.bike.yes') : '')
               data[:raw_values]["language_#{l}".to_sym] = can_speak
             end
             ConferenceRegistration.all_spaces.each do |s|
               space = (housing_data['space'] || {})[s.to_s]
               data[s] = space.present? ? space.to_i : nil
-            end
-            ConferenceRegistration.all_considerations.each do |c|
-              consideration = (housing_data['considerations'] || []).include?(c.to_s)
-              data[c] = (consideration ? (view_context._'articles.conference_registration.questions.bike.yes') : '')
-              data[:raw_values][c] = consideration
+              data[:raw_values][s] = space.present? ? space.to_i : 0
             end
             @excel_data[:data] << data
           end
@@ -593,18 +659,18 @@ class ConferenceAdministrationController < ApplicationController
 
       if html_format
         yes_no = [
-              [(view_context._"articles.conference_registration.questions.bike.yes"), true],
-              [(view_context._"articles.conference_registration.questions.bike.no"), false]
+              [I18n.t('forms.actions.generic.yes'), true],
+              [I18n.t('forms.actions.generic.no'), false]
             ]
         @column_options = {
           housing: ConferenceRegistration.all_housing_options.map { |h| [
-            (view_context._"articles.conference_registration.questions.housing.#{h}"),
+            I18n.t("articles.conference_registration.questions.housing_short.#{h}"),
             h] },
           bike: ConferenceRegistration.all_bike_options.map { |b| [
-            (view_context._"articles.conference_registration.questions.bike.#{b}"),
+            I18n.t("articles.conference_registration.questions.bike.#{b}"),
             b] },
           food: ConferenceRegistration.all_food_options.map { |f| [
-            (view_context._"articles.conference_registration.questions.food.#{f}"),
+            I18n.t("articles.conference_registration.questions.food.#{f}"),
             f] },
           arrival: view_context.conference_days_options_list(:before_plus_one),
           departure: view_context.conference_days_options_list(:after_minus_one),
@@ -615,16 +681,19 @@ class ConferenceAdministrationController < ApplicationController
           is_subscribed: [yes_no.last],
           can_provide_housing: yes_no,
           first_day: view_context.conference_days_options_list(:before),
-          last_day: view_context.conference_days_options_list(:after)
+          last_day: view_context.conference_days_options_list(:after),
+          group_ride: [:yes, :no, :maybe].map { |o| [I18n.t("forms.actions.generic.#{o}"), o] },
+          payment_currency: Conference.default_currencies.map { |c| [c, c] },
+          payment_method: ConferenceRegistration.all_payment_methods.map { |c| [I18n.t("forms.labels.generic.payment_type.#{c}"), c] }
         }
         User.AVAILABLE_LANGUAGES.each do |l|
           @column_options["language_#{l}".to_sym] = [
-              [(view_context._"articles.conference_registration.questions.bike.yes"), true]
+              [I18n.t("articles.conference_registration.questions.bike.yes"), true]
             ]
         end
         ConferenceRegistration.all_considerations.each do |c|
           @column_options[c.to_sym] = [
-              [(view_context._"articles.conference_registration.questions.bike.yes"), true]
+              [I18n.t("articles.conference_registration.questions.bike.yes"), true]
             ]
         end
       end
@@ -633,7 +702,7 @@ class ConferenceAdministrationController < ApplicationController
     def get_housing_data
       @hosts = {}
       @guests = {}
-      ConferenceRegistration.where(:conference_id => @this_conference.id).each do |registration|
+      ConferenceRegistration.where(conference_id: @this_conference.id).each do |registration|
         if registration.can_provide_housing
           @hosts[registration.id] = registration
         elsif registration.housing.present? && registration.housing != 'none'
@@ -657,6 +726,7 @@ class ConferenceAdministrationController < ApplicationController
           @housing_data[id][:space][s.to_sym] = size
         end
       end
+      @unhappy_people = Set.new
       
       @guests_housed = 0
 
@@ -691,7 +761,7 @@ class ConferenceAdministrationController < ApplicationController
 
             if (guest.housing == 'house' && space == :tent) ||
               (guest.housing == 'tent' && (space == :bed_space || space == :floor_space))
-              @housing_data[host_id][:guest_data][guest_id][:warnings][:space] = { actual: (view_context._"forms.labels.generic.#{space.to_s}"), expected: (view_context._"articles.conference_registration.questions.housing.#{guest.housing}")}
+              @housing_data[host_id][:guest_data][guest_id][:warnings][:space] = { actual: (view_context._"forms.labels.generic.#{space.to_s}"), expected: (view_context._"articles.conference_registration.questions.housing_short.#{guest.housing}")}
             end
 
             if data['companion'].present?
@@ -717,6 +787,7 @@ class ConferenceAdministrationController < ApplicationController
                 end
               end
             end
+            @unhappy_people << guest_id if @housing_data[host_id][:guest_data][guest_id][:errors].present? || @housing_data[host_id][:guest_data][guest_id][:warnings].present?
           else
             # make sure the housing data is empty if the host wasn't found, just in case something happened to the host
             @guests[guest_id].housing_data ||= {}
@@ -739,6 +810,7 @@ class ConferenceAdministrationController < ApplicationController
 
           if @housing_data[id][:guests][space].size > space_available
             @housing_data[id][:warnings][:space][space] << :overbooked
+            @unhappy_people << id
           end
         end
       end
@@ -1021,12 +1093,22 @@ class ConferenceAdministrationController < ApplicationController
                 registration.city_id = city.id
               end
             end
-          when :housing, :bike, :food, :allergies, :other
-            registration.send("#{key.to_s}=", value)
+          when :housing, :bike, :food
+            registration.send("#{key}=", value)
+          when :other
+            registration.housing_data ||= {}
+            registration.housing_data[key] = value
+            # delete deprecated values
+            registration.allergies = nil
+            registration.other = nil
           when :registration_fees_paid
-            registration.registration_fees_paid = value.to_i
+            registration.data ||= {}
+            registration.data['payment_amount'] = value.to_f
+          when :group_ride, :payment_currency, :payment_method
+            registration.data ||= {}
+            registration.data[key.to_s] = value.present? ? value.to_sym : nil
           when :can_provide_housing
-            registration.send("#{key.to_s}=", value.present?)
+            registration.send("#{key.to_s}=", value == 'true' ? true : (value == 'false' ? false : nil))
           when :arrival, :departure
             registration.send("#{key.to_s}=", value.present? ? Date.parse(value) : nil)
           when :companion_email

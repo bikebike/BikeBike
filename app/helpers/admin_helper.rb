@@ -160,21 +160,6 @@ module AdminHelper
       end
     end
 
-    # housing_data = guest.housing_data || []
-    
-    # if housing_data['host'].present?
-    #   if housing_data['host'] == host.id
-    #     return space == housing_data['space'] ? :selected_space : :other_space
-    #   end
-
-    #   return :other_host
-    # end
-
-    # if space_matches?(space, guest.housing) && available_dates_match?(host, guest)
-    #   return :good_match
-    # end
-
-    # return :bad_match
     return :good_match
   end
 
@@ -190,6 +175,7 @@ module AdminHelper
 
   def available_dates_match?(host, guest)
     return false unless host.housing_data['availability'].present? && host.housing_data['availability'][1].present?
+    return false unless guest.arrival.present? && guest.departure.present?
     if host.housing_data['availability'][0] <= guest.arrival &&
       host.housing_data['availability'][1] >= guest.departure
       return true
@@ -207,5 +193,11 @@ module AdminHelper
         end).html_safe
       end).html_safe
     end).html_safe
+  end
+
+  def admin_help_pages
+    return {
+      housing: :housing
+    }
   end
 end

@@ -74,7 +74,7 @@ module GeocoderHelper
     return nil unless city.present?
 
     hash = Hash.new
-    region_translation = region.present? && country.present? ? _("geography.subregions.#{country}.#{region}", locale: locale) : ''
+    region_translation = region.present? && country.present? ? I18n.t("geography.subregions.#{country}.#{region}", locale: locale, resolve: false) : ''
     country_translation = country.present? ? _("geography.countries.#{country}", locale: locale) : ''
     hash[:city] = _!(city) if city.present?
     hash[:region] = region_translation if region_translation.present?

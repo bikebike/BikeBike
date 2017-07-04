@@ -40,7 +40,9 @@
             dlg.removeAttribute('aria-hidden');
             dlg.setAttribute('role', 'alertdialog');
             dlg.setAttribute('tabindex', '0');
-            dlg.focus();
+            if (!dlg.getAttribute('data-nofocus')) {
+                dlg.focus();
+            }
             setTimeout(function() { dlg.classList.add('open'); }, 100);
         }
         window.closeOverlay = function(dlg, primaryContent, body) {
@@ -111,6 +113,14 @@
             link.addEventListener('click', function(event) {
                 event.preventDefault();
                 openDlg(infoDlg, link);
+                return false;
+            });
+        });
+        var helpDlg = document.getElementById('help-dlg');
+        forEachElement('[data-help-text]', function(link) {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                openDlg(helpDlg, link);
                 return false;
             });
         });

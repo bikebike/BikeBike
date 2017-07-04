@@ -1,50 +1,54 @@
-= hidden_field_tag :host, host.id
-.host-field
-  %h4.inline=_'forms.labels.generic.name'
-  %span.plain-value= host.user.name
-.host-field
-  %h4.inline=_'articles.conference_registration.headings.host.availability'
-  %span.plain-value= host.housing_data['availability'].present? && host.housing_data['availability'][1].present? ? date_span(host.housing_data['availability'][0].to_date, host.housing_data['availability'][1].to_date) : ''
-- if host.housing_data['considerations'].present?
-  .host-field
-    %h4.inline=_'articles.conference_registration.headings.host.considerations'
-    %span.plain-value= (host.housing_data['considerations'].map { | consideration | _"articles.conference_registration.host.considerations.#{consideration}" }).join(', ')
-- if sanitize(host.housing_data['notes'], tags: []).present?
-  .host-field
-    %h4=_'articles.conference_registration.headings.host.notes'
-    %blockquote= host.housing_data['notes'].html_safe
-%table.guests.admin-edit
-  %tr
-    %th.corner
-    %th=_'forms.labels.generic.organization'
-    %th=_'forms.labels.generic.city'
-    %th=_'forms.labels.generic.housing'
-    %th=_'articles.admin.housing.headings.arrival_departure'
-    %th=_'articles.conference_registration.headings.companion'
-    %th=_'forms.labels.generic.food'
-    %th=_'forms.labels.generic.other'
-  - @guests.each do | id, registration |
-    %tr.selectable{class: get_housing_match(host, registration, space).to_s.gsub('_', '-'), data: {host: host.id, guest: id, space: space}}
-      %th=registration.user.name
-      %td
-        - if registration.user.organizations.present?
-          = registration.user.organizations.first.name
-        - else
-          %em None
-      %td=registration.city
-      %td=registration.housing.present? ? (_"articles.conference_registration.questions.housing.#{registration.housing}") : ''
-      %td=date_span(registration.arrival.to_date, registration.departure.to_date)
-      - companion = companion(registration)
-      %td=companion.present? ? (companion.is_a?(User) ? companion.named_email : (_"articles.conference_registration.terms.registration_status.#{companion}")) : ''
-      %td=registration.food.present? ? (_"articles.conference_registration.questions.food.#{registration.food}") : ''
-      %td
-        .p=registration.other
+.host
+  = hidden_field_tag :host, host.id
+  %h4 Host
+  .table-scroller.no-edit
+    %table.guests.admin-edit
+      %tr
+        %th.corner
+        %th=_'forms.labels.generic.hosting_space'
+        %th=_'forms.labels.generic.first_day'
+        %th=_'forms.labels.generic.last_day'
+        %th=_'articles.conference_registration.headings.host.notes'
+      %tr
+        - availability = host.housing_data['availability']
+        %th=host.user.name
+        %td=_"forms.labels.generic.#{space}"
+        %td=(availability || [])[0].present? ? availability[0].present? ? date(availability[0].to_date, :span_same_year_date_1) : '' : ''
+        %td=(availability || [])[1].present? ? date(availability[1].to_date, :span_same_year_date_1) : ''
+        %td=((host.housing_data || {})['notes'] || '').html_safe
 
-.legend
-  %h4 Legend
-  %ul
-    %li.good-match Good Match
-    %li.bad-match Poor Match
-    %li.selected-space Also in this space
-    %li.other-space Also with this host
-    %li.other-host Already hosted
+%h4 Guests
+.guest-table
+  .table-scroller.no-edit
+    %table.guests.admin-edit
+      %tr
+        %th.corner
+        %th=_'forms.labels.generic.housing'
+        %th=_'forms.labels.generic.arrival'
+        %th=_'forms.labels.generic.departure'
+        %th=_'forms.labels.generic.other_notes'
+        %th=_'forms.labels.generic.city'
+        %th=_'forms.labels.generic.organization'
+        %th=_'articles.conference_registration.headings.companion'
+        %th=_'forms.labels.generic.food'
+      - @guests.each do |id, registration|
+        %tr.selectable{class: get_housing_match(host, registration, space).to_s.gsub('_', '-'), data: {host: host.id, guest: id, space: space}}
+          %th.break-ok=registration.user.name
+          %td=registration.housing.present? ? (_"articles.conference_registration.questions.housing.#{registration.housing}") : ''
+          %td
+            - if registration.arrival.present?
+              =date(registration.arrival.to_date, :span_same_year_date_1)
+          %td
+            - if registration.departure.present?
+              =date(registration.departure.to_date, :span_same_year_date_1)
+          %td.break-ok
+            .p=[registration.allergies, registration.other, (registration.housing_data || {})['other']].compact.join("\n\n")
+          %td=registration.city
+          %td.break-ok
+            - if registration.user.organizations.present?
+              = registration.user.organizations.first.name
+            - else
+              %em None
+          - companion = companion(registration)
+          %td=companion.present? ? (companion.is_a?(User) ? companion.named_email : (_"articles.conference_registration.terms.registration_status.#{companion}")) : ''
+          %td=registration.food.present? ? (_"articles.conference_registration.questions.food.#{registration.food}") : ''

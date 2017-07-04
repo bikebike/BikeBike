@@ -1,7 +1,12 @@
 module TableHelper
   def html_edit_table(excel_data, options = {})
     attributes = { class: options[:class], id: options[:id] }
-    attributes[:data] = { 'update-url' => options[:editable] } if options[:editable].present?
+    if options[:editable].present? || options[:sortable].present?
+      attributes[:data] = {
+        'update-url' => options[:editable],
+        'sort-url' => options[:sortable]
+      }
+    end
     
     if options[:column_names].is_a? Hash
       return content_tag(:table, attributes) do
@@ -9,11 +14,11 @@ module TableHelper
         column_names = {}
         (content_tag(:thead) do
           headers = ''
-          options[:column_names].each do | header_name, columns |
+          options[:column_names].each do |header_name, columns|
             column_names[header_name] ||= []
             headers += content_tag(:th, excel_data[:keys][header_name].present? ? _(excel_data[:keys][header_name]) : '', colspan: 2)
             row_count = columns.size
-            columns.each do | column |
+            columns.each do |column|
               column_names[header_name] << column
               if (options[:row_spans] || {})[column].present?
                 row_count += (options[:row_spans][column] - 1)
@@ -30,15 +35,18 @@ module TableHelper
 
           for i in 0...max_columns
             columns_html = ''
-            column_names.each do | header_name, columns |
+            column_names.each do |header_name, columns|
               column = columns[i]
               if column.present?
                 attributes = { class: [excel_data[:column_types][column]], data: { 'column-id' => column } }
                 if (options[:row_spans] || {})[column].present?
                   attributes[:rowspan] = options[:row_spans][column]
                 end
-                columns_html += content_tag(:th, excel_data[:keys][column].present? ? _(excel_data[:keys][column]) : '', rowspan: attributes[:rowspan]) + 
-                edit_column(nil, column, nil, attributes, excel_data, options)
+
+                column_text = excel_data[:keys][column].present? ? _(excel_data[:keys][column]) : ''
+
+                columns_html += content_tag(:th, column_text.html_safe, rowspan: attributes[:rowspan]) + 
+                                edit_column(nil, column, nil, attributes, excel_data, options)
               elsif column != false
                 columns_html += content_tag(:td, ' ', colspan: 2, class: :empty)
               end
@@ -56,8 +64,9 @@ module TableHelper
             if (excel_data[:column_types] || {})[column] != :table && ((options[:column_names] || []).include? column)
               rows += content_tag(:tr, { class: 'always-edit', data: { key: '' } }) do
                 attributes = { class: [excel_data[:column_types][column]], data: { 'column-id' => column } }
-                columns = content_tag(:th, excel_data[:keys][column].present? ? _(excel_data[:keys][column]) : '') + 
-                edit_column(nil, column, nil, attributes, excel_data, options)
+                column_text = excel_data[:keys][column].present? ? _(excel_data[:keys][column]) : ''
+
+                columns = content_tag(:th, column_text.html_safe) + edit_column(nil, column, nil, attributes, excel_data, options)
               end
             end
           end
@@ -70,7 +79,16 @@ module TableHelper
   def html_table(excel_data, options = {})
     options[:html] = true
     attributes = { class: options[:class], id: options[:id] }
-    attributes[:data] = { 'update-url' => options[:editable] } if options[:editable].present?
+
+    if options[:editable].present?
+      attributes[:data] ||= {}
+      attributes[:data]['update-url'] = options[:editable]
+    end
+    if options[:sortable].present?
+      attributes[:data] ||= {}
+      attributes[:data]['sort-url'] = options[:sortable]
+    end
+
     content_tag(:table, attributes) do
       (content_tag(:thead) do
         content_tag(:tr, excel_header_columns(excel_data))
@@ -106,7 +124,17 @@ module TableHelper
 
     data[:columns].each do |column|
       unless data[:column_types].present? && data[:column_types][column] == :table
-        columns += content_tag(:th, data[:keys][column].present? ? _(data[:keys][column]) : '', class: class_name)
+        column_text = data[:keys][column].present? ? _(data[:keys][column]) : ''
+        attrs = { class: class_name }
+
+        unless @sort_column.nil?
+          attrs[:data] = { colname: column }
+
+          if @sort_column == column
+            attrs[:data][:dir] = @sort_dir || :down
+          end          
+        end
+        columns += content_tag(:th, column_text.html_safe, attrs)
       end
     end
 
@@ -214,7 +242,7 @@ module TableHelper
 
   def edit_column(row, column, value, attributes, data, options)
     attributes[:class] << 'has-editor'
-    raw_value = row.present? ? (row[:raw_values][column] || value) : nil
+    raw_value = row.present? ? ((row[:raw_values] || {})[column] || value) : nil
 
     if row.present? && options[:html] && row[:html_values].present? && row[:html_values][column].present?
       value = row[:html_values][column]
@@ -299,14 +327,16 @@ module TableHelper
             ] + User.AVAILABLE_LANGUAGES.map { |l| "language_#{l}".to_sym },
           questions: [
               :registration_fees_paid,
+              :payment_currency,
+              :payment_method,
               :is_attending,
               :arrival,
               :departure,
               :housing,
               :bike,
               :food,
+              :group_ride,
               :companion_email,
-              :allergies,
               :other
             ],
           hosting: [
@@ -315,14 +345,15 @@ module TableHelper
               :phone,
               :first_day,
               :last_day
-            ] + ConferenceRegistration.all_spaces +
-            ConferenceRegistration.all_considerations + [
+            ] + ConferenceRegistration.all_spaces + [
               :notes
             ]
         },
       row_spans: {
-          allergies: 3,
-          other: 2
+          other: 2,
+          address: 2,
+          city: 2,
+          notes: 4
         },
       required_columns: [:name, :email],
       editable: administration_update_path(@this_conference.slug, @admin_step),
@@ -337,12 +368,15 @@ module TableHelper
       primary_key: :id,
       column_names: [
           :registration_fees_paid,
+          :payment_currency,
+          :payment_method,
           :is_attending,
           :is_subscribed,
           :city,
           :preferred_language,
           :arrival,
           :departure,
+          :group_ride,
           :housing,
           :bike,
           :food,
@@ -360,6 +394,7 @@ module TableHelper
         ConferenceRegistration.all_spaces +
         ConferenceRegistration.all_considerations,
       editable: administration_update_path(@this_conference.slug, @admin_step),
+      sortable: administration_step_path(@this_conference.slug, @admin_step),
       column_options: @column_options
     }
   end

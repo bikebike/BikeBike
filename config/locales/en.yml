@@ -1331,6 +1331,10 @@ en:
   conference:
     actions:
       Register: Register
+  help:
+    link_text: Help
+    headings:
+      admin_housing: Help for Housing
   modals:
     confirm: Please Confirm
     yes_button: 'Yes'
@@ -1461,10 +1465,9 @@ en:
             instead of a guest form. If you want to consider surrounding cities as
             well, enter the distance from %{city} that you wish to be included as
             providers. Cities are measured from center to center.
-          housing: Pair each housing provider with a list of guests. Try to match
-            guests with hosts and other guests who are good matches and respect their
-            requests, but also keep in mind that we cannot always respect all requests
-            and part of the Bike!Bike! experience is getting to know new people.
+          housing: Match guests with hosts, and fulfill their housing
+            requests to the best of your ability. Use guest notes and the face icons to determine if a guest is a good match for the host.
+            Hover over unhappy faces for details on how to find the guest a better match. Keep in mind that you may not be able to accommodate every request. 
       locations:
         heading: Locations
         description: Locations are used to schedule workshops, events, and meals.
@@ -2079,6 +2082,7 @@ en:
           quiet: Quiet household
           pets: House has dogs or cats
       can_provide_housing: I can provide housing.
+      housing_provider: Host?
       not_attending: I will not be attending the conference
       questions:
         bike:
@@ -2096,6 +2100,10 @@ en:
           house: Indoor Location
           none: I'll take care of it
           tent: Tent Space
+        housing_short:
+          house: House
+          none: None
+          tent: Tent
         bikes:
           medium: Medium
       none: "(none)"
@@ -2116,9 +2124,10 @@ en:
           unregistered: Unregistered
           preregistered: Preregistered
           registered: Registered
+          cancelled: Cancelled
         companion: Companion
         companion_email: Companion Email
-        Preferred_Languages: Preferred Language
+        Preferred_Languages: Language
         is_attending: Attending?
     about_bikebike:
       paragraphs:
@@ -2282,6 +2291,8 @@ en:
           paypal: Online
           on_arrival: In person
           none: None
+        payment_method: Payment Method
+        payment_currency: Payment Currency
         space: Available Space
         hosting_dates: When will you be in town?
         type: Type
@@ -2295,8 +2306,8 @@ en:
         other: Disabilities, housing preferences, etc.
         email: Email address
         allergies: Allergies
-        arrival: Arrival date
-        departure: Departure date
+        arrival: Arrival
+        departure: Departure
         location: City, State/Province, Country
         name: Name
         subject: Subject
@@ -2306,10 +2317,13 @@ en:
         notes: Notes
         message: 'Your Message:'
         address: Street Address
+        address_short: Address
         phone: Phone number
+        phone_short: Phone
         bed_space: Bed/Couch Space
         floor_space: Floor Space
         tent_space: Tent Space
+        hosting_space: Space
         first_day: From
         last_day: To
         body: Body
@@ -2329,7 +2343,7 @@ en:
           closed: Closed
           open: Open
           pre: Pre-Registration
-        registration_status: Registration Status
+        registration_status: Status
         companion: Email address
         block_number: Block
         days: Days
@@ -2395,6 +2409,10 @@ en:
         create: Create
         delete: Delete
         place_guest: Place Guest
+        place_guest_in:
+          bed_space: Place a guest in a bed or couch
+          floor_space: Place a guest on the floor
+          tent_space: Place a guest in a tent space
         set_host: Set Host
         add_comment: Add Comment
         reply: Reply

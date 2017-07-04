@@ -141,21 +141,6 @@ table, .table {
             background-color: transparent;
             border: 0;
         }
-
-        &.state {
-            background-size: 1.333em;
-            background-repeat: no-repeat;
-            background-position: center;
-            width: 1.75em;
-
-            &.happy {
-                background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 87.8 73.2'><polygon fill='#{$colour-5}' points='34.3 73.2 0 32.6 18.7 16.8 35.4 36.5 70.1 0 87.8 16.8 '/></svg>");
-            }
-
-            &.unhappy {
-                background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path xmlns="http://www.w3.org/2000/svg" d="M50 5C25.1 5 5 25.1 5 50c0 24.9 20.1 45 45 45s45-20.1 45-45C95 25.1 74.9 5 50 5zM72.5 64.3l-8.2 8.2L50 58.2 35.7 72.5l-8.2-8.2L41.8 50 27.5 35.7l8.2-8.2L50 41.8l14.3-14.3 8.2 8.2L58.2 50 72.5 64.3z" fill="#{$colour-4}"/></svg>');
-            }
-        }
     }
 
     th, .table-th {
@@ -167,42 +152,42 @@ table, .table {
         }
     }
 
-    td, .table-td {
-        &.inner-table {
-            padding: 0;
+    // td, .table-td {
+    //     &.inner-table {
+    //         padding: 0;
 
-            table {
-                margin: 0;
-                width: 100%;
-            }
+    //         table {
+    //             margin: 0;
+    //             width: 100%;
+    //         }
 
-            tr:first-child {
-                td, th {
-                    border-top: 0;
-                }
-            }
+    //         tr:first-child {
+    //             td, th {
+    //                 border-top: 0;
+    //             }
+    //         }
 
-            tr:last-child {
-                td, th {
-                    border-bottom: 0;
-                }
-            }
+    //         tr:last-child {
+    //             td, th {
+    //                 border-bottom: 0;
+    //             }
+    //         }
             
-            td, th {
-                &:first-child {
-                    border-left: 0
-                }
+    //         td, th {
+    //             &:first-child {
+    //                 border-left: 0
+    //             }
 
-                &:last-child {
-                    border-right: 0
-                }
-            }
-        }
+    //             &:last-child {
+    //                 border-right: 0
+    //             }
+    //         }
+    //     }
 
-        &.bold {
-            @include font-family(secondary);
-        }
-    }
+        // &.bold {
+        //     @include font-family(secondary);
+        // }
+    // }
 
     tbody th {
         width: 0.1rem;
@@ -2449,11 +2434,12 @@ a.logo {
     .register-link {
         font-size: 1.25em;
         margin: 0.5em;
-
-        .button {
-            @include _(animation, radiate 2s linear infinite alternate);
-        }
     }
+}
+
+.help-link {
+    float: right;
+    background-color: $red;
 }
 
 .conference-details {
@@ -2906,6 +2892,29 @@ body {
         text-align: left;
     }
 
+    #help-dlg {
+        .dlg-content {
+            @include _-(display, flex);
+            @include _(flex-direction, column);
+            max-width: 60rem;
+        }
+
+        .dlg-inner {
+            overflow: auto;
+        }
+
+        .title {
+            background-color: $red;
+            font-size: 2em;
+            text-align: left;
+        }
+
+        .message {
+            text-align: left;
+            font-size: 1.125em;
+        }
+    }
+
     #info-dlg .message {
         text-align: left;
 
@@ -2954,10 +2963,6 @@ body {
 
 @include keyframes(barberpole) {
   to   { background-position: 60px 30px; }
-}
-
-@include keyframes(radiate) {
-  to   { background-color: $green; }
 }
 
 html :focus {

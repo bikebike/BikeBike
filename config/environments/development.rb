@@ -44,7 +44,7 @@ BikeBike::Application.configure do
   #   enable_starttls_auto: true,
   #   openssl_verify_mode: 'none',
   #   user_name: 'info@bikebike.org',
-  #   password: config.app_config['email_password']
+  #   password: 'Toronto@)!)'
   # }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true

@@ -8,6 +8,7 @@ module RegistrationHelper
 
   def registration_status(registration)
     return :unregistered if registration.nil?
+    return :cancelled if registration.is_attending == 'n'
     return registration.status
   end
 
@@ -47,7 +48,7 @@ module RegistrationHelper
     completed_steps = registration.steps_completed || []
     last_step = nil
     steps = current_registration_steps(registration) || []
-    steps.each do | step |
+    steps.each do |step|
       # return the last enabled step if this one is disabled
       return last_step unless step[:enabled]
 

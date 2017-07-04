@@ -1,11 +1,13 @@
 - body_class 'banner-bottom' unless @this_conference.poster.present?
 - add_stylesheet :admin
 - content_for :banner do
-  = render :partial => 'application/header', :locals  => { page_group: :administration, page_key: 'Administration', image_file: @this_conference.poster_url || 'admin.jpg'}
+  = render partial: 'application/header', locals: { page_group: :administration, page_key: 'Administration', image_file: @this_conference.poster_url || 'admin.jpg'}
 
 %article{id: "admin-#{@admin_step}"}
   = row do
     = columns(medium: 12) do
+      - if admin_help_pages[@admin_step.to_sym]
+        = link_help_dlg("admin_#{admin_help_pages[@admin_step.to_sym]}", class: ['button', 'help-link'])
       %h2.floating=(_"articles.admin.#{@admin_group}.headings.#{@admin_step}", :t)
   = row do
     = columns(medium: 12) do
