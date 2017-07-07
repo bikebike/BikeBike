@@ -1115,7 +1115,7 @@ class ConferenceAdministrationController < ApplicationController
             registration.housing_data ||= {}
             registration.housing_data['companion'] ||= {}
             registration.housing_data['companion']['email'] = value
-            registration.housing_data['companion']['id'] = User.find_user(value)
+            registration.housing_data['companion']['id'] = User.find_user(value).id
           when :preferred_language
             registration.user.locale = value
             user_changed = true
