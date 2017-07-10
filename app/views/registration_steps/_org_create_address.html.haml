@@ -5,5 +5,6 @@
       = textfield :address, @address, required: true, big: true
       .multi-field
         = textfield :city, (@city.city || '').html_safe, readonly: true
-        = textfield :territory, (@city.translate_territory || '').html_safe, readonly: true
+        - territory = @city.translate_territory
+        = (textfield :territory, (@city.translate_territory || '').html_safe, readonly: true) if territory.present?
         = textfield :country, (@city.translate_country || '').html_safe, readonly: true
