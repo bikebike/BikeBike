@@ -6,4 +6,4 @@
       .multi-field
         = textfield :city, (@city.city || '').html_safe, readonly: true
         = textfield :territory, (@city.translate_territory || '').html_safe, readonly: true
-        = textfield :country, (@city.translate_country ||| '').html_safe, readonly: true
+        = textfield :country, (@city.translate_country || '').html_safe, readonly: true
