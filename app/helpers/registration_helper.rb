@@ -126,7 +126,9 @@ module RegistrationHelper
     actions = ''
     if buttons.present?
       buttons.each do |button_name|
-        actions += (button button_name, value: button_name)
+        attrs = { value: button_name }
+        attrs[:formnovalidate] = true if button_name == :back
+        actions += (button button_name, attrs)
       end
     end
 
