@@ -812,6 +812,20 @@ nav.sub-menu {
     }
 }
 
+@mixin hover-info {
+    display: none;
+    position: absolute;
+    right: 100%;
+    top: 0;
+    background-color: $white;
+    border: 0.1em solid #CCC;
+    padding: 0.25em 0.75em;
+    margin: 0;
+    list-style-type: square;
+    @include default-box-shadow(top, 2);
+    z-index: 10;
+}
+
 @include keyframes(unhappy) {
     from {
         @include _(transform, rotate(15deg));
@@ -870,6 +884,66 @@ nav.sub-menu {
         tr.host {
             th {
                 vertical-align: top;
+            }
+
+            > th {
+                min-width: 15em;
+            }
+
+            .host-notes {
+                @include font-family(primary);
+                font-size: 0.85em;
+                border: 0.1em solid $light-gray;
+                background-color: $white;
+                padding: 0.5em;
+                margin: 1em 0;
+
+                > p:first-child {
+                    margin-top: 0;
+                }
+
+                > p:last-child {
+                    margin-bottom: 0;
+                }
+            }
+
+            .guest-notes {
+                position: relative;
+                float: left;
+                margin-top: -0.2em;
+                margin-right: 0.25em;
+                cursor: pointer;
+
+                @include after {
+                    content: '\1F4C4';
+                    width: 2em;
+                    height: 2em;
+                }
+
+                .notes {
+                    @include hover-info;
+                    top: auto;
+                    bottom: 100%;
+                    right: auto;
+                    min-width: 25em;
+
+                    p {
+                        font-size: 1.125em;
+
+                        &:first-child {
+                            margin-top: 0;
+                        }
+                        &:last-child {
+                            margin-bottom: 0;
+                        }
+                    }
+                }
+
+                &:hover {
+                    .notes {
+                        display: block;
+                    }
+                }
             }
 
             .address {
@@ -937,17 +1011,7 @@ nav.sub-menu {
             }
 
             ul {
-                display: none;
-                position: absolute;
-                right: 100%;
-                top: 0;
-                background-color: $white;
-                border: 0.1em solid #CCC;
-                padding: 0.25em 0.75em;
-                margin: 0;
-                list-style-type: square;
-                @include default-box-shadow(top, 2);
-                z-index: 10;
+                @include hover-info;
             }
 
             li {
@@ -1716,6 +1780,113 @@ html[data-ontop] {
 
     .not-on-top {
         display: none !important;
+    }
+}
+
+.search-message {
+    display: none;
+    border: 0.05em solid $gray;
+    text-align: center;
+    padding: 1em;
+    margin: 1em;
+    border-radius: 0.2em;
+    box-shadow: 0 0 1em -0.5em;
+}
+
+#search-results {
+    display: none;
+    width: 100%;
+    margin-left: 0;
+
+    a {
+        color: inherit;
+
+        @include after {
+            display: none;
+        }
+    }
+
+    .name {
+        font-size: 1.5em;
+        min-width: 10em;
+    }
+
+    .registration {
+        &:hover, &:focus {
+            background-color: lighten($colour-1, 33%);
+            cursor: pointer;
+
+            th {
+                background-color: lighten($colour-1, 25%);
+            }
+        }
+    }
+}
+
+#search-form {
+    #no-search {
+        display: block;
+    }
+
+    #new-user {
+        display: none;
+    }
+
+    &[data-status="no-results"] {
+        #no-search, #search-results, #new-user {
+            display: none;
+        }
+
+        #no-results {
+            display: block;
+        }
+    }
+
+    &[data-status="success"] {
+        #no-search, #no-results, #new-user {
+            display: none;
+        }
+
+        #search-results {
+            display: block;
+        }
+    }
+
+    &[data-status="new-user"] {
+        #no-search, #no-results, #search-results {
+            display: none;
+        }
+
+        #new-user {
+            display: block;
+        }
+    }
+}
+
+#check-in {
+    .currency {
+        font-size: 1.5em;
+        margin-top: 0.5em;
+        margin-right: 0.5em;
+
+        ~ .select-field {
+            margin-top: 0.25em;
+            margin-right: 0.5em;
+        }
+    }
+
+    .input-field {
+        margin-bottom: 0;
+    }
+}
+
+.back-to-start {
+    @include before {
+        content: '◀';
+        font-size: 0.65em;
+        margin-right: 0.333em;
+        display: inline-block;
+        vertical-align: bottom;
     }
 }
 

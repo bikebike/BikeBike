@@ -28,7 +28,8 @@ module AdminHelper
           :registration_status,
           :stats,
           :registrations,
-          :broadcast
+          :broadcast,
+          :check_in
         ],
       housing: [
           :providers,

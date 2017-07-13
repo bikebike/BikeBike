@@ -367,6 +367,7 @@ module TableHelper
       class: ['registrations', 'admin-edit'],
       primary_key: :id,
       column_names: [
+          :pronoun,
           :registration_fees_paid,
           :payment_currency,
           :payment_method,
@@ -377,6 +378,7 @@ module TableHelper
           :arrival,
           :departure,
           :group_ride,
+          :org_non_member_interest,
           :housing,
           :bike,
           :food,

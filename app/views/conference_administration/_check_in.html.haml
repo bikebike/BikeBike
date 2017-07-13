@@ -1,0 +1,174 @@
+%script#registration-data{type: :json}=@registration_data.to_json.to_s.html_safe
+= columns(medium: 12) do
+  = admin_update_form id: 'search-form' do
+    = searchfield :search, nil, big: true
+    %table#search-results
+      %thead
+        %tr
+          %th.corner
+          %th Email
+          %th Location
+          %th Organization
+          %th Status
+      %tbody
+
+    %p#no-search.search-message Search for a user by name, email, location, or organization
+    %p#no-results.search-message No matching user was found, enter an email address to regster a new user
+    #new-user.actions.center=link_to 'Register %{email}', check_in_path(@this_conference.slug, 'new_user').gsub('new_user', '%{url_email}'), class: :button
+    %template#search-result
+      %tr.registration{tabindex: 0}
+        %th.name= link_to '%{name}', check_in_path(@this_conference.slug, 'user_id').gsub('user_id', '%{user_id}')
+        %td %{email}
+        %td %{location}
+        %td %{organization}
+        %td.no-wrap %{status}
+:javascript
+  var searchTable = null,
+    searchField = null,
+    lastSearch = null,
+    registrationData = null,
+    newUserMessage = null,
+    newUserMessageTemplate = null,
+    searchResultTemplate = null,
+    searchForm = null,
+    searchFields = ['email', 'name', 'location', 'oranization'];
+
+  function getRegistrationData() {
+    return JSON.parse(document.getElementById('registration-data').innerHTML);
+  }
+
+  function getSearchTable() {
+    return document.getElementById('search-results').getElementsByTagName('tbody')[0];
+  }
+
+  function getSearchResultTemplate() {
+    return document.getElementById('search-result').innerHTML;
+  }
+
+  function matchScore(data, terms) {
+    var score = 0;
+    for (var i = 0; i < terms.length; i++) {
+      var keys = Object.keys(data), termPos = -1;
+      for (var j = 0; j < keys.length; j++) {
+        var dataItem = data[keys[j]];
+        if (typeof(dataItem) === "string" && dataItem.length > 0) {
+          dataItem = dataItem.toLocaleLowerCase();
+          var index = dataItem.indexOf(' ' + terms[i]);
+          if (index < 0) {
+            index = dataItem.indexOf(terms[i]);
+          } else {
+            index = 0;
+          }
+          if (index >= 0 && (termPos < 0 || index < termPos)) {
+            termPos = index;
+          }
+        }
+      }
+      if (termPos >= 0) {
+        score += (termPos > 0 ? 10 : 20);
+      } else {
+        return 0;
+      }
+    }
+    return score + data['sort_weight'];
+  }
+
+  function searchResultHTML(data) {
+    if (searchResultTemplate === null) {
+      searchResultTemplate = getSearchResultTemplate();
+    }
+
+    var keys = Object.keys(data), html = searchResultTemplate;
+    for (var i = 0; i < keys.length; i++) {
+      var value = data[keys[i]];
+      if (value === null) {
+        value = '';
+      }
+      html = html.replace(new RegExp('%\\{' + keys[i] + '\\}', 'ig'), value);
+    }
+
+    return html;
+  }
+
+  function filterSearchResults() {
+    if (searchTable === null) {
+      searchTable = getSearchTable();
+    }
+    if (searchField === null) {
+      searchField = document.getElementById('search');
+    }
+    if (searchForm === null) {
+      searchForm = document.getElementById('search-form');
+    }
+
+    var searchTerm = searchField.value.toLocaleLowerCase().trim();
+
+    if (searchTerm != lastSearch) {
+      searchForm.classList.add('requesting');
+
+      var range = document.createRange();
+      range.selectNodeContents(searchTable);
+      range.deleteContents();
+
+      lastSearch = searchTerm;
+      var status = null;
+
+      if (searchTerm.length > 0) {
+        var terms = searchTerm.split(/\s+/);
+        if (registrationData === null) {
+          registrationData = getRegistrationData();
+        }
+
+        var matches = [];
+        for (var i = 0; i < registrationData.length; i++) {
+          var score = matchScore(registrationData[i], terms);
+          if (score > 0) {
+            matches.push({ score: score, data: registrationData[i] });
+          }
+        }
+
+        if (matches.length > 0) {
+          matches.sort(function(a, b) { return b.score - a.score; });
+
+          var html = '';
+          for (var i = 0; i < matches.length; i++) {
+            html += searchResultHTML(matches[i].data);
+          }
+          searchTable.innerHTML = html;
+
+          status = 'success';
+        } else if (searchTerm.match(/^\S+@\S+\.\S{2,}$/)) {
+          status = 'new-user';
+          if (newUserMessage === null) {
+            newUserMessage = document.getElementById('new-user');
+            newUserMessageTemplate = newUserMessage.innerHTML;
+          }
+          newUserMessage.innerHTML = newUserMessageTemplate.replace(/%\{email\}/g, searchTerm).replace(/%\{url_email\}/g, encodeURIComponent(searchTerm));
+        } else {
+          status = 'no-results';
+        }
+      } else {
+        status = 'no-search';
+      }
+
+      searchForm.setAttribute('data-status', status);
+      searchForm.classList.remove('requesting');
+    }
+  }
+
+  document.addEventListener('click', function(event) {
+    if (searchTable === null) {
+      searchTable = getSearchTable();
+    }
+    var target = event.target;
+    if (searchTable.contains(target)) {
+      while (target.tagName !== 'TR') {
+        target = target.parentElement;
+      }
+      var link = target.getElementsByTagName('a')[0];
+      window.location.href = link.href;
+    }
+  });
+  document.addEventListener('keyup', filterSearchResults);
+
+  filterSearchResults();

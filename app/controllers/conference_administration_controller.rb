@@ -84,6 +84,30 @@ class ConferenceAdministrationController < ApplicationController
     end
   end
 
+  def check_in
+    set_conference
+    return do_403 unless @this_conference.host? current_user
+
+    @page_title_vars = { title: @this_conference.title }
+    @admin_step = :check_in
+    @admin_group = view_context.get_administration_group(@admin_step)
+
+    if params[:id] =~ /^\S+@\S+\.\S{2,}$/
+      @user = User.new(email: params[:id])
+    elsif params[:id] =~ /^\d+$/
+      @user = User.find(params[:id].to_i)
+    else
+      return do_404
+    end
+
+    @registration = @this_conference.registration_for(@user) || ConferenceRegistration.new(conference: @this_conference)
+    @registration.data ||= {}
+
+    @user_name = @user.firstname || 'this person'
+    @user_name_proper = @user.firstname || 'This person'
+    @user_name_for_title = @user.firstname || "<em>#{@user.email}</em>"
+  end
+
   rescue_from ActiveRecord::PremissionDenied do |exception|
     do_403
   end
@@ -199,7 +223,7 @@ class ConferenceAdministrationController < ApplicationController
               name: org.name,
               street_address: address.present? ? address.street : nil,
               city: address.present? ? address.city : nil,
-              subregion: address.present? ? I18n.t("geography.subregions.#{address.country}.#{address.territory}") : nil,
+              subregion: address.present? ? I18n.t("geography.subregions.#{address.country}.#{address.territory}", resolve: false) : nil,
               country: address.present? ? I18n.t("geography.countries.#{address.country}") : nil,
               postal_code: address.present? ? address.postal_code : nil,
               email: org.email_address,
@@ -297,6 +321,46 @@ class ConferenceAdministrationController < ApplicationController
       if request.xhr?
         render html: view_context.html_table(@excel_data, view_context.registrations_table_options)
       end
+    end
+
+    def administrate_check_in
+      sort_weight = {
+        checked_in: 5,
+        registered: 4,
+        incomplete: 3,
+        cancelled: 2,
+        unregistered: 1
+      }
+
+      @registration_data = []
+      User.all.each do |user|
+        if user.email.present?
+          new_data = {
+            user_id: user.id,
+            email: user.email,
+            name: user.firstname
+          }
+
+          organization = user.organizations.first
+          new_data[:organization] = organization.present? ? organization.name : ''
+
+          registration = @this_conference.registration_for(user)
+          if registration.present? && registration.city_id.present?
+            new_data[:location] = registration.city.to_s
+            status = registration.status
+          else
+            new_data[:location] = user.last_location.to_s
+            status = :unregistered
+          end
+
+          new_data[:status] = I18n.t("articles.conference_registration.terms.registration_status.#{status}")
+          new_data[:sort_weight] = sort_weight[status]
+
+          @registration_data << new_data
+        end
+      end
+
+      @registration_data.sort! { |a, b| b[:sort_weight] <=> a[:sort_weight] }
     end
 
     def administrate_stats
@@ -476,6 +540,7 @@ class ConferenceAdministrationController < ApplicationController
       @excel_data = {
         columns: [
             :name,
+            :pronoun,
             :email,
             :date,
             :status,
@@ -524,6 +589,7 @@ class ConferenceAdministrationController < ApplicationController
           },
         keys: {
             name: 'forms.labels.generic.name',
+            pronoun: 'forms.labels.generic.pronoun',
             email: 'forms.labels.generic.email',
             status: 'forms.labels.generic.registration_status',
             is_attending: 'articles.conference_registration.terms.is_attending',
@@ -590,6 +656,7 @@ class ConferenceAdministrationController < ApplicationController
             data = {
               id: r.id,
               name: user.firstname || '',
+              pronoun: user.pronoun || '',
               email: user.email || '',
               status: I18n.t("articles.conference_registration.terms.registration_status.#{view_context.registration_status(r)}"),
               is_attending: I18n.t("articles.conference_registration.questions.bike.#{r.is_attending == 'n' ? 'no' : 'yes'}"),
@@ -1101,6 +1168,9 @@ class ConferenceAdministrationController < ApplicationController
             # delete deprecated values
             registration.allergies = nil
             registration.other = nil
+          when :org_non_member_interest
+            registration.data  ||= {}
+            registration.data['non_member_interest'] = value
           when :registration_fees_paid
             registration.data ||= {}
             registration.data['payment_amount'] = value.to_f
@@ -1116,8 +1186,8 @@ class ConferenceAdministrationController < ApplicationController
             registration.housing_data['companion'] ||= {}
             registration.housing_data['companion']['email'] = value
             registration.housing_data['companion']['id'] = User.find_user(value).id
-          when :preferred_language
-            registration.user.locale = value
+          when :preferred_language, :pronoun
+            registration.user.send("#{key}=", value)
             user_changed = true
           when :is_subscribed
             registration.user.is_subscribed = (value != "false")
@@ -1178,6 +1248,67 @@ class ConferenceAdministrationController < ApplicationController
       end
 
       return nil
+    end
+
+    def admin_update_check_in
+      unless params[:button] == 'cancel'
+        user_id = params[:user_id]
+
+        if params[:user_id].present?
+          user_id = user_id.to_i
+        else
+          user_id = User.get(params[:email]).id
+        end
+
+        registration = ConferenceRegistration.where(
+                user_id: user_id,
+                conference_id: @this_conference.id
+              ).limit(1).first ||
+            ConferenceRegistration.new(
+                conference_id: @this_conference.id,
+                user_id: user_id
+              )
+
+        registration.data ||= {}
+        registration.data['checked_in'] ||= DateTime.now
+
+        if params[:payment]
+          amount = params[:payment].to_f
+          if amount > 0
+            registration.registration_fees_paid ||= 0
+            registration.registration_fees_paid += amount
+            registration.data['payment_amount'] = amount
+            registration.data['payment_currency'] ||= params[:currency]
+          end
+        end
+
+        user = nil
+        if params[:name].present?
+          user ||= registration.user
+          user.firstname ||= params[:name]
+        end
+
+        if params[:pronoun].present?
+          user ||= registration.user
+          user.pronoun ||= params[:pronoun]
+        end
+
+        if params[:location].present?
+          unless registration.city_id.present?
+            city = City.search(params[:location])
+            registration.city_id = city.id if city.present?
+          end
+        end
+
+        user.save if user.present?
+
+        registration.bike = params[:bike]
+        registration.data['programme'] = params[:programme]
+
+        registration.save
+      end
+
+      return false
     end
 
     def admin_update_housing

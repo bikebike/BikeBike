@@ -133,8 +133,17 @@ module WidgetsHelper
             status_html = content_tag(:ul, status_html.html_safe)
           end
 
+          name_html = guest[:guest].user.name
+
+          other = (guest[:guest].housing_data || {})['other']
+          other.strip! if other.present?
+
+          if other.present?
+            name_html += content_tag :div, (content_tag :div, paragraph(other), class: 'notes').html_safe, class: 'guest-notes'
+          end
+
           guest_rows += content_tag :tr, id: "hosted-guest-#{guest_id}" do
-            (content_tag :td, guest[:guest].user.name) +
+            (content_tag :td, name_html.html_safe) +
             (content_tag :td do
               (guest[:guest].from + 
               (content_tag :a, (_'actions.workshops.Remove'), href: '#', class: 'remove-guest', data: { guest: guest_id })).html_safe

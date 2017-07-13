@@ -384,6 +384,10 @@ table, .table {
     }
 }
 
+.no-wrap {
+    white-space: nowrap;
+}
+
 body.modal-open {
     overflow: hidden;
 }
@@ -2432,8 +2436,8 @@ a.logo {
     }
 
     .register-link {
-        font-size: 1.25em;
-        margin: 0.5em;
+        font-size: 0.75em;
+        margin: 0.5em 0 0;
     }
 }
 
@@ -3632,8 +3636,6 @@ body.policy .policy-agreement ul {
     }
     
     .conference-banner {
-        @include _-(display, flex);
-        @include _(flex-wrap, wrap);
         margin: 0 auto;
         width: 100%;
 

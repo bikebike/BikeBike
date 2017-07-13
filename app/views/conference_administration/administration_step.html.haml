@@ -13,8 +13,8 @@
     = columns(medium: 12) do
       %nav.sub-nav
         %ul
-          %li=link_to (_'articles.admin.headings.back'), administrate_conference_path(@this_conference.slug)
-          - administration_steps[@admin_group].each do | step |
+          %li=link_to (_'articles.admin.headings.back'), administrate_conference_path(@this_conference.slug), class: 'back-to-start'
+          - administration_steps[@admin_group].each do |step|
             %li
               - title = (_"articles.admin.#{@admin_group}.headings.#{step}", :t)
               - if step == @admin_step.to_sym

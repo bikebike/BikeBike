@@ -29,6 +29,7 @@ BikeBike::Application.routes.draw do
         post 'update/:step' => 'conference_administration#admin_update', as: :administration_update
         get 'events/edit/:id' => 'conference_administration#edit_event', as: :edit_event
         get 'locations/edit/:id' => 'conference_administration#edit_location', as: :edit_location
+        get 'check_in/:id' => 'conference_administration#check_in', as: :check_in, constraints: { id: /.+/ }
       end
 
       # Workshops

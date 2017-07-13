@@ -7,4 +7,4 @@
       %h3 Select a Guest
       #table
   .actions.center
-    = link_to (_'links.download.Excel'), administration_step_path(@this_conference.slug, @admin_step, :format => :xlsx), class: [:button, :download]
+    = link_to (_'links.download.Excel'), administration_step_path(@this_conference.slug, @admin_step, format: :xlsx), class: [:button, :download]

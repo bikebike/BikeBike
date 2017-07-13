@@ -1569,6 +1569,8 @@ en:
           registrations: Modify Registrations
           broadcast: Contact Users
           broadcast_sent: Message Sent
+          check_in: Check In
+          check_in_user: Check in %{name}
         description: Open or close registration, view registration statistics, modify
           information submitted by registratnts and contact users.
         descriptions:
@@ -1579,6 +1581,7 @@ en:
             process.
           broadcast: Send emails to targeted subsets of users.
           broadcast_sent: Your message has been sent.
+          check_in: Check in attendees to the conference
       broadcast:
         heading: Broadcast
         description: The broadcast tool is used to contact users through email. You
@@ -2124,8 +2127,10 @@ en:
         registration_status:
           unregistered: Unregistered
           preregistered: Preregistered
+          incomplete: Incomplete
           registered: Registered
           cancelled: Cancelled
+          checked_in: Checked in
         companion: Companion
         companion_email: Companion Email
         Preferred_Languages: Language
@@ -2364,6 +2369,7 @@ en:
         no_file_selected: No file selected
     actions:
       generic:
+        check_in: Complete check in
         reopen_registration: Re-open my registration
         cancel_registration: Cancel my registration
         organization_none: None of the above

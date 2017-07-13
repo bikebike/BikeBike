@@ -228,7 +228,11 @@ module FormHelper
       so = select_options
       select_options = []
       so.each do |opt|
-        select_options << [ I18n.t("forms.options.#{name.to_s}.#{opt.to_s}"), opt]
+        if opt.is_a?(Array)
+          select_options << opt
+        else
+          select_options << [ I18n.t("forms.options.#{name.to_s}.#{opt.to_s}"), opt]
+        end
       end
     end
     textfield(name, value, options.merge({type: :select, options: select_options}))
@@ -470,11 +474,11 @@ module FormHelper
         if labels.present?
           label = labels[i]
         elsif is_single
-          label = _(label_key.to_s)
+          label = options[:translate] == false ? label_key.to_s : _(label_key.to_s)
         elsif box.is_a?(Integer)
           label = I18n.t(label_key.to_s)[box]
         else
-          label = _("#{label_key.to_s}.#{box}")
+          label = options[:translate] == false ? box : _("#{label_key.to_s}.#{box}")
         end
             
         boxes_html += label_tag(id, label)

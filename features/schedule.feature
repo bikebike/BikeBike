@@ -32,18 +32,9 @@ Feature: Conference Schedule
       |  Bike Sharing!                       |  Recycled bike art            |
       |  Classes, Workshops, Space           |  Software developers exchange |
 
-    And the workshop schedule is not published
+    And the workshop schedule is published
     And I am on the conference page
 
-    Then I should see 'Bike!Bike! 2025'
-    And see 'Proposed Workshops'
-    And see 'Bike Sharing!'
-    But I should not see 'Schedule'
-    And not see 'Tuesday'
-    And I should see 16 workshops under 'Proposed Workshops'
-
-    When the workshop schedule is published
-    And I refresh the page
     Then I should see 'Schedule'
     And see 'Tuesday'
     And see 'Wednesday'

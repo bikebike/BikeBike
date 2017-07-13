@@ -2,7 +2,7 @@ class WorkshopsController < ApplicationController
 
   def workshops
     set_conference
-    set_conference_registration!
+    set_conference_registration
     @workshops = Workshop.where(conference_id: @this_conference.id)
     @my_workshops = @workshops.select { |w| w.active_facilitator?(current_user) }
     render 'workshops/index'
@@ -10,7 +10,7 @@ class WorkshopsController < ApplicationController
 
   def view_workshop
     set_conference
-    set_conference_registration!
+    set_conference_registration
     @workshop = Workshop.find_by_id_and_conference_id(params[:workshop_id], @this_conference.id)
     return do_404 unless @workshop
 

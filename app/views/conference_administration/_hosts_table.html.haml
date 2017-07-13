@@ -16,5 +16,7 @@
       %th
         .name=registration.user.name
         .address=registration.housing_data['address']
+        - if registration.housing_data['notes'].present?
+          .host-notes=paragraph(registration.housing_data['notes'])
         %td.inner-table{colspan: 2}=host_guests_table(registration)
     - first_row = false

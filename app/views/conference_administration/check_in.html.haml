@@ -1,0 +1,94 @@
+- body_class 'banner-bottom' unless @this_conference.poster.present?
+- add_stylesheet :admin
+- content_for :banner do
+  = render partial: 'application/header', locals: { page_group: :administration, page_key: 'Administration', image_file: @this_conference.poster_url || 'admin.jpg'}
+
+%article{id: "admin-#{@admin_step}"}
+  = row do
+    = columns(medium: 12) do
+      - if admin_help_pages[@admin_step.to_sym]
+        = link_help_dlg("admin_#{admin_help_pages[@admin_step.to_sym]}", class: ['button', 'help-link'])
+      %h2.floating=_("articles.admin.#{@admin_group}.headings.check_in_user", vars: { name: @user_name_for_title }).html_safe
+  = row do
+    = columns(medium: 12) do
+      %nav.sub-nav
+        %ul
+          %li=link_to (_'articles.admin.headings.back'), administrate_conference_path(@this_conference.slug), class: 'back-to-start'
+          - administration_steps[@admin_group].each do |step|
+            %li
+              - title = (_"articles.admin.#{@admin_group}.headings.#{step}", :t)
+              - if step == @admin_step.to_sym
+                = title
+              - else
+                = link_to title, administration_step_path(@this_conference.slug, step.to_s)
+  = row do
+    = admin_update_form do
+      = columns(medium: 12) do
+        %p="Please verify with #{@user_name} that the following is correct. If you need to change check in information later, you can check the person in again to overwrite these values."
+        - if @user.id.present?
+          = hidden_field_tag :user_id, @user.id
+        - else
+          = hidden_field_tag :email, @user.email
+      = columns(medium: 12) do
+        %table#check-in{aria: { role: :presentation }}
+          - unless @user.firstname.present?
+            %tr
+              %td
+                %p="What is their name?"
+              %td= textfield :name, nil, big: true, label: false, required: true
+          - if @user.pronoun.nil?
+            %tr
+              %td
+                %p="Does #{@user_name} have a preferred pronoun? If so, enter it here"
+              %td= textfield :pronoun, nil, label: false
+          - unless @registration.city.present?
+            %tr
+              %td
+                %p="What city is #{@user_name} based? (Please be specific)"
+              %td= textfield :location, @user.last_location, label: false
+          %tr
+            %td
+              %p="Did you give #{@user_name} a programme and any other informational materials?"
+            %td= selectfield :programme, 'yes', [["I gave #{@user_name} a programme", 'yes'], ["I DID NOT give #{@user_name} a programme", 'no']], stretch: true, label: false
+          %tr
+            %td
+              - if @registration.bike.to_s == 'yes'
+                %p="#{@user_name_proper} said they <strong>do need a bike</strong>".html_safe
+              - elsif @registration.bike.to_s == 'no'
+                %p="#{@user_name_proper} said they <strong>do not need a bike</strong>".html_safe
+              - else
+                %p="Does #{@user_name} need a bike?".html_safe
+            %td= selectfield :bike, @registration.bike.to_s, [["#{@user_name_proper} is taking a bike", 'yes'], ["#{@user_name_proper} is NOT taking a bike", 'no']], stretch: true, label: false
+          %tr
+            %td
+              %p
+                - amount = @registration.registration_fees_paid || 0
+                - currency = @registration.conference.default_currency
+                - can_change_currency = true
+                - if amount > 0
+                  - currency = @registration.data['payment_currency'] if @registration.data['payment_currency'].present?
+                  ="#{@user_name_proper} <strong>has already paid</strong> <u>#{number_to_currency amount, unit: '$'} #{currency}</u>, if they decide to make another donation you can add the amount here".html_safe
+                  - amount = 0
+                  - can_change_currency = false
+                - else
+                  - amount = @registration.data['payment_amount'] || 0
+                  - if amount > 0
+                    ="#{@user_name_proper} <strong>has pledged</strong> to pay <u>#{number_to_currency amount, unit: '$'} #{@registration.data['payment_currency']}</u>, please confirm and take their payment now".html_safe
+                  - elsif @registration.data['payment_method'].present?
+                    ="#{@user_name_proper} <strong>has not pledged</strong> to pay for registration. If they would like to pay for registration now, enter their donation amount here".html_safe
+                  - else
+                    ="Please collect registration fees from #{@user_name} if they are willing to donate and enter the amount here".html_safe
+            %td
+              .flex-column
+                .currency $
+                = numberfield :payment, amount || 0.0, required: true, step: 0.01, min: 0.0, inline: true, label: false, stretch: true
+                - if can_change_currency
+                  = selectfield :currency, currency, [:CAD, :USD], inline: true, label: false, inline: true, label: false
+                - else
+                  .currency
+                    = currency
+                    = hidden_field_tag :currency, currency
+      = columns(medium: 12) do
+        .actions.center
+          = button :check_in
+          = button :cancel, value: :cancel
