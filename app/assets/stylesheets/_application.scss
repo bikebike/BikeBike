@@ -74,35 +74,36 @@ u {
 }
 
 a {
-    text-decoration: none;
-    color: $link-colour;
-    border-bottom: 0 solid;
+    text-decoration: underline;
     outline: 0;
-    position: relative;
     cursor: pointer;
+    text-decoration-skip: ink;
+    @include link;
+    // border-bottom: 0 solid;
+    // position: relative;
 
-    @include after {
-        content: '';
-        position: absolute;
-        border-bottom: 0 solid;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        opacity: 0;
-        @include _(transition, all 150ms ease-in-out);
-        @include _(transform-origin, 25% 50%);
-        @include _(transform, scaleX(0));
-    }
+    // @include after {
+        // content: '';
+        // position: absolute;
+        // border-bottom: 0 solid;
+        // right: 0;
+        // bottom: 0;
+        // left: 0;
+        // opacity: 0;
+        // @include _(transition, all 150ms ease-in-out);
+        // @include _(transform-origin, 25% 50%);
+        // @include _(transform, scaleX(0));
+    // }
 
-    &:hover,
-    &:active,
-    &:focus {
-        @include after {
-            border-bottom: 0.1em solid;
-            opacity: 1;
-            @include _(transform, scaleX(1));
-        }
-    }
+    // &:hover,
+    // &:active,
+    // &:focus {
+    //     @include after {
+    //         border-bottom: 0.1em solid;
+    //         opacity: 1;
+    //         @include _(transform, scaleX(1));
+    //     }
+    // }
 }
 
 .target:target {
@@ -526,7 +527,7 @@ button,
     }
 
     form.logout & {
-        background-color: #666;
+        background-color: $dark-gray;
     }
 
     #main &.modify {
@@ -544,7 +545,7 @@ button,
     }
 
     &.subdued, #main &.subdued {
-        background-color: #888;
+        background-color: $mid-gray;
     }
 
     #main &.accented {
@@ -552,7 +553,7 @@ button,
     }
 
     &.facebook {
-        background-color: #3A5795;
+        background-color: $facebook-blue;
     }
 
     &.small {
@@ -737,8 +738,6 @@ button,
             button {
                 width: 100%;
                 margin: 0;
-                // border: 0;
-                // border-top: inherit;
                 background-color: lighten($colour-1, 25%);
             }
         }
@@ -846,34 +845,32 @@ nav.sub-menu {
     a {
         margin: 0 1em 0.5em 0;
         background-color: $gray;
-        color: #888;
+        color: $mid-gray;
         display: inline-block;
         padding: 0.25em 0.75em 0.333em;
         font-size: 0.9em;
-        border: 1px solid #AAA;
+        border: 1px solid $mid-light-gray;
         border-bottom-width: 0.2em;
         @include _(border-radius, 0.15em);
         @include default-box-shadow(top, 2);
-        @include _(text-shadow, 0 0.05em 0.05em #FFF);
+        @include _(text-shadow, 0 0.05em 0.05em $white);
 
         &:hover, &:active, &:focus {
-            background-color: #D8D8D8;
+            background-color: $light-gray;
         }
 
         &.current {
-            background-color: #CCC;
-            color: #666;
+            background-color: $almost-light-gray;
+            color: $dark-gray;
             padding: 0.333em 0.75em 0.25em;
         }
 
-        @include after {
-            display: none;
-        }
+        @include not-link-like;
     }
 
     @include breakpoint(medium) {
-        border: 1px solid #AAA;
-        background-color: #AAA;
+        border: 1px solid $mid-light-gray;
+        background-color: $mid-light-gray;
         border-bottom-width: 0.125em;
         @include _(border-radius, 0.15em);
         @include default-box-shadow(top, 2);
@@ -989,7 +986,7 @@ input {
             z-index: $zindex-base + 3;
             @include _(transform, translateY(-100%) scale(1));
             background-color: transparent;
-            color: #666;
+            color: $dark-gray;
         }
     }
 
@@ -1193,14 +1190,13 @@ input {
         font-size: 1em;
 
         input {
-            //display: none;
             @include _(opacity, 0);
             @include _(transition, opacity 250ms ease-in-out);
             z-index: $zindex-base;
             position: absolute;
             width: auto;
             margin: 0;
-            border: 1px solid #CCC;
+            border: 1px solid $almost-light-gray;
             height: 1.5em;
             left: 0;
             top: 0;
@@ -1239,7 +1235,7 @@ input {
     
     label {
         display: block;
-        background-color: #FFF;
+        background-color: $white;
         height: 2.333em;
         font-weight: normal;
         font-size: 1.25em;
@@ -1277,7 +1273,7 @@ input {
             visibility: hidden;
             left: 0.75em;
             top: 0.25em;
-            border: 0.2em solid #FFF;
+            border: 0.2em solid $white;
             width: 0.75em;
             height: 1.5em;
             border-width: 0 .2em 0.2em 0;
@@ -1320,7 +1316,7 @@ input {
                 top: -0.125em;
                 left: 0.075em;
                 line-height: 1em;
-                color: #FFF;
+                color: $white;
                 height: 1em;
                 width: 1em;
             }
@@ -1565,9 +1561,7 @@ fieldset {
             color: inherit;
             padding: 0.25em 0.75em;
 
-            @include after {
-                display: none;
-            }
+            @include not-link-like;
         }
     }
 
@@ -1622,14 +1616,14 @@ fieldset {
         left: 0.5em;
         margin: 0;
         padding: 0 0.5em;
-        background-color: #FFF;
+        background-color: $white;
     }
 
     time {
         position: absolute;
         top: -0.75em;
         right: 0.75em;
-        background-color: #FFF;
+        background-color: $white;
         padding: 0 0.5em;
     }
 
@@ -1652,7 +1646,7 @@ fieldset {
         margin-top: 0;
         button {
             @include _(transition, background-color 150ms ease-in-out);
-            background-color: #888;
+            background-color: $mid-gray;
         }
 
         &.open {
@@ -1826,7 +1820,7 @@ ul.warnings {
         right: 0;
         padding: 0;
         font-size: 6vw;
-        background-color: #FFF;
+        background-color: $white;
         @include _-(display, flex);
         @include _(box-shadow, 0 0 2em -0.5em rgba(0, 0, 0, 0.5));
 
@@ -1852,14 +1846,11 @@ ul.warnings {
             margin: 0;
             font-weight: normal;
             padding: 0.5em 0;
-            color: #FFF;
+            color: $white;
             @include _(border-radius, 0);
             @include _(box-shadow, inset 0 0 1.5em 0.25em rgba(0, 0, 0, 0.125));
             @include _(text-shadow, 0 0 0.25em rgba(0,0,0,0.5));
-
-            @include after {
-                display: none;
-            }
+            @include not-link-like;
 
             .title {
                 font-size: 0.8em;
@@ -1890,12 +1881,7 @@ ul.warnings {
             color: inherit;
             padding: 0 0.333em;
             display: inline-block;
-
-            &:hover {
-                @include after {
-                    display: none;
-                }
-            }
+            @include not-link-like;
         }
 
         li {
@@ -1904,7 +1890,7 @@ ul.warnings {
             display: inline-block;
             
             &.current {
-                border-color: #CCC;
+                border-color: $almost-light-gray;
                 background-color: $extra-light-gray;
             }
 
@@ -1956,7 +1942,7 @@ ul.warnings {
             left: -50%;
             width: 100%;
             @include _(opacity, 0.5);
-            border-top: 0.25em dashed #CCC;
+            border-top: 0.25em dashed $almost-light-gray;
         }
 
         &:first-child {
@@ -1983,8 +1969,8 @@ ul.warnings {
         @include before {
             content: '';
             position: absolute;
-            background-color: #CCC;
-            @include _(box-shadow, 0 0 0.25rem #CCC);
+            background-color: $almost-light-gray;
+            @include _(box-shadow, 0 0 0.25rem $almost-light-gray);
             font-size: 1.3em;
             top: -0.2em;
             width: 0.55em;
@@ -2032,7 +2018,7 @@ ul.warnings {
     }
 
     .step {
-        color: #CCC;
+        color: $almost-light-gray;
         position: absolute;
         @include _(transform-origin, 10% 60%);
         @include _(transform, rotate(45deg));
@@ -2047,6 +2033,7 @@ ul.warnings {
         color: inherit;
         @include _(color, 0.5);
         @include _(transition, color 150ms ease-in-out);
+        @include not-link-like;
 
         @include before {
             content: '';
@@ -2056,10 +2043,6 @@ ul.warnings {
             bottom: 0;
             left: 0;
             z-index: 1;
-        }
-
-        @include after {
-            display: none;
         }
     }
 
@@ -2185,9 +2168,7 @@ table.schedule {
             color: inherit;
             align-items: center;
 
-            @include after {
-                display: none;
-            }
+            @include not-link-like;
 
             .details {
                 flex: 1;
@@ -2212,7 +2193,7 @@ table.schedule {
 
         .errors {
             position: relative;
-            border-top: 0.1rem solid #666;
+            border-top: 0.1rem solid $dark-gray;
             margin-top: 0.5em;
             padding-top: 0.25em;
 
@@ -2349,9 +2330,7 @@ a.logo {
     &:hover,
     &:active,
     &:focus {
-        @include after {
-            display: none;
-        }
+        @include not-link-like;
     }
 }
 
@@ -2689,7 +2668,7 @@ $header-tilt: 8deg;
         a {
             text-align: right;
             white-space: nowrap;
-            color: #666;
+            @include link($dark-gray, 0);
         }
     }
 
@@ -2724,9 +2703,8 @@ $header-tilt: 8deg;
         margin: 0.5em;
 
         a {
-            @include after {
-                display: none;
-            }
+            @include not-link-like;
+
             svg {
                 @include _(transition, fill 250ms ease-in-out);
             }
@@ -2741,12 +2719,6 @@ $header-tilt: 8deg;
     }
 
     .github {
-        a {
-            @include after {
-                display: none;
-            }
-        }
-
         &:hover .icons {
             fill: #4183C4;
         }
@@ -3016,7 +2988,7 @@ html :focus {
 
 #main .skip {
     button {
-        background-color: #888;
+        background-color: $mid-gray;
     }
 }
 
@@ -3032,7 +3004,7 @@ html :focus {
     }
 
     .currency {
-        color: #888;
+        color: $mid-gray;
         font-size: 1.5em;
     }
 
@@ -3093,7 +3065,7 @@ body.policy .policy-agreement ul {
     .facilitator {
         margin: 0 0 0.5em 0.5em;
         padding: 1.5em 0.5em 0.5em;
-        border-top: 0.1em solid #CCC;
+        border-top: 0.1em solid $almost-light-gray;
 
         &:first-child {
             border: 0;
@@ -3119,7 +3091,7 @@ body.policy .policy-agreement ul {
     }
 
     .role {
-        color: #666;
+        color: $dark-gray;
         white-space: nowrap;
 
         @include before {
@@ -3793,7 +3765,7 @@ body.policy .policy-agreement ul {
 
         .details {
             text-align: right;
-            color: #000;
+            color: $black;
         }
 
         .background {

@@ -654,10 +654,7 @@ nav.sub-menu {
             border-bottom: 0;
             @include default-box-shadow(top, 2);
             @include _(transition, box-shadow 150ms ease-in-out);
-
-            @include after {
-                display: none;
-            }
+            @include not-link-like;
 
             &:hover {
                 @include default-box-shadow(top, 0.75);

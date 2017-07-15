@@ -10,17 +10,23 @@ $colour-5: #02CA9E; // green
 
 $white: #FFFEFE;
 $black: #333;
-$gray: #E8E8E8;
-$extra-light-gray: #F8F8F8;
-$light-gray: #EEE;
-$mid-gray: #888;
-$red: #FF5A5F;
+$red:   #FF5A5F;
 
-$blue: $colour-1;
-$pink: $colour-2;
+$extra-light-gray:  #F8F8F8;
+$gray:              #E8E8E8;
+$light-gray:        #EEE;
+$almost-light-gray: #CCC;
+$mid-light-gray:    #AAA;
+$mid-gray:          #888;
+$dark-gray:         #666;
+
+$facebook-blue: #3A5795;
+
+$blue:   $colour-1;
+$pink:   $colour-2;
 $yellow: $colour-3;
 $orange: $colour-4;
-$green: $colour-5;
+$green:  $colour-5;
 
 $link-colour: darken($colour-1, 13%);
 
@@ -117,6 +123,7 @@ $selected-colour: rgba($blue, 0.5);
     overflow: hidden;
     cursor: pointer;
     @include text-stroke;
+    @include not-link-like;
 
     @include before {
         content: '';
@@ -125,7 +132,7 @@ $selected-colour: rgba($blue, 0.5);
         right: 0;
         bottom: 0;
         left: 0;
-        background-color: rgba(0,0,0,0);
+        background-color: rgba($black, 0);
         @include _(transition, background-color 150ms ease-in-out);
     }
 
@@ -152,4 +159,18 @@ $selected-colour: rgba($blue, 0.5);
             display: none;
         }
     }
+}
+
+@mixin link($colour: $link-colour, $initial-opacity: 0.333) {
+    color: $colour;
+    text-decoration-color: rgba($colour, $initial-opacity);
+    @include _(transition, text-decoration-color ease-in-out 200ms);
+
+    &:hover, &:focus, &:active {
+        text-decoration-color: $colour;
+    }
+}
+
+@mixin not-link-like {
+    text-decoration: none;
 }
