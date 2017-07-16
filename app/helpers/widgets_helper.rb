@@ -306,11 +306,8 @@ module WidgetsHelper
                        end
 
       if companion_user.present?
-        cr = ConferenceRegistration.where(user_id: companion_user.id).order(created_at: :desc).limit(1).first
-
-        if cr.present? && ((cr.steps_completed || []).include? 'questions')
-          return companion_user
-        end
+        cr = ConferenceRegistration.where(user_id: companion_user.id, conference_id: registration.conference_id).limit(1).first
+        return companion_user if cr.present? && cr.registered?
       end
       return :unregistered
     end
