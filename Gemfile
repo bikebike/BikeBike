@@ -30,8 +30,8 @@ gem 'launchy'
 #   bundle config local.lingua_franca ../lingua_franca
 #   bundle config local.marmara ../marmara
 gem 'bikecollectives_core', git: 'https://github.com/bikebike/bikecollectives_core.git', branch: 'master'
-gem 'bumbleberry', git: 'https://github.com/bumbleberry/bumbleberry.git', branch: '2017'
-gem 'lingua_franca', git: 'https://github.com/lingua-franca/lingua_franca.git', branch: '2017'
+gem 'bumbleberry', git: 'https://github.com/bumbleberry/bumbleberry.git', branch: 'master'
+gem 'lingua_franca', git: 'https://github.com/lingua-franca/lingua_franca.git', branch: 'master'
 gem 'marmara', git: 'https://github.com/lingua-franca/marmara.git', branch: 'master'
 
 # Bike!Bike! specific stuff
