@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170613022506) do
+ActiveRecord::Schema.define(version: 20170719024801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -361,6 +361,26 @@ ActiveRecord::Schema.define(version: 20170613022506) do
     t.datetime "updated_at"
   end
 
+  create_table "reports", force: :cascade do |t|
+    t.string   "request_id"
+    t.string   "signature"
+    t.string   "severity"
+    t.string   "source"
+    t.string   "backtrace"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "requests", force: :cascade do |t|
+    t.string   "request_id"
+    t.string   "session_id"
+    t.json     "data"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "application"
+    t.integer  "response"
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.string   "session_id", null: false
     t.text     "data"
@@ -380,11 +400,11 @@ ActiveRecord::Schema.define(version: 20170613022506) do
   end
 
   create_table "translation_records", force: :cascade do |t|
-    t.string   "locale"
-    t.integer  "translator_id"
-    t.string   "key"
-    t.text     "value"
-    t.datetime "created_at"
+    t.string  "locale"
+    t.integer "translator_id"
+    t.string  "key"
+    t.text    "value"
+    t.date    "created_at"
   end
 
   create_table "translations", force: :cascade do |t|

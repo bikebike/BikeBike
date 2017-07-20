@@ -11,5 +11,5 @@
   = row do
     = columns(medium: 12) do
       .actions.center
-        = (link_to (_'actions.workshops.Edit'), edit_workshop_path(@this_conference.slug, @workshop.id), :class => [:button, :modify]) if @workshop.can_edit?(current_user)
-        = (link_to (_'actions.workshops.Delete'), delete_workshop_path(@this_conference.slug, @workshop.id), :class => 'button delete') if @workshop.can_delete?(current_user)
+        = (link_to (_'actions.workshops.Edit'), edit_workshop_path(@this_conference.slug, @workshop.id), class: [:button, :modify]) if @workshop.can_edit?(current_user)
+        = (link_to (_'actions.workshops.Delete'), delete_workshop_path(@this_conference.slug, @workshop.id), class: 'button delete') if @workshop.can_delete?(current_user)

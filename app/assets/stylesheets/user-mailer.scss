@@ -1,5 +1,7 @@
 @import "settings";
 
+$max-table-width: 512px;
+
 body {
     width: 100% !important;
     -webkit-text-size-adjust: 100%;
@@ -76,6 +78,10 @@ p {
 p, blockquote {
     margin: 1em;
     line-height: 1.3333em;
+
+    &.signature {
+        margin: 0 0 1em;
+    }
 }
 
 blockquote {
@@ -127,7 +133,7 @@ h1, h2, h3, h4, h5, h6 {
 
 table {
     border-collapse: collapse;
-    max-width: 512px;
+    max-width: $max-table-width;
     min-width: 280px;
     mso-table-lspace: 0pt;
     mso-table-rspace: 0pt;
@@ -179,16 +185,34 @@ table#ecxbb_full_width {
 }
 
 code {
-    color: #C33;
-    font-size: 0.9em;
+    color: firebrick;
+    white-space: pre;
+    margin: 0 0 2em;
+    display: block;
+    max-width: $max-table-width;
+    overflow: auto;
+    box-sizing: border-box;
+
+    &.signature {
+        margin: 0 0 1em;
+        font-size: 1.5em;
+        color: navy;
+        text-align: left;
+        white-space: normal;
+        overflow: hidden;
+    }
+
+    &.backtrace {
+        padding: 1em;
+        border: 1px solid #CCC;
+        background-color: lemonchiffon;
+    }
 }
 
 pre {
     font-size: 1.5em;
     padding: 1em;
-    background-color: #333;
-    color: antiquewhite;
-    word-break: break-word;
+    word-break: break;
 }
 
 .diff, .ecxdiff {
@@ -240,8 +264,8 @@ h3 {
             padding: 10px 15px;
             margin-left: 20px;
             border-bottom: 3px solid darken($colour-5, 10%);
-            -webkit-box-shadow: 0 0.5em 1.5em -0.75em #000;
-            box-shadow: 0 0.5em 1.5em -0.75em #000;
+            -webkit-box-shadow: 0 0.5em 1.5em -0.75em $black;
+            box-shadow: 0 0.5em 1.5em -0.75em $black;
             cursor: pointer !important;
         }
 
@@ -263,6 +287,32 @@ h3 {
             color: $colour-1 !important;
             pointer-events: auto;
             cursor: default;
+        }
+    }
+}
+
+.request-details {
+    width: 100%;
+    max-width: 800px;
+    overflow: auto;
+
+    th, td {
+        border: 1px solid #CCC;
+        font-size: 1em;
+        padding: 0.5em;
+        vertical-align: top;
+        font-family: monospace;
+    }
+
+    table tr {
+        background-color: aliceblue;
+    }
+
+    .spacer {
+        background-color: transparent;
+
+        td {
+            border: 0;
         }
     }
 }

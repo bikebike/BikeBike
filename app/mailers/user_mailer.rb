@@ -123,15 +123,29 @@ class UserMailer < ActionMailer::Base
     mail to: @user.named_email, subject: clean_subject(subject)
   end
 
-  def error_report(subject, message, report, exception, request, params, user, time = nil)
-    @message = message
-    @report = report
-    @exception = exception
-    @request = request
-    @params = params
-    @time = time
-    @user = User.find(user) if user.present?
-    mail to: 'goodgodwin@hotmail.com', subject: clean_subject(subject)
+  def error_report(report_signature)
+    @reports = Report.where(signature: report_signature).order('created_at DESC')
+    @report = @reports.first
+
+    return unless @report.present?
+
+    @title = case @report.source.to_sym
+              when :javascript
+                "JavaScript fatal report"
+              when :i18n
+                "Missing translation report"
+              else
+                "Fatal report"
+              end
+    subject = "#{@title}: #{report_signature}"
+
+    @request = Request.find_by_request_id(@report.request_id)
+
+    return unless @request.present?
+
+    @user = User.find(@request.data['user'].to_i) if @request.data['user'].present?
+
+    mail to: administrators, subject: clean_subject(subject)
   end
 
   def contact(from, subject, message, email_list)
@@ -171,5 +185,9 @@ class UserMailer < ActionMailer::Base
     subject = ActionView::Base.full_sanitizer.sanitize(subject) unless Rails.env.test?
     @subject = subject
     return subject
+  end
+
+  def administrators
+    User.where(role: :administrator).map(&:named_email).join(',')
   end
 end

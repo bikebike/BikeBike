@@ -135,3 +135,9 @@ namespace :cucumber do
     raise exception unless exception.nil?
   end
 end
+
+namespace :clean do
+  task requests: :environment do
+    Request.delete_all(['created_at < ?', DateTime.now - 1.day])
+  end
+end

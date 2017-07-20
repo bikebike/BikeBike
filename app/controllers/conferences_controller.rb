@@ -82,6 +82,11 @@ class ConferencesController < ApplicationController
       # get the current step
       @step = current_registration_step(@this_conference, current_user)
 
+      if @update_status.nil? && flash[:status_message].present?
+        @update_status = flash[:status_message][:status]
+        @update_message = flash[:status_message][:message]
+      end
+
       if @step == :payment_form && (params[:token].present? || @test_token.present?)
         result = paypal_payment_confirm(@this_conference, current_user, params)
         data_to_instance_variables(result)

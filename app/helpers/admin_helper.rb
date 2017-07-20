@@ -59,8 +59,8 @@ module AdminHelper
   def get_administration_group(administration_step)
     admin_step = administration_step.to_sym
     admin_step = administration_sub_steps[admin_step] if administration_sub_steps[admin_step].present?
-    administration_steps.each do | group, steps |
-      steps.each do | step |
+    administration_steps.each do |group, steps|
+      steps.each do |step|
         return group if step == admin_step
       end
     end
@@ -75,35 +75,35 @@ module AdminHelper
     
     case to.to_sym
     when :registered
-      ConferenceRegistration.where(conference_id: conference.id).each do | r |
-        users << r.user if ((r.steps_completed || []).include? 'questions') && r.user.present? && r.is_attending != 'n'
+      ConferenceRegistration.where(conference_id: conference.id).each do |r|
+        users << r.user if r.registered? && r.user.present? && r.attending?
       end
     when :pre_registered
-      ConferenceRegistration.where(conference_id: conference.id).each do | r |
-        users << r.user if registration_status(r) == :preregistered && r.is_attending != 'n'
+      ConferenceRegistration.where(conference_id: conference.id).each do |r|
+        users << r.user if r.attending?
       end
     when :workshop_facilitators
       user_hash = {}
-      Workshop.where(conference_id: conference.id).each do | w |
-        w.active_facilitators.each do | u |
+      Workshop.where(conference_id: conference.id).each do |w|
+        w.active_facilitators.each do |u|
           user_hash[u.id] ||= u if u.present?
         end
       end
       users = user_hash.values
     when :unregistered
-      ConferenceRegistration.where(conference_id: conference.id).each do | r |
-        users << r.user if registration_status(r) == :unregistered && r.is_attending != 'n'
+      ConferenceRegistration.where(conference_id: conference.id).each do |r|
+        users << r.user if !r.registered? && r.attending?
       end
     when :housing_providers
-      ConferenceRegistration.where(conference_id: conference.id, can_provide_housing: true).each do | r |
+      ConferenceRegistration.where(conference_id: conference.id, can_provide_housing: true).each do |r|
         users << r.user if r.user.present?
       end
     when :guests
-      ConferenceRegistration.where(conference_id: conference.id, housing: 'house').each do | r |
-        users << r.user if r.user.present? && r.is_attending != 'n'
+      ConferenceRegistration.where(conference_id: conference.id, housing: 'house').each do |r|
+        users << r.user if r.user.present? && r.attending?
       end
     when :all
-      User.all.each do | u |
+      User.all.each do |u|
         users << u if u.present? && (u.is_subscribed.nil? || u.is_subscribed)
       end
     end
@@ -151,7 +151,7 @@ module AdminHelper
       end
     end
 
-    (((((@schedule[@day] || {})[:times] || {})[@time] || {})[:item] || {})[:workshops] || {}).each do | l, w |
+    (((((@schedule[@day] || {})[:times] || {})[@time] || {})[:item] || {})[:workshops] || {}).each do |l, w|
       if w[:workshop].id != workshop.id
         f_a = w[:workshop].active_facilitators.map { | f | f.id }
         f_b = workshop.active_facilitators.map { | f | f.id }

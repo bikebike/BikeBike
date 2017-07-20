@@ -1,35 +1,53 @@
 class ApplicationController < BaseController
   protect_from_forgery with: :exception, :except => [:do_confirm, :js_error, :admin_update]
 
-  before_filter :capture_page_info
+  before_filter :application_setup
+  after_filter  :capture_page_info
 
   helper_method :protect, :policies
-
-  # @@test_host
-  # @@test_location
 
   def default_url_options
     { host: "#{request.protocol}#{request.host_with_port}", trailing_slash: true }
   end
 
   def capture_page_info
-    # capture request info in case an error occurs
-    # if request.method == "GET" && (params[:controller] != 'application' || params[:action] != 'contact')
-    #   session[:last_request]
-    #   request_info = {
-    #     'params' => params,
-    #     'request' => {
-    #       'remote_ip'    => request.remote_ip,
-    #       'uuid'         => request.uuid,
-    #       'original_url' => request.original_url,
-    #       'env'          => Hash.new
-    #     }
-    #   }
-    #   request.env.each do |key, value|
-    #     request_info['request']['env'][key.to_s] = value.to_s
-    #   end
-    #   # session['request_info'] = request_info
-    # end
+    capture_response unless @user_type == :potential_bot || @user_type == :bot
+  end
+
+  def capture_response(response_code = nil)
+    Request.create(
+      request_id: request.uuid,
+      session_id: session.id,
+      application: :bikebike,
+      response: (response_code || response.code || 0).to_i,
+      data: {
+        user: logged_in? ? current_user.id : nil,
+        params: @original_params || params,
+        remote_ip: request.remote_ip,
+        request_method: request.method,
+        url: request.original_url,
+        user_agent: request.user_agent,
+        language: request.env['HTTP_ACCEPT_LANGUAGE'],
+        cookies: request.env['HTTP_COOKIE'],
+        requested_with: request.env['HTTP_X_REQUESTED_WITH']
+      })
+
+    @error_reports.each { |report| report_on(report) } if @error_reports
+  end
+
+  def report_on(report)
+    return if Rails.env.development? || Rails.env.test?
+    send_mail(:error_report, report.signature)
+  end
+
+  def application_setup
+    if request.user_agent =~ /Googlebot/
+      @user_type = :bot
+    elsif request.url =~ /^.*\.php(\?.*)?$/
+      @user_type = :potential_bot
+    else
+      @user_type = :normal
+    end
 
     # get the current conferences and set them globally
     status_hierarchy = {
@@ -82,51 +100,6 @@ class ApplicationController < BaseController
     @is_policy_page = true
   end
 
-  def js_error
-    # send and email if this is production
-    report = "A JavaScript error has occurred on <code>#{params[:location]}</code>"
-    if params[:location] == params[:url]
-      report += " on line <code>#{params[:lineNumber]}</code>"
-    else
-      report += " in <code>#{params[:url]}:#{params[:lineNumber]}</code>"
-    end
-
-    begin
-      # log the error
-      logger.info "A JavaScript error has occurred on #{params[:location]}:#{params[:lineNumber]}: #{params[:message]}"
-
-      if Rails.env.preview? || Rails.env.production?
-        # don't worry about bots
-        unless request.user_agent =~ /Googlebot/
-          request_info = {
-            'remote_ip'    => request.remote_ip,
-            'uuid'         => request.uuid,
-            'original_url' => request.original_url,
-            'env'          => Hash.new
-          }
-          request.env.each do |key, value|
-            request_info['env'][key.to_s] = value.to_s
-          end
-
-          send_mail(:error_report,
-              "A JavaScript error has occurred",
-              report,
-              params[:message],
-              nil,
-              request_info,
-              params,
-              current_user,
-              Time.now.strftime("%d/%m/%Y %H:%M")
-          )
-        end
-      end
-    rescue Exception => exception2
-      logger.info exception2.to_s
-      logger.info exception2.backtrace.join("\n")
-    end
-    render json: {}
-  end
-
   def confirmation_sent(user)
     template = 'login_confirmation_sent'
     @page_title ||= 'page_titles.403.Please_Check_Email'
@@ -150,6 +123,7 @@ class ApplicationController < BaseController
   
   def locale_not_available!(locale = nil)
     set_default_locale
+    @original_params = params.clone
     params[:_original_action] = params[:action]
     params[:action] = 'error-locale-not-available'
     @page_title = 'page_titles.404.Locale_Not_Available'
@@ -167,6 +141,28 @@ class ApplicationController < BaseController
     render 'application/locale_not_available', status: 404
   end
 
+  def on_error(report, exception = nil)
+    @error_reports ||= []
+    @error_reports << report
+    logger.info report.backtrace
+
+    raise exception if exception.present? && Rails.env.development?
+  end
+
+  def js_error
+    stack = params[:stack] || "#{params[:message]}\n\tat #{params[:url] || params[:location]}:#{params[:line]}:#{params[:col]}"
+    requests = Request.where(session_id: session.id).order("created_at DESC")
+    on_error(
+      Report.create(
+        request_id: requests.first.request_id,
+        signature: params[:message],
+        severity: :error,
+        source: :javascript,
+        backtrace: stack))
+
+    render json: {}
+  end
+
   unless Rails.env.test?
     rescue_from StandardError do |exception|
       handle_exception exception
@@ -177,37 +173,31 @@ class ApplicationController < BaseController
   end
 
   def handle_exception(exception)
-    # log the error
-    logger.info exception.to_s
-    logger.info exception.backtrace.join("\n")
+    # remove memory location from anonymous classes so tat we have a common signature
+    classMatcher = /#<(.*?):0x[0-9a-f]+>/
+    message = exception.message
+    message.gsub!(classMatcher, '\1') while message =~ classMatcher
+    stack = ([message] + exception.backtrace).join("\n  ")
 
-    # send and email if this is production
-    if Rails.env.preview? || Rails.env.production?
-      suppress(Exception) do
-        request_info = {
-          'remote_ip'    => request.remote_ip,
-          'uuid'         => request.uuid,
-          'original_url' => request.original_url,
-          'env'          => Hash.new
-        }
-        request.env.each do |key, value|
-          request_info['env'][key.to_s] = value.to_s
-        end
-        send_mail(:error_report,
-            "An error has occurred in #{Rails.env}",
-            nil,
-            exception.to_s,
-            exception.backtrace.join("\n"),
-            request_info,
-            params,
-            current_user,
-            Time.now.strftime("%d/%m/%Y %H:%M")
-        )
-      end
-    end
+    on_error(
+      Report.create(
+        request_id: request.uuid,
+        signature: message,
+        severity: :error,
+        source: :application,
+        backtrace: stack), exception)
+  end
 
-    # raise the error if we are in development so that we can debug it
-    raise exception if Rails.env.development?
+  def i18n_exception(str, exception, locale, key)
+    message = "#{exception.class.name}: #{exception.to_s}"
+    stack = "#{message}\n  #{caller.join("\n  ")}"
+    on_error(
+      Report.create(
+        request_id: request.uuid,
+        signature: message,
+        severity: :error,
+        source: :i18n,
+        backtrace: stack))
   end
 
   def protect(&block)
@@ -291,6 +281,7 @@ class ApplicationController < BaseController
   end
 
   def error_404(args = {})
+    @original_params = params.clone
     params[:_original_action] = params[:action]
     params[:action] = 'error-404'
     @page_title = 'page_titles.404.Page_Not_Found'
@@ -308,6 +299,7 @@ class ApplicationController < BaseController
     @template = template
     @page_title ||= 'page_titles.403.Access_Denied'
     @main_title ||= @page_title
+    @original_params = params.clone
     params[:_original_action] = params[:action]
     params[:action] = 'error-403'
 
@@ -317,11 +309,13 @@ class ApplicationController < BaseController
   def error_500(exception = nil)
     @page_title = 'page_titles.500.An_Error_Occurred'
     @main_title = 'error.500.title'
+    @original_params = params.clone
     params[:_original_action] = params[:action]
     params[:action] = 'error-500'
     @exception = exception
 
     super(exception)
+    capture_response(500)
   end
 
   def on_translation_change(object, data, locale, translator_id)
@@ -349,39 +343,6 @@ class ApplicationController < BaseController
             send_mail(:send, mailer, object.id, data, user.id, current_user.id)
           end
         end
-      end
-    end
-  end
-
-  def i18n_exception(str, exception, locale, key)
-    # log it
-    logger.info "Missing translation found for: #{key}"
-
-    # send an email if this is production
-    if Rails.env.preview? || Rails.env.production?
-      begin
-        request_info = {
-          'remote_ip'    => request.remote_ip,
-          'uuid'         => request.uuid,
-          'original_url' => request.original_url,
-          'env'          => Hash.new
-        }
-        request.env.each do |key, value|
-          request_info['env'][key.to_s] = value.to_s
-        end
-        send_mail(:error_report,
-            "A missing translation found in #{Rails.env}",
-            "<p>A translation for <code>#{key}</code> in <code>#{locale.to_s}</code> was found. The text that was rendered to the user was:</p><blockquote>#{str || 'nil'}</blockquote>",
-            exception.to_s,
-            nil,
-            request_info,
-            params,
-            current_user.id,
-            Time.now.strftime("%d/%m/%Y %H:%M")
-        )
-      rescue Exception => exception2
-        logger.info exception2.to_s
-        logger.info exception2.backtrace.join("\n")
       end
     end
   end
@@ -613,8 +574,13 @@ class ApplicationController < BaseController
     end
 
     def set_conference_registration!
-      @registration = set_conference_registration
+      set_conference_registration
       raise ActiveRecord::PremissionDenied unless @registration.present?
+    end
+
+    def ensure_registration_is_complete!
+      set_conference_registration!
+      raise ActiveRecord::PremissionDenied unless @registration.registered?
     end
 
     def set_or_create_conference_registration
