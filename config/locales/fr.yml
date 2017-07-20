@@ -1516,6 +1516,7 @@ fr:
         companion_unregistered: Votre partenaire ne s’est pas encore inscrit ou inscrite.
           Veuillez vous assurer qu’il ou elle le fasse pour que vous soyez hébergés
           ensemble.
+        registration_required: Veuillez compléter votre inscription
     policy:
       headings:
         The_Agreement: L’ Accord

@@ -803,26 +803,22 @@ ul.menu {
 
     .message {
         display: inline-block;
-        @include font-family(secondary);
         font-size: 1.25em;
         padding: 1em 2em;
-        border: 0.25rem solid $blue;
-        background-color: rgba($blue, 0.25);
+        background-color: $text-on-blue;
+        @include message;
     }
 
     &.error .message {
-        border-color: $red;
-        background-color: rgba($red, 0.25);
+        background-color: $text-on-red;
     }
 
     &.complete .message {
-        border-color: $green;
-        background-color: rgba($green, 0.25);
+        background-color: $text-on-green;
     }
 
     &.warning .message {
-        border-color: $yellow;
-        background-color: rgba($yellow, 0.25);
+        background-color: $text-on-yellow;
     }
 }
 
@@ -1732,14 +1728,12 @@ ul.warnings {
 .info-message {
     position: relative;
     min-height: 4em;
-    border: 0.2em solid rgba(0, 0, 0, 0.1);
-    background-color: rgba($colour-3, 0.333);
+    background-color: $text-on-yellow;
     padding: 1em 1em 1em 4em;
-    @include font-family(secondary);
     text-align: left;
     margin: 1em;
     width: auto;
-    @include default-box-shadow(top, 2);
+    @include message;
 
     @include before {
         content: '!';
@@ -1754,7 +1748,7 @@ ul.warnings {
         text-align: center;
         line-height: 1.5em;
         font-size: 1.5em;
-        background-color: $colour-3;
+        background-color: $yellow;
         @include _(border-radius, 50%);
         @include default-box-shadow(top, 2);
     }
@@ -1769,15 +1763,15 @@ ul.warnings {
 }
 
 .success-info {
-    background-color: rgba($colour-5, 0.333);
+    background-color: $text-on-green;
 
     @include before {
-        background-color: $colour-5;
+        background-color: $green;
     }
 }
 
 .error-info {
-    background-color: rgba($red, 0.333);
+    background-color: $text-on-red;
 
     @include before {
         background-color: $red;

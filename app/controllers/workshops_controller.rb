@@ -26,7 +26,8 @@ class WorkshopsController < ApplicationController
 
   def create_workshop
     set_conference
-    set_conference_registration!
+    ensure_registration_is_complete!
+
     @workshop = Workshop.new
     @languages = [I18n.locale.to_sym]
     @needs = []
@@ -47,7 +48,7 @@ class WorkshopsController < ApplicationController
 
   def edit_workshop
     set_conference
-    set_conference_registration!
+    ensure_registration_is_complete!
     @workshop = Workshop.find_by_id_and_conference_id(params[:workshop_id], @this_conference.id)
     
     return do_404 unless @workshop.present?
@@ -82,7 +83,7 @@ class WorkshopsController < ApplicationController
 
   def delete_workshop
     set_conference
-    set_conference_registration!
+    ensure_registration_is_complete!
     @workshop = Workshop.find_by_id_and_conference_id(params[:workshop_id], @this_conference.id)
 
     return do_404 unless @workshop.present?
@@ -95,9 +96,9 @@ class WorkshopsController < ApplicationController
           @workshop.destroy
         end
 
-        return redirect_to register_step_path(@this_conference.slug, 'workshops')
+        return redirect_to workshops_path(@this_conference.slug)
       end
-      return redirect_to view_workshop_url(@this_conference.slug, @workshop.id)
+      return redirect_to view_workshop_path(@this_conference.slug, @workshop.id)
     end
     @register_template = :workshops
 
@@ -106,13 +107,13 @@ class WorkshopsController < ApplicationController
   
   def save_workshop
     set_conference
-    set_conference_registration!
+    ensure_registration_is_complete!
 
     if params[:button].to_sym != :save
       if params[:workshop_id].present?
-        return redirect_to view_workshop_url(@this_conference.slug, params[:workshop_id])
+        return redirect_to view_workshop_path(@this_conference.slug, params[:workshop_id])
       end
-      return redirect_to register_step_path(@this_conference.slug, 'workshops')
+      return redirect_to workshops_path(@this_conference.slug)
     end
 
     if params[:workshop_id].present?
@@ -120,8 +121,8 @@ class WorkshopsController < ApplicationController
       return do_404 unless workshop.present?
       can_edit = workshop.can_edit?(current_user)
     else
-      workshop = Workshop.new(:conference_id => @this_conference.id)
-      workshop.workshop_facilitators = [WorkshopFacilitator.new(:user_id => current_user.id, :role => :creator)]
+      workshop = Workshop.new(conference_id: @this_conference.id)
+      workshop.workshop_facilitators = [WorkshopFacilitator.new(user_id: current_user.id, role: :creator)]
       can_edit = true
     end
 
@@ -157,27 +158,27 @@ class WorkshopsController < ApplicationController
       workshop.save
 
       # Rouge nil facilitators have been know to be created, just destroy them here now
-      WorkshopFacilitator.where(:user_id => nil).destroy_all
+      WorkshopFacilitator.where(user_id: nil).destroy_all
     else
       return do_403
     end
 
-    redirect_to view_workshop_url(@this_conference.slug, workshop.id)
+    redirect_to view_workshop_path(@this_conference.slug, workshop.id)
   end
 
   def toggle_workshop_interest
     set_conference
-    set_conference_registration!
+    ensure_registration_is_complete!
     workshop = Workshop.find_by_id_and_conference_id(params[:workshop_id], @this_conference.id)
     return do_404 unless workshop
 
     # save the current state
     interested = workshop.interested? current_user
     # remove all associated fields
-    WorkshopInterest.delete_all(:workshop_id => workshop.id, :user_id => current_user.id)
+    WorkshopInterest.delete_all(workshop_id: workshop.id, user_id: current_user.id)
 
     # creat the new interest row if we weren't interested before
-    WorkshopInterest.create(:workshop_id => workshop.id, :user_id => current_user.id) unless interested
+    WorkshopInterest.create(workshop_id: workshop.id, user_id: current_user.id) unless interested
 
     if request.xhr?
       render json: [
@@ -192,13 +193,13 @@ class WorkshopsController < ApplicationController
       ]
     else
       # go back to the workshop
-      redirect_to view_workshop_url(@this_conference.slug, workshop.id)
+      redirect_to view_workshop_path(@this_conference.slug, workshop.id)
     end
   end
 
   def facilitate_workshop
     set_conference
-    set_conference_registration!
+    ensure_registration_is_complete!
     @workshop = Workshop.find_by_id_and_conference_id(params[:workshop_id], @this_conference.id)
     return do_404 unless @workshop
     return do_403 if @workshop.facilitator?(current_user) || !current_user
@@ -209,7 +210,7 @@ class WorkshopsController < ApplicationController
 
   def facilitate_request
     set_conference
-    set_conference_registration!
+    ensure_registration_is_complete!
     workshop = Workshop.find_by_id_and_conference_id(params[:workshop_id], @this_conference.id)
     return do_404 unless workshop
     return do_403 if workshop.facilitator?(current_user) || !current_user
@@ -219,12 +220,12 @@ class WorkshopsController < ApplicationController
 
     send_mail(:workshop_facilitator_request, workshop.id, current_user.id, params[:message])
 
-    redirect_to sent_facilitate_workshop_url(@this_conference.slug, workshop.id)
+    redirect_to sent_facilitate_workshop_path(@this_conference.slug, workshop.id)
   end
 
   def sent_facilitate_request
     set_conference
-    set_conference_registration!
+    ensure_registration_is_complete!
     @workshop = Workshop.find_by_id_and_conference_id(params[:workshop_id], @this_conference.id)
     return do_404 unless @workshop
     return do_403 unless @workshop.requested_collaborator?(current_user)
@@ -236,7 +237,7 @@ class WorkshopsController < ApplicationController
   def approve_facilitate_request
     return do_403 unless logged_in?
     set_conference
-    set_conference_registration!
+    ensure_registration_is_complete!
     workshop = Workshop.find_by_id_and_conference_id(params[:workshop_id], @this_conference.id)
     return do_404 unless workshop.present?
     
@@ -253,24 +254,24 @@ class WorkshopsController < ApplicationController
         LinguaFranca.with_locale(user.locale) do
           send_mail(:workshop_facilitator_request_approved, workshop.id, user.id)
         end
-        return redirect_to view_workshop_url(@this_conference.slug, workshop.id)
+        return redirect_to view_workshop_path(@this_conference.slug, workshop.id)
       end
     when :deny
       if workshop.active_facilitator?(current_user) && workshop.requested_collaborator?(User.find(user_id))
         WorkshopFacilitator.delete_all(
-          :workshop_id => workshop.id,
-          :user_id => user_id)
+          workshop_id: workshop.id,
+          user_id: user_id)
         LinguaFranca.with_locale user.locale do
           send_mail(:workshop_facilitator_request_denied, workshop.id, user.id)
         end
-        return redirect_to view_workshop_url(@this_conference.slug, workshop.id)    
+        return redirect_to view_workshop_path(@this_conference.slug, workshop.id)    
       end
     when :remove
       if workshop.can_remove?(current_user, user)
         WorkshopFacilitator.delete_all(
-          :workshop_id => workshop.id,
-          :user_id => user_id)
-        return redirect_to view_workshop_url(@this_conference.slug, workshop.id)
+          workshop_id: workshop.id,
+          user_id: user_id)
+        return redirect_to view_workshop_path(@this_conference.slug, workshop.id)
       end
     when :switch_ownership
       if workshop.creator?(current_user)
@@ -282,7 +283,7 @@ class WorkshopsController < ApplicationController
             workshop.id, user_id)
         f.role = :creator
         f.save
-        return redirect_to view_workshop_url(@this_conference.slug, workshop.id)
+        return redirect_to view_workshop_path(@this_conference.slug, workshop.id)
       end
     end
 
@@ -291,7 +292,7 @@ class WorkshopsController < ApplicationController
 
   def add_workshop_facilitator
     set_conference
-    set_conference_registration!
+    ensure_registration_is_complete!
 
     user = User.find_user(params[:email])
 
@@ -313,12 +314,12 @@ class WorkshopsController < ApplicationController
       end
     end
 
-    return redirect_to view_workshop_url(@this_conference.slug, params[:workshop_id])
+    return redirect_to view_workshop_path(@this_conference.slug, params[:workshop_id])
   end
 
   def add_comment
     set_conference
-    set_conference_registration!
+    ensure_registration_is_complete!
     workshop = Workshop.find_by_id_and_conference_id(params[:workshop_id], @this_conference.id)
     
     return do_404 unless workshop && current_user
@@ -335,7 +336,7 @@ class WorkshopsController < ApplicationController
     elsif params[:button] = 'add_comment'
       new_comment = workshop.add_comment(current_user, params[:comment])
 
-      workshop.active_facilitators.each do | u |
+      workshop.active_facilitators.each do |u|
         unless u.id == current_user.id
           LinguaFranca.with_locale u.locale do
             send_mail(:workshop_comment, workshop.id, new_comment.id, u.id)
@@ -346,20 +347,21 @@ class WorkshopsController < ApplicationController
       return do_404
     end
 
-    return redirect_to view_workshop_url(@this_conference.slug, workshop.id, anchor: "comment-#{new_comment.id}")
+    return redirect_to view_workshop_path(@this_conference.slug, workshop.id, anchor: "comment-#{new_comment.id}")
   end
 
   rescue_from ActiveRecord::PremissionDenied do |exception|
     if !@this_conference.can_register?
       do_404
     elsif logged_in?
-      redirect_to 'conferences/register'
+      flash[:status_message] = { message: :registration_required, status: :warning }
+      redirect_to register_path(@this_conference.slug)
     else
       @register_template = :confirm_email
       @page_title = "articles.conference_registration.headings.#{@this_conference.registration_status == :open ? '': 'Pre_'}Registration_Details"
       @main_title = "articles.conference_registration.headings.#{@this_conference.registration_status == :open ? '': 'Pre_'}Register"
       @main_title_vars = { vars: { title: @this_conference.title } }
-      render 'conferences/register'
+      render register_path(@this_conference.slug)
     end
   end
 

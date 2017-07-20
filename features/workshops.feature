@@ -3,12 +3,11 @@ Feature: Workshops
     Given there is an upcoming conference
     And registration is open
     And I am logged in
-    And registered for the conference
+    And registered
     And on the registration page
 
     Then I should see 'New Workshop'
     And should see 'View Workshops'
-    Then I should see 'New Workshop'
     But I should not see any workshops
 
     When I click on 'New Workshop'
@@ -65,6 +64,24 @@ Feature: Workshops
     And click the 'Confirm' button
     Then I should see 'New Workshop'
     But I should not see any workshops
+
+  Scenario: Un-Registered users cannot create workshops
+    Given there is an upcoming conference
+    And the conference has workshop info copy
+    And registration is open
+    And I am logged in
+    And on the landing page
+
+    Then I should see 'View Workshops'
+
+    When I click on 'View Workshops'
+    Then I should be on the workshops page
+    And I should see 'New Workshop'
+    But I should not see any workshops
+
+    When I click on 'New Workshop'
+    Then I should see 'Please complete your registration'
+    But I should not see 'Create a Workshop'
 
   Scenario: Users can comment on and translate their own workshops
     Given that there is an upcoming conference

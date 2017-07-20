@@ -1687,6 +1687,7 @@ en:
         payment_pending: Thank you! Your payment is currently pending.
         companion_unregistered: Your companion has not yet registered. Please ensure
           that they do to guarantee you are housed together.
+        registration_required: Please complete your registration
       step_names:
         group_ride: Group ride?
         hosting_other: Other
@@ -2441,13 +2442,13 @@ en:
         add: Add new
     options:
       send_to:
-        registered: Everyone who has registered
-        pre_registered: Everyone who has pre-registered or registered
+        registered: Everyone who has completed their registration
+        pre_registered: Everyone who has begun or completed the registration process
         unregistered: Everyone who has not completed their registration
         workshop_facilitators: All workshop facilitators
         housing_providers: Housing providers
         guests: Everyone who has requested housing
-        all: Everyone
+        all: Everyone who has ever registered for a conference
       conferences:
         types:
           annual: Annual Bike!Bike!

@@ -28,6 +28,13 @@ $yellow: $colour-3;
 $orange: $colour-4;
 $green:  $colour-5;
 
+$text-on-blue:   rgba($blue, 0.333);
+$text-on-pink:   rgba($pink, 0.333);
+$text-on-yellow: rgba($yellow, 0.333);
+$text-on-orange: rgba($orange, 0.333);
+$text-on-green:  rgba($green, 0.333);
+$text-on-red:    rgba($red, 0.333);
+
 $link-colour: darken($colour-1, 13%);
 
 $selected-colour: rgba($blue, 0.5);
@@ -105,7 +112,7 @@ $selected-colour: rgba($blue, 0.5);
 }
 
 @mixin text-stroke {
-    @include _(text-stroke, 1px rgba(0, 0, 0, 0.25));
+    @include _(text-stroke, 1px rgba($black, 0.25));
 }
 
 @mixin button {
@@ -173,4 +180,10 @@ $selected-colour: rgba($blue, 0.5);
 
 @mixin not-link-like {
     text-decoration: none;
+}
+
+@mixin message {
+    @include font-family(secondary);
+    border: 0.2em solid rgba($black, 0.1);
+    @include default-box-shadow(top, 2);
 }

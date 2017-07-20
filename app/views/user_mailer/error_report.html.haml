@@ -1,53 +1,43 @@
-%p=@message.html_safe if @message.present?
-%pre=@report
+%h1=@title
 
-- if @exception.present?
-  %h1 Backtrace
-  %pre=@exception
+%h2 Error details
+%code.signature{class: "#{@report.source}-signature"}
+  = "#{@report.signature}"
+%code.backtrace{class: "#{@report.source}-backtrace"}=@report.backtrace
 
-%h1 Details
-%table.error-report
-  %tr
-    %th Key
-    %th Value
-  %tr
-    %td User ID
-    %td=@user.present? ? @user.id : ''
-  %tr
-    %td User Name
-    %td=@user.present? ? @user.name : ''
-  %tr
-    %td User Email
-    %td=@user.present? ? @user.email : ''
-  %tr
-    %td IP Address
-    %td=@request['remote_ip']
-  %tr
-    %td UUID
-    %td=@request['uuid']
-  %tr
-    %td URL
-    %td=@request['original_url'] 
-  %tr
-    %td Time
-    %td=@time
-
-%h1 Params
-%table.error-report
-  %tr
-    %th Key
-    %th Value
-  - @params.each do | key, value |
+%h2 Request details
+.request-details
+  %table
     %tr
-      %td=key
-      %td=value
-
-%h1 Request Environment
-%table.error-report
-  %tr
-    %th Key
-    %th Value
-  - @request['env'].each do | key, value |
-    %tr
-      %td=key
-      %td=value
+      %th Response code
+      %td=@request.response
+    - @request.data.each do |key, value|
+      - if key.to_s == 'user'
+        - if @user
+          %tr
+            %th User ID
+            %td=@user.id
+          %tr
+            %th User Email
+            %td=@user.email
+          %tr
+            %th User Name
+            %td=@user.firstname
+        - else
+          %tr
+            %th User ID
+            %td NULL
+        %tr.spacer
+          %td{ colspan: 2 }
+      - else
+        %tr
+          %th=key.to_s.titlecase
+          %td
+            - if value.is_a?(Hash)
+              %table
+                - value.each do |k, v|
+                  %tr
+                    %th=k
+                    %td=v
+            - else
+              = value.to_s

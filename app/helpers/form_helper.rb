@@ -704,58 +704,14 @@ module FormHelper
     return options
   end
 
-  def registration_step_menu
-    steps = current_registration_steps(@registration)
-    return '' unless steps.present? && steps.length > 1
-
-    pre_registration_steps = ''
-    post_registration_steps = ''
-    post_registration = false
-
-    steps.each do |step|
-      text = _"articles.conference_registration.headings.#{step[:name].to_s}"
-      
-      if step[:name] == :workshops
-        post_registration = true
-      end
-
-      h = content_tag :li, class: [step[:enabled] ? :enabled : nil, @register_template == step[:name] ? :current : nil, post_registration ? :post : :pre].compact do
-        if step[:enabled]
-          content_tag :div, (link_to text, register_step_path(@this_conference.slug, step[:name])).html_safe, class: :step
-        else
-          content_tag :div, text, class: :step
-        end
-      end
-
-      if post_registration
-        post_registration_steps += h.html_safe
-      else
-        pre_registration_steps += h.html_safe
-      end
-    end
-
-    html = (
-      row class: 'flow-steps' do
-        columns do
-          (content_tag :ul, id: 'registration-steps' do
-            pre_registration_steps.html_safe +
-            post_registration_steps.html_safe
-          end).html_safe
-        end
-      end
-    )
-
-    return html.html_safe
-  end
-
   def broadcast_options(conference = nil)
     conference ||= @this_conference || @conference
 
     options = [
       :registered,
       :pre_registered,
-      :workshop_facilitators,
       :unregistered,
+      :workshop_facilitators,
       :housing_providers,
       :guests,
       :all

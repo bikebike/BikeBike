@@ -1,5 +1,5 @@
 (function() {
-    window.onerror = function(message, url, lineNumber) {  
+    window.onerror = function(message, url, lineNumber, column, errorObj) {  
         //save error and send to server for example.
         var request = new XMLHttpRequest();
         request.open('POST', '/js_error', true);
@@ -7,7 +7,9 @@
         request.send(
             'message=' + encodeURI(message) +
             '&url=' + encodeURI(url) +
-            '&lineNumber=' + encodeURI(lineNumber) +
+            '&line=' + encodeURI(lineNumber) +
+            '&col=' + encodeURI(column) +
+            (errorObj && errorObj.stack ? '&stack=' + encodeURI(errorObj.stack) : '') +
             '&location=' + encodeURI(window.location.href)
         );
         return false;

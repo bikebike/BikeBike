@@ -3,10 +3,9 @@
 %article
   = row do
     %h2=_'page_titles.conferences.Facilitate_Workshop'
-    = registration_step_menu
     = columns(medium: 12) do
       =_('articles.workshops.paragraphs.facilitate_request_sent','Your request has been sent. You will receive an email once your request is approved or denied or if the current facilitators have any questions.')
     = columns(medium: 12) do
       .actions
-        = link_to (_'actions.workshops.View'), view_workshop_path(@this_conference.slug, @workshop.id), :class => 'button'
-        = link_to (_'actions.workshops.View_All'), register_step_path(@this_conference.slug, :wokshops), :class => 'button'
+        = link_to (_'actions.workshops.View'), view_workshop_path(@this_conference.slug, @workshop.id), class: :button
+        = link_to (_'actions.workshops.View_All'), register_step_path(@this_conference.slug, :wokshops), class: :button
