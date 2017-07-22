@@ -192,6 +192,7 @@ code {
     max-width: $max-table-width;
     overflow: auto;
     box-sizing: border-box;
+    line-height: 1.25em;
 
     &.signature {
         margin: 0 0 1em;
@@ -232,7 +233,6 @@ pre {
         padding: 0.5em;
         margin: 0;
         border-bottom: 1px solid #DDD;
-        //white-space: nowrap;
 
         &:nth-child(odd) {
             margin-right: -3px;
@@ -295,6 +295,7 @@ h3 {
     width: 100%;
     max-width: 800px;
     overflow: auto;
+    margin-bottom: 2em;
 
     th, td {
         border: 1px solid #CCC;

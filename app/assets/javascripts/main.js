@@ -2,7 +2,7 @@
     window.onerror = function(message, url, lineNumber, column, errorObj) {  
         //save error and send to server for example.
         var request = new XMLHttpRequest();
-        request.open('POST', '/js_error', true);
+        request.open('POST', '/js_error/', true);
         request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
         request.send(
             'message=' + encodeURI(message) +
