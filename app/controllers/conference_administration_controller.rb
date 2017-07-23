@@ -1359,7 +1359,7 @@ class ConferenceAdministrationController < ApplicationController
       @register_template = :administration
       if params[:button] == 'send'
         view_context.broadcast_to(@send_to).each do |user|
-          send_mail(:broadcast,
+          send_delayed_mail(:broadcast,
               "#{request.protocol}#{request.host_with_port}",
               @subject,
               @body,

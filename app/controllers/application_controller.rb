@@ -215,12 +215,10 @@ class ApplicationController < BaseController
   def contact_send
     email_list = ['Godwin <goodgodwin@hotmail.com>']
     
-    if params[:reason] == 'conference'
+    if params[:reason] == 'conference' && logged_in?
 
-      @conference.organizations.each do |org|
-        org.users.each do |user|
-          # email_list << user.named_email
-        end
+      @conference.conference_administrators.each do |user|
+        email_list << user.named_email
       end
     end
 
@@ -234,14 +232,14 @@ class ApplicationController < BaseController
       request_info['env'][key.to_s] = value.to_s
     end
 
-    send_mail(:contact,
+    send_delayed_mail(:contact,
         current_user || params[:email],
         params[:subject],
         params[:message],
         email_list
       )
 
-    send_mail(:contact_details,
+    send_delayed_mail(:contact_details,
         current_user || params[:email],
         params[:subject],
         params[:message],
@@ -326,7 +324,7 @@ class ApplicationController < BaseController
       object.get_translators(data, locale).each do |id, user|
         if user.id != current_user.id && user.id != translator_id
           LinguaFranca.with_locale user.locale do
-            send_mail(:send, mailer, object.id, data, locale, user.id, translator.id)
+            send_delayed_mail(:send, mailer, object.id, data, locale, user.id, translator.id)
           end
         end
       end
@@ -340,7 +338,7 @@ class ApplicationController < BaseController
       object.get_translators(data).each do |id, user|
         if user.id != current_user.id
           LinguaFranca.with_locale user.locale do
-            send_mail(:send, mailer, object.id, data, user.id, current_user.id)
+            send_delayed_mail(:send, mailer, object.id, data, user.id, current_user.id)
           end
         end
       end
@@ -614,12 +612,16 @@ class ApplicationController < BaseController
       send_mail(:email_confirmation, confirmation.id)
     end
 
-    def send_mail(*args)
+    def send_delayed_mail(*args)
       if Rails.env.preview? || Rails.env.production?
         UserMailer.delay(queue: Rails.env.to_s).send(*args)
       else
         UserMailer.send(*args).deliver_now
       end
+    end
+
+    def send_mail(*args)
+      UserMailer.send(*args).deliver_now
     end
 
     def policies
