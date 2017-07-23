@@ -93,12 +93,12 @@ namespace :deployment do
   task pull: :environment do
     branch = Rails.env.production? ? :master : :development
     `git reset --hard origin/#{branch}`
-    raise "\nPull failed" $?.exitstatus > 0
+    raise "\nPull failed" if $?.exitstatus > 0
     changed = !(`git pull` =~ /Already up to date/)
-    raise "\nPull failed" $?.exitstatus > 0
+    raise "\nPull failed" if $?.exitstatus > 0
 
     `bundle install --no-deployment && bundle update bundle install --deployment`
-    raise "\nPull failed" $?.exitstatus > 0
+    raise "\nPull failed" if $?.exitstatus > 0
   end
 
   task update: :environment do
@@ -112,7 +112,7 @@ namespace :deployment do
     ]
     cmd = tasks.map { |t| "RAILS_ENV=#{Rails.env} bundle exec #{t}"}.join(' && ')
     `#{cmd}`
-    raise "\nUpdate failed" $?.exitstatus > 0
+    raise "\nUpdate failed" if $?.exitstatus > 0
   end
 
   task bounce: :environment do
@@ -137,7 +137,7 @@ namespace :deployment do
     end
   end
 
-  task db: :start do
+  task start: :environment do
     [
       :pull,
       :update,
