@@ -68,7 +68,7 @@ class ApplicationController < BaseController
     @stylesheets << params[:controller] if params[:controller] == 'translations'
 
     @_inline_scripts ||= Set.new
-    @_inline_scripts << Rails.application.assets.find_asset('main.js').to_s
+    @_inline_scripts << File.read(File.join(Rails.public_path, ActionController::Base.helpers.asset_path('main.js')))
 
     ActionMailer::Base.default_url_options = {
         host: "#{request.protocol}#{request.host_with_port}"
