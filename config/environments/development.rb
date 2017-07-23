@@ -32,6 +32,7 @@ BikeBike::Application.configure do
   config.assets.debug = true
   config.assets.digest = true
   config.assets.compile = true
+  config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif *.json *.ttf *.otf *.woff *.woff2 *.svg *.json)
 
   # to deliver to the browser instead of email
   config.action_mailer.delivery_method = :letter_opener
