@@ -89,11 +89,63 @@ task "cucumber:debug" do
   ENV['TEST_DEBUG'] = nil
 end
 
-task deploy: :environment do
-  if Rails.env.preview? || Rails.env.production?
-    UserMailer.delay(queue: Rails.env.to_s).server_startup(Rails.env.to_s)
-  else
-    UserMailer.server_startup(Rails.env.to_s).deliver_now
+namespace :deployment do
+  task pull: :environment do
+    branch = Rails.env.production? ? :master : :development
+    `git reset --hard origin/#{branch}`
+    raise "\nPull failed" if $?.exitstatus > 0
+    changed = !(`git pull` =~ /Already up to date/)
+    raise "\nPull failed" if $?.exitstatus > 0
+
+    `bundle install --no-deployment && bundle update bundle install --deployment`
+    raise "\nPull failed" if $?.exitstatus > 0
+  end
+
+  task update: :environment do
+    tasks = [
+      'lingua_franca:import',
+      'bumbleberry:update',
+      'assets:clean',
+      'assets:precompile',
+      'routes',
+      'db:migrate'
+    ]
+    cmd = tasks.map { |t| "RAILS_ENV=#{Rails.env} bundle exec #{t}"}.join(' && ')
+    `#{cmd}`
+    raise "\nUpdate failed" if $?.exitstatus > 0
+  end
+
+  task bounce: :environment do
+    dir = Rails.env.production? ? :rails : Rails.env
+    pid = `cat /home/unicorn/#{Rails.env}.pid`
+    sk_pid = `cat /home/unicorn/sidekiq_#{Rails.env}.pid`
+    sk_processes = Rails.env.production? ? 25 : 5
+
+    system("kill #{pid}")
+    `bundle exec unicorn_rails -E #{Rails.env} -D -c /home/#{dir}/config/unicorn.rb`
+
+    system("kill #{sk_pid}")
+    `bundle exec sidekiq -d -C config/sidekiq_#{Rails.env}.yml -e #{Rails.env} -c #{sk_processes}`
+  end
+
+  # send an email to admins once deployment is complete
+  task complete: :environment do
+    if Rails.env.preview? || Rails.env.production?
+      UserMailer.delay(queue: Rails.env.to_s).server_startup(Rails.env.to_s)
+    else
+      UserMailer.server_startup(Rails.env.to_s).deliver_now
+    end
+  end
+
+  task start: :environment do
+    [
+      :pull,
+      :update,
+      :bounce,
+      :complete
+    ].each do |t|
+     Rake::Task["deployment:#{t}"].execute
+   end
   end
 end
 

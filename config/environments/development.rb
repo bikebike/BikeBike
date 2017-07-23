@@ -1,7 +1,3 @@
-#require 'perftools'
-
-#OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
-
 BikeBike::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -32,25 +28,14 @@ BikeBike::Application.configure do
   config.assets.debug = true
   config.assets.digest = true
   config.assets.compile = true
+  config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif *.json *.ttf *.otf *.woff *.woff2 *.svg *.json)
 
   # to deliver to the browser instead of email
   config.action_mailer.delivery_method = :letter_opener
-  # config.action_mailer.delivery_method = :smtp
-  # config.action_mailer.smtp_settings = {
-  #   address: 'smtp.gmail.com',
-  #   domain: 'bikebike.org',
-  #   port: 587,
-  #   authentication: :plain,
-  #   enable_starttls_auto: true,
-  #   openssl_verify_mode: 'none',
-  #   user_name: 'info@bikebike.org',
-  #   password: 'Toronto@)!)'
-  # }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true
 
   config.serve_static_files = true
-  # config.action_controller.perform_caching = true
 
   I18n.config.language_detection_method = I18n::Config::DETECT_LANGUAGE_FROM_URL_PARAM
 

@@ -1,5 +1,0 @@
-/*!CK:3203325578!*//*1427143565,*/
-
-if (self.CavalryLogger) { CavalryLogger.start_js(["uiVZ4"]); }
-
-__d("NavigationMetrics-upstream",["mixInEventEmitter","pageID","performance"],function(a,b,c,d,e,f,g,h,i){b.__markCompiled&&b.__markCompiled();var j=false,k=0,l,m={NAVIGATION_DONE:'NAVIGATION_DONE'},n=i.timing&&i.timing.navigationStart||0,o=0,p=0,q,r,s;function t(){l=h+':'+k;}var u={setTTI:function(w){o=w;return this;},setE2E:function(w){p=w;return this;},doneNavigation:function(){k++;t();v.emitAndHold(m.NAVIGATION_DONE,l,{page:q,pageType:r,pageURI:s,start:n,tti:o,e2e:p});n=0;o=0;p=0;},setStart:function(w){n=w;return this;}},v={Events:m,init:function(w){throw new Error('NavigationMetrics.init should be overridden by shim');},setPage:function(w){if(!j){j=true;v.init(u);}q=w.page;r=w.page_type;s=w.page_uri;}};g(v,m);e.exports=v;},null);

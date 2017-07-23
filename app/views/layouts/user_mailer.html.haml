@@ -1,26 +1,26 @@
 !!! Strict
-%html{:xmlns => "http://www.w3.org/1999/xhtml"}
+%html{xmlns: 'http://www.w3.org/1999/xhtml'}
   %head
-    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
-    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %meta{content: 'text/html; charset=utf-8', httpequiv: 'Content-Type'}
+    %meta{content: 'width=device-width, initial-scale=1.0', name: 'viewport'}
     %title=_!(@subject)
     = stylesheet_link_tag 'user-mailer'
   %body
-    %table{:border => "0", :cellpadding => "0", :cellspacing => "0", id: @wrapper_id.present? ? "bb_#{@wrapper_id.to_s}" : 'backgroundTable'}
+    %table{border: 0, cellpadding: 0, cellspacing: 0, id: @wrapper_id.present? ? "bb_#{@wrapper_id.to_s}" : 'backgroundTable'}
       %tr
         %td
-          %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0"}
+          %table{align: 'center', border: 0, cellpadding: 0, cellspacing: 0}
             - if @banner
               %tr
-                %td{:valign => "top", :style => 'text-align: center', colspan: 2}
-                  %img.image_fix{:src => @banner}
+                %td{valign: 'top', style: 'text-align: center', colspan: 2}
+                  %img.image_fix{src: @banner}
             %tr
-              %td{:valign => "top", colspan: 2}= yield
+              %td{valign: 'top', colspan: 2}= yield
             %tr
               %td{colspan: 2, style: 'height: 16px'}='&nbsp;'.html_safe
             %tr
               %td{style: 'width: 50%; text-align: left'}
-                %img.image_fix{:src => ((Rails.env.development? || Rails.env.test? ? 'https://preview-en.bikebike.org' : @host) + image_url('bblogo-paypal'))}
+                %img.image_fix{src: ((Rails.env.development? || Rails.env.test? ? 'https://preview-en.bikebike.org' : @host) + image_url('bblogo-paypal.png'))}
               %td{style: 'width: 50%; text-align: left'}
                 %a{href: @host}=_!("&copy; Bike!Bike! #{Date.today.year}").html_safe
             %tr

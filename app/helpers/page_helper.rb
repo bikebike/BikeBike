@@ -57,7 +57,7 @@ module PageHelper
 
   def add_inline_script(script)
     @_inline_scripts ||= Set.new
-    script = Rails.application.assets.find_asset("#{script.to_s}.js").to_s
+    script = File.read(File.join(Rails.public_path, ActionController::Base.helpers.asset_path("#{script.to_s}.js")))
     @_inline_scripts << script
   end
 
