@@ -20,7 +20,7 @@
               %td{colspan: 2, style: 'height: 16px'}='&nbsp;'.html_safe
             %tr
               %td{style: 'width: 50%; text-align: left'}
-                %img.image_fix{src: ((Rails.env.development? || Rails.env.test? ? 'https://preview-en.bikebike.org' : @host) + image_url('bblogo-paypal'))}
+                %img.image_fix{src: ((Rails.env.development? || Rails.env.test? ? 'https://preview-en.bikebike.org' : @host) + image_url('bblogo-paypal.png'))}
               %td{style: 'width: 50%; text-align: left'}
                 %a{href: @host}=_!("&copy; Bike!Bike! #{Date.today.year}").html_safe
             %tr
