@@ -217,8 +217,8 @@ class ApplicationController < BaseController
     
     if params[:reason] == 'conference' && logged_in?
 
-      @conference.conference_administrators.each do |user|
-        email_list << user.named_email
+      @conference.conference_administrators.each do |administrator|
+        email_list << administrator.user.named_email
       end
     end
 
