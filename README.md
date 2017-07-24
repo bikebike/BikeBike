@@ -9,19 +9,25 @@ This is the repository for the Bike!Bike! website. It can be found in developmen
 
 Feel free to clone or fork the repository any time to start working on new features or fixes. To get help create an issue or contact Godwin: `goodgodwin` `@` `hotmail.com` any time.
 
+![Screenshot of Bike!Bike!](https://workbench.bikecollectives.org/apps/bikebike/screenshots/application/home/3/desktop.png)
+
 ## Technologies ##
 
 * [Ruby 2.3.0][1]
-* [Rails 4.2.0][2]
+* [Rails 4.2.0][2] _([Project to upgrade to Rails 5](https://github.com/orgs/bikebike/projects/13))_
 * [PostgreSQL][3]
 * [HAML][4]
 * [SCSS][5]
+* [NGinx][6] _([We may switch to Caddy](https://github.com/bikebike/bikecollectives_core/issues/1))_
+* [DigitalOcean][7] _([We may switch to Linode](https://github.com/bikebike/bikecollectives_core/issues/2))_
 
 [1]: http://www.ruby-lang.org/en/
 [2]: http://rubyonrails.org/
 [3]: http://www.postgresql.org/
 [4]: http://haml.info/
 [5]: http://sass-lang.com/
+[6]: https://www.nginx.com/
+[7]: https://digitalocean.com
 
 
 ## Internal Gems ##
@@ -34,6 +40,10 @@ bundle config local.bikecollectives_core PATH_TO/bikecollectives_core
 ```
 
 Here is a list of the gems we have created so far, if you are a collaborator on this project you may need to become a collaborator on these gems as well. Don't hesitate to make a request, it won't be denied:
+
+### Bike Collectives Core ###
+
+[Bike Collectives Core](https://github.com/bikebike/bikecollectives_core) is where models, migrations, and some common controllers and helpers live. This Gem is shared between [Bike Collectives](https://github.com/bikebike/bikecollectives) and [Bike Collectives Workbench](https://github.com/bikebike/bikecollectives_workbench).
 
 ### Lingua Franca ###
 
@@ -80,24 +90,46 @@ All translation is done in a collaborative, volunteer based system on the site i
 
 The method can be used as follows:
 
-	_ 'basename.my_key'
+```haml
+%h1=_'basename.my_title'
+%p=_'basename.my_key', :paragraph
+%button=_'basename.click_me'
+```
 
-	_ 'basename.my_key', :paragraph
+Assuming none of the keys map to translations, this will be rendered into the following HTML:
 
-	end
+```html
+<h1>
+  Lorem ipsum dolor sit amet
+</h1>
 
-If the key does not exist, the previous lines will produce the following respectively:
+<p>
+  Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Proin eget tortor risus. Donec sollicitudin molestie malesuada. Donec rutrum congue leo eget malesuada.
+</p>
 
-	'my_key'
-	
-	'Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.
-		Vivamus magna justo, lacinia eget consectetur sed, convallis at
-		tellus. Proin eget tortor risus. Donec sollicitudin molestie
-		malesuada. Donec rutrum congue leo eget malesuada.'
+<button>
+  click me
+</button>
+```
 
-If the user has sufficient rights, these blocks will also be surrounded by the necessary markup to allow them to be selected and edited by the user.
+By default, the key will be translated using the last key part ('click me' in this example), however if a context is provided, some appropriate lorem ipsum text. Available contexts are:
 
-Translations are recorded during testing and committed to the repository when pushing to github. After pulling down the latest version from github you should always run `rake translations:migrate` to put the latest migrations into your database.
+* `title` (alias: `t`): title text, a few words in upper case
+* `word` (alias: `words`, `w`): A word, if a second parameter is provided a numbr of words will be rendered (for example `_'key',:w,3`)
+* `sentence` (alias: `sentences`, `s`): A sentence or multiple sentence
+* `paragraph` (alias: `p`): A paragraph
+
+If actual translations are not provided by the time the code hits production, fatals will occur.
+
+### Entering translations
+
+Translations can be provided directly by editing [`en.yml`](https://github.com/bikebike/BikeBike/blob/master/config/locales/en.yml) but will also be directly using the [workbench](https://github.com/bikebike/bikecollectives_workbench):
+
+![Screenshot of the Bike Collectives Workbench](https://i.imgur.com/y8Ezjeg.png)
+
+### Collecting translations
+
+Translations, along with screenshots and HTML page captures are collected during testing so that the workbench will have up to date translations and context for each to make it easier for translators to provide relevant translations. To collect these translations yourself, execute `rake i18n`.
 
 ## Testing Practices ##
 
@@ -106,7 +138,7 @@ Our focus will be on integration testing using Capybara. While testing the app r
 Before commiting you shuold always run:
 
 ```bash
-bundle exec cucumber
+bundle exec rake cucumber:run
 ```
 
 and:
