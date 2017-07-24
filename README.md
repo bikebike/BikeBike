@@ -41,6 +41,10 @@ bundle config local.bikecollectives_core PATH_TO/bikecollectives_core
 
 Here is a list of the gems we have created so far, if you are a collaborator on this project you may need to become a collaborator on these gems as well. Don't hesitate to make a request, it won't be denied:
 
+### Bike Collectives Core ###
+
+[Bike Collectives Core](https://github.com/bikebike/bikecollectives_core) is where models, migrations, and some common controllers and helpers live. This Gem is shared between [Bike Collectives](https://github.com/bikebike/bikecollectives) and [Bike Collectives Workbench](https://github.com/bikebike/bikecollectives_workbench).
+
 ### Lingua Franca ###
 
 [Lingua Franca](https://github.com/lingua-franca/lingua_franca) provides an easy way to include translatable content and provides a user interface for translators to provide translations. See [Translations](#translations) for best practices on the Bike!Bike! website.

@@ -33,7 +33,7 @@
       });
     };
 
-    d3.json('/assets/world-110m.json', function(error, world) {
+    d3.json(document.getElementById('map').getAttribute('data-src'), function(error, world) {
       if (error) {
         throw error;
       }
