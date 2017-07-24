@@ -8,4 +8,4 @@ Rails.application.config.assets.version = '1.0'
 
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-Rails.application.config.assets.precompile += %w( quill.js quill.css topojson.js pen.js *.js user-mailer.css favicon.ico fonts/*)
+Rails.application.config.assets.precompile += %w( quill.js quill.css topojson.js pen.js *.js user-mailer.css favicon.ico world-110m.json fonts/*)
