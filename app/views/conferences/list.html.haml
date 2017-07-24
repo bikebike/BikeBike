@@ -5,7 +5,7 @@
 
 - content_for :banner do
   #header-title.map
-    %svg#map.loading{preserveAspectRatio: 'xMinYMin slice', viewBox: "0 0 1880 550"}
+    %svg#map.loading{preserveAspectRatio: 'xMinYMin slice', viewBox: "0 0 1880 550", data: { src: asset_path('world-110m.json') }}
     #tooltip
 
 %article
