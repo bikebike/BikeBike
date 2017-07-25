@@ -2,7 +2,7 @@
 
 %h2 Error details
 %code.signature{class: "#{@report.source}-signature"}=@report.signature
-%code.backtrace{class: "#{@report.source}-backtrace"}=@report.backtrace.gsub(/\n\s+/, '<br>&nbsp;nbsp;').html_safe
+%code.backtrace{class: "#{@report.source}-backtrace"}=@report.backtrace.gsub(/\n+\s+/, '<br>&nbsp;&nbsp;').html_safe
 
 %h2 Request details
 .request-details
