@@ -3,8 +3,8 @@
   = save_registration_step do
     = columns(medium: 12) do
       = textfield :name, @name, required: true, big: true
-      %h3=_'articles.conference_registration.headings.pronoun'
     = columns(medium: 6) do
       %p.small=_'articles.conference_registration.paragraphs.pronoun', :p
     = columns(medium: 6) do
-      = textfield :pronoun, @pronoun, required: false, big: true, warning: 'articles.conference_registration.paragraphs.pronoun_optional'
+      %h3=_'articles.conference_registration.headings.pronoun'
+      = textfield :pronoun, @pronoun, required: false, big: true
