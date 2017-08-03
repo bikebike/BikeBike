@@ -145,7 +145,7 @@ class UserMailer < ActionMailer::Base
 
     @user = User.find(@request.data['user'].to_i) if @request.data['user'].present?
 
-    mail to: administrators, subject: clean_subject(subject)
+    mail to: administrators, subject: clean_subject(subject), reply_to: @user.present? ? @user.named_email : nil
   end
 
   def contact(from, subject, message, email_list)
