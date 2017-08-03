@@ -186,7 +186,7 @@ table#ecxbb_full_width {
 
 code {
     color: firebrick;
-    white-space: pre;
+    white-space: nowrap;
     margin: 0 0 2em;
     display: block;
     max-width: $max-table-width;

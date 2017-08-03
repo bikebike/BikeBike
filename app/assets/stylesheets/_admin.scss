@@ -128,28 +128,6 @@ table, .table {
                 margin: 0;
                 width: 100%;
             }
-
-            // tr:first-child {
-            //     td, th {
-            //         border-top: 0;
-            //     }
-            // }
-
-            // tr:last-child {
-            //     td, th {
-            //         border-bottom: 0;
-            //     }
-            // }
-            
-            // td, th {
-            //     &:first-child {
-            //         border-left: 0
-            //     }
-
-            //     &:last-child {
-            //         border-right: 0
-            //     }
-            // }
         }
 
         &.bold {
@@ -458,6 +436,7 @@ nav.sub-menu {
         @include _(border-radius, 0.15em);
         @include default-box-shadow(top, 2);
         @include _(text-shadow, 0 0.05em 0.05em #FFF);
+        @include not-link-like;
 
         &:hover, &:active, &:focus {
             background-color: #D8D8D8;
@@ -467,10 +446,6 @@ nav.sub-menu {
             background-color: #CCC;
             color: #666;
             padding: 0.333em 0.75em 0.25em;
-        }
-
-        @include after {
-            display: none;
         }
     }
 
@@ -711,10 +686,7 @@ nav.sub-menu {
         border: 0.1rem solid $light-gray;
         border-top: 0;
         border-right: 0;
-
-        @include after {
-            display: none;
-        }
+        @include not-link-like;
 
         &:hover {
             background-color: $light-gray;
@@ -1566,6 +1538,7 @@ nav.sub-menu {
         margin: 0.5em 0;
         @include default-box-shadow(top, 2);
         @include _(transition, transform 150ms ease-in-out);
+        @include not-link-like;
 
         &:hover, &:focus, &:active {
             z-index: $zindex-base + 2;
@@ -1582,10 +1555,6 @@ nav.sub-menu {
             z-index: $zindex-base + 2;
             cursor: pointer;
             @include _(box-shadow, inset 0em -2em 2em -1em $white);
-        }
-
-        @include after {
-            display: none;
         }
     }
 }
@@ -1797,10 +1766,7 @@ html[data-ontop] {
 
     a {
         color: inherit;
-
-        @include after {
-            display: none;
-        }
+        @include not-link-like;
     }
 
     .name {

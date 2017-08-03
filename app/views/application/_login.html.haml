@@ -1,6 +1,9 @@
 - dest ||= nil
+- if flash[:error].present?
+  #action-message.error
+    .message=_"articles.conference_registration.error.#{flash[:error]}"
 = form_tag do_confirm_path, class: 'flex-form' do
-	= hidden_field_tag :dest, settings_path if dest.present?
-	= emailfield :email, nil, big: true
-	= button :continue, value: :confirm_email
-	= link_to (_'forms.actions.generic.facebook_sign_in','Facebook Sign In'), auth_at_provider_path(provider: :facebook, dest: dest), class: [:button, :facebook]
+  = hidden_field_tag :dest, settings_path if dest.present?
+  = emailfield :email, nil, big: true, required: true
+  = button :continue, value: :confirm_email
+  = link_to (_'forms.actions.generic.facebook_sign_in','Facebook Sign In'), auth_at_provider_path(provider: :facebook, dest: dest), class: [:button, :facebook]
