@@ -112,7 +112,7 @@ module AdminHelper
   end
 
   def get_housing_match(host, guest, space)
-    housing_data = guest.housing_data || []
+    housing_data = guest.housing_data || {}
     
     if housing_data['host'].present?
       if housing_data['host'] == host.id
