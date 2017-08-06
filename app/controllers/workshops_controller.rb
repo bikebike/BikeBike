@@ -67,8 +67,8 @@ class WorkshopsController < ApplicationController
     else
       return do_403 unless @can_edit
 
-      @title = @workshop.title
-      @info = @workshop.info
+      @title = @workshop.title!
+      @info = @workshop.info!
     end
 
     @needs = JSON.parse(@workshop.needs || '[]').map &:to_sym

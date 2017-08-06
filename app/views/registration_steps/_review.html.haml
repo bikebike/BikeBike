@@ -39,6 +39,16 @@
       - if @allow_reopen_attendance
         .actions.centered
           = button :reopen_registration, value: :reopen_registration
+- if @host
+  = row do
+    = columns(medium: 12) do
+      %h3=_'articles.conferences.headings.housing_info', :t
+      %p=(_'articles.conference_registration.paragraphs.Housing', :p, vars: { name: strong(@host.user.name), address: location_link(Location.find_location(@host.housing_data['address'], @this_conference.city)), phone: phone_link(@host.housing_data['phone']), email: email_link(@host.user.email) }).html_safe
+  = row do
+    = columns(medium: 12) do
+      %h4=_'articles.conference_registration.headings.hosting_info', :t
+      = richtext @host.housing_data['info']
+      
 = row do
   = columns(medium: 12) do
     %h3=_'articles.workshops.headings.Workshops', :t

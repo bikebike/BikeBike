@@ -8,15 +8,22 @@
 
 - first_row = true
 %table.hosts.admin-edit
-  - @hosts.each do |id, registration|
-    - unless first_row
-      %tr.spacer
-        %td
-    %tr.host
-      %th
-        .name=registration.user.name
-        .address=registration.housing_data['address']
-        - if registration.housing_data['notes'].present?
-          .host-notes=paragraph(registration.housing_data['notes'])
-        %td.inner-table{colspan: 2}=host_guests_table(registration)
-    - first_row = false
+  - @hosts.sort_by{ |id, registration| registration.user.name }.each do |id, registration|
+    - if @housing_data[id][:space].map { |k,v| v }.sum > 0
+      - unless first_row
+        %tr.spacer
+          %td
+      %tr.host
+        %th
+          .name=registration.user.name
+          .address=location_link(Location.find_location(registration.housing_data['address'], @this_conference.city))
+          - if registration.housing_data['notes'].present?
+            .host-notes=paragraph(registration.housing_data['notes'])
+          - if registration.housing_data['info'].present?
+            %div=_'articles.conference_registration.headings.housing.Rules', :t
+            .house-rules
+              =richtext(registration.housing_data['info'], 4)
+            
+        %td.inner-table{colspan: 2}
+          =host_guests_table(registration)
+      - first_row = false

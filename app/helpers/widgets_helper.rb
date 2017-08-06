@@ -112,20 +112,20 @@ module WidgetsHelper
           @housing_data[id][:guest_data][guest_id][:errors].each do |error, value|
             if value.is_a?(Array)
               value.each do |v|
-                status_html += content_tag(:li, _("errors.messages.housing.space.#{error.to_s}", vars: v))
+                status_html += content_tag(:li, _("errors.messages.housing.space.#{error.to_s}", vars: v).html_safe)
               end
             else
-              status_html += content_tag(:li, _("errors.messages.housing.space.#{error.to_s}", vars: value))
+              status_html += content_tag(:li, _("errors.messages.housing.space.#{error.to_s}", vars: value).html_safe)
             end
           end
 
           @housing_data[id][:guest_data][guest_id][:warnings].each do |error, value|
             if value.is_a?(Array)
               value.each do |v|
-                status_html += content_tag(:li, _("warnings.messages.housing.space.#{error.to_s}", v))
+                status_html += content_tag(:li, _("warnings.messages.housing.space.#{error.to_s}", v).html_safe)
               end
             else
-              status_html += content_tag(:li, _("warnings.messages.housing.space.#{error.to_s}", vars: value))
+              status_html += content_tag(:li, _("warnings.messages.housing.space.#{error.to_s}", vars: value).html_safe)
             end
           end
 
@@ -325,5 +325,24 @@ module WidgetsHelper
         _!(markdown comment.comment)
       end
     end
+  end
+
+  def strong(text)
+    content_tag(:strong, text)
+  end
+
+  def phone_link(number)
+    content_tag(:a, number, href: "tel:#{number}")
+  end
+
+  def email_link(email)
+    content_tag(:a, email, href: "mailto:#{email}")
+  end
+
+  def status_bubble(text, status, attributes = {})
+    attributes[:class] ||= []
+    attributes[:class] = [attributes[:class]] unless attributes[:class].is_a?(Array)
+    attributes[:class] << "#{status}-info"
+    content_tag(:div, text.html_safe, attributes)
   end
 end

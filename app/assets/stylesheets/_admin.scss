@@ -123,6 +123,7 @@ table, .table {
     td, .table-td {
         &.inner-table {
             padding: 0.5em;
+            vertical-align: top;
 
             table {
                 margin: 0;
@@ -132,6 +133,10 @@ table, .table {
 
         &.bold {
             @include font-family(secondary);
+        }
+
+        .rules {
+            font-size: 0.75em;
         }
     }
 
@@ -859,7 +864,7 @@ nav.sub-menu {
                 min-width: 15em;
             }
 
-            .host-notes {
+            .host-notes, .house-rules {
                 @include font-family(primary);
                 font-size: 0.85em;
                 border: 0.1em solid $light-gray;
@@ -874,6 +879,11 @@ nav.sub-menu {
                 > p:last-child {
                     margin-bottom: 0;
                 }
+            }
+
+            .house-rules {
+                max-height: 30em;
+                overflow: auto;
             }
 
             .guest-notes {

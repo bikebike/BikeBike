@@ -1333,6 +1333,7 @@ fr:
           d’avis à nouveau,veuillez cliquer sur le boutonci-dessous,maissouvenez-vousquesi
           vous attendez trop longtemps,votre hébergement et votre bicyclette pourraient
           être attribués à quelqu’un d’autre.
+        Housing: Vous restez à %{address}, le nom de votre hôte est %{name}. Vous pouvez les contacter par email %{email} ou par téléphone à %{phone}. Prenez le temps de lire les règles de leur maison ci-dessous.
         pronoun_optional: Il n’y a aucune obligation de choisir un pronom.
         pronoun: Il importe que lorsqu'on communique avec vous ou au sujet de vous,
           ce soit avec respect. Si vous ne précisez pas votre pronom, les organisateurs
@@ -1617,6 +1618,7 @@ fr:
         facilitate_request_sent: Votre demande a été envoyée. Vous recevrez un courriel
           une fois qu’elle aura été approuvée ou rejetée, ou si l’un des animateurs
           ou l’une des animatrices a des questions.
+        not_original_locale: Vous éditez un atelier %{original_locale}, <a href="%{link}">éditez la traduction %{this_locale} à la place</a>
         notes: Les remarques ne peuvent être vues que par organisateurs et les organisatrices
           ainsi que par les personnes qui animent les présentations.
         needs: Si vous avez besoin du matériel qui suit, les organisateurs et les

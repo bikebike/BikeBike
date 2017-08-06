@@ -1833,7 +1833,11 @@ en:
             volunteering_info: Volunteering info
             additional_details: Additional details
         companion: Companion
+        Housing: Housing
+        housing:
+          Rules: House Rules
       paragraphs:
+        Housing: You are staying at %{address}, your host's name is %{name}. You can contact them by email %{email} or by phone at %{phone}. Please take some time to read their house rules below.
         pronoun: It is important that communications with you and about you are as
           respectful as possible. If you do not provide a pronoun organizers may assume
           he, she, or they based on your name or visual identity.
@@ -2242,6 +2246,7 @@ en:
           we want to hear about everyone’s experience within the many configurations
           of community shops we’re coming from.
         notes: Notes are only viewable by conference hosts and workshop facilitators
+        not_original_locale: You are editing a %{original_locale} workshop, <a href="%{link}">edit the %{this_locale} translation instead</a>
         facilitate_request: Please tell the current workshop facilitators who you
           are, why you want to help facilitate the workshop, and how you think you
           will help make the workshop better. All of the current facilitators will
