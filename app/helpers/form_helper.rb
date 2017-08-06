@@ -137,7 +137,8 @@ module FormHelper
 
     if options[:warning].present?
       description_id ||= "#{id}-desc"
-      html += content_tag(:div, _(options[:warning], :s, 2), id: description_id, class: 'warning-info')
+      # html += content_tag(:div, _(options[:warning], :s, 2), id: description_id, class: 'warning-info')
+      html += status_bubble(_(options[:warning], :s, 2), :warning, id: description_id)
     end
 
     aria = {}

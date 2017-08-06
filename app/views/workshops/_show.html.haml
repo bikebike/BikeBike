@@ -13,7 +13,7 @@
     - if preview.blank? && translations_available_for_editing
       .actions.center
         - translations_available_for_editing.each do |locale|
-          = link_to (_'actions.workshops.Translate', "Translate into #{language_name(locale)}", :vars => {:language => language_name(locale)}), translate_workshop_url(workshop.conference.slug, workshop.id, locale), :class => [:button, :translate]
+          = link_to (_'actions.workshops.Translate', "Translate into #{language_name(locale)}", vars: {language: language_name(locale)}), translate_workshop_url(workshop.conference.slug, workshop.id, locale), class: [:button, :translate]
   - if logged_in?
     = columns(medium: 6) do
       %h3=_'articles.workshops.headings.facilitators'
@@ -30,19 +30,19 @@
                 .details
                   .email=_!u.email
                 - if f.role.to_sym == :requested
-                  =(link_to (_'actions.workshops.Approve'), approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'approve'), :class => [:button, :modify])
-                  =(link_to (_'actions.workshops.Deny'), approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'deny'), :class => [:button, :delete])
+                  =(link_to (_'actions.workshops.Approve'), approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'approve'), class: [:button, :modify])
+                  =(link_to (_'actions.workshops.Deny'), approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'deny'), class: [:button, :delete])
                 - elsif workshop.can_remove?(current_user, u)
-                  =(link_with_confirmation (_'actions.workshops.Make_Owner'), (_'modals.workshops.facilitators.confirm_transfer_ownership', vars: { user_name: u.name}),approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'switch_ownership'), :class => [:button, :modify]) unless f.role.to_sym == :creator || !workshop.creator?(current_user)
-                  =(link_with_confirmation (_"actions.workshops.#{is_this_user ? 'Leave' : 'Remove'}"), (_"modals.workshops.facilitators.confirm_remove#{is_this_user ? '_self' : ''}", vars: { user_name: u.name}), approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'remove'), :class => [:button, :delete])
+                  =(link_with_confirmation (_'actions.workshops.Make_Owner'), (_'modals.workshops.facilitators.confirm_transfer_ownership', vars: { user_name: u.name}),approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'switch_ownership'), class: [:button, :modify]) unless f.role.to_sym == :creator || !workshop.creator?(current_user)
+                  =(link_with_confirmation (_"actions.workshops.#{is_this_user ? 'Leave' : 'Remove'}"), (_"modals.workshops.facilitators.confirm_remove#{is_this_user ? '_self' : ''}", vars: { user_name: u.name}), approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'remove'), class: [:button, :delete])
               - if is_this_user && workshop.requested_collaborator?(current_user)
                 .details
-                  =(link_with_confirmation (_'actions.workshops.Cancel_Request'), (_'modals.workshops.facilitators.confirm_cancel_request'), approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'remove'), :class => [:button, :delete])
+                  =(link_with_confirmation (_'actions.workshops.Cancel_Request'), (_'modals.workshops.facilitators.confirm_cancel_request'), approve_facilitate_workshop_request_path(workshop.conference.slug, workshop.id, f.user_id, 'remove'), class: [:button, :delete])
         - unless preview.present?
-          =(link_to (_'actions.workshops.Facilitate'), facilitate_workshop_path(workshop.conference.slug, workshop.id), :class => [:button, workshop.needs_facilitators ? :accented : :subdued]) unless workshop.facilitator?(current_user)
+          =(link_to (_'actions.workshops.Facilitate'), facilitate_workshop_path(workshop.conference.slug, workshop.id), class: [:button, workshop.needs_facilitators ? :accented : :subdued]) unless workshop.facilitator?(current_user)
           - if is_facilitator
             %h4=_'articles.workshops.headings.add_facilitator','Add a facilitator'
-            = form_tag workshop_add_facilitator_path(workshop.conference.slug, workshop.id), :class => 'add-facilitator mini-flex-form' do
+            = form_tag workshop_add_facilitator_path(workshop.conference.slug, workshop.id), class: 'add-facilitator mini-flex-form' do
               .email-field.input-field
                 = email_field_tag :email, nil, required: true
                 = label_tag :email

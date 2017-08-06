@@ -326,4 +326,23 @@ module WidgetsHelper
       end
     end
   end
+
+  def strong(text)
+    content_tag(:strong, text)
+  end
+
+  def phone_link(number)
+    content_tag(:a, number, href: "tel:#{number}")
+  end
+
+  def email_link(email)
+    content_tag(:a, email, href: "mailto:#{email}")
+  end
+
+  def status_bubble(text, status, attributes = {})
+    attributes[:class] ||= []
+    attributes[:class] = [attributes[:class]] unless attributes[:class].is_a?(Array)
+    attributes[:class] << "#{status}-info"
+    content_tag(:div, text.html_safe, attributes)
+  end
 end

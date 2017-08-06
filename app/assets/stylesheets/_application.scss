@@ -1723,6 +1723,10 @@ ul.warnings {
     .text-field & {
         margin: 0 0 1em 0;
     }
+
+    &.top-message {
+        margin-top: 2em;
+    }
 }
 
 .success-info {

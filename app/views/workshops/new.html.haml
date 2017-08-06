@@ -11,6 +11,8 @@
             = hidden_field_tag :translation, @translation
           - else
             %h2=_@page_title, :t
+          - unless @is_translating || @workshop.locale.to_s == I18n.locale.to_s
+            = status_bubble(_('articles.workshops.paragraphs.not_original_locale', vars: { original_locale: language_name(@workshop.locale), this_locale: language_name(I18n.locale), link: translate_workshop_url(@workshop.conference.slug, @workshop.id, I18n.locale) }), :warning, class: 'top-message')
         - else
           %h2=_@page_title, :t
 
