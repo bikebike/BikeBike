@@ -85,8 +85,14 @@ module GeocoderHelper
   end
 
   def location_link(location)
-    return '' unless location.present? && location.address.present?
-    content_tag(:a, (_!location.address), href: "http://www.google.com/maps/place/#{location.latitude},#{location.longitude}")
+    return '' unless location.present?
+    address = if location.is_a?(Location)
+                location.street
+              else
+                location.address
+              end
+    return '' unless address.present?
+    content_tag(:a, (_!address), href: "http://www.google.com/maps/place/#{location.latitude},#{location.longitude}")
   end
 
   def same_city?(location1, location2)

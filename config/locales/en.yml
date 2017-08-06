@@ -1833,7 +1833,11 @@ en:
             volunteering_info: Volunteering info
             additional_details: Additional details
         companion: Companion
+        Housing: Housing
+        housing:
+          Rules: House Rules
       paragraphs:
+        Housing: You are staying at %{address}, your host's name is <strong>%{name}</strong>. You can contact them by email <a href="mailto:%{email}">%{email}</a> or by phone at <a href="tel:%{phone}">%{phone}</a>. Please take some time to read their house rules below.
         pronoun: It is important that communications with you and about you are as
           respectful as possible. If you do not provide a pronoun organizers may assume
           he, she, or they based on your name or visual identity.

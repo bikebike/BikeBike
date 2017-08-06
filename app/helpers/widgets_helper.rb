@@ -112,20 +112,20 @@ module WidgetsHelper
           @housing_data[id][:guest_data][guest_id][:errors].each do |error, value|
             if value.is_a?(Array)
               value.each do |v|
-                status_html += content_tag(:li, _("errors.messages.housing.space.#{error.to_s}", vars: v))
+                status_html += content_tag(:li, _("errors.messages.housing.space.#{error.to_s}", vars: v).html_safe)
               end
             else
-              status_html += content_tag(:li, _("errors.messages.housing.space.#{error.to_s}", vars: value))
+              status_html += content_tag(:li, _("errors.messages.housing.space.#{error.to_s}", vars: value).html_safe)
             end
           end
 
           @housing_data[id][:guest_data][guest_id][:warnings].each do |error, value|
             if value.is_a?(Array)
               value.each do |v|
-                status_html += content_tag(:li, _("warnings.messages.housing.space.#{error.to_s}", v))
+                status_html += content_tag(:li, _("warnings.messages.housing.space.#{error.to_s}", v).html_safe)
               end
             else
-              status_html += content_tag(:li, _("warnings.messages.housing.space.#{error.to_s}", vars: value))
+              status_html += content_tag(:li, _("warnings.messages.housing.space.#{error.to_s}", vars: value).html_safe)
             end
           end
 

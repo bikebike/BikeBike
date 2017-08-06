@@ -479,8 +479,10 @@ class ConferenceAdministrationController < ApplicationController
             end
           end
 
+
           @excel_data[:data] << host_data
         end
+
         return respond_to do |format|
           format.xlsx { render xlsx: '../conferences/stats', filename: "housing" }
         end

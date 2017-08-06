@@ -20,6 +20,6 @@
                 - locale_translation = language_name(locale, true)
                 - translation_text = (_'translate.content.change_locale', "Read in #{locale_translation}", vars: {language: locale_translation}, locale: locale)
                 %a{href: url, lang: locale, title: translation_text}
-                  %span{aria: {hidden: true}}=_!locale
+                  %span{aria: {hidden: :true}}=_!locale
                   = off_screen translation_text
     

@@ -153,43 +153,6 @@ table, .table {
         }
     }
 
-    // td, .table-td {
-    //     &.inner-table {
-    //         padding: 0;
-
-    //         table {
-    //             margin: 0;
-    //             width: 100%;
-    //         }
-
-    //         tr:first-child {
-    //             td, th {
-    //                 border-top: 0;
-    //             }
-    //         }
-
-    //         tr:last-child {
-    //             td, th {
-    //                 border-bottom: 0;
-    //             }
-    //         }
-            
-    //         td, th {
-    //             &:first-child {
-    //                 border-left: 0
-    //             }
-
-    //             &:last-child {
-    //                 border-right: 0
-    //             }
-    //         }
-    //     }
-
-        // &.bold {
-        //     @include font-family(secondary);
-        // }
-    // }
-
     tbody th {
         width: 0.1rem;
     }
