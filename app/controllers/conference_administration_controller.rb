@@ -884,7 +884,7 @@ class ConferenceAdministrationController < ApplicationController
         end
       end
 
-      @guests = @guests.sort_by { |k,v| v.user.firstname }
+      @guests = @guests.sort_by { |k,v| v.user.firstname.downcase }
 
       return @hosts_affected_by_guests
     end
