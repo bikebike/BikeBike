@@ -366,7 +366,7 @@ class WorkshopsController < ApplicationController
       @page_title = "articles.conference_registration.headings.#{@this_conference.registration_status == :open ? '': 'Pre_'}Registration_Details"
       @main_title = "articles.conference_registration.headings.#{@this_conference.registration_status == :open ? '': 'Pre_'}Register"
       @main_title_vars = { vars: { title: @this_conference.title } }
-      render register_path(@this_conference.slug)
+      render 'conferences/register'
     end
   end
 
