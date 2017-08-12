@@ -8,7 +8,7 @@ module RegistrationHelper
 
   def registration_status(registration)
     return :unregistered if registration.nil?
-    return :cancelled if registration.is_attending == 'n'
+    return :cancelled if registration.is_attending == 'n' && !registration.can_provide_housing
     return registration.status
   end
 

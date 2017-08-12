@@ -3,7 +3,7 @@
     = row(class: 'inner-nav') do
       = columns(medium: 3) do
         - protect do
-          = link_to home_path, :class => 'logo' do
+          = link_to home_path, class: :logo do
             = svg 'logo', (_!'Bike Bike')
             = svg 'logo-text', (_!'Bike Bike')
             = off_screen _!'Bike Bike'
@@ -22,4 +22,3 @@
                 %a{href: url, lang: locale, title: translation_text}
                   %span{aria: {hidden: :true}}=_!locale
                   = off_screen translation_text
-    

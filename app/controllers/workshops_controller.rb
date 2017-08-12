@@ -147,8 +147,13 @@ class WorkshopsController < ApplicationController
       # only save if the text has changed, if we want to make sure only to update the translator id if necessary
       workshop.save_translations if do_save
     elsif can_edit
-      workshop.title              = title
-      workshop.info               = info
+      if workshop.locale.nil? || workshop.locale.to_s == I18n.locale.to_s
+        workshop.title = title
+        workshop.info = info
+      else
+        workshop.set_column_for_locale(:title, workshop.locale, title)
+        workshop.set_column_for_locale(:info, workshop.locale, info)
+      end
       workshop.languages          = (params[:languages] || {}).keys.to_json
       workshop.needs              = (params[:needs] || {}).keys.to_json
       workshop.theme              = params[:theme] == 'other' ? params[:other_theme] : params[:theme]

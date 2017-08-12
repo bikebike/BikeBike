@@ -1333,7 +1333,7 @@ fr:
           d’avis à nouveau,veuillez cliquer sur le boutonci-dessous,maissouvenez-vousquesi
           vous attendez trop longtemps,votre hébergement et votre bicyclette pourraient
           être attribués à quelqu’un d’autre.
-        Housing: Vous restez à %{address}, le nom de votre hôte est %{name}. Vous pouvez les contacter par email %{email} ou par téléphone à %{phone}. Prenez le temps de lire les règles de leur maison ci-dessous.
+        Housing: Vous serez hébergé(e) au %{address}, chez %{name}. Vous pouvez contacter cette personne à %{email} ou au %{phone}. Veuillez prendre la peine de lire les conditions d'hébergement ci-dessous.
         pronoun_optional: Il n’y a aucune obligation de choisir un pronom.
         pronoun: Il importe que lorsqu'on communique avec vous ou au sujet de vous,
           ce soit avec respect. Si vous ne précisez pas votre pronom, les organisateurs
