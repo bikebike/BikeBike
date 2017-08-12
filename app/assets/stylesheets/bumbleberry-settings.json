@@ -7,8 +7,8 @@
     },
     "development": {
       "safari": ["5", "5.1"],
-      "and_chr": ["59"],
-      "chrome": ["59"],
+      "and_chr": ["60"],
+      "chrome": ["60"],
       "edge": ["13"],
       "firefox": ["54"],
       "ie": ["11"],
