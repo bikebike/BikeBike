@@ -1294,6 +1294,7 @@ en:
   success:
     messages:
       admin:
+        block_saved: Workshop block saved successfully
         administrators: Organizations updated
         dates: Conference dates updated successfully
         description: Conference description updated successfully
