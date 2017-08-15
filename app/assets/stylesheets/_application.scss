@@ -326,6 +326,10 @@ table, .table {
             overflow: auto !important;
         }
     }
+
+    &.full {
+        width: 100%;
+    }
 }
 
 .table-scroller {
@@ -462,6 +466,7 @@ body.expanded-element {
 
 .responsive-table {
     display: block;
+    width: 100%;
 
     .table-td {
         padding: 1em;

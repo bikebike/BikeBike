@@ -1158,6 +1158,7 @@ fr:
         recycle_parts: Organismes de vélo à but non lucratif
     conference_registration:
       headings:
+        guests: Invités
         policy: Politique
         Policy_Agreement: Accord d’espace positif
         contact_info: Coordonnées
@@ -1240,6 +1241,10 @@ fr:
           quiet: Maison calme
       not_attending: Je n’assisterai pas à la conférence
       paragraphs:
+        Hosting:
+          zero: Vous n'avez pas encore été sélectionné pour héberger des invités, n'oubliez pas que votre liste d'invités peut changer à tout moment. Si vous avez des questions ou des problèmes concernant vos invités, veuillez contacter les organisateurs de la conférence.
+          one: Vous avez été sélectionné pour héberger un invité, veuillez garder à l'esprit que votre liste d'invités peut changer à tout moment. Si vous avez des questions ou des problèmes concernant vos invités, veuillez contacter les organisateurs de la conférence.
+          other: Vous avez été sélectionné pour accueillir %{count} invités, n'oubliez pas que votre liste d'invités peut changer à tout moment. Si vous avez des questions ou des problèmes concernant vos invités, veuillez contacter les organisateurs de la conférence.
         Contact_Info: Parlez-nous un peu de vous
         Confirm_Agreement: En cliquant sur « J’accepte », vous vous engagez à faire
           votre possible pour appliquer l’Accord d’espace positif de Bike!Bike! Merci.
