@@ -1401,7 +1401,12 @@ es:
         pronoun: Pronombre con el que te identificas (él/ella/ellxs)
         review: Revisar
         your_location: Ciudad o localidad en la que vives?
+        guests: Invitados
       paragraphs:
+        Hosting:
+          zero: No ha sido seleccionado para recibir invitados todavía, tenga en cuenta que su lista de invitados puede cambiar en cualquier momento. Si tiene alguna pregunta o problema sobre sus invitados, favor de comunicarse con los organizadores de la conferencia.
+          one: Usted ha sido seleccionado para recibir un invitado, por favor tenga en cuenta que su lista de invitados puede cambiar en cualquier momento. Si tiene alguna pregunta o problema sobre sus invitados, favor de comunicarse con los organizadores de la conferencia.
+          other: Usted ha sido seleccionado para recibir %{count} invitados, por favor tenga en cuenta que su lista de invitados puede cambiar en cualquier momento. Si tiene alguna pregunta o problema sobre sus invitados, favor de comunicarse con los organizadores de la conferencia.
         Payment_Made: Usted ya ha realizado un pago de %{fees_paid}.
         Payment_Add: "¡Gracias! Abajo puedes agregar más dinero a esta cantidad si
           deseas realizar otro pago. "

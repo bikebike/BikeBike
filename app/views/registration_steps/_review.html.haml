@@ -47,7 +47,27 @@
   = row do
     = columns(medium: 12) do
       %h4=_'articles.conference_registration.headings.hosting_info', :t
-      = richtext @host.housing_data['info']
+      #house-rules{lang: @host.user.locale.to_s == I18n.locale.to_s ? nil : @host.user.locale}
+        = richtext @host.housing_data['info']
+- elsif @guests
+  = row do
+    = columns(medium: 12) do
+      %h3=_'articles.conference_registration.headings.Hosting', :t
+      %p=_'articles.conference_registration.paragraphs.Hosting', :p, vars: { count: @guests.sum { |s| s.size } }
+  = row do
+    = columns(medium: 12) do
+      %h4=_'articles.conference_registration.headings.guests', :t
+      - @guests.each do |space, guests|
+        %h5=_"forms.labels.generic.#{space}"
+        %table.full
+          - guests.each do |guest|
+            %tr
+              %th=guest.user.name
+              %th=guest.from
+            %tr
+              - if guest.housing_data['other'].present?
+                %td{colspan: 2, lang: guest.user.locale.to_s == I18n.locale.to_s ? nil : guest.user.locale}
+                  = paragraph guest.housing_data['other']
       
 = row do
   = columns(medium: 12) do

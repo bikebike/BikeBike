@@ -1725,6 +1725,7 @@ en:
         name: Name
         languages: Languages spoken
       headings:
+        guests: Guests
         pronoun: Pronoun (he/she/they)
         Back_to: 'Back to:'
         group_ride: Do you plan to attend the group ride?
@@ -1838,6 +1839,10 @@ en:
         housing:
           Rules: House Rules
       paragraphs:
+        Hosting:
+          zero: You have not been selected to host any guests yet, please keep in mind that your guest list may change at any time. If you have any questions or issues about your guests, please reach out to the conference organizers.
+          one: You have been selected to host one guest, please keep in mind that your guest list may change at any time. If you have any questions or issues about your guests, please reach out to the conference organizers.
+          other: You have been selected to host %{count} guests, please keep in mind that your guest list may change at any time. If you have any questions or issues about your guests, please reach out to the conference organizers.
         Housing: You are staying at %{address}, your host's name is %{name}. You can contact them by email %{email} or by phone at %{phone}. Please take some time to read their house rules below.
         pronoun: It is important that communications with you and about you are as
           respectful as possible. If you do not provide a pronoun organizers may assume
