@@ -1173,6 +1173,8 @@ en:
   errors:
     format: "%{attribute} %{message}"
     messages:
+      schedule:
+        need_not_available: '%{workshop_title} workshop requires %{need} but %{location} does not have this amenity'
       accepted: must be accepted
       blank: can't be blank
       present: must be blank
