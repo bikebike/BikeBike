@@ -10,5 +10,5 @@
 
 %p
   =_'email.workshop.paragraph.view_workshop',"You can view the workshop here: "
-  - workshop_link = @host + view_workshop_path(@workshop.conference.slug, @workshop.id)
+  - workshop_link = view_workshop_path(@workshop.conference.slug, @workshop.id)
   %a{href: workshop_link}=workshop_link

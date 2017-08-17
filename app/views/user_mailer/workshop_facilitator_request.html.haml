@@ -4,7 +4,7 @@
 
 %p
   =_'email.workshop.paragraph.request_instructions',"You can approve or deny this request on your workshop page: "
-  - workshop_link = @host + view_workshop_url(@conference.slug, @workshop.id).html_safe
+  - workshop_link = view_workshop_url(@conference.slug, @workshop.id).html_safe
   %a{href: workshop_link}=_!(workshop_link)
 
 %p=_'email.workshop.paragraph.request_reply_instructions',"You can also reply directly to this email to ask follow-up questions."
