@@ -63,10 +63,11 @@
           - guests.each do |guest|
             %tr
               %th=guest.user.name
+              %th=guest.user.email
               %th=guest.from
             %tr
               - if guest.housing_data['other'].present?
-                %td{colspan: 2, lang: guest.user.locale.to_s == I18n.locale.to_s ? nil : guest.user.locale}
+                %td{colspan: 3, lang: guest.user.locale.to_s == I18n.locale.to_s ? nil : guest.user.locale}
                   = paragraph guest.housing_data['other']
       
 = row do
