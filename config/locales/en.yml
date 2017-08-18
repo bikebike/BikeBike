@@ -1244,6 +1244,7 @@ en:
         space:
           companions: This host wishes to be housed with %{name}
       admin:
+        save_block_days_required: Select at least one day
         administrators: Error updating organizations
         dates: Error updating dates
         description: Error saving your conference description
