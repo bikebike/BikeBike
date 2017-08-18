@@ -1174,7 +1174,8 @@ en:
     format: "%{attribute} %{message}"
     messages:
       schedule:
-        need_not_available: '%{workshop_title} workshop requires %{need} but %{location} does not have this amenity'
+        need_not_available: This workshop requires %{need} but the location does not have this amenity
+        common_facilitator: '%{facilitator_name} is facilitating %{workshop_title} at the same time at this workshop'
       accepted: must be accepted
       blank: can't be blank
       present: must be blank
