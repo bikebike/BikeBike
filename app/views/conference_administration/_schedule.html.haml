@@ -17,8 +17,8 @@
                     %th=location.is_a?(Symbol) ? '' : _!(location.title)
             %tbody
               - data[:times].each do |time, time_data|
-                %tr
-                  - rowspan = (time_data[:length] * 2).to_i
+                %tr{class: "row-type-#{time_data[:type] || 'nil'}"}
+                  - rowspan = (time_data[:length] * (1 / @this_conference.schedule_interval)).to_i
                   %th=time(time).html_safe
                   - if time_data[:type] == :workshop
                     - data[:locations].each do |id, location|
