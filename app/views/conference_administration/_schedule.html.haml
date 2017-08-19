@@ -29,27 +29,29 @@
                         - workshop = status = nil
                       %td{class: [time_data[:type], workshop.present? ? :filled : :open], rowspan: rowspan, data: workshop.present? ? nil : { block: time_data[:item][:block], day: day, location: id }}
                         - if workshop.present? && workshop.event_location.present?
-                          = link_to view_workshop_path(@conference.slug, workshop.id), class: 'event-detail-link' do
-                            .details
-                              .title=_!workshop.title
-                          %template.event-details{data: { href: view_workshop_path(@conference.slug, workshop.id) }}
-                            %h1.title=_!workshop.title
-                            %p.address
-                              = _!("#{workshop.event_location.title}:")
-                              = location_link workshop.event_location
-                            .workshop-description= richtext workshop.info, 1
-                          - if @can_edit
-                            = form_tag administration_update_path(conference.slug, @admin_step), class: 'deschedule-workshop' do
-                              .status
-                                .conflict-score
-                                  %span.title Conflicts: 
-                                  %span.value="#{status[:conflict_score]} / #{workshop.interested.size}"
-                                - if status[:errors].present?
-                                  .errors
-                                    - status[:errors].each do |error|
-                                      .error=_"errors.messages.schedule.#{error[:name].to_s}", vars: error[:i18nVars]
-                              = hidden_field_tag :id, workshop.id
-                              = button :deschedule, value: :deschedule_workshop, class: [:delete, :small]
+                          .workshop-container
+                            - if @can_edit
+                              -if strip_tags(workshop.notes).strip.present?
+                                = admin_notes(workshop.notes)
+                              - if status[:errors].present?
+                                = admin_status content_tag(:ul, (status[:errors].collect { |error| (_"errors.messages.schedule.#{error[:name].to_s}", vars: error[:i18nVars])}.join).html_safe).html_safe
+                            = link_to view_workshop_path(@conference.slug, workshop.id), class: 'event-detail-link' do
+                              .details
+                                .title=_!workshop.title
+                            %template.event-details{data: { href: view_workshop_path(@conference.slug, workshop.id) }}
+                              %h1.title=_!workshop.title
+                              %p.address
+                                = _!("#{workshop.event_location.title}:")
+                                = location_link workshop.event_location
+                              .workshop-description= richtext workshop.info, 1
+                            - if @can_edit
+                              = form_tag administration_update_path(conference.slug, @admin_step), class: 'deschedule-workshop' do
+                                .status
+                                  .conflict-score
+                                    %span.title Conflicts: 
+                                    %span.value="#{status[:conflict_score]} / #{workshop.interested.size}"
+                                = hidden_field_tag :id, workshop.id
+                                = button :deschedule, value: :deschedule_workshop, class: [:delete, :small]
                         - elsif @can_edit
                           .title="Block #{time_data[:item][:block] + 1}"
                   - elsif time_data[:type] != :nil

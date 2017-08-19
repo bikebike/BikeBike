@@ -2630,6 +2630,10 @@ en:
         projector: Projector
         sound: Sound System
         tools: Tools
+      amenity:
+        projector: a projector
+        sound: a sound system
+        tools: tools
       space:
         meeting_room: Meeting Room
         outdoor_meeting: Outdoor Space

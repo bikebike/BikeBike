@@ -39,6 +39,14 @@ $link-colour: darken($colour-1, 13%);
 
 $selected-colour: rgba($blue, 0.5);
 
+$note-icon:    '\1F4C4';
+$down-icon:    'ꜜ';
+$up-icon:      'ꜛ';
+$happy-icon:   '\1F601';
+$unhappy-icon: '\1F61E';
+$love-icon:    '\1F60D';
+$angry-icon:   '\1F621';
+
 @mixin default-box-shadow($direction: top, $distance: 1, $inset: false, $additional-shadow: false) {
     @if capable_of(box-shadow) {
         $offset: 0.2em;

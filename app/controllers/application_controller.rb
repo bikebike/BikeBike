@@ -491,7 +491,9 @@ class ApplicationController < BaseController
     @schedule.each do |day, data|
       @schedule[day][:times] = data[:times].sort.to_h
       @schedule[day][:locations] ||= {}
-      
+
+      # sort the locations by name      
+      @schedule[day][:locations] = @schedule[day][:locations].sort_by { |event_id, event| event.present? ? event.title.downcase   : '' }.to_h
       # add an empty block if no workshops are scheduled on this day yet
       @schedule[day][:locations][0] = :add if do_analyze || @schedule[day][:locations].empty?
 
@@ -537,7 +539,7 @@ class ApplicationController < BaseController
                       location: location,
                       workshop: workshop_i,
                       i18nVars: {
-                        need: need.to_s,
+                        need: I18n.t("workshop.options.amenity.#{need}"),
                         location: location.title,
                         workshop_title: workshop_i.title
                       }

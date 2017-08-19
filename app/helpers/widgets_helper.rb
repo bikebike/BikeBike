@@ -138,17 +138,14 @@ module WidgetsHelper
           other = (guest[:guest].housing_data || {})['other']
           other.strip! if other.present?
 
-          if other.present?
-            name_html += content_tag :div, (content_tag :div, paragraph(other), class: 'notes').html_safe, class: 'guest-notes'
-          end
+          name_html += admin_notes(other) if other.present?
 
           guest_rows += content_tag :tr, id: "hosted-guest-#{guest_id}" do
             (content_tag :td, name_html.html_safe) +
             (content_tag :td do
               (guest[:guest].from + 
               (content_tag :a, (_'actions.workshops.Remove'), href: '#', class: 'remove-guest', data: { guest: guest_id })).html_safe
-            end) +
-            (content_tag :td, status_html.html_safe, class: [:state, status_html.present? ? :unhappy : :happy])
+            end) + admin_status(status_html, :td)
           end
         end
 
@@ -163,7 +160,7 @@ module WidgetsHelper
         status_html = ''
         if @housing_data[id][:warnings].present? && @housing_data[id][:warnings][:space].present? && @housing_data[id][:warnings][:space][area].present?
           @housing_data[id][:warnings][:space][area].each do |w|
-            status_html += content_tag(:li, _("warnings.messages.housing.space.#{w.to_s}"))
+            status_html += content_tag(:li, _("warnings.messages.housing.space.#{w.to_s}", ))
           end
         end
         if status_html.present?
@@ -178,7 +175,7 @@ module WidgetsHelper
 
         html += content_tag :tr do
           (content_tag :th, (_"forms.labels.generic.#{area}"), colspan: 2) +
-          (content_tag :th, status_html.html_safe, class: [:state, status_html.present? ? :unhappy : :happy])
+          admin_status(status_html, :th)
         end
         html += guest_rows
         html += content_tag :tr, class: 'place-guest' do
@@ -192,6 +189,14 @@ module WidgetsHelper
     end
 
     content_tag :table, html.html_safe, class: 'host-table'
+  end
+
+  def admin_notes(notes)
+    content_tag :div, (content_tag :div, paragraph(notes), class: 'notes').html_safe, class: 'admin-notes', tabindex: -1
+  end
+
+  def admin_status(status_html, tag = :div)
+    content_tag tag, status_html.html_safe, class: "admin-status state #{status_html.present? ? 'un' : ''}happy", tabindex: -1
   end
   
   def host_guests_widget(registration)
