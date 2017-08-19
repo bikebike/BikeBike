@@ -10,7 +10,7 @@
       - is_new = info['time'].blank?
       = form_tag administration_update_path(@this_conference.slug, @admin_step), class: ['table-tr', is_new ? 'new' : 'saved'] do
         .table-th.center.big= is_new ? '' : (block + 1)
-        .table-td=hour_select info['time'], small: true, label: false
+        .table-td=hour_select info['time'], {small: true, label: false}, 8, 23.5, @this_conference.schedule_interval
         .table-td=length_select info['length'], {small: true, label: false}, 0.5, 2, @this_conference.schedule_interval
         .table-td=checkboxes :days, @block_days, info['days'].map(&:to_i), 'date.day_names', vertical: true, small: true
         .table-td.form
