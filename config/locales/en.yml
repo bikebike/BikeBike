@@ -1298,6 +1298,7 @@ en:
   success:
     messages:
       admin:
+        block_deleted: Workshop block successfully removed
         block_saved: Workshop block saved successfully
         administrators: Organizations updated
         dates: Conference dates updated successfully

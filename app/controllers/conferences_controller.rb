@@ -109,6 +109,13 @@ class ConferencesController < ApplicationController
     end
   end
 
+  def survey
+    return do_404
+    # set_conference
+    # do_403 unless @this_conference.is_public || @this_conference.host?(current_user)
+    # do_403 if @this_conference.registration_open
+  end
+
   helper_method :registration_complete?
 
   def registration_steps(conference = nil)

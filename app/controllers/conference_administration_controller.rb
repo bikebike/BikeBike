@@ -491,12 +491,12 @@ class ConferenceAdministrationController < ApplicationController
     end
 
     def administrate_locations
-      @locations = EventLocation.where(:conference_id => @this_conference.id)
+      @locations = EventLocation.where(conference_id: @this_conference.id)
     end
 
     def administrate_events
       @event = Event.new(locale: I18n.locale)
-      @events = Event.where(:conference_id => @this_conference.id)
+      @events = Event.where(conference_id: @this_conference.id)
       @day = nil
       @time = nil
       @length = 1.5
@@ -1409,6 +1409,7 @@ class ConferenceAdministrationController < ApplicationController
       when 'delete'
         location = EventLocation.find_by! id: params[:id].to_i, conference_id: @this_conference.id
         location.destroy
+        @this_conference.validate_workshop_blocks
       when 'create'
         empty_param = get_empty(params, [:title, :address, :space])
         if empty_param.present?
@@ -1506,11 +1507,13 @@ class ConferenceAdministrationController < ApplicationController
           @this_conference.save
           set_success_message :block_saved
         end
+        @this_conference.validate_workshop_blocks
         return false
       when 'delete_block'
         @this_conference.workshop_blocks ||= []
         @this_conference.workshop_blocks.delete_at(params[:workshop_block].to_i)
         @this_conference.save
+        @this_conference.validate_workshop_blocks
         set_success_message :block_deleted
         return false
       end

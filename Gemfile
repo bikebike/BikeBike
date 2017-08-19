@@ -43,7 +43,7 @@ gem 'redcarpet'
 gem 'to_spreadsheet', git: 'https://github.com/glebm/to_spreadsheet.git'
 
 group :development do
-  gem 'better_errors'
+  gem 'better_errors', '2.2.0'
   gem 'binding_of_caller'
   gem 'meta_request'
   
