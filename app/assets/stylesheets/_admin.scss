@@ -41,7 +41,7 @@ table, .table {
             white-space: nowrap;
 
             @include after {
-                content: 'ꜜ';
+                content: $down-icon;
                 position: absolute;
                 bottom: -1em;
                 left: 50%;
@@ -67,18 +67,18 @@ table, .table {
 
             &:hover {
                 @include after {
-                    content: 'ꜛ';
+                    content: $up-icon;
                 }
             }
         }
         [data-dir="up"] {
             @include after {
-                content: 'ꜛ';
+                content: $up-icon;
             }
 
             &:hover {
                 @include after {
-                    content: 'ꜜ';
+                    content: $down-icon;
                 }
             }
         }
@@ -97,26 +97,6 @@ table, .table {
             width: 0.1rem;
             background-color: transparent;
             border: 0;
-        }
-
-        &.state {
-            background-size: 1.333em;
-            background-repeat: no-repeat;
-            background-position: center;
-            width: 1.75em;
-
-            &.happy {
-                @include after {
-                    content: '\1F601';
-                    opacity: 0.5;
-                }
-            }
-
-            &.unhappy {
-                @include after {
-                    content: '\1F621';
-                }
-            }
         }
     }
 
@@ -809,6 +789,103 @@ nav.sub-menu {
     }
 }
 
+.admin-notes {
+    position: relative;
+    float: left;
+    margin-top: -0.2em;
+    margin-right: 0.25em;
+    cursor: pointer;
+
+    @include after {
+        content: $note-icon;
+        width: 2em;
+        height: 2em;
+    }
+
+    .notes {
+        @include hover-info;
+        top: auto;
+        bottom: 100%;
+        right: auto;
+        min-width: 25em;
+
+        p {
+            font-size: 1.125em;
+
+            &:first-child {
+                margin-top: 0;
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    &:hover, &:focus {
+        .notes {
+            display: block;
+        }
+    }
+}
+
+#main article .admin-status.state {
+    background-size: 1.333em;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 1.75em;
+    position: relative;
+    font-family: inherit;
+    padding: 0;
+    position: relative;
+    width: 2em;
+    height: 2em;
+
+    @include after {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        font-size: 1.5em;
+    }
+
+    &.happy {
+        @include after {
+            content: $happy-icon;
+            opacity: 0.5;
+        }
+    }
+
+    &.unhappy {
+        cursor: pointer;
+
+        @include after {
+            content: $angry-icon;
+            @include _(transform-origin, bottom);
+            @include _(animation, unhappy ease-in-out 1s infinite alternate both);
+        }
+    }
+
+    ul {
+        @include hover-info;
+    }
+
+    li {
+        white-space: nowrap;
+        margin: 0 0 0 1em;
+
+        &:first-child:last-child {
+            list-style: none;
+            margin: 0;
+        }
+    }
+
+    &:hover, &:focus {
+        ul {
+            display: block;
+        }           
+    }
+}
+
 #admin-housing, #admin-schedule {
     .guests-housed {
         margin-bottom: 1em;
@@ -831,13 +908,13 @@ nav.sub-menu {
 
             &.happy {
                 @include after {
-                    content: '\1F60D';
+                    content: $love-icon;
                 }
             }
 
             &.unhappy {
                 @include after {
-                    content: '\1F61E';
+                    content: $unhappy-icon;
                 }
             }
         }
@@ -886,45 +963,6 @@ nav.sub-menu {
                 overflow: auto;
             }
 
-            .guest-notes {
-                position: relative;
-                float: left;
-                margin-top: -0.2em;
-                margin-right: 0.25em;
-                cursor: pointer;
-
-                @include after {
-                    content: '\1F4C4';
-                    width: 2em;
-                    height: 2em;
-                }
-
-                .notes {
-                    @include hover-info;
-                    top: auto;
-                    bottom: 100%;
-                    right: auto;
-                    min-width: 25em;
-
-                    p {
-                        font-size: 1.125em;
-
-                        &:first-child {
-                            margin-top: 0;
-                        }
-                        &:last-child {
-                            margin-bottom: 0;
-                        }
-                    }
-                }
-
-                &:hover {
-                    .notes {
-                        display: block;
-                    }
-                }
-            }
-
             .address {
                 margin-top: 1em;
                 text-align: right;
@@ -963,51 +1001,6 @@ nav.sub-menu {
 
         td {
             vertical-align: middle;
-        }
-
-        .state {
-            position: relative;
-            font-family: inherit;
-            padding: 0;
-            position: relative;
-            width: 2em;
-            height: 2em;
-
-            @include after {
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                font-size: 1.5em;
-            }
-
-            &.unhappy {
-                cursor: pointer;
-
-                @include after {
-                    @include _(transform-origin, bottom);
-                    @include _(animation, unhappy ease-in-out 1s infinite alternate both);
-                }
-            }
-
-            ul {
-                @include hover-info;
-            }
-
-            li {
-                white-space: nowrap;
-                margin: 0 0 0 1em;
-
-                &:first-child:last-child {
-                    list-style: none;
-                    margin: 0;
-                }
-            }
-
-            &:hover {
-                ul {
-                    display: block;
-                }           
-            }
         }
     }
 
@@ -1364,6 +1357,85 @@ nav.sub-menu {
 
 
 #admin-schedule {
+    #schedule-preview {
+        overflow: visible
+    }
+
+    table.schedule {
+        td.workshop {
+            vertical-align: top;
+            text-align: left;
+            position: relative;
+
+            .event-detail-link {
+                width: auto;
+                font-size: 1.25em;
+            }
+        }
+
+        .status {
+            display: inline-block;
+            text-align: left;
+            float: right;
+            font-size: 0.9em;
+            margin-top: 0.5em;
+        }
+
+        .conflict-score {
+            text-align: right;
+
+            .title {
+                @include font-family(secondary);
+            }
+        }
+
+        .admin-status {
+            position: absolute;
+            top: 0;
+            right: 0.25em;
+
+            ul {
+                width: 15em;
+            }
+
+            + .event-detail-link {
+                padding-right: 1em;
+            }
+        }
+
+        .admin-notes {
+            @include after {
+                font-size: 1.25em;
+            }
+        }
+
+        .workshop-container {
+            padding-bottom: 4em;
+        }
+
+        .deschedule-workshop {
+            position: absolute;
+            right: 0.5em;
+            bottom: 0.5em;
+            left: 0.5em;
+        }
+
+        form {
+            margin-top: 0;
+            
+            button {
+                margin-top: 0.5em;
+                float: left;
+                z-index: 1;
+                opacity: 0.5;
+
+                &:hover, &:focus {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+
     .workshops-to-schedule {
         @include _-(display, flex);
         @include _(flex-wrap, wrap);

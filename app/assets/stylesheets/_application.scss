@@ -2136,70 +2136,6 @@ table.schedule {
             align-items: center;
 
             @include not-link-like;
-
-            .details {
-                flex: 1;
-            }
-        }
-
-        .status {
-            display: inline-block;
-            text-align: left;
-            float: right;
-            font-size: 0.9em;
-            margin-top: 0.5em;
-        }
-
-        .conflict-score {
-            text-align: right;
-
-            .title {
-                @include font-family(secondary);
-            }
-        }
-
-        .errors {
-            position: relative;
-            border-top: 0.1rem solid $dark-gray;
-            margin-top: 0.5em;
-            padding-top: 0.25em;
-
-            @include before {
-                content: '!';
-                display: inline-block;
-                position: absolute;
-                z-index: 1;
-                top: 0;
-                left: -1.2em;
-                width: 1em;
-                color: $white;
-                @include font-family(secondary);
-            }
-
-            @include after {
-                content: '';
-                position: absolute;
-                top: 0.1em;
-                left: -1.333em;
-                width: 0;
-                height: 0;
-                font-size: 1.25em;
-                border: 0.5em solid;
-                border-left-color: transparent;
-                border-right-color: transparent;
-                border-width: 0 0.5em 0.75em;
-                color: darken($colour-2, 25%);
-            }
-        }
-
-        #main .columns & form {
-            margin-top: 0;
-            
-            button {
-                margin-top: 0.5em;
-                float: left;
-                z-index: 1;
-            }
         }
     }
 }
@@ -3510,9 +3446,10 @@ body.policy .policy-agreement ul {
         }
 
         .nav {
+            display: block;
+            @include _-(display, flex);
             position: static;
             font-size: 1.75em;
-            display: block;
             text-align: center;
             background-color: transparent;
             @include _(box-shadow, none);
@@ -3520,6 +3457,8 @@ body.policy .policy-agreement ul {
 
         .nav a {
             &[class] {
+                @include _(flex, 1);
+                white-space: nowrap; 
                 width: auto;
                 float: none;
                 overflow: visible;

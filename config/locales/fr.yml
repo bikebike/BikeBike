@@ -1716,6 +1716,9 @@ fr:
       Leave: Se retirer
       Make_Owner: Changer de responsable
       Remove: Supprimer
+    conference:
+      edit_registration: Mon inscription
+      Translate: Modifier la version %{language}
   datetime:
     distance_in_words:
       x_days:
