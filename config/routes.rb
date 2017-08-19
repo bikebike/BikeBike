@@ -32,6 +32,11 @@ BikeBike::Application.routes.draw do
         get 'check_in/:id' => 'conference_administration#check_in', as: :check_in, constraints: { id: /.+/ }
       end
 
+      scope :survey do
+        root 'conferences#survey', as: :conference_survey
+        post 'save' => 'conferences#save_survey', as: :conference_survey_save
+      end
+
       # Workshops
       scope :workshops do
         root 'workshops#workshops', as: :workshops

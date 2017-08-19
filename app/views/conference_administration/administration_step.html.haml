@@ -38,4 +38,4 @@
     = columns(medium: 12) do
       %p=((_"articles.admin.#{@admin_group}.descriptions.#{@admin_step}", :s)) unless @hide_description === true
   = row do
-    = render @admin_step
+    = render @admin_step.to_s

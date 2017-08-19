@@ -423,7 +423,7 @@ class ApplicationController < BaseController
         day_diff += 7 if day_diff < 0
         day = (conference.start_date + day_diff.days).to_date
 
-        if @schedule[day].present? && @schedule[day][:times].present? && @schedule[day][:times][block['time'].to_f].present?
+        if block.present? && @schedule[day].present? && @schedule[day][:times].present? && @schedule[day][:times][block['time'].to_f].present?
           @schedule[day][:times][block['time'].to_f][:item][:workshops][workshop.event_location_id] = { workshop: workshop, status: { errors: [], warnings: [], conflict_score: nil } }
           @schedule[day][:locations][workshop.event_location_id] ||= workshop.event_location if workshop.event_location.present?
         end

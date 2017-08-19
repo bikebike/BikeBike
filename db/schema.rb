@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170719024801) do
+ActiveRecord::Schema.define(version: 20170817000540) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,6 +110,7 @@ ActiveRecord::Schema.define(version: 20170719024801) do
     t.boolean  "is_participant"
     t.boolean  "is_volunteer"
     t.string   "confirmation_token"
+    t.binary   "data_old"
     t.string   "email"
     t.boolean  "complete"
     t.boolean  "completed"
@@ -131,6 +132,7 @@ ActiveRecord::Schema.define(version: 20170719024801) do
     t.json     "housing_data"
     t.integer  "city_id"
     t.json     "data"
+    t.boolean  "survey_taken"
   end
 
   create_table "conference_types", force: :cascade do |t|
@@ -390,6 +392,14 @@ ActiveRecord::Schema.define(version: 20170719024801) do
 
   add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true, using: :btree
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
+
+  create_table "surveys", force: :cascade do |t|
+    t.string   "name"
+    t.string   "version"
+    t.json     "results"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "translation_followers", force: :cascade do |t|
     t.string   "key"
