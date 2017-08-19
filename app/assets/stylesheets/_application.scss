@@ -2060,6 +2060,12 @@ table.schedule {
             white-space: nowrap;
             text-align: right;
         }
+
+        .row-type-nil {
+            th {
+                color: $almost-light-gray;
+            }
+        }
     }
 
     &.locations-1 td.workshop.filled {

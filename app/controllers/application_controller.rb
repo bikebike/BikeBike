@@ -472,15 +472,15 @@ class ApplicationController < BaseController
 
     @schedule.deep_dup.each do |day, data|
       data[:times].each do |time, time_data|
-        if time_data[:next_event].present? || time_data[:length] > 0.5
-          span = 0.5
+        if time_data[:next_event].present? || time_data[:length] > @this_conference.schedule_interval
+          span = @this_conference.schedule_interval
           length = time_data[:next_event].present? ? time_data[:next_event] - time : time_data[:length]
           while span < length
             @schedule[day][:times][time + span] ||= {
               type: (span >= time_data[:length] ? :empty : :nil),
-              length: 0.5
+              length: @this_conference.schedule_interval
             }
-            span += 0.5
+            span += @this_conference.schedule_interval
           end
         end
       end
