@@ -27,9 +27,7 @@ module FormHelper
         value = object.is_a?(Hash) ? object[locale.to_sym] : object.get_column_for_locale!(name, locale, false)
 
         # use the default value if we need to
-        if _options[:default].present? && value.blank?
-          value = _(_options[:default], locale: locale)
-        end
+        value = _(_options[:default], locale: locale) if _options[:default].present? && value.blank?
 
         _options[:index] = locale
         _options[:lang] = locale

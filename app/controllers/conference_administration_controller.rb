@@ -44,6 +44,7 @@ class ConferenceAdministrationController < ApplicationController
   end
 
   def edit_event
+    @event = Event.find(params[:id])
     administration_step(:event_edit)
   end
 
@@ -1473,11 +1474,11 @@ class ConferenceAdministrationController < ApplicationController
 
         # save translations
         (params[:info] || {}).each do |locale, value|
-          event.set_column_for_locale(:title, locale, html_value(value), current_user.id) unless value = event._title(locale)
+          event.set_column_for_locale(:info, locale, value, current_user.id) if value != event._info(locale) && view_context.strip_tags(value).strip.present?
         end
 
         (params[:title] || {}).each do |locale, value|
-          event.set_column_for_locale(:info, locale, value, current_user.id) unless value = event._info(locale)
+          event.set_column_for_locale(:title, locale, html_value(value), current_user.id) if value != event._title(locale) && view_context.strip_tags(value).strip.present?
         end
 
         event.save
