@@ -1370,7 +1370,6 @@ nav.sub-menu {
             .event-detail-link {
                 width: auto;
                 font-size: 1.25em;
-
             }
             .event-detail-link, .details, .title {
                 display: inline;
@@ -1401,6 +1400,10 @@ nav.sub-menu {
 
             ul {
                 width: 15em;
+            }
+
+            li {
+                white-space: normal;
             }
 
             + .event-detail-link {

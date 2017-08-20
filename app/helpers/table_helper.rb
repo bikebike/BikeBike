@@ -16,7 +16,7 @@ module TableHelper
           headers = ''
           options[:column_names].each do |header_name, columns|
             column_names[header_name] ||= []
-            headers += content_tag(:th, excel_data[:keys][header_name].present? ? _(excel_data[:keys][header_name]) : '', colspan: 2)
+            headers += content_tag(:th, excel_data[:keys][header_name].present? ? I18n.t(excel_data[:keys][header_name], (excel_data[:key_vars] || {})[header_name]) : '', colspan: 2)
             row_count = columns.size
             columns.each do |column|
               column_names[header_name] << column
@@ -43,7 +43,7 @@ module TableHelper
                   attributes[:rowspan] = options[:row_spans][column]
                 end
 
-                column_text = excel_data[:keys][column].present? ? _(excel_data[:keys][column]) : ''
+                column_text = excel_data[:keys][column].present? ? I18n.t(excel_data[:keys][column], (excel_data[:key_vars] || {})[header_name]) : ''
 
                 columns_html += content_tag(:th, column_text.html_safe, rowspan: attributes[:rowspan]) + 
                                 edit_column(nil, column, nil, attributes, excel_data, options)
@@ -64,7 +64,7 @@ module TableHelper
             if (excel_data[:column_types] || {})[column] != :table && ((options[:column_names] || []).include? column)
               rows += content_tag(:tr, { class: 'always-edit', data: { key: '' } }) do
                 attributes = { class: [excel_data[:column_types][column]], data: { 'column-id' => column } }
-                column_text = excel_data[:keys][column].present? ? _(excel_data[:keys][column]) : ''
+                column_text = excel_data[:keys][column].present? ? I18n.t(excel_data[:keys][column], (excel_data[:key_vars] || {})[header_name]) : ''
 
                 columns = content_tag(:th, column_text.html_safe) + edit_column(nil, column, nil, attributes, excel_data, options)
               end
@@ -124,7 +124,7 @@ module TableHelper
 
     data[:columns].each do |column|
       unless data[:column_types].present? && data[:column_types][column] == :table
-        column_text = data[:keys][column].present? ? _(data[:keys][column]) : ''
+        column_text = data[:keys][column].present? ? I18n.t(data[:keys][column], (data[:key_vars] || {})[column]) : ''
         attrs = { class: class_name }
 
         unless @sort_column.nil?
@@ -395,6 +395,31 @@ module TableHelper
         User.AVAILABLE_LANGUAGES.map { |l| "language_#{l}".to_sym } +
         ConferenceRegistration.all_spaces +
         ConferenceRegistration.all_considerations,
+      editable: administration_update_path(@this_conference.slug, @admin_step),
+      sortable: administration_step_path(@this_conference.slug, @admin_step),
+      column_options: @column_options
+    }
+  end
+
+  def workshops_table_options
+    {
+      id: 'search-table',
+      class: ['registrations', 'admin-edit'],
+      primary_key: :id,
+      column_names: [
+          :title,
+          :owner,
+          :info,
+          :notes,
+          :locale,
+          :facilitators
+        ] +
+        User.AVAILABLE_LANGUAGES.map { |l| "language_#{l}".to_sym } +
+        (User.AVAILABLE_LANGUAGES - [I18n.locale]).map { |l| "title_#{l}".to_sym } +
+        Workshop.all_needs.map { |n| "need_#{n}".to_sym } + [
+          :theme,
+          :space
+        ],
       editable: administration_update_path(@this_conference.slug, @admin_step),
       sortable: administration_step_path(@this_conference.slug, @admin_step),
       column_options: @column_options

@@ -11,13 +11,15 @@ module FormHelper
     # set the selected locale
     selected_locale = (options[:locale] || object.locale || I18n.locale).to_sym
 
-    I18n.backend.enabled_locales.each do |locale|
+    locales = I18n.backend.enabled_locales.map { |l| [l, _("languages.#{l}")] }.sort_by { |l| l.last.downcase }.to_h
+
+    locales.each do |locale, locale_name|
       # ses if this should b the selected field
       class_name = selected_locale == locale.to_sym ? 'selected' : nil
 
       # add the locale to the nav
       nav += content_tag(:li,
-          content_tag(:a, _("languages.#{locale}"), href: 'javascript:void(0)'),
+          content_tag(:a, locale_name, href: 'javascript:void(0)'),
         class: class_name, data: { locale: locale }).html_safe
 
       fields = ''

@@ -5,7 +5,7 @@
 			= @event_location.title
 			= hidden_field_tag :event_location, @location
 	- else
-		= location_select(nil, inline_label: true, small: true, invalid_locations: (((((@schedule[@day] || {})[:times] || {})[@time] || {})[:item] || {})[:workshops] || {}).keys, label: false)
+		= location_select(nil, inline_label: true, small: true, invalid_locations: @invalid_locations, label: false)
 - if @event_location.present?
 	.host-field
 		%h4.inline=_'articles.admin.locations.headings.amenities'
@@ -38,7 +38,7 @@
 			%td=(workshop.active_facilitators.map { |x| x.named_email }).join(', ')
 			%td=workshop.interested_count
 			%td
-				.text=workshop.notes
+				.text=strip_tags(workshop.notes)
 
 .legend
 	%h4 Legend

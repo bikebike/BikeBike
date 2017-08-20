@@ -1427,6 +1427,7 @@ en:
           locations: Locations
           meals: Meals
           events: Events
+          workshops: Workshops
         descriptions:
           locations: Create the list of locations that you will be using for events,
             meals, and workshops.
@@ -1435,6 +1436,7 @@ en:
           events: Create event details. These events should be any type of event other
             than meals and workshops such as meeting, rides, and parties. The events
             will be added to your schedule.
+          workshops: View and modify all workshops created by registered users.
       schedule:
         description: On this page you can schedule workshops and publish your schedule
           to the front page.
@@ -2625,6 +2627,7 @@ en:
         unregistered: Unregistered
         facilitator: Facilitator
   workshop:
+    created_at: Creation Date
     options:
       needs:
         projector: Projector
@@ -2718,6 +2721,7 @@ en:
     content:
       change_locale: Read in %{language}
       Translation_of: Translation of
+      item_translation: "%{item} in %{language}"
   number:
     currency:
       format:

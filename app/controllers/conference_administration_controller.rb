@@ -253,46 +253,7 @@ class ConferenceAdministrationController < ApplicationController
           format.xlsx { render xlsx: '../conferences/stats', filename: "stats-#{DateTime.now.strftime('%Y-%m-%d')}" }
         end
       else
-        if params[:sort_column]
-          col = params[:sort_column].to_sym
-          @excel_data[:data].sort_by! do |row|
-            value = row[col]
-
-            if row[:raw_values].key?(col)
-              value = if row[:raw_values][col].is_a?(TrueClass)
-                        't'
-                      elsif row[:raw_values][col].is_a?(FalseClass)
-                        ''
-                      else
-                        row[:raw_values][col]
-                      end
-            elsif value.is_a?(City)
-              value = value.sortable_string
-            end
-
-            if value.nil?
-              case @excel_data[:column_types][col]
-              when :datetime, [:date, :day]
-                value = Date.new
-              when :money
-                value = 0
-              else
-                value = ''
-              end
-            end
-
-            value
-          end
-
-          if params[:sort_dir] == 'up'
-            @sort_dir = :up
-            @excel_data[:data].reverse!
-          end
-
-          @sort_column = col
-        else
-          @sort_column = :name
-        end
+        sort_data(params[:sort_column], params[:sort_dir], :name)
       end
 
       @registration_count = @registrations.size
@@ -317,6 +278,22 @@ class ConferenceAdministrationController < ApplicationController
             @donations += r.registration_fees_paid
           end
         end
+      end
+
+      if request.xhr?
+        render html: view_context.html_table(@excel_data, view_context.registrations_table_options)
+      end
+    end
+
+    def administrate_workshops
+      get_workshops(true)
+      if request.format.xlsx?
+        logger.info "Generating stats.xls"
+        return respond_to do |format|
+          format.xlsx { render xlsx: '../conferences/stats', filename: "workshops-#{DateTime.now.strftime('%Y-%m-%d')}" }
+        end
+      else
+        sort_data(params[:sort_column], params[:sort_dir], :name)
       end
 
       if request.xhr?
@@ -766,6 +743,179 @@ class ConferenceAdministrationController < ApplicationController
               [I18n.t("articles.conference_registration.questions.bike.yes"), true]
             ]
         end
+      end
+    end
+
+    def get_workshops(html_format = false, id = nil, conference = @this_conference)
+      @workshops = conference.workshops.sort_by { |w| w.title.downcase }
+      @excel_data = {
+        columns: [
+            :title,
+            :owner,
+            :locale,
+            :date,
+            :info,
+            :notes,
+            :facilitators
+          ] + User.AVAILABLE_LANGUAGES.map { |l| "language_#{l}".to_sym } +
+          Workshop.all_needs.map { |n| "need_#{n}".to_sym } + [
+            :theme,
+            :space
+          ] + (User.AVAILABLE_LANGUAGES - [I18n.locale]).map { |l| "title_#{l}".to_sym } +
+          (User.AVAILABLE_LANGUAGES - [I18n.locale]).map { |l| "info_#{l}".to_sym },
+        column_types: {
+            title: :bold,
+            date: :datetime,
+            info: :text,
+            notes: :text,
+            owner: :email
+          },
+        keys: {
+            title: 'forms.labels.generic.title',
+            owner: 'roles.workshops.facilitator.creator',
+            locale: 'articles.conference_registration.terms.Preferred_Languages',
+            info: 'forms.labels.generic.info',
+            date: 'workshop.created_at',
+            notes: 'forms.labels.generic.notes',
+            facilitators: 'roles.workshops.facilitator.facilitator',
+            theme: 'articles.workshops.headings.theme',
+            space: 'articles.workshops.headings.space'
+          },
+        data: []
+      }
+      @excel_data[:key_vars] = {}
+      User.AVAILABLE_LANGUAGES.each do |l|
+        @excel_data[:keys]["language_#{l}".to_sym] = "languages.#{l}"
+        if l != I18n.locale
+          @excel_data[:keys]["title_#{l}".to_sym] = 'translate.content.item_translation'
+          @excel_data[:key_vars]["title_#{l}".to_sym] = { language: view_context.language_name(l), item: I18n.t('forms.labels.generic.title') }
+
+          @excel_data[:keys]["info_#{l}".to_sym] = 'translate.content.item_translation'
+          @excel_data[:key_vars]["info_#{l}".to_sym] = { language: view_context.language_name(l), item: I18n.t('forms.labels.generic.info') }
+          @excel_data[:column_types]["info_#{l}".to_sym] = :text
+        end
+      end
+
+      Workshop.all_needs.each do |n|
+        @excel_data[:keys]["need_#{n}".to_sym] = "workshop.options.needs.#{n}"
+      end
+
+      @workshops.each do |w|
+        if w.present?
+          if id.nil? || id == w.id
+            owner = User.find(w.creator)
+            facilitators = w.collaborators.map { |f| User.find(f) }
+            data = {
+              id: w.id,
+              title: w.title,
+              info: view_context.strip_tags(w.info),
+              notes: view_context.strip_tags(w.notes),
+              owner: owner.name,
+              locale: w.locale.present? ? (view_context.language_name w.locale) : '',
+              date: w.created_at ? w.created_at.strftime("%F %T") : '',
+              facilitators: facilitators.map { |f| f.name }.join(', '),
+              theme: w.theme && Workshop.all_themes.include?(w.theme.to_sym) ? I18n.t("workshop.options.theme.#{w.theme}") : w.theme,
+              space: w.space && Workshop.all_spaces.include?(w.space.to_sym) ? I18n.t("workshop.options.space.#{w.space}") : '',
+              raw_values: {
+                info: w.info,
+                owner: owner.email,
+                notes: w.notes,
+                locale: w.locale,
+                facilitators: facilitators.map { |f| f.email }.join(', '),
+                theme: w.theme,
+                space: w.space
+              },
+              html_values: {
+              }
+            }
+
+            languages = JSON.parse(w.languages || '[]').map &:to_sym
+            User.AVAILABLE_LANGUAGES.each do |l|
+              in_language = ((languages || []).include? l.to_sym)
+              data["language_#{l}".to_sym] = (in_language ? I18n.t('articles.conference_registration.questions.bike.yes') : '')
+              data[:raw_values]["language_#{l}".to_sym] = in_language
+
+              if l != I18n.locale
+                data["title_#{l}".to_sym] = w.get_column_for_locale!(:title, l, false)
+                data["info_#{l}".to_sym] = view_context.strip_tags(w.get_column_for_locale!(:info, l, false))
+                data[:raw_values]["info_#{l}".to_sym] = w.get_column_for_locale!(:info, l, false)
+              end
+            end
+
+            needs = JSON.parse(w.needs || '[]').map &:to_sym
+            Workshop.all_needs.each do |n|
+              in_need = ((needs || []).include? n.to_sym)
+              data["need_#{n}".to_sym] = (in_need ? I18n.t('articles.conference_registration.questions.bike.yes') : '')
+              data[:raw_values]["need_#{n}".to_sym] = in_need
+            end
+
+            @excel_data[:data] << data
+          end
+        end
+      end
+
+      if html_format
+        @column_options = {
+          locale: I18n.backend.enabled_locales.map { |l| [(view_context.language_name l), l] },
+          theme: Workshop.all_themes.map { |t| [I18n.t("workshop.options.theme.#{t}"), t] },
+          space: Workshop.all_spaces.map { |s| [I18n.t("workshop.options.space.#{s}"), s] }
+        }
+        @column_options[:theme] += ((conference.workshops.map { |w| w.theme }) - Workshop.all_themes.map(&:to_s)).uniq.map { |t| [t, t] }
+        User.AVAILABLE_LANGUAGES.each do |l|
+          @column_options["language_#{l}".to_sym] = [
+              [I18n.t("articles.conference_registration.questions.bike.yes"), true]
+            ]
+        end
+        Workshop.all_needs.each do |n|
+          @column_options["need_#{n}".to_sym] = [
+              [I18n.t("articles.conference_registration.questions.bike.yes"), true]
+            ]
+        end
+      end
+    end
+
+    def sort_data(col, sort_dir, default_col)
+      if col
+        col = col.to_sym
+        @excel_data[:data].sort_by! do |row|
+          value = row[col]
+
+          if row[:raw_values].key?(col)
+            value = if row[:raw_values][col].is_a?(TrueClass)
+                      't'
+                    elsif row[:raw_values][col].is_a?(FalseClass)
+                      ''
+                    elsif @excel_data[:column_types][col] == :text
+                      view_context.strip_tags(row[:raw_values][col] || '').downcase
+                    else
+                      row[:raw_values][col]
+                    end
+          elsif value.is_a?(City)
+            value = value.sortable_string
+          end
+
+          if value.nil?
+            case @excel_data[:column_types][col]
+            when :datetime, [:date, :day]
+              value = Date.new
+            when :money
+              value = 0
+            else
+              value = ''
+            end
+          end
+
+          value
+        end
+
+        if sort_dir == 'up'
+          @sort_dir = :up
+          @excel_data[:data].reverse!
+        end
+
+        @sort_column = col
+      else
+        @sort_column = default_col
       end
     end
 
@@ -1255,6 +1405,85 @@ class ConferenceAdministrationController < ApplicationController
       return nil
     end
 
+    def admin_update_workshops
+      if params[:button] == 'update'
+        workshop = Workshop.where(
+              id: params[:key].to_i,
+              conference_id: @this_conference.id
+            ).limit(1).first
+
+        params.each do |key, value|
+          case key.to_sym
+          when :owner
+            user = User.get(value.strip)
+            user_role = WorkshopFacilitator.where(user_id: user.id, workshop_id: workshop.id).first || WorkshopFacilitator.new(user_id: user.id, workshop_id: workshop.id)
+            owner_role = WorkshopFacilitator.where(role: :creator, workshop_id: workshop.id).first
+            if !owner_role || owner_role.user_id != user.id
+              owner_role.role = :collaborator
+              user_role.role = :creator
+              owner_role.save!
+              user_role.save!
+            end
+          when :facilitators
+            ids = []
+            value.split(/[\s,;]+/).each do |email|
+              user = User.get(email)
+              ids << user.id
+              user_role = WorkshopFacilitator.where(user_id: user.id, workshop_id: workshop.id).first || WorkshopFacilitator.new(user_id: user.id, workshop_id: workshop.id)
+              unless user_role.role == 'creator' || user_role.role == 'collaborator'
+                user_role.role = 'collaborator'
+                user_role.save
+              end
+            end
+            WorkshopFacilitator.where("workshop_id = ? AND role = ? AND user_id NOT IN (?)", workshop.id, 'collaborator', ids).destroy_all
+          when :title, :locale, :date, :info, :notes, :theme, :space
+            workshop.send("#{key}=", value.present? ? value : nil)
+          else
+            if key.start_with?('language_')
+              l = key.split('_').last.to_sym
+              languages = JSON.parse(workshop.languages || '[]').map &:to_sym
+              if User.AVAILABLE_LANGUAGES.include? l
+                if value.present?
+                  languages |= [l]
+                else
+                  languages -= [l]
+                end
+                workshop.languages = languages.to_json
+              end
+            elsif key.start_with?('need_')
+              n = key.split('_').last.to_sym
+              needs = JSON.parse(workshop.needs || '[]').map &:to_sym
+              if Workshop.all_needs.include? n
+                if value.present?
+                  needs |= [n]
+                else
+                  needs -= [n]
+                end
+                workshop.needs = needs.to_json
+              end
+            elsif key.start_with?('title_')
+              l = key.split('_').last.to_sym
+              workshop.set_column_for_locale(:title, l, value)
+            elsif key.start_with?('info_')
+              l = key.split('_').last.to_sym
+              workshop.set_column_for_locale(:info, l, value)
+            end
+          end
+        end
+        workshop.save!
+
+        get_workshops(true, params[:key].to_i) 
+        options = view_context.workshops_table_options
+        options[:html] = true
+        
+        render html: view_context.excel_rows(@excel_data, {}, options)
+      else
+        do_404
+      end
+
+      return nil
+    end
+
     def admin_update_check_in
       unless params[:button] == 'cancel'
         user_id = params[:user_id]
@@ -1478,7 +1707,7 @@ class ConferenceAdministrationController < ApplicationController
         end
 
         (params[:title] || {}).each do |locale, value|
-          event.set_column_for_locale(:title, locale, html_value(value), current_user.id) if value != event._title(locale) && view_context.strip_tags(value).strip.present?
+          event.set_column_for_locale(:title, locale, html_value(value), current_user.id) if value != event._title(locale) && view_context.strip.present?
         end
 
         event.save
@@ -1555,7 +1784,17 @@ class ConferenceAdministrationController < ApplicationController
         @time = @workshop_blocks[@block]['time'].to_f
         @day = (Date.parse params[:day])
         @location = params[:location]
+        @division = params[:division].to_i
         @event_location = @location.present? && @location.to_i > 0 ? EventLocation.find(@location.to_i) : nil
+
+        @schedule ||= {}
+        @schedule[@day] ||= {}
+        @schedule[@day][@division] ||= []
+        @schedule[@day][@division][:times] ||= {}
+        @schedule[@day][@division][:times][@time] ||= {}
+        @schedule[@day][@division][:times][@time][:item] ||= {}
+        @schedule[@day][@division][:times][@time][:item][:workshops] || {}
+        @invalid_locations = @schedule[@day][@division.to_i][:times][@time][:item][:workshops].keys
 
         @workshops.sort { |a, b| a.title.downcase <=> b.title.downcase }.each do |workshop|
           @ordered_workshops[workshop.id] = workshop

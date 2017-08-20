@@ -1,5 +1,5 @@
 class ApplicationController < BaseController
-  protect_from_forgery with: :exception, :except => [:do_confirm, :js_error, :admin_update]
+  protect_from_forgery with: :exception, except: [:do_confirm, :js_error, :admin_update]
 
   before_filter :application_setup
   after_filter  :capture_page_info
@@ -392,13 +392,13 @@ class ApplicationController < BaseController
   def get_scheule_data(do_analyze = true)
     conference = @this_conference || @conference
     @meals = Hash[(conference.meals || {}).map{ |k, v| [k.to_i, v] }].sort.to_h
-    @events = Event.where(:conference_id => conference.id).order(start_time: :asc)
-    @workshops = Workshop.where(:conference_id => conference.id).order(start_time: :asc)
+    @events = Event.where(conference_id: conference.id).order(start_time: :asc)
+    @workshops = Workshop.where(conference_id: conference.id).order(start_time: :asc)
     @locations = {}
 
     get_block_data
 
-    @schedule = {}
+    schedule = {}
     day_1 = conference.start_date.wday
 
     @workshop_blocks.each_with_index do |info, block|
@@ -407,11 +407,11 @@ class ApplicationController < BaseController
         day_diff += 7 if day_diff < 0
         day = (conference.start_date + day_diff.days).to_date
         time = info['time'].to_f
-        @schedule[day] ||= { times: {}, locations: {} }
-        @schedule[day][:times][time] ||= {}
-        @schedule[day][:times][time][:type] = :workshop
-        @schedule[day][:times][time][:length] = info['length'].to_f
-        @schedule[day][:times][time][:item] = { block: block, workshops: {} }
+        schedule[day] ||= { times: {}, locations: {} }
+        schedule[day][:times][time] ||= {}
+        schedule[day][:times][time][:type] = :workshop
+        schedule[day][:times][time][:length] = info['length'].to_f
+        schedule[day][:times][time][:item] = { block: block, workshops: {} }
       end
     end
 
@@ -423,9 +423,9 @@ class ApplicationController < BaseController
         day_diff += 7 if day_diff < 0
         day = (conference.start_date + day_diff.days).to_date
 
-        if block.present? && @schedule[day].present? && @schedule[day][:times].present? && @schedule[day][:times][block['time'].to_f].present?
-          @schedule[day][:times][block['time'].to_f][:item][:workshops][workshop.event_location_id] = { workshop: workshop, status: { errors: [], warnings: [], conflict_score: nil } }
-          @schedule[day][:locations][workshop.event_location_id] ||= workshop.event_location if workshop.event_location.present?
+        if block.present? && schedule[day].present? && schedule[day][:times].present? && schedule[day][:times][block['time'].to_f].present?
+          schedule[day][:times][block['time'].to_f][:item][:workshops][workshop.event_location_id] = { workshop: workshop, status: { errors: [], warnings: [], conflict_score: nil } }
+          schedule[day][:locations][workshop.event_location_id] ||= workshop.event_location if workshop.event_location.present?
         end
       end
     end
@@ -433,50 +433,50 @@ class ApplicationController < BaseController
     @meals.each do |time, meal|
       day = meal['day'].to_date
       time = meal['time'].to_f
-      @schedule[day] ||= {}
-      @schedule[day][:times] ||= {}
-      @schedule[day][:times][time] ||= {}
-      @schedule[day][:times][time][:type] = :meal
-      @schedule[day][:times][time][:length] = (meal['length'] || 1.0).to_f
-      @schedule[day][:times][time][:item] = meal
+      schedule[day] ||= {}
+      schedule[day][:times] ||= {}
+      schedule[day][:times][time] ||= {}
+      schedule[day][:times][time][:type] = :meal
+      schedule[day][:times][time][:length] = (meal['length'] || 1.0).to_f
+      schedule[day][:times][time][:item] = meal
     end
 
     @events.each do |event|
       if event.present? && event.start_time.present? && event.end_time.present?
         day = event.start_time.midnight.to_date
         time = event.start_time.hour.to_f + (event.start_time.min / 60.0)
-        @schedule[day] ||= {}
-        @schedule[day][:times] ||= {}
-        @schedule[day][:times][time] ||= {}
-        @schedule[day][:times][time][:type] = :event
-        @schedule[day][:times][time][:length] = (event.end_time - event.start_time) / 3600.0
-        @schedule[day][:times][time][:item] = event
+        schedule[day] ||= {}
+        schedule[day][:times] ||= {}
+        schedule[day][:times][time] ||= {}
+        schedule[day][:times][time][:type] = :event
+        schedule[day][:times][time][:length] = (event.end_time - event.start_time) / 3600.0
+        schedule[day][:times][time][:item] = event
       end
     end
 
-    @schedule = @schedule.sort.to_h
-    @schedule.each do |day, data|
-      @schedule[day][:times] = data[:times].sort.to_h
+    schedule = schedule.sort.to_h
+    schedule.each do |day, data|
+      schedule[day][:times] = data[:times].sort.to_h
     end
 
-    @schedule.each do |day, data|
+    schedule.each do |day, data|
       last_event = nil
       data[:times].each do |time, time_data|
         if last_event.present?
-          @schedule[day][:times][last_event][:next_event] = time
+          schedule[day][:times][last_event][:next_event] = time
         end
         last_event = time
       end
-      @schedule[day][:num_locations] = (data[:locations] || []).size
+      schedule[day][:num_locations] = (data[:locations] || []).size
     end
 
-    @schedule.deep_dup.each do |day, data|
+    schedule.deep_dup.each do |day, data|
       data[:times].each do |time, time_data|
         if time_data[:next_event].present? || time_data[:length] > @this_conference.schedule_interval
           span = @this_conference.schedule_interval
           length = time_data[:next_event].present? ? time_data[:next_event] - time : time_data[:length]
           while span < length
-            @schedule[day][:times][time + span] ||= {
+            schedule[day][:times][time + span] ||= {
               type: (span >= time_data[:length] ? :empty : :nil),
               length: @this_conference.schedule_interval
             }
@@ -486,16 +486,20 @@ class ApplicationController < BaseController
       end
     end
 
-    @schedule = @schedule.sort.to_h
+    # schedule = schedule.sort.to_h
 
-    @schedule.each do |day, data|
-      @schedule[day][:times] = data[:times].sort.to_h
-      @schedule[day][:locations] ||= {}
+    schedule.each do |day, data|
+      # @schedule[day] = [{}]
+      # division = 0
+      # schedule[day][:num_locations] = schedule[day][:num_locations]
+      # schedule[day][:times] = data[:times].sort.to_h
+      schedule[day][:times] = data[:times].sort.to_h
+      schedule[day][:locations] ||= {}
+      # # sort the locations by name
+      schedule[day][:locations] = schedule[day][:locations].sort_by { |event_id, event| event.present? ? event.title.downcase   : '' }.to_h
 
-      # sort the locations by name      
-      @schedule[day][:locations] = @schedule[day][:locations].sort_by { |event_id, event| event.present? ? event.title.downcase   : '' }.to_h
-      # add an empty block if no workshops are scheduled on this day yet
-      @schedule[day][:locations][0] = :add if do_analyze || @schedule[day][:locations].empty?
+      # # add an empty block if no workshops are scheduled on this day yet
+      # schedule[day][:locations][0] = :add if do_analyze || schedule[day][:locations].empty?
 
       if do_analyze
         data[:times].each do |time, time_data|
@@ -512,8 +516,8 @@ class ApplicationController < BaseController
                     workshop_i.active_facilitators.each do |facilitator_i|
                       workshop_j.active_facilitators.each do |facilitator_j|
                         if facilitator_i.id == facilitator_j.id
-                          @schedule[day][:times][time][:status] ||= {}
-                          @schedule[day][:times][time][:item][:workshops][ids[j]][:status][:errors] << {
+                          schedule[day][:times][time][:status] ||= {}
+                          schedule[day][:times][time][:item][:workshops][ids[j]][:status][:errors] << {
                               name: :common_facilitator,
                               facilitator: facilitator_i,
                               workshop: workshop_i,
@@ -533,7 +537,7 @@ class ApplicationController < BaseController
                 amenities = JSON.parse(location.amenities || '[]').map &:to_sym
 
                 needs.each do |need|
-                  @schedule[day][:times][time][:item][:workshops][ids[i]][:status][:errors] << {
+                  schedule[day][:times][time][:item][:workshops][ids[i]][:status][:errors] << {
                       name: :need_not_available,
                       need: need,
                       location: location,
@@ -555,12 +559,54 @@ class ApplicationController < BaseController
                   end
                 end
 
-                @schedule[day][:times][time][:item][:workshops][ids[i]][:status][:conflict_score] = (interests & (workshop_i.interested.map { | u | u.user_id })).length
+                schedule[day][:times][time][:item][:workshops][ids[i]][:status][:conflict_score] = (interests & (workshop_i.interested.map { | u | u.user_id })).length
               end
             end
           end
         end
       end
+    end
+
+    @schedule = {}
+    schedule.sort.to_h.each do |day, data|
+      @schedule[day] = []
+      division = 0
+      # @schedule[day][division] = data
+      locations = nil
+      @schedule[day][division] = {}
+      @schedule[day][division][:times] = {}
+      # @schedule[day][division][:times] = data[:times]
+
+      # # sort the locations by name
+      # @schedule[day][:locations] = schedule[day][:locations].sort_by { |event_id, event| event.present? ? event.title.downcase   : '' }.to_h
+
+      # # add an empty block if no workshops are scheduled on this day yet
+      # schedule[day][:locations][0] = :add if do_analyze || schedule[day][:locations].empty?
+
+      # last_time_data = nil
+      data[:times].each do |time, time_data|
+        if time_data[:type] == :workshop && time_data[:item].present? && time_data[:item][:workshops].present?
+          if !locations.nil? && ((locations.keys - time_data[:item][:workshops].keys) | (time_data[:item][:workshops].keys - locations.keys)).length > 0
+            # data[:locations]
+            # xxx
+            @schedule[day][division][:locations] = locations.deep_dup
+            @schedule[day][division][:locations][0] = :add if do_analyze || locations.empty?
+            locations = data[:locations].select { |id, l| time_data[:item][:workshops][id].present? }
+
+            division += 1
+            @schedule[day][division] = {}
+            @schedule[day][division][:times] = {}
+          else
+            locations = data[:locations].select { |id, l| time_data[:item][:workshops][id].present? }
+          end
+        end
+        # last_time_data = time_data
+        @schedule[day][division][:times][time] = time_data
+      end
+      locations ||= data[:locations]
+      @schedule[day][division][:locations] = locations
+      @schedule[day][division][:locations][0] = :add if do_analyze || locations.empty?
+      @schedule[day][division][:num_locations] = locations.length
     end
   end
 

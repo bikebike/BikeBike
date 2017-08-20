@@ -6,81 +6,82 @@
     - else
       - add_inline_script :schedule if @entire_page
       #schedule-preview
-        - @schedule.each do |day, data|
+        - @schedule.each do |day, data_array|
           %h4=date(day, :weekday).html_safe
-          %table.schedule{class: [data[:locations].present? ? 'has-locations' : 'no-locations', "locations-#{data[:num_locations]}"]}
-            - if data[:locations].present? && data[:locations].values.first != :add
-              %thead
-                %tr
-                  %th.corner
-                  - data[:locations].each do |id, location|
-                    %th=location.is_a?(Symbol) ? '' : _!(location.title)
-            %tbody
-              - data[:times].each do |time, time_data|
-                %tr{class: "row-type-#{time_data[:type] || 'nil'}"}
-                  - rowspan = (time_data[:length] * (1 / @this_conference.schedule_interval)).to_i
-                  %th=time(time).html_safe
-                  - if time_data[:type] == :workshop
+          - data_array.each_with_index do |data, division|
+            %table.schedule{class: [data[:locations].present? ? 'has-locations' : 'no-locations', "locations-#{data[:num_locations]}"]}
+              - if data[:locations].present? && data[:locations].values.first != :add
+                %thead
+                  %tr
+                    %th.corner
                     - data[:locations].each do |id, location|
-                      - if time_data[:item][:workshops][id].present?
-                        - workshop = time_data[:item][:workshops][id][:workshop]
-                        - status = time_data[:item][:workshops][id][:status]
-                      - else
-                        - workshop = status = nil
-                      %td{class: [time_data[:type], workshop.present? ? :filled : :open], rowspan: rowspan, data: workshop.present? ? nil : { block: time_data[:item][:block], day: day, location: id }}
-                        - if workshop.present? && workshop.event_location.present?
-                          .workshop-container
-                            - if @can_edit
-                              -if strip_tags(workshop.notes).strip.present?
-                                = admin_notes(workshop.notes)
-                              - if status[:errors].present?
-                                = admin_status content_tag(:ul, (status[:errors].collect { |error| (_"errors.messages.schedule.#{error[:name].to_s}", vars: error[:i18nVars])}.join).html_safe).html_safe
-                            = link_to view_workshop_path(@conference.slug, workshop.id), class: 'event-detail-link' do
-                              .details
-                                .title=_!workshop.title
-                            %template.event-details{data: { href: view_workshop_path(@conference.slug, workshop.id) }}
-                              %h1.title=_!workshop.title
-                              %p.address
-                                = _!("#{workshop.event_location.title}:")
-                                = location_link workshop.event_location
-                              .workshop-description= richtext workshop.info, 1
-                            - if @can_edit
-                              = form_tag administration_update_path(conference.slug, @admin_step), class: 'deschedule-workshop' do
-                                .status
-                                  .conflict-score
-                                    %span.title Conflicts: 
-                                    %span.value="#{status[:conflict_score]} / #{workshop.interested.size}"
-                                = hidden_field_tag :id, workshop.id
-                                = button :deschedule, value: :deschedule_workshop, class: [:delete, :small]
-                        - elsif @can_edit
-                          .title="Block #{time_data[:item][:block] + 1}"
-                  - elsif time_data[:type] != :nil
-                    %td{class: time_data[:type], rowspan: rowspan, colspan: data[:locations].present? ? data[:locations].size : 1}
-                      - case time_data[:type]
-                        - when :meal
-                          - location = EventLocation.where(id: time_data[:item]['location'].to_i).first
-                          - if location.present?
-                            %a.event-detail-link
-                              .details
-                                .title=_!(time_data[:item]['title'])
-                                .location=_!location.title
-                            %template.event-details
-                              %h1.title=_!(time_data[:item]['title'])
-                              %p.address
-                                = _!("#{location.title}:")
-                                = location_link location
-                        - when :event
-                          - if time_data[:item].event_location.present?
-                            %a.event-detail-link
-                              .details
-                                .title=_!(time_data[:item][:title]) if time_data[:item][:title]
-                                .location=_!(time_data[:item].event_location.title)
-                            %template.event-details
-                              %h1.title=_!(time_data[:item][:title]) if time_data[:item][:title]
-                              %p.address
-                                = _!("#{time_data[:item].event_location.title}:")
-                                = location_link time_data[:item].event_location
-                              = richtext time_data[:item][:info], 1
+                      %th=location.is_a?(Symbol) ? '' : _!(location.title)
+              %tbody
+                - data[:times].each do |time, time_data|
+                  %tr{class: "row-type-#{time_data[:type] || 'nil'}"}
+                    - rowspan = (time_data[:length] * (1 / @this_conference.schedule_interval)).to_i
+                    %th=time(time).html_safe
+                    - if time_data[:type] == :workshop
+                      - data[:locations].each do |id, location|
+                        - if time_data[:item][:workshops][id].present?
+                          - workshop = time_data[:item][:workshops][id][:workshop]
+                          - status = time_data[:item][:workshops][id][:status]
+                        - else
+                          - workshop = status = nil
+                        %td{class: [time_data[:type], workshop.present? ? :filled : :open], rowspan: rowspan, data: workshop.present? ? nil : { block: time_data[:item][:block], day: day, location: id, division: division }}
+                          - if workshop.present? && workshop.event_location.present?
+                            .workshop-container
+                              - if @can_edit
+                                -if strip_tags(workshop.notes).strip.present?
+                                  = admin_notes(workshop.notes)
+                                - if status[:errors].present?
+                                  = admin_status content_tag(:ul, (status[:errors].collect { |error| "<li>#{(_"errors.messages.schedule.#{error[:name].to_s}", vars: error[:i18nVars])}</li>"}.join).html_safe).html_safe
+                              = link_to view_workshop_path(@conference.slug, workshop.id), class: 'event-detail-link' do
+                                .details
+                                  .title=_!workshop.title
+                              %template.event-details{data: { href: view_workshop_path(@conference.slug, workshop.id) }}
+                                %h1.title=_!workshop.title
+                                %p.address
+                                  = _!("#{workshop.event_location.title}:")
+                                  = location_link workshop.event_location
+                                .workshop-description= richtext workshop.info, 1
+                              - if @can_edit
+                                = form_tag administration_update_path(conference.slug, @admin_step), class: 'deschedule-workshop' do
+                                  .status
+                                    .conflict-score
+                                      %span.title Conflicts: 
+                                      %span.value="#{status[:conflict_score]} / #{workshop.interested.size}"
+                                  = hidden_field_tag :id, workshop.id
+                                  = button :deschedule, value: :deschedule_workshop, class: [:delete, :small]
+                          - elsif @can_edit
+                            .title="Block #{time_data[:item][:block] + 1}"
+                    - elsif time_data[:type] != :nil
+                      %td{class: time_data[:type], rowspan: rowspan, colspan: data[:locations].present? ? data[:locations].size : 1}
+                        - case time_data[:type]
+                          - when :meal
+                            - location = EventLocation.where(id: time_data[:item]['location'].to_i).first
+                            - if location.present?
+                              %a.event-detail-link
+                                .details
+                                  .title=_!(time_data[:item]['title'])
+                                  .location=_!location.title
+                              %template.event-details
+                                %h1.title=_!(time_data[:item]['title'])
+                                %p.address
+                                  = _!("#{location.title}:")
+                                  = location_link location
+                          - when :event
+                            - if time_data[:item].event_location.present?
+                              %a.event-detail-link
+                                .details
+                                  .title=_!(time_data[:item][:title]) if time_data[:item][:title]
+                                  .location=_!(time_data[:item].event_location.title)
+                              %template.event-details
+                                %h1.title=_!(time_data[:item][:title]) if time_data[:item][:title]
+                                %p.address
+                                  = _!("#{time_data[:item].event_location.title}:")
+                                  = location_link time_data[:item].event_location
+                                = richtext time_data[:item][:info], 1
       - if @entire_page
         #workshop-selector
           = form_tag administration_update_path(@this_conference.slug, @admin_step), class: 'workshop-dlg', id: 'workshop-table-form' do

@@ -1,0 +1,12 @@
+- add_inline_script :registrations
+= columns(medium: 12) do
+  .goes-fullscreen#registrations-table
+    .flex-column
+      = searchfield :search, nil, big: true, stretch: true
+      %a.button{data: { expands: 'registrations-table' }}='expand'
+      %a.button.delete{data: { contracts: 'registrations-table' }}='close'
+    .table-scroller#registrations
+      = html_table(@excel_data, workshops_table_options)
+= columns(medium: 12) do
+  .actions.center
+    = link_to (_'links.download.Excel'), administration_step_path(@this_conference.slug, :workshops, format: :xlsx), class: [:button, :download]

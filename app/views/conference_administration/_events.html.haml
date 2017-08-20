@@ -35,7 +35,7 @@
         = day_select @day, small: true, format: :weekday
         = hour_select @time, small: true
         = length_select @length, small: true
-      = translate_fields @event, { title: { type: :textfield, big: true, label: 'forms.labels.generic.title' }, info: { type: :textarea, label: 'forms.labels.generic.info', edit_on: :focus } }
+      = translate_fields @event, { title: { type: :textfield, big: true }, info: { type: :textarea, label: 'forms.labels.generic.info', edit_on: :focus } }
       .actions.next-prev
         = button :save, value: :save
         = button :cancel, value: :cancel, class: :subdued, formnovalidate: true if @event.id.present?

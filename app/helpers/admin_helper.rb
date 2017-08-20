@@ -38,7 +38,8 @@ module AdminHelper
       events: [
           :locations,
           :meals,
-          :events
+          :events,
+          :workshops
         ],
       schedule: [
           :workshop_times,
@@ -177,8 +178,8 @@ module AdminHelper
   def available_dates_match?(host, guest)
     return false unless host.housing_data['availability'].present? && host.housing_data['availability'][1].present?
     return false unless guest.arrival.present? && guest.departure.present?
-    if host.housing_data['availability'][0] <= guest.arrival &&
-      host.housing_data['availability'][1] >= guest.departure
+    if host.housing_data['availability'][0].to_date <= guest.arrival.to_date &&
+      host.housing_data['availability'][1].to_date >= guest.departure.to_date
       return true
      end
 
