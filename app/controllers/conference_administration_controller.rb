@@ -1794,7 +1794,7 @@ class ConferenceAdministrationController < ApplicationController
         @schedule[@day][@division][:times][@time] ||= {}
         @schedule[@day][@division][:times][@time][:item] ||= {}
         @schedule[@day][@division][:times][@time][:item][:workshops] || {}
-        @invalid_locations = @schedule[@day][@division.to_i][:times][@time][:item][:workshops].keys
+        @invalid_locations = @schedule[@day][@division][:times][@time][:item][:workshops].keys
 
         @workshops.sort { |a, b| a.title.downcase <=> b.title.downcase }.each do |workshop|
           @ordered_workshops[workshop.id] = workshop

@@ -130,7 +130,7 @@ module AdminHelper
     return :bad_match
   end
 
-  def get_workshop_match(workshop, day, block, location)
+  def get_workshop_match(workshop, day, division, time, block, location)
     if workshop.event_location_id.present? && workshop.present?
       if (Date.parse params[:day]).wday == workshop.block['day'] && block == workshop.block['block'].to_i
         return :selected_space
@@ -152,7 +152,15 @@ module AdminHelper
       end
     end
 
-    (((((@schedule[@day] || {})[:times] || {})[@time] || {})[:item] || {})[:workshops] || {}).each do |l, w|
+    @schedule ||= {}
+    @schedule[day] ||= {}
+    @schedule[day][division] ||= []
+    @schedule[day][division][:times] ||= {}
+    @schedule[day][division][:times][time] ||= {}
+    @schedule[day][division][:times][time][:item] ||= {}
+    @schedule[day][division][:times][time][:item][:workshops] || {}
+
+    @schedule[day][division][:times][time][:item][:workshops].each do |l, w|
       if w[:workshop].id != workshop.id
         f_a = w[:workshop].active_facilitators.map { | f | f.id }
         f_b = workshop.active_facilitators.map { | f | f.id }
