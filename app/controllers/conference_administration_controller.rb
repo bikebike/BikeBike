@@ -1707,7 +1707,7 @@ class ConferenceAdministrationController < ApplicationController
         end
 
         (params[:title] || {}).each do |locale, value|
-          event.set_column_for_locale(:title, locale, html_value(value), current_user.id) if value != event._title(locale) && view_context.strip.present?
+          event.set_column_for_locale(:title, locale, html_value(value), current_user.id) if value != event._title(locale) && value.strip.present?
         end
 
         event.save
