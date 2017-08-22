@@ -32,6 +32,7 @@ module I18nHelper
   end
 
   def date(date, format = :long)
+    return '' unless date.present?
     I18n.l(date.is_a?(String) ? Date.parse(date) : date, format: format)
   end
 
