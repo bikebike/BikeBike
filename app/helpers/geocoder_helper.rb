@@ -84,9 +84,13 @@ module GeocoderHelper
     return hash.length > 1 ? _("geography.formats.#{hash.keys.join('_')}", locale: locale, vars: hash) : hash.values.first
   end
 
-  def location_link(location)
+  def location_link(location, text = nil)
     return '' unless location.present?
-    address = if location.is_a?(Location)
+    address = if text is_a?(Symbol)
+                location.send(text)
+              elsif location.is_a?(String)
+                text
+              elsif location.is_a?(Location)
                 location.street
               else
                 location.address
