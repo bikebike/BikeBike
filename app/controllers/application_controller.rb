@@ -472,34 +472,26 @@ class ApplicationController < BaseController
 
     schedule.deep_dup.each do |day, data|
       data[:times].each do |time, time_data|
-        if time_data[:next_event].present? || time_data[:length] > @this_conference.schedule_interval
-          span = @this_conference.schedule_interval
+        if time_data[:next_event].present? || time_data[:length] > conference.schedule_interval
+          span = conference.schedule_interval
           length = time_data[:next_event].present? ? time_data[:next_event] - time : time_data[:length]
           while span < length
             schedule[day][:times][time + span] ||= {
               type: (span >= time_data[:length] ? :empty : :nil),
-              length: @this_conference.schedule_interval
+              length: conference.schedule_interval
             }
-            span += @this_conference.schedule_interval
+            span += conference.schedule_interval
           end
         end
       end
     end
 
-    # schedule = schedule.sort.to_h
-
     schedule.each do |day, data|
-      # @schedule[day] = [{}]
-      # division = 0
-      # schedule[day][:num_locations] = schedule[day][:num_locations]
-      # schedule[day][:times] = data[:times].sort.to_h
       schedule[day][:times] = data[:times].sort.to_h
       schedule[day][:locations] ||= {}
-      # # sort the locations by name
-      schedule[day][:locations] = schedule[day][:locations].sort_by { |event_id, event| event.present? ? event.title.downcase   : '' }.to_h
 
-      # # add an empty block if no workshops are scheduled on this day yet
-      # schedule[day][:locations][0] = :add if do_analyze || schedule[day][:locations].empty?
+      # sort the locations by name
+      schedule[day][:locations] = schedule[day][:locations].sort_by { |event_id, event| event.present? ? event.title.downcase   : '' }.to_h
 
       if do_analyze
         data[:times].each do |time, time_data|
@@ -571,24 +563,13 @@ class ApplicationController < BaseController
     schedule.sort.to_h.each do |day, data|
       @schedule[day] = []
       division = 0
-      # @schedule[day][division] = data
       locations = nil
       @schedule[day][division] = {}
       @schedule[day][division][:times] = {}
-      # @schedule[day][division][:times] = data[:times]
 
-      # # sort the locations by name
-      # @schedule[day][:locations] = schedule[day][:locations].sort_by { |event_id, event| event.present? ? event.title.downcase   : '' }.to_h
-
-      # # add an empty block if no workshops are scheduled on this day yet
-      # schedule[day][:locations][0] = :add if do_analyze || schedule[day][:locations].empty?
-
-      # last_time_data = nil
       data[:times].each do |time, time_data|
         if time_data[:type] == :workshop && time_data[:item].present? && time_data[:item][:workshops].present?
           if !locations.nil? && ((locations.keys - time_data[:item][:workshops].keys) | (time_data[:item][:workshops].keys - locations.keys)).length > 0
-            # data[:locations]
-            # xxx
             @schedule[day][division][:locations] = locations.deep_dup
             @schedule[day][division][:locations][0] = :add if do_analyze || locations.empty?
             locations = data[:locations].select { |id, l| time_data[:item][:workshops][id].present? }

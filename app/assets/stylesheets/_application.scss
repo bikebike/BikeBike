@@ -2053,6 +2053,16 @@ table.schedule {
     width: 100%;
     margin: 0 0 1em;
 
+    thead a {
+        @include link($black);
+    }
+
+    @for $i from 1 through 10 {
+        thead tr.locations-#{$i} .location-header {
+            width: percentage(100 / $i);
+        }        
+    }
+
     tbody {
         border: 0.1rem solid $light-gray;
 
@@ -2093,6 +2103,7 @@ table.schedule {
     }
 
     td {
+        position: relative;
         text-align: center;
         border: 0;
         background-color: $extra-light-gray;
@@ -2135,21 +2146,32 @@ table.schedule {
         .event-detail-link {
             display: inline-block;
             display: inline-flex;
-            position: relative;
+            position: static;
             height: 100%;
             width: 100%;
             color: inherit;
             align-items: center;
 
             @include not-link-like;
+
+            @include before {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+            }
         }
     }
 }
 
 body.home table.schedule td .event-detail-link:hover {
-    outline: 0.33rem solid #02CA9E;
-    outline-offset: 0.25rem;
-    z-index: 1;
+    @include before {
+        outline: 0.33rem solid $green;
+        outline-offset: -0.3rem;
+        z-index: 1;
+    }
 }
 
 .event-dlg {

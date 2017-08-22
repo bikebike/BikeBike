@@ -9,17 +9,17 @@
         - @schedule.each do |day, data_array|
           %h4=date(day, :weekday).html_safe
           - data_array.each_with_index do |data, division|
-            %table.schedule{class: [data[:locations].present? ? 'has-locations' : 'no-locations', "locations-#{data[:num_locations]}"]}
+            %table.schedule{class: [data[:locations].present? ? "has-locations locations-#{data[:locations].length}" : 'no-locations']}
               - if data[:locations].present? && data[:locations].values.first != :add
                 %thead
                   %tr
                     %th.corner
                     - data[:locations].each do |id, location|
-                      %th=location.is_a?(Symbol) ? '' : _!(location.title)
+                      %th.location-header=location.is_a?(Symbol) ? '' : location_link(location)
               %tbody
                 - data[:times].each do |time, time_data|
                   %tr{class: "row-type-#{time_data[:type] || 'nil'}"}
-                    - rowspan = (time_data[:length] * (1 / @this_conference.schedule_interval)).to_i
+                    - rowspan = (time_data[:length] * (1 / conference.schedule_interval)).to_i
                     %th=time(time).html_safe
                     - if time_data[:type] == :workshop
                       - data[:locations].each do |id, location|
@@ -84,6 +84,6 @@
                                 = richtext time_data[:item][:info], 1
       - if @entire_page
         #workshop-selector
-          = form_tag administration_update_path(@this_conference.slug, @admin_step), class: 'workshop-dlg', id: 'workshop-table-form' do
+          = form_tag administration_update_path(conference.slug, @admin_step), class: 'workshop-dlg', id: 'workshop-table-form' do
             %h3 Select a Workshop
             #table
