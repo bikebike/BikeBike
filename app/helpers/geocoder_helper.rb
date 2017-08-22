@@ -86,9 +86,9 @@ module GeocoderHelper
 
   def location_link(location, text = nil)
     return '' unless location.present?
-    address = if text is_a?(Symbol)
+    address = if text.is_a?(Symbol)
                 location.send(text)
-              elsif location.is_a?(String)
+              elsif text.is_a?(String)
                 text
               elsif location.is_a?(Location)
                 location.street
