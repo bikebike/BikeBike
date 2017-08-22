@@ -15,7 +15,7 @@
                   %tr
                     %th.corner
                     - data[:locations].each do |id, location|
-                      %th.location-header=location.is_a?(Symbol) ? '' : location_link(location)
+                      %th.location-header=location.is_a?(Symbol) ? '' : location_link(location, :title)
               %tbody
                 - data[:times].each do |time, time_data|
                   %tr{class: "row-type-#{time_data[:type] || 'nil'}"}
