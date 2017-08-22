@@ -795,6 +795,7 @@ nav.sub-menu {
     margin-top: -0.2em;
     margin-right: 0.25em;
     cursor: pointer;
+    z-index: 2;
 
     @include after {
         content: $note-icon;
