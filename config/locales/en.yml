@@ -2459,6 +2459,9 @@ en:
         show_interest: Click if you are interested in this workshop
         add: Add new
     options:
+      currency:
+        CAD: CAD
+        USD: USD
       send_to:
         registered: Everyone who has completed their registration
         pre_registered: Everyone who has begun or completed the registration process
