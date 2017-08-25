@@ -55,7 +55,7 @@ Feature: Conference Schedule
     Then I should not see 'Flatbush Ave'
     But I should see 'Battlefield: Consensus!'
 
-    When I click on 'Battlefield: Consensus!'
+    When I click on the 'Battlefield: Consensus!' link
     Then I should see 'The Co-op'
     And see '1415 Cortelyou Rd'
 
