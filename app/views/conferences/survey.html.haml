@@ -1,0 +1,70 @@
+= render partial: 'conferences/page_header', locals: {page_key: 'Conference_Survey'}
+- if @warnings.present?
+  = row class: 'warnings', tag: :ul do
+    - @warnings.each do |warning|
+      = columns tag: :li, class: 'warning-info' do
+        = warning
+%article
+  - if !@registration.checked_in?
+    = row do
+      = columns(medium: 12) do
+        %h2=_"articles.conference_survey.headings.post_conference", :t
+        %p=_"articles.conference_survey.paragraphs.post_conference_not_checked_in", :p
+  - elsif @registration.survey_taken
+    = row do
+      = columns(medium: 12) do
+        %h2=_"articles.conference_survey.headings.post_conference", :t
+        %p=_"articles.conference_survey.paragraphs.post_conference_taken", :p
+  - else
+    = form_tag conference_survey_save_path(@this_conference.slug) do
+      = row do
+        = columns(medium: 12) do
+          %h2=_"articles.conference_survey.headings.post_conference", :t
+          %p=_"articles.conference_survey.paragraphs.post_conference", :p
+          = textfield :email, nil, required: true, big: true unless logged_in?
+          %ol.survey
+            - @this_conference.post_conference_survey_questions.each do |name, question|
+              %li
+                %header
+                  %p= _"articles.conference_survey.paragraphs.#{name}", :p
+                .question-details
+                  - case question[:type]
+                    - when :open_ended
+                      .open-ended= textarea name, nil, plain: true, short: true, label: false, class: question[:comment_size]
+                    - when :multi_likert
+                      - options = question[:options].to_a
+                      - options << question[:waive_option] if question[:waive_option].present?
+                      .table.responsive-table.likert
+                        .table-thead.medium-up
+                          .table-tr
+                            .table-th.corner
+                            - options.each do |option|
+                              .table-th{id: "#{name}-option-#{option}"}=_("articles.conference_survey.likert.#{option}")
+                        .table-tbody
+                          - question[:questions].each do |q|
+                            .table-tr
+                              .table-th{id: "#{name}-question-#{q}"}=_("articles.conference_survey.questions.#{q}")
+                              - options.each do |option|
+                                .table-td
+                                  =label_tag do
+                                    =radio_button_tag "#{name}_#{q}", option, aria: { labelledby: "#{name}-question-#{q} #{name}-option-#{option}" }
+                                    %span.small-only=_("articles.conference_survey.likert.#{option}")
+                    - when :likert
+                      - options = question[:options].to_a
+                      - options << question[:waive_option] if question[:waive_option].present?
+                      - is_numerical = question[:options].is_a?(Range)
+                      %fieldset.likert
+                        - options.each do |option|
+                          = label_tag do
+                            = radio_button_tag name, option
+                            = _("articles.conference_survey.likert.#{option}")
+                  - if question[:comment].present?
+                    .comment
+                      = textarea "#{name}_comment", nil, label: "articles.conference_survey.comment.#{question[:comment] == true ? 'default' : question[:comment]}", plain: true, short: true
+
+
+      = row do
+        = columns(medium: 12) do
+          %p=_"articles.conference_survey.paragraphs.post_conference_submit", :p
+          .actions.center
+            = button :submit

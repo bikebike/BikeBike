@@ -476,7 +476,7 @@ module FormHelper
           label = labels[i]
         elsif is_single
           label = options[:translate] == false ? label_key.to_s : _(label_key.to_s)
-        elsif box.is_a?(Integer)
+        elsif box.is_a?(Integer) && options[:translate] != false
           label = I18n.t(label_key.to_s)[box]
         else
           label = options[:translate] == false ? box : _("#{label_key.to_s}.#{box}")

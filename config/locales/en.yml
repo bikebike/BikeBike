@@ -1653,6 +1653,51 @@ en:
         spaces: We respect each others bodies and spaces.
         open_minds: We encourage open minds and open hearts.
         peaceful: We are peaceful and honest.
+    conference_survey:
+      headings:
+        post_conference: Post-Conference Survey
+        years_attended: Years attended
+        reattend_again: Coming back?
+        services: Services
+        experience: Experience
+        improvement_ideas: Improvement Ideas
+        comments: Comments
+      paragraphs:
+        post_conference: Please share your feelings and experiences from this year's Bike!Bike! through this post-conference survey.
+                          The information you provide will be analysed and shared as a report with  
+                          with the direct responses accessible to outgoing and incoming organizers. All response you provide will be anonymous.
+        post_conference_submit: Your responses will are anonymous. Once you press submit, you will not be able to edit your responses.
+        post_conference_taken: Thank you for taking the post-conference survey, your responses have been recorded anonymously.
+        post_conference_not_checked_in: Our records indicate that you did not check in to the conference, this survey is only available to people who attended the conference in person. If you believe this in in error, please contact us.
+        years_attended: How many times have you attended Bike!Bike!?
+        reattend_again: How likely are you to re-attend in the future?
+        services: How satisfied are you with the following services?
+        experience: 'How would you describe your personal experience at this years Bike!Bike!? (i.e.: Was it inclusive/exclusive, inspiring/disappointing, educational/fun, etc.)'
+        improvement_ideas: What are some ways that Bike!Bike! can improve in the future?
+        comments: Do you have any additional comments, questions, or concerns?
+      likert:
+        very_unsatisfied: Very unsatisfied
+        unsatisfied: Unsatisfied
+        neutral: Neutral
+        satisfied: Satisfied
+        very_satisfied: Very satisfied
+        not_likely: Not likely
+        likely: Likely
+        very_likely: Very likely
+        first: This was my first time attending
+        two_to_four: 2-4
+        five_or_more: 5+
+        na: Not applicable
+      questions:
+        housing: Housing
+        bike: Loaner bike
+        food: Meals
+        schedule: Conference schedule
+        events: Special events
+        workshops: Workshop content and facilitation
+        website: Registration and website
+      comment:
+        default: Any additional comments?
     conference_registration:
       complete:
         payment_processed: Thank you for your payment! Your registration is now complete.
@@ -2388,6 +2433,7 @@ en:
         no_file_selected: No file selected
     actions:
       generic:
+        submit: Submit
         check_in: Complete check in
         reopen_registration: Re-open my registration
         cancel_registration: Cancel my registration
@@ -2502,6 +2548,7 @@ en:
       Contact_Us: Contact Us
     Conferences: Conferences
     conferences:
+      Conference_Survey: Post-Conference Survey
       Conference_Registration: Conference Registration
       Create_Workshop: Create a Workshop
       Email_Participants: Email Participants
@@ -2596,11 +2643,16 @@ en:
     conference:
       edit_registration: My registration
       Translate: Edit %{language} version
+      already_registered: Already registered?
+      access_registration: Access your registration
+    conference_registration:
+      take_survey: Take the survey now
   error:
     '403':
       description: You do not currently have sufficient permissions to access this
         page. If you believe this is an error, please contact us.
       title: You do not have access to this page
+      not_logged_in: You may need to be signed in to access this page. Please sign in using the form below, if you have any further problems don't hessitate to contact us.
     '404':
       description: The page you are looking for could not be found. If you think this
         was in error, please contact us.

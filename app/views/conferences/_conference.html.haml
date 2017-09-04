@@ -10,8 +10,12 @@
         - if conference.start_date.present? && conference.end_date.present?
           .secondary
             = date_span(conference.start_date.to_date, conference.end_date.to_date)
-        - if conference.poster.present? && links.include?(:register) && conference.can_register?
+        - if conference.poster.present? && links.include?(:register) && conference.can_register?(current_user)
           .register-link
+            - unless logged_in?
+              .access-registration
+                = _'actions.conference.already_registered'
+                = link_to (_'actions.conference.access_registration'), register_path(conference.slug)
             = (link_to _(is_registered ? 'actions.conference.edit_registration' : 'forms.actions.generic.register'), register_path(conference.slug), class: [:button, :register])
     - if conference.poster.present?
       %figure
@@ -23,7 +27,7 @@
       = richtext conference.info
 
       .links
-        = (link_to (_(is_registered ? 'actions.conference.edit_registration' : 'forms.actions.generic.register')), register_path(conference.slug), class: [:button, :register]) if links.include?(:register) && conference.can_register?
+        = (link_to (_(is_registered ? 'actions.conference.edit_registration' : 'forms.actions.generic.register')), register_path(conference.slug), class: [:button, :register]) if links.include?(:register) && conference.can_register?(current_user)
         = (link_to (_'articles.workshops.info.read_more'), conference_path(conference.slug), class: :button) if links.include?(:read_more)
         = (link_to (_'forms.actions.generic.administrate'), administrate_conference_path(conference.slug), class: [:button]) if links.include?(:administrate)
         = (link_to (_'forms.actions.generic.edit'), edit_conference_path(conference.slug), class: [:button, :subdued]) if links.include?(:edit)

@@ -80,31 +80,6 @@ a {
     cursor: pointer;
     text-decoration-skip: ink;
     @include link;
-    // border-bottom: 0 solid;
-    // position: relative;
-
-    // @include after {
-        // content: '';
-        // position: absolute;
-        // border-bottom: 0 solid;
-        // right: 0;
-        // bottom: 0;
-        // left: 0;
-        // opacity: 0;
-        // @include _(transition, all 150ms ease-in-out);
-        // @include _(transform-origin, 25% 50%);
-        // @include _(transform, scaleX(0));
-    // }
-
-    // &:hover,
-    // &:active,
-    // &:focus {
-    //     @include after {
-    //         border-bottom: 0.1em solid;
-    //         opacity: 1;
-    //         @include _(transform, scaleX(1));
-    //     }
-    // }
 }
 
 .target:target {
@@ -119,6 +94,10 @@ a {
     width: 1px; 
     overflow: hidden; 
     position: absolute !important;
+}
+
+.medium-up {
+    display: none;
 }
 
 table, .table {
@@ -2349,6 +2328,19 @@ a.logo {
         font-size: 0.75em;
         margin: 0.5em 0 0;
     }
+
+    .access-registration {
+        display: inline-block;
+        font-size: 0.85em;
+        color: $mid-gray;
+        margin: 0.5em 1em;
+        text-align: right;
+        right: 0;
+
+        a {
+            display: block; 
+        }
+    }
 }
 
 .help-link {
@@ -3340,7 +3332,151 @@ body.policy .policy-agreement ul {
     }
 }
 
+#main ol.survey {
+    counter-reset: survey-question;
+    list-style: none;
+    padding: 0 1em;
+    $item-color: $dark-gray;
+
+    li {
+        margin: 2em 0;
+        border: 0.1em solid $item-color;
+        background-color: $extra-light-gray;
+
+        @include before {
+            content: counter(survey-question);
+            counter-increment: survey-question;
+            @include font-family(secondary);
+            float: left;
+            font-size: 3.5em;
+            background-color: $item-color;
+            color: $white;
+            width: 1.25em;
+            height: 1.25em;
+            line-height: 1.25em;
+            text-align: center;
+            margin: 0;// 0.3333em 0 0;
+        }
+    }
+
+    header {
+        @include _-(display, flex);
+        @include _(align-items, center);
+        overflow: auto;
+        margin: 0;
+        padding: 0.5em 1em;
+        min-height: 4.375em;
+    }
+
+    p {
+        margin: 0;
+        line-height: 1.25em;
+    }
+
+    .question-title {
+        margin: 0;
+        color: $mid-gray;
+        line-height: 2.6667em;
+    }
+
+    .question-details {
+        margin: 0.05em;
+        padding: 1em;
+        background-color: $white;
+        overflow: auto; // let it scroll just in case
+    }
+
+    .comment {
+        max-width: 40em;
+        margin: auto;
+
+        textarea {
+            min-height: 5em;
+        }
+    }
+
+    .open-ended {
+        margin: 2em 1em;
+    }
+
+    label {
+        cursor: pointer;
+
+        &:hover {
+            background-color: $light-gray;
+        }
+
+        input {
+            cursor: inherit;
+        }
+    }
+}
+
+fieldset.likert {
+    margin: 0 0 0.5em;
+
+    label {
+        display: block;
+        margin-bottom: 0.5em;
+    }
+}
+
+.responsive-table.likert {
+    width: 100%;
+    margin: 0;
+
+    .table-th {
+        padding: 0.5em;
+    }
+
+    .table-td {
+        padding: 0;
+    }
+
+    label {
+        display: block;
+        padding: 0.5em;
+    }
+}
+
 @include breakpoint(medium) {
+    #main ol.survey {
+        .open-ended {
+            margin: 2em 1em 2em 5em;
+        }
+    }
+
+    fieldset.likert {
+        margin: 0 0 0.5em 5em;
+    }
+
+    .responsive-table.likert {
+        margin: 2em 0 1em;
+
+        .table-td, .table-thead .table-th {
+            text-align: center;
+        }
+
+        .table-th {
+            vertical-align: middle;
+        }
+
+        .table-td {
+            position: relative;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        label {
+            width: 100%;
+            padding: 1.7em 0;
+        }
+
+        input {
+            margin: auto;
+        }
+    }
+
     :focus,
     input[type="submit"]:focus,
     .check-box-field input:focus + label,
@@ -3353,6 +3489,14 @@ body.policy .policy-agreement ul {
             outline-offset: 0.2rem;
             z-index: 1;
         }
+    }
+
+    .medium-up {
+        display: inherit;
+    }
+
+    .small-only {
+        display: none;
     }
 
     html[data-input="kb"] {
@@ -3471,6 +3615,7 @@ body.policy .policy-agreement ul {
             margin-top: 0;
             padding-top: 0.1em;
             font-size: 4.25em;
+            min-width: 2.25em;
         }
 
         .nav {
@@ -3555,6 +3700,11 @@ body.policy .policy-agreement ul {
             max-width: 100%;
             margin-bottom: 5.5em;
             @include _(box-shadow, 0 0 2em -0.5em rgba(0, 0, 0, 0.5));
+        }
+
+        .access-registration {
+            position: absolute;
+            max-width: 11.5em;
         }
     }
 
@@ -3891,10 +4041,26 @@ body.policy .policy-agreement ul {
         .table-th, .table-td {
             display: table-cell;
         }
+
+        .table-thead {
+            display: table-header-group;
+        }
+
+        .table-tbody {
+            display: table-row-group;
+        }
+
+        .table-tfoot {
+            display: table-footer-group;
+        }
     }
 } // medium
 
 @include breakpoint(large) {
+    .responsive-table.likert {
+        table-layout: fixed;
+    }
+
     #main {
         padding-left: $sidebar-width;
     }
@@ -3957,5 +4123,21 @@ body.policy .policy-agreement ul {
 @include breakpoint(small, medium) {
     #main-nav .columns.medium-3 {
         width: auto;
+    }
+
+    .responsive-table.likert {
+        .table-tr {
+            border: 0.1rem solid $light-gray;
+        }
+
+        .table-td {
+            border: 0;
+        }
+
+        .table-th {
+            border-top: 0;
+            border-right: 0;
+            border-left: 0;
+        }
     }
 }

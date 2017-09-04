@@ -43,7 +43,7 @@ class ConferencesController < ApplicationController
   def register
     set_conference
     do_403 unless @this_conference.is_public || @this_conference.host?(current_user)
-    do_403 unless @this_conference.registration_open
+    do_403 unless @this_conference.registration_open || @this_conference.registered?(current_user)
 
     if logged_in?
       if request.post?
@@ -110,10 +110,49 @@ class ConferencesController < ApplicationController
   end
 
   def survey
-    return do_404
-    # set_conference
-    # do_403 unless @this_conference.is_public || @this_conference.host?(current_user)
-    # do_403 if @this_conference.registration_open
+    set_conference
+    ensure_registration_is_complete!
+    return do_403 unless @this_conference.post_conference_survey_available? || @registration.survey_taken
+  end
+
+  def save_survey
+    set_conference
+    ensure_registration_is_complete!
+    return do_403 unless @this_conference.post_conference_survey_available?(@registration) && !@registration.survey_taken
+
+    # compile the results
+    results = {}
+    @this_conference.post_conference_survey_questions.each do |name, question|
+      case question[:type]
+      when :multi_likert
+        answer = {}
+        question[:questions].each do |q|
+          r = params["#{name}_#{q}"]
+          answer[q] = r if r.present? && question[:options].include?(r.to_sym)
+        end
+        results[name] = answer
+      else
+        answer = params[name]
+        if answer.present?
+          unless question[:waive_option].present? && answer.to_sym == question[:waive_option]
+            results[name] = answer
+          end
+        end
+      end
+    end
+
+    # create the survey
+    Survey.create(
+        name: @this_conference.post_conference_survey_name,
+        version: @this_conference.post_conference_survey_version,
+        results: results
+      )
+
+    # mark this user as having taken the survey
+    @registration.survey_taken = true
+    @registration.save!
+
+    redirect_to conference_survey_path
   end
 
   helper_method :registration_complete?
@@ -166,7 +205,7 @@ class ConferencesController < ApplicationController
 
   rescue_from ActiveRecord::PremissionDenied do |exception|
     if !@this_conference.can_register?
-      do_404
+      do_403
     elsif logged_in?
       redirect_to 'conferences/register'
     else

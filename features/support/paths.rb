@@ -16,7 +16,7 @@ module NavigationHelpers
     when /^registration$/i
       path = :register
       args << TestState.last_conference.slug
-    when /^(conference|register|workshops)$/i
+    when /^(conference(?:[_\s]survey)?|register|workshops)$/i
       args << TestState.last_conference.slug
     when /^confirm(ation)?$/
       path = :confirm
@@ -26,7 +26,7 @@ module NavigationHelpers
     end
 
     if path.is_a?(Symbol)
-      path = Rails.application.routes.url_helpers.send("#{path}_path".to_sym, *args)
+      path = Rails.application.routes.url_helpers.send("#{path.to_s.gsub(/\s+/, '_')}_path".to_sym, *args)
     end
 
     raise "Can't find mapping from \"#{path}\" to a path." unless path.present?

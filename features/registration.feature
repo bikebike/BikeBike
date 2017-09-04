@@ -640,3 +640,10 @@ Scenario: Housing providers can enter incorrect data and fix it
 
     When I click the 'Next' button
     Then I should see 'Your registration is complete'
+
+Scenario: Registration is not accessible after registration is closed
+    Given there is an upcoming conference in 'Brooklyn NY'
+    And registration is closed
+    And I am on the registration page
+
+    Then I should see 'You may need to be signed in to access this page'
