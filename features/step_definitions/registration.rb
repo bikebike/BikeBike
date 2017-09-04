@@ -3,6 +3,14 @@ Given /^(?:I am |'(.+)' is )?registered(?: for the conference)?$/i do |username|
   create_registration(username.present? ? get_user(username) : TestState.my_account)
 end
 
+Given /^I am (not )?checked in?$/i do |do_not_check_in|
+  unless do_not_check_in
+    TestState.my_registration.data ||= {}
+    TestState.my_registration.data['checked_in'] ||= DateTime.now
+    TestState.my_registration.save!
+  end
+end
+
 Given /^(.+) and (.+) are companions$/i do |user1, user2|
   u1 = get_user(user1.gsub(/'/, ''))
   u2 = get_user(user2.gsub(/'/, ''))
@@ -53,44 +61,6 @@ When /^(?:I )?(finish|cancel|don't finish) (?:(?:with )?(?:paypal|the payment))$
   TestState.my_registration.save!
   visit send("register_paypal_#{action == 'cancel' ? 'cancel' : 'confirm'}_path".to_sym, TestState.last_conference.slug, :paypal_confirm, 'token', amount: YAML.load(TestState.my_registration.payment_info)[:amount])
 end
-
-# Then /^(?:I )?pay \$?([\d\.]+)$/i do |amount|
-#   button = nil
-
-#   paypal_info = YAML.load(File.read(Rails.root.join("config/paypal.yml")))['test'].symbolize_keys
-#   TestState.last_conference.paypal_username = paypal_info[:username]
-#   TestState.last_conference.paypal_password = paypal_info[:password]
-#   TestState.last_conference.paypal_signature = paypal_info[:signature]
-#   TestState.last_conference.save!
-
-#   TestState.my_registration.payment_info = {
-#       payer_id: '1234',
-#       token: '5678',
-#       amount: amount.to_f,
-#       status: 'Completed'
-#     }.to_yaml
-#   TestState.my_registration.save!
-
-#   control = page.all("[value^=\"#{amount}\"]")
-  
-#   TestState.last_payment_amount = amount
-
-#   if control.length > 0
-#     control.first.trigger('click')
-#   else
-#     fill_in(locate('amount'), with: amount)
-#     click_link_or_button(locate('payment'))
-#   end
-# end
-
-# Then /^(?:I )?(don't )?have enough funds$/i do |status|
-#   if status.blank?
-#     info = YAML.load(TestState.my_registration.payment_info)
-#     info[:status] = 'Completed'
-#     TestState.my_registration.payment_info = info.to_yaml
-#     TestState.my_registration.save!
-#   end
-# end
 
 Given /^a workshop( titled .+)? exists?$/i do |title|
   workshop = Workshop.new

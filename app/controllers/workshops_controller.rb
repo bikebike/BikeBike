@@ -26,6 +26,7 @@ class WorkshopsController < ApplicationController
 
   def create_workshop
     set_conference
+    return do_404 unless @this_conference.registration_open
     ensure_registration_is_complete!
 
     @workshop = Workshop.new
@@ -121,6 +122,7 @@ class WorkshopsController < ApplicationController
       return do_404 unless workshop.present?
       can_edit = workshop.can_edit?(current_user)
     else
+      return do_404 unless @this_conference.registration_open
       workshop = Workshop.new(conference_id: @this_conference.id)
       workshop.workshop_facilitators = [WorkshopFacilitator.new(user_id: current_user.id, role: :creator)]
       can_edit = true
@@ -175,7 +177,7 @@ class WorkshopsController < ApplicationController
     set_conference
     ensure_registration_is_complete!
     workshop = Workshop.find_by_id_and_conference_id(params[:workshop_id], @this_conference.id)
-    return do_404 unless workshop
+    return do_404 unless workshop.present? && workshop.can_show_interest?(current_user)
 
     # save the current state
     interested = workshop.interested? current_user

@@ -1,3 +1,10 @@
+- if @allow_survey
+  = row do
+    = columns(medium: 12) do
+      %h2=_'articles.conference_survey.headings.post_conference', :t
+      %p=_'articles.conference_survey.paragraphs.post_conference', :p
+      .actions.centered
+        = link_to (_'actions.conference_registration.take_survey'), conference_survey_path(@this_conference), class: [:button, :modify]
 = registration_step_header
 = row do
   = columns(medium: 12) do
@@ -9,7 +16,7 @@
               .table-tr
                 .table-th
                   =_"articles.conference_registration.step_names.#{step}"
-                  = button :edit, name: :edit_step, value: step, class: [:unstyled, :edit]
+                  = button :edit, name: :edit_step, value: step, class: [:unstyled, :edit] if @this_conference.registration_open
                 .table-td
                   - case data[:type]
                     - when :bool
@@ -32,7 +39,7 @@
                       - else
                         = value.html_safe
       - else
-        %p.centered=_'articles.conference_registration.paragraphs.registration_cancelled', :p
+        %p=_'articles.conference_registration.paragraphs.registration_cancelled', :p
       - if @allow_cancel_attendance
         .actions.centered
           = button :cancel_registration, value: :cancel_registration, class: :red
@@ -70,17 +77,18 @@
                 %td{colspan: 3, lang: guest.user.locale.to_s == I18n.locale.to_s ? nil : guest.user.locale}
                   = paragraph guest.housing_data['other']
       
-= row do
-  = columns(medium: 12) do
-    %h3=_'articles.workshops.headings.Workshops', :t
-    - if @this_conference.workshop_info.present?
-      = richtext @this_conference.workshop_info
-    - else
-      %p=_'articles.conference_registration.paragraphs.workshops', :p
-    .actions.centered
-      .buttons
-        = link_to (_'articles.conference_registration.actions.View_Workshops'), workshops_path(@this_conference), class: :button
-        = link_to (_'actions.workshops.create'), create_workshop_path(@this_conference), class: [:button, :modify]
+- if @this_conference.registration_open
+  = row do
+    = columns(medium: 12) do
+      %h3=_'articles.workshops.headings.Workshops', :t
+      - if @this_conference.workshop_info.present?
+        = richtext @this_conference.workshop_info
+      - else
+        %p=_'articles.conference_registration.paragraphs.workshops', :p
+      .actions.centered
+        .buttons
+          = link_to (_'articles.conference_registration.actions.View_Workshops'), workshops_path(@this_conference), class: :button
+          = link_to (_'actions.workshops.create'), create_workshop_path(@this_conference), class: [:button, :modify]
 - if @my_workshops.present?
   = row do
     = columns(medium: 12) do

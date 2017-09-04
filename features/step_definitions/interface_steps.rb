@@ -67,6 +67,12 @@ Then /^(?:I )?(un)?check ([^']+)$/i do |uncheck, name|
   find("input[type=\"checkbox\"][name$=\"[#{name.gsub(/\s/, '_')}]\"]").click
 end
 
+Then /^(?:I )?set ([^']+) to (.+?)(?: under (.+))?$/i do |name, value, under|
+  _name = ((under.present? ? "#{under.gsub(/\s/, '_')}_" : '') + name.gsub(/\s/, '_')).downcase
+  _value = value.gsub(/\s/, '_').downcase
+  find("input[type=\"radio\"][name=\"#{_name}\"][value=\"#{_value}\"]").click
+end
+
 Then /^(?:my )?'(.+)' should (not )?be checked$/i do |text, negate|
   label = find('.check-box-field label', text: text)
   find("##{label[:for]}", visible: false).send(negate ? :should_not : :should, be_checked)
@@ -133,24 +139,19 @@ Then /^(?:my )?(.+)? should (not )?be set to (.+)$/i do |field, should, value|
   page.find('[id$="' + field.gsub(/\s+/, '_') + '"]').value.send(should.nil? ? 'should' : 'should_not', eq(value))
 end
 
-Then /^(?:I )?set (.+?) to (.+)$/i do |field, value|
-  field = field.gsub(/^\s*(my|the)\s*(.+)$/, '\2')
-  page.find('[id$="' + field.gsub(/\s+/, '_') + '"]', :visible => false).set value
-end
-
 Then /^(?:I )?wait for (.+?) to appear$/i do |field|
   count = 0
   element = nil
   while element.nil? && count < 120
     begin element = page.find('[id$="' + field.gsub(/\s+/, '_') + '"]'); rescue; end
-    begin element ||= page.find('[id$="' + field.gsub(/\s+/, '_') + '"]', :visible => false); rescue; end
+    begin element ||= page.find('[id$="' + field.gsub(/\s+/, '_') + '"]', visible: false); rescue; end
     sleep(1)
     count += 1
   end
 end
 
 Then /^(?:I )?select (.+?) from (.+)$/i do |value, field|
-  select(value, :from => locate(field))
+  select(value, from: locate(field))
 end
 
 Then /^in a new session$/i do
