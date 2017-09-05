@@ -78,7 +78,7 @@ class ConferencesController < ApplicationController
           return redirect_to pp_response.redirect_uri
         end
       end
-
+begin
       # get the current step
       @step = current_registration_step(@this_conference, current_user)
 
@@ -97,6 +97,11 @@ class ConferencesController < ApplicationController
       result = registration_step(@step, @this_conference, current_user)
       # pass any data on to the view
       data_to_instance_variables(result)
+rescue Exception => e
+  puts e
+  puts e.backtrace.join("\n")
+  raise e
+end
     end
 
     if request.xhr?

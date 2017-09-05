@@ -111,6 +111,10 @@ def create_registration(user = TestState.my_account)
     'group_ride' => true
   }
   registration.housing_data = { 'other' => '', 'companion' => false }
+  
+  registration.city_id = City.search('Los Angeles').id unless City.exists?(registration.city_id)
+  registration.data['city_id'] = City.search('Montreal').id unless City.exists?(registration.data['city_id'])
+
   registration.save!
 
   if user == TestState.my_account
