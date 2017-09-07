@@ -71,6 +71,12 @@ task :i18n do
   end
 end
 
+task 'i18n:debug' do
+  ENV['I18N_DEBUG'] = '1'
+  Rake::Task['i18n'].execute
+  ENV['I18N_DEBUG'] = '0'
+end
+
 task :css do
   ENV['CSS_TEST'] = '1'
   Rake::Task['cucumber:run'].execute
