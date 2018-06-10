@@ -2445,8 +2445,8 @@ en:
         food_vegetarian: I am vegetarian
         food_vegan: I am vegan
         housing_none: I don't need a place to stay
-        housing_tent: I would like a place to tent
-        housing_house: Yes, I would like to place to stay
+        housing_tent: I would like a tent spot
+        housing_house: Yes, I would like a place to stay
         'yes': 'Yes'
         'no': 'No'
         maybe: Maybe
