@@ -342,11 +342,6 @@ class ConferenceAdministrationController < ApplicationController
     end
 
     def administrate_stats
-      if @this_conference.start_date.blank? || @this_conference.end_date.blank?
-        @warning_message = :no_date_warning
-        return
-      end
-
       get_stats(!request.format.xlsx?)
 
       if request.format.xlsx?
@@ -355,6 +350,16 @@ class ConferenceAdministrationController < ApplicationController
           format.xlsx { render xlsx: '../conferences/stats', filename: "stats-#{DateTime.now.strftime('%Y-%m-%d')}" }
         end
       else
+        @past_conferences = []
+        Conference.all.order("start_date DESC").each do |conference|
+          @past_conferences << conference if conference.is_public && @this_conference.id != conference.id
+        end
+
+        if @this_conference.start_date.blank? || @this_conference.end_date.blank?
+          @warning_message = :no_date_warning
+          return
+        end
+
         @registration_count = @registrations.size
         @completed_registrations = 0
         @bikes = 0
@@ -377,11 +382,6 @@ class ConferenceAdministrationController < ApplicationController
               @donations += r.registration_fees_paid
             end
           end
-        end
-
-        @past_conferences = []
-        Conference.all.order("start_date DESC").each do |conference|
-          @past_conferences << conference if conference.is_public && @this_conference.id != conference.id
         end
       end
     end
