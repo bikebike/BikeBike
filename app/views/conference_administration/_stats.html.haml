@@ -7,11 +7,11 @@
     = data_set(:h3, 'articles.admin.stats.headings.bikes') do
       = (@completed_registrations || 0) > 0 ? "#{@bikes} (#{number_to_percentage(@bikes / @completed_registrations.to_f * 100.0)})" : "0"
     = data_set(:h3, 'articles.admin.stats.headings.food.meat') do
-      = (@food[:all] || 0) > 0 ? "#{@food[:meat]} (#{number_to_percentage(@food[:meat] / @food[:all].to_f * 100.0)})" : "0"
+      = @food && (@food[:all] || 0) > 0 ? "#{@food[:meat]} (#{number_to_percentage(@food[:meat] / @food[:all].to_f * 100.0)})" : "0"
     = data_set(:h3, 'articles.admin.stats.headings.food.vegetarian') do
-      = (@food[:all] || 0) > 0 ? "#{@food[:vegetarian]} (#{number_to_percentage(@food[:vegetarian] / @food[:all].to_f * 100.0)})" : "0"
+      = @food && (@food[:all] || 0) > 0 ? "#{@food[:vegetarian]} (#{number_to_percentage(@food[:vegetarian] / @food[:all].to_f * 100.0)})" : "0"
     = data_set(:h3, 'articles.admin.stats.headings.food.vegan') do
-      = (@food[:all] || 0) > 0 ? "#{@food[:vegan]} (#{number_to_percentage(@food[:vegan] / @food[:all].to_f * 100.0)})" : "0"
+      = @food && (@food[:all] || 0) > 0 ? "#{@food[:vegan]} (#{number_to_percentage(@food[:vegan] / @food[:all].to_f * 100.0)})" : "0"
     = data_set(:h3, 'articles.admin.stats.headings.donation_count') do
       = (@completed_registrations || 0) > 0 ? "#{@donation_count} (#{number_to_percentage(@donation_count / @completed_registrations.to_f * 100.0)})" : "0"
     = data_set(:h3, 'articles.admin.stats.headings.donation_total') do
