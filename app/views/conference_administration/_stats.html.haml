@@ -3,7 +3,7 @@
     = data_set(:h3, 'articles.admin.stats.headings.completed_registrations') do
       = (@completed_registrations || 0).to_s
     = data_set(:h3, 'articles.admin.stats.headings.incomplete_registrations') do
-      = ((@registration_count - @completed_registrations) || 0).to_s
+      = ((@registration_count || 0) - (@completed_registrations || 0)).to_s
     = data_set(:h3, 'articles.admin.stats.headings.bikes') do
       = (@completed_registrations || 0) > 0 ? "#{@bikes} (#{number_to_percentage(@bikes / @completed_registrations.to_f * 100.0)})" : "0"
     = data_set(:h3, 'articles.admin.stats.headings.food.meat') do
