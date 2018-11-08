@@ -342,9 +342,8 @@ class ConferenceAdministrationController < ApplicationController
     end
 
     def administrate_stats
-      get_stats(!request.format.xlsx?)
-
       if request.format.xlsx?
+        get_stats
         logger.info "Generating stats.xls"
         return respond_to do |format|
           format.xlsx { render xlsx: '../conferences/stats', filename: "stats-#{DateTime.now.strftime('%Y-%m-%d')}" }
@@ -359,6 +358,8 @@ class ConferenceAdministrationController < ApplicationController
           @warning_message = :no_date_warning
           return
         end
+
+        get_stats(true)
 
         @registration_count = @registrations.size
         @completed_registrations = 0
