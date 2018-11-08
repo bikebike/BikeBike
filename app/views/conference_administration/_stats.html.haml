@@ -22,5 +22,5 @@
 = columns(medium: 12) do
   %h3=_'articles.admin.stats.headings.past_stats'
   %ul.actions.center
-    - @past_conferences.each do |conference|
+    - (@past_conferences || []).each do |conference|
       = link_to conference.title, previous_stats_path(@this_conference.slug, conference.slug, format: :xlsx), class: [:button, :download]
