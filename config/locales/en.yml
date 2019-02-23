@@ -1375,7 +1375,7 @@ en:
         payment_message: Registration
         schedule_info: Schedule
         travel_info: Getting To %{city}
-        city_info: Weather and Crime in %{city}
+        city_info: A little about %{city}
         what_to_bring: What to Bring
         volunteering_info: Volunteering
         conferences: National and Regional Conferences
