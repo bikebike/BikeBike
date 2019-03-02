@@ -1384,7 +1384,7 @@ es:
         housing_companion_email: Correo electrónico de tu acompañante
         housing_departure_date: Fecha de partida
         housing_food: Cuáles son tus hábitos alimenticios?
-        housing_other: Otras consideraciones
+        housing_other: Información para organizadores
         housing_type: Hospedaje
         org_create_address: Dirección de tu organización
         org_create_email: Correo electrónico de tu organización
@@ -1567,12 +1567,10 @@ es:
           la opción que mejor describa el tipo de comida que comes. Usaremos esto
           para decidir el tipo de comidas que prepararemos y la cantidad de alimentos
           que necesitaremos.
-        housing_other: Tienes algún requerimiento especial o consideraciones que creas
-          que debamos tener respecto a tu estadía, tales como alergias, limitaciones
-          de movilidad o discapacidades, o si necesitas guardería? Hacérnoslo saber
-          por adelantado nos ayudará a determinar mejor el lugar en el que te hospedarás
-          y si es necesario, preparar los mismos lugares en los que se realizará la
-          conferencia para tu mejor accesibilidad a ellos.
+        housing_other: Ingrese cualquier información que le gustaría que los organizadores
+          consideren para su visita. Si tiene restricciones de movilidad, dieta o alergias,
+          o preferencias de alojamiento (ej. preferencia de huéspedes para compartir
+          alojamiento), indíquelos aquí por favor.
         housing_type: Necesitas un lugar para quedarte en %{city} ? Haremos lo posible
           por ubicarte con un(a) anfitrión(a) local y con lxs visitantes que mejor
           coincidan con tus necesidades. 
