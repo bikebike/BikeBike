@@ -1212,7 +1212,7 @@ fr:
         hosting_space_tent: Hébergement sous tente
         hosting_start_date: Date de début de l’hébergement
         housing_bike: Souhaitez-vous emprunter un vélo?
-        housing_other: Autres précisions
+        housing_other: Informations pour les organisateurs
         housing_type: Hébergement
         hosting_end_date: Date de fin de l’hébergement
         housing_companion_check: Hébergement pour deux personnes
@@ -1386,10 +1386,11 @@ fr:
         housing_food: Veuillez nous renseigner sur vos habitudes alimentaires en choisissant
           l'option qui vous correspond le mieux. Cela nous aidera à préparer de meilleurs
           repas et à prévoir des quantités de nourriture adaptées.
-        housing_other: Avez-vous des besoins spéciaux ou d'autres besoins à prendre
-          en compte, tel que des allergies, des incapacités ou du gardiennage d'enfants?
-          Veuillez le préciser ici afin de nous aider à vous trouver un hébergement
-          adapté et à organiser le congrès.
+        housing_other: "Merci d'indiquer toutes les informations que vous désirez porter à
+          l'attention des organisateurs, afin qu'elles puissent être prises en compte dans
+          l'organisation de votre séjour. Si vous avez des besoins en matière d'accessibilité,
+          un régime particulier ou des allergies, ou si vous avez des préférences concernant
+          votre hébergement et votre hôte : listez tout celà ici."
         housing_type: Avez-vous besoin d'un hébergement à %{city}? Nous ferons notre
           possible pour trouver des hébergements adaptés aux besoins de tous et de
           toutes.

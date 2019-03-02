@@ -1797,7 +1797,7 @@ en:
         payment_form: Registration Fee Amount
         org_select: Which organization are you a member of?
         payment_type: Registration Fee Method
-        housing_other: Other considerations
+        housing_other: Information for organizers
         housing_allergies: Do you have any allergies?
         housing_food: What are your eating habits?
         housing_bike: Would you like to borrow a bike?
@@ -1952,10 +1952,10 @@ en:
           out of our own pockets. Otherwise, please pledge to pay on arrival. Your
           pledge will help us make a rough plan for what we can and cannot afford.
           Thank you.
-        housing_other: Do you have any special needs or considerations that we should
-          know about for your stay such as allergies, disabilities, or a need for
-          child care? Letting us know in advance will help us determine the best place
-          for you to stay and make any necessary preparations for the conference itself.
+        housing_other: Please enter any information you would like organizers to consider
+          when preparing for your visit. If you have restrictions in terms of mobility,
+          diet or allergies, or preferences on the accommodations or guests that we will
+          place you with, please list them here.
         housing_allergies: Let us know if you have any allergies that we should be
           made aware of.
         housing_food: Please let us know your eating habits by selecting the option
